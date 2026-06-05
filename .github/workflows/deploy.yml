@@ -89,11 +89,10 @@ jobs:
           export PATH="$HOME/.composer/vendor/bin:$PATH"
           phpcs --standard=moodle moodle-plugins/ || true
 
-      - name: Bicep build
-        uses: azure/setup-cli@v2
       - name: Validate Bicep
         run: |
           set -euo pipefail
+          az config set bicep.use_binary_from_path=false
           az bicep build --file infrastructure/bicep/main.bicep
 
       - name: AI Gateway typecheck
