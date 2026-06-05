@@ -6,7 +6,7 @@ set -euo pipefail
 MOODLE_DIR="${MOODLE_DIR:-/var/www/moodle}"
 CONFIG="${MOODLE_DIR}/config.php"
 BACKUP=/tmp/config.pgbouncer.bak
-LOG="${MOODLE_UPGRADE_LOG:-/var/log/moodle-upgrade.log}"
+LOG="${MOODLE_UPGRADE_LOG:-/tmp/moodle-upgrade.log}"
 
 exec > >(tee -a "$LOG") 2>&1
 

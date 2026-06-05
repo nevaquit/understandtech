@@ -281,8 +281,8 @@ jobs:
         if: github.event_name != 'workflow_dispatch' || inputs.skip_upgrade != 'true'
         run: |
           set -euo pipefail
-          UPGRADE_LOG=/var/log/moodle-upgrade.log
-          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/moodle-upgrade-direct-pg.sh" 2>&1 | tee "$UPGRADE_LOG"
+          UPGRADE_LOG="${RUNNER_TEMP}/moodle-upgrade.log"
+          sudo MOODLE_UPGRADE_LOG="$UPGRADE_LOG" /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/moodle-upgrade-direct-pg.sh" 2>&1 | tee "$UPGRADE_LOG"
           code=${PIPESTATUS[0]}
           echo "upgrade exit code: ${code}"
           if [ "${code}" -ne 0 ]; then
