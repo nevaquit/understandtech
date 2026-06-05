@@ -1,0 +1,51 @@
+<?php
+// Moodle config for understandtech.app — copy to /var/www/moodle/config.php
+// Secrets loaded from /etc/moodle/env (populated from Azure Key Vault at deploy time).
+// NEVER commit a live config.php with real credentials.
+
+unset($CFG);
+global $CFG;
+$CFG = new stdClass();
+
+$envfile = '/etc/moodle/env';
+if (is_readable($envfile)) {
+    foreach (file($envfile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        if (str_starts_with(trim($line), '#') || !str_contains($line, '=')) {
+            continue;
+        }
+        [$key, $value] = explode('=', $line, 2);
+        putenv(trim($key) . '=' . trim($value));
+    }
+}
+
+$CFG->dbtype    = 'pgsql';
+$CFG->dblibrary = 'native';
+$CFG->dbhost    = getenv('MOODLE_DB_HOST') ?: '127.0.0.1';
+$CFG->dbname    = getenv('MOODLE_DB_NAME') ?: 'moodle';
+$CFG->dbuser    = getenv('MOODLE_DB_USER') ?: 'moodle_user';
+$CFG->dbpass    = getenv('MOODLE_DB_PASSWORD') ?: '';
+$CFG->prefix    = 'mdl_';
+$CFG->dboptions = [
+    'dbpersist' => false,
+    'dbport'    => (int) (getenv('MOODLE_DB_PORT') ?: 6432),
+    'dbsocket'  => false,
+    'sslmode'   => 'disable',
+];
+
+$CFG->wwwroot   = getenv('MOODLE_WWWROOT') ?: 'https://understandtech.app';
+$CFG->dataroot  = '/var/www/moodledata';
+$CFG->admin     = getenv('MOODLE_ADMIN_USER') ?: 'admin';
+$CFG->directorypermissions = 02770;
+
+$CFG->session_handler_class = '\core\session\redis';
+$CFG->session_redis_host = getenv('MOODLE_REDIS_HOST') ?: 'understandtech-redis-prod.eastus2.redis.azure.net';
+$CFG->session_redis_port = (int) (getenv('MOODLE_REDIS_PORT') ?: 10000);
+$CFG->session_redis_auth = getenv('MOODLE_REDIS_PASSWORD') ?: '';
+$CFG->session_redis_encrypt = true;
+
+$CFG->tool_generator_users_password = 'REPLACE_ME_BEFORE_PRODUCTION';
+
+// AI tutor JWT signing — must match Cloudflare Worker secret (cf-worker-shared-secret in KV).
+putenv('AITUTOR_WORKER_SHARED_SECRET=' . (getenv('AITUTOR_WORKER_SHARED_SECRET') ?: ''));
+
+require_once(__DIR__ . '/lib/setup.php');

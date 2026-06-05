@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/certmaster/db" VERSION="20260605" COMMENT="Certification readiness tracking"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="certmaster_certifications" COMMENT="Certification frameworks">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="shortname" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="fullname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="exam_code" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="shortname" TYPE="unique" FIELDS="shortname"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="certmaster_domains" COMMENT="Certification domains">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="certificationid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="shortname" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="fullname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="blueprint_weight" TYPE="number" LENGTH="5" NOTNULL="true" DECIMALS="2" SEQUENCE="false"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="certificationid" TYPE="foreign" FIELDS="certificationid" REFTABLE="certmaster_certifications" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="cert_sort" UNIQUE="false" FIELDS="certificationid, sortorder"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="certmaster_objectives" COMMENT="Certification objectives">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="domainid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="shortname" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="fullname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="sortorder" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="domainid" TYPE="foreign" FIELDS="domainid" REFTABLE="certmaster_domains" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="domain_sort" UNIQUE="false" FIELDS="domainid, sortorder"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="certmaster_question_objective" COMMENT="Question to objective mapping">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="question_bank question id"/>
+        <FIELD NAME="objectiveid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="objectiveid" TYPE="foreign" FIELDS="objectiveid" REFTABLE="certmaster_objectives" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="question_objective" UNIQUE="true" FIELDS="questionid, objectiveid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="certmaster_attempt_confidence" COMMENT="Per-answer confidence ratings">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="attemptid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="slot" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="confidence" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="iscorrect" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="attempt_slot" UNIQUE="true" FIELDS="attemptid, slot"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="certmaster_mastery" COMMENT="Per-user objective mastery">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="objectiveid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="mastery_score" TYPE="number" LENGTH="5" NOTNULL="true" DECIMALS="2" SEQUENCE="false"/>
+        <FIELD NAME="attempts_count" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="last_updated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="objectiveid" TYPE="foreign" FIELDS="objectiveid" REFTABLE="certmaster_objectives" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="user_objective" UNIQUE="true" FIELDS="userid, objectiveid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

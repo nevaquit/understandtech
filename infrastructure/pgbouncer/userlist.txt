@@ -1,11 +1,15 @@
-# PgBouncer SCRAM user list for moodle_user
+# PgBouncer SCRAM user list
 # Deploy to /etc/pgbouncer/userlist.txt — chmod 0600, owner postgres:postgres
 #
-# Regenerate SCRAM hash from plain password:
-#   psql -c "SELECT concat('\"moodle_user\" \"', rolpassword, '\"') FROM pg_authid WHERE rolname='moodle_user';"
-# Or on Postgres 16+:
+# Moodle connects through PgBouncer as moodle_user (create role on Azure Postgres after deploy).
+# Admin password is stored in Key Vault secret moodle-db-password (moodle_admin).
+#
+# Regenerate SCRAM hash from plain password (on Postgres 16+):
+#   psql -h understandtech-pg-prod.postgres.database.azure.com -U moodle_admin -d postgres \
+#     -c "SELECT concat('\"moodle_user\" \"', rolpassword, '\"') FROM pg_authid WHERE rolname='moodle_user';"
+# Or:
 #   psql -c "SELECT scram_sha_256_password('moodle_user', '<password>');"
 #
-# Replace {{HASHED_PASSWORD}} before deployment.
+# Replace {{HASHED_PASSWORD}} before copying to the VM. Do not commit real hashes.
 
 "moodle_user" "{{HASHED_PASSWORD}}"

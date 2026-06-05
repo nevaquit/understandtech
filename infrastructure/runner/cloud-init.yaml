@@ -38,12 +38,11 @@ write_files:
       if ! dpkg -s nginx >/dev/null 2>&1; then
         log "Installing packages"
         apt-get update
-        apt-get install -y software-properties-common ca-certificates curl jq git unzip cifs-utils redis-tools pgbouncer
-        add-apt-repository -y ppa:ondrej/nginx
+        apt-get install -y software-properties-common ca-certificates curl jq git unzip cifs-utils redis-tools pgbouncer nginx
         add-apt-repository -y ppa:ondrej/php
         apt-get update
-        apt-get install -y nginx php8.3-fpm php8.3-cli php8.3-mbstring php8.3-intl php8.3-pgsql php8.3-redis \
-          php8.3-gd php8.3-curl php8.3-soap php8.3-xml php8.3-zip php8.3-opcache php8.3-sodium php8.3-exif php8.3-sqlite3
+        apt-get install -y php8.3-fpm php8.3-cli php8.3-mbstring php8.3-intl php8.3-pgsql php8.3-redis \
+          php8.3-gd php8.3-curl php8.3-soap php8.3-xml php8.3-zip php8.3-opcache php8.3-exif php8.3-sqlite3
       fi
 
       # --- 2. System users ---

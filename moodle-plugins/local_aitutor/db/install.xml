@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/aitutor/db" VERSION="20260605" COMMENT="AI tutor conversations"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="aitutor_conversations" COMMENT="Tutor conversation sessions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="conversationuuid" TYPE="char" LENGTH="36" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="conversationuuid" TYPE="unique" FIELDS="conversationuuid"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="user_course" UNIQUE="false" FIELDS="userid, courseid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="aitutor_messages" COMMENT="Tutor messages">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="conversationid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="role" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="content" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="conversationid" TYPE="foreign" FIELDS="conversationid" REFTABLE="aitutor_conversations" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

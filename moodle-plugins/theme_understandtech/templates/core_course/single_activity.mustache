@@ -1,0 +1,19 @@
+{{!
+    @template core_course/single_activity
+    Two-pane lesson layout wrapper for Skool-style courses.
+}}
+<div class="ut-skool-layout" data-region="single-activity">
+    <div class="ut-lesson-grid">
+        <section class="ut-lesson-media" aria-label="{{#str}}activitymodule, moodle{{/str}}">
+            {{{content}}}
+        </section>
+        <aside class="ut-lesson-nav" aria-label="{{#str}}courseindex, core_course{{/str}}">
+            {{#courseindex}}
+                {{{courseindex}}}
+            {{/courseindex}}
+            {{^courseindex}}
+                <nav class="ut-lesson-nav-placeholder" aria-hidden="true"></nav>
+            {{/courseindex}}
+        </aside>
+    </div>
+</div>

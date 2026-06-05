@@ -1,0 +1,18 @@
+<div class="block-examreadiness">
+    {{#empty}}
+        <p class="text-muted">{{#str}}noattempts, block_examreadiness{{/str}}</p>
+    {{/empty}}
+    {{^empty}}
+        <div class="display-6 mb-2">{{readiness}}%</div>
+        <div class="small text-muted mb-3">{{#str}}readiness_label, block_examreadiness{{/str}}</div>
+        <canvas class="block-examreadiness-radar" data-radar="{{radar}}" height="200" aria-label="Domain mastery radar"></canvas>
+        {{#misconceptions}}
+            <h4 class="h6 mt-3">{{#str}}misconceptions_heading, block_examreadiness{{/str}}</h4>
+            <ul class="list-unstyled">
+                {{#.}}
+                    <li>{{objective}} — attempt {{attemptid}}</li>
+                {{/.}}
+            </ul>
+        {{/misconceptions}}
+    {{/empty}}
+</div>

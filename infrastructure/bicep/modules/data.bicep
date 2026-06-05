@@ -39,15 +39,6 @@ resource postgres 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
   }
 }
 
-resource postgresConfigPgbouncer 'Microsoft.DBforPostgreSQL/flexibleServers/configurations@2024-08-01' = {
-  parent: postgres
-  name: 'pgbouncer.enabled'
-  properties: {
-    value: 'true'
-    source: 'user-override'
-  }
-}
-
 resource postgresDb 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2024-08-01' = {
   parent: postgres
   name: 'moodle'
@@ -61,21 +52,28 @@ resource privateDnsZone 'Microsoft.Network/privateDnsZones@2020-06-01' existing 
   name: privateDnsZoneName
 }
 
-resource redis 'Microsoft.Cache/redis@2024-03-01' = {
+resource redis 'Microsoft.Cache/redisEnterprise@2025-04-01' = {
   name: 'understandtech-redis-${environment}'
   location: location
   tags: tags
+  sku: {
+    name: 'Balanced_B0'
+  }
   properties: {
-    sku: {
-      name: 'Basic'
-      family: 'C'
-      capacity: 0
-    }
-    enableNonSslPort: false
+    encryption: {}
+    highAvailability: 'Disabled'
     minimumTlsVersion: '1.2'
-    redisConfiguration: {
-      'maxmemory-policy': 'allkeys-lru'
-    }
+  }
+}
+
+resource redisDatabase 'Microsoft.Cache/redisEnterprise/databases@2025-04-01' = {
+  parent: redis
+  name: 'default'
+  properties: {
+    clientProtocol: 'Encrypted'
+    clusteringPolicy: 'OSSCluster'
+    evictionPolicy: 'AllKeysLRU'
+    modules: []
   }
 }
 

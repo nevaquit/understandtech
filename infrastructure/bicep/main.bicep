@@ -14,6 +14,12 @@ param environment string = 'prod'
 
 param location string = 'eastus2'
 
+@description('Web VM size — override if eastus2 has capacity restrictions.')
+param vmSize string = 'Standard_D2s_v3'
+
+@description('Availability zone for the web VM (empty = regional).')
+param vmZone string = ''
+
 @description('Cloudflare IPv4 CIDR ranges allowed to reach origin HTTPS.')
 param cloudflareIpv4Prefixes array = [
   '173.245.48.0/20'
@@ -94,6 +100,8 @@ module vm 'modules/vm.bicep' = {
     adminPublicKey: vmAdminPublicKey
     cloudInitContent: loadTextContent('../runner/cloud-init.yaml')
     keyVaultName: data.outputs.keyVaultName
+    vmSize: vmSize
+    vmZone: vmZone
   }
 }
 

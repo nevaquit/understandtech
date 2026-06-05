@@ -8,11 +8,19 @@ param adminPublicKey string
 param cloudInitContent string
 param keyVaultName string
 
+@description('VM size — must have capacity in the target region/zone.')
+param vmSize string = 'Standard_D2s_v3'
+
+@description('Availability zone for the web VM (empty string = regional).')
+param vmZone string = ''
+
 var vmName = 'understandtech-web-${environment}'
+var vmZones array = empty(vmZone) ? [] : [ vmZone ]
 
 resource publicIp 'Microsoft.Network/publicIPAddresses@2024-01-01' = {
   name: '${vmName}-pip'
   location: location
+  zones: vmZones
   tags: tags
   sku: {
     name: 'Standard'
@@ -25,6 +33,7 @@ resource publicIp 'Microsoft.Network/publicIPAddresses@2024-01-01' = {
 resource nic 'Microsoft.Network/networkInterfaces@2024-01-01' = {
   name: '${vmName}-nic'
   location: location
+  zones: vmZones
   tags: tags
   properties: {
     ipConfigurations: [
@@ -51,12 +60,13 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-03-01' = {
   name: vmName
   location: location
   tags: tags
+  zones: vmZones
   identity: {
     type: 'SystemAssigned'
   }
   properties: {
     hardwareProfile: {
-      vmSize: 'Standard_B2ms'
+      vmSize: vmSize
     }
     osProfile: {
       computerName: vmName
@@ -77,9 +87,9 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-03-01' = {
     storageProfile: {
       imageReference: {
         publisher: 'Canonical'
-        offer: '0001-com-ubuntu-server-noble'
-        sku: '24_04-lts-gen2'
-        version: 'latest'
+        offer: '0001-com-ubuntu-server-jammy'
+        sku: '22_04-lts-gen2'
+        version: '22.04.202605030'
       }
       osDisk: {
         createOption: 'FromImage'

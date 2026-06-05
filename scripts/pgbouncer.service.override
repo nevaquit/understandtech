@@ -1,0 +1,8 @@
+[Service]
+Type=forking
+User=postgres
+Group=postgres
+ExecStart=/usr/sbin/pgbouncer -d /etc/pgbouncer/pgbouncer.ini
+ExecReload=/bin/kill -HUP $MAINPID
+PIDFile=/var/run/postgresql/pgbouncer.pid
+Restart=on-failure

@@ -1,0 +1,22 @@
+{{!
+    @template block_xp/main
+    Leaderboard styling for Level Up XP block (when installed).
+}}
+<div class="ut-leaderboard block_xp" data-region="xp-leaderboard">
+    <h3 class="h5 mb-3">{{#str}}leaderboard, block_xp{{/str}}</h3>
+    <div class="ut-leaderboard-list" role="list">
+        {{#entries}}
+            <div class="ut-leaderboard-row" role="listitem">
+                <span class="ut-rank" aria-label="{{ranklabel}}">{{rank}}</span>
+                <span class="ut-name">{{name}}</span>
+                <div class="ut-xp-bar flex-grow-1 mx-3" aria-hidden="true">
+                    <div class="ut-xp-fill" style="width: {{percent}}%"></div>
+                </div>
+                <span class="ut-points">{{points}} XP</span>
+            </div>
+        {{/entries}}
+        {{^entries}}
+            <p class="text-muted">{{#str}}noentries, block_xp{{/str}}</p>
+        {{/entries}}
+    </div>
+</div>

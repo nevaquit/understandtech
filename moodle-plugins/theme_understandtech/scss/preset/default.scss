@@ -1,0 +1,133 @@
+// UnderstandTech brand preset — Boost child overrides.
+// Variables $ut-brand-* are injected via theme_understandtech_get_pre_scss().
+
+$body-font-family: 'Source Serif 4', Georgia, serif;
+$headings-font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+$font-family-monospace: 'Share Tech Mono', ui-monospace, monospace;
+
+$navbar-height: 3.5rem;
+$card-border-radius: 0.75rem;
+
+.navbar {
+    background-color: $ut-brand-navy;
+    border-bottom: 2px solid $ut-brand-gold;
+
+    .navbar-brand,
+    .nav-link,
+    .navbar-nav .nav-link {
+        color: #fff;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+        color: $ut-brand-gold;
+    }
+}
+
+.ut-primary-nav {
+    .nav-item {
+        max-width: 8rem;
+        text-align: center;
+    }
+
+    .nav-link {
+        font-family: $headings-font-family;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+    }
+}
+
+#page {
+    background-color: #f4f6f9;
+}
+
+#region-main {
+    background: #fff;
+    border-radius: $card-border-radius;
+    box-shadow: 0 1px 3px rgba($ut-brand-navy, 0.08);
+}
+
+.ut-skool-layout {
+    .ut-lesson-grid {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 1.5rem;
+        min-height: 60vh;
+    }
+
+    .ut-lesson-media {
+        background: $ut-brand-navy;
+        border-radius: $card-border-radius;
+        color: #fff;
+        padding: 1rem;
+    }
+
+    .ut-lesson-nav {
+        background: #fff;
+        border: 1px solid rgba($ut-brand-navy, 0.12);
+        border-radius: $card-border-radius;
+        padding: 1rem;
+    }
+}
+
+.ut-dashboard-cards {
+    .card {
+        border: none;
+        border-top: 3px solid $ut-brand-teal;
+        transition: transform 0.15s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+
+    .card-title {
+        color: $ut-brand-navy;
+        font-family: $headings-font-family;
+    }
+}
+
+.ut-community-feed {
+    .ut-feed-item {
+        border-left: 3px solid $ut-brand-gold;
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.btn-primary {
+    background-color: $ut-brand-teal;
+    border-color: $ut-brand-teal;
+
+    &:hover,
+    &:focus {
+        background-color: darken($ut-brand-teal, 8%);
+        border-color: darken($ut-brand-teal, 8%);
+    }
+}
+
+.btn-secondary {
+    background-color: $ut-brand-gold;
+    border-color: $ut-brand-gold;
+    color: $ut-brand-navy;
+}
+
+#page-login-index {
+    .login-container {
+        max-width: 28rem;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: $card-border-radius;
+        box-shadow: 0 8px 24px rgba($ut-brand-navy, 0.12);
+        border-top: 4px solid $ut-brand-gold;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .ut-skool-layout .ut-lesson-grid {
+        grid-template-columns: 1fr;
+    }
+}

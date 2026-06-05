@@ -19,6 +19,7 @@ dist/
 .wrangler/
 *.tsbuildinfo
 infrastructure/bicep/main.json
+infrastructure/runner/cloud-init.rendered.yaml
 
 # IDE
 .idea/
