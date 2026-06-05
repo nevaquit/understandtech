@@ -1,4 +1,4 @@
-# Understandtech.app
+# Understandtech
 
 Local full-stack web application built with Next.js, TypeScript, and Tailwind CSS.
 

@@ -7,7 +7,7 @@ export default function Home() {
             Local development
           </p>
           <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
-            Understandtech.app
+            Understandtech
           </h1>
           <p className="text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Full-stack Next.js app with API routes, TypeScript, and Tailwind CSS.

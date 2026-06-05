@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Understandtech.app",
-  description: "Full-stack web application for Understandtech.app",
+  title: "Understandtech",
+  description: "Full-stack web application for Understandtech",
 };
 
 export default function RootLayout({
