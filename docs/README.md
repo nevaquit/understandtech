@@ -9,6 +9,9 @@ Source documents for understandtech.app platform development.
 | [white-paper.md](white-paper.md) | Technical White Paper v2.0 — architecture and business strategy |
 | [playbook.md](playbook.md) | Creation Playbook — phase-by-phase Cursor prompts |
 | [phase-0-toolchain.md](phase-0-toolchain.md) | Local toolchain audit (Phase 0) |
+| [phase-2-infrastructure.md](phase-2-infrastructure.md) | Azure Bicep, nginx, PgBouncer (Phase 2) |
+| [phase-7-production.md](phase-7-production.md) | Production gates, smoke baseline, v1.0.0 blockers (Phase 7) |
+| [post-deployment-validation.md](post-deployment-validation.md) | 30-minute post-deploy engineer checklist (§7.3) |
 
 ## Original Word documents (archived)
 
