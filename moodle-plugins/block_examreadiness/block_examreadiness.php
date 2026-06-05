@@ -8,8 +8,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class block_examreadiness extends block_base {
 
-    #[\Override]
-    public function init(): void {
+    public function init() {
         $this->title = get_string('pluginname', 'block_examreadiness');
     }
 

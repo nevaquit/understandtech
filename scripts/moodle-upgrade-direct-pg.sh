@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-set -uo pipefail
+# Run Moodle upgrade.php against Azure PostgreSQL directly (bypass PgBouncer transaction pool).
+# PgBouncer transaction mode breaks DDL in upgrade_noncore(); restore config.php after success.
+set -euo pipefail
 
-CONFIG=/var/www/moodle/config.php
+MOODLE_DIR="${MOODLE_DIR:-/var/www/moodle}"
+CONFIG="${MOODLE_DIR}/config.php"
 BACKUP=/tmp/config.pgbouncer.bak
-LOG=/tmp/moodle-upgrade.log
+LOG="${MOODLE_UPGRADE_LOG:-/var/log/moodle-upgrade.log}"
 
-exec > >(tee "$LOG") 2>&1
+exec > >(tee -a "$LOG") 2>&1
 
 echo "=== Moodle direct-Postgres upgrade $(date -Is) ==="
 
@@ -16,7 +19,8 @@ sudo sed -i "s|'dbport' => 6432|'dbport' => 5432, 'sslmode' => 'require'|g" "$CO
 echo "--- config dboptions ---"
 sudo grep -A6 dboptions "$CONFIG" || true
 
-if ! sudo -u www-data php /var/www/moodle/admin/cli/upgrade.php --non-interactive; then
+cd "$MOODLE_DIR"
+if ! sudo -u www-data /usr/bin/php admin/cli/upgrade.php --non-interactive --allow-unstable; then
   echo "Upgrade failed; restoring config"
   sudo cp "$BACKUP" "$CONFIG"
   sudo chown root:www-data "$CONFIG"
@@ -27,6 +31,6 @@ fi
 sudo cp "$BACKUP" "$CONFIG"
 sudo chown root:www-data "$CONFIG"
 sudo chmod 640 "$CONFIG"
-sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
+sudo -u www-data /usr/bin/php admin/cli/purge_caches.php
 
 echo "Upgrade complete via direct Postgres."
