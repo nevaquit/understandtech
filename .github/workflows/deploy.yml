@@ -171,11 +171,24 @@ jobs:
           sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --enable
 
       - name: Sync monorepo on VM
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
           cd /opt/understandtech-plugins
-          sudo -u gha-runner git fetch origin main
-          sudo -u gha-runner git reset --hard origin/main
+          for attempt in 1 2 3 4 5; do
+            sudo -u gha-runner git fetch origin main
+            sudo -u gha-runner git reset --hard origin/main
+            actual="$(git rev-parse HEAD)"
+            if [ "$actual" = "$EXPECTED_SHA" ]; then
+              echo "Monorepo synced to ${EXPECTED_SHA}"
+              exit 0
+            fi
+            echo "origin/main is ${actual}, expected ${EXPECTED_SHA} (attempt ${attempt}/5)"
+            sleep 3
+          done
+          echo "ERROR: monorepo stuck at $(git rev-parse HEAD), expected ${EXPECTED_SHA}" >&2
+          exit 1
 
       - name: Rsync changed plugins
         env:
