@@ -38,6 +38,34 @@ After population, refresh VM env:
 .\scripts\setup-moodle-env-vm.ps1
 ```
 
+## Cloudflare AI Gateway Worker (Phase 4.3)
+
+Worker code lives in `cloudflare-worker/ai-gateway/`. Before first deploy, replace placeholders in `wrangler.jsonc`:
+
+| Placeholder | Replace with |
+|-------------|--------------|
+| `REPLACE_WITH_KV_NAMESPACE_ID` | Output of `npx wrangler kv namespace create PROMPT_CACHE` |
+| `REPLACE_ACCOUNT` in `AI_GATEWAY_URL` | Cloudflare account ID |
+
+Secrets (never commit — use Key Vault values):
+
+```bash
+cd cloudflare-worker/ai-gateway
+npx wrangler login
+npx wrangler secret put MOODLE_JWT_SECRET
+npx wrangler secret put MOODLE_WEBHOOK_HMAC_SECRET
+npx wrangler secret put ANTHROPIC_API_KEY
+npx wrangler secret put OPENAI_API_KEY
+```
+
+Deploy (checks auth, placeholders, runs typecheck):
+
+```bash
+./scripts/deploy-ai-gateway.sh
+```
+
+Expected route after deploy: `https://ai.understandtech.app/*`
+
 ## Cloudflare origin certificate
 
 Production nginx (`infrastructure/nginx/understandtech.conf`) requires:
@@ -82,5 +110,6 @@ sudo ./scripts/install-cloudflare-origin-certs.sh \
 | `setup-moodle-env-vm.ps1` | Key Vault → `/etc/moodle/env` on VM |
 | `install-moodle-vm.sh` | Clone Moodle 4.5 to `/var/www/moodle` |
 | `deploy-plugins-vm.sh` | Deploy `moodle-plugins/*` to VM |
+| `deploy-ai-gateway.sh` | Phase 4.3 Worker deploy (KV + secrets + `wrangler deploy`) |
 | `render-cloud-init.ps1` | Render cloud-init with storage key |
 | `vm-bootstrap-remote.sh` | Partial VM bootstrap (HTTP nginx) |

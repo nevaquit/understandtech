@@ -15,6 +15,7 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/mo
 gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/moodle/mod/*
 gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/moodle/theme/*
 gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/moodle/blocks/*
+gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/moodle/question/behaviour/*
 
 # Redis cache flush (application DB 0 only)
 gha-runner ALL=(root) NOPASSWD: /usr/bin/cat /etc/moodle/redis_password
