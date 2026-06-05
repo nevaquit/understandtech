@@ -1,0 +1,15 @@
+{
+  "name": "understandtech-e2e",
+  "private": true,
+  "description": "Playwright E2E tests for understandtech.app (Phase 6)",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "typescript": "^5.7.2"
+  }
+}

@@ -325,6 +325,15 @@ jobs:
           fi
           echo "php-fpm socket: ok"
 
+      - name: Post-deploy smoke test
+        env:
+          ON_VM: '1'
+          PROD_URL: https://understandtech.app
+          GITHUB_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          bash "${PLUGINS_REPO_DIR}/scripts/smoke-test-deployment.sh"
+
       - name: Deployment summary
         if: always()
         run: |

@@ -111,5 +111,6 @@ sudo ./scripts/install-cloudflare-origin-certs.sh \
 | `install-moodle-vm.sh` | Clone Moodle 4.5 to `/var/www/moodle` |
 | `deploy-plugins-vm.sh` | Deploy `moodle-plugins/*` to VM |
 | `deploy-ai-gateway.sh` | Phase 4.3 Worker deploy (KV + secrets + `wrangler deploy`) |
+| `smoke-test-deployment.sh` | Phase 6.2 post-deploy checks (DNS, SSL, AI Worker, VM health) |
 | `render-cloud-init.ps1` | Render cloud-init with storage key |
 | `vm-bootstrap-remote.sh` | Partial VM bootstrap (HTTP nginx) |
