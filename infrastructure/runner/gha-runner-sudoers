@@ -14,6 +14,18 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/php /var/www/moodle/admin/cli/maintenan
 gha-runner ALL=(root) NOPASSWD: /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php
 gha-runner ALL=(root) NOPASSWD: /usr/bin/php /var/www/moodle/admin/cli/upgrade.php --non-interactive --allow-unstable
 
+# Plugin sync into www-data-owned Moodle dirroot (deploy workflow)
+gha-runner ALL=(root) NOPASSWD: /usr/bin/mkdir -p /var/www/moodle/local/*
+gha-runner ALL=(root) NOPASSWD: /usr/bin/mkdir -p /var/www/moodle/mod/*
+gha-runner ALL=(root) NOPASSWD: /usr/bin/mkdir -p /var/www/moodle/theme/*
+gha-runner ALL=(root) NOPASSWD: /usr/bin/mkdir -p /var/www/moodle/blocks/*
+gha-runner ALL=(root) NOPASSWD: /usr/bin/mkdir -p /var/www/moodle/question/behaviour/*
+gha-runner ALL=(root) NOPASSWD: /usr/bin/rsync -av --delete --exclude=.git --exclude=.github --exclude=\*.md --exclude=tests/ /opt/understandtech-plugins/moodle-plugins/local_*/ /var/www/moodle/local/*/
+gha-runner ALL=(root) NOPASSWD: /usr/bin/rsync -av --delete --exclude=.git --exclude=.github --exclude=\*.md --exclude=tests/ /opt/understandtech-plugins/moodle-plugins/mod_*/ /var/www/moodle/mod/*/
+gha-runner ALL=(root) NOPASSWD: /usr/bin/rsync -av --delete --exclude=.git --exclude=.github --exclude=\*.md --exclude=tests/ /opt/understandtech-plugins/moodle-plugins/theme_*/ /var/www/moodle/theme/*/
+gha-runner ALL=(root) NOPASSWD: /usr/bin/rsync -av --delete --exclude=.git --exclude=.github --exclude=\*.md --exclude=tests/ /opt/understandtech-plugins/moodle-plugins/block_*/ /var/www/moodle/blocks/*/
+gha-runner ALL=(root) NOPASSWD: /usr/bin/rsync -av --delete --exclude=.git --exclude=.github --exclude=\*.md --exclude=tests/ /opt/understandtech-plugins/moodle-plugins/qbehaviour_*/ /var/www/moodle/question/behaviour/*/
+
 # Plugin sync ownership after rsync
 gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/moodle/local/*
 gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/moodle/mod/*

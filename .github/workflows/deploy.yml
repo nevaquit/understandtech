@@ -213,8 +213,8 @@ jobs:
               echo "Skip missing source: $src" >&2
               continue
             fi
-            mkdir -p "$(dirname "$dst")"
-            /usr/bin/rsync -av --delete \
+            sudo /usr/bin/mkdir -p "$dst"
+            sudo "${RSYNC_BIN}" -av --delete \
               --exclude='.git' --exclude='.github' --exclude='*.md' --exclude='tests/' \
               "$src" "$dst"
             chown_plugin "$relpath"
