@@ -308,13 +308,30 @@ jobs:
       - name: Health check
         run: |
           set -euo pipefail
-          code=$(curl -s -o /dev/null -w '%{http_code}' -k https://localhost/ \
-            -H 'Host: understandtech.app')
-          echo "HTTP status: $code"
-          if [ "$code" != "200" ] && [ "$code" != "303" ]; then
-            echo "Unexpected health check status: $code" >&2
+          # Origin :443 enforces Cloudflare Authenticated Origin Pulls (ssl_verify_client on).
+          # Local HTTPS curl without a CF client cert returns 400 — verify stack on-box instead.
+          for svc in nginx php8.3-fpm pgbouncer; do
+            if ! systemctl is-active --quiet "$svc"; then
+              echo "Service not active: $svc" >&2
+              systemctl status "$svc" --no-pager >&2 || true
+              exit 1
+            fi
+            echo "$svc: active"
+          done
+
+          if [ ! -S /run/php/moodle.sock ]; then
+            echo "PHP-FPM socket missing: /run/php/moodle.sock" >&2
             exit 1
           fi
+          echo "php-fpm socket: ok"
+
+          if ! redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" \
+            -a "$(sudo /usr/bin/cat /etc/moodle/redis_password)" \
+            -n 0 PING | grep -q PONG; then
+            echo "Redis PING failed" >&2
+            exit 1
+          fi
+          echo "redis: ok"
 
       - name: Deployment summary
         if: always()
