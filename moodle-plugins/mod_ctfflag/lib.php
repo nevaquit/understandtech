@@ -9,7 +9,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param string $feature FEATURE_* constant
  * @return bool|null
  */
-function ctfflag_supports(string $feature): ?bool {
+function ctfflag_supports($feature) {
     switch ($feature) {
         case FEATURE_MOD_INTRO:
             return true;
@@ -43,7 +43,7 @@ function ctfflag_add_instance(stdClass $data, $mform = null) {
  * @param moodleform|null $mform
  * @return bool
  */
-function ctfflag_update_instance(stdClass $data, $mform = null): bool {
+function ctfflag_update_instance(stdClass $data, $mform = null) {
     global $DB;
 
     $data->timemodified = time();
@@ -58,7 +58,7 @@ function ctfflag_update_instance(stdClass $data, $mform = null): bool {
  * @param int $id
  * @return bool
  */
-function ctfflag_delete_instance(int $id): bool {
+function ctfflag_delete_instance($id) {
     global $DB;
 
     if (!$DB->record_exists('ctfflag', ['id' => $id])) {

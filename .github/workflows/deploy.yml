@@ -18,7 +18,7 @@ on:
 
 concurrency:
   group: production-deploy
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   MOODLE_DIR: /var/www/moodle
@@ -252,6 +252,11 @@ jobs:
         run: |
           set -euo pipefail
           sudo /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php
+
+      - name: Reload PHP-FPM
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/systemctl reload php8.3-fpm
 
       - name: Run Moodle upgrade
         if: github.event_name != 'workflow_dispatch' || inputs.skip_upgrade != 'true'

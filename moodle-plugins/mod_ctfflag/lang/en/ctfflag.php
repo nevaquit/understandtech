@@ -4,3 +4,4 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'CTF lab flag';
+$string['privacy:metadata:nullprovider'] = 'The CTF lab flag module does not store personal data yet.';
