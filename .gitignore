@@ -6,8 +6,11 @@ vendor/
 .env*
 !.env.example
 *secret*
+!scripts/populate-keyvault-secrets.ps1
+!scripts/populate-keyvault-secrets.sh
 *.pem
 *.key
+!infrastructure/ssl/cloudflare/.gitkeep
 
 # Logs and OS
 *.log
