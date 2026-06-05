@@ -48,10 +48,13 @@ export interface Env {
 	MOODLE_WEBHOOK_HMAC_SECRET: string;
 	MOODLE_WEBHOOK_URL: string;
 	AI_GATEWAY_URL: string;
+	AI_GATEWAY_ID: string;
 	PRIMARY_MODEL: string;
 	SECONDARY_MODEL: string;
 	CACHE_TTL_SECONDS: string;
 	ANTHROPIC_API_KEY: string;
 	OPENAI_API_KEY: string;
+	/** Optional; only needed when gateway auth is on and AI binding is unavailable. */
+	CF_AIG_AUTHORIZATION?: string;
 	PROMPT_CACHE: KVNamespace;
 }

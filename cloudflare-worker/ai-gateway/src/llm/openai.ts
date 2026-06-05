@@ -1,4 +1,7 @@
 import type { ChatMessage, Env } from '../types';
+import { buildProviderHeaders, providerUrl, trimSecret } from './aig';
+
+const OPENAI_DIRECT_URL = 'https://api.openai.com/v1/chat/completions';
 
 export interface OpenAiStreamResult {
 	provider: 'openai';
@@ -15,26 +18,19 @@ export async function streamOpenAi(
 	signal: AbortSignal,
 	onToken: (token: string) => void,
 ): Promise<OpenAiStreamResult> {
-	const url = `${env.AI_GATEWAY_URL}/openai/chat/completions`;
 	const chatMessages: ChatMessage[] = [
 		{ role: 'system', content: systemPrompt },
 		...messages.filter((m) => m.role !== 'system'),
 	];
 
-	const response = await fetch(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${env.OPENAI_API_KEY}`,
-		},
-		body: JSON.stringify({
-			model: env.SECONDARY_MODEL,
-			max_tokens: 2048,
-			stream: true,
-			messages: chatMessages,
-		}),
-		signal,
+	const body = JSON.stringify({
+		model: env.SECONDARY_MODEL,
+		max_tokens: 2048,
+		stream: true,
+		messages: chatMessages,
 	});
+
+	const response = await fetchOpenAiChatCompletions(env, body, signal);
 
 	if (!response.ok) {
 		throw new Error(`OpenAI error: ${response.status}`);
@@ -99,24 +95,17 @@ export async function completeOpenAi(
 	userContent: string,
 	signal: AbortSignal,
 ): Promise<string> {
-	const url = `${env.AI_GATEWAY_URL}/openai/chat/completions`;
-	const response = await fetch(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${env.OPENAI_API_KEY}`,
-		},
-		body: JSON.stringify({
-			model: env.SECONDARY_MODEL,
-			max_tokens: 2048,
-			response_format: { type: 'json_object' },
-			messages: [
-				{ role: 'system', content: systemPrompt },
-				{ role: 'user', content: userContent },
-			],
-		}),
-		signal,
+	const body = JSON.stringify({
+		model: env.SECONDARY_MODEL,
+		max_tokens: 2048,
+		response_format: { type: 'json_object' },
+		messages: [
+			{ role: 'system', content: systemPrompt },
+			{ role: 'user', content: userContent },
+		],
 	});
+
+	const response = await fetchOpenAiChatCompletions(env, body, signal);
 
 	if (!response.ok) {
 		throw new Error(`OpenAI grade error: ${response.status}`);
@@ -126,4 +115,35 @@ export async function completeOpenAi(
 		choices?: Array<{ message?: { content?: string } }>;
 	};
 	return json.choices?.[0]?.message?.content ?? '{}';
+}
+
+/** POST to OpenAI; retries direct API when gateway returns 401 (missing cf-aig auth). */
+export async function fetchOpenAiChatCompletions(
+	env: Env,
+	body: string,
+	signal: AbortSignal,
+): Promise<Response> {
+	const providerHeaders = {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${trimSecret(env.OPENAI_API_KEY)}`,
+	};
+
+	const gatewayUrl = await providerUrl(env, 'openai', '/chat/completions');
+	let response = await fetch(gatewayUrl, {
+		method: 'POST',
+		headers: buildProviderHeaders(env, providerHeaders),
+		body,
+		signal,
+	});
+
+	if (response.status === 401 && gatewayUrl.includes('gateway.ai.cloudflare.com')) {
+		response = await fetch(OPENAI_DIRECT_URL, {
+			method: 'POST',
+			headers: providerHeaders,
+			body,
+			signal,
+		});
+	}
+
+	return response;
 }

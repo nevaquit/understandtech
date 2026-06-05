@@ -1,5 +1,5 @@
 import type { ChatMessage, Env } from '../types';
-import { shouldFallbackAnthropic, streamAnthropic } from './anthropic';
+import { fetchAnthropicMessages, shouldFallbackAnthropic, streamAnthropic } from './anthropic';
 import { completeOpenAi, streamOpenAi } from './openai';
 
 export type LlmProvider = 'anthropic' | 'openai';
@@ -39,24 +39,15 @@ export async function completeGrade(
 	userContent: string,
 	signal: AbortSignal,
 ): Promise<{ provider: LlmProvider; content: string }> {
-	const url = `${env.AI_GATEWAY_URL}/anthropic/v1/messages`;
+	const body = JSON.stringify({
+		model: env.PRIMARY_MODEL,
+		max_tokens: 2048,
+		system: systemPrompt,
+		messages: [{ role: 'user', content: userContent }],
+	});
 
 	try {
-		const response = await fetch(url, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'x-api-key': env.ANTHROPIC_API_KEY,
-				'anthropic-version': '2023-06-01',
-			},
-			body: JSON.stringify({
-				model: env.PRIMARY_MODEL,
-				max_tokens: 2048,
-				system: systemPrompt,
-				messages: [{ role: 'user', content: userContent }],
-			}),
-			signal,
-		});
+		const response = await fetchAnthropicMessages(env, body, signal);
 
 		if (response.ok) {
 			const json = (await response.json()) as {
