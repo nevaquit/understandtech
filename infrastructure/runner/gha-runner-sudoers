@@ -26,6 +26,9 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/rsync -av --delete --exclude=.git --exc
 gha-runner ALL=(root) NOPASSWD: /usr/bin/rsync -av --delete --exclude=.git --exclude=.github --exclude=\*.md --exclude=tests/ /opt/understandtech-plugins/moodle-plugins/block_*/ /var/www/moodle/blocks/*/
 gha-runner ALL=(root) NOPASSWD: /usr/bin/rsync -av --delete --exclude=.git --exclude=.github --exclude=\*.md --exclude=tests/ /opt/understandtech-plugins/moodle-plugins/qbehaviour_*/ /var/www/moodle/question/behaviour/*/
 
+# Remove README-only placeholder dirs before upgrade (scripts/remove-placeholder-plugins.sh)
+gha-runner ALL=(root) NOPASSWD: /opt/understandtech-plugins/scripts/remove-placeholder-plugins.sh
+
 # Plugin sync ownership after rsync
 gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/moodle/local/*
 gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/moodle/mod/*
