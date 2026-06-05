@@ -8,6 +8,54 @@ var vnetName = 'understandtech-vnet-${environment}'
 var nsgName = 'understandtech-nsg-${environment}'
 var postgresDnsZoneName = 'privatelink.postgres.database.azure.com'
 
+var cloudflareHttpsRules = [for (prefix, i) in cloudflareIpv4Prefixes: {
+  name: 'Allow-Cloudflare-HTTPS-${i}'
+  properties: {
+    priority: 200 + i
+    direction: 'Inbound'
+    access: 'Allow'
+    protocol: 'Tcp'
+    sourceAddressPrefix: prefix
+    sourcePortRange: '*'
+    destinationAddressPrefix: '*'
+    destinationPortRange: '443'
+  }
+}]
+
+var nsgSecurityRules = concat(
+  [
+    {
+      name: 'Allow-SSH-Admin'
+      properties: {
+        priority: 100
+        direction: 'Inbound'
+        access: 'Allow'
+        protocol: 'Tcp'
+        sourceAddressPrefix: adminIpAddress
+        sourcePortRange: '*'
+        destinationAddressPrefix: '*'
+        destinationPortRange: '22'
+      }
+    }
+  ],
+  cloudflareHttpsRules,
+  [
+    {
+      name: 'Deny-All-Inbound'
+      properties: {
+        priority: 4096
+        direction: 'Inbound'
+        access: 'Deny'
+        protocol: '*'
+        sourceAddressPrefix: '*'
+        sourcePortRange: '*'
+        destinationAddressPrefix: '*'
+        destinationPortRange: '*'
+      }
+    }
+  ]
+)
+
 resource vnet 'Microsoft.Network/virtualNetworks@2024-01-01' = {
   name: vnetName
   location: location
@@ -49,53 +97,7 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2024-01-01' = {
   location: location
   tags: tags
   properties: {
-    securityRules: concat(
-      [
-        {
-          name: 'Allow-SSH-Admin'
-          properties: {
-            priority: 100
-            direction: 'Inbound'
-            access: 'Allow'
-            protocol: 'Tcp'
-            sourceAddressPrefix: adminIpAddress
-            sourcePortRange: '*'
-            destinationAddressPrefix: '*'
-            destinationPortRange: '22'
-          }
-        }
-      ],
-      [
-        for (prefix, i) in cloudflareIpv4Prefixes: {
-          name: 'Allow-Cloudflare-HTTPS-${i}'
-          properties: {
-            priority: 200 + i
-            direction: 'Inbound'
-            access: 'Allow'
-            protocol: 'Tcp'
-            sourceAddressPrefix: prefix
-            sourcePortRange: '*'
-            destinationAddressPrefix: '*'
-            destinationPortRange: '443'
-          }
-        }
-      ],
-      [
-        {
-          name: 'Deny-All-Inbound'
-          properties: {
-            priority: 4096
-            direction: 'Inbound'
-            access: 'Deny'
-            protocol: '*'
-            sourceAddressPrefix: '*'
-            sourcePortRange: '*'
-            destinationAddressPrefix: '*'
-            destinationPortRange: '*'
-          }
-        }
-      ]
-    )
+    securityRules: nsgSecurityRules
   }
 }
 

@@ -6,7 +6,6 @@ param nsgId string
 param adminUsername string
 param adminPublicKey string
 param cloudInitContent string
-param keyVaultId string
 param keyVaultName string
 
 var vmName = 'understandtech-web-${environment}'
@@ -100,9 +99,13 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-03-01' = {
   }
 }
 
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
+  name: keyVaultName
+}
+
 resource kvSecretsUser 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(keyVaultId, vm.id, '4633458b-17de-408a-b874-0445c86b69e6')
-  scope: resourceId('Microsoft.KeyVault/vaults', keyVaultName)
+  name: guid(keyVault.id, vm.id, '4633458b-17de-408a-b874-0445c86b69e6')
+  scope: keyVault
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
     principalId: vm.identity.principalId

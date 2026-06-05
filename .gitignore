@@ -18,6 +18,7 @@ Thumbs.db
 dist/
 .wrangler/
 *.tsbuildinfo
+infrastructure/bicep/main.json
 
 # IDE
 .idea/

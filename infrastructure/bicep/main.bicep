@@ -93,7 +93,6 @@ module vm 'modules/vm.bicep' = {
     adminUsername: vmAdminUsername
     adminPublicKey: vmAdminPublicKey
     cloudInitContent: loadTextContent('../runner/cloud-init.yaml')
-    keyVaultId: data.outputs.keyVaultId
     keyVaultName: data.outputs.keyVaultName
   }
 }

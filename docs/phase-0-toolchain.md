@@ -11,6 +11,8 @@ Repository: `understandtech` (understandtech.app platform monorepo)
 | Node.js | 20 LTS+ | OK | v22.22.0 |
 | npm | (with Node) | OK | 11.6.2 |
 | GitHub CLI | 2.40+ | OK | 2.92.0 |
+| Azure CLI | 2.60+ | OK | 2.87.0 |
+| Bicep CLI | Latest | OK | 0.43.8 |
 | Cursor | Latest | OK | (IDE) |
 
 ## Missing — install before Phase 2+
@@ -21,8 +23,6 @@ Repository: `understandtech` (understandtech.app platform monorepo)
 | Composer | 2.6+ | Missing | [getcomposer.org](https://getcomposer.org/download/) |
 | Docker Desktop | Latest | Missing | [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop/) |
 | Docker Compose | v2+ | Missing | Bundled with Docker Desktop |
-| Azure CLI | 2.60+ | Missing | `winget install Microsoft.AzureCLI` |
-| Bicep CLI | Latest | Missing | `winget install Microsoft.Bicep` |
 | Wrangler | 3+ | Missing | `npm install -g wrangler` |
 | jq | 1.6+ | Missing | `winget install jqlang.jq` |
 
@@ -49,6 +49,6 @@ Confirm access before Phase 2:
 
 ## Phase 0 verdict
 
-**Partially complete.** Git, Node, npm, and GitHub CLI are ready for Phase 1 (repository bootstrap). Install PHP, Composer, and Docker before Phase 3 (Moodle plugin development). Install Azure CLI, Bicep, and Wrangler before Phases 2 and 4.
+**Partially complete.** Git, Node, npm, GitHub CLI, Azure CLI, and Bicep are ready for Phase 2 deployment. Install PHP, Composer, and Docker before Phase 3 (Moodle plugin development). Install Wrangler before Phase 4.
 
 Next step: Phase 1 scaffolding (complete) → install missing tools in parallel with Phase 2 planning.
