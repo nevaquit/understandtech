@@ -1,39 +1,55 @@
-# Understandtech
+# understandtech.app Platform Monorepo
 
-Local full-stack web application built with Next.js, TypeScript, and Tailwind CSS.
+Custom plugins, infrastructure-as-code, and edge workers for **understandtech.app** — an AI-augmented certification training platform built on Moodle 4.5 LTS with a deconstructed edge-native architecture (Cloudflare + Azure).
 
-## Stack
+This repository does **not** contain Moodle core. It tracks only the intellectual property and deployment artifacts defined in the [Technical White Paper v2.0](docs/white-paper.md).
 
-- **Frontend:** React 19 + Next.js App Router
-- **Backend:** Next.js API routes (`src/app/api`)
-- **Styling:** Tailwind CSS v4
+## Architecture overview
 
-## Getting started
+- **Origin:** Azure VM running Nginx + PHP-FPM + custom Moodle plugins
+- **Data:** Azure PostgreSQL (via PgBouncer) + Redis cache
+- **Edge:** Cloudflare (WAF, Stream, Workers, AI Gateway)
+- **AI:** All LLM calls routed through the Cloudflare AI Gateway Worker — Moodle PHP never calls providers directly
+
+See [docs/white-paper.md](docs/white-paper.md) for the full architectural blueprint.
+
+## Repository layout
+
+| Directory | Purpose |
+|-----------|---------|
+| `moodle-plugins/` | Custom Moodle plugins (theme, local, mod, block) |
+| `cloudflare-worker/` | Edge workers (AI Gateway) |
+| `infrastructure/` | Bicep, Nginx, PHP-FPM, PgBouncer, runner configs |
+| `.github/workflows/` | CI/CD pipelines |
+| `scripts/` | Utility and conversion scripts |
+| `docs/` | White paper, playbook, toolchain audit |
+| `tests/` | E2E (Playwright) and integration tests |
+
+## Local development quick start
+
+> Docker Compose stack coming in Phase 3. For now:
 
 ```bash
-npm install
-cp .env.example .env.local
-npm run dev
+git clone git@github.com:nevaquit/understandtech.git
+cd understandtech
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The health check API is at [http://localhost:3000/api/health](http://localhost:3000/api/health).
+1. Review [Phase 0 toolchain audit](docs/phase-0-toolchain.md) and install missing tools
+2. Follow [Creation Playbook](docs/playbook.md) phase by phase
+3. Use the project skill: `/understandtech-platform` in Cursor Agent chat
 
-## Scripts
+## Documentation
 
-| Command        | Description              |
-| -------------- | ------------------------ |
-| `npm run dev`  | Start development server |
-| `npm run build`| Production build         |
-| `npm run start`| Run production server    |
-| `npm run lint` | Run ESLint               |
+| Document | Description |
+|----------|-------------|
+| [docs/white-paper.md](docs/white-paper.md) | Architecture and business strategy (v2.0) |
+| [docs/playbook.md](docs/playbook.md) | Cursor-driven build sequence with prompts |
+| [docs/phase-0-toolchain.md](docs/phase-0-toolchain.md) | Local toolchain audit |
 
-## Project structure
+## Contributing
 
-```
-src/
-  app/
-    api/          # Backend API routes
-    page.tsx      # Home page
-    layout.tsx    # Root layout
-public/           # Static assets
-```
+See [CONTRIBUTING.md](CONTRIBUTING.md) for branch naming, commit format, and PR requirements.
+
+## License
+
+Confidential and proprietary — AI Tech Pros, Inc. See [LICENSE](LICENSE).

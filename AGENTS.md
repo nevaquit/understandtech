@@ -1,5 +1,10 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# Agent instructions
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+This repository follows the understandtech.app v2.0 platform architecture.
+
+- Read `.cursorrules` before making changes
+- Read `docs/white-paper.md` for architecture
+- Read `docs/playbook.md` for build phases and Cursor prompts
+- Use project skill `/understandtech-platform` in Agent chat
+
+Moodle core is never committed. Secrets never appear in source.

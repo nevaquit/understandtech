@@ -1,0 +1,87 @@
+# understandtech.app — AI workspace rules
+
+These rules apply to all AI-assisted work in this repository.
+
+## Project Identity
+
+- **Product:** understandtech.app — AI-augmented certification training platform
+- **Parent:** AI Tech Pros, Inc.
+- **Foundation:** Moodle 4.5 LTS with custom plugins; not a from-scratch LMS
+- **Architecture:** Deconstructed edge-native monolith (Cloudflare edge + Azure origin)
+- **Reference docs:** `docs/white-paper.md` (architecture), `docs/playbook.md` (build sequence)
+
+## Tech Stack (NEVER suggest alternatives)
+
+- **LMS:** Moodle 4.5 LTS (PHP 8.3)
+- **Web:** Nginx 1.26 + PHP-FPM 8.3
+- **DB:** Azure PostgreSQL Flexible Server (PG 16) via PgBouncer
+- **Cache:** Azure Cache for Redis
+- **Edge:** Cloudflare (DNS, WAF, Stream, Workers, AI Gateway)
+- **Cloud:** Microsoft Azure
+- **CI/CD:** GitHub Actions with self-hosted runner
+
+## Repository Scope
+
+This monorepo tracks **only** custom intellectual property and infrastructure code.
+
+- Moodle **core is NEVER committed** here — it lives on the production VM and is pulled from upstream during deployment
+- Only custom plugins under `moodle-plugins/`, infrastructure under `infrastructure/`, and the Cloudflare Worker under `cloudflare-worker/`
+
+## Critical Constraints
+
+1. Core Moodle files are **NEVER** committed to this repo. Only custom plugins.
+2. Secrets **NEVER** appear in source. Use Azure Key Vault references in config.
+3. The AI tutor **MUST NOT** reveal assessment answers, lab flag values, or quiz solutions.
+4. PHP code **MUST** follow Moodle Coding Style (moodle-cs ruleset, level: moodle).
+5. The Cloudflare Worker handles **all** LLM API calls. Moodle PHP never calls Anthropic or OpenAI directly.
+6. All video URLs are signed JWTs (60-second expiry); never expose raw Stream IDs.
+7. Never hardcode API keys, database passwords, or JWT signing keys in any file.
+
+## Naming Conventions
+
+- Moodle plugins: `type_name` with lowercase underscores (e.g. `local_certmaster`)
+- Plugin language strings: `$string['key']` in `lang/en/<plugin>.php`
+- Database tables: `mdl_<plugin>_<entity>` (Moodle convention)
+- Cloudflare Worker: TypeScript, camelCase
+- Bicep: PascalCase resource names, camelCase parameters
+
+## Code Quality Bar
+
+- Every public PHP function has PHPDoc with `@param` and `@return`
+- Every database query uses Moodle's `$DB` API; never raw mysqli/PDO
+- Every form uses Moodle's `moodleform` class; never raw HTML `<form>`
+- Every user-facing string is translatable via `get_string()`
+- No deprecated Moodle APIs (consult Moodle 4.5 docs if unsure)
+- TypeScript in Workers: strict mode, no `any` without documented exception
+
+## Build Phases
+
+Follow `docs/playbook.md` in order:
+
+| Phase | Focus |
+|-------|-------|
+| 0 | Toolchain prerequisites |
+| 1 | Repository bootstrap (this repo) |
+| 2 | Azure infrastructure (Bicep) |
+| 3 | Moodle plugins (theme + local + activity + blocks) |
+| 4 | Cloudflare AI Gateway Worker |
+| 5 | CI/CD + self-hosted runner |
+| 6 | E2E and integration tests |
+| 7 | Production deployment |
+
+When executing a playbook prompt, copy constraints and acceptance criteria verbatim and verify each criterion before marking complete.
+
+## Brand Palette
+
+Use navy, gold, and teal in UI work:
+
+- Navy: `#0B1F3A`
+- Gold: `#C9A227`
+- Teal: `#1A8A7D`
+
+## When in Doubt
+
+- Read `docs/white-paper.md` before suggesting architectural changes
+- Prefer plain PHP/SQL over clever abstractions; this codebase is operated by a small team
+- Reference `@.cursorrules` and `@docs/playbook.md` in multi-file prompts
+- Commit before invoking multi-file agent changes so you can `git diff` or reset cleanly
