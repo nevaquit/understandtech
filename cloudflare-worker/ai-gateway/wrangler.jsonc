@@ -16,19 +16,19 @@
 	],
 	"routes": [
 		{
-			"pattern": "ai.understandtech.app/*",
-			"zone_name": "understandtech.app"
+			"pattern": "ai.understandtech.app",
+			"custom_domain": true
 		}
 	],
 	"kv_namespaces": [
 		{
 			"binding": "PROMPT_CACHE",
-			"id": "REPLACE_WITH_KV_NAMESPACE_ID"
+			"id": "a43be5f6f8ee4433b71127e03f0d6551"
 		}
 	],
 	"vars": {
 		"MOODLE_WEBHOOK_URL": "https://understandtech.app/local/aitutor/webhook.php",
-		"AI_GATEWAY_URL": "https://gateway.ai.cloudflare.com/v1/REPLACE_ACCOUNT/understandtech",
+		"AI_GATEWAY_URL": "https://gateway.ai.cloudflare.com/v1/365965a7234fe266200abe63be3b63ba/understandtech",
 		"PRIMARY_MODEL": "claude-sonnet-4-20250514",
 		"SECONDARY_MODEL": "gpt-4o",
 		"CACHE_TTL_SECONDS": "60"
