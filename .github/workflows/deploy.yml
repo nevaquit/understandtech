@@ -190,6 +190,12 @@ jobs:
           echo "ERROR: monorepo stuck at $(git rev-parse HEAD), expected ${EXPECTED_SHA}" >&2
           exit 1
 
+      - name: Remove undeployed plugin placeholders on VM
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /opt/understandtech-plugins/scripts/remove-placeholder-plugins.sh
+
       - name: Rsync changed plugins
         env:
           CHANGED_PLUGINS: ${{ needs.validate.outputs.changed_plugins }}
@@ -283,6 +289,7 @@ jobs:
           exit "${code}"
 
       - name: Flush Redis application cache
+        continue-on-error: true
         run: |
           set -euo pipefail
           redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" \
