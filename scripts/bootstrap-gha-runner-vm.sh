@@ -35,8 +35,8 @@ if [ ! -f /opt/actions-runner/.runner ]; then
       --token "$REGISTRATION_TOKEN" \
       --labels self-hosted,linux,production \
       --name understandtech-web-prod
-    sudo /opt/actions-runner/svc.sh install gha-runner
-    sudo /opt/actions-runner/svc.sh start
+    sudo bash -c 'cd /opt/actions-runner && ./svc.sh install gha-runner'
+    sudo bash -c 'cd /opt/actions-runner && ./svc.sh start'
     log "Runner service started"
   fi
 else
