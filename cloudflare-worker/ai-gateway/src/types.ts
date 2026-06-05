@@ -23,6 +23,26 @@ export interface TutorRequestBody {
 	context?: TutorContext;
 }
 
+export interface GradeRequestBody {
+	submission: string;
+	rubric: string;
+	context?: TutorContext;
+}
+
+export interface GradeResponse {
+	score: number;
+	max_score: number;
+	feedback: string;
+	rubric_breakdown: Array<{
+		criterion: string;
+		score: number;
+		max_score: number;
+		comment: string;
+	}>;
+	provider: string;
+	prompt_version: string;
+}
+
 export interface Env {
 	MOODLE_JWT_SECRET: string;
 	MOODLE_WEBHOOK_HMAC_SECRET: string;
