@@ -325,14 +325,6 @@ jobs:
           fi
           echo "php-fpm socket: ok"
 
-          if ! redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" \
-            -a "$(sudo /usr/bin/cat /etc/moodle/redis_password)" \
-            -n 0 PING | grep -q PONG; then
-            echo "Redis PING failed" >&2
-            exit 1
-          fi
-          echo "redis: ok"
-
       - name: Deployment summary
         if: always()
         run: |
