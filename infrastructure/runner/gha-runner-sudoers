@@ -4,6 +4,10 @@
 
 Defaults:gha-runner !requiretty
 
+# Monorepo sync in /opt/understandtech-plugins (deploy workflow)
+gha-runner ALL=(gha-runner) NOPASSWD: /usr/bin/git fetch origin main
+gha-runner ALL=(gha-runner) NOPASSWD: /usr/bin/git reset --hard origin/main
+
 # Moodle CLI maintenance and upgrades
 gha-runner ALL=(root) NOPASSWD: /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --enable
 gha-runner ALL=(root) NOPASSWD: /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
