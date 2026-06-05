@@ -107,8 +107,22 @@ jobs:
         run: |
           set -euo pipefail
 
+          # Only deploy plugins with version.php; README-only placeholders are skipped.
+          is_deployable() {
+            [ -f "moodle-plugins/$1/version.php" ]
+          }
+
           detect_all() {
-            find moodle-plugins -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort
+            find moodle-plugins -mindepth 1 -maxdepth 1 -type d -printf '%f\n' \
+              | while read -r name; do
+                  is_deployable "$name" && echo "$name"
+                done | sort
+          }
+
+          filter_deployable() {
+            while read -r name; do
+              [ -n "$name" ] && is_deployable "$name" && echo "$name"
+            done | sort -u
           }
 
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -116,12 +130,12 @@ jobs:
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
             mapfile -t plugins < <(
               git diff --name-only "${{ github.event.pull_request.base.sha }}" HEAD \
-                | grep '^moodle-plugins/' | cut -d/ -f2 | sort -u
+                | grep '^moodle-plugins/' | cut -d/ -f2 | filter_deployable
             )
           elif git rev-parse HEAD~1 >/dev/null 2>&1; then
             mapfile -t plugins < <(
               git diff --name-only HEAD~1 HEAD \
-                | grep '^moodle-plugins/' | cut -d/ -f2 | sort -u || true
+                | grep '^moodle-plugins/' | cut -d/ -f2 | filter_deployable || true
             )
           else
             mapfile -t plugins < <(detect_all)
@@ -162,6 +176,39 @@ jobs:
           cd /opt/understandtech-plugins
           sudo -u gha-runner git fetch origin main
           sudo -u gha-runner git reset --hard origin/main
+
+      - name: Remove placeholder plugin dirs
+        run: |
+          set -euo pipefail
+
+          plugin_moodle_path() {
+            local name="$1"
+            case "$name" in
+              local_*) echo "local/${name#local_}" ;;
+              mod_*) echo "mod/${name#mod_}" ;;
+              theme_*) echo "theme/${name#theme_}" ;;
+              block_*) echo "blocks/${name#block_}" ;;
+              qbehaviour_*) echo "question/behaviour/${name#qbehaviour_}" ;;
+              *)
+                echo "Unknown plugin prefix: $name" >&2
+                return 1
+                ;;
+            esac
+          }
+
+          for srcpath in "${PLUGINS_REPO_DIR}"/moodle-plugins/*/; do
+            [ -d "$srcpath" ] || continue
+            srcname="$(basename "$srcpath")"
+            if [ -f "${srcpath}version.php" ]; then
+              continue
+            fi
+            relpath="$(plugin_moodle_path "$srcname")"
+            dst="${MOODLE_DIR}/${relpath}"
+            if [ -d "$dst" ]; then
+              sudo /usr/bin/rm -rf "$dst"
+              echo "Removed placeholder dir (no version.php): $dst"
+            fi
+          done
 
       - name: Rsync changed plugins
         env:
@@ -211,6 +258,10 @@ jobs:
             dst="${MOODLE_DIR}/${relpath}/"
             if [ ! -d "$src" ]; then
               echo "Skip missing source: $src" >&2
+              continue
+            fi
+            if [ ! -f "${src}version.php" ]; then
+              echo "Skip placeholder (no version.php): $srcname" >&2
               continue
             fi
             sudo /usr/bin/mkdir -p "$dst"

@@ -23,11 +23,19 @@ for srcname in "${!PLUGIN_MAP[@]}"; do
   name="${relpath#*/}"
   srcpath="$SRC/$srcname"
   dstpath="$MOODLE/$relpath"
-  if [ -d "$srcpath" ]; then
-    sudo mkdir -p "$(dirname "$dstpath")"
-    sudo rsync -a --delete "$srcpath/" "$dstpath/"
-    echo "deployed $relpath"
+  if [ ! -d "$srcpath" ]; then
+    continue
   fi
+  if [ ! -f "$srcpath/version.php" ]; then
+    if [ -d "$dstpath" ]; then
+      sudo rm -rf "$dstpath"
+      echo "removed placeholder $relpath"
+    fi
+    continue
+  fi
+  sudo mkdir -p "$(dirname "$dstpath")"
+  sudo rsync -a --delete "$srcpath/" "$dstpath/"
+  echo "deployed $relpath"
 done
 
 sudo chown -R www-data:www-data "$MOODLE/theme" "$MOODLE/local" "$MOODLE/block" "$MOODLE/mod" "$MOODLE/question/behaviour" 2>/dev/null || true
