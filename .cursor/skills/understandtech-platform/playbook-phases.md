@@ -14,14 +14,13 @@ Audit: `docs/phase-0-toolchain.md`
 - README, CONTRIBUTING, LICENSE
 - Project Cursor skill
 
-## Phase 2 — Cloud infrastructure
+## Phase 2 — Cloud infrastructure ✅
 
-Prompts 2.1–2.4:
+Prompts 2.1–2.4 complete. See `docs/phase-2-infrastructure.md`.
 
-- Azure Bicep template
-- VM cloud-init
-- Nginx site config
-- PgBouncer config
+- Azure Bicep: `infrastructure/bicep/`
+- Cloud-init: `infrastructure/runner/cloud-init.yaml`
+- Nginx / PHP-FPM / PgBouncer configs in `infrastructure/`
 
 ## Phase 3 — Moodle plugins
 

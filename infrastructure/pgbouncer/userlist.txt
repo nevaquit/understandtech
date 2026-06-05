@@ -1,0 +1,11 @@
+# PgBouncer SCRAM user list for moodle_user
+# Deploy to /etc/pgbouncer/userlist.txt — chmod 0600, owner postgres:postgres
+#
+# Regenerate SCRAM hash from plain password:
+#   psql -c "SELECT concat('\"moodle_user\" \"', rolpassword, '\"') FROM pg_authid WHERE rolname='moodle_user';"
+# Or on Postgres 16+:
+#   psql -c "SELECT scram_sha_256_password('moodle_user', '<password>');"
+#
+# Replace {{HASHED_PASSWORD}} before deployment.
+
+"moodle_user" "{{HASHED_PASSWORD}}"

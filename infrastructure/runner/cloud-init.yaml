@@ -1,0 +1,143 @@
+#cloud-config
+# understandtech.app VM bootstrap — Phase 2.2
+#
+# Template substitution (run scripts/render-cloud-init.sh before az deployment):
+#   {{POSTGRES_FQDN}}       — Azure Postgres private FQDN
+#   {{REGISTRATION_TOKEN}}  — GitHub Actions runner registration token (short-lived)
+#   {{STORAGE_ACCOUNT_NAME}} — Azure Files account name
+#   {{SMB_PASSWORD}}        — Storage account key (from Key Vault post-deploy)
+#   {{REPO_SSH_URL}}        — Plugin monorepo (default: git@github.com:nevaquit/understandtech.git)
+
+package_update: true
+package_upgrade: false
+
+write_files:
+  - path: /etc/moodle/bootstrap.env
+    permissions: '0600'
+    owner: root:root
+    content: |
+      POSTGRES_FQDN={{POSTGRES_FQDN}}
+      REGISTRATION_TOKEN={{REGISTRATION_TOKEN}}
+      STORAGE_ACCOUNT_NAME={{STORAGE_ACCOUNT_NAME}}
+      SMB_PASSWORD={{SMB_PASSWORD}}
+      REPO_SSH_URL={{REPO_SSH_URL}}
+
+  - path: /opt/understandtech/bootstrap.sh
+    permissions: '0755'
+    owner: root:root
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+      source /etc/moodle/bootstrap.env
+      export DEBIAN_FRONTEND=noninteractive
+      MARKER=/var/lib/understandtech/bootstrap-complete
+
+      log() { echo "[understandtech-bootstrap] $*"; }
+
+      # --- 1. System packages ---
+      if ! dpkg -s nginx >/dev/null 2>&1; then
+        log "Installing packages"
+        apt-get update
+        apt-get install -y software-properties-common ca-certificates curl jq git unzip cifs-utils redis-tools pgbouncer
+        add-apt-repository -y ppa:ondrej/nginx
+        add-apt-repository -y ppa:ondrej/php
+        apt-get update
+        apt-get install -y nginx php8.3-fpm php8.3-cli php8.3-mbstring php8.3-intl php8.3-pgsql php8.3-redis \
+          php8.3-gd php8.3-curl php8.3-soap php8.3-xml php8.3-zip php8.3-opcache php8.3-sodium php8.3-exif php8.3-sqlite3
+      fi
+
+      # --- 2. System users ---
+      id gha-runner >/dev/null 2>&1 || useradd --system --home-dir /opt/actions-runner --create-home gha-runner
+      usermod -s /bin/bash gha-runner
+
+      install -d -m 0750 -o root -g root /etc/moodle
+      install -d -m 0755 /var/www/moodle /var/www/moodledata
+
+      # --- 3. Azure Files mount ---
+      if ! grep -q moodledata /etc/fstab; then
+        log "Configuring Azure Files SMB mount"
+        printf 'username=%s\npassword=%s\n' "$STORAGE_ACCOUNT_NAME" "$SMB_PASSWORD" > /etc/moodle/smbcred
+        chmod 0600 /etc/moodle/smbcred
+        echo "//${STORAGE_ACCOUNT_NAME}.file.core.windows.net/moodledata /var/www/moodledata cifs credentials=/etc/moodle/smbcred,dir_mode=0770,file_mode=0660,uid=33,gid=33,nofail 0 0" >> /etc/fstab
+        mount -a
+      fi
+
+      # --- 4. PHP production settings ---
+      cat > /etc/php/8.3/fpm/conf.d/99-understandtech.ini <<'PHPINI'
+      memory_limit = 512M
+      upload_max_filesize = 200M
+      post_max_size = 200M
+      max_execution_time = 300
+      opcache.enable = 1
+      opcache.memory_consumption = 256
+      opcache.max_accelerated_files = 20000
+      opcache.validate_timestamps = 0
+      opcache.jit = tracing
+      opcache.jit_buffer_size = 128M
+      PHPINI
+      # validate_timestamps=0: production performance; purge via deploy workflow after plugin updates.
+
+      # --- 5. PHP-FPM pool (from repo checkout or embedded on first clone) ---
+      # Copied after plugin repo clone below.
+
+      # --- 6–7. Nginx + PgBouncer configs ---
+      # Applied after repo clone.
+
+      # --- 8–10. GitHub runner + plugin repo ---
+      if [ ! -d /opt/actions-runner/.runner ]; then
+        log "Installing GitHub Actions runner"
+        RUNNER_VERSION=$(curl -fsSL https://api.github.com/repos/actions/runner/releases/latest | jq -r .tag_name | sed 's/v//')
+        curl -fsSL -o /tmp/actions-runner.tar.gz -L "https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz"
+        tar -xzf /tmp/actions-runner.tar.gz -C /opt/actions-runner
+        chown -R gha-runner:gha-runner /opt/actions-runner
+        sudo -u gha-runner /opt/actions-runner/config.sh --unattended \
+          --url https://github.com/nevaquit/understandtech \
+          --token "$REGISTRATION_TOKEN" \
+          --labels self-hosted,linux,production \
+          --name understandtech-web-prod
+        /opt/actions-runner/svc.sh install gha-runner
+      fi
+
+      if [ ! -d /opt/understandtech-plugins/.git ]; then
+        log "Cloning plugin monorepo"
+        sudo -u gha-runner git clone "$REPO_SSH_URL" /opt/understandtech-plugins
+      fi
+
+      # Copy infrastructure configs from monorepo
+      REPO_INFRA=/opt/understandtech-plugins/infrastructure
+      if [ -d "$REPO_INFRA" ]; then
+        cp "$REPO_INFRA/php-fpm/moodle.conf" /etc/php/8.3/fpm/pool.d/moodle.conf
+        cp "$REPO_INFRA/nginx/understandtech.conf" /etc/nginx/sites-available/understandtech.conf
+        cp "$REPO_INFRA/nginx/understandtech-rate-limit.conf" /etc/nginx/conf.d/understandtech-rate-limit.conf
+        ln -sf /etc/nginx/sites-available/understandtech.conf /etc/nginx/sites-enabled/understandtech.conf
+        rm -f /etc/nginx/sites-enabled/default
+        sed "s/{{POSTGRES_FQDN}}/$POSTGRES_FQDN/g" "$REPO_INFRA/pgbouncer/pgbouncer.ini" > /etc/pgbouncer/pgbouncer.ini
+        cp "$REPO_INFRA/pgbouncer/userlist.txt" /etc/pgbouncer/userlist.txt
+        chmod 0600 /etc/pgbouncer/userlist.txt
+        chown postgres:postgres /etc/pgbouncer/userlist.txt
+        cp "$REPO_INFRA/runner/gha-runner-sudoers" /etc/sudoers.d/gha-runner
+        chmod 0440 /etc/sudoers.d/gha-runner
+        visudo -cf /etc/sudoers.d/gha-runner
+      fi
+
+      # --- 11. Sysctl tuning ---
+      cat > /etc/sysctl.d/99-moodle.conf <<'SYSCTL'
+      net.core.somaxconn = 4096
+      vm.swappiness = 10
+      SYSCTL
+      sysctl --system >/dev/null
+
+      # --- 12. Enable services ---
+      systemctl enable nginx php8.3-fpm pgbouncer
+      systemctl restart php8.3-fpm
+      nginx -t
+      systemctl restart nginx
+      systemctl restart pgbouncer
+      systemctl enable actions.runner.* 2>/dev/null || true
+      systemctl start actions.runner.* 2>/dev/null || true
+
+      touch "$MARKER"
+      log "Bootstrap complete"
+
+runcmd:
+  - [bash, -lc, 'test -f /var/lib/understandtech/bootstrap-complete || /opt/understandtech/bootstrap.sh']
