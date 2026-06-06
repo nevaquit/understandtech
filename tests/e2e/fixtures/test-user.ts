@@ -39,13 +39,23 @@ export class TestUser {
   }
 
   async login(email: string, password: string): Promise<void> {
-    await this.gotoLogin();
-    await this.page.locator('#username').fill(email);
-    await this.page.locator('#password').fill(password);
-    await this.page.locator('#loginbtn').click();
-    await this.page.waitForURL((url) => !url.pathname.endsWith('/login/index.php'), {
-      timeout: 30_000,
-    });
+    const submitLogin = async (): Promise<void> => {
+      await this.gotoLogin();
+      await this.page.locator('#username').fill(email);
+      await this.page.locator('#password').fill(password);
+      await this.page.locator('#loginbtn').click();
+      await this.page.waitForURL((url) => !url.pathname.endsWith('/login/index.php'), {
+        timeout: 30_000,
+      });
+    };
+
+    try {
+      await submitLogin();
+    } catch {
+      // Origin login rate limits can reject rapid sequential E2E logins.
+      await this.page.waitForTimeout(2_000);
+      await submitLogin();
+    }
   }
 
   async logout(): Promise<void> {
