@@ -14,10 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Apply nginx vhost
+      - name: Sync monorepo and apply nginx via upgrade script
         run: |
           set -euo pipefail
-          bash scripts/apply-nginx-config.sh
+          cd /opt/understandtech-plugins
+          sudo -u gha-runner git fetch origin main
+          sudo -u gha-runner git reset --hard origin/main
+          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/moodle-upgrade-direct-pg.sh
 
       - name: Verify RequireJS endpoint
         run: |

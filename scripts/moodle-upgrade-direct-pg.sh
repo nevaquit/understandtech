@@ -33,4 +33,19 @@ sudo chown root:www-data "$CONFIG"
 sudo chmod 640 "$CONFIG"
 sudo -u www-data /usr/bin/php admin/cli/purge_caches.php
 
+REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
+NGINX_SRC="${REPO}/infrastructure/nginx/understandtech.conf"
+NGINX_DST="/etc/nginx/sites-available/understandtech.conf"
+if [ -f "$NGINX_SRC" ] && { [ ! -f "$NGINX_DST" ] || ! cmp -s "$NGINX_SRC" "$NGINX_DST"; }; then
+  echo "Applying nginx vhost from ${NGINX_SRC}"
+  cp "$NGINX_SRC" "$NGINX_DST"
+  ln -sf "$NGINX_DST" /etc/nginx/sites-enabled/understandtech.conf
+  if [ -f "${REPO}/infrastructure/nginx/understandtech-rate-limit.conf" ]; then
+    cp "${REPO}/infrastructure/nginx/understandtech-rate-limit.conf" /etc/nginx/conf.d/understandtech-rate-limit.conf
+  fi
+  nginx -t
+  systemctl reload nginx
+  echo "nginx reloaded"
+fi
+
 echo "Upgrade complete via direct Postgres."
