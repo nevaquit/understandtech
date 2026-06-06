@@ -43,6 +43,9 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R www-data\:www-data /var/www/mo
 # Redis cache flush (application DB 0 only)
 gha-runner ALL=(root) NOPASSWD: /usr/bin/cat /etc/moodle/redis_password
 
+# Post-deploy smoke test: read PgBouncer dbhost from config.php (640 root:www-data)
+gha-runner ALL=(root) NOPASSWD: /usr/bin/grep dbhost /var/www/moodle/config.php
+
 # Service reload after config changes
 gha-runner ALL=(root) NOPASSWD: /usr/bin/systemctl reload nginx
 gha-runner ALL=(root) NOPASSWD: /usr/bin/systemctl reload php8.3-fpm

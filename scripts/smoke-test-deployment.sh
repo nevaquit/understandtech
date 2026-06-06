@@ -165,24 +165,15 @@ check_db_vm() {
     warn "VM DB check skipped (not on production VM)"
     return
   fi
-  local dbhost=""
-  dbhost="$(sudo -u www-data /usr/bin/php 2>/dev/null <<PHP || true
-<?php
-define('CLI_SCRIPT', true);
-require '${config}';
-global \$CFG;
-echo \$CFG->dbhost;
-PHP
-)"
-  if [[ -z "$dbhost" ]]; then
-    dbhost="$(sudo grep -E "^\s*\\\$CFG->dbhost" "$config" 2>/dev/null \
-      | grep -v dbpass | head -n1 \
-      | sed -E "s/.*['\"]([^'\"]+)['\"].*/\1/" || true)"
-  fi
-  if [[ -n "$dbhost" ]]; then
-    pass "Moodle dbhost configured: $dbhost"
-  elif sudo grep -qE 'dbhost' "$config" 2>/dev/null; then
-    pass "Moodle dbhost line present in config.php"
+  local dbhost="" dbhost_line=""
+  dbhost_line="$(sudo grep dbhost "$config" 2>/dev/null | grep -v dbpass | head -n1 || true)"
+  if [[ -n "$dbhost_line" ]]; then
+    dbhost="$(printf '%s' "$dbhost_line" | sed -n "s/.*['\"]\([^'\"]*\)['\"].*/\1/p" | head -n1 || true)"
+    if [[ -n "$dbhost" ]]; then
+      pass "Moodle dbhost configured: $dbhost"
+    else
+      pass "Moodle dbhost line present in config.php"
+    fi
   else
     fail "Could not read Moodle dbhost from config.php"
   fi
