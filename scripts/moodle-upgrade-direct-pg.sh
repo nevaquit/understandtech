@@ -113,4 +113,22 @@ if [ -f "${REPO}/scripts/test-tutor-jwt.php" ]; then
   sudo -u www-data /usr/bin/php "${REPO}/scripts/test-tutor-jwt.php" --curl || echo "WARN: tutor JWT/worker check failed"
 fi
 
+
+
+echo "--- SCSS compilation diagnostic ---"
+sudo -u www-data /usr/bin/php << 'PHPEOF'
+<?php
+define('CLI_SCRIPT', true);
+require '/var/www/moodle/config.php';
+require_once($CFG->libdir . '/outputlib.php');
+try {
+  $theme = theme_config::load('understandtech');
+  $css = $theme->get_css_content();
+  echo 'SCSS OK: ' . strlen($css) . ' bytes' . PHP_EOL;
+  echo 'First 100: ' . substr($css, 0, 100) . PHP_EOL;
+} catch (\Throwable $e) {
+  echo 'SCSS ERROR: ' . $e->getMessage() . PHP_EOL;
+  echo 'At: ' . $e->getFile() . ':' . $e->getLine() . PHP_EOL;
+}
+PHPEOF
 echo "Upgrade complete via direct Postgres."
