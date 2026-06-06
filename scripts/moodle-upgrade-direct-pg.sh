@@ -206,3 +206,15 @@ try {
 }
 PHPEOF4
 echo "Upgrade complete via direct Postgres."
+
+# === SCSS file existence check ===
+SCSS_FILE="/var/www/moodle/theme/understandtech/scss/preset/default.scss"
+if [ -f "$SCSS_FILE" ]; then
+  SCSS_SIZE=$(wc -c < "$SCSS_FILE")
+  echo "default.scss exists: YES ($SCSS_SIZE bytes)"
+  echo "default.scss first 100 chars: $(head -c 100 $SCSS_FILE)"
+else
+  echo "default.scss EXISTS: NO - FILE MISSING!"
+  echo "scss directory contents:"
+  ls -la /var/www/moodle/theme/understandtech/scss/ 2>/dev/null || echo "scss dir missing"
+fi
