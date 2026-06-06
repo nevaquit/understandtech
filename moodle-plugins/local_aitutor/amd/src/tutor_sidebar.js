@@ -8,7 +8,6 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
                     return !!root;
                 }
                 root.dataset.aitutorBound = '1';
-
                 const output = root.querySelector('.local-aitutor-output');
                 const sendBtn = root.querySelector('.local-aitutor-send');
                 const toggle = root.querySelector('.local-aitutor-toggle');
@@ -100,6 +99,7 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
                     if (sendBtn) {
                         sendBtn.disabled = true;
                     }
+                    output.textContent = '…';
                     try {
                         const [{token, workerurl}] = await fetchJwt();
                         await streamTutorReply(workerurl, token, prompt);

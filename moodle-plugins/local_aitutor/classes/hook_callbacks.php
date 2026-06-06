@@ -66,7 +66,7 @@ class hook_callbacks {
     public static function before_standard_footer(
         \core\hook\output\before_standard_footer_html_generation $hook,
     ): void {
-        global $OUTPUT, $PAGE;
+        global $OUTPUT;
 
         $sidebar = self::get_sidebar_context();
         if ($sidebar === null) {
@@ -75,13 +75,9 @@ class hook_callbacks {
 
         $html = $OUTPUT->render_from_template('local_aitutor/sidebar', [
             'title' => get_string('sidebar_title', 'local_aitutor'),
+            'courseid' => $sidebar['courseid'],
+            'cmid' => $sidebar['cmid'],
         ]);
         $hook->add_html($html);
-
-        $PAGE->requires->js_call_amd(
-            'local_aitutor/tutor_sidebar',
-            'init',
-            [$sidebar['courseid'], $sidebar['cmid']],
-        );
     }
 }
