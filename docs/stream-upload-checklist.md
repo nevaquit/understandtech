@@ -52,12 +52,41 @@ Expect the smoke script to pass the Stream URL check (HTTP 200 on manifest).
 
 ## 4. Moodle lesson embed
 
-1. **Site administration → Plugins → Local plugins → CertMaster** — set **Stream signing key ID** and **customer subdomain** from the dashboard.
+1. **Site administration → Plugins → Local plugins → CertMaster** — set **Stream signing key ID**, **customer subdomain**, and **Test Stream video ID** from the dashboard.
 2. Deploy signing PEM: `.\scripts\setup-moodle-env-vm.ps1` (writes `/etc/moodle/cf-stream-signing-key.pem` from Key Vault).
-3. In PHP or a custom Mustache filter, call `\local_certmaster\stream_helper::sign_manifest_url($videoid)` — never paste raw video IDs in HTML.
-4. Embed iframe: `https://<subdomain>.cloudflarestream.com/<jwt>/iframe` (generate JWT the same way; manifest URL uses `/manifest/video.m3u8`).
+3. Purge Moodle caches after plugin deploy so AMD `local_certmaster/stream_player` loads.
+4. **Preview player:** open `https://understandtech.app/local/certmaster/player.php` (signed iframe; JWT refreshes every 50s via AJAX — no raw video UID in page source).
+5. **Course activity:** add a **URL** or **Page** link to `/local/certmaster/player.php`, or in custom PHP:
+
+```php
+require_once($CFG->dirroot . '/local/certmaster/lib.php');
+echo local_certmaster_render_stream_player($videoid); // $videoid from DB/config only
+```
+
+Rendered markup (server-signed, 60s JWT in iframe `src`):
+
+```html
+<div class="local-certmaster-stream-player" data-expiresat="1717600060">
+  <iframe class="local-certmaster-stream-iframe"
+    src="https://customer-abc123.cloudflarestream.com/eyJhbG.../iframe"
+    allowfullscreen style="width:100%;aspect-ratio:16/9;border:none"></iframe>
+</div>
+```
+
+HLS manifest (smoke tests): `stream_helper::sign_manifest_url($videoid)` → `.../manifest/video.m3u8`.
 
 Reference: [stream-jwt-signing.md](../.cursor/skills/edge-serverless-orchestration/stream-jwt-signing.md).
+
+### `generate-stream-signed-url.sh` without upload
+
+Signing-only smoke (no video in Stream yet) fails fast with `ERROR: missing VIDEO_ID`. Document env for when a video exists:
+
+| Env | Source |
+|-----|--------|
+| `STREAM_VIDEO_ID` | Stream dashboard after upload |
+| `STREAM_SIGNING_KID` | Stream → Settings → Signing keys |
+| `STREAM_CUSTOMER_SUBDOMAIN` | Embed snippet (`customer-…`) |
+| `CF_STREAM_SIGNING_KEY` | Key Vault `cf-stream-signing-key` or `KEY_VAULT=utkvnhhwegpz3rem6` auto-fetch |
 
 ## 5. Done when
 

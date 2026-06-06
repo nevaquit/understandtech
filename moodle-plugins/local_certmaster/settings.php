@@ -40,5 +40,13 @@ if ($hassiteconfig) {
         PARAM_ALPHANUMEXT
     ));
 
+    $settings->add(new admin_setting_configtext(
+        'local_certmaster/streamtestvideoid',
+        get_string('streamtestvideoid', 'local_certmaster'),
+        get_string('streamtestvideoid_desc', 'local_certmaster'),
+        '',
+        PARAM_ALPHANUMEXT
+    ));
+
     $ADMIN->add('localplugins', $settings);
 }

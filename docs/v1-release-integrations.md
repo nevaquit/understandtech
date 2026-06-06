@@ -7,9 +7,9 @@ Honest status for playbook §7.1 gates that require **external dashboards** or *
 | Item | Status |
 |------|--------|
 | Key Vault `cf-stream-signing-key` | ✅ Populated (len 57, not `REPLACE-ME`) |
-| `local_certmaster` Stream signing | ✅ **`stream_helper`** — RS256 JWT, 60s expiry; admin kid + subdomain; PEM from `/etc/moodle/cf-stream-signing-key.pem` |
+| `local_certmaster` Stream signing | ✅ **`stream_helper`** + **`player.php`** + Mustache/AMD refresh; admin kid + subdomain + test video ID |
 | Test video uploaded | ❌ **User action** — no video in Stream yet |
-| Course lesson embed | ❌ **User action** — embed signed player in a lesson after upload |
+| Course lesson embed | ⏸ **After upload** — link `/local/certmaster/player.php` or `local_certmaster_render_stream_player()` |
 | Smoke `TEST_VIDEO_URL` | ⏸ Skipped until signed manifest URL exists |
 
 **Checklist:** [stream-upload-checklist.md](stream-upload-checklist.md)

@@ -12,16 +12,36 @@ CertMaster-equivalent certification readiness tracking for understandtech.app.
 
 ## Cloudflare Stream (signed URLs)
 
-- `stream_helper::sign_manifest_url($videoid)` — RS256 JWT, 60-second expiry
-- Admin: **Stream signing key ID** + **customer subdomain** (CertMaster settings)
-- PEM: `/etc/moodle/cf-stream-signing-key.pem` (deploy via `scripts/setup-moodle-env-vm.ps1`)
+| Item | Value |
+|------|-------|
+| Key Vault secret | `cf-stream-signing-key` (`stream_helper::KEY_VAULT_SECRET`) |
+| VM PEM path | `/etc/moodle/cf-stream-signing-key.pem` (via `scripts/setup-moodle-env-vm.ps1`) |
+| JWT expiry | 60 seconds (RS256) |
+
+### PHP API
+
+- `stream_helper::sign_manifest_url($videoid)` — HLS manifest URL
+- `stream_helper::sign_iframe_url($videoid)` — iframe embed URL
+- `local_certmaster_render_stream_player($videoid)` — Mustache + AMD player with auto-refresh
+
+### Lesson embed
+
+```php
+// In a Page resource or theme callback — video UID stored server-side only.
+echo local_certmaster_render_stream_player($videoid);
+```
+
+Preview page (admin test video): `/local/certmaster/player.php` (uses **Test Stream video ID** setting).
+
+### AMD refresh
+
+`amd/src/stream_player.js` calls `local_certmaster_get_stream_iframe_url` every 50s so the iframe JWT stays valid.
 
 ## Not yet implemented
 
 - `certmaster_confidence` question behaviour UI
 - CSV objective import admin UI
 - `amd/src/radar_chart.js` (consumed by `block_examreadiness`)
-- Lesson Page Mustache embed filter (call `stream_helper` from theme)
 
 ## Install
 

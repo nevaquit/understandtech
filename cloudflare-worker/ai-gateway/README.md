@@ -62,6 +62,18 @@ npx wrangler secret put ANTHROPIC_API_KEY
 npx wrangler secret put OPENAI_API_KEY
 ```
 
+#### CF_AIG_AUTHORIZATION (optional)
+
+Only required when **Cloudflare AI Gateway → Authenticated Gateway** is enabled for the `understandtech` gateway. Production `/health` and `/tutor` work **without** this secret today.
+
+```bash
+# Token from Cloudflare dashboard → AI → AI Gateway → understandtech → Authentication
+npx wrangler secret put CF_AIG_AUTHORIZATION
+npx wrangler secret list   # confirm present
+```
+
+When set, `src/llm/aig.ts` sends `cf-aig-authorization: Bearer <token>` on upstream AI Gateway requests. Do not commit the token to the repo or `wrangler.jsonc`.
+
 ### 4. Deploy
 
 ```bash

@@ -8,14 +8,17 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Cloudflare Stream signed URL helper — RS256 JWT, 60-second expiry.
  *
- * Signing PEM is read from /etc/moodle/cf-stream-signing-key.pem (deployed from Key Vault)
- * or CF_STREAM_SIGNING_KEY env (single-line PEM with literal \\n sequences).
+ * Signing PEM is read from /etc/moodle/cf-stream-signing-key.pem (deployed from Key Vault
+ * secret {@see KEY_VAULT_SECRET}) or CF_STREAM_SIGNING_KEY env (single-line PEM with literal \\n).
  * Never expose raw Stream video IDs in learner-facing HTML; always sign server-side.
  */
 class stream_helper {
 
     /** @var int Maximum JWT lifetime in seconds (platform policy). */
     public const JWT_EXPIRY_SECONDS = 60;
+
+    /** @var string Azure Key Vault secret name for Stream signing PEM. */
+    public const KEY_VAULT_SECRET = 'cf-stream-signing-key';
 
     /** @var string Default PEM path on production VM. */
     public const DEFAULT_PEM_PATH = '/etc/moodle/cf-stream-signing-key.pem';
@@ -27,15 +30,36 @@ class stream_helper {
      * @return string Signed manifest URL (expires in 60 seconds).
      */
     public static function sign_manifest_url(string $videoid): string {
-        $videoid = trim($videoid);
-        if ($videoid === '' || !preg_match('/^[a-zA-Z0-9_-]+$/', $videoid)) {
-            throw new \invalid_parameter_exception('Invalid Stream video id');
-        }
-
+        self::validate_video_id($videoid);
         $subdomain = self::get_customer_subdomain();
         $token = self::sign_jwt($videoid);
 
         return "https://{$subdomain}.cloudflarestream.com/{$token}/manifest/video.m3u8";
+    }
+
+    /**
+     * Build a signed iframe embed URL for a Stream video UID.
+     *
+     * @param string $videoid Cloudflare Stream video UID (stored server-side only).
+     * @return string Signed iframe URL (expires in 60 seconds).
+     */
+    public static function sign_iframe_url(string $videoid): string {
+        self::validate_video_id($videoid);
+        $subdomain = self::get_customer_subdomain();
+        $token = self::sign_jwt($videoid);
+
+        return "https://{$subdomain}.cloudflarestream.com/{$token}/iframe";
+    }
+
+    /**
+     * @param string $videoid
+     * @return void
+     */
+    protected static function validate_video_id(string $videoid): void {
+        $videoid = trim($videoid);
+        if ($videoid === '' || !preg_match('/^[a-zA-Z0-9_-]+$/', $videoid)) {
+            throw new \invalid_parameter_exception('Invalid Stream video id');
+        }
     }
 
     /**
@@ -46,6 +70,8 @@ class stream_helper {
      * @return string Compact JWT string.
      */
     public static function sign_jwt(string $videoid, ?int $exp = null): string {
+        self::validate_video_id($videoid);
+        $videoid = trim($videoid);
         $kid = self::get_signing_kid();
         $pem = self::get_signing_pem();
         $exp = $exp ?? (time() + self::JWT_EXPIRY_SECONDS);

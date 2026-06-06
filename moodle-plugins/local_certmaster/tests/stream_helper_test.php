@@ -67,6 +67,12 @@ final class stream_helper_test extends \advanced_testcase {
         $this->assertStringEndsWith('/manifest/video.m3u8', $url);
     }
 
+    public function test_sign_iframe_url_format(): void {
+        $url = stream_helper::sign_iframe_url('lessonvid01');
+        $this->assertStringStartsWith('https://customer-testsubdomain.cloudflarestream.com/', $url);
+        $this->assertStringEndsWith('/iframe', $url);
+    }
+
     public function test_rejects_invalid_video_id(): void {
         $this->expectException(\invalid_parameter_exception::class);
         stream_helper::sign_manifest_url('../etc/passwd');

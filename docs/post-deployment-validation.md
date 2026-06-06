@@ -17,7 +17,7 @@ Print this page or keep it in a side window. Fill the **Pass/Fail** column as yo
 | AI tutor **refuses** assessment bypass (Socratic, no answers) | Pedagogical guarantee broken |
 | AI Worker `/health` returns `{"status":"ok"}` | All tutor traffic blocked |
 | Authenticated Origin Pulls blocks direct origin access | WAF/rate limits bypassed |
-| Stripe webhook endpoint responds (when billing enabled) | Revenue/subscription breakage |
+| Stripe webhook endpoint responds | Revenue/subscription breakage — **N/A until billing enabled** (see Deferred integrations) |
 
 If any STOP item fails, execute rollback per [playbook §7.4](playbook.md#74-rollback-plan) before attempting a forward fix.
 
@@ -147,7 +147,8 @@ Requires test student credentials in `tests/e2e/.env` (`STAGING_TEST_USER_EMAIL`
 | Quiz + confidence rating | qbehaviour_certmasterconfidence works | Complete one quiz question with confidence slider | |
 | AI tutor Socratic response | No direct assessment answers | Ask tutor about a quiz question — must refuse | |
 | Lab flag + XP | mod_ctfflag awards XP on correct flag | Submit test flag in lab activity | |
-| Stripe checkout (when enabled) | Checkout loads; test card `4242…` works | Click Subscribe → Stripe test mode | |
+| Stream player page | Signed iframe loads; JWT in `src` (not raw UID) | `https://understandtech.app/local/certmaster/player.php` after test video ID set | |
+| Stripe checkout (when enabled) | Checkout loads; test card `4242…` works | Click Subscribe → Stripe test mode — **skip for v1.0.0** | |
 
 Full E2E: `cd tests/e2e && npm test` — see [tests/e2e/README.md](../tests/e2e/README.md).
 
@@ -200,7 +201,7 @@ See [playbook §7.4](playbook.md#74-rollback-plan) for decision rules.
 
 ## Deferred integrations (skip until keys exist)
 
-These rows are **not STOP failures** for core `v1.0.0`. Resume when understandtech Stripe/Postmark accounts and Key Vault secrets are ready.
+**Core v1.0.0 validation:** Run all sections above except rows marked below. These integrations are **post-v1 commerce & email** — not STOP failures for tagging `v1.0.0`. Resume when understandtech Stripe/Postmark accounts and Key Vault secrets are ready.
 
 | Integration | Skip reason | Resume with |
 |-------------|-------------|-------------|

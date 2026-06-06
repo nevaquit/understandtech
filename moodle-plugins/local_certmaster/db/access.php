@@ -28,4 +28,13 @@ $capabilities = [
             'manager' => CAP_ALLOW,
         ],
     ],
+    'local/certmaster:viewstream' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'student' => CAP_ALLOW,
+            'teacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+        ],
+    ],
 ];
