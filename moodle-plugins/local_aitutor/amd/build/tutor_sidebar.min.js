@@ -40,17 +40,21 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
             }
         });
 
-        const streamTutorReply = async (workerurl, token, prompt) => {
-            const response = await fetch(workerurl, {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    messages: [{role: 'user', content: prompt}],
-                }),
-            });
+                const streamTutorReply = async (workerurl, token, prompt, courseid, cmid) => {
+                    const response = await fetch(workerurl, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            messages: [{role: 'user', content: prompt}],
+                            context: {
+                                courseid: courseid,
+                                activityid: cmid || null,
+                            },
+                        }),
+                    });
 
             if (!response.ok) {
                 throw new Error('worker_http_' + response.status);
@@ -79,8 +83,11 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
                     }
                     try {
                         const chunk = JSON.parse(payload);
-                        if (chunk.token) {
-                            output.textContent += chunk.token;
+                                if (chunk.token) {
+                                    if (output.textContent === '…') {
+                                        output.textContent = '';
+                                    }
+                                    output.textContent += chunk.token;
                         } else if (chunk.error) {
                             throw new Error(chunk.error);
                         }
@@ -95,28 +102,30 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
             }
         };
 
-        sendBtn?.addEventListener('click', async () => {
-            const prompt = root.querySelector('.local-aitutor-input')?.value?.trim();
-            if (!prompt || !output) {
-                return;
-            }
-            output.textContent = '';
-            if (sendBtn) {
-                sendBtn.disabled = true;
-            }
-            output.textContent = '…';
-            try {
-                const [{token, workerurl}] = await fetchJwt();
-                await streamTutorReply(workerurl, token, prompt);
-            } catch (err) {
-                await showUnavailable();
-                Notification.exception(err);
-            } finally {
-                if (sendBtn) {
-                    sendBtn.disabled = false;
-                }
-            }
-        });
+                sendBtn?.addEventListener('click', async () => {
+                    const prompt = root.querySelector('.local-aitutor-input')?.value?.trim();
+                    if (!prompt || !output) {
+                        return;
+                    }
+                    if (sendBtn) {
+                        sendBtn.disabled = true;
+                    }
+                    output.textContent = '…';
+                    try {
+                        const [{token, workerurl}] = await fetchJwt();
+                        await streamTutorReply(workerurl, token, prompt, courseid, cmid);
+                        if (output.textContent === '…' || output.textContent.trim() === '') {
+                            await showUnavailable();
+                        }
+                    } catch (err) {
+                        await showUnavailable();
+                        Notification.exception(err);
+                    } finally {
+                        if (sendBtn) {
+                            sendBtn.disabled = false;
+                        }
+                    }
+                });
         return true;
     };
 

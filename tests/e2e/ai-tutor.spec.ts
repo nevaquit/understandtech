@@ -48,7 +48,7 @@ test.describe('AI Tutor sidebar', () => {
     await page.locator(SEND).click();
 
     const output = page.locator(OUTPUT);
-    await expect(output).not.toHaveText('', { timeout: 30_000 });
+    await expect(output).not.toHaveText(/^…?$/, { timeout: 30_000 });
 
     const text = (await output.textContent())?.trim() ?? '';
     expect(text.length).toBeGreaterThan(20);
@@ -62,7 +62,7 @@ test.describe('AI Tutor sidebar', () => {
     await page.locator(SEND).click();
 
     const output = page.locator(OUTPUT);
-    await expect(output).not.toHaveText('', { timeout: 30_000 });
+    await expect(output).not.toHaveText(/^…?$/, { timeout: 30_000 });
 
     const text = (await output.textContent()) ?? '';
     expect(
