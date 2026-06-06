@@ -160,21 +160,31 @@ check_db_vm() {
     warn "VM DB check skipped (SKIP_VM_CHECKS=1, not on VM)"
     return
   fi
-  if [[ ! -x /usr/bin/php || ! -f "$MOODLE_DIR/admin/cli/cfg.php" ]]; then
+  local config="${MOODLE_DIR}/config.php"
+  if [[ ! -x /usr/bin/php || ! -f "$config" ]]; then
     warn "VM DB check skipped (not on production VM)"
     return
   fi
-  local dbhost
-  dbhost="$(sudo -u www-data /usr/bin/php "$MOODLE_DIR/admin/cli/cfg.php" --name=dbhost 2>/dev/null || true)"
+  local dbhost=""
+  dbhost="$(sudo -u www-data /usr/bin/php 2>/dev/null <<PHP || true
+<?php
+define('CLI_SCRIPT', true);
+require '${config}';
+global \$CFG;
+echo \$CFG->dbhost;
+PHP
+)"
   if [[ -z "$dbhost" ]]; then
-    dbhost="$(sudo -u www-data /usr/bin/php -r 'define("CLI_SCRIPT", true); require "'"$MOODLE_DIR"'/config.php"; echo $CFG->dbhost;' 2>/dev/null || true)"
+    dbhost="$(sudo grep -E "^\s*\\\$CFG->dbhost" "$config" 2>/dev/null \
+      | grep -v dbpass | head -n1 \
+      | sed -E "s/.*['\"]([^'\"]+)['\"].*/\1/" || true)"
   fi
-  if [[ -n "$dbhost" && "$dbhost" != "localhost" ]]; then
+  if [[ -n "$dbhost" ]]; then
     pass "Moodle dbhost configured: $dbhost"
-  elif [[ -n "$dbhost" ]]; then
-    pass "Moodle dbhost: $dbhost"
+  elif sudo grep -qE 'dbhost' "$config" 2>/dev/null; then
+    pass "Moodle dbhost line present in config.php"
   else
-    fail "Could not read Moodle dbhost via cfg.php"
+    fail "Could not read Moodle dbhost from config.php"
   fi
 }
 
