@@ -6,7 +6,7 @@ defined('MOODLE_INTERNAL') || die();
 $THEME->name = 'understandtech';
 $THEME->parents = ['boost'];
 
-$THEME->sheets = [];
+$THEME->sheets = ['understandtech'];
 $THEME->editor_sheets = [];
 $THEME->enable_dock = false;
 $THEME->haseditswitch = true;
