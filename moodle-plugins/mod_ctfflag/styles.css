@@ -1,0 +1,30 @@
+.ut-ctfflag-view .ut-ctfflag-intro {
+    margin-bottom: 1.25rem;
+}
+
+.ut-ctfflag-form {
+    max-width: 36rem;
+    padding: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+    border: 1px solid rgba(11, 31, 58, 0.12);
+    border-radius: 0.5rem;
+    background: rgba(11, 31, 58, 0.03);
+}
+
+.ut-ctfflag-form .form-control {
+    font-family: "Share Tech Mono", ui-monospace, monospace;
+}
+
+.ut-ctfflag-form .btn-primary {
+    background-color: #1A8A7D;
+    border-color: #1A8A7D;
+}
+
+.ut-ctfflag-form .btn-primary:hover {
+    background-color: #157a6e;
+    border-color: #157a6e;
+}
+
+.ut-ctfflag-complete {
+    color: #0B1F3A;
+    font-weight: 600;
+}

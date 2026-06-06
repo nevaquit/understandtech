@@ -2,6 +2,12 @@
 
 Capture-the-flag style lab activity module for hands-on certification labs.
 
-## Readiness integration (stub)
+## Flag submission
 
-When flag validation is implemented, call `ctfflag_notify_flag_success($cm, $instance)` to fire `\mod_ctfflag\event\flag_submitted`. The `local_certmaster` observer listens for this event toward future objective mastery recalculation.
+Learners submit flags on `view.php`. Teachers configure a PCRE pattern (`expected_flag_regex`); submissions are validated with `mod_ctfflag\local\flag_validator` and **never stored in plain text** — only success/failure is logged in `mdl_ctfflag_submissions`.
+
+On success the activity fires `\mod_ctfflag\event\flag_submitted`, updates completion when enabled, and posts `1.0` to the gradebook.
+
+## Readiness integration
+
+`local_certmaster` listens for `flag_submitted` toward future objective mastery recalculation.
