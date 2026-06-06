@@ -131,4 +131,21 @@ try {
   echo 'At: ' . $e->getFile() . ':' . $e->getLine() . PHP_EOL;
 }
 PHPEOF
+
+echo "--- Active theme diagnostic ---"
+sudo -u www-data /usr/bin/php << 'PHPEOF2'
+<?php
+define('CLI_SCRIPT', true);
+require '/var/www/moodle/config.php';
+$theme = get_config('core', 'theme');
+echo "Active theme: " . $theme . PHP_EOL;
+$themeDir = $CFG->dirroot . '/theme/understandtech';
+echo "Theme dir exists: " . (is_dir($themeDir) ? 'YES' : 'NO') . PHP_EOL;
+echo "lib.php exists: " . (file_exists($themeDir . '/lib.php') ? 'YES' : 'NO') . PHP_EOL;
+$dbversion = get_config('theme_understandtech', 'version');
+echo "DB theme version: " . ($dbversion ?: 'not set') . PHP_EOL;
+// Check if styles.php would serve CSS for this theme
+$themerev = get_config('core', 'themerev');
+echo "themerev: " . $themerev . PHP_EOL;
+PHPEOF2
 echo "Upgrade complete via direct Postgres."
