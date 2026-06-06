@@ -120,15 +120,33 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
         return true;
     };
 
+    /**
+     * Bind sidebar once footer-injected markup (with data-courseid) is in the DOM.
+     *
+     * @return {void}
+     */
+    const initFromDom = () => {
+        const poll = () => {
+            const root = document.getElementById('local-aitutor-sidebar');
+            if (!root) {
+                window.requestAnimationFrame(poll);
+                return;
+            }
+            const courseid = parseInt(root.dataset.courseid, 10);
+            const cmid = parseInt(root.dataset.cmid, 10) || 0;
+            if (!Number.isFinite(courseid) || courseid < 1) {
+                window.requestAnimationFrame(poll);
+                return;
+            }
+            bindSidebar(courseid, cmid);
+        };
+        poll();
+    };
+
     return {
         init: function(courseid, cmid) {
-            const poll = () => {
-                if (bindSidebar(courseid, cmid)) {
-                    return;
-                }
-                window.requestAnimationFrame(poll);
-            };
-            poll();
+            bindSidebar(courseid, cmid);
         },
+        initFromDom: initFromDom,
     };
 });
