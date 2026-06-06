@@ -16,7 +16,7 @@ Four secrets still ship as `REPLACE-ME` after Bicep deploy. Populate them before
 | `stripe-publishable-key` | `STRIPE_PUBLISHABLE_KEY` | Same page → Publishable key |
 | `stripe-webhook-secret` | `STRIPE_WEBHOOK_SECRET` | Stripe **Developers → Webhooks** → signing secret (`whsec_…`); see [docs/stripe-integration.md](../docs/stripe-integration.md) |
 
-Stripe secrets are optional until the §7.1 billing gate; the populate script creates `REPLACE-ME` placeholders if missing.
+Stripe secrets are optional until the §7.1 billing gate; use **`.\scripts\stripe-kv-setup-interactive.ps1`** for Stripe-only secure prompts, or the full populate script below.
 
 ```powershell
 $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')

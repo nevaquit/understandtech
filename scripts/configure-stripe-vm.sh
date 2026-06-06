@@ -15,7 +15,7 @@ set -euo pipefail
 KEY_VAULT="${KEY_VAULT:-utkvnhhwegpz3rem6}"
 MOODLE_DIR="${MOODLE_DIR:-/var/www/moodle}"
 ENV_FILE="${ENV_FILE:-/etc/moodle/env}"
-DRY_RUN=0
+DRY_RUN="${DRY_RUN:-0}"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in

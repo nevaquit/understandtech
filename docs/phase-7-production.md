@@ -19,13 +19,13 @@ Per `docs/playbook.md` §7.1–7.4. **Do not tag `v1.0.0` until all pre-deploy g
 |------|--------|------------------|
 | Staging Playwright tests pass | ✅ **Done** (core) | **8/8 pass** chromium project (`--workers=1`, 2026-06-06): auth setup + AI tutor **4/4** + course nav **3/3**. Optional `auth.spec.ts` (chromium-auth) still flaky when run after session tests — not a §7.1 blocker. |
 | Smoke test passes (no failures) | ⚠️ **Partial** | Critical paths pass from workstation: SSL, HTTP 200, AI health/auth. Git Bash DNS check may fail on Windows (`dig`/`nslookup` PATH). `TEST_VIDEO_URL` not set — Stream check skipped. Full run: `ORIGIN_IP=52.252.59.54 PROD_URL=https://understandtech.app ./scripts/smoke-test-deployment.sh` |
-| Azure Key Vault secrets populated | ✅ **Done** (core) | Seven original secrets OK (length only, 2026-06-06): `moodle-db-password`, `moodle-app-password`, `redis-password`, `anthropic-api-key`, `openai-api-key`, `cf-stream-signing-key`, `cf-worker-shared-secret` — none `REPLACE-ME`. **Stripe:** `stripe-secret-key`, `stripe-publishable-key`, `stripe-webhook-secret` — ❌ user action ([stripe-integration.md](stripe-integration.md)). |
+| Azure Key Vault secrets populated | ⚠️ **Partial** | Core seven OK (2026-06-06). **Stripe:** `stripe-secret-key`, `stripe-publishable-key`, `stripe-webhook-secret` — ❌ **absent** from vault (2026-06-06 re-audit). **Postmark:** `postmark-server-token` — ❌ absent. Helper: `.\scripts\stripe-kv-setup-interactive.ps1` ([stripe-integration.md](stripe-integration.md)). |
 | Production DNS → Cloudflare | ✅ **Done** | `understandtech.app` → Cloudflare anycast. |
 | Cloudflare DNS records proxied | ✅ **Done** | `Server: cloudflare`, `CF-RAY` on responses. |
 | Authenticated Origin Pulls enabled | ✅ **Done** | Nginx `ssl_client_certificate` present on VM. Direct `--resolve understandtech.app:443:52.252.59.54` from workstation: **TLS handshake fails** (curl 000/35) — origin not serving anonymous HTTPS; traffic must go through Cloudflare. |
 | Cloudflare Stream test video | ❌ **User action** | KV signing key ✅; no upload/lesson embed yet. See [v1-release-integrations.md](v1-release-integrations.md). |
-| Stripe webhooks → production | ❌ **User action** | Install `paygw_stripe` on VM; populate Stripe KV secrets; configure payment account. Webhook: `https://understandtech.app/payment/gateway/stripe/webhook.php`. See [stripe-integration.md](stripe-integration.md). |
-| Postmark sender verified | ❌ **User action** | Moodle `smtphosts` empty on VM. See [v1-release-integrations.md](v1-release-integrations.md). |
+| Stripe webhooks → production | ⚠️ **Partial** | `paygw_stripe` **1.31** (2026020800) on VM; webhook `POST` → **400** (not 404). No `STRIPE_*` in `/etc/moodle/env` until KV populated. Payment account + KV secrets: user action. See [stripe-integration.md](stripe-integration.md). |
+| Postmark sender verified | ❌ **User action** | KV `postmark-server-token` absent; Moodle `smtphosts` empty on VM. See [v1-release-integrations.md](v1-release-integrations.md). |
 | Self-hosted runner idle/online | ✅ **Done** | `{"name":"understandtech-web-prod","status":"online","busy":false}` |
 | Rollback plan documented | ✅ **Done** | Playbook §7.4 + checklist rollback section |
 | Redis sessions wired | ✅ **Done** | `\core\session\redis` in live `config.php`; Azure Redis `PONG` (TLS); `session_redis_encrypt` SSL context array; **`fetchbuffersize` 100000** for PgBouncer transaction mode. Restart PgBouncer after config changes. |
@@ -41,9 +41,15 @@ OK   anthropic-api-key (len=108)
 OK   openai-api-key (len=164)
 OK   cf-stream-signing-key (len=57)
 OK   cf-worker-shared-secret (len=44)
+ABS  stripe-secret-key
+ABS  stripe-publishable-key
+ABS  stripe-webhook-secret
+ABS  postmark-server-token
 ```
 
 Populate script dry-run: all four LLM/Stream/worker secrets already configured — `./scripts/populate-keyvault-secrets.sh` skips each.
+
+Stripe/Postmark: run `.\scripts\stripe-kv-setup-interactive.ps1` when understandtech Stripe test keys exist; then `./scripts/configure-stripe-remote.sh` and `./scripts/setup-postmark-smtp-remote.sh`.
 
 ## Smoke / Origin Pulls (2026-06-06)
 
@@ -100,8 +106,8 @@ Then execute every row in [post-deployment-validation.md](post-deployment-valida
 ## Recommended next steps
 
 1. **Stream:** Upload test video in Cloudflare dashboard; `generate-stream-signed-url.sh` → `TEST_VIDEO_URL`; re-run smoke.
-2. **Stripe:** Follow [stripe-integration.md](stripe-integration.md) — install `paygw_stripe` on VM, populate KV, configure payment account.
-3. **Postmark:** Verify sender; store `postmark-server-token` in KV; run `./scripts/setup-postmark-smtp-remote.sh`.
+2. **Stripe:** `paygw_stripe` installed on VM — run `.\scripts\stripe-kv-setup-interactive.ps1`, then `./scripts/configure-stripe-remote.sh`, then Moodle payment account ([stripe-integration.md](stripe-integration.md)).
+3. **Postmark:** Verify sender; `az keyvault secret set --name postmark-server-token …`; run `./scripts/setup-postmark-smtp-remote.sh`.
 4. **Sudoers:** From machine with `az login`: `./scripts/sync-sudoers-remote.sh` (or `sync-sudoers-vm.sh` on VM after `git pull`).
 5. **Tag `v1.0.0`** when all §7.1 rows are ✅.
 
