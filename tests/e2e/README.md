@@ -30,6 +30,9 @@ cp .env.example .env
 
 ```bash
 npm test
+# Windows: install chromium only, single worker to avoid login rate limits
+npx playwright install chromium
+npx playwright test --project=chromium --workers=1
 npm run test:headed   # visible browser
 npm run report        # open HTML report after a run
 ```

@@ -20,7 +20,7 @@ test.describe('Authentication', () => {
 
     await expect(page).toHaveURL(/\/login\/index\.php/);
     await expect(
-      page.locator('.alert-danger, #loginerrormessage, .loginerrors'),
+      page.getByRole('alert').or(page.locator('#loginerrormessage, .loginerrors')),
     ).toBeVisible({ timeout: 10_000 });
   });
 
@@ -41,7 +41,13 @@ test.describe('Authentication', () => {
       await page.getByRole('menuitem', { name: /log out/i }).click();
     }
 
-    await expect(page.locator('#login')).toBeVisible({ timeout: 15_000 });
+    // Moodle may show logout confirmation before returning to login.
+    const continueBtn = page.getByRole('button', { name: /continue|log out/i });
+    if (await continueBtn.isVisible({ timeout: 5_000 }).catch(() => false)) {
+      await continueBtn.click();
+    }
+
+    await expect(page.locator('.loginform')).toBeVisible({ timeout: 15_000 });
   });
 
   test('session persists across page reload', async ({ page }) => {

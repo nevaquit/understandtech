@@ -108,6 +108,10 @@ sudo ./scripts/install-cloudflare-origin-certs.sh \
 | Script | Purpose |
 |--------|---------|
 | `setup-moodle-env-vm.ps1` | Key Vault → `/etc/moodle/env` on VM |
+| `wire-redis-sessions-vm.sh` | Wire Redis sessions + PgBouncer `fetchbuffersize` on VM |
+| `wire-redis-sessions-remote.sh` | Azure Run Command wrapper for Redis sessions script |
+| `setup-e2e-test-user-vm.sh` | Create `e2etest` user + `e2e101` course on VM |
+| `setup-e2e-test-user-remote.sh` | Azure Run Command wrapper (set `E2E_PASSWORD`) |
 | `install-moodle-vm.sh` | Clone Moodle 4.5 to `/var/www/moodle` |
 | `deploy-plugins-vm.sh` | Deploy `moodle-plugins/*` to VM |
 | `deploy-ai-gateway.sh` | Phase 4.3 Worker deploy (KV + secrets + `wrangler deploy`) |

@@ -21,7 +21,7 @@ MOODLE_DB_PASSWORD=$dbpass
 MOODLE_REDIS_HOST=understandtech-redis-prod.eastus2.redis.azure.net
 MOODLE_REDIS_PORT=10000
 MOODLE_REDIS_PASSWORD=$redis
-MOODLE_WWWROOT=http://52.252.59.54
+MOODLE_WWWROOT=https://understandtech.app
 AITUTOR_WORKER_SHARED_SECRET=$worker
 "@
 

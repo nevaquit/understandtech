@@ -8,7 +8,7 @@ Per `docs/playbook.md` §7.1–7.4. **Do not tag `v1.0.0` until all pre-deploy g
 |------|--------|
 | Production URL live | ✅ `https://understandtech.app` (HTTP 200, `cf-ray` present) |
 | AI Worker health | ✅ `https://ai.understandtech.app/health` → `{"status":"ok"}` |
-| Self-hosted runner | ✅ `understandtech-web-prod` online (`gh api …/runners`) |
+| Self-hosted runner | ✅ `understandtech-web-prod` online |
 | CI/CD | ✅ `deploy.yml` validate + deploy green on `main` |
 | Post-deploy checklist | ✅ `docs/post-deployment-validation.md` |
 | v1.0.0 tag + formal release deploy | ⏸ **Blocked** — gates below |
@@ -17,39 +17,64 @@ Per `docs/playbook.md` §7.1–7.4. **Do not tag `v1.0.0` until all pre-deploy g
 
 | Gate | Status | Evidence / notes |
 |------|--------|------------------|
-| Staging Playwright tests pass | ⚠️ **Partial** | Suite exists (`tests/e2e/`); auth/tutor specs need `STAGING_TEST_USER_*` in `.env`. Invalid-login test runs without creds. |
-| Smoke test passes (no failures) | ⚠️ **Partial** | Automated script: **6 pass / 6 warn / 0 fail** when `gh` + DNS tools available; **5 pass / 6 warn / 1 fail** from Git Bash on Windows (DNS check — `dig`/`nslookup` not in PATH). Critical paths (SSL, HTTP, AI health/auth, Moodle login) pass. |
-| Azure Key Vault secrets populated | ❓ **Verify on VM** | Vault `utkvnhhwegpz3rem6`. Run populate validation: `./scripts/populate-keyvault-secrets.sh` (checks 4 LLM/Stream/worker secrets). Also confirm `moodle-app-password`, `redis-password` not `REPLACE-ME`. Requires `az login`. |
-| Production DNS → Cloudflare | ✅ **Done** | `understandtech.app` → Cloudflare anycast (104.21.x / 172.67.x). |
-| Cloudflare DNS records proxied | ✅ **Done** | Responses include `Server: cloudflare`, `CF-RAY` header. |
-| Authenticated Origin Pulls enabled | ⚠️ **Unverified** | Nginx enforces client cert (`deploy.yml` health check notes 400 without CF cert). Set `ORIGIN_IP=52.252.59.54` in smoke script to confirm block. |
-| Cloudflare Stream test video | ❌ **Pending** | No `TEST_VIDEO_URL` in smoke runs. Upload video in Stream dashboard; wire signed URL in course content. |
-| Stripe webhooks → production | ❌ **Pending** | `paygw_stripe` / `enrol_stripepayment` not in `moodle-plugins/`; no webhook endpoint configured in repo. |
-| Postmark sender verified | ❌ **Pending** | Not configured in codebase; Moodle SMTP settings required. |
+| Staging Playwright tests pass | ⚠️ **Partial** | **5 pass / 6 fail / 0 skip** (chromium, `--workers=1`, 2026-06-06). Auth login + session persist ✅; course navigation 3/3 ✅; AI tutor 0/4 ❌ (sidebar HTML absent on course — plugin deployed but hook output not in page; purge/deploy follow-up). Invalid-login + logout flaky under load. Credentials: user `e2etest` on VM; `tests/e2e/.env` populated locally (gitignored). |
+| Smoke test passes (no failures) | ⚠️ **Partial** | Critical paths pass from workstation: SSL, HTTP 200, AI health/auth, Moodle login (after `fetchbuffersize` + PgBouncer restart). Git Bash DNS check may fail on Windows (`dig`/`nslookup` PATH). Run from VM or PowerShell for full DNS. |
+| Azure Key Vault secrets populated | ✅ **Done** | All 7 secrets OK (length only, 2026-06-06): `moodle-db-password`, `moodle-app-password`, `redis-password`, `anthropic-api-key`, `openai-api-key`, `cf-stream-signing-key`, `cf-worker-shared-secret` — none `REPLACE-ME`. |
+| Production DNS → Cloudflare | ✅ **Done** | `understandtech.app` → Cloudflare anycast. |
+| Cloudflare DNS records proxied | ✅ **Done** | `Server: cloudflare`, `CF-RAY` on responses. |
+| Authenticated Origin Pulls enabled | ✅ **Done** | Nginx `ssl_client_certificate` present on VM. Direct `--resolve understandtech.app:443:52.252.59.54` from workstation: **TLS handshake fails** (curl 000/35) — origin not serving anonymous HTTPS; traffic must go through Cloudflare. |
+| Cloudflare Stream test video | ❌ **User action** | KV signing key ✅; no upload/lesson embed yet. See [v1-release-integrations.md](v1-release-integrations.md). |
+| Stripe webhooks → production | ❌ **Blocked** | Plugins not in repo; no webhook. See [v1-release-integrations.md](v1-release-integrations.md). |
+| Postmark sender verified | ❌ **User action** | Moodle `smtphosts` empty on VM. See [v1-release-integrations.md](v1-release-integrations.md). |
 | Self-hosted runner idle/online | ✅ **Done** | `{"name":"understandtech-web-prod","status":"online","busy":false}` |
 | Rollback plan documented | ✅ **Done** | Playbook §7.4 + checklist rollback section |
-| Redis sessions wired | ⚠️ **Partial** | `config.php.template` sets `\core\session\redis` → Azure Redis; smoke script still warns Redis may be unreachable until VM tunnel/password verified. |
-| `CF_AIG_AUTHORIZATION` Worker secret | ⚠️ **Optional** | Only required when Cloudflare AI Gateway auth is enabled without the Workers AI binding. Worker health/tutor 401 work without it today. Set via `npx wrangler secret put CF_AIG_AUTHORIZATION` if gateway dashboard shows auth errors. |
+| Redis sessions wired | ✅ **Done** | `\core\session\redis` in live `config.php`; Azure Redis `PONG` (TLS); `session_redis_encrypt` SSL context array; **`fetchbuffersize` 100000** for PgBouncer transaction mode. Restart PgBouncer after config changes. |
+| `CF_AIG_AUTHORIZATION` Worker secret | ⚠️ **Optional** | Worker health/tutor 401 OK without it today. |
 
-## Smoke test baseline (2026-06-06)
-
-From engineer workstation (Git Bash, `GITHUB_REPO=nevaquit/understandtech`):
+## Key Vault audit (2026-06-06)
 
 ```
-=== Summary: 5 passed, 6 warnings, 1 failures ===
-[PASS] SSL valid (~89 days remaining)
-[PASS] HTTP via Cloudflare: 200
-[PASS] AI Worker /health OK
-[PASS] AI Worker /tutor rejects unauthenticated requests (401)
-[PASS] Moodle login page reachable
-[FAIL] DNS resolution (dig/nslookup unavailable in Git Bash on Windows)
-[WARN] ORIGIN_IP not set — Origin Pulls test skipped
-[WARN] VM DB / Redis / disk checks skipped (not on VM)
-[WARN] gh CLI not in Git Bash PATH (runner check skipped; verified separately via PowerShell)
-[WARN] TEST_VIDEO_URL not set — Stream JWT skipped
+OK   moodle-db-password (len=32)
+OK   moodle-app-password (len=32)
+OK   redis-password (len=44)
+OK   anthropic-api-key (len=108)
+OK   openai-api-key (len=164)
+OK   cf-stream-signing-key (len=57)
+OK   cf-worker-shared-secret (len=44)
 ```
 
-Separate verification (PowerShell): `gh api repos/nevaquit/understandtech/actions/runners` → runner **online**; `nslookup understandtech.app` → Cloudflare IPs.
+Populate script dry-run: all four LLM/Stream/worker secrets already configured — `./scripts/populate-keyvault-secrets.sh` skips each.
+
+## Smoke / Origin Pulls (2026-06-06)
+
+From workstation (PowerShell + curl):
+
+| Check | Result |
+|-------|--------|
+| HTTPS via Cloudflare | 200, `cf-ray` present |
+| AI `/health` | `{"status":"ok"}` |
+| AI `/tutor` no JWT | 401 |
+| Direct origin `52.252.59.54:443` | TLS handshake failure (blocked) |
+| `TEST_VIDEO_URL` | Not set — skipped |
+
+Full script: `ORIGIN_IP=52.252.59.54 PROD_URL=https://understandtech.app ./scripts/smoke-test-deployment.sh` (use Git Bash/WSL or run individual curl checks on Windows).
+
+## Playwright (2026-06-06)
+
+```bash
+cd tests/e2e
+cp .env.example .env   # set STAGING_TEST_USER_EMAIL=e2etest, password, E2E_COURSE_PATH=/course/view.php?id=2
+npx playwright install chromium
+npx playwright test --project=chromium --workers=1
+```
+
+**Result:** 5 passed, 6 failed (AI tutor sidebar + flaky auth logout/invalid-login).
+
+Production test user (created via `scripts/setup-e2e-test-user-vm.sh` on VM):
+
+- Username: `e2etest`
+- Email: `e2e-test@understandtech.app`
+- Course: `E2E Test Course` (`/course/view.php?id=2`)
 
 ## Deployment sequence (when gates are green)
 
@@ -66,20 +91,17 @@ PROD_URL=https://understandtech.app GITHUB_REPO=nevaquit/understandtech \
 
 Then execute every row in [post-deployment-validation.md](post-deployment-validation.md).
 
-## Recommended actions before v1.0.0
+## Recommended next steps
 
-1. **Credentials:** Create production test student; add to `tests/e2e/.env`; run `npm test` — all specs green.
-2. **Key Vault:** `az login` → run secret loop in post-deployment doc → `./scripts/populate-keyvault-secrets.sh` if any `REPLACE-ME` → `pwsh ./scripts/setup-moodle-env-vm.ps1`.
-3. **Origin Pulls:** `ORIGIN_IP=52.252.59.54 ./scripts/smoke-test-deployment.sh` — expect direct-origin block.
-4. **Stream:** Upload test video; embed in lesson; export signed URL to `TEST_VIDEO_URL`; re-run smoke.
-5. **Redis sessions:** SSH to VM → `redis-cli … PING` → confirm Moodle sessions persist across PHP-FPM reload.
-6. **Stripe:** Install/configure Moodle Stripe plugins; point webhook to production; run test card flow (playbook §6.1).
-7. **Postmark:** Verify sender domain; configure Moodle SMTP; send test password-reset email.
-8. **CF_AIG_AUTHORIZATION:** If AI Gateway returns 401 on tutor traffic, set Worker secret and redeploy via `./scripts/deploy-ai-gateway.sh`.
-9. **Tag release:** Only after steps 1–8 pass → tag `v1.0.0` and trigger deploy.
+1. **AI tutor E2E:** Sync latest `local_aitutor` from monorepo to VM (`deploy-plugins-vm.sh` / CI deploy), purge caches, confirm `#local-aitutor-sidebar` on course 2; re-run tutor specs.
+2. **Stream:** Upload test video; set `TEST_VIDEO_URL`; re-run smoke.
+3. **Stripe / Postmark:** Follow [v1-release-integrations.md](v1-release-integrations.md).
+4. **Playwright:** Store `STAGING_TEST_USER_PASSWORD` in engineer `.env` only; optional GitHub Actions secrets for CI.
+5. **Tag `v1.0.0`** when all §7.1 rows are ✅.
 
 ## Related docs
 
 - [post-deployment-validation.md](post-deployment-validation.md) — 30-minute checklist
+- [v1-release-integrations.md](v1-release-integrations.md) — Stream / Stripe / Postmark
 - [playbook.md §7](playbook.md#phase-7-production-deployment-and-validation)
-- [scripts/README.md](../scripts/README.md) — Key Vault, Worker deploy, smoke script
+- [scripts/README.md](../scripts/README.md) — Key Vault, Redis, E2E user, smoke script

@@ -30,6 +30,7 @@ $CFG->dboptions = [
     'dbport'    => (int) (getenv('MOODLE_DB_PORT') ?: 6432),
     'dbsocket'  => false,
     'sslmode'   => 'disable',
+    'fetchbuffersize' => 100000,
 ];
 
 $CFG->wwwroot   = getenv('MOODLE_WWWROOT') ?: 'https://understandtech.app';
@@ -41,7 +42,7 @@ $CFG->session_handler_class = '\core\session\redis';
 $CFG->session_redis_host = getenv('MOODLE_REDIS_HOST') ?: 'understandtech-redis-prod.eastus2.redis.azure.net';
 $CFG->session_redis_port = (int) (getenv('MOODLE_REDIS_PORT') ?: 10000);
 $CFG->session_redis_auth = getenv('MOODLE_REDIS_PASSWORD') ?: '';
-$CFG->session_redis_encrypt = true;
+$CFG->session_redis_encrypt = ['verify_peer' => false, 'verify_peer_name' => false];
 
 $CFG->tool_generator_users_password = 'REPLACE_ME_BEFORE_PRODUCTION';
 

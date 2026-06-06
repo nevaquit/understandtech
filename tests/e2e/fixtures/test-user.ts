@@ -35,7 +35,7 @@ export class TestUser {
 
   async gotoLogin(): Promise<void> {
     await this.page.goto('/login/index.php');
-    await expect(this.page.locator('#login')).toBeVisible();
+    await expect(this.page.locator('.loginform')).toBeVisible();
   }
 
   async login(email: string, password: string): Promise<void> {
@@ -56,7 +56,7 @@ export class TestUser {
     } else {
       await this.page.goto('/login/logout.php?sesskey=skip');
     }
-    await expect(this.page.locator('#login')).toBeVisible({ timeout: 15_000 });
+    await expect(this.page.locator('.loginform')).toBeVisible({ timeout: 15_000 });
   }
 
   async expectDashboard(): Promise<void> {
