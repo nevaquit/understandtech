@@ -34,28 +34,40 @@ export class TestUser {
   constructor(private readonly page: Page) {}
 
   async gotoLogin(): Promise<void> {
-    await this.page.goto('/login/index.php');
-    await expect(this.page.locator('.loginform, .ut-login-form')).toBeVisible({ timeout: 15_000 });
+    await this.page.goto('/login/index.php', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+    await this.waitForLoginForm();
+  }
+
+  /**
+   * Wait for login form or backoff when nginx rate-limits /login (5 req/min).
+   */
+  async waitForLoginForm(): Promise<void> {
+    const loginForm = this.page.locator('.loginform, .ut-login-form');
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const bodyText = (await this.page.locator('body').innerText().catch(() => '')).toLowerCase();
+      const rateLimited = bodyText.includes('503 service temporarily unavailable')
+        || bodyText.includes('too many requests');
+
+      if (rateLimited && attempt < 2) {
+        await this.page.waitForTimeout(65_000);
+        await this.page.goto('/login/index.php', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+        continue;
+      }
+
+      await expect(loginForm).toBeVisible({ timeout: 15_000 });
+      return;
+    }
   }
 
   async login(email: string, password: string): Promise<void> {
-    const submitLogin = async (): Promise<void> => {
-      await this.gotoLogin();
-      await this.page.locator('#username').fill(email);
-      await this.page.locator('#password').fill(password);
-      await this.page.locator('#loginbtn').click();
-      await this.page.waitForURL((url) => !url.pathname.endsWith('/login/index.php'), {
-        timeout: 30_000,
-      });
-    };
-
-    try {
-      await submitLogin();
-    } catch {
-      // Origin login rate limits can reject rapid sequential E2E logins.
-      await this.page.waitForTimeout(2_000);
-      await submitLogin();
-    }
+    await this.gotoLogin();
+    await this.page.locator('#username').fill(email);
+    await this.page.locator('#password').fill(password);
+    await this.page.locator('#loginbtn').click();
+    await this.page.waitForURL((url) => !url.pathname.endsWith('/login/index.php'), {
+      timeout: 60_000,
+      waitUntil: 'domcontentloaded',
+    });
   }
 
   async logout(): Promise<void> {
@@ -71,8 +83,8 @@ export class TestUser {
 
   async expectDashboard(): Promise<void> {
     await expect(this.page).toHaveURL(/\/my\//);
-    await expect(this.page.locator('#page-my-index, #page-my-dashboard')).toBeVisible({
-      timeout: 15_000,
-    });
+    await expect(
+      this.page.locator('#page-my-index, #page-my-dashboard').first(),
+    ).toBeVisible({ timeout: 15_000 });
   }
 }

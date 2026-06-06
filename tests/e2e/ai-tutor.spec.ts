@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getStudentCredentials, TestUser } from './fixtures/test-user';
+import { getStudentCredentials } from './fixtures/test-user';
 
 const SIDEBAR = '#local-aitutor-sidebar';
 const OUTPUT = '.local-aitutor-output';
@@ -14,20 +14,30 @@ function getCoursePath(): string {
   return path;
 }
 
+/** Retry course navigation when origin returns transient DB error pages. */
+async function gotoCourseWithSidebar(page: import('@playwright/test').Page): Promise<void> {
+  const coursePath = getCoursePath();
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await page.goto(coursePath, { waitUntil: 'load', timeout: 60_000 });
+    const dbError = await page.getByText(/error reading from database/i).isVisible().catch(() => false);
+    if (!dbError && await page.locator(SIDEBAR).isVisible().catch(() => false)) {
+      return;
+    }
+    await page.waitForTimeout(3000 * (attempt + 1));
+  }
+  await expect(page.locator(SIDEBAR)).toBeVisible({ timeout: 30_000 });
+}
+
 /** Patterns that indicate Socratic refusal rather than a direct answer dump. */
 const REFUSAL_HINTS =
   /\b(can'?t|cannot|won'?t|instead|guide|concept|together|explore|understand|learn|think about|what do you know|hint|clarify)\b/i;
 
 test.describe('AI Tutor sidebar', () => {
   test.beforeEach(async ({ page }) => {
-    const creds = getStudentCredentials();
-    test.skip(!creds, 'STAGING_TEST_USER_EMAIL / STAGING_TEST_USER_PASSWORD not set');
+    test.skip(!getStudentCredentials(), 'STAGING_TEST_USER_EMAIL / STAGING_TEST_USER_PASSWORD not set');
     test.skip(!process.env.E2E_COURSE_PATH?.trim(), 'Set E2E_COURSE_PATH for AI tutor tests');
 
-    const user = new TestUser(page);
-    await user.login(creds!.email, creds!.password);
-    await page.goto(getCoursePath());
-    await expect(page.locator(SIDEBAR)).toBeVisible({ timeout: 20_000 });
+    await gotoCourseWithSidebar(page);
     await page.waitForFunction(
       () => document.querySelector('#local-aitutor-sidebar')?.dataset.aitutorBound === '1',
       undefined,
@@ -49,6 +59,8 @@ test.describe('AI Tutor sidebar', () => {
 
     const output = page.locator(OUTPUT);
     await expect(output).not.toHaveText(/^…?$/, { timeout: 30_000 });
+    // Sidebar re-enables Send when the SSE stream closes.
+    await expect(page.locator(SEND)).toBeEnabled({ timeout: 60_000 });
 
     const text = (await output.textContent())?.trim() ?? '';
     expect(text.length).toBeGreaterThan(20);
@@ -63,6 +75,7 @@ test.describe('AI Tutor sidebar', () => {
 
     const output = page.locator(OUTPUT);
     await expect(output).not.toHaveText(/^…?$/, { timeout: 30_000 });
+    await expect(page.locator(SEND)).toBeEnabled({ timeout: 60_000 });
 
     const text = (await output.textContent()) ?? '';
     expect(

@@ -29,12 +29,14 @@ const baseURL =
   process.env.BASE_URL?.replace(/\/$/, '') ??
   'https://understandtech.app';
 
+const authFile = path.join(__dirname, '.auth', 'student.json');
+
 export default defineConfig({
   testDir: '.',
   testMatch: '**/*.spec.ts',
   timeout: 60_000,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   reporter: [['html', { open: 'never' }], ['list']],
@@ -45,10 +47,41 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'setup', testMatch: /auth\.setup\.ts/ },
+    {
+      name: 'chromium',
+      testIgnore: /auth\.spec\.ts/,
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: authFile,
+      },
+      dependencies: ['setup'],
+    },
+    {
+      name: 'chromium-auth',
+      testMatch: /auth\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['chromium'],
+    },
+    {
+      name: 'firefox',
+      testIgnore: /auth\.spec\.ts/,
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: authFile,
+      },
+      dependencies: ['setup'],
+    },
     ...(process.platform === 'darwin'
-      ? [{ name: 'webkit', use: { ...devices['Desktop Safari'] } }]
+      ? [{
+          name: 'webkit',
+          testIgnore: /auth\.spec\.ts/,
+          use: {
+            ...devices['Desktop Safari'],
+            storageState: authFile,
+          },
+          dependencies: ['setup'],
+        }]
       : []),
   ],
 });

@@ -166,6 +166,9 @@ check_db_vm() {
   fi
   local dbhost
   dbhost="$(sudo -u www-data /usr/bin/php "$MOODLE_DIR/admin/cli/cfg.php" --name=dbhost 2>/dev/null || true)"
+  if [[ -z "$dbhost" ]]; then
+    dbhost="$(sudo -u www-data /usr/bin/php -r 'define("CLI_SCRIPT", true); require "'"$MOODLE_DIR"'/config.php"; echo $CFG->dbhost;' 2>/dev/null || true)"
+  fi
   if [[ -n "$dbhost" && "$dbhost" != "localhost" ]]; then
     pass "Moodle dbhost configured: $dbhost"
   elif [[ -n "$dbhost" ]]; then

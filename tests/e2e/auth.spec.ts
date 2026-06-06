@@ -3,6 +3,7 @@ import { getStudentCredentials, TestUser } from './fixtures/test-user';
 
 test.describe('Authentication', () => {
   test('login with valid credentials lands on dashboard', async ({ page }) => {
+    test.setTimeout(180_000);
     const creds = getStudentCredentials();
     test.skip(!creds, 'STAGING_TEST_USER_EMAIL / STAGING_TEST_USER_PASSWORD not set');
 
@@ -36,8 +37,7 @@ test.describe('Authentication', () => {
     if (await logoutLink.isVisible()) {
       await logoutLink.click();
     } else {
-      const userMenu = page.locator('[data-region="usermenu"], .usermenu');
-      await userMenu.click();
+      await page.locator('[data-region="usermenu"]').first().click();
       await page.getByRole('menuitem', { name: /log out/i }).click();
     }
 
@@ -47,16 +47,14 @@ test.describe('Authentication', () => {
       await continueBtn.click();
     }
 
-    await expect(page).toHaveURL(/\/login\/index\.php|\/?(?:\?|$)/, { timeout: 15_000 });
-    const loginForm = page.locator('.loginform');
-    if (await loginForm.isVisible({ timeout: 3_000 }).catch(() => false)) {
-      await expect(loginForm).toBeVisible();
-    } else {
-      await expect(page.getByText(/not logged in/i)).toBeVisible();
-    }
+    await expect(page).toHaveURL(/\/login\/index\.php|\/\?redirect=0/, { timeout: 15_000 });
+    const loginForm = page.locator('.loginform, .ut-login-form');
+    const guestHome = page.getByRole('link', { name: /log in|login/i });
+    await expect(loginForm.or(guestHome)).toBeVisible({ timeout: 15_000 });
   });
 
   test('session persists across page reload', async ({ page }) => {
+    test.setTimeout(180_000);
     const creds = getStudentCredentials();
     test.skip(!creds, 'STAGING_TEST_USER_EMAIL / STAGING_TEST_USER_PASSWORD not set');
 
