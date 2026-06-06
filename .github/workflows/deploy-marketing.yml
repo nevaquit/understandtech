@@ -1,0 +1,66 @@
+# Deploy marketing site files to /var/www/marketing on the production VM.
+# Runs on every push to main (no plugin-change detection needed).
+name: Deploy Marketing Site
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'marketing/**'
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: Deploy marketing to production
+    runs-on: [self-hosted, linux, production]
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync monorepo on VM
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          cd /opt/understandtech-plugins
+          for attempt in 1 2 3 4 5; do
+            sudo -u gha-runner git fetch origin main
+            sudo -u gha-runner git reset --hard origin/main
+            actual="$(git rev-parse HEAD)"
+            if [ "$actual" = "$EXPECTED_SHA" ]; then
+              echo "Monorepo synced to ${EXPECTED_SHA}"
+              break
+            fi
+            echo "Attempt ${attempt}/5: HEAD=${actual}, expected=${EXPECTED_SHA}"
+            sleep 3
+          done
+
+      - name: Deploy marketing files
+        run: |
+          set -euo pipefail
+          MARKETING_SRC="/opt/understandtech-plugins/marketing"
+          MARKETING_DEST="/var/www/marketing"
+          mkdir -p "$MARKETING_DEST"
+          rsync -av --delete "$MARKETING_SRC/" "$MARKETING_DEST/"
+          chown -R www-data:www-data "$MARKETING_DEST"
+          find "$MARKETING_DEST" -type d -exec chmod 755 {} \;
+          find "$MARKETING_DEST" -type f -exec chmod 644 {} \;
+          echo "Marketing files deployed:"
+          ls -la "$MARKETING_DEST"
+
+      - name: Reload nginx
+        run: |
+          set -euo pipefail
+          nginx -t
+          systemctl reload nginx
+          echo "nginx reloaded"
+
+      - name: Verify marketing site
+        run: |
+          set -euo pipefail
+          code="$(curl -sS -o /dev/null -w '%{http_code}' 'https://understandtech.app/' || true)"
+          echo "marketing_root_http=${code}"
+          if [ "$code" != "200" ]; then
+            echo "Expected 200 from marketing root" >&2
+            exit 1
+          fi
+          echo "Marketing site verified OK"
