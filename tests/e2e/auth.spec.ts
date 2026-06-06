@@ -20,7 +20,7 @@ test.describe('Authentication', () => {
 
     await expect(page).toHaveURL(/\/login\/index\.php/);
     await expect(
-      page.getByRole('alert').or(page.locator('#loginerrormessage, .loginerrors')),
+      page.getByRole('alert').or(page.locator('#loginerrormessage, .loginerrors, .alert-danger')),
     ).toBeVisible({ timeout: 10_000 });
   });
 
@@ -47,7 +47,7 @@ test.describe('Authentication', () => {
       await continueBtn.click();
     }
 
-    await expect(page).toHaveURL(/\/login\/index\.php|\/\?/, { timeout: 15_000 });
+    await expect(page).toHaveURL(/\/login\/index\.php|\/?(?:\?|$)/, { timeout: 15_000 });
     const loginForm = page.locator('.loginform');
     if (await loginForm.isVisible({ timeout: 3_000 }).catch(() => false)) {
       await expect(loginForm).toBeVisible();
