@@ -6,6 +6,9 @@
 #   OPENAI_API_KEY             -> openai-api-key
 #   CF_STREAM_SIGNING_KEY      -> cf-stream-signing-key
 #   AITUTOR_WORKER_SHARED_SECRET or CF_WORKER_SHARED_SECRET -> cf-worker-shared-secret
+#   STRIPE_SECRET_KEY            -> stripe-secret-key
+#   STRIPE_PUBLISHABLE_KEY       -> stripe-publishable-key
+#   STRIPE_WEBHOOK_SECRET        -> stripe-webhook-secret
 #
 # Prerequisites:
 #   az login
@@ -29,6 +32,9 @@ $secretMap = [ordered]@{
     'openai-api-key'          = @('OPENAI_API_KEY')
     'cf-stream-signing-key'   = @('CF_STREAM_SIGNING_KEY', 'CLOUDFLARE_STREAM_SIGNING_KEY')
     'cf-worker-shared-secret' = @('AITUTOR_WORKER_SHARED_SECRET', 'CF_WORKER_SHARED_SECRET')
+    'stripe-secret-key'       = @('STRIPE_SECRET_KEY')
+    'stripe-publishable-key'  = @('STRIPE_PUBLISHABLE_KEY')
+    'stripe-webhook-secret'   = @('STRIPE_WEBHOOK_SECRET')
 }
 
 function Get-SecretFromEnv {
@@ -72,7 +78,12 @@ $skipped = @()
 foreach ($kvName in $secretMap.Keys) {
     $current = az keyvault secret show --vault-name $KeyVault --name $kvName --query value -o tsv 2>$null
     if ($LASTEXITCODE -ne 0) {
-        throw "Cannot read secret '$kvName' from Key Vault (check RBAC)."
+        Write-Host "[init] $kvName not in Key Vault — creating REPLACE-ME placeholder"
+        az keyvault secret set --vault-name $KeyVault --name $kvName --value 'REPLACE-ME' -o none | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+            throw "Cannot create secret '$kvName' in Key Vault (check RBAC)."
+        }
+        $current = 'REPLACE-ME'
     }
 
     if ($current -ne 'REPLACE-ME' -and -not [string]::IsNullOrWhiteSpace($current)) {
@@ -89,6 +100,10 @@ foreach ($kvName in $secretMap.Keys) {
     }
 
     if ([string]::IsNullOrWhiteSpace($value)) {
+        if ($kvName -like 'stripe-*') {
+            Write-Host "[pend] $kvName still REPLACE-ME — set $($secretMap[$kvName] -join ' or ') when Stripe is ready"
+            continue
+        }
         $envHint = ($secretMap[$kvName] -join ' or ')
         $value = Read-SecretSecure -Prompt "Enter value for $kvName (env: $envHint)"
     }
@@ -106,13 +121,26 @@ foreach ($kvName in $secretMap.Keys) {
 }
 
 Write-Host ''
-Write-Host 'Validation:'
+Write-Host 'Validation (required):'
 $allOk = $true
-foreach ($kvName in $secretMap.Keys) {
+$required = @('anthropic-api-key', 'openai-api-key', 'cf-stream-signing-key', 'cf-worker-shared-secret')
+foreach ($kvName in $required) {
     $val = az keyvault secret show --vault-name $KeyVault --name $kvName --query value -o tsv
     if ($val -eq 'REPLACE-ME' -or [string]::IsNullOrWhiteSpace($val)) {
         Write-Host "[FAIL] $kvName still REPLACE-ME or empty"
         $allOk = $false
+    }
+    else {
+        Write-Host "[ OK ] $kvName configured"
+    }
+}
+
+Write-Host ''
+Write-Host 'Validation (Stripe — required before §7.1 billing gate):'
+foreach ($kvName in @('stripe-secret-key', 'stripe-publishable-key', 'stripe-webhook-secret')) {
+    $val = az keyvault secret show --vault-name $KeyVault --name $kvName --query value -o tsv 2>$null
+    if ($val -eq 'REPLACE-ME' -or [string]::IsNullOrWhiteSpace($val)) {
+        Write-Host "[PEND] $kvName not set"
     }
     else {
         Write-Host "[ OK ] $kvName configured"
@@ -126,3 +154,4 @@ if (-not $allOk) {
 Write-Host ''
 Write-Host "Done. Updated: $($updated.Count), already set: $($skipped.Count)"
 Write-Host 'Next: .\scripts\setup-moodle-env-vm.ps1'
+Write-Host 'Stripe: .\scripts\configure-stripe-vm.ps1  (see docs/stripe-integration.md)'

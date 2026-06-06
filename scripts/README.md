@@ -12,6 +12,11 @@ Four secrets still ship as `REPLACE-ME` after Bicep deploy. Populate them before
 | `openai-api-key` | `OPENAI_API_KEY` | [OpenAI platform](https://platform.openai.com/api-keys) |
 | `cf-stream-signing-key` | `CF_STREAM_SIGNING_KEY` | Cloudflare **Stream → Settings → Signing Keys → Create** — store the signing key PEM (not the key id) |
 | `cf-worker-shared-secret` | `AITUTOR_WORKER_SHARED_SECRET` or `CF_WORKER_SHARED_SECRET` | Generate a random 32+ byte secret; must match the Cloudflare Worker secret and `AITUTOR_WORKER_SHARED_SECRET` in `/etc/moodle/env` |
+| `stripe-secret-key` | `STRIPE_SECRET_KEY` | [Stripe Dashboard](https://dashboard.stripe.com/apikeys) → Secret key (`sk_test_…` / `sk_live_…`) |
+| `stripe-publishable-key` | `STRIPE_PUBLISHABLE_KEY` | Same page → Publishable key |
+| `stripe-webhook-secret` | `STRIPE_WEBHOOK_SECRET` | Stripe **Developers → Webhooks** → signing secret (`whsec_…`); see [docs/stripe-integration.md](../docs/stripe-integration.md) |
+
+Stripe secrets are optional until the §7.1 billing gate; the populate script creates `REPLACE-ME` placeholders if missing.
 
 ```powershell
 $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User')
@@ -108,10 +113,14 @@ sudo ./scripts/install-cloudflare-origin-certs.sh \
 | Script | Purpose |
 |--------|---------|
 | `setup-moodle-env-vm.ps1` | Key Vault → `/etc/moodle/env` on VM |
+| `configure-stripe-vm.sh` / `.ps1` | Stripe Key Vault secrets → `/etc/moodle/env`; verify `paygw_stripe` on VM |
 | `wire-redis-sessions-vm.sh` | Wire Redis sessions + PgBouncer `fetchbuffersize` on VM |
 | `wire-redis-sessions-remote.sh` | Azure Run Command wrapper for Redis sessions script |
 | `setup-e2e-test-user-vm.sh` | Create `e2etest` user + `e2e101` course on VM |
 | `setup-e2e-test-user-remote.sh` | Azure Run Command wrapper (set `E2E_PASSWORD`) |
+| `generate-stream-signed-url.sh` | RS256 Stream manifest URL for smoke `TEST_VIDEO_URL` |
+| `setup-postmark-smtp-vm.sh` / `-remote.sh` | Moodle Postmark SMTP from KV token |
+| `sync-sudoers-vm.sh` / `-remote.sh` | Install `gha-runner-sudoers` from repo on VM |
 | `install-moodle-vm.sh` | Clone Moodle 4.5 to `/var/www/moodle` |
 | `deploy-plugins-vm.sh` | Deploy `moodle-plugins/*` to VM |
 | `deploy-ai-gateway.sh` | Phase 4.3 Worker deploy (KV + secrets + `wrangler deploy`) |

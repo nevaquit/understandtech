@@ -6,6 +6,7 @@
 # Env vars -> Key Vault:
 #   ANTHROPIC_API_KEY / OPENAI_API_KEY / CF_STREAM_SIGNING_KEY
 #   AITUTOR_WORKER_SHARED_SECRET or CF_WORKER_SHARED_SECRET
+#   STRIPE_SECRET_KEY / STRIPE_PUBLISHABLE_KEY / STRIPE_WEBHOOK_SECRET
 #
 # Usage:
 #   export ANTHROPIC_API_KEY='...'
@@ -51,17 +52,31 @@ set_secret() {
   az keyvault secret set --vault-name "$KEY_VAULT" --name "$name" --value "$value" -o none >/dev/null
 }
 
+ensure_secret_exists() {
+  local name="$1"
+  if ! current="$(az keyvault secret show --vault-name "$KEY_VAULT" --name "$name" --query value -o tsv 2>/dev/null)"; then
+    set_secret "$name" 'REPLACE-ME'
+    echo "[init] $name placeholder created (REPLACE-ME)"
+    current='REPLACE-ME'
+  fi
+  printf '%s' "$current"
+}
+
 declare -A SECRET_ENVS=(
   [anthropic-api-key]="ANTHROPIC_API_KEY"
   [openai-api-key]="OPENAI_API_KEY"
   [cf-stream-signing-key]="CF_STREAM_SIGNING_KEY CLOUDFLARE_STREAM_SIGNING_KEY"
   [cf-worker-shared-secret]="AITUTOR_WORKER_SHARED_SECRET CF_WORKER_SHARED_SECRET"
+  [stripe-secret-key]="STRIPE_SECRET_KEY"
+  [stripe-publishable-key]="STRIPE_PUBLISHABLE_KEY"
+  [stripe-webhook-secret]="STRIPE_WEBHOOK_SECRET"
 )
 
 echo "Key Vault: $KEY_VAULT"
 
-for kv_name in anthropic-api-key openai-api-key cf-stream-signing-key cf-worker-shared-secret; do
-  current="$(az keyvault secret show --vault-name "$KEY_VAULT" --name "$kv_name" --query value -o tsv)"
+for kv_name in anthropic-api-key openai-api-key cf-stream-signing-key cf-worker-shared-secret \
+  stripe-secret-key stripe-publishable-key stripe-webhook-secret; do
+  current="$(ensure_secret_exists "$kv_name")"
   if [[ "$current" != "REPLACE-ME" && -n "$current" ]]; then
     echo "[skip] $kv_name already configured"
     continue
@@ -74,6 +89,9 @@ for kv_name in anthropic-api-key openai-api-key cf-stream-signing-key cf-worker-
   elif [[ "$kv_name" == "cf-worker-shared-secret" && "$GENERATE_WORKER" -eq 1 ]]; then
     value="$(random_worker_secret)"
     echo "[gen]  $kv_name generated random value (use same in Cloudflare Worker secrets)"
+  elif [[ "$kv_name" == stripe-* ]]; then
+    echo "[pend] $kv_name still REPLACE-ME — set ${env_names[*]} when Stripe is ready (optional until billing gate)"
+    continue
   else
     env_hint="${env_names[*]}"
     printf 'Enter value for %s (env: %s): ' "$kv_name" "$env_hint" >&2
@@ -91,7 +109,7 @@ for kv_name in anthropic-api-key openai-api-key cf-stream-signing-key cf-worker-
 done
 
 echo ''
-echo 'Validation:'
+echo 'Validation (required):'
 ok=1
 for kv_name in anthropic-api-key openai-api-key cf-stream-signing-key cf-worker-shared-secret; do
   val="$(az keyvault secret show --vault-name "$KEY_VAULT" --name "$kv_name" --query value -o tsv)"
@@ -103,6 +121,18 @@ for kv_name in anthropic-api-key openai-api-key cf-stream-signing-key cf-worker-
   fi
 done
 
+echo ''
+echo 'Validation (Stripe — required before §7.1 billing gate):'
+for kv_name in stripe-secret-key stripe-publishable-key stripe-webhook-secret; do
+  val="$(az keyvault secret show --vault-name "$KEY_VAULT" --name "$kv_name" --query value -o tsv 2>/dev/null || echo '')"
+  if [[ "$val" == "REPLACE-ME" || -z "$val" ]]; then
+    echo "[PEND] $kv_name not set"
+  else
+    echo "[ OK ] $kv_name configured"
+  fi
+done
+
 [[ "$ok" -eq 1 ]] || exit 1
 echo ''
 echo 'Next: pwsh ./scripts/setup-moodle-env-vm.ps1'
+echo 'Stripe: pwsh ./scripts/configure-stripe-vm.ps1  (after Stripe keys set; see docs/stripe-integration.md)'
