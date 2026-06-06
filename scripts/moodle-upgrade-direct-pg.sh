@@ -240,3 +240,42 @@ else
   echo "scss directory contents:"
   ls -la /var/www/moodle/theme/understandtech/scss/ 2>/dev/null || echo "scss dir missing"
 fi
+
+# === Direct scssphp compilation test ===
+sudo -u www-data /usr/bin/php << 'PHPEOF5'
+<?php
+define('CLI_SCRIPT', true);
+require '/var/www/moodle/config.php';
+require_once($CFG->libdir . '/classes/scss.php');
+
+// Read the SCSS files
+$prescsspath = '/var/www/moodle/theme/understandtech/lib.php';
+require_once $prescsspath;
+$theme = theme_config::load('understandtech');
+
+$prescss = $theme->get_pre_scss_code();
+$mainscss = theme_understandtech_get_main_scss_content($theme);
+
+echo "pre_scss: " . strlen($prescss) . " bytes\n";
+echo "main_scss: " . strlen($mainscss) . " bytes\n";
+
+// Compile with scssphp directly
+$compiler = new core_scss([]);
+$compiler->prepend_raw_scss($prescss);
+$compiler->append_raw_scss($mainscss);
+$compiler->setImportPaths([
+    '/var/www/moodle/theme/understandtech/scss',
+    '/var/www/moodle/theme/boost/scss',
+]);
+
+try {
+    $css = $compiler->to_css();
+    echo "Compilation SUCCESS: " . strlen($css) . " bytes\n";
+    echo "CSS starts with: " . substr($css, 0, 200) . "\n";
+    echo "ut-nav-sticky: " . (strpos($css, 'ut-nav-sticky') !== false ? 'YES' : 'NO') . "\n";
+    echo "--ut-navy: " . (strpos($css, '--ut-navy') !== false ? 'YES' : 'NO') . "\n";
+} catch (\Throwable $e) {
+    echo "Compilation ERROR: " . $e->getMessage() . "\n";
+    echo "At: " . $e->getFile() . ":" . $e->getLine() . "\n";
+}
+PHPEOF5
