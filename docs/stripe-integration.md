@@ -2,6 +2,132 @@
 
 Stripe handles subscription and one-time course payments. Card data never touches the Moodle VM (PCI scope stays with Stripe). API keys live in Azure Key Vault `utkvnhhwegpz3rem6` and are injected at runtime — never committed to this monorepo.
 
+> **Repo note:** This monorepo has **no** references to Negotiatemedicalbill.ai, its Stripe account IDs, or its banking configuration. Negotiatemedicalbill billing is managed outside this repository. Use the Stripe Dashboard steps below to mirror payout settings manually from that account.
+
+## Separate Stripe account for understandtech.app
+
+understandtech.app and Negotiatemedicalbill.ai are separate products under **AI Tech Pros, Inc.** Each product should use its **own Stripe account** (isolated customers, payouts, webhooks, and API keys). Do **not** reuse Negotiatemedicalbill API keys in understandtech Key Vault — every Stripe account has unique `sk_…`, `pk_…`, and `whsec_…` values.
+
+### Same legal entity (AI Tech Pros)
+
+When both accounts belong to the same legal entity (AI Tech Pros, Inc.):
+
+- Stripe **Organizations** (or multiple accounts under one login) let you manage both brands without a second email signup.
+- **Tax ID (EIN)** and **business verification** can often be reused after the first account is verified — Stripe may pre-fill or skip duplicate KYC for the second account.
+- **Payout bank account** is configured per account, but you enter the **same** routing and account numbers on each account (Stripe does not auto-copy bank details between accounts; you add them again or pick a saved external account when offered).
+- Charges, refunds, disputes, and Connect transfers stay **scoped to the active account** — switching the dashboard account picker changes which keys and webhooks you see.
+
+### Option A — New account under the same Stripe login (recommended)
+
+Use this when you already log into Stripe for Negotiatemedicalbill.ai with an AI Tech Pros owner email.
+
+1. Sign in at [dashboard.stripe.com](https://dashboard.stripe.com) with the **same** Stripe login used for Negotiatemedicalbill.
+2. Open the **account picker** (top-left account name) → **Create account** (wording may be **Add account** under **Settings → Account** depending on dashboard version).
+3. Choose **Create a new account** (standalone account for a new product — not a Connect connected account unless you deliberately use Connect).
+4. Name the account clearly, e.g. `UnderstandTech` or `understandtech.app` (internal label only; students see business name from **Settings → Business details**).
+5. Complete activation for the **new** account while it is selected in the account picker.
+
+**Why Option A:** One login, shared org-level visibility, separate API keys and payout ledgers per product. Matches how a multi-product company typically operates.
+
+### Option B — Brand-new Stripe signup
+
+Use only if Negotiatemedicalbill uses a different owner email or you cannot add accounts under the existing login.
+
+1. Sign up at [stripe.com](https://stripe.com) with an AI Tech Pros corporate email (e.g. `billing@…` or `ops@…`).
+2. During activation, set legal entity to **AI Tech Pros, Inc.** (same as Negotiatemedicalbill if that is the existing entity).
+3. Invite other team members via **Settings → Team** so both products remain accessible.
+
+Option B creates a separate Stripe login; you will not see Negotiatemedicalbill in the same account picker unless you later link accounts through an Organization.
+
+### Mirror payout bank account from Negotiatemedicalbill.ai
+
+Perform these steps **while the understandtech.app Stripe account is selected** in the dashboard. Never commit bank account or routing numbers to git.
+
+1. **Reference (read-only):** Switch account picker to **Negotiatemedicalbill** → **Settings → Payouts** → note payout schedule (daily/weekly/manual) and currency — do **not** copy account numbers into this repo.
+2. Switch back to the **understandtech.app** account.
+3. **Settings → Payouts → Add bank account** (or **Settings → Bank accounts and scheduling**).
+4. Enter the **same** US bank routing and account numbers used on Negotiatemedicalbill (re-type manually; Stripe does not import them from the sibling account).
+   - If Stripe shows **Use existing external account** or a saved payout method for the same legal entity, you may select it instead of re-entering.
+5. Complete any micro-deposit verification if prompted (usually skipped when the bank was already verified for the same entity on another account).
+6. Set **Payout schedule** to match Negotiatemedicalbill (e.g. daily automatic) if desired.
+
+### Business profile (understandtech.app / AI Tech Pros)
+
+With the understandtech account selected:
+
+| Field | Suggested value |
+|-------|-----------------|
+| **Legal business name** | AI Tech Pros, Inc. |
+| **Doing business as (DBA)** | understandtech.app (if Stripe asks for customer-facing name) |
+| **Business website** | `https://understandtech.app` |
+| **Product description** | Online certification training / LMS subscriptions and course payments |
+| **Support email / phone** | understandtech support contacts (not Negotiatemedicalbill support) |
+| **Statement descriptor** | Short name students see on card statements (e.g. `UNDERTECH` or `AI TECH PROS`) — must differ from Negotiatemedicalbill descriptor to avoid confusion |
+| **Tax ID** | Same EIN as Negotiatemedicalbill if same legal entity |
+
+Complete **Settings → Business → Public details** and account activation checklist before live mode.
+
+### Test mode first
+
+1. Confirm **Test mode** toggle (top-right) is **on** for the new understandtech account.
+2. **Developers → API keys** — copy **test** publishable and secret keys (see Key Vault table below).
+3. Configure Moodle payment account with test keys; run a checkout with card `4242 4242 4242 4242` (see [Test mode](#test-mode)).
+4. Only after test checkout and webhooks succeed, repeat with **Live mode** keys and live webhook signing secret.
+
+### Webhook URL (understandtech.app only)
+
+Register webhooks on the **understandtech Stripe account**, not Negotiatemedicalbill:
+
+```text
+https://understandtech.app/payment/gateway/stripe/webhook.php
+```
+
+- **Preferred:** Moodle `paygw_stripe` creates the endpoint when you save the payment account (see [Webhook endpoint](#2-webhook-endpoint)).
+- **Manual:** **Developers → Webhooks → Add endpoint** → URL above → copy signing secret to Key Vault.
+- Test-mode and live-mode webhooks are **separate** endpoints and secrets.
+
+### Key Vault secret names (understandtech account only)
+
+Vault: **`utkvnhhwegpz3rem6`** (understandtech Azure subscription — not shared with Negotiatemedicalbill infrastructure).
+
+| Key Vault name | Env var | Source (understandtech Stripe account) |
+|----------------|---------|------------------------------------------|
+| `stripe-secret-key` | `STRIPE_SECRET_KEY` | **Developers → API keys** → Secret (`sk_test_…` then `sk_live_…`) |
+| `stripe-publishable-key` | `STRIPE_PUBLISHABLE_KEY` | Same page → Publishable (`pk_test_…` / `pk_live_…`) |
+| `stripe-webhook-secret` | `STRIPE_WEBHOOK_SECRET` | **Developers → Webhooks** → signing secret for understandtech endpoint (`whsec_…`) |
+
+These names are **distinct in practice** from Negotiatemedicalbill because they live in understandtech’s vault and hold **understandtech account keys only**. Do not paste Negotiatemedicalbill `sk_` / `pk_` / `whsec_` values here.
+
+If both products ever shared one Key Vault (not recommended), use prefixed names such as `ut-stripe-secret-key` vs `nmb-stripe-secret-key` and update `scripts/populate-keyvault-secrets.*` accordingly — current scripts expect the unprefixed `stripe-*` names above.
+
+Populate after obtaining test keys:
+
+```powershell
+$env:STRIPE_SECRET_KEY = 'sk_test_...'      # from understandtech account, test mode
+$env:STRIPE_PUBLISHABLE_KEY = 'pk_test_...'
+$env:STRIPE_WEBHOOK_SECRET = 'whsec_...'    # after webhook exists or payment account save
+.\scripts\populate-keyvault-secrets.ps1
+.\scripts\configure-stripe-vm.ps1
+```
+
+### Checklist — new understandtech Stripe account
+
+| # | Step | Owner |
+|---|------|--------|
+| 1 | Create understandtech Stripe account (Option A or B) under AI Tech Pros | Stripe Dashboard |
+| 2 | **Settings → Business** — understandtech.app profile, EIN, support URL | Stripe Dashboard |
+| 3 | **Settings → Payouts** — add same bank as Negotiatemedicalbill (manual re-entry) | Stripe Dashboard |
+| 4 | Stay in **Test mode** → copy test API keys | Stripe Dashboard |
+| 5 | Install `paygw_stripe` on VM if not already ([Option A install](#recommended-install-path-option-a)) | VM / Moodle admin |
+| 6 | Populate Key Vault `stripe-*` secrets with **understandtech test** keys | `populate-keyvault-secrets.ps1` |
+| 7 | Run `configure-stripe-vm.ps1` → `/etc/moodle/env` | Workstation or VM |
+| 8 | Moodle **Payment accounts** → Stripe gateway → save (registers webhook) | Moodle admin |
+| 9 | Test checkout `4242…` on a paid course | Browser |
+| 10 | Switch to **Live mode** → new live keys + live `whsec_` → update KV → re-save payment account | Stripe + KV + Moodle |
+| 11 | Post-deploy: webhook POST returns not **404** ([verify](#2-webhook-endpoint)) | CLI / validation doc |
+
+---
+
 ## Recommended install path (Option A)
 
 | Approach | Verdict |
@@ -73,8 +199,8 @@ sudo ./scripts/configure-stripe-vm.sh
 
 ### 1. Account and API keys
 
-1. Create or open your Stripe account at [dashboard.stripe.com](https://dashboard.stripe.com).
-2. Start in **Test mode** (toggle top-right).
+1. Create the **understandtech.app** Stripe account (separate from Negotiatemedicalbill) — see [Separate Stripe account for understandtech.app](#separate-stripe-account-for-understandtechapp).
+2. Start in **Test mode** (toggle top-right) on the understandtech account.
 3. **Developers → API keys** — copy publishable and secret keys into Key Vault (above).
 
 ### 2. Webhook endpoint
