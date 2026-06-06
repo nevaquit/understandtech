@@ -148,4 +148,30 @@ echo "DB theme version: " . ($dbversion ?: 'not set') . PHP_EOL;
 $themerev = get_config('core', 'themerev');
 echo "themerev: " . $themerev . PHP_EOL;
 PHPEOF2
+
+echo "--- Force theme reset ---"
+sudo -u www-data /usr/bin/php << 'PHPEOF3'
+<?php
+define('CLI_SCRIPT', true);
+require '/var/www/moodle/config.php';
+// Force the theme to understandtech
+set_config('theme', 'understandtech');
+// Reset all theme caches
+theme_reset_all_caches();
+echo "Theme set to: " . get_config('core', 'theme') . PHP_EOL;
+echo "New themerev: " . get_config('core', 'themerev') . PHP_EOL;
+// Also clear the moodledata/cache/theme directory
+$themecachedir = $CFG->dataroot . '/cache/theme';
+if (is_dir($themecachedir)) {
+    $files = glob($themecachedir . '/*');
+    foreach ($files as $file) {
+        if (is_file($file)) unlink($file);
+        elseif (is_dir($file)) {
+            array_map('unlink', glob($file . '/*'));
+            rmdir($file);
+        }
+    }
+    echo "Theme cache cleared: $themecachedir" . PHP_EOL;
+}
+PHPEOF3
 echo "Upgrade complete via direct Postgres."
