@@ -174,4 +174,35 @@ if (is_dir($themecachedir)) {
     echo "Theme cache cleared: $themecachedir" . PHP_EOL;
 }
 PHPEOF3
+
+echo "--- PHP syntax check ---"
+/usr/bin/php -l /var/www/moodle/theme/understandtech/lib.php && echo "lib.php: OK" || echo "lib.php: SYNTAX ERROR"
+/usr/bin/php -l /var/www/moodle/theme/understandtech/config.php && echo "config.php: OK" || echo "config.php: SYNTAX ERROR"
+/usr/bin/php -l /var/www/moodle/theme/understandtech/classes/core_renderer.php 2>/dev/null && echo "core_renderer.php: OK" || echo "core_renderer.php: SYNTAX ERROR or missing"
+echo "--- styles.php test ---"
+sudo -u www-data /usr/bin/php << 'PHPEOF4'
+<?php
+define('CLI_SCRIPT', true);
+require '/var/www/moodle/config.php';
+// Simulate what styles.php does
+try {
+    $themename = 'understandtech';
+    $theme = theme_config::load($themename);
+    echo "theme_config::load OK" . PHP_EOL;
+    $type = 'all';
+    $rev = (int)get_config('core', 'themerev');
+    echo "themerev: $rev" . PHP_EOL;
+    // Check if theme has scss
+    $hasscss = method_exists('theme_' . $themename . '_lib', 'get_main_scss_content') 
+               || function_exists('theme_' . $themename . '_get_main_scss_content');
+    echo "has get_main_scss_content: " . ($hasscss ? 'YES' : 'NO') . PHP_EOL;
+    // Try to get the CSS
+    $css = $theme->get_css_content();
+    echo "get_css_content OK: " . strlen($css) . " bytes" . PHP_EOL;
+    echo "CSS starts with: " . substr($css, 0, 50) . PHP_EOL;
+} catch (\Throwable $e) {
+    echo "ERROR: " . $e->getMessage() . PHP_EOL;
+    echo "At: " . $e->getFile() . ":" . $e->getLine() . PHP_EOL;
+}
+PHPEOF4
 echo "Upgrade complete via direct Postgres."
