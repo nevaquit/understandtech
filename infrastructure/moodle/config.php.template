@@ -33,7 +33,7 @@ $CFG->dboptions = [
     'fetchbuffersize' => 100000,
 ];
 
-$CFG->wwwroot   = getenv('MOODLE_WWWROOT') ?: 'https://understandtech.app';
+$CFG->wwwroot   = getenv('MOODLE_WWWROOT') ?: 'https://understandtech.app/learn';
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = getenv('MOODLE_ADMIN_USER') ?: 'admin';
 $CFG->directorypermissions = 02770;

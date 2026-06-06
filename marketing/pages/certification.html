@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UnderstandTech Certification Engine — Industry-recognized credentials backed by a mastery algorithm. 94% first-attempt pass rate.">
+  <meta name="theme-color" content="#0B1F3A">
+  <title>Certification Engine — UnderstandTech</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap"></noscript>
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(160deg, var(--ut-navy-deep) 0%, var(--ut-navy) 60%, #1a1000 100%);
+      padding: calc(var(--ut-nav-h) + var(--ut-space-2xl)) 0 var(--ut-space-2xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: -10%;
+      width: 55%;
+      height: 100%;
+      background: radial-gradient(ellipse 70% 80% at 70% 50%, rgba(201,162,39,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .page-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ut-space-2xl);
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .cert-mockup-wrap { display: none; }
+    }
+
+    .page-hero h1 { font-size: var(--ut-text-3xl); color: #fff; line-height: 1.1; margin-bottom: var(--ut-space-md); }
+    .page-hero h1 .accent { color: var(--ut-gold); }
+    .page-hero-lead { font-size: var(--ut-text-lg); color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 52ch; margin-bottom: var(--ut-space-xl); }
+
+    /* Certificate Mockup */
+    .cert-mockup {
+      background: linear-gradient(145deg, #fff 0%, #f8f6f0 100%);
+      border-radius: var(--ut-radius-lg);
+      padding: var(--ut-space-xl);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,162,39,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-mockup::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--ut-gold), var(--ut-teal));
+    }
+
+    .cert-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--ut-space-lg);
+    }
+
+    .cert-brand {
+      font-family: var(--ut-font-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ut-navy);
+    }
+
+    .cert-badge-icon {
+      width: 3rem; height: 3rem;
+      background: var(--ut-gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ut-navy);
+    }
+
+    .cert-title {
+      font-family: var(--ut-font-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ut-text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .cert-name {
+      font-family: var(--ut-font-head);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ut-navy);
+      margin-bottom: var(--ut-space-sm);
+    }
+
+    .cert-recipient {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--ut-text-muted);
+      margin-bottom: var(--ut-space-lg);
+    }
+
+    .cert-meta {
+      display: flex;
+      gap: var(--ut-space-lg);
+      padding-top: var(--ut-space-md);
+      border-top: 1px solid rgba(11,31,58,0.1);
+    }
+
+    .cert-meta-item {
+      font-family: var(--ut-font-head);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ut-text-muted);
+    }
+
+    .cert-meta-item strong {
+      display: block;
+      color: var(--ut-navy);
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+    }
+
+    /* Mastery Algorithm Visual */
+    .mastery-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.4rem;
+    }
+
+    .mastery-cell {
+      aspect-ratio: 1;
+      border-radius: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ut-font-head);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .mastery-cell-high   { background: var(--ut-teal); }
+    .mastery-cell-mid    { background: var(--ut-gold); color: var(--ut-navy); }
+    .mastery-cell-low    { background: rgba(11,31,58,0.15); color: var(--ut-text-muted); }
+    .mastery-cell-gap    { background: rgba(239,68,68,0.15); color: #dc2626; border: 1px solid rgba(239,68,68,0.3); }
+
+    /* Confidence Meter */
+    .confidence-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .confidence-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .confidence-label {
+      font-family: var(--ut-font-head);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ut-text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .confidence-score {
+      font-family: var(--ut-font-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .score-high  { color: var(--ut-teal); }
+    .score-mid   { color: var(--ut-gold); }
+    .score-low   { color: #dc2626; }
+
+    /* Track Cards */
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+      gap: var(--ut-space-lg);
+    }
+
+    .track-card {
+      background: var(--ut-surface);
+      border-radius: var(--ut-radius);
+      padding: var(--ut-space-lg);
+      border: 1px solid var(--ut-border);
+      box-shadow: var(--ut-shadow-sm);
+      transition: transform var(--ut-duration) var(--ut-ease), box-shadow var(--ut-duration) var(--ut-ease);
+    }
+
+    .track-card:hover { transform: translateY(-3px); box-shadow: var(--ut-shadow-lg); }
+
+    .track-icon {
+      width: 3rem; height: 3rem;
+      border-radius: var(--ut-radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: var(--ut-space-md);
+      font-size: 1.4rem;
+    }
+
+    .track-card h3 { font-size: var(--ut-text-xl); margin-bottom: 0.35rem; color: var(--ut-navy); }
+    .track-card p  { font-size: 0.9rem; color: var(--ut-text-muted); line-height: 1.55; margin-bottom: var(--ut-space-md); }
+
+    .track-meta {
+      display: flex;
+      gap: var(--ut-space-md);
+      font-family: var(--ut-font-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ut-text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div id="ut-nav-placeholder"></div>
+
+  <main id="main-content">
+
+    <!-- ═══ PAGE HERO ═══════════════════════════════════════════════ -->
+    <section class="page-hero" aria-label="Certification Engine overview">
+      <div class="ut-container">
+        <div class="page-hero-inner">
+          <div>
+            <span class="ut-eyebrow ut-eyebrow-gold">Certification Engine</span>
+            <h1>Credentials that prove you <span class="accent">actually know</span> the material</h1>
+            <p class="page-hero-lead">
+              Our mastery algorithm doesn't just test what you've seen — it measures what you've genuinely understood. The result: a 94% first-attempt pass rate on industry exams, and credentials employers trust.
+            </p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <a href="../pages/pricing.html" class="btn btn-gold btn-lg">Start Your Certification</a>
+              <a href="#cert-tracks" class="btn btn-outline">Browse Tracks</a>
+            </div>
+          </div>
+
+          <div class="cert-mockup-wrap" aria-hidden="true">
+            <div class="cert-mockup">
+              <div class="cert-logo-row">
+                <span class="cert-brand">UnderstandTech</span>
+                <div class="cert-badge-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                </div>
+              </div>
+              <div class="cert-title">Certificate of Mastery</div>
+              <div class="cert-name">Cloud Architecture — Level 3</div>
+              <div class="cert-recipient">Awarded to Marcus Rodriguez</div>
+              <div style="margin-bottom:var(--ut-space-md);">
+                <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-text-muted);margin-bottom:0.5rem;">Mastery Score</div>
+                <div class="ut-xp-bar">
+                  <div class="ut-xp-fill" data-width="94%" style="width:0%"></div>
+                </div>
+                <div style="font-family:var(--ut-font-head);font-size:0.8rem;font-weight:700;color:var(--ut-teal);margin-top:0.35rem;">94% — Distinction</div>
+              </div>
+              <div class="cert-meta">
+                <div class="cert-meta-item">Issued<strong>June 2026</strong></div>
+                <div class="cert-meta-item">Credential ID<strong>UT-CA3-2026-0847</strong></div>
+                <div class="cert-meta-item">Valid<strong>3 Years</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ STATS ════════════════════════════════════════════════════ -->
+    <section class="ut-section-sm" style="background:var(--ut-surface);">
+      <div class="ut-container">
+        <div class="ut-stats-row reveal">
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="94" data-suffix="%">0</span>
+            <span class="ut-stat-label">First-Attempt Pass Rate</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="18" data-suffix="+">0</span>
+            <span class="ut-stat-label">Certification Tracks</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="8500" data-suffix="+">0</span>
+            <span class="ut-stat-label">Credentials Issued</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="3" data-suffix=" yr">0</span>
+            <span class="ut-stat-label">Credential Validity</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ut-gradient-bar"></div>
+
+    <!-- ═══ MASTERY ALGORITHM ══════════════════════════════════════ -->
+    <section class="ut-section" aria-labelledby="mastery-heading">
+      <div class="ut-container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--ut-space-2xl);align-items:center;" class="reveal">
+          <div>
+            <span class="ut-eyebrow">Mastery Algorithm</span>
+            <h2 id="mastery-heading" class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-md)">Confidence-weighted questions that find your real gaps</h2>
+            <p style="color:var(--ut-text-muted);line-height:1.7;margin-bottom:var(--ut-space-lg)">
+              Most platforms test whether you can recognize the right answer. Our algorithm tests whether you actually understand why it's right — and whether you'd recognize the wrong answer under pressure.
+            </p>
+            <p style="color:var(--ut-text-muted);line-height:1.7;margin-bottom:var(--ut-space-lg)">
+              Every question asks you to rate your confidence. High confidence + wrong answer = a critical gap. Low confidence + right answer = lucky guess. The algorithm tracks both and adapts your learning path accordingly.
+            </p>
+            <div style="display:flex;gap:var(--ut-space-md);flex-wrap:wrap;">
+              <div class="badge badge-teal">Spaced Repetition</div>
+              <div class="badge badge-gold">Confidence Weighting</div>
+              <div class="badge badge-navy">Adaptive Difficulty</div>
+            </div>
+          </div>
+
+          <div style="background:var(--ut-surface-2);border-radius:var(--ut-radius-lg);padding:var(--ut-space-xl);border:1px solid var(--ut-border);box-shadow:var(--ut-shadow-md);" aria-hidden="true">
+            <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ut-text-muted);margin-bottom:1rem;">Knowledge Map — Cloud Architecture</div>
+            <div class="mastery-grid" style="margin-bottom:1rem;">
+              <div class="mastery-cell mastery-cell-high">VPC</div>
+              <div class="mastery-cell mastery-cell-high">IAM</div>
+              <div class="mastery-cell mastery-cell-mid">EC2</div>
+              <div class="mastery-cell mastery-cell-high">S3</div>
+              <div class="mastery-cell mastery-cell-high">RDS</div>
+              <div class="mastery-cell mastery-cell-mid">ELB</div>
+              <div class="mastery-cell mastery-cell-gap">CIDR</div>
+              <div class="mastery-cell mastery-cell-high">CDN</div>
+              <div class="mastery-cell mastery-cell-mid">Lambda</div>
+              <div class="mastery-cell mastery-cell-high">SQS</div>
+              <div class="mastery-cell mastery-cell-high">SNS</div>
+              <div class="mastery-cell mastery-cell-gap">BGP</div>
+              <div class="mastery-cell mastery-cell-high">ECS</div>
+              <div class="mastery-cell mastery-cell-mid">EKS</div>
+              <div class="mastery-cell mastery-cell-high">WAF</div>
+            </div>
+            <div style="display:flex;gap:0.75rem;font-family:var(--ut-font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">
+              <span style="display:flex;align-items:center;gap:0.3rem;color:var(--ut-teal)"><span style="width:10px;height:10px;background:var(--ut-teal);border-radius:2px;display:inline-block"></span>Mastered</span>
+              <span style="display:flex;align-items:center;gap:0.3rem;color:#92400e"><span style="width:10px;height:10px;background:var(--ut-gold);border-radius:2px;display:inline-block"></span>Learning</span>
+              <span style="display:flex;align-items:center;gap:0.3rem;color:#dc2626"><span style="width:10px;height:10px;background:rgba(239,68,68,0.3);border:1px solid rgba(239,68,68,0.5);border-radius:2px;display:inline-block"></span>Gap</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:var(--ut-space-2xl)"></div>
+
+        <!-- Confidence Meter -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--ut-space-2xl);align-items:center;" class="reveal">
+          <div style="background:var(--ut-surface-2);border-radius:var(--ut-radius-lg);padding:var(--ut-space-xl);border:1px solid var(--ut-border);box-shadow:var(--ut-shadow-md);" aria-hidden="true">
+            <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ut-text-muted);margin-bottom:1rem;">Exam Readiness Report</div>
+            <div class="confidence-row">
+              <div class="confidence-item">
+                <div>
+                  <div class="confidence-label">VPC &amp; Networking</div>
+                  <div class="ut-xp-bar" style="margin-top:0.3rem;"><div class="ut-xp-fill" data-width="92%" style="width:0%"></div></div>
+                </div>
+                <span class="confidence-score score-high">92%</span>
+              </div>
+              <div class="confidence-item">
+                <div>
+                  <div class="confidence-label">IAM &amp; Security</div>
+                  <div class="ut-xp-bar" style="margin-top:0.3rem;"><div class="ut-xp-fill" data-width="88%" style="width:0%"></div></div>
+                </div>
+                <span class="confidence-score score-high">88%</span>
+              </div>
+              <div class="confidence-item">
+                <div>
+                  <div class="confidence-label">Load Balancing</div>
+                  <div class="ut-xp-bar" style="margin-top:0.3rem;"><div class="ut-xp-fill" data-width="71%" style="width:0%"></div></div>
+                </div>
+                <span class="confidence-score score-mid">71%</span>
+              </div>
+              <div class="confidence-item">
+                <div>
+                  <div class="confidence-label">CIDR &amp; Routing</div>
+                  <div class="ut-xp-bar" style="margin-top:0.3rem;"><div class="ut-xp-fill" data-width="38%" style="width:0%"></div></div>
+                </div>
+                <span class="confidence-score score-low">38%</span>
+              </div>
+            </div>
+            <div style="margin-top:1rem;padding:0.75rem;background:rgba(239,68,68,0.06);border-radius:var(--ut-radius-sm);border:1px solid rgba(239,68,68,0.15);">
+              <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#dc2626;margin-bottom:0.3rem;">Recommended Focus</div>
+              <div style="font-size:0.85rem;color:var(--ut-text-muted);">Spend 2 more sessions on CIDR notation before scheduling your exam.</div>
+            </div>
+          </div>
+
+          <div>
+            <span class="ut-eyebrow">Exam Readiness</span>
+            <h2 class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-md)">Know when you're ready — before you pay for the exam</h2>
+            <p style="color:var(--ut-text-muted);line-height:1.7;margin-bottom:var(--ut-space-lg)">
+              The Exam Readiness block gives you a real-time radar of your knowledge across every domain in your certification track. It tells you exactly which topics need more work — so you don't waste money on an exam you're not ready for.
+            </p>
+            <p style="color:var(--ut-text-muted);line-height:1.7;">
+              When every domain hits the green threshold, the system clears you to schedule. Our learners report feeling genuinely prepared — not just optimistic.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CERTIFICATION TRACKS ════════════════════════════════════ -->
+    <section class="ut-section" style="background:var(--ut-surface-2);" id="cert-tracks" aria-labelledby="tracks-heading">
+      <div class="ut-container">
+        <div class="text-center mb-xl reveal">
+          <span class="ut-eyebrow">Certification Tracks</span>
+          <h2 id="tracks-heading" class="ut-heading-lg" style="color:var(--ut-navy)">Choose your path to mastery</h2>
+        </div>
+
+        <div class="tracks-grid">
+          <div class="track-card reveal reveal-delay-1">
+            <div class="track-icon" style="background:rgba(255,153,0,0.1);" aria-hidden="true">☁️</div>
+            <h3>Cloud Architecture</h3>
+            <p>AWS, Azure, and GCP fundamentals through advanced multi-cloud design patterns. Covers VPC, IAM, compute, storage, and serverless.</p>
+            <div class="track-meta">
+              <span>18 modules</span>
+              <span>~40 hours</span>
+              <span class="text-teal">Most Popular</span>
+            </div>
+          </div>
+
+          <div class="track-card reveal reveal-delay-2">
+            <div class="track-icon" style="background:rgba(26,138,125,0.1);" aria-hidden="true">🔒</div>
+            <h3>Security &amp; Compliance</h3>
+            <p>Zero-trust architecture, SOC 2, GDPR, penetration testing fundamentals, and cloud security posture management.</p>
+            <div class="track-meta">
+              <span>22 modules</span>
+              <span>~55 hours</span>
+            </div>
+          </div>
+
+          <div class="track-card reveal reveal-delay-3">
+            <div class="track-icon" style="background:rgba(99,102,241,0.1);" aria-hidden="true">⚙️</div>
+            <h3>DevOps &amp; Platform Engineering</h3>
+            <p>CI/CD pipelines, Kubernetes, Docker, GitOps, infrastructure as code with Terraform and Bicep.</p>
+            <div class="track-meta">
+              <span>20 modules</span>
+              <span>~48 hours</span>
+            </div>
+          </div>
+
+          <div class="track-card reveal reveal-delay-1">
+            <div class="track-icon" style="background:rgba(201,162,39,0.1);" aria-hidden="true">🤖</div>
+            <h3>AI &amp; Machine Learning</h3>
+            <p>Foundations of ML, LLM architecture, prompt engineering, RAG systems, and responsible AI deployment.</p>
+            <div class="track-meta">
+              <span>16 modules</span>
+              <span>~38 hours</span>
+              <span class="text-teal">New</span>
+            </div>
+          </div>
+
+          <div class="track-card reveal reveal-delay-2">
+            <div class="track-icon" style="background:rgba(239,68,68,0.1);" aria-hidden="true">🗄️</div>
+            <h3>Data Engineering</h3>
+            <p>Data pipelines, warehousing, streaming with Kafka, Spark, dbt, and cloud-native analytics platforms.</p>
+            <div class="track-meta">
+              <span>19 modules</span>
+              <span>~45 hours</span>
+            </div>
+          </div>
+
+          <div class="track-card reveal reveal-delay-3">
+            <div class="track-icon" style="background:rgba(11,31,58,0.08);" aria-hidden="true">🌐</div>
+            <h3>Networking Fundamentals</h3>
+            <p>TCP/IP, DNS, BGP, SD-WAN, and modern network architecture for cloud-first organizations.</p>
+            <div class="track-meta">
+              <span>14 modules</span>
+              <span>~30 hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ══════════════════════════════════════════════════════ -->
+    <section class="ut-section">
+      <div class="ut-container">
+        <div class="cta-banner reveal" style="background:linear-gradient(135deg,var(--ut-navy) 0%,#1a1000 100%);border-radius:var(--ut-radius-xl);padding:var(--ut-space-2xl);text-align:center;border:1px solid rgba(201,162,39,0.25);">
+          <span class="ut-eyebrow ut-eyebrow-gold">Earn Your Credential</span>
+          <h2 style="font-size:var(--ut-text-3xl);color:#fff;margin-bottom:var(--ut-space-md);">Your next certification starts today</h2>
+          <p style="color:rgba(255,255,255,0.7);font-size:var(--ut-text-lg);max-width:52ch;margin:0 auto var(--ut-space-xl);">14 days free. No credit card. Cancel anytime. Join 8,500+ professionals who've already earned their UnderstandTech credential.</p>
+          <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+            <a href="/learn/login/index.php" class="btn btn-gold btn-lg">Start Free Trial</a>
+            <a href="../pages/about.html" class="btn btn-outline btn-lg">Learn About Our Method</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="ut-footer-placeholder"></div>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

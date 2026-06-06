@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UnderstandTech AI Tutor — Adaptive, streaming AI tutoring that explains complex technology concepts in plain language. Available 24/7, always at your level.">
+  <meta name="theme-color" content="#0B1F3A">
+  <title>AI Tutor — UnderstandTech</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap"></noscript>
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <style>
+    /* ── Page Hero ─────────────────────────────────────────────────── */
+    .page-hero {
+      background: linear-gradient(160deg, var(--ut-navy-deep) 0%, var(--ut-navy) 60%, #0f2a4a 100%);
+      padding: calc(var(--ut-nav-h) + var(--ut-space-2xl)) 0 var(--ut-space-2xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: -10%;
+      width: 55%;
+      height: 100%;
+      background: radial-gradient(ellipse 70% 80% at 70% 50%, rgba(26,138,125,0.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .page-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ut-space-2xl);
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .page-hero-inner { grid-template-columns: 1fr; }
+      .page-hero-visual { display: none; }
+    }
+
+    .page-hero h1 {
+      font-size: var(--ut-text-3xl);
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: var(--ut-space-md);
+    }
+
+    .page-hero h1 .accent { color: var(--ut-gold); }
+
+    .page-hero-lead {
+      font-size: var(--ut-text-lg);
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      max-width: 52ch;
+      margin-bottom: var(--ut-space-xl);
+    }
+
+    /* ── Chat Mockup ───────────────────────────────────────────────── */
+    .chat-mockup {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--ut-radius-lg);
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+    }
+
+    .chat-header {
+      background: rgba(11,31,58,0.6);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .chat-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .chat-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    .chat-title {
+      font-family: var(--ut-font-head);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-left: auto;
+    }
+
+    .chat-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chat-msg {
+      max-width: 85%;
+      border-radius: var(--ut-radius);
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .chat-msg-user {
+      align-self: flex-end;
+      background: var(--ut-teal);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-msg-ai {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.9);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-msg-ai code {
+      background: rgba(255,255,255,0.1);
+      color: #4dd9cc;
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      font-size: 0.82rem;
+    }
+
+    .chat-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--ut-gold);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chat-cursor { animation: none; }
+    }
+
+    .chat-input-row {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .chat-input-fake {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--ut-radius-sm);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+      font-family: var(--ut-font-body);
+    }
+
+    .chat-send-btn {
+      width: 2rem; height: 2rem;
+      background: var(--ut-teal);
+      border-radius: var(--ut-radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    /* ── Feature Detail Sections ───────────────────────────────────── */
+    .feature-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ut-space-2xl);
+      align-items: center;
+    }
+
+    .feature-detail.reverse { direction: rtl; }
+    .feature-detail.reverse > * { direction: ltr; }
+
+    @media (max-width: 768px) {
+      .feature-detail,
+      .feature-detail.reverse { grid-template-columns: 1fr; direction: ltr; }
+    }
+
+    .feature-detail-visual {
+      background: var(--ut-surface-2);
+      border-radius: var(--ut-radius-lg);
+      padding: var(--ut-space-xl);
+      border: 1px solid var(--ut-border);
+      box-shadow: var(--ut-shadow-md);
+    }
+
+    .capability-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ut-space-md);
+      margin-top: var(--ut-space-lg);
+    }
+
+    .capability-item {
+      display: flex;
+      gap: var(--ut-space-md);
+      align-items: flex-start;
+    }
+
+    .capability-icon {
+      width: 2.5rem; height: 2.5rem;
+      border-radius: var(--ut-radius-sm);
+      background: var(--ut-teal-dim);
+      color: var(--ut-teal);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .capability-icon-gold {
+      background: var(--ut-gold-dim);
+      color: var(--ut-gold);
+    }
+
+    .capability-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: var(--ut-navy);
+    }
+
+    .capability-item p {
+      font-size: 0.9rem;
+      color: var(--ut-text-muted);
+      line-height: 1.55;
+    }
+
+    /* ── Context Window Visual ─────────────────────────────────────── */
+    .context-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .context-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--ut-radius-sm);
+      font-family: var(--ut-font-head);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .context-tag-course  { background: rgba(26,138,125,0.1); color: var(--ut-teal); border: 1px solid rgba(26,138,125,0.2); }
+    .context-tag-history { background: rgba(11,31,58,0.06); color: var(--ut-navy); border: 1px solid var(--ut-border); }
+    .context-tag-mastery { background: rgba(201,162,39,0.1); color: #92400e; border: 1px solid rgba(201,162,39,0.2); }
+  </style>
+</head>
+<body>
+  <div id="ut-nav-placeholder"></div>
+
+  <main id="main-content">
+
+    <!-- ═══ PAGE HERO ═══════════════════════════════════════════════ -->
+    <section class="page-hero" aria-label="AI Tutor overview">
+      <div class="ut-container">
+        <div class="page-hero-inner">
+          <div>
+            <span class="ut-eyebrow ut-eyebrow-gold">AI Tutor</span>
+            <h1>Your expert tutor, available <span class="accent">24/7</span> — at exactly your level</h1>
+            <p class="page-hero-lead">
+              Stop searching Stack Overflow. Stop rewatching the same video. Ask your AI tutor anything about technology and get a clear, contextual, personalized answer — right now.
+            </p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+              <a href="../pages/pricing.html" class="btn btn-gold btn-lg">Try It Free</a>
+              <a href="#how-tutor-works" class="btn btn-outline">See the Details</a>
+            </div>
+          </div>
+
+          <!-- Chat Mockup -->
+          <div class="page-hero-visual" aria-hidden="true">
+            <div class="chat-mockup">
+              <div class="chat-header">
+                <div class="chat-dots">
+                  <div class="chat-dot" style="background:#ff5f57"></div>
+                  <div class="chat-dot" style="background:#febc2e"></div>
+                  <div class="chat-dot" style="background:#28c840"></div>
+                </div>
+                <span class="chat-title">AI Tutor — Cloud Architecture</span>
+              </div>
+              <div class="chat-body">
+                <div class="chat-msg chat-msg-user">
+                  What's the difference between a VPC and a subnet? I keep confusing them.
+                </div>
+                <div class="chat-msg chat-msg-ai">
+                  Great question — this trips up a lot of people. Think of it this way:<br><br>
+                  A <code>VPC</code> (Virtual Private Cloud) is your entire private network — like buying a plot of land. A <code>subnet</code> is how you divide that land into zones (front yard, back yard, etc.).<br><br>
+                  Your VPC defines the overall IP range (e.g., <code>10.0.0.0/16</code>). Subnets carve out smaller ranges within it — a public subnet (<code>10.0.1.0/24</code>) for web servers, a private subnet (<code>10.0.2.0/24</code>) for databases.<span class="chat-cursor"></span>
+                </div>
+              </div>
+              <div class="chat-input-row">
+                <div class="chat-input-fake">Ask a follow-up question...</div>
+                <div class="chat-send-btn" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ STATS ════════════════════════════════════════════════════ -->
+    <section class="ut-section-sm" style="background:var(--ut-surface);" aria-label="AI Tutor statistics">
+      <div class="ut-container">
+        <div class="ut-stats-row reveal">
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="2" data-suffix="s">0</span>
+            <span class="ut-stat-label">Avg. First Response</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="98" data-suffix="%">0</span>
+            <span class="ut-stat-label">Accuracy Rating</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="50" data-suffix="+">0</span>
+            <span class="ut-stat-label">Technology Domains</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="24" data-suffix="/7">0</span>
+            <span class="ut-stat-label">Always Available</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ut-gradient-bar"></div>
+
+    <!-- ═══ CAPABILITIES ════════════════════════════════════════════ -->
+    <section class="ut-section" id="how-tutor-works" aria-labelledby="capabilities-heading">
+      <div class="ut-container">
+
+        <!-- Adaptive Intelligence -->
+        <div class="feature-detail reveal">
+          <div>
+            <span class="ut-eyebrow">Adaptive Intelligence</span>
+            <h2 id="capabilities-heading" class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-md)">Meets you exactly where you are</h2>
+            <p style="color:var(--ut-text-muted);line-height:1.7;margin-bottom:var(--ut-space-lg)">
+              The AI Tutor reads your mastery level from your course history, recent quiz performance, and the questions you ask. It calibrates every response — never over-explaining to an expert, never under-explaining to a beginner.
+            </p>
+            <div class="capability-list">
+              <div class="capability-item">
+                <div class="capability-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <div>
+                  <h4>Real-time level calibration</h4>
+                  <p>Adjusts vocabulary, depth, and analogy complexity based on your demonstrated knowledge — automatically.</p>
+                </div>
+              </div>
+              <div class="capability-item">
+                <div class="capability-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                </div>
+                <div>
+                  <h4>Course-aware context</h4>
+                  <p>Every answer is grounded in your current module, your certification track, and your learning history — not generic internet knowledge.</p>
+                </div>
+              </div>
+              <div class="capability-item">
+                <div class="capability-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div>
+                  <h4>Multi-turn conversation</h4>
+                  <p>Ask follow-up questions naturally. The tutor remembers your full session context so you never have to repeat yourself.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-detail-visual" aria-hidden="true">
+            <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ut-teal);margin-bottom:1rem;">Context Window</div>
+            <div class="context-visual">
+              <div class="context-tag context-tag-course">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Current Module: Cloud Architecture — VPC &amp; Networking
+              </div>
+              <div class="context-tag context-tag-mastery">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Mastery Level: Intermediate (64%)
+              </div>
+              <div class="context-tag context-tag-history">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Recent: Struggled with CIDR notation (2 days ago)
+              </div>
+              <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(26,138,125,0.06);border-radius:var(--ut-radius-sm);border:1px solid rgba(26,138,125,0.15);">
+                <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-teal);margin-bottom:0.4rem;">Tutor Strategy</div>
+                <div style="font-size:0.85rem;color:var(--ut-text-muted);line-height:1.5;">Use spatial analogies (land/zones). Reinforce CIDR with concrete examples. Avoid jargon — build from fundamentals.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:var(--ut-space-2xl)"></div>
+
+        <!-- Streaming Responses -->
+        <div class="feature-detail reverse reveal">
+          <div>
+            <span class="ut-eyebrow">Streaming Architecture</span>
+            <h2 class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-md)">Answers that appear as fast as you can read</h2>
+            <p style="color:var(--ut-text-muted);line-height:1.7;margin-bottom:var(--ut-space-lg)">
+              Powered by a Cloudflare Worker with Server-Sent Events, the AI Tutor streams responses token-by-token — eliminating the waiting spinner and creating a natural, conversational feel that keeps you in flow.
+            </p>
+            <div class="capability-list">
+              <div class="capability-item">
+                <div class="capability-icon capability-icon-gold" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div>
+                  <h4>Sub-2-second first token</h4>
+                  <p>Edge-deployed inference means your first word appears in under two seconds, anywhere in the world.</p>
+                </div>
+              </div>
+              <div class="capability-item">
+                <div class="capability-icon capability-icon-gold" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <div>
+                  <h4>Multi-provider fallback</h4>
+                  <p>Routes across OpenAI, Anthropic, and Google Gemini via AI Gateway — automatically failing over for maximum uptime.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-detail-visual" aria-hidden="true">
+            <div style="font-family:var(--ut-font-mono);font-size:0.78rem;color:var(--ut-text-muted);line-height:1.8;">
+              <div style="color:var(--ut-teal);margin-bottom:0.5rem;">// Cloudflare Worker — SSE Stream</div>
+              <div><span style="color:#93c5fd">const</span> stream = <span style="color:#86efac">new</span> ReadableStream({</div>
+              <div style="padding-left:1.25rem;">start(controller) {</div>
+              <div style="padding-left:2.5rem;"><span style="color:#93c5fd">for await</span> (<span style="color:#93c5fd">const</span> chunk <span style="color:#93c5fd">of</span> llmStream) {</div>
+              <div style="padding-left:3.75rem;">controller.enqueue(</div>
+              <div style="padding-left:5rem;"><span style="color:#fbbf24">`data: ${chunk}\n\n`</span></div>
+              <div style="padding-left:3.75rem;">);</div>
+              <div style="padding-left:2.5rem;">}</div>
+              <div style="padding-left:1.25rem;">}</div>
+              <div>});</div>
+              <div style="margin-top:0.75rem;color:var(--ut-teal);">// Response headers</div>
+              <div><span style="color:#86efac">'Content-Type'</span>: <span style="color:#fbbf24">'text/event-stream'</span></div>
+              <div><span style="color:#86efac">'Cache-Control'</span>: <span style="color:#fbbf24">'no-cache'</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ CTA ══════════════════════════════════════════════════════ -->
+    <section class="ut-section" style="background:var(--ut-surface-2);">
+      <div class="ut-container">
+        <div class="cta-banner reveal" style="background:linear-gradient(135deg,var(--ut-navy) 0%,#0f2a4a 100%);border-radius:var(--ut-radius-xl);padding:var(--ut-space-2xl);text-align:center;border:1px solid rgba(201,162,39,0.2);">
+          <span class="ut-eyebrow ut-eyebrow-gold">Start Learning</span>
+          <h2 style="font-size:var(--ut-text-3xl);color:#fff;margin-bottom:var(--ut-space-md);">Ask your first question — free</h2>
+          <p style="color:rgba(255,255,255,0.7);font-size:var(--ut-text-lg);max-width:50ch;margin:0 auto var(--ut-space-xl);">No setup. No credit card. Just type your question and experience what learning with an expert tutor actually feels like.</p>
+          <a href="/learn/login/index.php" class="btn btn-gold btn-lg">Start Free Trial</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="ut-footer-placeholder"></div>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

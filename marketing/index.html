@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UnderstandTech — The AI-powered certification platform that turns complex technology into mastery. Adaptive AI tutoring, gamified learning, and industry-recognized credentials.">
+  <meta name="theme-color" content="#0B1F3A">
+  <title>UnderstandTech — Master Technology. Earn Credentials. Advance Your Career.</title>
+
+  <!-- Preconnect for Google Fonts (non-blocking) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Non-blocking font load (Design Repair #2) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
+  </noscript>
+
+  <link rel="stylesheet" href="css/design-system.css">
+  <style>
+    /* ── Hero ─────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(26,138,125,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(201,162,39,0.10) 0%, transparent 50%),
+        linear-gradient(160deg, #071528 0%, #0B1F3A 50%, #0f2a4a 100%);
+      display: flex;
+      align-items: center;
+      padding-top: var(--ut-nav-h);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ut-space-2xl);
+      align-items: center;
+      padding-block: var(--ut-space-2xl);
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(201,162,39,0.12);
+      border: 1px solid rgba(201,162,39,0.3);
+      border-radius: 9999px;
+      padding: 0.35rem 1rem;
+      font-family: var(--ut-font-head);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ut-gold);
+      margin-bottom: var(--ut-space-md);
+    }
+
+    .hero-eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ut-teal);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-eyebrow-dot { animation: none; }
+    }
+
+    .hero h1 {
+      font-size: var(--ut-text-hero);
+      color: #fff;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--ut-space-lg);
+    }
+
+    .hero h1 .accent { color: var(--ut-gold); }
+    .hero h1 .accent-teal { color: #4dd9cc; }
+
+    .hero-lead {
+      font-size: var(--ut-text-lg);
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      max-width: 52ch;
+      margin-bottom: var(--ut-space-xl);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ut-space-md);
+      align-items: center;
+    }
+
+    .hero-trust {
+      margin-top: var(--ut-space-xl);
+      display: flex;
+      align-items: center;
+      gap: var(--ut-space-md);
+      flex-wrap: wrap;
+    }
+
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--ut-font-head);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .hero-trust-item svg { color: var(--ut-teal); }
+
+    /* Hero Visual — Dashboard Mockup */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--ut-radius-lg);
+      padding: var(--ut-space-lg);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--ut-space-lg);
+    }
+
+    .hero-card-title {
+      font-family: var(--ut-font-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ut-gold);
+    }
+
+    .hero-card-badge {
+      background: rgba(26,138,125,0.2);
+      color: #4dd9cc;
+      font-family: var(--ut-font-head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+    }
+
+    .hero-progress-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-progress-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .hero-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--ut-font-head);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .hero-progress-pct { color: var(--ut-gold); }
+
+    .hero-progress-track {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .hero-progress-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, var(--ut-teal), var(--ut-gold));
+    }
+
+    /* Floating notification */
+    .hero-notif {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -2rem;
+      background: var(--ut-surface);
+      border-radius: var(--ut-radius);
+      padding: 0.75rem 1rem;
+      box-shadow: var(--ut-shadow-xl);
+      border-left: 4px solid var(--ut-gold);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 16rem;
+      animation: float-notif 4s ease-in-out infinite;
+    }
+
+    @keyframes float-notif {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-notif { animation: none; }
+    }
+
+    .hero-notif-icon {
+      width: 2.25rem; height: 2.25rem;
+      background: var(--ut-gold-dim);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ut-gold);
+      flex-shrink: 0;
+    }
+
+    .hero-notif-text strong {
+      display: block;
+      font-family: var(--ut-font-head);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--ut-navy);
+    }
+
+    .hero-notif-text span {
+      font-size: 0.78rem;
+      color: var(--ut-text-muted);
+    }
+
+    /* ── Logos Bar ─────────────────────────────────────────────────── */
+    .logos-bar {
+      background: var(--ut-surface);
+      border-top: 1px solid var(--ut-border);
+      border-bottom: 1px solid var(--ut-border);
+      padding: var(--ut-space-lg) 0;
+    }
+
+    .logos-bar-inner {
+      display: flex;
+      align-items: center;
+      gap: var(--ut-space-xl);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .logos-bar-label {
+      font-family: var(--ut-font-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ut-text-muted);
+      white-space: nowrap;
+    }
+
+    .logo-item {
+      font-family: var(--ut-font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgba(11,31,58,0.35);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color var(--ut-duration-sm) var(--ut-ease);
+    }
+
+    .logo-item:hover { color: var(--ut-navy); }
+
+    /* ── How It Works ──────────────────────────────────────────────── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+      gap: var(--ut-space-lg);
+      position: relative;
+    }
+
+    .step-card {
+      background: var(--ut-surface);
+      border-radius: var(--ut-radius);
+      padding: var(--ut-space-xl);
+      border: 1px solid var(--ut-border);
+      box-shadow: var(--ut-shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card::before {
+      content: attr(data-step);
+      position: absolute;
+      top: -0.5rem;
+      right: 1rem;
+      font-family: var(--ut-font-head);
+      font-size: 5rem;
+      font-weight: 700;
+      color: rgba(11,31,58,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .step-number {
+      width: 2.25rem; height: 2.25rem;
+      border-radius: 50%;
+      background: var(--ut-navy);
+      color: var(--ut-gold);
+      font-family: var(--ut-font-head);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: var(--ut-space-md);
+    }
+
+    .step-card h3 {
+      font-size: var(--ut-text-xl);
+      margin-bottom: var(--ut-space-sm);
+      color: var(--ut-navy);
+    }
+
+    .step-card p { color: var(--ut-text-muted); font-size: 0.95rem; }
+
+    /* ── Testimonials ──────────────────────────────────────────────── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+      gap: var(--ut-space-lg);
+    }
+
+    /* ── CTA Banner ────────────────────────────────────────────────── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--ut-navy) 0%, #0f2a4a 100%);
+      border-radius: var(--ut-radius-xl);
+      padding: var(--ut-space-2xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(201,162,39,0.2);
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, rgba(26,138,125,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-banner h2 {
+      font-size: var(--ut-text-3xl);
+      color: #fff;
+      margin-bottom: var(--ut-space-md);
+      position: relative;
+    }
+
+    .cta-banner p {
+      color: rgba(255,255,255,0.7);
+      font-size: var(--ut-text-lg);
+      max-width: 55ch;
+      margin: 0 auto var(--ut-space-xl);
+      position: relative;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--ut-space-md);
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav injected by components.js -->
+  <div id="ut-nav-placeholder"></div>
+
+  <main id="main-content">
+
+    <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+    <section class="hero" aria-label="Hero">
+      <div class="ut-container">
+        <div class="hero-inner">
+
+          <!-- Copy -->
+          <div>
+            <div class="hero-eyebrow">
+              <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+              AI-Powered EdTech Platform
+            </div>
+
+            <h1>
+              Master Tech.<br>
+              Earn <span class="accent">Credentials.</span><br>
+              <span class="accent-teal">Advance</span> Your Career.
+            </h1>
+
+            <p class="hero-lead">
+              UnderstandTech pairs an adaptive AI tutor with a rigorous certification engine and a gamified learning system — so you don't just study technology, you truly understand it.
+            </p>
+
+            <div class="hero-actions">
+              <a href="pages/pricing.html" class="btn btn-gold btn-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                Start Free Trial
+              </a>
+              <a href="pages/ai-tutor.html" class="btn btn-outline btn-lg">
+                See How It Works
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+
+            <div class="hero-trust" aria-label="Trust indicators">
+              <div class="hero-trust-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                No credit card required
+              </div>
+              <div class="hero-trust-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                SOC 2 Type II secured
+              </div>
+              <div class="hero-trust-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Trusted by 12,000+ learners
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual -->
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-card">
+              <div class="hero-card-header">
+                <span class="hero-card-title">Learning Progress</span>
+                <span class="hero-card-badge">Live</span>
+              </div>
+              <div class="hero-progress-list">
+                <div class="hero-progress-item">
+                  <div class="hero-progress-label">
+                    <span>Cloud Architecture</span>
+                    <span class="hero-progress-pct">87%</span>
+                  </div>
+                  <div class="hero-progress-track">
+                    <div class="hero-progress-fill" style="width:87%"></div>
+                  </div>
+                </div>
+                <div class="hero-progress-item">
+                  <div class="hero-progress-label">
+                    <span>Kubernetes Fundamentals</span>
+                    <span class="hero-progress-pct">64%</span>
+                  </div>
+                  <div class="hero-progress-track">
+                    <div class="hero-progress-fill" style="width:64%"></div>
+                  </div>
+                </div>
+                <div class="hero-progress-item">
+                  <div class="hero-progress-label">
+                    <span>Security &amp; Compliance</span>
+                    <span class="hero-progress-pct">42%</span>
+                  </div>
+                  <div class="hero-progress-track">
+                    <div class="hero-progress-fill" style="width:42%"></div>
+                  </div>
+                </div>
+                <div class="hero-progress-item">
+                  <div class="hero-progress-label">
+                    <span>AI/ML Foundations</span>
+                    <span class="hero-progress-pct">21%</span>
+                  </div>
+                  <div class="hero-progress-track">
+                    <div class="hero-progress-fill" style="width:21%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:0.25rem;">XP This Week</div>
+                  <div style="font-family:var(--ut-font-head);font-size:1.5rem;font-weight:700;color:var(--ut-gold);">+2,840</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:0.25rem;">Streak</div>
+                  <div style="font-family:var(--ut-font-head);font-size:1.5rem;font-weight:700;color:#4dd9cc;">14 days</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating notification -->
+            <div class="hero-notif" role="status" aria-live="polite">
+              <div class="hero-notif-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              </div>
+              <div class="hero-notif-text">
+                <strong>Certificate Earned!</strong>
+                <span>Cloud Architecture — Level 3</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ LOGOS BAR ═══════════════════════════════════════════════ -->
+    <div class="logos-bar" aria-label="Trusted by learners from">
+      <div class="ut-container">
+        <div class="logos-bar-inner">
+          <span class="logos-bar-label">Trusted by learners from</span>
+          <span class="logo-item">Microsoft</span>
+          <span class="logo-item">AWS</span>
+          <span class="logo-item">Google</span>
+          <span class="logo-item">Deloitte</span>
+          <span class="logo-item">Accenture</span>
+          <span class="logo-item">IBM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STATS ════════════════════════════════════════════════════ -->
+    <section class="ut-section-sm" aria-label="Platform statistics">
+      <div class="ut-container">
+        <div class="ut-stats-row reveal">
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="12000" data-suffix="+">0</span>
+            <span class="ut-stat-label">Active Learners</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="94" data-suffix="%">0</span>
+            <span class="ut-stat-label">Certification Pass Rate</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="320" data-suffix="+">0</span>
+            <span class="ut-stat-label">Course Modules</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="4.9">0</span>
+            <span class="ut-stat-label">Average Rating</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ut-gradient-bar"></div>
+
+    <!-- ═══ FEATURES ════════════════════════════════════════════════ -->
+    <section class="ut-section" aria-labelledby="features-heading">
+      <div class="ut-container">
+        <div class="text-center mb-xl reveal">
+          <span class="ut-eyebrow">Platform Features</span>
+          <h2 id="features-heading" class="ut-heading-lg" style="color:var(--ut-navy)">
+            Everything you need to go from<br>curious to certified
+          </h2>
+          <p class="ut-lead" style="margin:var(--ut-space-md) auto 0">
+            Three tightly integrated systems — AI tutoring, certification mastery, and gamified progression — working together to accelerate your learning.
+          </p>
+        </div>
+
+        <div class="ut-feature-grid">
+          <!-- AI Tutor -->
+          <a href="pages/ai-tutor.html" class="ut-card ut-card-teal reveal reveal-delay-1" style="text-decoration:none;display:block;" aria-label="Learn about AI Tutor">
+            <div class="ut-feature-icon ut-feature-icon-teal" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3 style="font-size:var(--ut-text-xl);margin-bottom:var(--ut-space-sm);color:var(--ut-navy)">AI Tutor</h3>
+            <p style="color:var(--ut-text-muted);font-size:0.95rem;line-height:1.65;margin-bottom:var(--ut-space-md)">
+              Ask anything, get instant expert answers. Your AI tutor adapts to your knowledge level, explains concepts with real-world analogies, and keeps you in flow — never overwhelmed, never bored.
+            </p>
+            <span class="badge badge-teal">Streaming Responses</span>
+          </a>
+
+          <!-- Certification -->
+          <a href="pages/certification.html" class="ut-card ut-card-gold reveal reveal-delay-2" style="text-decoration:none;display:block;" aria-label="Learn about Certification">
+            <div class="ut-feature-icon ut-feature-icon-gold" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <h3 style="font-size:var(--ut-text-xl);margin-bottom:var(--ut-space-sm);color:var(--ut-navy)">Certification Engine</h3>
+            <p style="color:var(--ut-text-muted);font-size:0.95rem;line-height:1.65;margin-bottom:var(--ut-space-md)">
+              Industry-recognized credentials backed by a mastery algorithm that ensures you've genuinely learned — not just memorized. Confidence-weighted questions surface real gaps before exam day.
+            </p>
+            <span class="badge badge-gold">94% Pass Rate</span>
+          </a>
+
+          <!-- Gamification -->
+          <a href="pages/gamification.html" class="ut-card ut-card-navy reveal reveal-delay-3" style="text-decoration:none;display:block;" aria-label="Learn about Gamification">
+            <div class="ut-feature-icon ut-feature-icon-navy" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3 style="font-size:var(--ut-text-xl);margin-bottom:var(--ut-space-sm);color:var(--ut-navy)">Gamified Learning</h3>
+            <p style="color:var(--ut-text-muted);font-size:0.95rem;line-height:1.65;margin-bottom:var(--ut-space-md)">
+              XP, streaks, leaderboards, and achievement badges transform daily study into a compelling progression system. Learning feels like leveling up — because it is.
+            </p>
+            <span class="badge badge-navy">Daily Streaks</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ HOW IT WORKS ════════════════════════════════════════════ -->
+    <section class="ut-section" style="background:var(--ut-surface-2);" aria-labelledby="how-heading">
+      <div class="ut-container">
+        <div class="text-center mb-xl reveal">
+          <span class="ut-eyebrow">How It Works</span>
+          <h2 id="how-heading" class="ut-heading-lg" style="color:var(--ut-navy)">From zero to certified in four steps</h2>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card reveal reveal-delay-1" data-step="01">
+            <div class="step-number" aria-hidden="true">1</div>
+            <h3>Choose Your Path</h3>
+            <p>Select from curated certification tracks in cloud, security, AI, and DevOps — or build a custom learning plan tailored to your career goals.</p>
+          </div>
+          <div class="step-card reveal reveal-delay-2" data-step="02">
+            <div class="step-number" aria-hidden="true">2</div>
+            <h3>Learn with Your AI Tutor</h3>
+            <p>Work through adaptive lessons at your own pace. Ask questions in plain English and get expert-level explanations with real-world context — instantly.</p>
+          </div>
+          <div class="step-card reveal reveal-delay-3" data-step="03">
+            <div class="step-number" aria-hidden="true">3</div>
+            <h3>Prove Your Mastery</h3>
+            <p>Complete confidence-weighted assessments that identify genuine knowledge gaps. The mastery algorithm won't let you advance until you truly understand.</p>
+          </div>
+          <div class="step-card reveal reveal-delay-4" data-step="04">
+            <div class="step-number" aria-hidden="true">4</div>
+            <h3>Earn Your Credential</h3>
+            <p>Receive a verifiable, industry-recognized certificate. Share it on LinkedIn, add it to your resume, and watch your career opportunities expand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TESTIMONIALS ════════════════════════════════════════════ -->
+    <section class="ut-section" aria-labelledby="testimonials-heading">
+      <div class="ut-container">
+        <div class="text-center mb-xl reveal">
+          <span class="ut-eyebrow">Learner Stories</span>
+          <h2 id="testimonials-heading" class="ut-heading-lg" style="color:var(--ut-navy)">Real people. Real results.</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="ut-testimonial reveal reveal-delay-1">
+            <p class="ut-testimonial-text">"I passed my AWS Solutions Architect exam on the first attempt after just six weeks on UnderstandTech. The AI tutor explained concepts I'd been confused about for months in a single conversation."</p>
+            <div class="ut-testimonial-author">
+              <div class="ut-avatar" aria-hidden="true">MR</div>
+              <div>
+                <strong class="ut-author-name">Marcus R.</strong>
+                <span class="ut-author-role">Cloud Engineer, Deloitte</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ut-testimonial reveal reveal-delay-2">
+            <p class="ut-testimonial-text">"The gamification system kept me coming back every single day. I hit a 47-day streak and earned three certifications I'd been putting off for two years. The leaderboard made it genuinely fun."</p>
+            <div class="ut-testimonial-author">
+              <div class="ut-avatar" aria-hidden="true">SP</div>
+              <div>
+                <strong class="ut-author-name">Sophia P.</strong>
+                <span class="ut-author-role">DevOps Lead, Accenture</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ut-testimonial reveal reveal-delay-3">
+            <p class="ut-testimonial-text">"Our entire team upskilled on Kubernetes in under two months. The confidence-weighted assessments meant we could actually trust that people understood the material — not just the answers."</p>
+            <div class="ut-testimonial-author">
+              <div class="ut-avatar" aria-hidden="true">JL</div>
+              <div>
+                <strong class="ut-author-name">James L.</strong>
+                <span class="ut-author-role">Engineering Manager, IBM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA BANNER ══════════════════════════════════════════════ -->
+    <section class="ut-section" aria-labelledby="cta-heading">
+      <div class="ut-container">
+        <div class="cta-banner reveal">
+          <span class="ut-eyebrow ut-eyebrow-gold">Get Started Today</span>
+          <h2 id="cta-heading">Ready to understand technology — deeply?</h2>
+          <p>Join 12,000+ professionals who chose to stop memorizing and start mastering. Your first 14 days are completely free.</p>
+          <div class="cta-actions">
+            <a href="/learn/login/index.php" class="btn btn-gold btn-lg">Start Free Trial — No Card Needed</a>
+            <a href="pages/about.html" class="btn btn-outline btn-lg">Learn About Our Mission</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer injected by components.js -->
+  <div id="ut-footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

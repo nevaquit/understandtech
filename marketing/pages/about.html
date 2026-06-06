@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About UnderstandTech — Our mission, our team, and the philosophy behind the platform that turns technology confusion into genuine mastery.">
+  <meta name="theme-color" content="#0B1F3A">
+  <title>About — UnderstandTech</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap"></noscript>
+
+  <link rel="stylesheet" href="../css/design-system.css">
+  <style>
+    .about-hero {
+      background: linear-gradient(160deg, var(--ut-navy-deep) 0%, var(--ut-navy) 100%);
+      padding: calc(var(--ut-nav-h) + var(--ut-space-2xl)) 0 var(--ut-space-2xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(26,138,125,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .about-hero h1 { font-size: var(--ut-text-3xl); color: #fff; margin-bottom: var(--ut-space-md); position: relative; }
+    .about-hero h1 .accent { color: var(--ut-gold); }
+    .about-hero-lead { font-size: var(--ut-text-lg); color: rgba(255,255,255,0.75); max-width: 60ch; margin: 0 auto; line-height: 1.7; position: relative; }
+
+    /* Mission Section */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ut-space-2xl);
+      align-items: center;
+    }
+
+    @media (max-width: 768px) { .mission-grid { grid-template-columns: 1fr; } }
+
+    .mission-quote {
+      border-left: 4px solid var(--ut-gold);
+      padding-left: var(--ut-space-lg);
+      margin: var(--ut-space-lg) 0;
+    }
+
+    .mission-quote blockquote {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: var(--ut-text-xl);
+      font-style: italic;
+      color: var(--ut-navy);
+      line-height: 1.55;
+      margin: 0 0 0.5rem;
+    }
+
+    .mission-quote cite {
+      font-family: var(--ut-font-head);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ut-text-muted);
+      font-style: normal;
+    }
+
+    /* Values */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+      gap: var(--ut-space-lg);
+    }
+
+    .value-card {
+      background: var(--ut-surface);
+      border-radius: var(--ut-radius);
+      padding: var(--ut-space-xl);
+      border: 1px solid var(--ut-border);
+      box-shadow: var(--ut-shadow-sm);
+    }
+
+    .value-number {
+      font-family: var(--ut-font-head);
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(11,31,58,0.06);
+      line-height: 1;
+      margin-bottom: -0.5rem;
+    }
+
+    .value-card h3 { font-size: var(--ut-text-xl); color: var(--ut-navy); margin-bottom: var(--ut-space-sm); }
+    .value-card p  { font-size: 0.95rem; color: var(--ut-text-muted); line-height: 1.65; }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+      gap: var(--ut-space-lg);
+    }
+
+    .team-card {
+      background: var(--ut-surface);
+      border-radius: var(--ut-radius);
+      overflow: hidden;
+      border: 1px solid var(--ut-border);
+      box-shadow: var(--ut-shadow-sm);
+      transition: transform var(--ut-duration) var(--ut-ease), box-shadow var(--ut-duration) var(--ut-ease);
+    }
+
+    .team-card:hover { transform: translateY(-3px); box-shadow: var(--ut-shadow-lg); }
+
+    .team-avatar-wrap {
+      height: 10rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-avatar-large {
+      width: 6rem; height: 6rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--ut-font-head);
+      font-weight: 700;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .team-info {
+      padding: var(--ut-space-md);
+      border-top: 1px solid var(--ut-border);
+    }
+
+    .team-name {
+      font-family: var(--ut-font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ut-navy);
+      margin-bottom: 0.2rem;
+    }
+
+    .team-role {
+      font-family: var(--ut-font-head);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ut-teal);
+      margin-bottom: var(--ut-space-sm);
+    }
+
+    .team-bio {
+      font-size: 0.88rem;
+      color: var(--ut-text-muted);
+      line-height: 1.55;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.625rem;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--ut-teal), var(--ut-gold));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: var(--ut-space-xl);
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: 0.25rem;
+      width: 1.25rem; height: 1.25rem;
+      border-radius: 50%;
+      background: var(--ut-navy);
+      border: 3px solid var(--ut-teal);
+      box-shadow: 0 0 0 3px rgba(26,138,125,0.15);
+    }
+
+    .timeline-year {
+      font-family: var(--ut-font-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ut-teal);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-item h4 { font-size: 1rem; color: var(--ut-navy); margin-bottom: 0.35rem; }
+    .timeline-item p  { font-size: 0.9rem; color: var(--ut-text-muted); line-height: 1.55; }
+
+    /* Press logos */
+    .press-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ut-space-xl);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .press-item {
+      font-family: var(--ut-font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(11,31,58,0.3);
+      transition: color var(--ut-duration-sm) var(--ut-ease);
+    }
+
+    .press-item:hover { color: var(--ut-navy); }
+  </style>
+</head>
+<body>
+  <div id="ut-nav-placeholder"></div>
+
+  <main id="main-content">
+
+    <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+    <section class="about-hero" aria-label="About UnderstandTech">
+      <div class="ut-container">
+        <span class="ut-eyebrow ut-eyebrow-gold">Our Story</span>
+        <h1>We built the platform we <span class="accent">wished existed</span></h1>
+        <p class="about-hero-lead">
+          UnderstandTech was born from a simple frustration: technology education was either too shallow to be useful or too dense to be accessible. We set out to fix that — with AI, with rigor, and with genuine respect for the learner.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ STATS ════════════════════════════════════════════════════ -->
+    <section class="ut-section-sm" style="background:var(--ut-surface);">
+      <div class="ut-container">
+        <div class="ut-stats-row reveal">
+          <div class="ut-stat-block">
+            <span class="ut-stat-value">2022</span>
+            <span class="ut-stat-label">Founded</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="12" data-suffix="+">0</span>
+            <span class="ut-stat-label">Team Members</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="12000" data-suffix="+">0</span>
+            <span class="ut-stat-label">Learners Served</span>
+          </div>
+          <div class="ut-stat-block">
+            <span class="ut-stat-value" data-target="8500" data-suffix="+">0</span>
+            <span class="ut-stat-label">Credentials Issued</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ut-gradient-bar"></div>
+
+    <!-- ═══ MISSION ══════════════════════════════════════════════════ -->
+    <section class="ut-section" aria-labelledby="mission-heading">
+      <div class="ut-container">
+        <div class="mission-grid reveal">
+          <div>
+            <span class="ut-eyebrow">Our Mission</span>
+            <h2 id="mission-heading" class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-md)">Understanding, not just passing</h2>
+            <p style="color:var(--ut-text-muted);line-height:1.7;margin-bottom:var(--ut-space-md)">
+              The technology industry has a knowledge problem. Certifications are valuable — but the way most people prepare for them produces professionals who can pass a test without truly understanding the systems they'll be responsible for.
+            </p>
+            <p style="color:var(--ut-text-muted);line-height:1.7;margin-bottom:var(--ut-space-md)">
+              We built UnderstandTech around a different philosophy: that genuine understanding is both achievable and measurable, and that the right combination of adaptive AI tutoring, rigorous assessment, and motivating feedback loops can get any determined learner there.
+            </p>
+            <p style="color:var(--ut-text-muted);line-height:1.7;">
+              Our mastery algorithm doesn't just track what you've seen — it tracks what you've genuinely internalized. When you earn an UnderstandTech credential, you've earned it.
+            </p>
+          </div>
+
+          <div>
+            <div class="mission-quote">
+              <blockquote>"The goal was never to build another quiz platform. It was to build the tutor that every learner deserves — one that's infinitely patient, always available, and genuinely invested in your success."</blockquote>
+              <cite>— Founder, AI Tech Pros</cite>
+            </div>
+
+            <div style="background:var(--ut-surface-2);border-radius:var(--ut-radius);padding:var(--ut-space-lg);border:1px solid var(--ut-border);margin-top:var(--ut-space-lg);">
+              <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ut-text-muted);margin-bottom:1rem;">Built on first principles</div>
+              <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--ut-text-muted);">
+                  <div style="width:0.5rem;height:0.5rem;border-radius:50%;background:var(--ut-teal);flex-shrink:0;"></div>
+                  Mastery over memorization
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--ut-text-muted);">
+                  <div style="width:0.5rem;height:0.5rem;border-radius:50%;background:var(--ut-gold);flex-shrink:0;"></div>
+                  Adaptive over one-size-fits-all
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--ut-text-muted);">
+                  <div style="width:0.5rem;height:0.5rem;border-radius:50%;background:var(--ut-teal);flex-shrink:0;"></div>
+                  Engagement over obligation
+                </div>
+                <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--ut-text-muted);">
+                  <div style="width:0.5rem;height:0.5rem;border-radius:50%;background:var(--ut-gold);flex-shrink:0;"></div>
+                  Transparency over opacity
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VALUES ═══════════════════════════════════════════════════ -->
+    <section class="ut-section" style="background:var(--ut-surface-2);" aria-labelledby="values-heading">
+      <div class="ut-container">
+        <div class="text-center mb-xl reveal">
+          <span class="ut-eyebrow">Our Values</span>
+          <h2 id="values-heading" class="ut-heading-lg" style="color:var(--ut-navy)">What we believe about learning</h2>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-card reveal reveal-delay-1">
+            <div class="value-number" aria-hidden="true">01</div>
+            <h3>Depth over breadth</h3>
+            <p>A learner who deeply understands ten concepts is more valuable than one who has skimmed a hundred. We design every module to build genuine mental models, not surface familiarity.</p>
+          </div>
+          <div class="value-card reveal reveal-delay-2">
+            <div class="value-number" aria-hidden="true">02</div>
+            <h3>Honest assessment</h3>
+            <p>We tell you the truth about what you know and what you don't. Our confidence-weighted algorithm surfaces real gaps before they become expensive problems in production.</p>
+          </div>
+          <div class="value-card reveal reveal-delay-3">
+            <div class="value-number" aria-hidden="true">03</div>
+            <h3>Intrinsic motivation</h3>
+            <p>The best learning happens when people are genuinely curious and engaged — not just compliant. Our gamification system is designed to reward curiosity, not just completion.</p>
+          </div>
+          <div class="value-card reveal reveal-delay-1">
+            <div class="value-number" aria-hidden="true">04</div>
+            <h3>Accessibility for all</h3>
+            <p>World-class technology education should not require a world-class budget. We price our platform to be accessible to individual learners, not just enterprise training departments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TEAM ══════════════════════════════════════════════════════ -->
+    <section class="ut-section" id="team" aria-labelledby="team-heading">
+      <div class="ut-container">
+        <div class="text-center mb-xl reveal">
+          <span class="ut-eyebrow">The Team</span>
+          <h2 id="team-heading" class="ut-heading-lg" style="color:var(--ut-navy)">Built by educators, engineers, and learners</h2>
+          <p class="ut-lead" style="margin:var(--ut-space-md) auto 0;">Every person on our team has been a learner who needed better tools. That experience shapes every decision we make.</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card reveal reveal-delay-1">
+            <div class="team-avatar-wrap" style="background:linear-gradient(135deg,rgba(11,31,58,0.05),rgba(26,138,125,0.1));">
+              <div class="team-avatar-large" style="background:linear-gradient(135deg,var(--ut-navy),var(--ut-teal));">AJ</div>
+            </div>
+            <div class="team-info">
+              <div class="team-name">Alex Johnson</div>
+              <div class="team-role">Founder &amp; CEO</div>
+              <p class="team-bio">Former cloud architect at AWS. Spent a decade watching talented engineers fail certification exams they should have passed — and decided to fix the problem.</p>
+            </div>
+          </div>
+
+          <div class="team-card reveal reveal-delay-2">
+            <div class="team-avatar-wrap" style="background:linear-gradient(135deg,rgba(201,162,39,0.05),rgba(201,162,39,0.12));">
+              <div class="team-avatar-large" style="background:linear-gradient(135deg,var(--ut-gold),#E8C547);color:var(--ut-navy);">SC</div>
+            </div>
+            <div class="team-info">
+              <div class="team-name">Sarah Chen</div>
+              <div class="team-role">CTO</div>
+              <p class="team-bio">PhD in educational psychology. Designed the mastery algorithm and confidence-weighting system that powers our certification engine.</p>
+            </div>
+          </div>
+
+          <div class="team-card reveal reveal-delay-3">
+            <div class="team-avatar-wrap" style="background:linear-gradient(135deg,rgba(26,138,125,0.05),rgba(26,138,125,0.12));">
+              <div class="team-avatar-large" style="background:linear-gradient(135deg,var(--ut-teal),#4dd9cc);">MO</div>
+            </div>
+            <div class="team-info">
+              <div class="team-name">Marcus Osei</div>
+              <div class="team-role">Head of AI</div>
+              <p class="team-bio">Previously at Anthropic. Leads the AI Tutor architecture, including the adaptive context system and multi-provider LLM routing.</p>
+            </div>
+          </div>
+
+          <div class="team-card reveal reveal-delay-1">
+            <div class="team-avatar-wrap" style="background:linear-gradient(135deg,rgba(99,102,241,0.05),rgba(99,102,241,0.1));">
+              <div class="team-avatar-large" style="background:linear-gradient(135deg,#6366f1,#818cf8);">LP</div>
+            </div>
+            <div class="team-info">
+              <div class="team-name">Lena Park</div>
+              <div class="team-role">Head of Design</div>
+              <p class="team-bio">Formerly at Figma. Believes that great learning design is inseparable from great visual design — and proves it every day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TIMELINE ═════════════════════════════════════════════════ -->
+    <section class="ut-section" style="background:var(--ut-surface-2);" aria-labelledby="timeline-heading">
+      <div class="ut-container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--ut-space-2xl);align-items:start;" class="reveal">
+          <div>
+            <span class="ut-eyebrow">Our Journey</span>
+            <h2 id="timeline-heading" class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-xl)">From idea to platform</h2>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-year">Q1 2022</div>
+                <h4>The idea</h4>
+                <p>Alex and Sarah meet at a cloud conference. Both frustrated by the same problem: great engineers failing exams they should pass.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-year">Q3 2022</div>
+                <h4>First prototype</h4>
+                <p>A basic mastery algorithm and a simple chat interface. 50 beta testers. Feedback: "This is what I've been looking for."</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-year">Q1 2023</div>
+                <h4>Seed funding</h4>
+                <p>$2.4M seed round. Hired the core engineering team. Launched the gamification system and first three certification tracks.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-year">Q4 2023</div>
+                <h4>1,000 learners</h4>
+                <p>Crossed 1,000 active learners. First enterprise cohort (Deloitte, 45 seats). 94% certification pass rate confirmed.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-year">2026</div>
+                <h4>12,000+ learners and growing</h4>
+                <p>18 certification tracks, 8,500+ credentials issued, and a team of 12 dedicated to making technology education genuinely excellent.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <span class="ut-eyebrow">In the Press</span>
+            <h2 class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-xl)">What people are saying</h2>
+
+            <div style="display:flex;flex-direction:column;gap:var(--ut-space-md);">
+              <div style="background:var(--ut-surface);border-radius:var(--ut-radius);padding:var(--ut-space-lg);border:1px solid var(--ut-border);border-left:4px solid var(--ut-teal);">
+                <p style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--ut-navy);line-height:1.6;margin-bottom:0.75rem;">"UnderstandTech represents a genuine step forward in how we prepare technology professionals. The mastery model is rigorous in a way that most platforms aren't."</p>
+                <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-text-muted);">TechCrunch</div>
+              </div>
+
+              <div style="background:var(--ut-surface);border-radius:var(--ut-radius);padding:var(--ut-space-lg);border:1px solid var(--ut-border);border-left:4px solid var(--ut-gold);">
+                <p style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--ut-navy);line-height:1.6;margin-bottom:0.75rem;">"The AI tutor is genuinely impressive — it explains concepts at exactly the right level and never makes you feel stupid for asking a basic question."</p>
+                <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-text-muted);">The Verge</div>
+              </div>
+
+              <div style="background:var(--ut-surface);border-radius:var(--ut-radius);padding:var(--ut-space-lg);border:1px solid var(--ut-border);border-left:4px solid var(--ut-teal);">
+                <p style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--ut-navy);line-height:1.6;margin-bottom:0.75rem;">"We've tried six platforms for team upskilling. UnderstandTech is the first one where people actually finish the courses — and remember what they learned."</p>
+                <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-text-muted);">Forbes</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ══════════════════════════════════════════════════════ -->
+    <section class="ut-section">
+      <div class="ut-container">
+        <div style="background:linear-gradient(135deg,var(--ut-navy) 0%,#0f2a4a 100%);border-radius:var(--ut-radius-xl);padding:var(--ut-space-2xl);text-align:center;border:1px solid rgba(201,162,39,0.2);" class="reveal">
+          <span class="ut-eyebrow ut-eyebrow-gold">Join Us</span>
+          <h2 style="font-size:var(--ut-text-3xl);color:#fff;margin-bottom:var(--ut-space-md);">Be part of the next chapter</h2>
+          <p style="color:rgba(255,255,255,0.7);font-size:var(--ut-text-lg);max-width:52ch;margin:0 auto var(--ut-space-xl);">Whether you're a learner, an enterprise, or a potential team member — we'd love to have you involved in building the future of technology education.</p>
+          <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+            <a href="../pages/pricing.html" class="btn btn-gold btn-lg">Start Learning Free</a>
+            <a href="#" class="btn btn-outline btn-lg">View Open Roles</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="ut-footer-placeholder"></div>
+  <script src="../js/components.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
