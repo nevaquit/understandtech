@@ -49,4 +49,7 @@ $CFG->tool_generator_users_password = 'REPLACE_ME_BEFORE_PRODUCTION';
 // AI tutor JWT signing — must match Cloudflare Worker secret (cf-worker-shared-secret in KV).
 putenv('AITUTOR_WORKER_SHARED_SECRET=' . (getenv('AITUTOR_WORKER_SHARED_SECRET') ?: ''));
 
+// Cloudflare Stream signing PEM: /etc/moodle/cf-stream-signing-key.pem (local_certmaster stream_helper).
+// Optional override: CF_STREAM_SIGNING_KEY env (single-line PEM with \n escapes).
+
 require_once(__DIR__ . '/lib/setup.php');

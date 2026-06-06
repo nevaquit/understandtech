@@ -47,7 +47,9 @@ Tests without credentials skip authenticated flows; the invalid-login test alway
 | `course-navigation.spec.ts` | Dashboard, optional course page |
 | `ai-tutor.spec.ts` | Sidebar visibility, streaming, Socratic refusal, worker outage |
 
-Future playbook specs (video, quiz confidence, lab flag, Stripe) belong here once staging content is seeded.
+| `payment-flow.spec.ts` | Stripe checkout — **deferred**; excluded from `chromium`; use `--project=chromium-stripe` with `STRIPE_TEST=1` |
+
+Future playbook specs (video playback, quiz confidence, lab flag) belong here once staging content is seeded.
 
 ## CI
 

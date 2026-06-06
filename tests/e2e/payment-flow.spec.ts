@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test';
 import { getStudentCredentials } from './fixtures/test-user';
 
 /**
- * Stripe checkout E2E — skipped unless STRIPE_TEST=1 and course enrolment on payment is configured.
+ * Stripe checkout E2E — DEFERRED for v1.0.0 (no Stripe keys in Key Vault yet).
+ * Excluded from default `chromium` project; runs only with STRIPE_TEST=1 → chromium-stripe project.
  *
  * Requires:
  *   STRIPE_TEST=1

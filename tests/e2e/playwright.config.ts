@@ -50,7 +50,7 @@ export default defineConfig({
     { name: 'setup', testMatch: /auth\.setup\.ts/ },
     {
       name: 'chromium',
-      testIgnore: /auth\.spec\.ts/,
+      testIgnore: [/auth\.spec\.ts/, /payment-flow\.spec\.ts/],
       use: {
         ...devices['Desktop Chrome'],
         storageState: authFile,
@@ -65,7 +65,7 @@ export default defineConfig({
     },
     {
       name: 'firefox',
-      testIgnore: /auth\.spec\.ts/,
+      testIgnore: [/auth\.spec\.ts/, /payment-flow\.spec\.ts/],
       use: {
         ...devices['Desktop Firefox'],
         storageState: authFile,
@@ -75,9 +75,20 @@ export default defineConfig({
     ...(process.platform === 'darwin'
       ? [{
           name: 'webkit',
-          testIgnore: /auth\.spec\.ts/,
+          testIgnore: [/auth\.spec\.ts/, /payment-flow\.spec\.ts/],
           use: {
             ...devices['Desktop Safari'],
+            storageState: authFile,
+          },
+          dependencies: ['setup'],
+        }]
+      : []),
+    ...(process.env.STRIPE_TEST === '1' || process.env.STRIPE_TEST === 'true'
+      ? [{
+          name: 'chromium-stripe',
+          testMatch: /payment-flow\.spec\.ts/,
+          use: {
+            ...devices['Desktop Chrome'],
             storageState: authFile,
           },
           dependencies: ['setup'],

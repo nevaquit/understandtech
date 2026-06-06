@@ -18,5 +18,27 @@ if ($hassiteconfig) {
         get_string('manageframeworks', 'local_certmaster')
     ));
 
+    $settings->add(new admin_setting_heading(
+        'local_certmaster/streamheading',
+        get_string('streamsettingsheading', 'local_certmaster'),
+        get_string('streamsettingsdesc', 'local_certmaster')
+    ));
+
+    $settings->add(new admin_setting_configtext(
+        'local_certmaster/streamsigningkid',
+        get_string('streamsigningkid', 'local_certmaster'),
+        get_string('streamsigningkid_desc', 'local_certmaster'),
+        '',
+        PARAM_ALPHANUMEXT
+    ));
+
+    $settings->add(new admin_setting_configtext(
+        'local_certmaster/streamcustomersubdomain',
+        get_string('streamcustomersubdomain', 'local_certmaster'),
+        get_string('streamcustomersubdomain_desc', 'local_certmaster'),
+        '',
+        PARAM_ALPHANUMEXT
+    ));
+
     $ADMIN->add('localplugins', $settings);
 }

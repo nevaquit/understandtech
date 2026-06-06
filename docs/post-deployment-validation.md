@@ -195,3 +195,18 @@ See [playbook §7.4](playbook.md#74-rollback-plan) for decision rules.
 | Nginx config | `infrastructure/nginx/understandtech.conf` |
 
 **Baseline captured:** 2026-06-06 — see [phase-7-production.md](phase-7-production.md).
+
+---
+
+## Deferred integrations (skip until keys exist)
+
+These rows are **not STOP failures** for core `v1.0.0`. Resume when understandtech Stripe/Postmark accounts and Key Vault secrets are ready.
+
+| Integration | Skip reason | Resume with |
+|-------------|-------------|-------------|
+| Stripe checkout + webhook | `stripe-*` secrets absent from Key Vault (deferred 2026-06-06) | `.\scripts\stripe-kv-setup-interactive.ps1` → `./scripts/configure-stripe-remote.sh` → Moodle payment account |
+| Postmark password-reset email | `postmark-server-token` absent; `smtphosts` empty | Verify sender → KV → `./scripts/setup-postmark-smtp-remote.sh` |
+| `payment-flow.spec.ts` E2E | Excluded from default Playwright chromium project | `STRIPE_TEST=1 E2E_PAID_COURSE_PATH=... npx playwright test --project=chromium-stripe` |
+| Stripe webhook STOP row (above) | Mark **N/A** until billing enabled | Re-enable when `paygw_stripe` payment account is live |
+
+Core platform STOP items (SSL, login, AI Socratic refusal, Worker health, Origin Pulls) remain mandatory.

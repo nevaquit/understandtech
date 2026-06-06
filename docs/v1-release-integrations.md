@@ -7,7 +7,7 @@ Honest status for playbook §7.1 gates that require **external dashboards** or *
 | Item | Status |
 |------|--------|
 | Key Vault `cf-stream-signing-key` | ✅ Populated (len 57, not `REPLACE-ME`) |
-| `local_certmaster` Stream embed | ⏸ **Not implemented** — no signed-URL PHP in monorepo yet; use Page/Lesson iframe per skill until plugin adds signing |
+| `local_certmaster` Stream signing | ✅ **`stream_helper`** — RS256 JWT, 60s expiry; admin kid + subdomain; PEM from `/etc/moodle/cf-stream-signing-key.pem` |
 | Test video uploaded | ❌ **User action** — no video in Stream yet |
 | Course lesson embed | ❌ **User action** — embed signed player in a lesson after upload |
 | Smoke `TEST_VIDEO_URL` | ⏸ Skipped until signed manifest URL exists |
@@ -39,11 +39,11 @@ Honest status for playbook §7.1 gates that require **external dashboards** or *
 |------|--------|
 | Install approach | ✅ **Option A** — install on VM from Moodle.org (not monorepo). See [stripe-integration.md](stripe-integration.md). |
 | Moodle plugins on VM | ✅ **`paygw_stripe` installed** — release **1.31** (`2026020800`), `webhook.php` present (Azure run-command 2026-06-06); optional `enrol_stripepayment` not installed |
-| Key Vault Stripe secrets | ❌ **Absent** — `stripe-secret-key`, `stripe-publishable-key`, `stripe-webhook-secret` not in vault `utkvnhhwegpz3rem6` (re-audit 2026-06-06). Helper: `.\scripts\stripe-kv-setup-interactive.ps1` |
+| Key Vault Stripe secrets | ⏸ **Deferred by user** — `stripe-secret-key`, `stripe-publishable-key`, `stripe-webhook-secret` not in vault `utkvnhhwegpz3rem6`. Helper: `.\scripts\stripe-kv-setup-interactive.ps1` |
 | Stripe env on VM (`/etc/moodle/env`) | ⏸ **Blocked** — no `STRIPE_*` vars until KV populated; `configure-stripe-remote.sh` skipped |
 | Webhook route reachable | ✅ **HTTP 400** on `POST …/webhook.php` (plugin installed; not 404) |
 | Stripe account / webhooks | ❌ **User action** — create understandtech Stripe account; Moodle payment account + test keys |
-| E2E `payment-flow.spec.ts` | ⏸ **Stub** — skipped unless `STRIPE_TEST=1` + `E2E_PAID_COURSE_PATH` |
+| E2E `payment-flow.spec.ts` | ⏸ **Deferred** — excluded from chromium project; `chromium-stripe` project when `STRIPE_TEST=1` |
 
 ### Expected plugins (white-paper / playbook)
 
@@ -70,7 +70,7 @@ Full runbook: **[stripe-integration.md](stripe-integration.md)**
 | Item | Status |
 |------|--------|
 | Moodle SMTP (`smtphosts`) | ❌ Empty on production VM (verified 2026-06-06) |
-| Key Vault `postmark-server-token` | ❌ **Absent** — secret not in vault (re-audit 2026-06-06) |
+| Key Vault `postmark-server-token` | ⏸ **Deferred by user** — secret not in vault (re-audit 2026-06-06) |
 | Postmark sender signature | ❌ **User action** |
 | Password-reset test email | ❌ Blocked until SMTP configured |
 

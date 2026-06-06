@@ -8,7 +8,8 @@ One-page gate for playbook §7.1 **Stream test video**. Signing key is already i
 |------|--------|
 | Key Vault `cf-stream-signing-key` | ✅ Populated (len 57, not `REPLACE-ME`) |
 | `scripts/generate-stream-signed-url.sh` | ✅ In repo (needs `python3` + `cryptography`) |
-| `local_certmaster` signed embed | ⏸ Not in monorepo yet — use Page/Lesson iframe until plugin ships |
+| `local_certmaster` Stream signing | ✅ `stream_helper::sign_manifest_url()` (RS256, 60s) — configure kid + subdomain in admin |
+| Signing PEM on VM | ⏸ Run `.\scripts\setup-moodle-env-vm.ps1` → `/etc/moodle/cf-stream-signing-key.pem` |
 
 ## 1. Upload test video (Cloudflare dashboard)
 
@@ -49,13 +50,14 @@ PROD_URL=https://understandtech.app TEST_VIDEO_URL="$TEST_VIDEO_URL" \
 
 Expect the smoke script to pass the Stream URL check (HTTP 200 on manifest).
 
-## 4. Moodle lesson embed (interim)
+## 4. Moodle lesson embed
 
-Until `local_certmaster` signs URLs server-side:
+1. **Site administration → Plugins → Local plugins → CertMaster** — set **Stream signing key ID** and **customer subdomain** from the dashboard.
+2. Deploy signing PEM: `.\scripts\setup-moodle-env-vm.ps1` (writes `/etc/moodle/cf-stream-signing-key.pem` from Key Vault).
+3. In PHP or a custom Mustache filter, call `\local_certmaster\stream_helper::sign_manifest_url($videoid)` — never paste raw video IDs in HTML.
+4. Embed iframe: `https://<subdomain>.cloudflarestream.com/<jwt>/iframe` (generate JWT the same way; manifest URL uses `/manifest/video.m3u8`).
 
-1. Create or edit a **Page** or **Lesson** in a test course.
-2. Use the Stream iframe pattern from [stream-jwt-signing.md](../.cursor/skills/edge-serverless-orchestration/stream-jwt-signing.md) — JWT must expire in **≤ 60 seconds**; never paste raw video IDs in public HTML long-term.
-3. For production lessons, plan on PHP/Worker signing (see white paper § video policy).
+Reference: [stream-jwt-signing.md](../.cursor/skills/edge-serverless-orchestration/stream-jwt-signing.md).
 
 ## 5. Done when
 

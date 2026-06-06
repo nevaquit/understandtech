@@ -112,7 +112,9 @@ sudo ./scripts/install-cloudflare-origin-certs.sh \
 
 | Script | Purpose |
 |--------|---------|
-| `setup-moodle-env-vm.ps1` | Key Vault → `/etc/moodle/env` on VM |
+| `setup-moodle-env-vm.ps1` | Key Vault → `/etc/moodle/env` + Stream signing PEM on VM |
+| `apply-nginx-config.sh` | On VM: sync `infrastructure/nginx/understandtech.conf` and reload |
+| `apply-nginx-config-remote.sh` | Azure Run Command wrapper for nginx sync (JS PHP-FPM routing) |
 | `install-paygw-stripe-vm.sh` | Install `paygw_stripe` from moodle.org/GitHub on VM (not monorepo) |
 | `configure-stripe-vm.sh` / `.ps1` | Stripe Key Vault secrets → `/etc/moodle/env`; verify `paygw_stripe` on VM |
 | `wire-redis-sessions-vm.sh` | Wire Redis sessions + PgBouncer `fetchbuffersize` on VM |
