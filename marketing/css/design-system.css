@@ -94,6 +94,97 @@
     --ut-shadow-md:  0 4px 16px rgba(0,0,0,0.4);
     --ut-shadow-lg:  0 8px 32px rgba(0,0,0,0.5);
   }
+
+  /* ── Override inline style="color:var(--ut-navy)" everywhere ──────
+     Inline styles have higher specificity than class rules, so we use
+     attribute selectors with !important to ensure dark-mode legibility.
+     These selectors ONLY match elements with the exact inline strings.
+  ── */
+  [style*="color:var(--ut-navy)"],
+  [style*="color: var(--ut-navy)"] {
+    color: #e2e8f0 !important;
+  }
+
+  [style*="color:var(--ut-text-muted)"],
+  [style*="color: var(--ut-text-muted)"] {
+    color: #94a3b8 !important;
+  }
+
+  /* ── Headings default to navy in light mode — flip to light ──────── */
+  h1, h2, h3, h4, h5, h6 {
+    color: #e2e8f0;
+  }
+
+  /* ── Preserve intentionally white/gold/teal text ─────────────────── */
+  .hero h1, .page-hero h1 { color: #ffffff !important; }
+  .cta-banner h2 { color: #ffffff !important; }
+  .cta-banner p { color: rgba(255,255,255,0.82) !important; }
+
+  /* ── Cards on dark surface ────────────────────────────────────────── */
+  .ut-card h3 { color: #e2e8f0 !important; }
+  .ut-card p  { color: #94a3b8 !important; }
+
+  /* ── Step cards ───────────────────────────────────────────────────── */
+  .step-card h3 { color: #e2e8f0 !important; }
+  .step-card p  { color: #94a3b8 !important; }
+
+  /* ── Capability / feature detail items ───────────────────────────── */
+  .capability-item h4 { color: #e2e8f0 !important; }
+  .capability-item p  { color: #94a3b8 !important; }
+
+  /* ── Certification track cards ────────────────────────────────────── */
+  .track-card h3 { color: #e2e8f0 !important; }
+  .track-card p  { color: #94a3b8 !important; }
+
+  /* ── About page: values, team, timeline, press ────────────────────── */
+  .value-card h3, .team-card h3, .timeline-item h3,
+  .press-item, .mission-quote { color: #e2e8f0 !important; }
+  .value-card p, .team-card p, .timeline-item p { color: #94a3b8 !important; }
+
+  /* ── Gamification: leaderboard, achievements ─────────────────────── */
+  .lb-name  { color: #e2e8f0 !important; }
+  .lb-score { color: #94a3b8 !important; }
+  .achievement-card h4 { color: #e2e8f0 !important; }
+  .achievement-card p  { color: #94a3b8 !important; }
+
+  /* ── Pricing cards ────────────────────────────────────────────────── */
+  .ut-pricing-card h3 { color: #e2e8f0 !important; }
+  .ut-pricing-card p  { color: #94a3b8 !important; }
+  .ut-price { color: #e2e8f0 !important; }
+
+  /* ── Stats ────────────────────────────────────────────────────────── */
+  .ut-stat-value { color: #e2e8f0 !important; }
+  .ut-stat-label { color: #94a3b8 !important; }
+
+  /* ── Testimonials ─────────────────────────────────────────────────── */
+  .ut-testimonial-text { color: #cbd5e1 !important; }
+  .ut-author-name { color: #e2e8f0 !important; }
+  .ut-author-role { color: #94a3b8 !important; }
+
+  /* ── FAQ ──────────────────────────────────────────────────────────── */
+  .ut-faq-trigger { color: #e2e8f0 !important; }
+  .ut-faq-body p  { color: #94a3b8 !important; }
+
+  /* ── Section labels ───────────────────────────────────────────────── */
+  .ut-section-label h2 { color: #e2e8f0 !important; }
+
+  /* ── Code blocks ──────────────────────────────────────────────────── */
+  code {
+    background: rgba(255,255,255,0.08) !important;
+    color: #93c5fd !important;
+  }
+
+  /* ── Logo bar items ───────────────────────────────────────────────── */
+  .logo-item { color: rgba(255,255,255,0.55) !important; }
+  .logo-item:hover { color: rgba(255,255,255,0.9) !important; }
+  .logos-bar-label { color: #94a3b8 !important; }
+
+  /* ── Logos bar and stats bar backgrounds ─────────────────────────── */
+  .logos-bar { background: var(--ut-surface) !important; }
+  .ut-stat-block { background: var(--ut-surface) !important; }
+  .ut-testimonial { background: var(--ut-surface) !important; }
+  .ut-card { background: var(--ut-surface) !important; }
+  .step-card { background: var(--ut-surface) !important; }
 }
 
 /* ─── Reduced Motion ─────────────────────────────────────────────── */
@@ -924,6 +1015,37 @@ code {
   white-space: nowrap;
   border: 0;
 }
+
+/* ─── Dark Section Overrides ────────────────────────────────────── */
+/* Use .dark-section on any section with a dark/navy background       */
+/* to ensure all descendant text is legible against dark surfaces.    */
+.dark-section h1,
+.dark-section h2,
+.dark-section h3,
+.dark-section h4,
+.dark-section h5,
+.dark-section h6 {
+  color: #ffffff;
+}
+
+.dark-section p,
+.dark-section li,
+.dark-section span:not(.badge):not(.ut-eyebrow):not(.ut-eyebrow-gold):not(.ut-section-pill) {
+  color: rgba(255,255,255,0.88);
+}
+
+.dark-section .ut-lead,
+.dark-section .text-muted {
+  color: rgba(255,255,255,0.75);
+}
+
+.dark-section .ut-eyebrow { color: #4dd9cc; }
+.dark-section .ut-eyebrow-gold { color: var(--ut-gold); }
+
+/* Step cards on dark surface backgrounds */
+.dark-bg h1, .dark-bg h2, .dark-bg h3,
+.dark-bg h4, .dark-bg h5, .dark-bg h6 { color: #ffffff; }
+.dark-bg p, .dark-bg li { color: rgba(255,255,255,0.85); }
 
 /* ─── Print Styles ───────────────────────────────────────────────── */
 @media print {

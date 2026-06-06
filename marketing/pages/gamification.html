@@ -117,7 +117,7 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.82);
     }
 
     .xp-section {
@@ -132,7 +132,7 @@
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.82);
       margin-bottom: 0.4rem;
     }
 
@@ -172,7 +172,7 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.82);
     }
 
     .streak-value {
@@ -212,7 +212,7 @@
       font-family: var(--ut-font-head);
       font-size: 0.75rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.82);
     }
 
     .leaderboard-row {
@@ -300,6 +300,15 @@
 
     .achievement-card h4 { font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--ut-navy); }
     .achievement-card p  { font-size: 0.82rem; color: var(--ut-text-muted); line-height: 1.5; }
+
+    /* Dark mode overrides for gamification page */
+    @media (prefers-color-scheme: dark) {
+      .lb-name { color: #e2e8f0 !important; }
+      .achievement-card h4 { color: #e2e8f0 !important; }
+      .achievement-card p { color: #94a3b8 !important; }
+      .leaderboard-header { background: #0f1e35 !important; }
+      .lb-avatar { background: #1a3a5c !important; }
+    }
   </style>
 </head>
 <body>
