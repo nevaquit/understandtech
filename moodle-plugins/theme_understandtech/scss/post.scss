@@ -59,3 +59,18 @@
     border-radius: 0.5rem;
     box-shadow: 0 4px 12px rgba($ut-brand-navy, 0.15);
 }
+
+.block-examreadiness {
+    container-type: inline-size;
+    container-name: readiness;
+
+    .display-6 {
+        font-family: $headings-font-family;
+        color: $ut-brand-navy;
+    }
+
+    .block-examreadiness-radar {
+        width: 100%;
+        max-height: clamp(12rem, 40cqw, 20rem);
+    }
+}
