@@ -25,6 +25,36 @@ define(['jquery', 'core/chartjs'], function($, ChartJS) {
     };
 
     /**
+     * Truncate long blueprint labels for narrow containers.
+     *
+     * @param {string} label Domain label.
+     * @param {number} maxLen Maximum character count.
+     * @return {string}
+     */
+    const truncateLabel = (label, maxLen) => {
+        if (!label || label.length <= maxLen) {
+            return label;
+        }
+        return label.slice(0, maxLen - 1) + '\u2026';
+    };
+
+    /**
+     * Resolve label length from container width.
+     *
+     * @param {number} width Container width in pixels.
+     * @return {number}
+     */
+    const getLabelMaxLen = (width) => {
+        if (width < 280) {
+            return 8;
+        }
+        if (width < 400) {
+            return 12;
+        }
+        return 24;
+    };
+
+    /**
      * Render a single radar chart on a canvas element.
      *
      * @param {HTMLCanvasElement} canvas
@@ -35,14 +65,17 @@ define(['jquery', 'core/chartjs'], function($, ChartJS) {
             return;
         }
 
-        const labels = radar.map((d) => d.label || d.domain);
+        const container = canvas.closest('.block-examreadiness') || canvas.parentElement;
+        const containerWidth = container ? container.clientWidth : 400;
+        const maxLen = getLabelMaxLen(containerWidth);
+        const labels = radar.map((d) => truncateLabel(d.label || d.domain, maxLen));
         const scores = radar.map((d) => Number(d.score) || 0);
 
         canvas.style.width = '100%';
         canvas.setAttribute('role', 'img');
 
         // eslint-disable-next-line no-new
-        new ChartJS(canvas, {
+        const chart = new ChartJS(canvas, {
             type: 'radar',
             data: {
                 labels,
@@ -53,6 +86,7 @@ define(['jquery', 'core/chartjs'], function($, ChartJS) {
                     backgroundColor: 'rgba(26, 138, 125, 0.2)',
                     pointBackgroundColor: BRAND.gold,
                     pointBorderColor: BRAND.navy,
+                    borderWidth: 2,
                 }],
             },
             options: {
@@ -63,10 +97,11 @@ define(['jquery', 'core/chartjs'], function($, ChartJS) {
                         beginAtZero: true,
                         min: 0,
                         max: 100,
-                        ticks: {stepSize: 20},
+                        ticks: {stepSize: 20, backdropColor: 'transparent'},
                         grid: {color: 'rgba(11, 31, 58, 0.12)'},
+                        angleLines: {color: 'rgba(11, 31, 58, 0.08)'},
                         pointLabels: {
-                            font: {size: 11},
+                            font: {size: 11, family: 'Rajdhani, Segoe UI, sans-serif'},
                             color: BRAND.navy,
                         },
                     },
@@ -81,6 +116,19 @@ define(['jquery', 'core/chartjs'], function($, ChartJS) {
                 },
             },
         });
+
+        canvas._utRadarChart = chart;
+
+        if (typeof ResizeObserver !== 'undefined' && container) {
+            const observer = new ResizeObserver(() => {
+                const width = container.clientWidth || 400;
+                const newMax = getLabelMaxLen(width);
+                chart.data.labels = radar.map((d) => truncateLabel(d.label || d.domain, newMax));
+                chart.update('none');
+            });
+            observer.observe(container);
+            canvas._utRadarObserver = observer;
+        }
     };
 
     /**

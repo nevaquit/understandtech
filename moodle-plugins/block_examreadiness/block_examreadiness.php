@@ -40,9 +40,17 @@ class block_examreadiness extends block_base {
             $PAGE->requires->js_call_amd('local_certmaster/radar_chart', 'init', ['.block-examreadiness-radar']);
         }
 
+        $radardomains = array_map(static function (array $domain): array {
+            return [
+                'label' => $domain['label'],
+                'score' => $domain['score'],
+            ];
+        }, $data['radar']);
+
         $this->content->text = $OUTPUT->render_from_template('block_examreadiness/main', [
             'readiness' => $data['overall_readiness'],
             'radar' => json_encode($data['radar']),
+            'radardomains' => $radardomains,
             'misconceptions' => $misconceptions,
             'empty' => empty($data['radar']),
         ]);

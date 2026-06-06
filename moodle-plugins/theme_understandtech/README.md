@@ -54,6 +54,22 @@ Placeholder — capture after Moodle install:
 | `core/toast` | Notification styling |
 | `block_xp/main` | Leaderboard widget (requires block_xp) |
 
+## Gamification (Level Up XP)
+
+When `block_xp` is installed on the production VM, the theme overrides `block_xp/main` with `.ut-leaderboard` styling and milestone toasts via `core/toast` (add class `ut-milestone-toast` server-side when surfacing unlocks).
+
+### XP economy calibration (configure in Level Up XP admin)
+
+| Behavior | Relative XP | Notes |
+|----------|-------------|-------|
+| Community post | Small, frequent | Skool-like feed activity |
+| Peer support (forum answer) | Substantial | Reward helping others |
+| Lesson completion | Moderate | Core progression |
+| Lab submission | Large | Tie to `mod_ctfflag` when deployed |
+| Practice exam pass | Largest | Cert readiness milestones |
+
+Award XP via Moodle **event observers** in local plugins (`db/events.php`), not theme JavaScript. Readiness thresholds should reference `local_certmaster\api::get_user_readiness()`, not raw quiz attempt counts.
+
 ## Customization
 
 Adjust `scss/preset/default.scss` for layout tokens and `scss/post.scss` for widget styling. Purge theme caches after changes (**Site administration → Development → Purge all caches**).

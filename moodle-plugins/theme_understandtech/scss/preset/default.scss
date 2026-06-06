@@ -1,6 +1,12 @@
 // UnderstandTech brand preset — Boost child overrides.
 // Variables $ut-brand-* are injected via theme_understandtech_get_pre_scss().
 
+$ut-space-sm: clamp(0.5rem, 0.35rem + 0.5vw, 0.75rem);
+$ut-space-md: clamp(0.75rem, 0.5rem + 1vw, 1.25rem);
+$ut-space-lg: clamp(1rem, 0.75rem + 1.5vw, 2rem);
+$ut-heading-lg: clamp(1.25rem, 1rem + 1.2vw, 2rem);
+$ut-content-max: min(100%, 90rem);
+
 $body-font-family: 'Source Serif 4', Georgia, serif;
 $headings-font-family: 'Rajdhani', 'Segoe UI', sans-serif;
 $font-family-monospace: 'Share Tech Mono', ui-monospace, monospace;
@@ -47,14 +53,42 @@ $card-border-radius: 0.75rem;
     background: #fff;
     border-radius: $card-border-radius;
     box-shadow: 0 1px 3px rgba($ut-brand-navy, 0.08);
+    padding: $ut-space-md;
+}
+
+.pagelayout-mydashboard,
+.pagelayout-frontpage {
+    #region-main {
+        max-width: $ut-content-max;
+        margin-inline: auto;
+    }
+}
+
+.pagelayout-course {
+    #region-main {
+        padding: $ut-space-lg;
+    }
+
+    .course-content {
+        max-width: $ut-content-max;
+    }
+}
+
+.page-header-headings h1 {
+    font-size: $ut-heading-lg;
+    color: $ut-brand-navy;
+    font-family: $headings-font-family;
 }
 
 .ut-skool-layout {
+    container-type: inline-size;
+    container-name: lesson;
+
     .ut-lesson-grid {
         display: grid;
         grid-template-columns: 3fr 2fr;
-        gap: 1.5rem;
-        min-height: 60vh;
+        gap: $ut-space-lg;
+        min-height: clamp(40vh, 50cqw, 60vh);
     }
 
     .ut-lesson-media {
@@ -73,6 +107,13 @@ $card-border-radius: 0.75rem;
 }
 
 .ut-dashboard-cards {
+    container-type: inline-size;
+    container-name: dashboard;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(14rem, 40cqw, 20rem), 1fr));
+    gap: $ut-space-md;
+
     .card {
         border: none;
         border-top: 3px solid $ut-brand-teal;
@@ -86,6 +127,7 @@ $card-border-radius: 0.75rem;
     .card-title {
         color: $ut-brand-navy;
         font-family: $headings-font-family;
+        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
     }
 }
 
@@ -127,6 +169,20 @@ $card-border-radius: 0.75rem;
 }
 
 @media (max-width: 991.98px) {
+    .ut-skool-layout .ut-lesson-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ut-primary-nav .nav-item {
+        max-width: none;
+    }
+
+    .navbar .nav-link {
+        font-size: clamp(0.75rem, 0.7rem + 0.3vw, 0.85rem);
+    }
+}
+
+@container lesson (max-width: 48rem) {
     .ut-skool-layout .ut-lesson-grid {
         grid-template-columns: 1fr;
     }

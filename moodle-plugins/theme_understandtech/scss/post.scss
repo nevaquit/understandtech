@@ -58,19 +58,45 @@
     border-left: 4px solid $ut-brand-teal;
     border-radius: 0.5rem;
     box-shadow: 0 4px 12px rgba($ut-brand-navy, 0.15);
+
+    &.ut-milestone-toast {
+        border-left-color: $ut-brand-gold;
+
+        .toast-header {
+            background: rgba($ut-brand-gold, 0.12);
+            color: $ut-brand-navy;
+            font-family: $headings-font-family;
+        }
+    }
 }
 
 .block-examreadiness {
     container-type: inline-size;
     container-name: readiness;
 
-    .display-6 {
+    .block-examreadiness-score .display-6 {
         font-family: $headings-font-family;
         color: $ut-brand-navy;
+        font-size: clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem);
     }
 
     .block-examreadiness-radar {
         width: 100%;
         max-height: clamp(12rem, 40cqw, 20rem);
+    }
+
+    .block-examreadiness-misconceptions li {
+        padding: $ut-space-sm 0;
+        border-bottom: 1px solid rgba($ut-brand-navy, 0.06);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+@container readiness (min-width: 20rem) {
+    .block-examreadiness-radar {
+        max-height: clamp(14rem, 45cqw, 24rem);
     }
 }

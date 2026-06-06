@@ -1,5 +1,11 @@
 // AI Tutor sidebar — JWT fetch + SSE streaming to Cloudflare Worker.
-define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notification, Str) {
+define(['core/ajax', 'core/str'], function(Ajax, Str) {
+    const STRINGS = [
+        {key: 'unavailable', component: 'local_aitutor'},
+        {key: 'loading', component: 'local_aitutor'},
+        {key: 'error_generic', component: 'local_aitutor'},
+    ];
+
     /**
      * Bind sidebar UI once the footer-injected markup is in the DOM.
      *
@@ -13,9 +19,12 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
             return !!root;
         }
         root.dataset.aitutorBound = '1';
+
         const output = root.querySelector('.local-aitutor-output');
         const sendBtn = root.querySelector('.local-aitutor-send');
         const toggle = root.querySelector('.local-aitutor-toggle');
+        const input = root.querySelector('.local-aitutor-input');
+
         const collapsed = localStorage.getItem('local_aitutor_collapsed') === '1';
         if (collapsed) {
             root.classList.add('collapsed');
@@ -29,32 +38,58 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
             );
         });
 
+        let strings = {
+            unavailable: 'AI Tutor is temporarily unavailable. Please try again later.',
+            loading: 'Thinking…',
+            error_generic: 'Something went wrong. Please try again.',
+        };
+
+        Str.get_strings(STRINGS).then((resolved) => {
+            strings = {
+                unavailable: resolved[0],
+                loading: resolved[1],
+                error_generic: resolved[2],
+            };
+        });
+
+        const setLoading = (active) => {
+            root.classList.toggle('is-loading', active);
+            if (sendBtn) {
+                sendBtn.disabled = active;
+            }
+        };
+
+        const setError = (message) => {
+            root.classList.add('has-error');
+            if (output) {
+                output.textContent = message;
+            }
+        };
+
+        const clearError = () => {
+            root.classList.remove('has-error');
+        };
+
         const fetchJwt = () => Ajax.call([{
             methodname: 'local_aitutor_get_jwt',
             args: {courseid: courseid, cmid: cmid || 0, conversationuuid: ''},
         }])[0];
 
-        const showUnavailable = () => Str.get_string('unavailable', 'local_aitutor').then((text) => {
-            if (output) {
-                output.textContent = text;
-            }
-        });
-
-                const streamTutorReply = async (workerurl, token, prompt, courseid, cmid) => {
-                    const response = await fetch(workerurl, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': 'Bearer ' + token,
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            messages: [{role: 'user', content: prompt}],
-                            context: {
-                                courseid: courseid,
-                                activityid: cmid || null,
-                            },
-                        }),
-                    });
+        const streamTutorReply = async (workerurl, token, prompt, courseid, cmid) => {
+            const response = await fetch(workerurl, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    messages: [{role: 'user', content: prompt}],
+                    context: {
+                        courseid: courseid,
+                        activityid: cmid || null,
+                    },
+                }),
+            });
 
             if (!response.ok) {
                 throw new Error('worker_http_' + response.status);
@@ -83,17 +118,21 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
                     }
                     try {
                         const chunk = JSON.parse(payload);
-                                if (chunk.token) {
-                                    if (output.textContent === '…') {
-                                        output.textContent = '';
-                                    }
-                                    output.textContent += chunk.token;
+                        if (chunk.token) {
+                            if (output && output.textContent === strings.loading) {
+                                output.textContent = '';
+                            }
+                            if (output) {
+                                output.textContent += chunk.token;
+                            }
                         } else if (chunk.error) {
                             throw new Error(chunk.error);
                         }
                     } catch (parseErr) {
                         if (parseErr instanceof SyntaxError) {
-                            output.textContent += payload;
+                            if (output) {
+                                output.textContent += payload;
+                            }
                         } else {
                             throw parseErr;
                         }
@@ -102,30 +141,29 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
             }
         };
 
-                sendBtn?.addEventListener('click', async () => {
-                    const prompt = root.querySelector('.local-aitutor-input')?.value?.trim();
-                    if (!prompt || !output) {
-                        return;
-                    }
-                    if (sendBtn) {
-                        sendBtn.disabled = true;
-                    }
-                    output.textContent = '…';
-                    try {
-                        const {token, workerurl} = await fetchJwt();
-                        await streamTutorReply(workerurl, token, prompt, courseid, cmid);
-                        if (output.textContent === '…' || output.textContent.trim() === '') {
-                            await showUnavailable();
-                        }
-                    } catch (err) {
-                        await showUnavailable();
-                        Notification.exception(err);
-                    } finally {
-                        if (sendBtn) {
-                            sendBtn.disabled = false;
-                        }
-                    }
-                });
+        sendBtn?.addEventListener('click', async () => {
+            const prompt = input?.value?.trim();
+            if (!prompt || !output) {
+                return;
+            }
+
+            clearError();
+            setLoading(true);
+            output.textContent = strings.loading;
+
+            try {
+                const {token, workerurl} = await fetchJwt();
+                await streamTutorReply(workerurl, token, prompt, courseid, cmid);
+                if (output.textContent === strings.loading || output.textContent.trim() === '') {
+                    output.textContent = strings.unavailable;
+                }
+            } catch (err) {
+                setError(strings.error_generic);
+            } finally {
+                setLoading(false);
+            }
+        });
+
         return true;
     };
 

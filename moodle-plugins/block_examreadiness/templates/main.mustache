@@ -3,12 +3,34 @@
         <p class="text-muted">{{#str}}noattempts, block_examreadiness{{/str}}</p>
     {{/empty}}
     {{^empty}}
-        <div class="display-6 mb-2">{{readiness}}%</div>
-        <div class="small text-muted mb-3">{{#str}}readiness_label, block_examreadiness{{/str}}</div>
-        <canvas class="block-examreadiness-radar" data-radar="{{radar}}" height="200" aria-label="Domain mastery radar"></canvas>
+        <div class="block-examreadiness-score">
+            <div class="display-6 mb-2">{{readiness}}%</div>
+            <div class="small text-muted mb-3">{{#str}}readiness_label, block_examreadiness{{/str}}</div>
+        </div>
+        <figure class="block-examreadiness-chart mb-0">
+            <canvas class="block-examreadiness-radar" data-radar="{{radar}}" height="200"
+                    aria-label="{{#str}}radar_aria, block_examreadiness{{/str}}"></canvas>
+            <table class="sr-only">
+                <caption>{{#str}}radar_summary, block_examreadiness{{/str}}</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">{{#str}}domain, block_examreadiness{{/str}}</th>
+                        <th scope="col">{{#str}}score, block_examreadiness{{/str}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#radardomains}}
+                        <tr>
+                            <th scope="row">{{label}}</th>
+                            <td>{{score}}%</td>
+                        </tr>
+                    {{/radardomains}}
+                </tbody>
+            </table>
+        </figure>
         {{#misconceptions}}
             <h4 class="h6 mt-3">{{#str}}misconceptions_heading, block_examreadiness{{/str}}</h4>
-            <ul class="list-unstyled">
+            <ul class="list-unstyled block-examreadiness-misconceptions">
                 {{#.}}
                     <li>{{objective}} — attempt {{attemptid}}</li>
                 {{/.}}
