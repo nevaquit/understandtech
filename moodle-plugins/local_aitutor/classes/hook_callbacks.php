@@ -42,7 +42,7 @@ class hook_callbacks {
     }
 
     /**
-     * Register CSS/AMD while the page head is still being built.
+     * Register sidebar stylesheet while the page head is still being built.
      *
      * @param \core\hook\output\before_standard_head_html_generation $hook
      * @return void
@@ -50,29 +50,24 @@ class hook_callbacks {
     public static function before_standard_head(\core\hook\output\before_standard_head_html_generation $hook): void {
         global $PAGE;
 
-        $sidebar = self::get_sidebar_context();
-        if ($sidebar === null) {
+        if (self::get_sidebar_context() === null) {
             return;
         }
 
         $PAGE->requires->css('/local/aitutor/styles.css');
-        $PAGE->requires->js_call_amd(
-            'local_aitutor/tutor_sidebar',
-            'init',
-            [$sidebar['courseid'], $sidebar['cmid']],
-        );
     }
 
     /**
-     * Inject sidebar markup before the page footer is rendered.
+     * Inject sidebar markup and AMD init before footer scripts are emitted.
      *
      * @param \core\hook\output\before_footer_html_generation $hook
      * @return void
      */
     public static function before_footer(\core\hook\output\before_footer_html_generation $hook): void {
-        global $OUTPUT;
+        global $OUTPUT, $PAGE;
 
-        if (self::get_sidebar_context() === null) {
+        $sidebar = self::get_sidebar_context();
+        if ($sidebar === null) {
             return;
         }
 
@@ -80,5 +75,11 @@ class hook_callbacks {
             'title' => get_string('sidebar_title', 'local_aitutor'),
         ]);
         $hook->add_html($html);
+
+        $PAGE->requires->js_call_amd(
+            'local_aitutor/tutor_sidebar',
+            'init',
+            [$sidebar['courseid'], $sidebar['cmid']],
+        );
     }
 }

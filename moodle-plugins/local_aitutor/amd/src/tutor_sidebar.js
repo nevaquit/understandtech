@@ -1,5 +1,5 @@
 // AI Tutor sidebar — JWT fetch + SSE streaming to Cloudflare Worker.
-define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
+define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notification, Str) {
     return {
         init: function(courseid, cmid) {
             const root = document.getElementById('local-aitutor-sidebar');
@@ -8,6 +8,7 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
             }
 
             const output = root.querySelector('.local-aitutor-output');
+            const sendBtn = root.querySelector('.local-aitutor-send');
             const toggle = root.querySelector('.local-aitutor-toggle');
             const collapsed = localStorage.getItem('local_aitutor_collapsed') === '1';
             if (collapsed) {
@@ -23,6 +24,12 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 methodname: 'local_aitutor_get_jwt',
                 args: {courseid: courseid, cmid: cmid || 0, conversationuuid: ''},
             }])[0];
+
+            const showUnavailable = () => Str.get_string('unavailable', 'local_aitutor').then((text) => {
+                if (output) {
+                    output.textContent = text;
+                }
+            });
 
             const streamTutorReply = async (workerurl, token, prompt) => {
                 const response = await fetch(workerurl, {
@@ -79,18 +86,25 @@ define(['core/ajax', 'core/notification'], function(Ajax, Notification) {
                 }
             };
 
-            root.querySelector('.local-aitutor-send')?.addEventListener('click', async () => {
+            sendBtn?.addEventListener('click', async () => {
                 const prompt = root.querySelector('.local-aitutor-input')?.value?.trim();
                 if (!prompt || !output) {
                     return;
                 }
                 output.textContent = '';
+                if (sendBtn) {
+                    sendBtn.disabled = true;
+                }
                 try {
                     const [{token, workerurl}] = await fetchJwt();
                     await streamTutorReply(workerurl, token, prompt);
                 } catch (err) {
-                    output.textContent = M.util.get_string('unavailable', 'local_aitutor');
+                    await showUnavailable();
                     Notification.exception(err);
+                } finally {
+                    if (sendBtn) {
+                        sendBtn.disabled = false;
+                    }
                 }
             });
         },

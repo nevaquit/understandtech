@@ -35,7 +35,7 @@ export class TestUser {
 
   async gotoLogin(): Promise<void> {
     await this.page.goto('/login/index.php');
-    await expect(this.page.locator('.loginform')).toBeVisible();
+    await expect(this.page.locator('.loginform, .ut-login-form')).toBeVisible({ timeout: 15_000 });
   }
 
   async login(email: string, password: string): Promise<void> {
