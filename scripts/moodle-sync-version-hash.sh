@@ -32,3 +32,19 @@ echo "PgBouncer transaction mode restored"
 
 bash /tmp/verify-certmaster-tables.sh 2>/dev/null | tail -8
 bash /tmp/moodle-query-custom-plugins.sh 2>/dev/null | head -12
+
+# Test SCSS compilation to catch any theme CSS errors early
+echo "--- SCSS compilation test ---"
+sudo -u www-data /usr/bin/php -r "
+define('CLI_SCRIPT', true);
+require '/var/www/moodle/config.php';
+require_once(\$CFG->libdir . '/outputlib.php');
+\$theme = theme_config::load('understandtech');
+try {
+    \$css = \$theme->get_css_content();
+    echo 'SCSS OK: ' . strlen(\$css) . ' bytes' . PHP_EOL;
+} catch (\Throwable \$e) {
+    echo 'SCSS ERROR: ' . \$e->getMessage() . PHP_EOL;
+    echo 'At: ' . \$e->getFile() . ':' . \$e->getLine() . PHP_EOL;
+}
+" 2>&1 || echo "PHP SCSS test failed"
