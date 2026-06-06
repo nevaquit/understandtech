@@ -48,4 +48,9 @@ if [ -f "$NGINX_SRC" ] && { [ ! -f "$NGINX_DST" ] || ! cmp -s "$NGINX_SRC" "$NGI
   echo "nginx reloaded"
 fi
 
+if [ -f "${REPO}/scripts/test-tutor-jwt.php" ]; then
+  echo "--- tutor JWT smoke ---"
+  sudo -u www-data /usr/bin/php "${REPO}/scripts/test-tutor-jwt.php" --curl || echo "WARN: tutor JWT/worker check failed"
+fi
+
 echo "Upgrade complete via direct Postgres."
