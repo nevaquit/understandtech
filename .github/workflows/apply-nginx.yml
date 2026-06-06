@@ -33,8 +33,8 @@ jobs:
           set -euo pipefail
           grep -q 'javascript\\.php' /etc/nginx/sites-available/understandtech.conf
           echo "nginx: javascript.php location present"
-          dbhost="$(sudo -u www-data /usr/bin/php /var/www/moodle/admin/cli/cfg.php --name=dbhost 2>/dev/null || true)"
-          dbport="$(sudo -u www-data /usr/bin/php /var/www/moodle/admin/cli/cfg.php --name=dboptions 2>/dev/null | grep dbport || true)"
+          dbhost="$(sudo -u www-data /usr/bin/php -r 'define("CLI_SCRIPT",true); require "/var/www/moodle/config.php"; echo $CFG->dbhost;' 2>/dev/null || true)"
+          dbport="$(sudo -u www-data /usr/bin/php -r 'define("CLI_SCRIPT",true); require "/var/www/moodle/config.php"; echo $CFG->dboptions["dbport"] ?? "";' 2>/dev/null || true)"
           echo "dbhost=${dbhost}"
           echo "dboptions=${dbport}"
           if [[ "$dbhost" != "127.0.0.1" ]]; then
