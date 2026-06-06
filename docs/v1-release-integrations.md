@@ -12,6 +12,8 @@ Honest status for playbook §7.1 gates that require **external dashboards** or *
 | Course lesson embed | ❌ **User action** — embed signed player in a lesson after upload |
 | Smoke `TEST_VIDEO_URL` | ⏸ Skipped until signed manifest URL exists |
 
+**Checklist:** [stream-upload-checklist.md](stream-upload-checklist.md)
+
 ### Steps (Cloudflare dashboard)
 
 1. **Stream → Upload** — upload a short test clip (e.g. 30s MP4). Note the **video ID** and **customer subdomain** from the embed snippet.

@@ -23,7 +23,7 @@ Per `docs/playbook.md` §7.1–7.4. **Do not tag `v1.0.0` until all pre-deploy g
 | Production DNS → Cloudflare | ✅ **Done** | `understandtech.app` → Cloudflare anycast. |
 | Cloudflare DNS records proxied | ✅ **Done** | `Server: cloudflare`, `CF-RAY` on responses. |
 | Authenticated Origin Pulls enabled | ✅ **Done** | Nginx `ssl_client_certificate` present on VM. Direct `--resolve understandtech.app:443:52.252.59.54` from workstation: **TLS handshake fails** (curl 000/35) — origin not serving anonymous HTTPS; traffic must go through Cloudflare. |
-| Cloudflare Stream test video | ❌ **User action** | KV signing key ✅; no upload/lesson embed yet. See [v1-release-integrations.md](v1-release-integrations.md). |
+| Cloudflare Stream test video | ❌ **User action** | KV signing key ✅ (len 57); no upload/lesson embed yet. See [stream-upload-checklist.md](stream-upload-checklist.md) and [v1-release-integrations.md](v1-release-integrations.md). |
 | Stripe webhooks → production | ⚠️ **Partial** | `paygw_stripe` **1.31** (2026020800) on VM; webhook `POST` → **400** (not 404). No `STRIPE_*` in `/etc/moodle/env` until KV populated. Payment account + KV secrets: user action. See [stripe-integration.md](stripe-integration.md). |
 | Postmark sender verified | ❌ **User action** | KV `postmark-server-token` absent; Moodle `smtphosts` empty on VM. See [v1-release-integrations.md](v1-release-integrations.md). |
 | Self-hosted runner idle/online | ✅ **Done** | `{"name":"understandtech-web-prod","status":"online","busy":false}` |
@@ -105,7 +105,7 @@ Then execute every row in [post-deployment-validation.md](post-deployment-valida
 
 ## Recommended next steps
 
-1. **Stream:** Upload test video in Cloudflare dashboard; `generate-stream-signed-url.sh` → `TEST_VIDEO_URL`; re-run smoke.
+1. **Stream:** Follow [stream-upload-checklist.md](stream-upload-checklist.md) — upload in dashboard, `generate-stream-signed-url.sh` → `TEST_VIDEO_URL`, re-run smoke.
 2. **Stripe:** `paygw_stripe` installed on VM — run `.\scripts\stripe-kv-setup-interactive.ps1`, then `./scripts/configure-stripe-remote.sh`, then Moodle payment account ([stripe-integration.md](stripe-integration.md)).
 3. **Postmark:** Verify sender; `az keyvault secret set --name postmark-server-token …`; run `./scripts/setup-postmark-smtp-remote.sh`.
 4. **Sudoers:** From machine with `az login`: `./scripts/sync-sudoers-remote.sh` (or `sync-sudoers-vm.sh` on VM after `git pull`).
