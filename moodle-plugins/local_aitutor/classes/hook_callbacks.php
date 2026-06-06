@@ -66,7 +66,7 @@ class hook_callbacks {
     public static function before_standard_footer(
         \core\hook\output\before_standard_footer_html_generation $hook,
     ): void {
-        global $OUTPUT;
+        global $OUTPUT, $PAGE;
 
         $sidebar = self::get_sidebar_context();
         if ($sidebar === null) {
@@ -79,5 +79,15 @@ class hook_callbacks {
             'cmid' => $sidebar['cmid'],
         ]);
         $hook->add_html($html);
+
+        $courseid = $sidebar['courseid'];
+        $cmid = $sidebar['cmid'];
+        $PAGE->requires->js_amd_inline(
+            "require(['local_aitutor/tutor_sidebar'], function(Tutor) {" .
+            "var boot = function() {" .
+            "if (document.getElementById('local-aitutor-sidebar')) {" .
+            "Tutor.init({$courseid}, {$cmid}); return; }" .
+            "window.requestAnimationFrame(boot); }; boot(); });",
+        );
     }
 }

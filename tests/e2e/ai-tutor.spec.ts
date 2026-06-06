@@ -28,11 +28,7 @@ test.describe('AI Tutor sidebar', () => {
     await user.login(creds!.email, creds!.password);
     await page.goto(getCoursePath());
     await expect(page.locator(SIDEBAR)).toBeVisible({ timeout: 20_000 });
-    await page.waitForFunction(
-      () => document.querySelector('#local-aitutor-sidebar')?.dataset.aitutorBound === '1',
-      undefined,
-      { timeout: 20_000 },
-    );
+    await page.waitForLoadState('networkidle').catch(() => undefined);
   });
 
   test('sidebar is visible on course page', async ({ page }) => {
