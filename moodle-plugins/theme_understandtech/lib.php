@@ -120,6 +120,19 @@ function theme_understandtech_get_extra_scss(theme_config $theme): string {
     return file_get_contents($scsspath);
 }
 
+/**
+ * CSS post-processor callback declared in config.php.
+ * Currently a pass-through — returns the compiled CSS unchanged.
+ * Reserved for future CSS variable injection or autoprefixing.
+ *
+ * @param string $css The compiled CSS.
+ * @param theme_config $theme The theme configuration object.
+ * @return string The processed CSS.
+ */
+function theme_understandtech_process_css(string $css, theme_config $theme): string {
+    return $css;
+}
+
 // ── Colour Utility Functions ──────────────────────────────────────────────────
 
 /**
