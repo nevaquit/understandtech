@@ -108,6 +108,19 @@ if [ -f "$NGINX_SRC" ] && { [ ! -f "$NGINX_DST" ] || ! cmp -s "$NGINX_SRC" "$NGI
   echo "nginx reloaded"
 fi
 
+# Deploy marketing site files
+MARKETING_SRC="${REPO}/marketing"
+MARKETING_DEST="/var/www/marketing"
+if [ -d "$MARKETING_SRC" ]; then
+  echo "Deploying marketing site from ${MARKETING_SRC}"
+  mkdir -p "$MARKETING_DEST"
+  rsync -av --delete "$MARKETING_SRC/" "$MARKETING_DEST/"
+  chown -R www-data:www-data "$MARKETING_DEST"
+  find "$MARKETING_DEST" -type d -exec chmod 755 {} \;
+  find "$MARKETING_DEST" -type f -exec chmod 644 {} \;
+  echo "Marketing site deployed to ${MARKETING_DEST}"
+fi
+
 if [ -f "${REPO}/scripts/test-tutor-jwt.php" ]; then
   echo "--- tutor JWT smoke ---"
   sudo -u www-data /usr/bin/php "${REPO}/scripts/test-tutor-jwt.php" --curl || echo "WARN: tutor JWT/worker check failed"
