@@ -98,11 +98,17 @@ function theme_understandtech_page_init(moodle_page $page): void {
  * @return string Main SCSS content.
  */
 function theme_understandtech_get_main_scss_content(theme_config $theme): string {
-    $scsspath = $theme->dir . '/scss/preset/default.scss';
-    if (!is_readable($scsspath)) {
-        return '';
+    global $CFG;
+    // Start with Boost's default preset so Bootstrap + Boost SCSS variables and
+    // mixins are available when our custom rules are compiled.
+    $boostpreset = $CFG->dirroot . '/theme/boost/scss/preset/default.scss';
+    $scss = is_readable($boostpreset) ? file_get_contents($boostpreset) : '';
+    // Append our custom design system SCSS after Boost's preset.
+    $customscss = $theme->dir . '/scss/preset/default.scss';
+    if (is_readable($customscss)) {
+        $scss .= "\n" . file_get_contents($customscss);
     }
-    return file_get_contents($scsspath);
+    return $scss;
 }
 
 /**
