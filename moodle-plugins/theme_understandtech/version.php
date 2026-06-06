@@ -9,7 +9,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'theme_understandtech';
-$plugin->version   = 2026060909;
+$plugin->version   = 2026060910;
 $plugin->requires  = 2024100700;
 $plugin->maturity  = MATURITY_BETA;
 $plugin->release   = '1.0.0';
