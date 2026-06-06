@@ -69,7 +69,7 @@ function buildFooter() {
           </div>
           <span class="ut-nav-brand-name" style="color:#fff">Understand<span>Tech</span></span>
         </a>
-        <p>The AI-powered certification platform that turns complex technology into mastery — one adaptive lesson at a time.</p>
+        <p>The AI-powered certification platform that turns complex technology into mastery — one adaptive lesson at a time. A Veteran Owned Small Business (VOSB).</p>
       </div>
 
       <div class="ut-footer-col">
@@ -104,7 +104,7 @@ function buildFooter() {
     </div>
 
     <div class="ut-footer-bottom">
-      <span>&copy; 2026 AI Tech Pros, Inc. All rights reserved.</span>
+      <span>&copy; 2026 AI Tech Pros, Inc. All rights reserved. A Veteran Owned Small Business.</span>
       <div style="display:flex;gap:1.5rem;">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>

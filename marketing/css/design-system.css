@@ -22,7 +22,7 @@
   --ut-surface:     #ffffff;
   --ut-surface-2:   #f8fafc;
   --ut-text:        #1e293b;
-  --ut-text-muted:  #475569;
+  --ut-text-muted:  #334155; /* Darkened for contrast */
   --ut-border:      rgba(11,31,58,0.10);
   --ut-border-med:  rgba(11,31,58,0.16);
 
