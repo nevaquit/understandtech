@@ -28,14 +28,30 @@ jobs:
           set -euo pipefail
           sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
 
-      - name: Verify RequireJS endpoint
+      - name: Verify nginx JS routing and login
         run: |
           set -euo pipefail
+          grep -q 'javascript\\.php' /etc/nginx/sites-available/understandtech.conf
+          echo "nginx: javascript.php location present"
+          dbhost="$(sudo -u www-data /usr/bin/php /var/www/moodle/admin/cli/cfg.php --name=dbhost 2>/dev/null || true)"
+          dbport="$(sudo -u www-data /usr/bin/php /var/www/moodle/admin/cli/cfg.php --name=dboptions 2>/dev/null | grep dbport || true)"
+          echo "dbhost=${dbhost}"
+          echo "dboptions=${dbport}"
+          if [[ "$dbhost" != "127.0.0.1" ]]; then
+            echo "Expected dbhost 127.0.0.1 (PgBouncer)" >&2
+            exit 1
+          fi
           code="$(curl -sS -o /dev/null -w '%{http_code}' \
-            'https://understandtech.app/lib/javascript.php/-1/lib/requirejs/require.min.js' \
-            --resolve understandtech.app:443:127.0.0.1 -k || true)"
+            'https://understandtech.app/lib/javascript.php/-1/lib/requirejs/require.min.js' || true)"
           echo "requirejs_http=${code}"
           if [ "$code" != "200" ]; then
-            echo "Expected 200 from local RequireJS URL" >&2
+            echo "Expected 200 from Cloudflare RequireJS URL" >&2
+            exit 1
+          fi
+          login_code="$(curl -sS -o /tmp/login-check.html -w '%{http_code}' \
+            'https://understandtech.app/login/index.php' || true)"
+          echo "login_http=${login_code}"
+          if grep -q 'Error reading from database' /tmp/login-check.html 2>/dev/null; then
+            echo "Login page shows database error" >&2
             exit 1
           fi

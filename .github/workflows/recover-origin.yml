@@ -21,4 +21,10 @@ jobs:
       - name: Restore DB connectivity
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/recover-origin-db.sh
+          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/moodle-upgrade-direct-pg.sh
+
+      - name: Disable maintenance mode
+        if: always()
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable

@@ -7,12 +7,12 @@ MOODLE_DIR="${MOODLE_DIR:-/var/www/moodle}"
 CONFIG="${MOODLE_DIR}/config.php"
 BACKUP=/tmp/config.pgbouncer.bak
 LOG="${MOODLE_UPGRADE_LOG:-/tmp/moodle-upgrade.log}"
+REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
 
 exec > >(tee -a "$LOG") 2>&1
 
 echo "=== Moodle direct-Postgres upgrade $(date -Is) ==="
 
-REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
 if [ -x "${REPO}/scripts/recover-origin-db.sh" ]; then
   bash "${REPO}/scripts/recover-origin-db.sh" || true
 fi
@@ -22,11 +22,51 @@ if ! sudo -u www-data php -r "define('CLI_SCRIPT',true); require '${CONFIG}'; gl
   exit 1
 fi
 
-if grep -q '127.0.0.1' "$CONFIG" && grep -q '6432' "$CONFIG"; then
+ensure_pgbouncer_backup() {
+  if grep -q '127.0.0.1' "$CONFIG" && grep -q "'dbport' => 6432" "$CONFIG"; then
+    cp "$CONFIG" "$BACKUP"
+    echo "PgBouncer config backed up to ${BACKUP}"
+    return 0
+  fi
+  if [ -f "$BACKUP" ] && grep -q '127.0.0.1' "$BACKUP" && grep -q "'dbport' => 6432" "$BACKUP"; then
+    echo "Using existing PgBouncer backup at ${BACKUP}"
+    return 0
+  fi
   cp "$CONFIG" "$BACKUP"
-else
-  echo "WARN: config.php not on PgBouncer; skipping backup refresh"
-fi
+  sed -i 's|understandtech-pg-prod.postgres.database.azure.com|127.0.0.1|g' "$BACKUP"
+  sed -i "s|'dbport' => 5432, 'sslmode' => 'require'|'dbport' => 6432|g" "$BACKUP"
+  sed -i "s|'dbport' => 5432|'dbport' => 6432|g" "$BACKUP"
+  sed -i "/'sslmode'/d" "$BACKUP"
+  echo "Built PgBouncer backup from direct Postgres config"
+}
+
+restore_pgbouncer_config() {
+  if [ ! -f "$BACKUP" ]; then
+    echo "ERROR: missing PgBouncer backup at ${BACKUP}" >&2
+    return 1
+  fi
+  for bak in /tmp/pgbouncer.ini.transaction.bak /tmp/pb.full.bak /tmp/pb.bak; do
+    if [ -f "$bak" ]; then
+      cp "$bak" /etc/pgbouncer/pgbouncer.ini
+      sed -i 's/pool_mode=session/pool_mode=transaction/g' /etc/pgbouncer/pgbouncer.ini
+      sed -i 's/^pool_mode = session$/pool_mode = transaction/' /etc/pgbouncer/pgbouncer.ini
+      systemctl restart pgbouncer
+      echo "PgBouncer transaction mode restored from ${bak}"
+      break
+    fi
+  done
+  cp "$BACKUP" "$CONFIG"
+  chown root:www-data "$CONFIG"
+  chmod 640 "$CONFIG"
+  if ! sudo -u www-data php -r "define('CLI_SCRIPT',true); require '${CONFIG}'; global \$DB; \$DB->get_record('config',['name'=>'version'],'value'); echo 'ok';" 2>/dev/null | grep -q ok; then
+    echo "ERROR: PgBouncer config restore failed DB ping" >&2
+    return 1
+  fi
+  echo "PgBouncer config restored and verified"
+}
+
+ensure_pgbouncer_backup
+
 sudo sed -i "s|127.0.0.1|understandtech-pg-prod.postgres.database.azure.com|g" "$CONFIG"
 sudo sed -i "s|'dbport' => 6432|'dbport' => 5432, 'sslmode' => 'require'|g" "$CONFIG"
 
@@ -35,16 +75,22 @@ sudo grep -A6 dboptions "$CONFIG" || true
 
 cd "$MOODLE_DIR"
 if ! sudo -u www-data /usr/bin/php admin/cli/upgrade.php --non-interactive --allow-unstable; then
-  echo "Upgrade failed; restoring config"
-  sudo cp "$BACKUP" "$CONFIG"
-  sudo chown root:www-data "$CONFIG"
-  sudo chmod 640 "$CONFIG"
+  echo "Upgrade failed; restoring PgBouncer config"
+  restore_pgbouncer_config || cp "$BACKUP" "$CONFIG"
+  chown root:www-data "$CONFIG"
+  chmod 640 "$CONFIG"
   exit 1
 fi
 
-sudo cp "$BACKUP" "$CONFIG"
-sudo chown root:www-data "$CONFIG"
-sudo chmod 640 "$CONFIG"
+if ! restore_pgbouncer_config; then
+  echo "ERROR: could not restore PgBouncer after upgrade" >&2
+  exit 1
+fi
+
+if [ -f "${REPO}/scripts/moodle-sync-version-hash.sh" ]; then
+  bash "${REPO}/scripts/moodle-sync-version-hash.sh" || echo "WARN: version hash sync failed"
+fi
+
 sudo -u www-data /usr/bin/php admin/cli/purge_caches.php
 systemctl reload php8.3-fpm
 
