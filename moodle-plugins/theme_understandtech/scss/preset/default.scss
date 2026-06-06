@@ -8,6 +8,25 @@
 // =============================================================================
 
 
+:root {
+  --ut-fluid-1: #{"clamp(1.125rem, 1rem + 0.5vw, 1.375rem)"};
+  --ut-fluid-2: #{"clamp(1.25rem, 1rem + 1vw, 1.75rem)"};
+  --ut-fluid-3: #{"clamp(2rem, 1.5rem + 2vw, 3rem)"};
+  --ut-fluid-4: #{"clamp(1rem, 4vw, 2rem)"};
+  --ut-fluid-5: #{"clamp(3rem, 8vw, 6rem)"};
+  --ut-fluid-6: #{"clamp(2rem, 5vw, 3.5rem)"};
+  --ut-fluid-7: #{"clamp(2.5rem, 6vw, 4rem)"};
+  --ut-fluid-8: #{"clamp(1.75rem, 1.25rem + 2.5vw, 3rem)"};
+  --ut-fluid-9: #{"clamp(1rem, 0.9rem + 0.5vw, 1.125rem)"};
+  --ut-fluid-10: #{"clamp(2rem, 6vw, 5rem)"};
+  --ut-fluid-11: #{"clamp(2.5rem, 2rem + 3vw, 4.5rem)"};
+  --ut-fluid-12: #{"clamp(1rem, 0.9rem + 0.5vw, 1.25rem)"};
+  --ut-fluid-13: #{"clamp(14rem, 40cqw, 20rem)"};
+  --ut-fluid-14: #{"clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem)"};
+  --ut-fluid-15: #{"clamp(12rem, 40cqw, 20rem)"};
+  --ut-fluid-16: #{"clamp(14rem, 45cqw, 24rem)"};
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Design Tokens
 // ─────────────────────────────────────────────────────────────────────────────
@@ -739,7 +758,7 @@ a:focus-visible {
     .ut-card-title {
         font-family: $ut-font-heading;
         font-weight: 700;
-        font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+        font-size: var(--ut-fluid-1);
         color: $ut-white;
         margin-bottom: $ut-space-sm;
     }
@@ -801,7 +820,7 @@ a:focus-visible {
     .ut-cert-title {
         font-family: $ut-font-heading;
         font-weight: 700;
-        font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+        font-size: var(--ut-fluid-2);
         color: $ut-navy;
         margin-bottom: $ut-space-sm;
     }
@@ -975,7 +994,7 @@ a:focus-visible {
         display: block;
         font-family: $ut-font-heading;
         font-weight: 700;
-        font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+        font-size: var(--ut-fluid-3);
         color: $ut-gold;
         line-height: 1;
         margin-bottom: 0.25rem;
@@ -1146,17 +1165,17 @@ h1, h2, h3, h4, h5, h6,
     max-width: 75rem;
     margin-left: auto;
     margin-right: auto;
-    padding-left: clamp(1rem, 4vw, 2rem);
-    padding-right: clamp(1rem, 4vw, 2rem);
+    padding-left: var(--ut-fluid-4);
+    padding-right: var(--ut-fluid-4);
 }
 
 // ── Sections ─────────────────────────────────────────────────────────────────
 .ut-section {
-    padding: clamp(3rem, 8vw, 6rem) 0;
+    padding: var(--ut-fluid-5) 0;
 }
 
 .ut-section-sm {
-    padding: clamp(2rem, 5vw, 3.5rem) 0;
+    padding: var(--ut-fluid-6) 0;
 }
 
 .ut-section-dark {
@@ -1170,15 +1189,15 @@ h1, h2, h3, h4, h5, h6,
 .ut-section-header {
     text-align: center;
     max-width: 52rem;
-    margin: 0 auto clamp(2.5rem, 6vw, 4rem);
+    margin: 0 auto var(--ut-fluid-7);
 
     h2 {
-        font-size: clamp(1.75rem, 1.25rem + 2.5vw, 3rem);
+        font-size: var(--ut-fluid-8);
         margin-bottom: $ut-space-md;
     }
 
     p {
-        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+        font-size: var(--ut-fluid-9);
         color: $ut-text-muted;
         max-width: 48ch;
         margin-left: auto;
@@ -1215,9 +1234,9 @@ h1, h2, h3, h4, h5, h6,
     z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 6vw, 5rem);
+    gap: var(--ut-fluid-10);
     align-items: center;
-    padding: clamp(3rem, 8vw, 6rem) 0;
+    padding: var(--ut-fluid-5) 0;
 
     @media (max-width: 991.98px) {
         grid-template-columns: 1fr;
@@ -1227,13 +1246,13 @@ h1, h2, h3, h4, h5, h6,
 
 .ut-hero-content {
     h1 {
-        font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+        font-size: var(--ut-fluid-11);
         line-height: 1.05;
         margin-bottom: $ut-space-lg;
     }
 
     p {
-        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+        font-size: var(--ut-fluid-12);
         color: $ut-text-muted;
         max-width: 44ch;
         margin-bottom: $ut-space-xl;
@@ -1366,7 +1385,7 @@ h1, h2, h3, h4, h5, h6,
     container-type: inline-size;
     container-name: dashboard;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(14rem, 40cqw, 20rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--ut-fluid-13), 1fr));
     gap: $ut-space-md;
 
     .card {
@@ -1383,7 +1402,7 @@ h1, h2, h3, h4, h5, h6,
     .card-title {
         color: $ut-white;
         font-family: $ut-font-heading;
-        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+        font-size: var(--ut-fluid-12);
     }
 }
 
@@ -1506,7 +1525,7 @@ h1, h2, h3, h4, h5, h6,
 .ut-footer {
     background: $ut-navy-deep;
     border-top: 1px solid rgba($ut-gold, 0.12);
-    padding: clamp(2.5rem, 6vw, 4rem) 0 $ut-space-xl;
+    padding: var(--ut-fluid-7) 0 $ut-space-xl;
     color: $ut-text-muted;
     font-size: 0.875rem;
 
@@ -1665,12 +1684,12 @@ h1, h2, h3, h4, h5, h6,
     .block-examreadiness-score .display-6 {
         font-family: $ut-font-heading;
         color: $ut-gold;
-        font-size: clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem);
+        font-size: var(--ut-fluid-14);
     }
 
     .block-examreadiness-radar {
         width: 100%;
-        max-height: clamp(12rem, 40cqw, 20rem);
+        max-height: var(--ut-fluid-15);
     }
 
     .block-examreadiness-misconceptions li {
@@ -1685,6 +1704,6 @@ h1, h2, h3, h4, h5, h6,
 
 @container readiness (min-width: 20rem) {
     .block-examreadiness-radar {
-        max-height: clamp(14rem, 45cqw, 24rem);
+        max-height: var(--ut-fluid-16);
     }
 }
