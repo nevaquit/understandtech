@@ -1,0 +1,32 @@
+# One-off: apply nginx config on production VM (Moodle JS routing fix).
+
+name: Apply nginx config
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apply:
+    name: Apply nginx on VM
+    runs-on: [self-hosted, linux, production]
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply nginx vhost
+        run: |
+          set -euo pipefail
+          bash scripts/apply-nginx-config.sh
+
+      - name: Verify RequireJS endpoint
+        run: |
+          set -euo pipefail
+          code="$(curl -sS -o /dev/null -w '%{http_code}' \
+            'https://understandtech.app/lib/javascript.php/-1/lib/requirejs/require.min.js' \
+            --resolve understandtech.app:443:127.0.0.1 -k || true)"
+          echo "requirejs_http=${code}"
+          if [ "$code" != "200" ]; then
+            echo "Expected 200 from local RequireJS URL" >&2
+            exit 1
+          fi
