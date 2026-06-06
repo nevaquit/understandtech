@@ -56,11 +56,16 @@ class hook_callbacks {
         }
 
         $PAGE->requires->css('/local/aitutor/styles.css');
-        // Footer hooks run after PAGE->requires is locked; queue AMD here and poll for DOM in init.
-        $PAGE->requires->js_call_amd(
-            'local_aitutor/tutor_sidebar',
-            'init',
-            [$sidebar['courseid'], $sidebar['cmid']],
+        // Register before footer hooks lock PAGE->requires. js_call_amd emits M.util.js_pending
+        // before core/first defines M; js_amd_inline runs after RequireJS in the footer AMD block.
+        $courseid = $sidebar['courseid'];
+        $cmid = $sidebar['cmid'];
+        $PAGE->requires->js_amd_inline(
+            "require(['local_aitutor/tutor_sidebar'], function(Tutor) {" .
+            "var boot = function() {" .
+            "if (document.getElementById('local-aitutor-sidebar')) {" .
+            "Tutor.init({$courseid}, {$cmid}); return; }" .
+            "window.requestAnimationFrame(boot); }; boot(); });",
         );
     }
 
