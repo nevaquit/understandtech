@@ -49,6 +49,7 @@ class block_examreadiness extends block_base {
 
         $this->content->text = $OUTPUT->render_from_template('block_examreadiness/main', [
             'readiness' => $data['overall_readiness'],
+            'certificationid' => $certid,
             'radar' => json_encode($data['radar']),
             'radardomains' => $radardomains,
             'misconceptions' => $misconceptions,

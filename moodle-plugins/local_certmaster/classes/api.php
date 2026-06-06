@@ -17,6 +17,27 @@ class api {
     public const DEFAULT_MASTERY = 50.0;
 
     /**
+     * Return certification options for admin select elements (id => label).
+     *
+     * @return array<int, string>
+     */
+    public static function get_certification_options(): array {
+        global $DB;
+
+        $records = $DB->get_records('certmaster_certifications', null, 'fullname ASC', 'id, fullname, exam_code');
+        $options = [];
+        foreach ($records as $cert) {
+            $label = $cert->fullname;
+            if (!empty($cert->exam_code)) {
+                $label .= ' (' . $cert->exam_code . ')';
+            }
+            $options[(int) $cert->id] = $label;
+        }
+
+        return $options;
+    }
+
+    /**
      * Return certification with domains and objectives.
      *
      * @param int $id Certification id.

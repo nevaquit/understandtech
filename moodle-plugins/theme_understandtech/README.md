@@ -25,7 +25,19 @@ Typography: Rajdhani (headings), Source Serif 4 (body), Share Tech Mono (code) v
 
 - Brand colours (navy, gold, teal)
 - Custom logo upload
-- Skool-style layout toggle
+- **Enable Skool-style layout** — adds `ut-skool-enabled` body class for two-pane lesson grids, dashboard cards, and community feed styling
+
+## Skool-style course layout
+
+Two-pane lesson view (media left, course index right) uses the theme override `core_course/single_activity` wrapped in `.ut-skool-layout`.
+
+1. Enable **Skool-style layout** in theme settings (on by default).
+2. For each certification track course, set **Course format** to **Single activity format** (`format_singleactivity`).
+   - **Course administration → Edit settings → Format → Single activity format**
+   - Choose the primary lesson activity (Page, URL, or custom module).
+3. Purge theme caches after changing format or SCSS.
+
+Container queries on `.ut-skool-layout` collapse the grid to a single column below 48rem container width (and below 992px viewport).
 
 ## Development
 

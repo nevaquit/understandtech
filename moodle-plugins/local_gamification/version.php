@@ -3,8 +3,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_certmaster';
+$plugin->component = 'local_gamification';
 $plugin->version   = 2026060700;
 $plugin->requires  = 2024100700;
-$plugin->maturity  = MATURITY_BETA;
-$plugin->release   = '1.0.0';
+$plugin->maturity  = MATURITY_ALPHA;
+$plugin->release   = '0.1.0-dev';

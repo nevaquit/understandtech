@@ -68,3 +68,24 @@ function ctfflag_delete_instance($id) {
     $DB->delete_records('ctfflag', ['id' => $id]);
     return true;
 }
+
+/**
+ * Notify readiness pipeline that a learner captured the lab flag (stub).
+ *
+ * Call from the future flag submission handler when validation succeeds.
+ *
+ * @param stdClass $cm Course-module record.
+ * @param stdClass $instance ctfflag instance record.
+ * @return void
+ */
+function ctfflag_notify_flag_success(stdClass $cm, stdClass $instance): void {
+    $event = \mod_ctfflag\event\flag_submitted::create([
+        'objectid' => $instance->id,
+        'context' => context_module::instance($cm->id),
+        'relateduserid' => null,
+        'other' => [
+            'cmid' => $cm->id,
+        ],
+    ]);
+    $event->trigger();
+}

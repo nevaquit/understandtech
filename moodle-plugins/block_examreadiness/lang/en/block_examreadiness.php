@@ -5,9 +5,13 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Exam readiness';
 $string['blocktitle'] = 'Block title';
+$string['blocktitle_help'] = 'Optional custom title shown in the block header. Leave blank to use the default plugin name.';
+$string['certification'] = 'Certification';
+$string['certification_help'] = 'Select the certification framework from CertMaster. Security+ SY0-701 is seeded on fresh install.';
+$string['certificationrequired'] = 'Select a certification framework.';
 $string['certificationid'] = 'Certification ID';
-$string['certificationid_help'] = 'local_certmaster certification record id (Security+ is seeded as id 1 on fresh install).';
-$string['noconfig'] = 'Configure a certification ID in the block settings.';
+$string['certificationid_help'] = 'Deprecated — use the certification dropdown.';
+$string['noconfig'] = 'Select a certification in the block settings.';
 $string['readiness_label'] = 'Exam readiness';
 $string['misconceptions_heading'] = 'Dangerous misconceptions';
 $string['noattempts'] = 'Complete a quiz to see your readiness radar.';

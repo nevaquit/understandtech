@@ -80,62 +80,64 @@ $card-border-radius: 0.75rem;
     font-family: $headings-font-family;
 }
 
-.ut-skool-layout {
-    container-type: inline-size;
-    container-name: lesson;
+.ut-skool-enabled {
+    .ut-skool-layout {
+        container-type: inline-size;
+        container-name: lesson;
 
-    .ut-lesson-grid {
-        display: grid;
-        grid-template-columns: 3fr 2fr;
-        gap: $ut-space-lg;
-        min-height: clamp(40vh, 50cqw, 60vh);
-    }
+        .ut-lesson-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: $ut-space-lg;
+            min-height: clamp(40vh, 50cqw, 60vh);
+        }
 
-    .ut-lesson-media {
-        background: $ut-brand-navy;
-        border-radius: $card-border-radius;
-        color: #fff;
-        padding: 1rem;
-    }
+        .ut-lesson-media {
+            background: $ut-brand-navy;
+            border-radius: $card-border-radius;
+            color: #fff;
+            padding: 1rem;
+        }
 
-    .ut-lesson-nav {
-        background: #fff;
-        border: 1px solid rgba($ut-brand-navy, 0.12);
-        border-radius: $card-border-radius;
-        padding: 1rem;
-    }
-}
-
-.ut-dashboard-cards {
-    container-type: inline-size;
-    container-name: dashboard;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(14rem, 40cqw, 20rem), 1fr));
-    gap: $ut-space-md;
-
-    .card {
-        border: none;
-        border-top: 3px solid $ut-brand-teal;
-        transition: transform 0.15s ease;
-
-        &:hover {
-            transform: translateY(-2px);
+        .ut-lesson-nav {
+            background: #fff;
+            border: 1px solid rgba($ut-brand-navy, 0.12);
+            border-radius: $card-border-radius;
+            padding: 1rem;
         }
     }
 
-    .card-title {
-        color: $ut-brand-navy;
-        font-family: $headings-font-family;
-        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
-    }
-}
+    .ut-dashboard-cards {
+        container-type: inline-size;
+        container-name: dashboard;
 
-.ut-community-feed {
-    .ut-feed-item {
-        border-left: 3px solid $ut-brand-gold;
-        padding-left: 1rem;
-        margin-bottom: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(clamp(14rem, 40cqw, 20rem), 1fr));
+        gap: $ut-space-md;
+
+        .card {
+            border: none;
+            border-top: 3px solid $ut-brand-teal;
+            transition: transform 0.15s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        .card-title {
+            color: $ut-brand-navy;
+            font-family: $headings-font-family;
+            font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+        }
+    }
+
+    .ut-community-feed {
+        .ut-feed-item {
+            border-left: 3px solid $ut-brand-gold;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
     }
 }
 
@@ -169,7 +171,7 @@ $card-border-radius: 0.75rem;
 }
 
 @media (max-width: 991.98px) {
-    .ut-skool-layout .ut-lesson-grid {
+    .ut-skool-enabled .ut-skool-layout .ut-lesson-grid {
         grid-template-columns: 1fr;
     }
 
@@ -183,7 +185,7 @@ $card-border-radius: 0.75rem;
 }
 
 @container lesson (max-width: 48rem) {
-    .ut-skool-layout .ut-lesson-grid {
+    .ut-skool-enabled .ut-skool-layout .ut-lesson-grid {
         grid-template-columns: 1fr;
     }
 }

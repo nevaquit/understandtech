@@ -33,15 +33,15 @@ echo local_certmaster_render_stream_player($videoid);
 
 Preview page (admin test video): `/local/certmaster/player.php` (uses **Test Stream video ID** setting).
 
-### AMD refresh
+### AMD modules
 
-`amd/src/stream_player.js` calls `local_certmaster_get_stream_iframe_url` every 50s so the iframe JWT stays valid.
+- `amd/src/stream_player.js` — Stream iframe JWT refresh via `local_certmaster_get_stream_iframe_url`
+- `amd/src/radar_chart.js` — Chart.js domain radar for `block_examreadiness` with live AJAX refresh via `local_certmaster_get_user_readiness`
 
 ## Not yet implemented
 
 - `certmaster_confidence` question behaviour UI
 - CSV objective import admin UI
-- `amd/src/radar_chart.js` (consumed by `block_examreadiness`)
 
 ## Install
 

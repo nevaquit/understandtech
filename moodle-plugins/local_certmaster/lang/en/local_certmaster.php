@@ -19,6 +19,7 @@ $string['streamsigningkeymissing'] = 'Stream signing PEM is missing. Deploy cf-s
 $string['streamsignfailed'] = 'Failed to sign Stream JWT. Check signing key PEM format.';
 $string['streamtestvideoid'] = 'Test Stream video ID';
 $string['streamtestvideoid_desc'] = 'Optional video UID for /local/certmaster/player.php preview and E2E. Set after uploading a test clip in the Stream dashboard.';
+$string['invalidcertification'] = 'The selected certification does not exist.';
 $string['streamtestvideomissing'] = 'No test Stream video ID configured. Set it in CertMaster settings after uploading a test video.';
 $string['streamplayer_title'] = 'Course video';
 $string['privacy:metadata:attemptid'] = 'Quiz attempt identifier linked to a confidence rating.';
