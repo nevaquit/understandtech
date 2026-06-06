@@ -56,7 +56,7 @@
       font-family: 'Source Serif 4', Georgia, serif;
       font-size: var(--ut-text-xl);
       font-style: italic;
-      color: var(--ut-navy);
+      color: var(--ut-text);
       line-height: 1.55;
       margin: 0 0 0.5rem;
     }
@@ -90,12 +90,12 @@
       font-family: var(--ut-font-head);
       font-size: 3rem;
       font-weight: 700;
-      color: rgba(11,31,58,0.06);
+      color: rgba(255,255,255,0.06);
       line-height: 1;
       margin-bottom: -0.5rem;
     }
 
-    .value-card h3 { font-size: var(--ut-text-xl); color: var(--ut-navy); margin-bottom: var(--ut-space-sm); }
+    .value-card h3 { font-size: var(--ut-text-xl); color: var(--ut-text); margin-bottom: var(--ut-space-sm); }
     .value-card p  { font-size: 0.95rem; color: var(--ut-text-muted); line-height: 1.65; }
 
     /* Team */
@@ -142,7 +142,7 @@
       font-family: var(--ut-font-head);
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--ut-navy);
+      color: var(--ut-text);
       margin-bottom: 0.2rem;
     }
 
@@ -205,7 +205,7 @@
       margin-bottom: 0.25rem;
     }
 
-    .timeline-item h4 { font-size: 1rem; color: var(--ut-navy); margin-bottom: 0.35rem; }
+    .timeline-item h4 { font-size: 1rem; color: var(--ut-text); margin-bottom: 0.35rem; }
     .timeline-item p  { font-size: 0.9rem; color: var(--ut-text-muted); line-height: 1.55; }
 
     /* Press logos */
@@ -223,11 +223,10 @@
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(11,31,58,0.3);
+            color: rgba(255,255,255,0.45);
       transition: color var(--ut-duration-sm) var(--ut-ease);
     }
-
-    .press-item:hover { color: var(--ut-navy); }
+    .press-item:hover { color: var(--ut-text); }
   </style>
 </head>
 <body>
@@ -278,7 +277,7 @@
         <div class="mission-grid reveal">
           <div>
             <span class="ut-eyebrow">Our Mission</span>
-            <h2 id="mission-heading" class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-md)">Understanding, not just passing</h2>
+            <h2 id="mission-heading" class="ut-heading-md" style="color:var(--ut-text);margin-bottom:var(--ut-space-md)">Understanding, not just passing</h2>
             <p style="color:var(--ut-text-muted);line-height:1.7;margin-bottom:var(--ut-space-md)">
               The technology industry has a knowledge problem. Certifications are valuable — but the way most people prepare for them produces professionals who can pass a test without truly understanding the systems they'll be responsible for.
             </p>
@@ -327,7 +326,7 @@
       <div class="ut-container">
         <div class="text-center mb-xl reveal">
           <span class="ut-eyebrow">Our Values</span>
-          <h2 id="values-heading" class="ut-heading-lg" style="color:var(--ut-navy)">What we believe about learning</h2>
+          <h2 id="values-heading" class="ut-heading-lg" style="color:var(--ut-text)">What we believe about learning</h2>
         </div>
 
         <div class="values-grid">
@@ -360,7 +359,7 @@
       <div class="ut-container">
         <div class="text-center mb-xl reveal">
           <span class="ut-eyebrow">The Team</span>
-          <h2 id="team-heading" class="ut-heading-lg" style="color:var(--ut-navy)">Built by educators, engineers, and learners</h2>
+          <h2 id="team-heading" class="ut-heading-lg" style="color:var(--ut-text)">Built by educators, engineers, and learners</h2>
           <p class="ut-lead" style="margin:var(--ut-space-md) auto 0;">Every person on our team has been a learner who needed better tools. That experience shapes every decision we make.</p>
         </div>
 
@@ -378,7 +377,7 @@
 
           <div class="team-card reveal reveal-delay-2">
             <div class="team-avatar-wrap" style="background:linear-gradient(135deg,rgba(201,162,39,0.05),rgba(201,162,39,0.12));">
-              <div class="team-avatar-large" style="background:linear-gradient(135deg,var(--ut-gold),#E8C547);color:var(--ut-navy);">HJ</div>
+              <div class="team-avatar-large" style="background:linear-gradient(135deg,var(--ut-gold),#E8C547);color:var(--ut-text);">HJ</div>
             </div>
             <div class="team-info">
               <div class="team-name">Henry Jenkins</div>
@@ -396,7 +395,7 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--ut-space-2xl);align-items:start;" class="reveal">
           <div>
             <span class="ut-eyebrow">Our Journey</span>
-            <h2 id="timeline-heading" class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-xl)">From idea to platform</h2>
+            <h2 id="timeline-heading" class="ut-heading-md" style="color:var(--ut-text);margin-bottom:var(--ut-space-xl)">From idea to platform</h2>
             <div class="timeline">
               <div class="timeline-item">
                 <div class="timeline-dot" aria-hidden="true"></div>
@@ -433,21 +432,21 @@
 
           <div>
             <span class="ut-eyebrow">In the Press</span>
-            <h2 class="ut-heading-md" style="color:var(--ut-navy);margin-bottom:var(--ut-space-xl)">What people are saying</h2>
+            <h2 class="ut-heading-md" style="color:var(--ut-text);margin-bottom:var(--ut-space-xl)">What people are saying</h2>
 
             <div style="display:flex;flex-direction:column;gap:var(--ut-space-md);">
               <div style="background:var(--ut-surface);border-radius:var(--ut-radius);padding:var(--ut-space-lg);border:1px solid var(--ut-border);border-left:4px solid var(--ut-teal);">
-                <p style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--ut-navy);line-height:1.6;margin-bottom:0.75rem;">"UnderstandTech represents a genuine step forward in how we prepare technology professionals. The mastery model is rigorous in a way that most platforms aren't."</p>
+                <p style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--ut-text);line-height:1.6;margin-bottom:0.75rem;">"UnderstandTech represents a genuine step forward in how we prepare technology professionals. The mastery model is rigorous in a way that most platforms aren't."</p>
                 <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-text-muted);">TechCrunch</div>
               </div>
 
               <div style="background:var(--ut-surface);border-radius:var(--ut-radius);padding:var(--ut-space-lg);border:1px solid var(--ut-border);border-left:4px solid var(--ut-gold);">
-                <p style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--ut-navy);line-height:1.6;margin-bottom:0.75rem;">"The AI tutor is genuinely impressive — it explains concepts at exactly the right level and never makes you feel stupid for asking a basic question."</p>
+                <p style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--ut-text);line-height:1.6;margin-bottom:0.75rem;">"The AI tutor is genuinely impressive — it explains concepts at exactly the right level and never makes you feel stupid for asking a basic question."</p>
                 <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-text-muted);">The Verge</div>
               </div>
 
               <div style="background:var(--ut-surface);border-radius:var(--ut-radius);padding:var(--ut-space-lg);border:1px solid var(--ut-border);border-left:4px solid var(--ut-teal);">
-                <p style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--ut-navy);line-height:1.6;margin-bottom:0.75rem;">"We've tried six platforms for team upskilling. UnderstandTech is the first one where people actually finish the courses — and remember what they learned."</p>
+                <p style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;color:var(--ut-text);line-height:1.6;margin-bottom:0.75rem;">"We've tried six platforms for team upskilling. UnderstandTech is the first one where people actually finish the courses — and remember what they learned."</p>
                 <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-text-muted);">Forbes</div>
               </div>
             </div>

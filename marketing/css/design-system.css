@@ -17,14 +17,17 @@
   --ut-teal-dark:   #157a6e;
   --ut-teal-dim:    rgba(26,138,125,0.12);
 
-  /* Semantic Surfaces */
-  --ut-bg:          #f4f6f9;
-  --ut-surface:     #ffffff;
-  --ut-surface-2:   #f8fafc;
-  --ut-text:        #1e293b;
-  --ut-text-muted:  #334155; /* Darkened for contrast */
-  --ut-border:      rgba(11,31,58,0.10);
-  --ut-border-med:  rgba(11,31,58,0.16);
+  /* Semantic Surfaces — Dark-first design */
+  --ut-bg:          #0a1628;
+  --ut-surface:     #0f1e35;
+  --ut-surface-2:   #132038;
+  --ut-text:        #e2e8f0;
+  --ut-text-muted:  #94a3b8;
+  --ut-border:      rgba(255,255,255,0.08);
+  --ut-border-med:  rgba(255,255,255,0.14);
+  --ut-shadow-sm:   0 1px 4px rgba(0,0,0,0.3);
+  --ut-shadow-md:   0 4px 16px rgba(0,0,0,0.4);
+  --ut-shadow-lg:   0 8px 32px rgba(0,0,0,0.5);
 
   /* Typography */
   --ut-font-head:   'Rajdhani', 'Segoe UI', sans-serif;
@@ -80,19 +83,10 @@
   --ut-content-max: min(100%, 1100px);
 }
 
-/* ─── Dark Mode (prefers-color-scheme) ──────────────────────────── */
+/* ─── Dark Mode override (already dark-first, just ensure consistency) ── */
 @media (prefers-color-scheme: dark) {
   :root {
-    --ut-bg:         #0a1628;
-    --ut-surface:    #0f1e35;
-    --ut-surface-2:  #132038;
-    --ut-text:       #e2e8f0;
-    --ut-text-muted: #94a3b8;
-    --ut-border:     rgba(255,255,255,0.08);
-    --ut-border-med: rgba(255,255,255,0.14);
-    --ut-shadow-sm:  0 1px 4px rgba(0,0,0,0.3);
-    --ut-shadow-md:  0 4px 16px rgba(0,0,0,0.4);
-    --ut-shadow-lg:  0 8px 32px rgba(0,0,0,0.5);
+    /* Variables already set to dark defaults above — no changes needed */
   }
 
   /* ── Override inline style="color:var(--ut-navy)" everywhere ──────
@@ -415,11 +409,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--ut-font-head);
   font-weight: 700;
   line-height: 1.2;
-  color: var(--ut-navy);
-}
-
-@media (prefers-color-scheme: dark) {
-  h1, h2, h3, h4, h5, h6 { color: #e2e8f0; }
+  color: var(--ut-text);
 }
 
 .ut-eyebrow {
@@ -450,14 +440,10 @@ h1, h2, h3, h4, h5, h6 {
 code {
   font-family: var(--ut-font-mono);
   font-size: 0.88em;
-  background: rgba(11,31,58,0.06);
-  color: var(--ut-navy);
+  background: rgba(255,255,255,0.08);
+  color: #93c5fd;
   padding: 0.15rem 0.4rem;
   border-radius: 0.25rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  code { background: rgba(255,255,255,0.08); color: #93c5fd; }
 }
 
 /* ─── Buttons ────────────────────────────────────────────────────── */
@@ -580,12 +566,10 @@ code {
 
 .ut-section-label h2 {
   font-size: var(--ut-text-3xl);
-  color: var(--ut-navy);
+  color: var(--ut-text);
 }
 
-@media (prefers-color-scheme: dark) {
-  .ut-section-label h2 { color: #e2e8f0; }
-}
+
 
 .ut-section-pill {
   font-family: var(--ut-font-head);
@@ -622,7 +606,7 @@ code {
 
 .ut-feature-icon-teal { background: rgba(26,138,125,0.12); color: var(--ut-teal); }
 .ut-feature-icon-gold { background: rgba(201,162,39,0.12); color: var(--ut-gold); }
-.ut-feature-icon-navy { background: rgba(11,31,58,0.08); color: var(--ut-navy); }
+.ut-feature-icon-navy { background: rgba(255,255,255,0.06); color: var(--ut-text-muted); }
 
 /* ─── Stats Row ──────────────────────────────────────────────────── */
 .ut-stats-row {
@@ -644,7 +628,7 @@ code {
   font-family: var(--ut-font-head);
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
-  color: var(--ut-navy);
+  color: var(--ut-text);
   line-height: 1;
   display: block;
 }
@@ -704,12 +688,11 @@ code {
   font-family: var(--ut-font-head);
   font-weight: 700;
   font-size: 1rem;
-  color: var(--ut-navy);
+  color: var(--ut-text);
   display: block;
 }
 
 @media (prefers-color-scheme: dark) {
-  .ut-author-name { color: #e2e8f0; }
 }
 
 .ut-author-role {
@@ -766,7 +749,7 @@ code {
   font-family: var(--ut-font-head);
   font-size: clamp(2.5rem, 4vw, 3.5rem);
   font-weight: 700;
-  color: var(--ut-navy);
+  color: var(--ut-text);
   line-height: 1;
 }
 
@@ -816,7 +799,7 @@ code {
   font-family: var(--ut-font-head);
   font-size: var(--ut-text-lg);
   font-weight: 600;
-  color: var(--ut-navy);
+  color: var(--ut-text);
   text-align: left;
   gap: 1rem;
   transition: color var(--ut-duration-sm) var(--ut-ease);
