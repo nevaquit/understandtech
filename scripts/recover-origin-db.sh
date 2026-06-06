@@ -48,6 +48,7 @@ for src in "$BACKUP" "${CONFIG}.preinstall" /var/www/moodle/config.php.preinstal
     echo "DB restored from ${src}"
     sudo -u www-data php "${MOODLE_DIR}/admin/cli/purge_caches.php"
     sudo -u www-data php "${MOODLE_DIR}/admin/cli/maintenance.php" --disable || true
+    systemctl reload php8.3-fpm
     exit 0
   fi
 done

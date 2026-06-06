@@ -46,6 +46,7 @@ sudo cp "$BACKUP" "$CONFIG"
 sudo chown root:www-data "$CONFIG"
 sudo chmod 640 "$CONFIG"
 sudo -u www-data /usr/bin/php admin/cli/purge_caches.php
+systemctl reload php8.3-fpm
 
 NGINX_SRC="${REPO}/infrastructure/nginx/understandtech.conf"
 NGINX_DST="/etc/nginx/sites-available/understandtech.conf"
