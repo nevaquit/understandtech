@@ -58,12 +58,14 @@ class hook_callbacks {
     }
 
     /**
-     * Inject sidebar markup during layout render and queue AMD init.
+     * Inject sidebar before the end-of-body script placeholder in the theme footer.
      *
-     * @param \core\hook\output\after_standard_main_region_html_generation $hook
+     * @param \core\hook\output\before_standard_footer_html_generation $hook
      * @return void
      */
-    public static function after_main_region(\core\hook\output\after_standard_main_region_html_generation $hook): void {
+    public static function before_standard_footer(
+        \core\hook\output\before_standard_footer_html_generation $hook,
+    ): void {
         global $OUTPUT, $PAGE;
 
         $sidebar = self::get_sidebar_context();
