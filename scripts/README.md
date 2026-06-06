@@ -113,6 +113,7 @@ sudo ./scripts/install-cloudflare-origin-certs.sh \
 | Script | Purpose |
 |--------|---------|
 | `setup-moodle-env-vm.ps1` | Key Vault → `/etc/moodle/env` on VM |
+| `install-paygw-stripe-vm.sh` | Install `paygw_stripe` from moodle.org/GitHub on VM (not monorepo) |
 | `configure-stripe-vm.sh` / `.ps1` | Stripe Key Vault secrets → `/etc/moodle/env`; verify `paygw_stripe` on VM |
 | `wire-redis-sessions-vm.sh` | Wire Redis sessions + PgBouncer `fetchbuffersize` on VM |
 | `wire-redis-sessions-remote.sh` | Azure Run Command wrapper for Redis sessions script |

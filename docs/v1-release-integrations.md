@@ -36,9 +36,11 @@ Honest status for playbook §7.1 gates that require **external dashboards** or *
 | Item | Status |
 |------|--------|
 | Install approach | ✅ **Option A** — install on VM from Moodle.org (not monorepo). See [stripe-integration.md](stripe-integration.md). |
-| Moodle plugins on VM | ❌ **`paygw_stripe` not installed**; optional `enrol_stripepayment` |
-| Key Vault Stripe secrets | ❌ **`stripe-secret-key` / `stripe-publishable-key` / `stripe-webhook-secret`** — placeholders via `populate-keyvault-secrets` (not in original Bicep set) |
-| Stripe account / webhooks | ❌ **User action** — Stripe Dashboard + Moodle payment account |
+| Moodle plugins on VM | ✅ **`paygw_stripe` installed** (GitHub `alexmorrisnz/moodle-paygw_stripe` master → `/var/www/moodle/payment/gateway/stripe/`; upgrade 2026-06-06); optional `enrol_stripepayment` not installed |
+| Key Vault Stripe secrets | ❌ **Not created** — `stripe-secret-key`, `stripe-publishable-key`, `stripe-webhook-secret` absent from vault `utkvnhhwegpz3rem6` (populate after understandtech Stripe account test keys) |
+| Stripe env on VM (`/etc/moodle/env`) | ⏸ **Blocked** — `configure-stripe-vm` skipped until KV secrets exist |
+| Webhook route reachable | ✅ **HTTP 400** on `POST …/webhook.php` (plugin installed; not 404) |
+| Stripe account / webhooks | ❌ **User action** — create understandtech Stripe account; Moodle payment account + live/test keys |
 | E2E `payment-flow.spec.ts` | ❌ Not created (playbook §6.1 future spec) |
 
 ### Expected plugins (white-paper / playbook)
@@ -66,7 +68,7 @@ Full runbook: **[stripe-integration.md](stripe-integration.md)**
 | Item | Status |
 |------|--------|
 | Moodle SMTP (`smtphosts`) | ❌ Empty on production VM (verified 2026-06-06) |
-| Key Vault `postmark-server-token` | ❌ **Not created** — add after Postmark server token issued |
+| Key Vault `postmark-server-token` | ❌ **Not created** — secret absent from vault (add after Postmark server token issued) |
 | Postmark sender signature | ❌ **User action** |
 | Password-reset test email | ❌ Blocked until SMTP configured |
 
@@ -95,6 +97,7 @@ Full runbook: **[stripe-integration.md](stripe-integration.md)**
 | Script | Purpose |
 |--------|---------|
 | `./scripts/populate-keyvault-secrets.sh` | LLM + Stream + worker + **Stripe** secrets |
+| `./scripts/install-paygw-stripe-vm.sh` | Download + install `paygw_stripe` on VM (Azure Run Command or SSH) |
 | `./scripts/configure-stripe-vm.sh` / `.ps1` | KV → `/etc/moodle/env` Stripe vars; plugin pre-flight |
 | `./scripts/setup-moodle-env-vm.ps1` | KV → `/etc/moodle/env` |
 | `./scripts/generate-stream-signed-url.sh` | Build `TEST_VIDEO_URL` after Stream upload |
