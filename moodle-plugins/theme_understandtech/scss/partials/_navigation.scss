@@ -1,0 +1,266 @@
+// =============================================================================
+// UnderstandTech Navigation
+// Sticky top nav with gold active indicators and mobile drawer
+// =============================================================================
+
+// ── Navbar Shell ─────────────────────────────────────────────────────────────
+.navbar.ut-navbar {
+    background: rgba($ut-navy-deep, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba($ut-gold, 0.15);
+    padding: 0 $ut-space-lg;
+    height: 4rem;
+    position: sticky;
+    top: 0;
+    z-index: $ut-z-nav;
+    transition: background $ut-transition-normal, box-shadow $ut-transition-normal;
+
+    &.scrolled {
+        background: rgba($ut-navy-deep, 0.98);
+        box-shadow: $ut-shadow-md;
+    }
+}
+
+// ── Logo ─────────────────────────────────────────────────────────────────────
+.ut-navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    font-family: $ut-font-heading;
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: 0.06em;
+    color: $ut-white;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus-visible {
+        color: $ut-gold;
+        text-decoration: none;
+    }
+
+    .ut-logo-icon {
+        width: 2rem;
+        height: 2rem;
+        flex-shrink: 0;
+    }
+
+    .ut-logo-text {
+        span { color: $ut-gold; }
+    }
+}
+
+// ── Primary Nav Links ─────────────────────────────────────────────────────────
+.ut-primary-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .nav-item {
+        position: relative;
+    }
+
+    .nav-link {
+        font-family: $ut-font-heading;
+        font-weight: 600;
+        font-size: 0.8125rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba($ut-white, 0.8);
+        padding: 0.5rem 0.875rem;
+        border-radius: $ut-radius-sm;
+        transition: color $ut-transition-fast, background $ut-transition-fast;
+        text-decoration: none;
+        white-space: nowrap;
+
+        &:hover {
+            color: $ut-gold;
+            background: rgba($ut-gold, 0.08);
+        }
+
+        &.active,
+        &[aria-current="page"] {
+            color: $ut-gold;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                left: 0.875rem;
+                right: 0.875rem;
+                height: 2px;
+                background: $ut-gold;
+                border-radius: $ut-radius-pill;
+            }
+        }
+    }
+}
+
+// ── CTA Button in Nav ─────────────────────────────────────────────────────────
+.ut-nav-cta {
+    font-family: $ut-font-heading;
+    font-weight: 700;
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: $ut-gold;
+    color: $ut-navy;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: $ut-radius-sm;
+    text-decoration: none;
+    transition: background $ut-transition-fast, transform $ut-transition-fast;
+    white-space: nowrap;
+
+    &:hover {
+        background: $ut-gold-light;
+        color: $ut-navy;
+        transform: translateY(-1px);
+        text-decoration: none;
+    }
+
+    &:focus-visible {
+        outline: 3px solid $ut-white;
+        outline-offset: 2px;
+    }
+}
+
+// ── Mobile Hamburger ─────────────────────────────────────────────────────────
+.ut-mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba($ut-gold, 0.4);
+    border-radius: $ut-radius-sm;
+    padding: 0.375rem 0.5rem;
+    cursor: pointer;
+    transition: border-color $ut-transition-fast;
+
+    &:hover {
+        border-color: $ut-gold;
+    }
+
+    @media (max-width: 991.98px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// ── Mobile Drawer ─────────────────────────────────────────────────────────────
+@media (max-width: 991.98px) {
+    .ut-primary-nav {
+        display: none;
+        position: absolute;
+        top: 4rem;
+        left: 0;
+        right: 0;
+        background: rgba($ut-navy-deep, 0.98);
+        border-bottom: 1px solid rgba($ut-gold, 0.15);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: $ut-space-sm 0;
+        z-index: $ut-z-nav - 1;
+
+        &.open {
+            display: flex;
+        }
+
+        .nav-link {
+            padding: 0.75rem $ut-space-lg;
+            border-radius: 0;
+
+            &.active::after {
+                display: none;
+            }
+
+            &.active {
+                border-left: 3px solid $ut-gold;
+                padding-left: calc(#{$ut-space-lg} - 3px);
+            }
+        }
+    }
+
+    .ut-nav-cta {
+        margin: $ut-space-sm $ut-space-lg;
+        text-align: center;
+        display: block;
+    }
+}
+
+// ── Moodle Boost Nav Overrides ────────────────────────────────────────────────
+// Ensure Boost's own navbar inherits our brand colours
+#nav-drawer {
+    background: $ut-navy-deep;
+    border-right: 1px solid rgba($ut-gold, 0.12);
+
+    .list-group-item {
+        background: transparent;
+        color: rgba($ut-white, 0.8);
+        border-color: rgba($ut-gold, 0.08);
+        font-family: $ut-font-heading;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+
+        &:hover,
+        &:focus {
+            background: rgba($ut-gold, 0.08);
+            color: $ut-gold;
+        }
+
+        &.active {
+            background: rgba($ut-gold, 0.12);
+            color: $ut-gold;
+            border-left: 3px solid $ut-gold;
+        }
+    }
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba($ut-white, 0.8);
+
+    &:hover,
+    &:focus {
+        color: $ut-gold;
+    }
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: rgba($ut-gold, 0.4);
+    color: $ut-gold;
+}
+
+// ── Breadcrumbs ───────────────────────────────────────────────────────────────
+.breadcrumb {
+    background: transparent;
+    padding: $ut-space-sm 0;
+    font-family: $ut-font-heading;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+
+    .breadcrumb-item {
+        color: $ut-text-muted;
+
+        a {
+            color: $ut-teal-light;
+            text-decoration: none;
+
+            &:hover {
+                color: $ut-gold;
+            }
+        }
+
+        &.active {
+            color: $ut-gold;
+        }
+
+        + .breadcrumb-item::before {
+            color: $ut-text-muted;
+        }
+    }
+}

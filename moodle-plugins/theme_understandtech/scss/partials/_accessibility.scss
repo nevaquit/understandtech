@@ -1,0 +1,181 @@
+// =============================================================================
+// UnderstandTech Accessibility Overrides
+// Fixes all six design deficiencies identified in the architectural audit report
+// =============================================================================
+
+// ── 1. Skip-to-content link ───────────────────────────────────────────────────
+.ut-skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: $ut-z-toast;
+    background: $ut-gold;
+    color: $ut-navy;
+    font-family: $ut-font-heading;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 $ut-radius-sm $ut-radius-sm;
+    text-decoration: none;
+    transition: top $ut-transition-fast;
+
+    &:focus {
+        top: 0;
+        outline: 3px solid $ut-navy;
+        outline-offset: 2px;
+    }
+}
+
+// ── 2. Focus-visible rings (WCAG 2.1 AA) ─────────────────────────────────────
+// Remove browser default outline, replace with gold ring on keyboard focus only
+*:focus {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 3px solid $ut-gold;
+    outline-offset: 3px;
+    border-radius: $ut-radius-sm;
+}
+
+// Boost/Bootstrap overrides
+.btn:focus-visible,
+.form-control:focus-visible,
+.nav-link:focus-visible,
+.dropdown-item:focus-visible,
+a:focus-visible {
+    outline: 3px solid $ut-gold !important;
+    outline-offset: 3px !important;
+    box-shadow: none !important;
+}
+
+// ── 3. Reduced-motion guard ───────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .ut-hero-bg-grid,
+    .ut-xp-bar-fill,
+    .ut-progress-fill,
+    .ut-streak-pulse {
+        animation: none !important;
+    }
+}
+
+// ── 4. Print styles ───────────────────────────────────────────────────────────
+@media print {
+    // Hide navigation, sidebars, and interactive chrome
+    #nav-drawer,
+    .navbar,
+    #page-header .header-actions,
+    .block-region-pre,
+    .block-region-post,
+    .footer-popover,
+    #page-footer .footer-content-debugging,
+    .ut-primary-nav,
+    .ut-mobile-menu-btn,
+    .btn-primary,
+    .btn-secondary,
+    .ut-cta-section,
+    .ut-hero-cta-group {
+        display: none !important;
+    }
+
+    // Expand main content to full width
+    #page-content,
+    #region-main,
+    .ut-main-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    // Force white background and dark text for readability
+    body,
+    #page,
+    .card,
+    .ut-surface {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    // Ensure headings print in dark colour
+    h1, h2, h3, h4, h5, h6 {
+        color: #000 !important;
+    }
+
+    // Show full URLs for links
+    a[href]::after {
+        content: ' (' attr(href) ')';
+        font-size: 0.75em;
+        color: #555;
+    }
+
+    // Avoid page breaks inside cards
+    .card,
+    .ut-cert-card,
+    .ut-feature-card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+}
+
+// ── 5. Dark mode system preference ───────────────────────────────────────────
+// Moodle renders on a navy background by default; this block adjusts
+// surface tokens when the OS is in dark mode to prevent navy-on-navy text
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ut-surface-elevated: #1a2f4a;
+        --ut-border-subtle: rgba(201, 162, 39, 0.2);
+    }
+
+    .card,
+    .block,
+    .ut-surface {
+        background-color: var(--ut-surface-elevated, #1a2f4a);
+        border-color: var(--ut-border-subtle, rgba(201, 162, 39, 0.2));
+    }
+
+    // Ensure muted text is still readable against dark surfaces
+    .text-muted,
+    .ut-text-muted {
+        color: rgba(255, 255, 255, 0.75) !important;
+    }
+}
+
+// ── 6. Icon-only button accessibility ────────────────────────────────────────
+// Ensure all icon-only buttons have a visible label for screen readers
+// (aria-label is enforced in templates; this provides the visual tooltip)
+[aria-label]:not([aria-label=""]) {
+    position: relative;
+}
+
+// Hamburger / mobile menu — use SVG icon, not emoji
+.ut-mobile-menu-btn {
+    // Icon is rendered via background SVG in _navigation.scss
+    // This rule ensures the button text node is visually hidden
+    // but accessible to screen readers via aria-label
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 1.25rem;
+        height: 1.25rem;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9A227' stroke-width='2' stroke-linecap='round'%3E%3Cline x1='3' y1='6' x2='21' y2='6'/%3E%3Cline x1='3' y1='12' x2='21' y2='12'/%3E%3Cline x1='3' y1='18' x2='21' y2='18'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}

@@ -1,0 +1,111 @@
+// =============================================================================
+// UnderstandTech Design Tokens
+// Injected into Boost SCSS compilation via lib.php pre_scss()
+// =============================================================================
+
+// ── Brand Palette ─────────────────────────────────────────────────────────────
+$ut-navy-deep:   #071529 !default;
+$ut-navy:        #0B1F3A !default;
+$ut-navy-mid:    #112847 !default;
+$ut-surface:     #0F2035 !default;
+$ut-gold:        #C9A227 !default;
+$ut-gold-light:  #E8C547 !default;
+$ut-teal:        #1A8A7D !default;
+$ut-teal-light:  #22B5A5 !default;
+$ut-white:       #FFFFFF !default;
+$ut-text-muted:  rgba(255, 255, 255, 0.65) !default;
+
+// ── Typography ────────────────────────────────────────────────────────────────
+$ut-font-heading:  'Rajdhani', 'Segoe UI', sans-serif !default;
+$ut-font-body:     'Source Serif 4', Georgia, serif !default;
+$ut-font-mono:     'Share Tech Mono', 'Courier New', monospace !default;
+
+// ── Spacing Scale ─────────────────────────────────────────────────────────────
+$ut-space-xs:    0.25rem !default;
+$ut-space-sm:    0.5rem  !default;
+$ut-space-md:    1rem    !default;
+$ut-space-lg:    1.5rem  !default;
+$ut-space-xl:    2.5rem  !default;
+$ut-space-2xl:   4rem    !default;
+$ut-space-3xl:   6rem    !default;
+
+// ── Border Radius ─────────────────────────────────────────────────────────────
+$ut-radius-sm:   0.375rem !default;
+$ut-radius-md:   0.75rem  !default;
+$ut-radius-lg:   1.25rem  !default;
+$ut-radius-pill: 999px    !default;
+
+// ── Shadows ───────────────────────────────────────────────────────────────────
+$ut-shadow-sm:  0 2px 8px  rgba($ut-navy, 0.25) !default;
+$ut-shadow-md:  0 4px 20px rgba($ut-navy, 0.35) !default;
+$ut-shadow-lg:  0 8px 40px rgba($ut-navy, 0.45) !default;
+$ut-shadow-gold: 0 0 0 3px rgba($ut-gold, 0.4)  !default;
+
+// ── Transitions ───────────────────────────────────────────────────────────────
+$ut-transition-fast:   0.15s ease !default;
+$ut-transition-normal: 0.25s ease !default;
+$ut-transition-slow:   0.4s  ease !default;
+
+// ── Z-index Scale ─────────────────────────────────────────────────────────────
+$ut-z-nav:     1000 !default;
+$ut-z-modal:   1050 !default;
+$ut-z-toast:   1100 !default;
+
+// ── Boost Variable Overrides ──────────────────────────────────────────────────
+// These override Bootstrap/Boost defaults before compilation
+$primary:               $ut-teal    !default;
+$secondary:             $ut-gold    !default;
+$body-bg:               $ut-navy    !default;
+$body-color:            $ut-white   !default;
+$headings-font-family:  $ut-font-heading !default;
+$headings-font-weight:  700         !default;
+$headings-color:        $ut-white   !default;
+$font-family-base:      $ut-font-body !default;
+$font-size-base:        1rem        !default;
+$line-height-base:      1.65        !default;
+$card-border-radius:    $ut-radius-md !default;
+$card-bg:               $ut-surface !default;
+$card-border-color:     rgba($ut-gold, 0.15) !default;
+$link-color:            $ut-teal-light !default;
+$link-hover-color:      $ut-gold    !default;
+$navbar-dark-color:     rgba($ut-white, 0.85) !default;
+$navbar-dark-hover-color: $ut-gold  !default;
+$navbar-dark-active-color: $ut-gold !default;
+$navbar-dark-bg:        $ut-navy    !default;
+$input-bg:              $ut-navy-mid !default;
+$input-color:           $ut-white   !default;
+$input-border-color:    rgba($ut-gold, 0.3) !default;
+$input-focus-border-color: $ut-gold !default;
+$input-focus-box-shadow: $ut-shadow-gold !default;
+$input-placeholder-color: $ut-text-muted !default;
+$btn-border-radius:     $ut-radius-sm !default;
+$btn-font-family:       $ut-font-heading !default;
+$btn-font-weight:       600         !default;
+$btn-letter-spacing:    0.08em      !default;
+$table-color:           $ut-white   !default;
+$table-bg:              transparent !default;
+$table-border-color:    rgba($ut-gold, 0.15) !default;
+$modal-content-bg:      $ut-surface !default;
+$modal-content-color:   $ut-white   !default;
+$dropdown-bg:           $ut-surface !default;
+$dropdown-color:        $ut-white   !default;
+$dropdown-link-color:   $ut-white   !default;
+$dropdown-link-hover-bg: rgba($ut-gold, 0.12) !default;
+$dropdown-link-hover-color: $ut-gold !default;
+$pagination-bg:         $ut-surface !default;
+$pagination-color:      $ut-white   !default;
+$pagination-border-color: rgba($ut-gold, 0.2) !default;
+$pagination-hover-bg:   rgba($ut-gold, 0.12) !default;
+$pagination-active-bg:  $ut-gold    !default;
+$pagination-active-color: $ut-navy  !default;
+$alert-bg-level:        -10         !default;
+$alert-border-level:    -9          !default;
+$alert-color-level:     6           !default;
+$breadcrumb-bg:         transparent !default;
+$breadcrumb-divider-color: $ut-text-muted !default;
+$breadcrumb-active-color: $ut-gold  !default;
+$progress-bg:           rgba($ut-navy-mid, 0.5) !default;
+$progress-bar-bg:       $ut-teal    !default;
+$tooltip-bg:            $ut-navy-deep !default;
+$tooltip-color:         $ut-white   !default;
+$badge-font-weight:     600         !default;

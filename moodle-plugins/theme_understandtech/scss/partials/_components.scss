@@ -1,0 +1,506 @@
+// =============================================================================
+// UnderstandTech Components
+// Reusable UI components: cards, buttons, badges, progress, XP, leaderboard
+// =============================================================================
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
+.btn-ut-primary {
+    font-family: $ut-font-heading;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: $ut-gold;
+    color: $ut-navy;
+    border: 2px solid $ut-gold;
+    padding: 0.75rem 1.75rem;
+    border-radius: $ut-radius-sm;
+    transition: background $ut-transition-fast, transform $ut-transition-fast, box-shadow $ut-transition-fast;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+        background: $ut-gold-light;
+        border-color: $ut-gold-light;
+        color: $ut-navy;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($ut-gold, 0.35);
+        text-decoration: none;
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.btn-ut-outline {
+    font-family: $ut-font-heading;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: $ut-white;
+    border: 2px solid rgba($ut-white, 0.4);
+    padding: 0.75rem 1.75rem;
+    border-radius: $ut-radius-sm;
+    transition: border-color $ut-transition-fast, color $ut-transition-fast, background $ut-transition-fast;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+        border-color: $ut-gold;
+        color: $ut-gold;
+        background: rgba($ut-gold, 0.06);
+        text-decoration: none;
+    }
+}
+
+.btn-ut-teal {
+    @extend .btn-ut-primary;
+    background: $ut-teal;
+    color: $ut-white;
+    border-color: $ut-teal;
+
+    &:hover {
+        background: $ut-teal-light;
+        border-color: $ut-teal-light;
+        color: $ut-white;
+        box-shadow: 0 6px 20px rgba($ut-teal, 0.35);
+    }
+}
+
+// Boost .btn-primary override
+.btn-primary {
+    background-color: $ut-teal;
+    border-color: $ut-teal;
+    font-family: $ut-font-heading;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+
+    &:hover,
+    &:focus {
+        background-color: $ut-teal-light;
+        border-color: $ut-teal-light;
+    }
+}
+
+.btn-secondary {
+    background-color: $ut-gold;
+    border-color: $ut-gold;
+    color: $ut-navy;
+    font-family: $ut-font-heading;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+
+    &:hover,
+    &:focus {
+        background-color: $ut-gold-light;
+        border-color: $ut-gold-light;
+        color: $ut-navy;
+    }
+}
+
+// ── Cards ─────────────────────────────────────────────────────────────────────
+.ut-card {
+    background: $ut-surface;
+    border: 1px solid rgba($ut-gold, 0.12);
+    border-radius: $ut-radius-lg;
+    padding: $ut-space-xl;
+    transition: transform $ut-transition-normal, box-shadow $ut-transition-normal, border-color $ut-transition-normal;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: $ut-shadow-lg;
+        border-color: rgba($ut-gold, 0.3);
+    }
+}
+
+.ut-feature-card {
+    @extend .ut-card;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, $ut-gold, $ut-teal);
+        opacity: 0;
+        transition: opacity $ut-transition-normal;
+    }
+
+    &:hover::before {
+        opacity: 1;
+    }
+
+    .ut-card-icon {
+        font-size: 2rem;
+        margin-bottom: $ut-space-md;
+        display: block;
+    }
+
+    .ut-card-title {
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+        color: $ut-white;
+        margin-bottom: $ut-space-sm;
+    }
+
+    .ut-card-body {
+        font-family: $ut-font-body;
+        color: $ut-text-muted;
+        line-height: 1.65;
+    }
+
+    .ut-card-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        font-size: 0.6875rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $ut-teal-light;
+        border: 1px solid rgba($ut-teal, 0.4);
+        padding: 0.25rem 0.625rem;
+        border-radius: $ut-radius-pill;
+        margin-top: $ut-space-lg;
+    }
+}
+
+// ── Certificate Card ──────────────────────────────────────────────────────────
+.ut-cert-card {
+    background: $ut-white;
+    border: 2px solid $ut-gold;
+    border-radius: $ut-radius-lg;
+    padding: $ut-space-xl;
+    color: $ut-navy;
+    position: relative;
+    overflow: hidden;
+    box-shadow: $ut-shadow-lg;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, $ut-gold, $ut-teal);
+    }
+
+    .ut-cert-issuer {
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: $ut-navy;
+        margin-bottom: $ut-space-md;
+    }
+
+    .ut-cert-title {
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+        color: $ut-navy;
+        margin-bottom: $ut-space-sm;
+    }
+
+    .ut-cert-awardee {
+        font-family: $ut-font-body;
+        font-style: italic;
+        color: rgba($ut-navy, 0.7);
+        margin-bottom: $ut-space-lg;
+    }
+
+    .ut-cert-score-bar {
+        height: 4px;
+        background: rgba($ut-navy, 0.1);
+        border-radius: $ut-radius-pill;
+        margin-bottom: $ut-space-sm;
+        overflow: hidden;
+
+        .ut-cert-score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, $ut-teal, $ut-gold);
+            border-radius: $ut-radius-pill;
+        }
+    }
+
+    .ut-cert-meta {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: $ut-space-md;
+        margin-top: $ut-space-lg;
+        padding-top: $ut-space-lg;
+        border-top: 1px solid rgba($ut-navy, 0.1);
+
+        dt {
+            font-family: $ut-font-heading;
+            font-size: 0.6875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba($ut-navy, 0.5);
+        }
+
+        dd {
+            font-family: $ut-font-heading;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: $ut-navy;
+            margin: 0;
+        }
+    }
+}
+
+// ── Progress Bars ─────────────────────────────────────────────────────────────
+.ut-progress {
+    height: 0.5rem;
+    background: rgba($ut-white, 0.1);
+    border-radius: $ut-radius-pill;
+    overflow: hidden;
+
+    .ut-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, $ut-teal, $ut-gold);
+        border-radius: $ut-radius-pill;
+        transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+// ── XP Bar ────────────────────────────────────────────────────────────────────
+.ut-xp-bar-container {
+    .ut-xp-bar-label {
+        display: flex;
+        justify-content: space-between;
+        font-family: $ut-font-heading;
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        color: $ut-text-muted;
+        margin-bottom: $ut-space-xs;
+    }
+
+    .ut-xp-bar {
+        height: 0.375rem;
+        background: rgba($ut-white, 0.1);
+        border-radius: $ut-radius-pill;
+        overflow: hidden;
+
+        .ut-xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, $ut-teal, $ut-gold);
+            border-radius: $ut-radius-pill;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    }
+}
+
+// ── Leaderboard ───────────────────────────────────────────────────────────────
+.ut-leaderboard {
+    .ut-leaderboard-row {
+        display: flex;
+        align-items: center;
+        gap: $ut-space-md;
+        padding: 0.75rem $ut-space-md;
+        border-radius: $ut-radius-md;
+        background: rgba($ut-white, 0.03);
+        border: 1px solid rgba($ut-gold, 0.08);
+        margin-bottom: $ut-space-sm;
+        transition: background $ut-transition-fast, border-color $ut-transition-fast;
+
+        &:hover {
+            background: rgba($ut-gold, 0.06);
+            border-color: rgba($ut-gold, 0.2);
+        }
+
+        &.ut-rank-1 { border-left: 3px solid #FFD700; }
+        &.ut-rank-2 { border-left: 3px solid #C0C0C0; }
+        &.ut-rank-3 { border-left: 3px solid #CD7F32; }
+        &.ut-rank-you {
+            background: rgba($ut-gold, 0.08);
+            border-color: rgba($ut-gold, 0.3);
+        }
+    }
+
+    .ut-rank {
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        font-size: 1rem;
+        color: $ut-gold;
+        min-width: 1.75rem;
+        text-align: center;
+    }
+
+    .ut-avatar {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        background: $ut-navy-mid;
+        color: $ut-white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        font-size: 0.8125rem;
+        flex-shrink: 0;
+        border: 2px solid rgba($ut-gold, 0.2);
+    }
+
+    .ut-learner-name {
+        font-family: $ut-font-heading;
+        font-weight: 600;
+        color: $ut-white;
+        flex: 1;
+    }
+
+    .ut-xp-score {
+        font-family: $ut-font-mono;
+        font-size: 0.875rem;
+        color: $ut-gold;
+        white-space: nowrap;
+    }
+}
+
+// ── Stat Blocks ───────────────────────────────────────────────────────────────
+.ut-stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: $ut-space-lg;
+    text-align: center;
+}
+
+.ut-stat-block {
+    .ut-stat-value {
+        display: block;
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+        color: $ut-gold;
+        line-height: 1;
+        margin-bottom: 0.25rem;
+    }
+
+    .ut-stat-label {
+        font-family: $ut-font-heading;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: $ut-text-muted;
+    }
+}
+
+// ── Badges ────────────────────────────────────────────────────────────────────
+.ut-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: $ut-font-heading;
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: $ut-radius-pill;
+
+    &.ut-badge-gold {
+        background: rgba($ut-gold, 0.15);
+        color: $ut-gold;
+        border: 1px solid rgba($ut-gold, 0.3);
+    }
+
+    &.ut-badge-teal {
+        background: rgba($ut-teal, 0.15);
+        color: $ut-teal-light;
+        border: 1px solid rgba($ut-teal, 0.3);
+    }
+
+    &.ut-badge-popular {
+        background: $ut-gold;
+        color: $ut-navy;
+        border: none;
+    }
+}
+
+// ── Divider ───────────────────────────────────────────────────────────────────
+.ut-divider {
+    height: 3px;
+    background: linear-gradient(90deg, $ut-gold, $ut-teal);
+    border: none;
+    border-radius: $ut-radius-pill;
+    margin: $ut-space-xl 0;
+}
+
+// ── Toast / Notification ─────────────────────────────────────────────────────
+.ut-notification-toast {
+    background: $ut-surface;
+    border: 1px solid rgba($ut-gold, 0.2);
+    border-left: 4px solid $ut-teal;
+    border-radius: $ut-radius-md;
+    box-shadow: $ut-shadow-md;
+    padding: $ut-space-md;
+    display: flex;
+    align-items: flex-start;
+    gap: $ut-space-md;
+
+    &.ut-milestone-toast {
+        border-left-color: $ut-gold;
+    }
+
+    .toast-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .toast-title {
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        color: $ut-white;
+        margin-bottom: 0.25rem;
+    }
+
+    .toast-body {
+        font-size: 0.875rem;
+        color: $ut-text-muted;
+    }
+}
+
+// ── Code Blocks ──────────────────────────────────────────────────────────────
+.ut-code-block {
+    background: $ut-navy-deep;
+    border: 1px solid rgba($ut-gold, 0.15);
+    border-radius: $ut-radius-md;
+    padding: $ut-space-lg;
+    font-family: $ut-font-mono;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: rgba($ut-white, 0.85);
+    overflow-x: auto;
+
+    .ut-code-comment { color: rgba($ut-white, 0.4); }
+    .ut-code-keyword { color: $ut-teal-light; }
+    .ut-code-string  { color: $ut-gold; }
+    .ut-code-value   { color: #79c0ff; }
+}
+
+pre code,
+code.hljs {
+    font-family: $ut-font-mono;
+    background: $ut-navy-deep;
+    color: rgba($ut-white, 0.85);
+    border-radius: $ut-radius-sm;
+    padding: 0.2em 0.4em;
+}

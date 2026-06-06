@@ -1,0 +1,137 @@
+{{!
+    @template theme_understandtech/navbar
+
+    UnderstandTech global navigation bar.
+    Rendered by core_renderer::render_navbar() in all layout files.
+
+    Context variables:
+    - wwwroot: string - Moodle $CFG->wwwroot
+    - sitename: string - Site name
+    - isloggedin: bool - Whether the user is logged in
+    - loginurl: string - Login page URL
+    - dashboardurl: string - Dashboard URL
+    - profileurl: string - User profile URL
+    - logouturl: string - Logout URL
+    - username: string - Display name of logged-in user
+    - userpictureurl: string - User avatar URL
+    - hasnavdrawer: bool - Whether the nav drawer is available
+    - navdrawertoggle: string - Nav drawer toggle button HTML (from Boost)
+}}
+<a class="ut-skip-link" href="#maincontent">Skip to main content</a>
+
+<nav class="navbar ut-navbar" role="navigation" aria-label="Main navigation">
+    <div class="ut-container d-flex align-items-center justify-content-between w-100">
+
+        {{! Logo }}
+        <a href="{{wwwroot}}" class="ut-navbar-brand" aria-label="{{sitename}} — Home">
+            <svg class="ut-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="40" height="40" rx="8" fill="#C9A227"/>
+                <path d="M10 13h20M10 20h14M10 27h8" stroke="#0B1F3A" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="30" cy="27" r="5" fill="#0B1F3A"/>
+                <path d="M27.5 27l1.5 1.5 3-3" stroke="#C9A227" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="ut-logo-text">Understand<span>Tech</span></span>
+        </a>
+
+        {{! Primary Nav Links }}
+        <ul class="ut-primary-nav" id="ut-primary-nav" role="list">
+            <li class="nav-item">
+                <a href="{{wwwroot}}/course/index.php" class="nav-link">Courses</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{wwwroot}}/local/certmaster/index.php" class="nav-link">Certifications</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{wwwroot}}/local/aitutor/index.php" class="nav-link">AI Tutor</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{wwwroot}}/local/gamification/leaderboard.php" class="nav-link">Leaderboard</a>
+            </li>
+            {{#isloggedin}}
+            <li class="nav-item">
+                <a href="{{dashboardurl}}" class="nav-link">Dashboard</a>
+            </li>
+            {{/isloggedin}}
+        </ul>
+
+        {{! Right-side actions }}
+        <div class="d-flex align-items-center gap-2">
+            {{#isloggedin}}
+            <div class="dropdown">
+                <button class="btn btn-link p-0 d-flex align-items-center gap-2"
+                        id="ut-user-menu"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        style="color:rgba(255,255,255,0.85);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.875rem;">
+                    {{#userpictureurl}}
+                    <img src="{{userpictureurl}}" alt="" width="32" height="32"
+                         style="border-radius:50%;border:2px solid rgba(201,162,39,0.4);" aria-hidden="true">
+                    {{/userpictureurl}}
+                    {{^userpictureurl}}
+                    <span style="width:32px;height:32px;border-radius:50%;background:#1A8A7D;display:inline-flex;align-items:center;justify-content:center;font-size:0.875rem;font-weight:700;color:#fff;border:2px solid rgba(201,162,39,0.4);" aria-hidden="true">
+                        {{#username}}{{username}}{{/username}}
+                    </span>
+                    {{/userpictureurl}}
+                    <span class="d-none d-lg-inline">{{username}}</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ut-user-menu">
+                    <a class="dropdown-item" href="{{dashboardurl}}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right:0.5rem;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        Dashboard
+                    </a>
+                    <a class="dropdown-item" href="{{profileurl}}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right:0.5rem;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                        Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{logouturl}}">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right:0.5rem;"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+                        Log out
+                    </a>
+                </div>
+            </div>
+            {{/isloggedin}}
+            {{^isloggedin}}
+            <a href="{{loginurl}}" class="ut-nav-cta">Get Started</a>
+            {{/isloggedin}}
+
+            {{! Mobile hamburger }}
+            <button class="ut-mobile-menu-btn d-lg-none"
+                    id="ut-mobile-toggle"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    aria-controls="ut-primary-nav">
+                <span style="font-size:0;line-height:0;">Menu</span>
+            </button>
+
+            {{! Boost nav drawer toggle (if available) }}
+            {{#hasnavdrawer}}
+            {{{navdrawertoggle}}}
+            {{/hasnavdrawer}}
+        </div>
+
+    </div>
+</nav>
+
+<script>
+(function() {
+    var btn = document.getElementById('ut-mobile-toggle');
+    var nav = document.getElementById('ut-primary-nav');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function() {
+        var isOpen = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Scroll-based navbar shadow
+    var navbar = document.querySelector('.ut-navbar');
+    if (!navbar) return;
+    var onScroll = function() {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+}());
+</script>
