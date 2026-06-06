@@ -4,7 +4,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_aitutor';
-$plugin->version   = 2026060616;
+$plugin->version   = 2026060617;
 $plugin->requires  = 2024100700;
 $plugin->maturity  = MATURITY_BETA;
 $plugin->release   = '1.0.0';

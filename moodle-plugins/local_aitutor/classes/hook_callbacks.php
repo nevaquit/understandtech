@@ -50,11 +50,18 @@ class hook_callbacks {
     public static function before_standard_head(\core\hook\output\before_standard_head_html_generation $hook): void {
         global $PAGE;
 
-        if (self::get_sidebar_context() === null) {
+        $sidebar = self::get_sidebar_context();
+        if ($sidebar === null) {
             return;
         }
 
         $PAGE->requires->css('/local/aitutor/styles.css');
+        // Footer hooks run after PAGE->requires is locked; queue AMD here and poll for DOM in init.
+        $PAGE->requires->js_call_amd(
+            'local_aitutor/tutor_sidebar',
+            'init',
+            [$sidebar['courseid'], $sidebar['cmid']],
+        );
     }
 
     /**
@@ -66,7 +73,7 @@ class hook_callbacks {
     public static function before_standard_footer(
         \core\hook\output\before_standard_footer_html_generation $hook,
     ): void {
-        global $OUTPUT, $PAGE;
+        global $OUTPUT;
 
         $sidebar = self::get_sidebar_context();
         if ($sidebar === null) {
@@ -79,15 +86,5 @@ class hook_callbacks {
             'cmid' => $sidebar['cmid'],
         ]);
         $hook->add_html($html);
-
-        $courseid = $sidebar['courseid'];
-        $cmid = $sidebar['cmid'];
-        $PAGE->requires->js_amd_inline(
-            "require(['local_aitutor/tutor_sidebar'], function(Tutor) {" .
-            "var boot = function() {" .
-            "if (document.getElementById('local-aitutor-sidebar')) {" .
-            "Tutor.init({$courseid}, {$cmid}); return; }" .
-            "window.requestAnimationFrame(boot); }; boot(); });",
-        );
     }
 }
