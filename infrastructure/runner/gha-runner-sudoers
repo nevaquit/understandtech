@@ -15,6 +15,7 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/php /var/www/moodle/admin/cli/purge_cac
 gha-runner ALL=(root) NOPASSWD: /usr/bin/php /var/www/moodle/admin/cli/upgrade.php --non-interactive --allow-unstable
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/moodle-upgrade-direct-pg.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/apply-nginx-config.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/recover-origin-db.sh
 
 # Plugin sync into www-data-owned Moodle dirroot (deploy workflow)
 gha-runner ALL=(root) NOPASSWD: /usr/bin/mkdir -p /var/www/moodle/local/*

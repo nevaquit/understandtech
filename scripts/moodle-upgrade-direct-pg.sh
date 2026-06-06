@@ -12,7 +12,21 @@ exec > >(tee -a "$LOG") 2>&1
 
 echo "=== Moodle direct-Postgres upgrade $(date -Is) ==="
 
-sudo cp "$CONFIG" "$BACKUP"
+REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
+if [ -x "${REPO}/scripts/recover-origin-db.sh" ]; then
+  bash "${REPO}/scripts/recover-origin-db.sh" || true
+fi
+
+if ! sudo -u www-data php -r "define('CLI_SCRIPT',true); require '${CONFIG}'; global \$DB; \$DB->get_record('config',['name'=>'version'],'value'); echo 'ok';" 2>/dev/null | grep -q ok; then
+  echo "ERROR: DB still unreachable after recovery" >&2
+  exit 1
+fi
+
+if grep -q '127.0.0.1' "$CONFIG" && grep -q '6432' "$CONFIG"; then
+  cp "$CONFIG" "$BACKUP"
+else
+  echo "WARN: config.php not on PgBouncer; skipping backup refresh"
+fi
 sudo sed -i "s|127.0.0.1|understandtech-pg-prod.postgres.database.azure.com|g" "$CONFIG"
 sudo sed -i "s|'dbport' => 6432|'dbport' => 5432, 'sslmode' => 'require'|g" "$CONFIG"
 
@@ -33,7 +47,6 @@ sudo chown root:www-data "$CONFIG"
 sudo chmod 640 "$CONFIG"
 sudo -u www-data /usr/bin/php admin/cli/purge_caches.php
 
-REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
 NGINX_SRC="${REPO}/infrastructure/nginx/understandtech.conf"
 NGINX_DST="/etc/nginx/sites-available/understandtech.conf"
 if [ -f "$NGINX_SRC" ] && { [ ! -f "$NGINX_DST" ] || ! cmp -s "$NGINX_SRC" "$NGINX_DST"; }; then
