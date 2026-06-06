@@ -159,6 +159,13 @@ $card-border-radius: 0.75rem;
 }
 
 #page-login-index {
+    background-color: #f4f6f9;
+
+    #page {
+        background-color: transparent;
+        min-height: 100vh;
+    }
+
     .login-container {
         max-width: 28rem;
         margin: 2rem auto;
@@ -167,6 +174,11 @@ $card-border-radius: 0.75rem;
         border-radius: $card-border-radius;
         box-shadow: 0 8px 24px rgba($ut-brand-navy, 0.12);
         border-top: 4px solid $ut-brand-gold;
+    }
+
+    .ut-login-form .btn-primary {
+        background-color: $ut-brand-teal;
+        border-color: $ut-brand-teal;
     }
 }
 

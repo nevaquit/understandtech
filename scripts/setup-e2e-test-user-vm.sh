@@ -24,8 +24,12 @@ $username = 'e2etest';
 $email = 'e2e-test@understandtech.app';
 
 if ($existing = $DB->get_record('user', ['username' => $username, 'deleted' => 0])) {
-    $existing->password = $password;
+    $existing->auth = 'manual';
+    $existing->confirmed = 1;
+    $existing->suspended = 0;
+    $existing->mnethostid = $CFG->mnet_localhost_id;
     user_update_user($existing, false, false);
+    update_internal_user_password($existing, $password);
     $userid = (int) $existing->id;
     echo "user_reset id=$userid\n";
 } else {

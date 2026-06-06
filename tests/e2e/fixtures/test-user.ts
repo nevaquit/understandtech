@@ -43,15 +43,25 @@ export class TestUser {
    */
   async waitForLoginForm(): Promise<void> {
     const loginForm = this.page.locator('.loginform, .ut-login-form');
-    for (let attempt = 0; attempt < 3; attempt++) {
+    const maxAttempts = 5;
+
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
       const bodyText = (await this.page.locator('body').innerText().catch(() => '')).toLowerCase();
       const rateLimited = bodyText.includes('503 service temporarily unavailable')
         || bodyText.includes('too many requests');
+      const dbError = bodyText.includes('error reading from database');
 
-      if (rateLimited && attempt < 2) {
-        await this.page.waitForTimeout(65_000);
-        await this.page.goto('/login/index.php', { waitUntil: 'domcontentloaded', timeout: 60_000 });
-        continue;
+      if (rateLimited || dbError) {
+        if (attempt < maxAttempts - 1) {
+          await this.page.waitForTimeout(rateLimited ? 65_000 : 20_000);
+          await this.page.goto('/login/index.php', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+          continue;
+        }
+        throw new Error(
+          dbError
+            ? 'Moodle login unavailable: Error reading from database (check PgBouncer/Redis on origin).'
+            : 'Moodle login rate-limited (nginx 5 req/min on /login/index.php).',
+        );
       }
 
       await expect(loginForm).toBeVisible({ timeout: 15_000 });

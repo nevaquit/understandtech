@@ -158,7 +158,9 @@ define(['core/ajax', 'core/str'], function(Ajax, Str) {
                     output.textContent = strings.unavailable;
                 }
             } catch (err) {
-                setError(strings.error_generic);
+                const networkFailure = err instanceof TypeError
+                    || String(err?.message ?? '').startsWith('worker_http_');
+                setError(networkFailure ? strings.unavailable : strings.error_generic);
             } finally {
                 setLoading(false);
             }
