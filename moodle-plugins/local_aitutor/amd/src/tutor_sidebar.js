@@ -112,7 +112,7 @@ define(['core/ajax', 'core/notification', 'core/str'], function(Ajax, Notificati
                     }
                     output.textContent = '…';
                     try {
-                        const [{token, workerurl}] = await fetchJwt();
+                        const {token, workerurl} = await fetchJwt();
                         await streamTutorReply(workerurl, token, prompt, courseid, cmid);
                         if (output.textContent === '…' || output.textContent.trim() === '') {
                             await showUnavailable();
