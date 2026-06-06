@@ -90,6 +90,22 @@ function theme_understandtech_page_init(moodle_page $page): void {
 }
 
 /**
+ * Return the main SCSS content for the theme preset.
+ * Required by Moodle when $THEME->scss is set as a callback in config.php.
+ * Reads scss/preset/default.scss which @imports all five partials.
+ *
+ * @param theme_config $theme The theme configuration object.
+ * @return string Main SCSS content.
+ */
+function theme_understandtech_get_main_scss_content(theme_config $theme): string {
+    $scsspath = $theme->dir . '/scss/preset/default.scss';
+    if (!is_readable($scsspath)) {
+        return '';
+    }
+    return file_get_contents($scsspath);
+}
+
+/**
  * Return extra SCSS to append after the preset (post.scss equivalent via PHP).
  * This is where widget-specific overrides live that need access to compiled vars.
  *
@@ -97,7 +113,11 @@ function theme_understandtech_page_init(moodle_page $page): void {
  * @return string Extra SCSS.
  */
 function theme_understandtech_get_extra_scss(theme_config $theme): string {
-    return file_get_contents(__DIR__ . '/scss/post.scss');
+    $scsspath = $theme->dir . '/scss/post.scss';
+    if (!is_readable($scsspath)) {
+        return '';
+    }
+    return file_get_contents($scsspath);
 }
 
 // ── Colour Utility Functions ──────────────────────────────────────────────────
