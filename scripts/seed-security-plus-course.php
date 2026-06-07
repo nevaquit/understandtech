@@ -414,10 +414,10 @@ $sectionnames = [
 foreach ($sectionnames as $num => $label) {
     $section = $DB->get_record('course_sections', ['course' => $course->id, 'section' => $num], '*', MUST_EXIST);
     if ((string) $section->name !== $label) {
-        $section->name = $label;
-        course_update_section($course, $section);
+        $DB->set_field('course_sections', 'name', $label, ['id' => $section->id]);
     }
 }
+rebuild_course_cache((int) $course->id, true);
 
 $domainsection = [
     'general_concepts' => 1,
