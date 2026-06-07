@@ -16,6 +16,9 @@
   --ut-teal:        #1A8A7D;
   --ut-teal-dark:   #157a6e;
   --ut-teal-dim:    rgba(26,138,125,0.12);
+  --ut-purple:      #7C3AED;
+  --ut-purple-light: #A78BFA;
+  --ut-purple-dim:  rgba(124,58,237,0.15);
 
   /* Semantic Surfaces — Dark-first design */
   --ut-bg:          #0a1628;
@@ -534,7 +537,8 @@ code {
 
 .ut-card-teal  { border-top: 3px solid var(--ut-teal); }
 .ut-card-gold  { border-top: 3px solid var(--ut-gold); }
-.ut-card-navy  { border-top: 3px solid var(--ut-navy); }
+.ut-card-navy   { border-top: 3px solid var(--ut-navy); }
+.ut-card-purple { border-top: 3px solid var(--ut-purple-light); }
 
 /* ─── Badges ─────────────────────────────────────────────────────── */
 .badge {
@@ -552,7 +556,8 @@ code {
 }
 
 .badge-teal    { background: rgba(26,138,125,0.12); color: var(--ut-teal); }
-.badge-gold    { background: rgba(201,162,39,0.15); color: #92400e; }
+.badge-gold    { background: rgba(201,162,39,0.15); color: var(--ut-gold); }
+.badge-purple  { background: var(--ut-purple-dim); color: var(--ut-purple-light); }
 .badge-navy    { background: var(--ut-navy); color: #fff; }
 .badge-new     { background: var(--ut-teal); color: #fff; }
 
@@ -606,7 +611,8 @@ code {
 
 .ut-feature-icon-teal { background: rgba(26,138,125,0.12); color: var(--ut-teal); }
 .ut-feature-icon-gold { background: rgba(201,162,39,0.12); color: var(--ut-gold); }
-.ut-feature-icon-navy { background: rgba(255,255,255,0.06); color: var(--ut-text-muted); }
+.ut-feature-icon-navy   { background: rgba(255,255,255,0.06); color: var(--ut-text-muted); }
+.ut-feature-icon-purple { background: var(--ut-purple-dim); color: var(--ut-purple-light); }
 
 /* ─── Stats Row ──────────────────────────────────────────────────── */
 .ut-stats-row {
