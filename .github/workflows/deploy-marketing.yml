@@ -33,10 +33,10 @@ jobs:
           EXPECTED_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
-          cd /opt/understandtech-plugins
+          cd ${PLUGINS_REPO_DIR}
           for attempt in 1 2 3 4 5; do
-            sudo -u gha-runner git fetch origin main
-            sudo -u gha-runner git reset --hard origin/main
+            git fetch origin main
+            git reset --hard origin/main
             actual="$(git rev-parse HEAD)"
             if [ "$actual" = "$EXPECTED_SHA" ]; then
               echo "Monorepo synced to ${EXPECTED_SHA}"
