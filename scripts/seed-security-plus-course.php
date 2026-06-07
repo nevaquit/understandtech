@@ -155,13 +155,12 @@ function security_plus_import_gift(int $contextid, stdClass $category, string $g
     $context = context::instance_by_id($contextid);
     $before = count(security_plus_category_question_ids((int) $category->id));
 
-    $lines = file($giftpath);
     $qformat = new qformat_gift();
     $qformat->setCategory($category);
     $qformat->setContexts([$context]);
-    $qformat->setFilename(basename($giftpath));
+    $qformat->setFilename($giftpath);
     $qformat->setStoponerror(false);
-    if (!$qformat->importprocess($lines)) {
+    if (!$qformat->importprocess()) {
         echo "gift_import_failed path={$giftpath}\n";
         return $before;
     }
@@ -427,7 +426,7 @@ $domainsection = [
 
 foreach ($objectives as $objective) {
     $sectionnum = $domainsection[$objective->domainshort] ?? 1;
-    $pagename = 'SY0-701 ' . strtoupper(str_replace('sy701_', '', str_replace('_', '.', $objective->shortname)))
+    $pagename = strtoupper(str_replace('sy701_', 'SY0-701 ', str_replace('_', '.', $objective->shortname)))
         . ': ' . $objective->fullname;
     security_plus_add_page(
         $course,
