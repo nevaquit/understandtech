@@ -134,18 +134,42 @@ function animateCounter(el) {
 }
 
 function initCounters() {
-  if (!('IntersectionObserver' in window)) return;
+  const fired = new WeakSet();
+
+  function fireCounter(el) {
+    if (fired.has(el)) return;
+    fired.add(el);
+    animateCounter(el);
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: just set final values immediately
+    document.querySelectorAll('[data-target]').forEach(el => fireCounter(el));
+    return;
+  }
 
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        animateCounter(e.target);
+        fireCounter(e.target);
         obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.2, rootMargin: '0px 0px -10px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px 0px 0px' });
 
   document.querySelectorAll('[data-target]').forEach(el => obs.observe(el));
+
+  // Also fire for any counter already in/near viewport after a short delay
+  // (handles cases where reveal animation delays visibility)
+  setTimeout(() => {
+    document.querySelectorAll('[data-target]').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) {
+        fireCounter(el);
+        obs.unobserve(el);
+      }
+    });
+  }, 400);
 }
 
 /* ─── Sticky Nav Shadow on Scroll ────────────────────────────────── */
