@@ -1,0 +1,195 @@
+::sy701_1_1 Security control categories::Which of the following best describes a detective control?{
+=Monitoring and alerting on suspicious activity
+~Blocking unauthorized access before it occurs
+~Physically preventing entry to a data center
+~Replacing a failed control with a compensating control
+}
+
+::sy701_1_2 CIA triad::Which principle ensures that data has not been altered without authorization?{
+=Integrity
+~Confidentiality
+~Availability
+~Non-repudiation
+}
+
+::sy701_1_3 Change management::Why is a documented backout plan important during change management?{
+=It enables safe rollback if a change introduces security or operational issues
+~It eliminates the need for maintenance windows
+~It replaces the need for version control
+~It guarantees zero downtime for every change
+}
+
+::sy701_1_4 Cryptographic hashing::What is the primary purpose of salting passwords before hashing?{
+=To defend against rainbow table attacks
+~To encrypt passwords for reversible storage
+~To replace the need for key escrow
+~To sign messages with a private key
+}
+
+::sy701_2_1 Threat actors::Which motivation is most commonly associated with organized crime threat actors?{
+=Financial gain
+~Political hacktivism
+~Nation-state espionage only
+~Accidental insider mistakes
+}
+
+::sy701_2_2 Attack vectors::Phishing delivered via SMS is commonly referred to as what?{
+=Smishing
+~Vishing
+~Typosquatting
+~Watering hole
+}
+
+::sy701_2_3 Vulnerabilities::A buffer overflow is best categorized as which type of vulnerability?{
+=Application
+~Physical
+~Policy
+~Environmental
+}
+
+::sy701_2_4 Malicious activity indicators::Impossible travel alerts are most closely related to detecting what?{
+=Account compromise or credential misuse
+~Expired TLS certificates
+~Misconfigured DNS records
+~Hardware end-of-life
+}
+
+::sy701_2_5 Mitigation::Applying least privilege primarily reduces what risk?{
+=Unauthorized access to resources beyond job requirements
+~Network latency on encrypted links
+~Certificate revocation delays
+~Backup storage costs
+}
+
+::sy701_3_1 Architecture models::Which model shifts infrastructure management to a cloud provider while the customer configures security controls for workloads?{
+=Shared responsibility in cloud computing
+~Air-gapped on-premises only
+~Fully decentralized peer-to-peer
+~Single-tenant mainframe only
+}
+
+::sy701_3_2 Secure infrastructure::An inline IPS placed on a network path is primarily used to what?{
+=Detect and block malicious traffic in real time
+~Archive logs for long-term retention only
+~Replace the need for encryption
+~Generate self-signed certificates
+}
+
+::sy701_3_3 Data protection::Tokenization is primarily used to protect data by doing what?{
+=Replacing sensitive values with non-sensitive substitutes
+~Compressing files for faster backup
+~Deleting data at end of life
+~Publishing data to an open ledger
+}
+
+::sy701_3_4 Resilience::A warm site typically provides what compared to a hot site?{
+=Partially configured infrastructure with longer recovery time
+~No data replication capability
+~Only offsite tape backups with no network
+~Immediate failover with zero RTO
+}
+
+::sy701_4_1 Secure baselines::Establishing a secure baseline for servers most directly supports which goal?{
+=Consistent hardening and reduced configuration drift
+~Eliminating the need for patching
+~Removing all administrative accounts
+~Disabling all logging to save storage
+}
+
+::sy701_4_2 Asset management::Sanitization during asset disposal primarily prevents what?{
+=Data remanence on decommissioned media
+~Certificate expiration
+~DNS cache poisoning
+~Social engineering
+}
+
+::sy701_4_3 Vulnerability management::A false positive in vulnerability scanning means what?{
+=A reported vulnerability is not actually present
+~A real vulnerability was missed by the scanner
+~A patch was applied successfully
+~A risk was accepted permanently
+}
+
+::sy701_4_4 Monitoring::A SIEM is primarily used to what?{
+=Aggregate and correlate security events for analysis and alerting
+~Encrypt data at rest on endpoints
+~Replace identity and access management
+~Issue digital certificates
+}
+
+::sy701_4_5 Network security::A web application firewall (WAF) is designed to protect what?{
+=Web applications at Layer 7
+~Layer 2 switching loops
+~Physical access to a server room
+~Email SPF records only
+}
+
+::sy701_4_6 IAM::Multifactor authentication requires how many distinct factor categories?{
+=Two or more
+~Exactly one
+~Only biometric factors
+~Only knowledge factors
+}
+
+::sy701_4_7 Automation::Orchestration in security operations most directly improves what?{
+=Coordinated response across multiple tools and processes
+~Manual ticket duplication
+~Removal of audit trails
+~Permanent exception handling
+}
+
+::sy701_4_8 Incident response::Which incident response phase focuses on limiting damage and preventing spread?{
+=Containment
+~Preparation
+~Lessons learned
+~Detection only
+}
+
+::sy701_4_9 Investigation::Maintaining chain of custody is critical during what activity?{
+=Digital forensics evidence handling
+~Password policy updates
+~Vendor contract renewal
+~Security awareness training
+}
+
+::sy701_5_1 Governance::An Acceptable Use Policy (AUP) is an example of what governance element?{
+=Policy
+~Procedure only
+~Technical control
+~Penetration test report
+}
+
+::sy701_5_2 Risk management::Annualized Loss Expectancy (ALE) combines which concepts?{
+=Single Loss Expectancy and Annualized Rate of Occurrence
+~RTO and RPO only
+~CVSS and CVE only
+~SLA and MOU only
+}
+
+::sy701_5_3 Third-party risk::A right-to-audit clause in a vendor contract enables what?{
+=The organization to verify vendor security controls
+~Unlimited data sharing with suppliers
+~Automatic exemption from compliance
+~Removal of SLA penalties
+}
+
+::sy701_5_4 Compliance::Data sovereignty requirements primarily concern what?{
+=Where data is stored and processed geographically
+~Which antivirus vendor is selected
+~How often passwords expire
+~Which IDS signatures are enabled
+}
+
+::sy701_5_5 Audits::An external regulatory examination is best classified as what?{
+=External assessment
+~Self-assessment only
+~Tabletop exercise
+~Bug bounty program
+}
+
+::sy701_5_6 Security awareness::Simulated phishing campaigns are primarily used to what?{
+=Measure and improve user recognition of social engineering
+~Replace technical email filtering
+~Eliminate the need for DMARC
+~Archive firewall logs
+}

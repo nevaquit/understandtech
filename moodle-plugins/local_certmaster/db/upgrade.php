@@ -50,6 +50,26 @@ function xmldb_local_certmaster_upgrade(int $oldversion): bool {
         upgrade_plugin_savepoint(true, 2026060802, 'local', 'certmaster');
     }
 
+    if ($oldversion < 2026060803) {
+        $cert = $DB->get_record('certmaster_certifications', ['shortname' => 'security_plus_sy0_701']);
+        if ($cert) {
+            $weights = [
+                'general_concepts' => 12.00,
+                'threats_vulns' => 22.00,
+                'security_architecture' => 18.00,
+                'security_operations' => 28.00,
+                'program_management' => 20.00,
+            ];
+            foreach ($weights as $shortname => $weight) {
+                $DB->set_field('certmaster_domains', 'blueprint_weight', $weight, [
+                    'certificationid' => $cert->id,
+                    'shortname' => $shortname,
+                ]);
+            }
+        }
+        upgrade_plugin_savepoint(true, 2026060803, 'local', 'certmaster');
+    }
+
     return true;
 }
 

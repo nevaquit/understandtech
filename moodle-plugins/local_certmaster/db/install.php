@@ -21,11 +21,11 @@ function xmldb_local_certmaster_install(): bool {
     ]);
 
     $domains = [
-        ['shortname' => 'general_concepts', 'fullname' => 'General Security Concepts', 'weight' => 11.00, 'sortorder' => 1],
+        ['shortname' => 'general_concepts', 'fullname' => 'General Security Concepts', 'weight' => 12.00, 'sortorder' => 1],
         ['shortname' => 'threats_vulns', 'fullname' => 'Threats, Vulnerabilities, and Mitigations', 'weight' => 22.00, 'sortorder' => 2],
-        ['shortname' => 'security_architecture', 'fullname' => 'Security Architecture', 'weight' => 25.00, 'sortorder' => 3],
+        ['shortname' => 'security_architecture', 'fullname' => 'Security Architecture', 'weight' => 18.00, 'sortorder' => 3],
         ['shortname' => 'security_operations', 'fullname' => 'Security Operations', 'weight' => 28.00, 'sortorder' => 4],
-        ['shortname' => 'program_management', 'fullname' => 'Security Program Management and Oversight', 'weight' => 14.00, 'sortorder' => 5],
+        ['shortname' => 'program_management', 'fullname' => 'Security Program Management and Oversight', 'weight' => 20.00, 'sortorder' => 5],
     ];
 
     foreach ($domains as $domain) {
