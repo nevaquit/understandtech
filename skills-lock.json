@@ -1,17 +1,47 @@
 {
   "version": 1,
   "skills": {
+    "InDesign": {
+      "source": "sfkislev/flue",
+      "sourceType": "github",
+      "skillPath": "skills/indesign/SKILL.md",
+      "computedHash": "1433e3189aacc6cc272879998170e50b16a9ab409202b754dd503c475b44ef8d"
+    },
     "behat-automation-skill": {
       "source": "SparshKesari/testmu-skills",
       "sourceType": "github",
       "skillPath": "behat-automation-skill/SKILL.md",
       "computedHash": "3ba01632df46d43e74c604b4f0c5fb0c7cfae6013cf63c86b01b795f3e6dbded"
     },
+    "effective-print-design": {
+      "source": "sebastian-software/effective-print-design",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "c2f8ac43551bd97d14fd3d0816555e1959deea829b50c69774fd0f11a1bf4989"
+    },
+    "latex-paper-en": {
+      "source": "bahayonghang/academic-writing-skills",
+      "sourceType": "github",
+      "skillPath": "academic-writing-skills/latex-paper-en/SKILL.md",
+      "computedHash": "3665054ba07502dac3fb20c7cb471c1f8132d261fe241d092b49733299bc100f"
+    },
+    "markdown-to-pdf": {
+      "source": "duc01226/easyplatform",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/markdown-to-pdf/SKILL.md",
+      "computedHash": "592d0880bddd64812994a575285be618221975fa84b4c922940f168dd8f197dc"
+    },
     "moodle-plugin": {
       "source": "Af1ah/moodle-plugin-skills",
       "sourceType": "github",
       "skillPath": "SKILL.md",
       "computedHash": "2b18af6cff574fe245456d2560e0e916f82890f86f8944b35f1b3d6b2f6d5430"
+    },
+    "print-css": {
+      "source": "baphomet480/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/print-css/SKILL.md",
+      "computedHash": "c221b5c2f367ce1c6aee6d9964a0e9d7ac98663a7200e1cd2858af9c5be92253"
     }
   }
 }
