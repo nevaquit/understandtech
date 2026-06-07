@@ -11,8 +11,8 @@
 define('CLI_SCRIPT', true);
 
 $repopath = getenv('PLUGINS_REPO_DIR') ?: '/opt/understandtech-plugins';
+chdir('/var/www/moodle');
 require('/var/www/moodle/config.php');
-require_once($CFG->dirroot . '/local/certmaster/classes/csv_importer.php');
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->dirroot . '/course/modlib.php');
 require_once($CFG->dirroot . '/mod/page/lib.php');
@@ -20,8 +20,6 @@ require_once($CFG->dirroot . '/mod/quiz/lib.php');
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->dirroot . '/lib/questionlib.php');
-
-use local_certmaster\csv_importer;
 
 /**
  * Build lesson HTML for an SY0-701 objective (original summary aligned to exam objective text).
@@ -356,7 +354,7 @@ if (!is_readable($csvpath)) {
     echo "error=csv_missing path={$csvpath}\n";
     exit(1);
 }
-$imported = csv_importer::import_from_csv(file_get_contents($csvpath));
+$imported = \local_certmaster\csv_importer::import_from_csv(file_get_contents($csvpath));
 echo "objectives_imported={$imported}\n";
 
 $objectives = $DB->get_records_sql(
