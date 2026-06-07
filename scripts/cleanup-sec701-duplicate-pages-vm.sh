@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Seed Security+ SY0-701 course on production Moodle (run on VM).
+# Remove duplicate SEC701 lesson pages on production Moodle (run on VM).
 set -euo pipefail
 
 REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
@@ -10,6 +10,5 @@ if [ -d "${REPO}/.git" ]; then
 fi
 
 sudo -u www-data php "${REPO}/scripts/cleanup-sec701-duplicate-pages.php"
-sudo -u www-data php "${REPO}/scripts/seed-security-plus-course.php"
 sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
-echo 'seed_security_plus_complete=1'
+echo 'cleanup_sec701_pages_complete=1'

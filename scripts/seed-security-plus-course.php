@@ -18,6 +18,7 @@ require_once($CFG->dirroot . '/course/modlib.php');
 require_once($CFG->dirroot . '/mod/page/lib.php');
 require_once($CFG->dirroot . '/mod/quiz/lib.php');
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
+require_once($CFG->libdir . '/question/engine/lib.php');
 require_once($CFG->dirroot . '/question/format.php');
 require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->dirroot . '/lib/questionlib.php');
@@ -215,6 +216,83 @@ function security_plus_map_questions_by_objective(int $categoryid): array {
 }
 
 /**
+ * Apply Moodle 4.5 quiz form defaults (matches mod_quiz_generator).
+ *
+ * @param stdClass $quiz
+ * @return stdClass
+ */
+function security_plus_quiz_apply_defaults(stdClass $quiz): stdClass {
+    $defaults = [
+        'timeopen' => 0,
+        'timeclose' => 0,
+        'preferredbehaviour' => 'deferredfeedback',
+        'canredoquestions' => 0,
+        'attempts' => 0,
+        'attemptonlast' => 0,
+        'grademethod' => QUIZ_GRADEHIGHEST,
+        'decimalpoints' => 2,
+        'questiondecimalpoints' => -1,
+        'attemptduring' => 1,
+        'correctnessduring' => 1,
+        'maxmarksduring' => 1,
+        'marksduring' => 1,
+        'specificfeedbackduring' => 1,
+        'generalfeedbackduring' => 1,
+        'rightanswerduring' => 1,
+        'overallfeedbackduring' => 0,
+        'attemptimmediately' => 1,
+        'correctnessimmediately' => 1,
+        'maxmarksimmediately' => 1,
+        'marksimmediately' => 1,
+        'specificfeedbackimmediately' => 1,
+        'generalfeedbackimmediately' => 1,
+        'rightanswerimmediately' => 1,
+        'overallfeedbackimmediately' => 1,
+        'attemptopen' => 1,
+        'correctnessopen' => 1,
+        'maxmarksopen' => 1,
+        'marksopen' => 1,
+        'specificfeedbackopen' => 1,
+        'generalfeedbackopen' => 1,
+        'rightansweropen' => 1,
+        'overallfeedbackopen' => 1,
+        'attemptclosed' => 1,
+        'correctnessclosed' => 1,
+        'maxmarksclosed' => 1,
+        'marksclosed' => 1,
+        'specificfeedbackclosed' => 1,
+        'generalfeedbackclosed' => 1,
+        'rightanswerclosed' => 1,
+        'overallfeedbackclosed' => 1,
+        'questionsperpage' => 1,
+        'navmethod' => QUIZ_NAVMETHOD_FREE,
+        'shuffleanswers' => 1,
+        'sumgrades' => 0,
+        'grade' => 100,
+        'timelimit' => 0,
+        'overduehandling' => 'autosubmit',
+        'graceperiod' => 0,
+        'quizpassword' => '',
+        'subnet' => '',
+        'browsersecurity' => '',
+        'delay1' => 0,
+        'delay2' => 0,
+        'showuserpicture' => 0,
+        'showblocks' => 0,
+        'completionattemptsexhausted' => 0,
+        'completionpass' => 0,
+        'allowofflineattempts' => 0,
+        'visibleoncoursepage' => 1,
+    ];
+    foreach ($defaults as $key => $value) {
+        if (!isset($quiz->$key)) {
+            $quiz->$key = $value;
+        }
+    }
+    return $quiz;
+}
+
+/**
  * @param stdClass $course
  * @param int $sectionnum
  * @param string $quizname
@@ -223,6 +301,11 @@ function security_plus_map_questions_by_objective(int $categoryid): array {
  */
 function security_plus_add_quiz(stdClass $course, int $sectionnum, string $quizname, array $questionids): void {
     global $DB;
+
+    if (!$questionids) {
+        echo "quiz_skip_empty name={$quizname}\n";
+        return;
+    }
 
     $exists = $DB->record_exists_sql(
         "SELECT q.id
@@ -237,61 +320,65 @@ function security_plus_add_quiz(stdClass $course, int $sectionnum, string $quizn
         return;
     }
 
-    $quiz = new stdClass();
+    $targetbehaviour = 'deferredfeedback';
+    if (array_key_exists('certmasterconfidence', core_component::get_plugin_list('qbehaviour'))) {
+        try {
+            question_engine::get_behaviour_type('certmasterconfidence');
+            $targetbehaviour = 'certmasterconfidence';
+        } catch (Throwable $e) {
+            echo "quiz_warn behaviour_unavailable fallback=deferredfeedback name={$quizname}\n";
+        }
+    } else {
+        echo "quiz_warn behaviour_missing fallback=deferredfeedback name={$quizname}\n";
+    }
+
+    $quiz = security_plus_quiz_apply_defaults(new stdClass());
     $quiz->course = $course->id;
     $quiz->name = $quizname;
     $quiz->intro = '<p>Knowledge check aligned to SY0-701 domain objectives. Rate your confidence after each question.</p>';
     $quiz->introformat = FORMAT_HTML;
-    $quiz->timeopen = 0;
-    $quiz->timeclose = 0;
-    $quiz->timelimit = 0;
-    $quiz->overduehandling = 'autosubmit';
-    $quiz->graceperiod = 0;
-    $quiz->preferredbehaviour = 'certmasterconfidence';
-    $quiz->canredoquestions = 0;
-    $quiz->attempts = 0;
-    $quiz->attemptonlast = 0;
-    $quiz->grademethod = 1;
-    $quiz->decimalpoints = 2;
-    $quiz->questiondecimalpoints = -1;
-    $quiz->reviewattempt = 69888;
-    $quiz->reviewcorrectness = 4352;
-    $quiz->reviewmarks = 4352;
-    $quiz->reviewspecificfeedback = 4352;
-    $quiz->reviewgeneralfeedback = 4352;
-    $quiz->reviewrightanswer = 4352;
-    $quiz->reviewoverallfeedback = 4352;
-    $quiz->questionsperpage = 1;
-    $quiz->navmethod = QUIZ_NAVMETHOD_FREE;
-    $quiz->shuffleanswers = 1;
-    $quiz->sumgrades = count($questionids);
-    $quiz->grade = 100;
-    $quiz->timecreated = time();
-    $quiz->timemodified = time();
-    $quiz->password = '';
-    $quiz->subnet = '';
-    $quiz->browsersecurity = '-';
-    $quiz->delay1 = 0;
-    $quiz->delay2 = 0;
-    $quiz->showuserpicture = 0;
-    $quiz->showblocks = 0;
-    $quiz->completionattemptsexhausted = 0;
-    $quiz->completionpass = 0;
-    $quiz->allowofflineattempts = 0;
     $quiz->module = $DB->get_field('modules', 'id', ['name' => 'quiz']);
     $quiz->modulename = 'quiz';
     $quiz->section = $sectionnum;
     $quiz->visible = 1;
     $quiz->cmidnumber = '';
 
-    $cm = add_moduleinfo($quiz, $course);
-    $quizrecord = $DB->get_record('quiz', ['id' => $cm->instance], '*', MUST_EXIST);
-    $slot = 1;
-    foreach ($questionids as $qid) {
-        quiz_add_quiz_question($qid, $quizrecord, $slot);
-        $slot++;
+    try {
+        $cm = add_moduleinfo($quiz, $course);
+    } catch (Throwable $e) {
+        echo "quiz_create_failed name={$quizname} error=" . $e->getMessage() . "\n";
+        return;
     }
-    echo "quiz_created id={$quizrecord->id} name={$quizname} questions=" . count($questionids) . "\n";
+
+    $quizrecord = $DB->get_record('quiz', ['id' => $cm->instance], '*', MUST_EXIST);
+    $quizrecord->cmid = $cm->coursemodule;
+
+    $added = 0;
+    foreach ($questionids as $qid) {
+        try {
+            if (quiz_add_quiz_question($qid, $quizrecord, 0) === false) {
+                echo "quiz_question_exists quiz={$quizname} qid={$qid}\n";
+                continue;
+            }
+            $added++;
+        } catch (Throwable $e) {
+            echo "quiz_question_failed quiz={$quizname} qid={$qid} error=" . $e->getMessage() . "\n";
+            break;
+        }
+    }
+
+    if ($added === 0) {
+        echo "quiz_no_questions_added name={$quizname} deleting_empty=1\n";
+        course_delete_module($cm->coursemodule);
+        return;
+    }
+
+    $quizrecord = $DB->get_record('quiz', ['id' => $quizrecord->id], '*', MUST_EXIST);
+    $quizrecord->preferredbehaviour = $targetbehaviour;
+    $DB->update_record('quiz', $quizrecord);
+    quiz_update_sumgrades($quizrecord);
+
+    echo "quiz_created id={$quizrecord->id} name={$quizname} questions={$added} behaviour={$targetbehaviour}\n";
 }
 
 /**
@@ -428,6 +515,18 @@ foreach ($objectives as $objective) {
     $sectionnum = $domainsection[$objective->domainshort] ?? 1;
     $pagename = strtoupper(str_replace('sy701_', 'SY0-701 ', str_replace('_', '.', $objective->shortname)))
         . ': ' . $objective->fullname;
+    if (security_plus_page_exists((int) $course->id, $sectionnum, $pagename)) {
+        echo "page_exists name={$pagename} section={$sectionnum}\n";
+        continue;
+    }
+    // Legacy title from earlier seed runs.
+    $legacy = strtoupper(str_replace('sy701_', 'SY701.', str_replace('_', '.', $objective->shortname)))
+        . ': ' . $objective->fullname;
+    if (security_plus_page_exists((int) $course->id, $sectionnum, $legacy)
+        || security_plus_page_exists((int) $course->id, $sectionnum, 'SY0-701 ' . $legacy)) {
+        echo "page_exists_legacy name={$legacy} section={$sectionnum}\n";
+        continue;
+    }
     security_plus_add_page(
         $course,
         $sectionnum,
