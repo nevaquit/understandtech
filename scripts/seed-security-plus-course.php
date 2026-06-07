@@ -159,9 +159,7 @@ function security_plus_import_gift(int $contextid, stdClass $category, string $g
     $qformat = new qformat_gift();
     $qformat->setCategory($category);
     $qformat->setContexts([$context]);
-    $qformat->setCourse(null);
     $qformat->setFilename(basename($giftpath));
-    $qformat->setRepparse(true);
     $qformat->setStoponerror(false);
     if (!$qformat->importprocess($lines)) {
         echo "gift_import_failed path={$giftpath}\n";
