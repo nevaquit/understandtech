@@ -1,0 +1,39 @@
+<?php
+// Local Moodle config for Docker Compose development.
+// Generated template — install.php may overwrite on first bootstrap; re-apply from docker/moodle/config.php.local if needed.
+// NEVER commit live credentials.
+
+unset($CFG);
+global $CFG;
+$CFG = new stdClass();
+
+$CFG->dbtype    = 'pgsql';
+$CFG->dblibrary = 'native';
+$CFG->dbhost    = getenv('MOODLE_DB_HOST') ?: 'postgres';
+$CFG->dbname    = getenv('MOODLE_DB_NAME') ?: 'moodle';
+$CFG->dbuser    = getenv('MOODLE_DB_USER') ?: 'moodle';
+$CFG->dbpass    = getenv('MOODLE_DB_PASSWORD') ?: '';
+$CFG->prefix    = 'mdl_';
+$CFG->dboptions = [
+    'dbpersist' => false,
+    'dbport'    => 5432,
+    'dbsocket'  => false,
+    'sslmode'   => 'disable',
+];
+
+$CFG->wwwroot   = getenv('MOODLE_WWWROOT') ?: 'http://localhost:8080';
+$CFG->dataroot  = '/var/moodledata';
+$CFG->admin     = getenv('MOODLE_ADMIN_USER') ?: 'admin';
+$CFG->directorypermissions = 02777;
+
+// File sessions for local dev (no Azure Redis).
+$CFG->session_handler_class = '\core\session\file';
+
+$CFG->tool_generator_users_password = 'localdev';
+
+$secret = getenv('AITUTOR_WORKER_SHARED_SECRET');
+if ($secret !== false && $secret !== '') {
+    putenv('AITUTOR_WORKER_SHARED_SECRET=' . $secret);
+}
+
+require_once(__DIR__ . '/lib/setup.php');

@@ -43,10 +43,16 @@ export interface GradeResponse {
 	prompt_version: string;
 }
 
+export interface RagChunk {
+	content: string;
+	source_type: string;
+}
+
 export interface Env {
 	MOODLE_JWT_SECRET: string;
 	MOODLE_WEBHOOK_HMAC_SECRET: string;
 	MOODLE_WEBHOOK_URL: string;
+	MOODLE_RAG_URL: string;
 	AI_GATEWAY_URL: string;
 	AI_GATEWAY_ID: string;
 	PRIMARY_MODEL: string;

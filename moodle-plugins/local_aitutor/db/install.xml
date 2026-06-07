@@ -34,5 +34,25 @@
         <KEY NAME="conversationid" TYPE="foreign" FIELDS="conversationid" REFTABLE="aitutor_conversations" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
+    <TABLE NAME="aitutor_embeddings" COMMENT="Course content chunks for RAG retrieval">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="chunk_hash" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="content_text" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="source_type" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="embeddingjson" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="course_chunk" TYPE="unique" FIELDS="courseid, chunk_hash"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course_idx" UNIQUE="false" FIELDS="courseid"/>
+      </INDEXES>
+    </TABLE>
   </TABLES>
 </XMLDB>

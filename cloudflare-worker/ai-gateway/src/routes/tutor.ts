@@ -9,6 +9,9 @@ import {
 } from '../cache';
 import { streamTutorCompletion } from '../llm/gateway';
 import { TUTOR_SYSTEM_PROMPT, TUTOR_SYSTEM_PROMPT_VERSION } from '../prompts';
+import { embedQuery } from '../rag/embed';
+import { assembleTutorSystemPrompt, ragChunksFingerprint } from '../rag/prompt';
+import { fetchRagChunks } from '../rag/retrieve';
 import { contextToJson, postTranscriptWebhook } from '../webhook';
 
 function sseFrame(data: unknown): Uint8Array {
@@ -61,7 +64,31 @@ export async function handleTutor(
 	const userMessage = body.messages.at(-1)?.content ?? '';
 	const context = body.context ?? claims.context;
 	const contextJson = contextToJson(context);
-	const cacheKey = await buildTutorCacheKey(TUTOR_SYSTEM_PROMPT_VERSION, contextJson, userMessage);
+
+	const authHeader = request.headers.get('Authorization') ?? '';
+	const jwt = authHeader.replace(/^Bearer\s+/i, '');
+
+	let ragChunks: Awaited<ReturnType<typeof fetchRagChunks>> = [];
+	let ragFingerprint = '';
+	if (userMessage.trim() && env.MOODLE_RAG_URL) {
+		const ragAbort = new AbortController();
+		request.signal.addEventListener('abort', () => ragAbort.abort());
+		try {
+			const embedding = await embedQuery(env, userMessage, ragAbort.signal);
+			ragChunks = await fetchRagChunks(env, jwt, userMessage, embedding, ragAbort.signal);
+			ragFingerprint = ragChunksFingerprint(ragChunks);
+		} catch {
+			ragChunks = [];
+		}
+	}
+
+	const systemPrompt = assembleTutorSystemPrompt(TUTOR_SYSTEM_PROMPT, ragChunks);
+	const cacheKey = await buildTutorCacheKey(
+		TUTOR_SYSTEM_PROMPT_VERSION,
+		contextJson,
+		userMessage,
+		ragFingerprint,
+	);
 
 	const cached = await getCachedResponse(env, cacheKey);
 	if (cached) {
@@ -92,7 +119,7 @@ export async function handleTutor(
 			try {
 				const result = await streamTutorCompletion(
 					env,
-					TUTOR_SYSTEM_PROMPT,
+					systemPrompt,
 					body.messages,
 					abortController.signal,
 					(token) => {

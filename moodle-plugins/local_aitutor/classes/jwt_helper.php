@@ -30,10 +30,64 @@ class jwt_helper {
     }
 
     /**
+     * Decode and validate HS256 JWT.
+     *
+     * @param string $jwt Token string.
+     * @param string $secret Signing secret.
+     * @return array|null Claims array or null when invalid/expired.
+     */
+    public static function decode(string $jwt, string $secret): ?array {
+        $parts = explode('.', $jwt);
+        if (count($parts) !== 3) {
+            return null;
+        }
+
+        [$headerb64, $payloadb64, $sigb64] = $parts;
+        $signinginput = $headerb64 . '.' . $payloadb64;
+        $expected = self::urlsafe_b64(hash_hmac('sha256', $signinginput, $secret, true));
+
+        if (!hash_equals($expected, $sigb64)) {
+            return null;
+        }
+
+        $payloadjson = base64_decode(strtr($payloadb64, '-_', '+/'), true);
+        if ($payloadjson === false) {
+            return null;
+        }
+
+        $claims = json_decode($payloadjson, true);
+        if (!is_array($claims)) {
+            return null;
+        }
+
+        $now = time();
+        if (!empty($claims['exp']) && (int) $claims['exp'] < $now) {
+            return null;
+        }
+        if (!empty($claims['iat']) && (int) $claims['iat'] > $now + 60) {
+            return null;
+        }
+
+        return $claims;
+    }
+
+    /**
      * @param string $data
      * @return string
      */
     protected static function urlsafe_b64(string $data): string {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    /**
+     * @param string $data
+     * @return string
+     */
+    protected static function urlsafe_b64_decode(string $data): string {
+        $padding = 4 - (strlen($data) % 4);
+        if ($padding < 4) {
+            $data .= str_repeat('=', $padding);
+        }
+        return base64_decode(strtr($data, '-_', '+/'), true) ?: '';
     }
 }

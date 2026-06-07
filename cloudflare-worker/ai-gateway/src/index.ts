@@ -5,6 +5,7 @@ import { RateLimitError } from './cache';
 import { handleHealth } from './routes/health';
 import { handleTutor } from './routes/tutor';
 import { handleGrade } from './routes/grade';
+import { handleEmbed } from './routes/embed';
 
 const ALLOWED_ORIGINS = new Set([
 	'https://understandtech.app',
@@ -18,6 +19,7 @@ router.post('/tutor', (request: Request, env: Env, ctx: ExecutionContext) =>
 	handleTutor(request, env, ctx),
 );
 router.post('/grade', (request: Request, env: Env) => handleGrade(request, env));
+router.post('/embed', (request: Request, env: Env) => handleEmbed(request, env));
 router.all('*', () => Response.json({ error: 'Not found' }, { status: 404 }));
 
 function corsHeaders(request: Request): HeadersInit {

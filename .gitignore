@@ -30,3 +30,4 @@ infrastructure/runner/cloud-init.rendered.yaml
 
 # Moodle local (never commit core)
 /moodle/
+/moodledata/

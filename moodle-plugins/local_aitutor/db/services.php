@@ -22,4 +22,13 @@ $functions = [
         'ajax' => true,
         'capabilities' => 'local/aitutor:use',
     ],
+    'local_aitutor_get_rag_context' => [
+        'classname' => 'local_aitutor\external\get_rag_context',
+        'methodname' => 'execute',
+        'classpath' => '',
+        'description' => 'Retrieve course-scoped RAG chunks',
+        'type' => 'read',
+        'ajax' => true,
+        'capabilities' => 'local/aitutor:use',
+    ],
 ];

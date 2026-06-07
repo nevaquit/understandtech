@@ -23,8 +23,9 @@ export async function buildTutorCacheKey(
 	promptVersion: string,
 	contextJson: string,
 	userMessage: string,
+	ragFingerprint = '',
 ): Promise<string> {
-	const material = `${promptVersion}:${contextJson}:${userMessage}`;
+	const material = `${promptVersion}:${contextJson}:${ragFingerprint}:${userMessage}`;
 	return `cache:${await sha256(material)}`;
 }
 

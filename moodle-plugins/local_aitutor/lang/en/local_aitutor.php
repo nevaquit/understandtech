@@ -4,6 +4,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'AI Tutor';
+$string['task_reindex_courses'] = 'Reindex course content for AI tutor RAG';
 $string['sidebar_title'] = 'AI Tutor';
 $string['workerurl'] = 'AI Worker URL';
 $string['workerurl_desc'] = 'Cloudflare Worker endpoint for tutor SSE connections.';

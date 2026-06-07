@@ -1,0 +1,21 @@
+<div class="block-portfolio ut-portfolio">
+    <h3 class="h5 mb-3">{{#str}}portfolio, block_portfolio{{/str}}</h3>
+    {{^empty}}
+    <div class="mb-3">
+        <strong>{{#str}}readiness, block_portfolio{{/str}}:</strong> {{readiness}}%
+    </div>
+    {{#labs.length}}
+    <ul class="list-unstyled">
+        {{#labs}}
+        <li class="mb-2">
+            <a href="{{url}}">{{title}}</a>
+            <small class="text-muted d-block">{{date}}</small>
+        </li>
+        {{/labs}}
+    </ul>
+    {{/labs.length}}
+    {{/empty}}
+    {{#empty}}
+    <p class="text-muted">{{#str}}empty, block_portfolio{{/str}}</p>
+    {{/empty}}
+</div>

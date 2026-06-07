@@ -1,0 +1,59 @@
+# Local Moodle 4.5 stack for understandtech.app plugin development.
+# Usage: docker compose --env-file docker/.env.local up -d --build
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-moodle}
+      POSTGRES_USER: ${POSTGRES_USER:-moodle}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in docker/.env.local}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-moodle} -d ${POSTGRES_DB:-moodle}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  moodle:
+    build:
+      context: ./docker/moodle
+      dockerfile: Dockerfile
+    environment:
+      MOODLE_WWWROOT: ${MOODLE_WWWROOT:-http://localhost:8080}
+      MOODLE_DB_HOST: postgres
+      MOODLE_DB_NAME: ${POSTGRES_DB:-moodle}
+      MOODLE_DB_USER: ${POSTGRES_USER:-moodle}
+      MOODLE_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      MOODLE_ADMIN_USER: ${MOODLE_ADMIN_USER:-admin}
+      MOODLE_ADMIN_PASSWORD: ${MOODLE_ADMIN_PASSWORD:?Set MOODLE_ADMIN_PASSWORD in docker/.env.local}
+      MOODLE_ADMIN_EMAIL: ${MOODLE_ADMIN_EMAIL:-admin@localhost}
+      AITUTOR_WORKER_SHARED_SECRET: ${AITUTOR_WORKER_SHARED_SECRET:-}
+    volumes:
+      - ./moodle:/var/www/moodle
+      - ./moodledata:/var/moodledata
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /var/www/moodle/index.php"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  nginx:
+    image: nginx:1.26-alpine
+    ports:
+      - "${MOODLE_PORT:-8080}:80"
+    volumes:
+      - ./moodle:/var/www/moodle:ro
+      - ./docker/nginx/local.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      moodle:
+        condition: service_started
+
+volumes:
+  postgres_data:
