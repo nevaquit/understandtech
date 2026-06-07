@@ -64,26 +64,37 @@ jobs:
             echo "LOGIN_URL verified: $(grep LOGIN_URL /var/www/marketing/js/components.js)" || \
             echo "WARNING: wantsurl not found in components.js"
 
+      - name: Apply nginx cache headers
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash ${PLUGINS_REPO_DIR}/scripts/apply-nginx-config.sh
+          echo "nginx reloaded with current cache TTL settings"
+
       - name: Purge Cloudflare cache
         if: success()
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
         run: |
           set -euo pipefail
-          if [ -z "${CF_API_TOKEN:-}" ] || [ -z "${CF_ZONE_ID:-}" ]; then
-            echo "WARNING: CF_API_TOKEN or CF_ZONE_ID not set — skipping Cloudflare cache purge"
+          TOKEN="${CF_API_TOKEN:-${CLOUDFLARE_API_TOKEN:-}}"
+          ZONE="${CF_ZONE_ID:-${CLOUDFLARE_ZONE_ID:-}}"
+          if [ -z "${TOKEN}" ] || [ -z "${ZONE}" ]; then
+            echo "WARNING: Cloudflare purge secrets not set — skipping purge"
             exit 0
           fi
           echo "Purging Cloudflare cache for marketing assets..."
           curl -s -X POST \
-            "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
-            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            "https://api.cloudflare.com/client/v4/zones/${ZONE}/purge_cache" \
+            -H "Authorization: Bearer ${TOKEN}" \
             -H "Content-Type: application/json" \
             --data '{
               "files": [
                 "https://understandtech.app/",
                 "https://understandtech.app/css/design-system.css",
+                "https://understandtech.app/css/design-system.css?v=20260608",
                 "https://understandtech.app/css/pages.css",
                 "https://understandtech.app/js/main.js",
                 "https://understandtech.app/js/components.js",
@@ -94,13 +105,14 @@ jobs:
                 "https://understandtech.app/pages/about.html"
               ]
             }' | python3 -c "
-import json, sys
-data = json.load(sys.stdin)
-if data.get('success'):
-    print('Cloudflare cache purged successfully')
-else:
-    print('Cache purge response:', json.dumps(data, indent=2))
-"
+          import json, sys
+          data = json.load(sys.stdin)
+          if data.get('success'):
+              print('Cloudflare cache purged successfully')
+          else:
+              print('Cache purge response:', json.dumps(data, indent=2))
+              sys.exit(1)
+          "
 
       - name: Deployment summary
         if: always()
