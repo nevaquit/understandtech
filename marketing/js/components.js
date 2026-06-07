@@ -87,8 +87,8 @@ function buildFooter() {
         <ul>
           <li><a href="${ROOT}${PAGES}about.html">About</a></li>
           <li><a href="${ROOT}${PAGES}about.html#team">Team</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Careers</a></li>
+          <li><a href="mailto:blog@understandtech.app">Blog</a></li>
+          <li><a href="mailto:careers@understandtech.app?subject=Career%20Inquiry">Careers</a></li>
         </ul>
       </div>
 
@@ -97,8 +97,8 @@ function buildFooter() {
         <ul>
           <li><a href="${LOGIN_URL}">Log In</a></li>
           <li><a href="${LOGIN_URL}">Start Free Trial</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
+          <li><a href="mailto:privacy@understandtech.app">Privacy Policy</a></li>
+          <li><a href="mailto:legal@understandtech.app">Terms of Service</a></li>
         </ul>
       </div>
     </div>
@@ -106,9 +106,9 @@ function buildFooter() {
     <div class="ut-footer-bottom">
       <span>&copy; 2026 AI Tech Pros, Inc. All rights reserved. A Veteran Owned Small Business.</span>
       <div style="display:flex;gap:1.5rem;">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Contact</a>
+        <a href="mailto:privacy@understandtech.app">Privacy</a>
+        <a href="mailto:legal@understandtech.app">Terms</a>
+        <a href="mailto:support@understandtech.app">Contact</a>
       </div>
     </div>
   </div>

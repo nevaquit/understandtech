@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="UnderstandTech Pricing — Transparent plans for individuals, teams, and enterprises. Start free for 14 days.">
   <meta name="theme-color" content="#0B1F3A">
+  <meta property="og:title" content="Pricing — UnderstandTech">
+  <meta property="og:description" content="UnderstandTech Pricing — Transparent plans for individuals, teams, and enterprises. Start free for 14 days.">
+  <meta property="og:url" content="https://understandtech.app/pages/pricing.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://understandtech.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pricing — UnderstandTech">
+  <meta name="twitter:description" content="UnderstandTech Pricing — Transparent plans for individuals, teams, and enterprises. Start free for 14 days.">
+  <link rel="canonical" href="https://understandtech.app/pages/pricing.html">
   <title>Pricing — UnderstandTech</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -417,7 +427,7 @@
                 Priority Support
               </li>
             </ul>
-            <a href="#" class="btn btn-outline" style="width:100%;justify-content:center;">Apply for VIP</a>
+            <a href="mailto:vip@understandtech.app?subject=VIP%20Access%20Request" class="btn btn-outline" style="width:100%;justify-content:center;">Apply for VIP</a>
           </div>
 
         </div>
@@ -428,7 +438,7 @@
             <div style="font-family:var(--ut-font-head);font-size:1rem;font-weight:700;color:var(--ut-text);margin-bottom:0.25rem;">DoD 8140 / DCWF Alignment</div>
             <div style="font-size:0.9rem;color:var(--ut-text-muted);">Our specialized tracks map directly to DCWF Roles 441, 511, and 612. Need organizational alignment?</div>
           </div>
-          <a href="#" class="btn btn-navy">Talk to Enterprise Sales</a>
+          <a href="mailto:enterprise@understandtech.app?subject=Enterprise%20Sales%20Inquiry" class="btn btn-navy">Talk to Enterprise Sales</a>
         </div>
       </div>
     </section>
@@ -599,19 +609,32 @@
   <script src="../js/components.js"></script>
   <script src="../js/main.js"></script>
   <script>
-    // Billing toggle interaction
+    // Billing toggle interaction with live price switching
     const monthlyLabel = document.getElementById('monthly-label');
     const annualLabel  = document.getElementById('annual-label');
 
-    monthlyLabel.addEventListener('click', () => {
+    // Tier 1 only has a monthly price that changes with annual billing
+    const tier1Price    = document.querySelector('.pricing-card:first-child .price-amount');
+    const tier1Period   = document.querySelector('.pricing-card:first-child .price-period');
+    const TIER1_MONTHLY = '97';
+    const TIER1_ANNUAL  = '73'; // 25% off = $73/mo billed annually
+
+    function setMonthly() {
       monthlyLabel.classList.add('active');
       annualLabel.classList.remove('active');
-    });
+      if (tier1Price)  tier1Price.textContent  = TIER1_MONTHLY;
+      if (tier1Period) tier1Period.textContent = '/month';
+    }
 
-    annualLabel.addEventListener('click', () => {
+    function setAnnual() {
       annualLabel.classList.add('active');
       monthlyLabel.classList.remove('active');
-    });
+      if (tier1Price)  tier1Price.textContent  = TIER1_ANNUAL;
+      if (tier1Period) tier1Period.textContent = '/mo · billed annually';
+    }
+
+    monthlyLabel.addEventListener('click', setMonthly);
+    annualLabel.addEventListener('click', setAnnual);
   </script>
 </body>
 </html>
