@@ -1,0 +1,51 @@
+<div class="ut-lesson-content">
+<h3>Exam objective 3.4</h3>
+<p><strong>Explain the importance of resilience and recovery in security architecture</strong></p>
+<div class="ut-lesson-body">
+<p>Resilience and recovery are critical aspects of security architecture, ensuring that systems can withstand disruptions and quickly return to normal operations after an incident.</p>
+<h4>High Availability</h4>
+<ul>
+<li><strong>Load Balancing vs. Clustering</strong>:</li>
+</ul>
+<p>- <strong>Load Balancing</strong>: Distributes incoming network traffic across multiple servers to ensure no single server is overwhelmed, improving responsiveness and availability. - <strong>Clustering</strong>: Groups multiple servers together to act as a single system, providing redundancy and failover capabilities.</p>
+<h4>Site Considerations</h4>
+<ul>
+<li><strong>Hot Site</strong>: A fully equipped off-site data center that can be operational within hours, providing immediate recovery capabilities.</li>
+<li><strong>Cold Site</strong>: A basic off-site facility with essential infrastructure (e.g., power, cooling) but no hardware or data. Requires significant time to become operational.</li>
+<li><strong>Warm Site</strong>: A compromise between hot and cold sites, with some hardware and connectivity, allowing for quicker recovery than a cold site but not as immediate as a hot site.</li>
+<li><strong>Geographic Dispersion</strong>: Distributing IT infrastructure across multiple geographically separate locations to protect against regional disasters.</li>
+</ul>
+<h4>Platform Diversity</h4>
+<ul>
+<li><strong>Multi-cloud Systems</strong>: Using multiple cloud providers to avoid vendor lock-in and enhance resilience by distributing workloads across different infrastructures.</li>
+<li><strong>Continuity of Operations (COOP)</strong>: The ability of an organization to continue essential functions during and after a disruption.</li>
+<li><strong>Capacity Planning</strong>: Ensuring that systems have sufficient resources (e.g., people, technology, infrastructure) to handle peak loads and recover from incidents.</li>
+</ul>
+<h4>Testing</h4>
+<ul>
+<li><strong>Tabletop Exercises</strong>: Discussion-based sessions where participants talk through their roles and responsibilities during an incident or disaster scenario.</li>
+<li><strong>Fail Over</strong>: The process of automatically switching to a redundant or standby system in the event of a primary system failure.</li>
+<li><strong>Simulation</strong>: Testing recovery plans in a controlled environment that mimics real-world conditions.</li>
+<li><strong>Parallel Processing</strong>: Running critical processes on multiple systems simultaneously to ensure continuous operation and data consistency.</li>
+</ul>
+<h4>Backups</h4>
+<ul>
+<li><strong>Onsite/Offsite</strong>: Storing backups both locally and in a remote location to protect against site-specific disasters.</li>
+<li><strong>Frequency</strong>: How often backups are performed (e.g., daily, weekly, continuous).</li>
+<li><strong>Encryption</strong>: Encrypting backup data to protect its confidentiality in case of unauthorized access.</li>
+<li><strong>Snapshots</strong>: A point-in-time copy of a virtual machine or data volume, allowing for quick restoration to a previous state.</li>
+</ul>
+<h4>Recovery</h4>
+<ul>
+<li><strong>Replication</strong>: Copying data in real-time or near real-time to a secondary location, ensuring minimal data loss in case of a primary system failure.</li>
+<li><strong>Journaling</strong>: Recording changes to a file system or database in a log, allowing for recovery to a consistent state after a crash.</li>
+</ul>
+<h4>Power</h4>
+<ul>
+<li><strong>Generators</strong>: Provide backup power in case of a main power outage.</li>
+<li><strong>Uninterruptible Power Supply (UPS)</strong>: Provides temporary power to systems during a power outage, allowing for graceful shutdown or transfer to generator power.</li>
+</ul>
+</div>
+<h4>Next steps</h4>
+<p>Complete the domain knowledge check quiz after this lesson and use the AI tutor for scenario-based practice. The tutor guides you Socratically without revealing assessment answers.</p>
+</div>

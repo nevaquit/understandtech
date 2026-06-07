@@ -1,0 +1,51 @@
+<div class="ut-lesson-content">
+<h3>Exam objective 3.1</h3>
+<p><strong>Compare and contrast security implications of different architecture models</strong></p>
+<div class="ut-lesson-body">
+<p>Different architecture models have distinct security implications, affecting how security controls are implemented and managed.</p>
+<h4>Architecture and Infrastructure Concepts</h4>
+<ul>
+<li><strong>Cloud</strong>: Utilizing third-party cloud providers (e.g., AWS, Azure, Google Cloud) for computing resources. Security is a shared responsibility model.</li>
+</ul>
+<p>- <strong>Responsibility matrix</strong>: Defines the security responsibilities between the cloud provider and the customer. - <strong>Hybrid considerations</strong>: Integrating on-premises infrastructure with cloud services, requiring careful security planning for connectivity and data flow. - <strong>Third-party vendors</strong>: Relying on external vendors for services, necessitating vendor risk management.</p>
+<ul>
+<li><strong>On-premises</strong>: Hosting all IT infrastructure within the organization's own facilities. Full control over security, but also full responsibility.</li>
+<li><strong>Centralized vs. Decentralized</strong>:</li>
+</ul>
+<p>- <strong>Centralized</strong>: Security management and controls are managed from a single point. Can offer consistency but also a single point of failure. - <strong>Decentralized</strong>: Security management and controls are distributed across different teams or locations. Can offer flexibility but may lead to inconsistencies.</p>
+<ul>
+<li><strong>Containerization</strong>: Packaging applications and their dependencies into isolated containers (e.g., Docker, Kubernetes). Offers portability and efficiency, but requires container-specific security measures.</li>
+<li><strong>Virtualization</strong>: Creating virtual versions of computing resources (e.g., servers, operating systems, storage). Offers resource utilization and flexibility, but introduces new attack surfaces (e.g., VM escape).</li>
+<li><strong>IoT (Internet of Things)</strong>: Network of physical objects embedded with sensors, software, and other technologies for connecting and exchanging data over the internet. Often have limited security features and are vulnerable to attacks.</li>
+<li><strong>Industrial Control Systems (ICS)/Supervisory Control and Data Acquisition (SCADA)</strong>: Computerized systems that control industrial processes. Often critical infrastructure, requiring specialized security measures due to their operational nature and potential for physical impact.</li>
+<li><strong>Real-time Operating System (RTOS)</strong>: Operating systems designed for applications with strict timing requirements. Security must not compromise real-time performance.</li>
+<li><strong>Embedded Systems</strong>: Computer systems designed for specific functions within a larger mechanical or electrical system. Often have limited resources and may lack robust security features.</li>
+<li><strong>High Availability</strong>: Designing systems to minimize downtime and ensure continuous operation. Security measures should not hinder availability.</li>
+</ul>
+<h4>Infrastructure Considerations</h4>
+<ul>
+<li><strong>Infrastructure as Code (IaC)</strong>: Managing and provisioning infrastructure through code instead of manual processes. Improves consistency and reduces human error, but requires secure coding practices for infrastructure definitions.</li>
+<li><strong>Serverless</strong>: Cloud execution model where the cloud provider dynamically manages the allocation and provisioning of servers. Reduces operational overhead but shifts some security responsibilities to the cloud provider.</li>
+<li><strong>Microservices</strong>: An architectural style that structures an application as a collection of loosely coupled, independently deployable services. Increases complexity in securing inter-service communication.</li>
+<li><strong>Network Infrastructure</strong>:</li>
+</ul>
+<p>- <strong>Physical isolation / Air-gapped</strong>: Completely separating a network segment from other networks, including the internet, for maximum security. - <strong>Logical segmentation</strong>: Dividing a network into smaller, isolated segments using VLANs, subnets, or firewalls to control traffic flow and limit the impact of breaches. - <strong>Software-defined networking (SDN)</strong>: Decoupling the control plane from the data plane, allowing for centralized and programmable network management. Offers flexibility but introduces new security considerations for the control plane.</p>
+<h4>Considerations (General Security Implications)</h4>
+<ul>
+<li><strong>Availability</strong>: Ensuring systems and data are accessible when needed. Security measures should not negatively impact availability.</li>
+<li><strong>Resilience</strong>: The ability of a system to recover from failures and continue operating. Security architecture should incorporate resilience.</li>
+<li><strong>Cost</strong>: The financial investment required for implementing and maintaining security measures.</li>
+<li><strong>Responsiveness</strong>: The ability of security systems to detect and respond to threats quickly.</li>
+<li><strong>Scalability</strong>: The ability of security solutions to handle increasing demands and growth.</li>
+<li><strong>Ease of Deployment</strong>: How easily security solutions can be implemented and integrated into existing infrastructure.</li>
+<li><strong>Risk Transference</strong>: Shifting the financial burden of risk to another party, often through insurance.</li>
+<li><strong>Ease of Recovery</strong>: How quickly and efficiently systems and data can be restored after an incident.</li>
+<li><strong>Patch Availability</strong>: The frequency and reliability of security patches from vendors.</li>
+<li><strong>Inability to Patch</strong>: Situations where systems cannot be patched due to legacy issues, vendor support, or operational constraints.</li>
+<li><strong>Power</strong>: Ensuring reliable power supply for security systems and critical infrastructure.</li>
+<li><strong>Compute</strong>: The processing power and resources required for security operations, such as encryption, logging, and analysis.</li>
+</ul>
+</div>
+<h4>Next steps</h4>
+<p>Complete the domain knowledge check quiz after this lesson and use the AI tutor for scenario-based practice. The tutor guides you Socratically without revealing assessment answers.</p>
+</div>

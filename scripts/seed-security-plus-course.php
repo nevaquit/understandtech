@@ -24,7 +24,7 @@ require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->dirroot . '/lib/questionlib.php');
 
 /**
- * Build lesson HTML for an SY0-701 objective (original summary aligned to exam objective text).
+ * Build fallback lesson HTML when no CyberKraft content file exists.
  *
  * @param string $code Objective code e.g. sy701_1_1
  * @param string $title Official objective title
@@ -53,14 +53,33 @@ HTML;
 }
 
 /**
+ * Load lesson HTML from CyberKraft-derived content file when present.
+ *
+ * @param string $repopath Repository root on VM
+ * @param string $code Objective shortname e.g. sy701_1_1
+ * @param string $title Objective title for fallback
+ * @return string
+ */
+function security_plus_load_lesson_html(string $repopath, string $code, string $title): string {
+    $path = $repopath . '/content/security-plus/lessons/' . $code . '.html';
+    if (is_readable($path)) {
+        $html = file_get_contents($path);
+        if ($html !== false && trim($html) !== '') {
+            return $html;
+        }
+    }
+    return security_plus_lesson_html($code, $title);
+}
+
+/**
  * @param int $courseid
  * @param int $sectionnum
  * @param string $name
- * @return bool True if page already existed
+ * @return stdClass|null Page row
  */
-function security_plus_page_exists(int $courseid, int $sectionnum, string $name): bool {
+function security_plus_find_page(int $courseid, int $sectionnum, string $name): ?stdClass {
     global $DB;
-    $sql = "SELECT p.id
+    $sql = "SELECT p.*
               FROM {page} p
               JOIN {course_modules} cm ON cm.instance = p.id
               JOIN {modules} m ON m.id = cm.module AND m.name = 'page'
@@ -68,11 +87,51 @@ function security_plus_page_exists(int $courseid, int $sectionnum, string $name)
              WHERE cm.course = :courseid
                AND cs.section = :sectionnum
                AND p.name = :name";
-    return $DB->record_exists_sql($sql, [
+    return $DB->get_record_sql($sql, [
         'courseid' => $courseid,
         'sectionnum' => $sectionnum,
         'name' => $name,
-    ]);
+    ]) ?: null;
+}
+
+/**
+ * @param int $courseid
+ * @param int $sectionnum
+ * @param string $name
+ * @return bool True if page already existed
+ */
+function security_plus_page_exists(int $courseid, int $sectionnum, string $name): bool {
+    return security_plus_find_page($courseid, $sectionnum, $name) !== null;
+}
+
+/**
+ * Create or update a lesson page with CyberKraft content.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $name
+ * @param string $html
+ * @return void
+ */
+function security_plus_upsert_page(stdClass $course, int $sectionnum, string $name, string $html): void {
+    global $DB;
+
+    $existing = security_plus_find_page((int) $course->id, $sectionnum, $name);
+    if ($existing) {
+        if ($existing->content !== $html) {
+            $existing->content = $html;
+            $existing->contentformat = FORMAT_HTML;
+            $existing->timemodified = time();
+            $existing->revision = (int) $existing->revision + 1;
+            $DB->update_record('page', $existing);
+            echo "page_updated id={$existing->id} name={$name} section={$sectionnum}\n";
+        } else {
+            echo "page_unchanged id={$existing->id} name={$name} section={$sectionnum}\n";
+        }
+        return;
+    }
+
+    security_plus_add_page($course, $sectionnum, $name, $html);
 }
 
 /**
@@ -515,24 +574,34 @@ foreach ($objectives as $objective) {
     $sectionnum = $domainsection[$objective->domainshort] ?? 1;
     $pagename = strtoupper(str_replace('sy701_', 'SY0-701 ', str_replace('_', '.', $objective->shortname)))
         . ': ' . $objective->fullname;
+    $html = security_plus_load_lesson_html($repopath, $objective->shortname, $objective->fullname);
+
     if (security_plus_page_exists((int) $course->id, $sectionnum, $pagename)) {
-        echo "page_exists name={$pagename} section={$sectionnum}\n";
+        security_plus_upsert_page($course, $sectionnum, $pagename, $html);
         continue;
     }
     // Legacy title from earlier seed runs.
     $legacy = strtoupper(str_replace('sy701_', 'SY701.', str_replace('_', '.', $objective->shortname)))
         . ': ' . $objective->fullname;
-    if (security_plus_page_exists((int) $course->id, $sectionnum, $legacy)
-        || security_plus_page_exists((int) $course->id, $sectionnum, 'SY0-701 ' . $legacy)) {
-        echo "page_exists_legacy name={$legacy} section={$sectionnum}\n";
+    $legacypage = security_plus_find_page((int) $course->id, $sectionnum, $legacy)
+        ?: security_plus_find_page((int) $course->id, $sectionnum, 'SY0-701 ' . $legacy);
+    if ($legacypage) {
+        if ($legacypage->name !== $pagename) {
+            $legacypage->name = $pagename;
+        }
+        if ($legacypage->content !== $html) {
+            $legacypage->content = $html;
+            $legacypage->contentformat = FORMAT_HTML;
+            $legacypage->timemodified = time();
+            $legacypage->revision = (int) $legacypage->revision + 1;
+            $DB->update_record('page', $legacypage);
+            echo "page_updated_legacy id={$legacypage->id} name={$pagename} section={$sectionnum}\n";
+        } else {
+            echo "page_unchanged_legacy id={$legacypage->id} name={$pagename} section={$sectionnum}\n";
+        }
         continue;
     }
-    security_plus_add_page(
-        $course,
-        $sectionnum,
-        $pagename,
-        security_plus_lesson_html($objective->shortname, $objective->fullname)
-    );
+    security_plus_upsert_page($course, $sectionnum, $pagename, $html);
 }
 
 $context = context_course::instance((int) $course->id);

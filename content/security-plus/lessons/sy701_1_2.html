@@ -1,0 +1,177 @@
+<div class="ut-lesson-content">
+<h3>Exam objective 1.2</h3>
+<p><strong>Summarize fundamental security concepts</strong></p>
+<div class="ut-lesson-body">
+<p>Understanding fundamental security concepts is essential for building a strong foundation in cybersecurity. These concepts form the basis for all security decisions and implementations in an organization.</p>
+<h4>CIA Triad</h4>
+<p>The CIA Triad represents the three core principles of information security. Every security control and decision should be evaluated against these three pillars.</p>
+<h4>Visual Representation: CIA Triad</h4>
+<p>The CIA Triad forms the foundation of information security, with each component being equally important and interconnected.</p>
+<p><strong>Confidentiality</strong> Confidentiality ensures that sensitive information is accessed only by authorized individuals, entities, or processes. This principle protects information from unauthorized disclosure and maintains privacy.</p>
+<p>Key aspects of confidentiality include:</p>
+<ul>
+<li>Data classification schemes that categorize information based on sensitivity levels</li>
+<li>Access controls that restrict who can view specific information</li>
+<li>Encryption that protects data both at rest and in transit</li>
+<li>Need-to-know principles that limit access to only what is necessary for job functions</li>
+<li>Non-disclosure agreements (NDAs) that legally bind individuals to protect sensitive information</li>
+</ul>
+<p>Common threats to confidentiality:</p>
+<ul>
+<li>Unauthorized access to systems or data</li>
+<li>Social engineering attacks that trick users into revealing information</li>
+<li>Data breaches that expose sensitive information</li>
+<li>Insider threats from malicious or careless employees</li>
+<li>Weak encryption or poor key management</li>
+</ul>
+<p><strong>Integrity</strong> Integrity ensures the accuracy, completeness, and reliability of information and systems. It protects against unauthorized modification, deletion, or corruption of data and ensures that information remains trustworthy.</p>
+<p>Key aspects of integrity include:</p>
+<ul>
+<li>Data validation mechanisms that verify information accuracy</li>
+<li>Digital signatures that prove data hasn't been tampered with</li>
+<li>Hash functions that detect unauthorized changes to files</li>
+<li>Version control systems that track changes to documents and code</li>
+<li>Checksums that verify data transmission accuracy</li>
+<li>Access controls that prevent unauthorized modifications</li>
+</ul>
+<p>Common threats to integrity:</p>
+<ul>
+<li>Malware that corrupts or modifies data</li>
+<li>Unauthorized changes by malicious insiders</li>
+<li>System errors that corrupt data</li>
+<li>Man-in-the-middle attacks that alter data in transit</li>
+<li>Poor change management processes</li>
+</ul>
+<p><strong>Availability</strong> Availability ensures that data, applications, and services are accessible to authorized users when needed. This principle focuses on maintaining operational systems and preventing service disruptions.</p>
+<p>Key aspects of availability include:</p>
+<ul>
+<li>Redundant systems that provide backup capabilities</li>
+<li>Load balancing that distributes traffic across multiple servers</li>
+<li>Disaster recovery plans that restore operations after incidents</li>
+<li>Business continuity planning that maintains operations during disruptions</li>
+<li>Regular maintenance and updates to prevent system failures</li>
+<li>Monitoring systems that detect and alert on service issues</li>
+</ul>
+<p>Common threats to availability:</p>
+<ul>
+<li>Denial-of-Service (DoS) and Distributed Denial-of-Service (DDoS) attacks</li>
+<li>Hardware failures that cause system outages</li>
+<li>Natural disasters that damage infrastructure</li>
+<li>Power outages that disrupt operations</li>
+<li>Network connectivity issues</li>
+<li>Ransomware attacks that encrypt critical systems</li>
+</ul>
+<h4>Additional Security Concepts</h4>
+<p><strong>Non-repudiation</strong> Non-repudiation provides proof of the origin, authenticity, and integrity of data, preventing a sender from denying they sent a message or performed an action. This concept is crucial for legal and business accountability.</p>
+<p>Implementation methods:</p>
+<ul>
+<li>Digital signatures that cryptographically bind actions to specific individuals</li>
+<li>Audit logs that record user activities with timestamps</li>
+<li>Biometric authentication that uniquely identifies individuals</li>
+<li>Trusted timestamping services that prove when actions occurred</li>
+<li>Certificate authorities that validate digital identities</li>
+</ul>
+<p><strong>Authentication, Authorization, and Accounting (AAA)</strong> AAA is a framework for controlling access to computer resources, enforcing policies, auditing usage, and providing information necessary to bill for services.</p>
+<p><strong>Authentication</strong> Authentication verifies the identity of a user, device, or system attempting to access resources. It answers the question "Who are you?"</p>
+<p>Types of authentication factors:</p>
+<ul>
+<li>Something you know (passwords, PINs, security questions)</li>
+<li>Something you have (smart cards, tokens, mobile devices)</li>
+<li>Something you are (biometrics like fingerprints, retina scans)</li>
+<li>Something you do (behavioral patterns, typing rhythms)</li>
+<li>Somewhere you are (location-based authentication)</li>
+</ul>
+<p><strong>Authorization</strong> Authorization determines what an authenticated user is allowed to do. It answers the question "What are you allowed to access?"</p>
+<p>Authorization models include:</p>
+<ul>
+<li>Role-Based Access Control (RBAC) that assigns permissions based on job roles</li>
+<li>Attribute-Based Access Control (ABAC) that uses multiple attributes for decisions</li>
+<li>Mandatory Access Control (MAC) that uses security labels and clearances</li>
+<li>Discretionary Access Control (DAC) that allows owners to control access</li>
+</ul>
+<p><strong>Accounting (Auditing)</strong> Accounting tracks user activities and resource consumption for security monitoring, billing, and compliance purposes. It answers the question "What did you do?"</p>
+<p>Accounting includes:</p>
+<ul>
+<li>Logging user login/logout times and activities</li>
+<li>Tracking resource usage and access attempts</li>
+<li>Monitoring system changes and administrative actions</li>
+<li>Generating reports for compliance and security analysis</li>
+</ul>
+<h4>Visual Representation: AAA Process Flow</h4>
+<p>The following diagram illustrates the sequential AAA (Authentication, Authorization, Accounting) process:</p>
+<p>This diagram shows the essential AAA workflow:</p>
+<p>1. <strong>Authentication</strong> - Verifying the user's identity through credentials, biometrics, or other factors 2. <strong>Authorization</strong> - Granting appropriate permissions based on the authenticated identity and access policies 3. <strong>Accounting</strong> - Logging all actions and resource usage for audit trails and compliance</p>
+<p>The AAA framework ensures:</p>
+<ul>
+<li>Proper identity verification before system access</li>
+<li>Appropriate permission assignment based on roles and policies</li>
+<li>Comprehensive activity logging for security monitoring</li>
+<li>Compliance with regulatory and organizational requirements</li>
+<li>Forensic capabilities for incident investigation</li>
+</ul>
+<p><strong>Gap Analysis</strong> Gap analysis is a systematic process of comparing current security posture against desired security standards or requirements. It identifies areas where security controls are missing, inadequate, or improperly implemented.</p>
+<p>Steps in gap analysis: 1. Define security requirements and standards 2. Assess current security controls and practices 3. Identify gaps between current state and requirements 4. Prioritize gaps based on risk and impact 5. Develop remediation plans to address identified gaps 6. Implement corrective measures and monitor progress</p>
+<p><strong>Zero Trust Architecture</strong> Zero Trust is a security model that assumes no implicit trust for any entity, whether inside or outside the network perimeter. It requires strict verification for every person and device trying to access resources.</p>
+<p>Core principles of Zero Trust:</p>
+<ul>
+<li>"Never trust, always verify" - all access requests must be authenticated and authorized</li>
+<li>Least privilege access - users receive minimum necessary permissions</li>
+<li>Assume breach - design systems assuming attackers are already present</li>
+<li>Verify explicitly - use multiple data sources for access decisions</li>
+<li>Continuous monitoring - constantly assess security posture and user behavior</li>
+</ul>
+<p>Zero Trust implementation includes:</p>
+<ul>
+<li>Multi-factor authentication for all access requests</li>
+<li>Micro-segmentation to limit lateral movement</li>
+<li>Encryption of all communications</li>
+<li>Continuous monitoring and analytics</li>
+<li>Identity and access management (IAM) systems</li>
+<li>Software-defined perimeters (SDP)</li>
+</ul>
+<p><strong>Physical Security</strong> Physical security protects personnel, hardware, software, networks, and data from physical actions and events that could cause serious loss or damage. It forms the foundation of overall security strategy.</p>
+<p>Physical security components include:</p>
+<p>*Perimeter Security:*</p>
+<ul>
+<li>Fencing and barriers to define property boundaries</li>
+<li>Gates and access points with controlled entry</li>
+<li>Lighting systems to deter intruders and aid surveillance</li>
+<li>Landscaping designed to eliminate hiding places</li>
+</ul>
+<p>*Building Security:*</p>
+<ul>
+<li>Access control systems (card readers, biometric scanners)</li>
+<li>Security guards and reception areas</li>
+<li>Visitor management systems</li>
+<li>Mantrap/airlock systems for high-security areas</li>
+</ul>
+<p>*Environmental Controls:*</p>
+<ul>
+<li>Fire detection and suppression systems</li>
+<li>HVAC systems to maintain proper temperature and humidity</li>
+<li>Power systems including UPS and backup generators</li>
+<li>Water detection systems to prevent flooding damage</li>
+</ul>
+<p>*Surveillance Systems:*</p>
+<ul>
+<li>CCTV cameras with recording capabilities</li>
+<li>Motion detection systems</li>
+<li>Alarm systems for unauthorized access</li>
+<li>Security monitoring centers</li>
+</ul>
+<p><strong>Deception and Disruption Technology</strong> These technologies are designed to mislead attackers, gather intelligence about attack methods, and disrupt malicious activities.</p>
+<p><strong>Honeypots</strong> Honeypots are decoy systems designed to attract and trap attackers. They appear to be legitimate systems but are actually isolated and monitored to study attack techniques.</p>
+<p>Types of honeypots:</p>
+<ul>
+<li>Low-interaction honeypots that simulate services and capture basic attack data</li>
+<li>High-interaction honeypots that provide full operating systems for detailed analysis</li>
+<li>Production honeypots deployed in live networks to detect real attacks</li>
+<li>Research honeypots used to study new attack techniques and malware</li>
+</ul>
+<p><strong>Honeynets</strong> Honeynets are networks of honeypots that create more realistic environments for attackers. They provide comprehensive views of attack campaigns and allow researchers to study coordinated attacks.</p>
+<p><strong>Honeyfiles</strong> Honeyfiles are decoy documents placed in file systems to detect unauthorized access. When accessed, they trigger alerts indicating potential compromise.</p>
+<p><strong>Honeytokens</strong> Honeytokens are pieces of data (credentials, URLs, database records) that have no legitimate use but trigger alerts when accessed, indicating unauthorized activity.</p>
+</div>
+<h4>Next steps</h4>
+<p>Complete the domain knowledge check quiz after this lesson and use the AI tutor for scenario-based practice. The tutor guides you Socratically without revealing assessment answers.</p>
+</div>

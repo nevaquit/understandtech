@@ -1,0 +1,259 @@
+<div class="ut-lesson-content">
+<h3>Exam objective 2.2</h3>
+<p><strong>Explain common threat vectors and attack surfaces</strong></p>
+<div class="ut-lesson-body">
+<p>Threat vectors are the paths or methods that attackers use to gain access to systems or deliver malicious payloads. Attack surfaces represent the total number of possible entry points that an attacker could exploit. Understanding these concepts is crucial for implementing effective defensive measures.</p>
+<h4>Message-based Threats</h4>
+<p>Message-based threats use various communication channels to deliver malicious content or trick users into performing harmful actions.</p>
+<p><strong>Email</strong> Email remains one of the most common attack vectors due to its ubiquity and the trust users place in email communications.</p>
+<p>Common email-based attacks:</p>
+<ul>
+<li>Phishing emails that trick users into revealing credentials or personal information</li>
+<li>Malware attachments that execute when opened by recipients</li>
+<li>Business Email Compromise (BEC) attacks targeting financial transactions</li>
+<li>Spear phishing attacks targeting specific individuals or organizations</li>
+<li>Email spoofing to impersonate trusted senders</li>
+</ul>
+<p>Email security measures:</p>
+<ul>
+<li>Spam filters and anti-malware scanning</li>
+<li>Sender Policy Framework (SPF) and DKIM authentication</li>
+<li>Domain-based Message Authentication, Reporting, and Conformance (DMARC)</li>
+<li>User education and awareness training</li>
+<li>Email encryption for sensitive communications</li>
+</ul>
+<p><strong>SMS (Short Message Service)</strong> SMS-based attacks, also known as "smishing," exploit the trust users place in text messages and the limited security features of SMS.</p>
+<p>Common SMS attacks:</p>
+<ul>
+<li>Phishing messages with malicious links</li>
+<li>Fake alerts claiming account compromises</li>
+<li>Two-factor authentication bypass attempts</li>
+<li>Premium rate service scams</li>
+<li>Malware distribution through malicious links</li>
+</ul>
+<p>SMS security considerations:</p>
+<ul>
+<li>Limited encryption and authentication capabilities</li>
+<li>Difficulty in verifying sender authenticity</li>
+<li>User tendency to trust text messages</li>
+<li>Limited security controls on mobile devices</li>
+<li>Potential for SIM swapping attacks</li>
+</ul>
+<p><strong>Instant Messaging</strong> Instant messaging platforms can be exploited to deliver malware, conduct social engineering attacks, or steal credentials.</p>
+<p>IM-based attack methods:</p>
+<ul>
+<li>Malicious file transfers containing malware</li>
+<li>Phishing links shared through chat messages</li>
+<li>Social engineering to extract sensitive information</li>
+<li>Account takeover through credential theft</li>
+<li>Spreading malware through infected contacts</li>
+</ul>
+<h4>Other Attack Vectors</h4>
+<p><strong>Image-based</strong> Attackers can embed malicious code within image files or use images as part of social engineering attacks.</p>
+<p>Image-based attack techniques:</p>
+<ul>
+<li>Steganography to hide malicious code in image files</li>
+<li>Malicious image files that exploit image processing vulnerabilities</li>
+<li>QR codes containing malicious URLs or commands</li>
+<li>Fake images used in social engineering attacks</li>
+<li>Image-based CAPTCHA bypass techniques</li>
+</ul>
+<p><strong>File-based</strong> Malicious files can be distributed through various channels to compromise systems or steal information.</p>
+<p>Common file-based attacks:</p>
+<ul>
+<li>Malware-infected documents (Word, Excel, PDF files)</li>
+<li>Executable files disguised as legitimate software</li>
+<li>Archive files containing multiple malicious components</li>
+<li>Script files (PowerShell, JavaScript, VBScript) with malicious code</li>
+<li>Macro-enabled documents that execute harmful commands</li>
+</ul>
+<p>File security measures:</p>
+<ul>
+<li>Antivirus and anti-malware scanning</li>
+<li>File type restrictions and allow lists</li>
+<li>Sandboxing for suspicious file analysis</li>
+<li>Digital signatures for file authenticity verification</li>
+<li>User education about safe file handling practices</li>
+</ul>
+<p><strong>Voice Call</strong> Voice-based attacks, known as "vishing" (voice phishing), use phone calls to manipulate victims into revealing sensitive information or performing harmful actions.</p>
+<p>Vishing attack techniques:</p>
+<ul>
+<li>Impersonating trusted organizations (banks, government agencies)</li>
+<li>Creating urgency to pressure victims into quick decisions</li>
+<li>Using caller ID spoofing to appear legitimate</li>
+<li>Social engineering to extract personal information</li>
+<li>Voice over IP (VoIP) systems for anonymous calling</li>
+</ul>
+<p><strong>Removable Device</strong> USB drives and other removable media can be used to introduce malware or steal data from air-gapped systems.</p>
+<p>Removable device attacks:</p>
+<ul>
+<li>USB drops containing malware-infected devices</li>
+<li>BadUSB attacks that reprogram device firmware</li>
+<li>Data exfiltration through unauthorized removable media</li>
+<li>Keyloggers and other surveillance tools</li>
+<li>Bypassing network security controls</li>
+</ul>
+<p>Removable device security:</p>
+<ul>
+<li>Device control policies and technical restrictions</li>
+<li>Endpoint protection with removable media scanning</li>
+<li>Data loss prevention (DLP) solutions</li>
+<li>User education about removable device risks</li>
+<li>Physical security controls for sensitive areas</li>
+</ul>
+<p><strong>Vulnerable Software</strong> Unpatched or misconfigured software provides entry points for attackers to exploit known vulnerabilities.</p>
+<p>Software vulnerability exploitation:</p>
+<ul>
+<li>Operating system vulnerabilities and missing patches</li>
+<li>Application vulnerabilities in web browsers and plugins</li>
+<li>Third-party software with known security flaws</li>
+<li>Default configurations with weak security settings</li>
+<li>Legacy software without security updates</li>
+</ul>
+<p><strong>Unsupported Systems</strong> Systems that no longer receive security updates present significant risks as new vulnerabilities cannot be patched.</p>
+<p>Risks of unsupported systems:</p>
+<ul>
+<li>No security patches for newly discovered vulnerabilities</li>
+<li>Incompatibility with modern security tools</li>
+<li>Compliance and regulatory issues</li>
+<li>Increased attack surface over time</li>
+<li>Potential for lateral movement to other systems</li>
+</ul>
+<p><strong>Unsecure Networks</strong> Networks with weak security controls or misconfigurations can be exploited to gain unauthorized access or intercept communications.</p>
+<p>Network security vulnerabilities:</p>
+<ul>
+<li>Unencrypted wireless networks</li>
+<li>Weak authentication mechanisms</li>
+<li>Default credentials on network devices</li>
+<li>Misconfigured firewalls and access controls</li>
+<li>Lack of network segmentation</li>
+</ul>
+<p><strong>Open Service Ports</strong> Unnecessary open ports provide potential entry points for attackers to access network services.</p>
+<p>Port security considerations:</p>
+<ul>
+<li>Regular port scanning to identify open services</li>
+<li>Principle of least privilege for network access</li>
+<li>Firewall rules to restrict unnecessary connections</li>
+<li>Service hardening and secure configurations</li>
+<li>Network monitoring for unusual port activity</li>
+</ul>
+<p><strong>Default Credentials</strong> Many devices and applications ship with default usernames and passwords that are often not changed during deployment.</p>
+<p>Default credential risks:</p>
+<ul>
+<li>Widely known default login combinations</li>
+<li>Easy targets for automated attack tools</li>
+<li>Administrative access to critical systems</li>
+<li>Potential for lateral movement within networks</li>
+<li>Compliance violations and audit findings</li>
+</ul>
+<p><strong>Supply Chain</strong> Supply chain attacks target the software or hardware development and distribution process to compromise end users.</p>
+<p>Supply chain attack methods:</p>
+<ul>
+<li>Compromising software development environments</li>
+<li>Injecting malware into software updates</li>
+<li>Hardware tampering during manufacturing or shipping</li>
+<li>Third-party vendor compromises affecting customers</li>
+<li>Open source software package compromises</li>
+</ul>
+<h4>Human Vectors/Social Engineering</h4>
+<p>Social engineering attacks exploit human psychology and behavior rather than technical vulnerabilities. These attacks are often highly effective because they target the weakest link in security: people.</p>
+<p><strong>Phishing</strong> Phishing attacks use fraudulent communications to trick victims into revealing sensitive information or performing harmful actions.</p>
+<p>Phishing characteristics:</p>
+<ul>
+<li>Mass distribution to many potential victims</li>
+<li>Generic messages that could apply to anyone</li>
+<li>Urgency or fear tactics to prompt quick action</li>
+<li>Requests for sensitive information or credentials</li>
+<li>Links to fake websites that mimic legitimate services</li>
+</ul>
+<p>Common phishing techniques:</p>
+<ul>
+<li>Email phishing with malicious links or attachments</li>
+<li>Website spoofing to steal login credentials</li>
+<li>Fake security alerts claiming account compromises</li>
+<li>Prize or lottery scams requesting personal information</li>
+<li>Charity scams exploiting current events or disasters</li>
+</ul>
+<p><strong>Vishing (Voice Phishing)</strong> Vishing uses phone calls to manipulate victims into revealing information or performing actions that compromise security.</p>
+<p>Vishing tactics:</p>
+<ul>
+<li>Impersonating bank representatives or government officials</li>
+<li>Creating false emergencies requiring immediate action</li>
+<li>Using personal information gathered from other sources</li>
+<li>Caller ID spoofing to appear more legitimate</li>
+<li>Recording calls to gather additional information</li>
+</ul>
+<p><strong>Smishing (SMS Phishing)</strong> Smishing uses text messages to conduct phishing attacks, often directing victims to malicious websites or phone numbers.</p>
+<p>Smishing characteristics:</p>
+<ul>
+<li>Short, urgent messages with limited context</li>
+<li>Links to malicious websites or phone numbers</li>
+<li>Requests to call premium rate numbers</li>
+<li>Fake alerts about account problems or security issues</li>
+<li>Exploitation of mobile device limitations</li>
+</ul>
+<p><strong>Misinformation/Disinformation</strong> These attacks spread false or misleading information to influence public opinion, create confusion, or undermine trust in institutions.</p>
+<p>Misinformation vs. Disinformation:</p>
+<ul>
+<li>Misinformation: False information spread without malicious intent</li>
+<li>Disinformation: Deliberately false information spread with malicious intent</li>
+</ul>
+<p>Common targets:</p>
+<ul>
+<li>Political processes and elections</li>
+<li>Public health information and policies</li>
+<li>Financial markets and economic stability</li>
+<li>Social issues and community relations</li>
+<li>Corporate reputation and brand trust</li>
+</ul>
+<p><strong>Impersonation</strong> Attackers pretend to be trusted individuals or organizations to gain victims' confidence and extract information or access.</p>
+<p>Impersonation techniques:</p>
+<ul>
+<li>Pretending to be IT support personnel</li>
+<li>Impersonating executives or authority figures</li>
+<li>Posing as vendors or business partners</li>
+<li>Claiming to be law enforcement or government officials</li>
+<li>Using social media profiles to build false identities</li>
+</ul>
+<p><strong>Business Email Compromise (BEC)</strong> BEC attacks target businesses by compromising or spoofing executive email accounts to authorize fraudulent transactions.</p>
+<p>BEC attack patterns:</p>
+<ul>
+<li>CEO fraud targeting finance departments</li>
+<li>Invoice fraud with fake vendor payment requests</li>
+<li>Account compromise through credential theft</li>
+<li>Attorney impersonation for urgent legal matters</li>
+<li>Real estate transaction fraud</li>
+</ul>
+<p><strong>Pretexting</strong> Pretexting involves creating fabricated scenarios to engage victims and extract information or gain access to systems.</p>
+<p>Pretexting scenarios:</p>
+<ul>
+<li>IT support calls requesting password verification</li>
+<li>Survey or research requests for personal information</li>
+<li>Emergency situations requiring immediate assistance</li>
+<li>Vendor or contractor verification calls</li>
+<li>Background check or employment verification requests</li>
+</ul>
+<p><strong>Watering Hole</strong> Watering hole attacks compromise websites frequently visited by target organizations or individuals to deliver malware to specific victims.</p>
+<p>Watering hole attack process: 1. Identify websites commonly visited by targets 2. Compromise the identified websites 3. Inject malicious code into the websites 4. Wait for targets to visit and become infected 5. Use initial compromise for further attacks</p>
+<p><strong>Brand Impersonation</strong> Attackers create fake websites, emails, or communications that mimic trusted brands to steal credentials or distribute malware.</p>
+<p>Brand impersonation techniques:</p>
+<ul>
+<li>Fake websites with similar domain names</li>
+<li>Spoofed emails using company logos and branding</li>
+<li>Fake mobile applications mimicking legitimate services</li>
+<li>Social media accounts impersonating brands</li>
+<li>Fake customer support communications</li>
+</ul>
+<p><strong>Typosquatting</strong> Typosquatting involves registering domain names that are similar to legitimate websites to capture traffic from users who make typing errors.</p>
+<p>Typosquatting methods:</p>
+<ul>
+<li>Common misspellings of popular domain names</li>
+<li>Different top-level domains (.com vs .net)</li>
+<li>Character substitution (replacing letters with numbers)</li>
+<li>Additional or missing characters in domain names</li>
+<li>Homograph attacks using similar-looking characters</li>
+</ul>
+</div>
+<h4>Next steps</h4>
+<p>Complete the domain knowledge check quiz after this lesson and use the AI tutor for scenario-based practice. The tutor guides you Socratically without revealing assessment answers.</p>
+</div>
