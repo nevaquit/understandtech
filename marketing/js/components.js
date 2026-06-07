@@ -11,7 +11,7 @@
 const isSubPage = window.location.pathname.includes('/pages/');
 const ROOT      = isSubPage ? '../'  : '/';
 const PAGES     = isSubPage ? ''     : 'pages/';
-const LOGIN_URL = '/learn/login/index.php';
+const LOGIN_URL = '/learn/login/index.php?wantsurl=%2Flearn%2Fmy%2F';
 
 function buildNav() {
   return `
