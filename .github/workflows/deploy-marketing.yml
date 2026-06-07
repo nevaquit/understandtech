@@ -64,6 +64,44 @@ jobs:
             echo "LOGIN_URL verified: $(grep LOGIN_URL /var/www/marketing/js/components.js)" || \
             echo "WARNING: wantsurl not found in components.js"
 
+      - name: Purge Cloudflare cache
+        if: success()
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+        run: |
+          set -euo pipefail
+          if [ -z "${CF_API_TOKEN:-}" ] || [ -z "${CF_ZONE_ID:-}" ]; then
+            echo "WARNING: CF_API_TOKEN or CF_ZONE_ID not set — skipping Cloudflare cache purge"
+            exit 0
+          fi
+          echo "Purging Cloudflare cache for marketing assets..."
+          curl -s -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{
+              "files": [
+                "https://understandtech.app/",
+                "https://understandtech.app/css/design-system.css",
+                "https://understandtech.app/css/pages.css",
+                "https://understandtech.app/js/main.js",
+                "https://understandtech.app/js/components.js",
+                "https://understandtech.app/pages/gamification.html",
+                "https://understandtech.app/pages/ai-tutor.html",
+                "https://understandtech.app/pages/certification.html",
+                "https://understandtech.app/pages/pricing.html",
+                "https://understandtech.app/pages/about.html"
+              ]
+            }' | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
+if data.get('success'):
+    print('Cloudflare cache purged successfully')
+else:
+    print('Cache purge response:', json.dumps(data, indent=2))
+"
+
       - name: Deployment summary
         if: always()
         run: |
