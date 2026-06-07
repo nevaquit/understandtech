@@ -1,0 +1,324 @@
+# Tag Detection Configuration for Cursor IDE and CLI Documentation
+# Version: 1.0
+
+tags:
+  agent:
+    terms:
+      - agent
+      - cursor agent
+      - agent mode
+      - agent tools
+      - agent planning
+      - agent review
+      - agent terminal
+      - agent browser
+    min_mentions: 4
+
+  cloud-agent:
+    terms:
+      - cloud agent
+      - cloud task
+      - web agent
+      - mobile agent
+      - egress ip
+    min_mentions: 3
+
+  cli:
+    terms:
+      - cli
+      - command line
+      - terminal
+      - shell mode
+      - headless
+      - github actions
+    min_mentions: 5
+
+  tab:
+    terms:
+      - tab
+      - cursor tab
+      - autocomplete
+      - completion
+      - suggestions
+    min_mentions: 4
+
+  inline-edit:
+    terms:
+      - inline edit
+      - inline editing
+      - quick edit
+      - terminal edit
+    min_mentions: 3
+
+  mcp:
+    terms:
+      - mcp
+      - model context protocol
+      - mcp server
+      - mcp tool
+      - mcp directory
+    min_mentions: 4
+
+  context:
+    terms:
+      - context
+      - codebase indexing
+      - ignore files
+      - mentions
+      - rules
+    min_mentions: 4
+
+  integrations:
+    terms:
+      - integration
+      - integrations
+      - slack
+      - linear
+      - github
+      - gitlab
+      - git
+      - deeplinks
+    min_mentions: 3
+
+  configuration:
+    terms:
+      - configuration
+      - config
+      - settings
+      - extensions
+      - keyboard
+      - themes
+      - shell
+      - worktrees
+    min_mentions: 5
+
+  billing:
+    terms:
+      - billing
+      - pricing
+      - spend
+      - subscription
+      - credits
+      - usage
+    min_mentions: 4
+
+  teams:
+    terms:
+      - team
+      - teams
+      - members
+      - sso
+      - dashboard
+      - analytics
+    min_mentions: 4
+
+  enterprise:
+    terms:
+      - enterprise
+      - scim
+      - identity
+      - governance
+      - compliance
+      - deployment
+    min_mentions: 3
+
+  security:
+    terms:
+      - security
+      - secure
+      - permission
+      - permissions
+      - access control
+      - authentication
+    min_mentions: 4
+
+  troubleshooting:
+    terms:
+      - troubleshoot
+      - troubleshooting
+      - fix error
+      - error handling
+      - debug
+      - debugging
+      - common issues
+    min_mentions: 3
+
+  cookbook:
+    terms:
+      - cookbook
+      - recipe
+      - example
+      - tutorial
+      - web development
+      - data science
+      - mermaid
+    min_mentions: 3
+
+  models:
+    terms:
+      - model
+      - models
+      - api key
+      - api keys
+      - bedrock
+      - aws
+    min_mentions: 5
+
+  migration:
+    terms:
+      - migration
+      - migrate
+      - vscode
+      - jetbrains
+      - import
+    min_mentions: 3
+
+  languages:
+    terms:
+      - python
+      - javascript
+      - typescript
+      - swift
+      - java
+      - ios
+      - macos
+    min_mentions: 3
+
+categories:
+  get-started:
+    path_patterns:
+      - get-started
+      - quickstart
+      - concepts
+    tag_mapping:
+      - installation
+    content_terms:
+      - getting started
+      - quickstart
+      - introduction
+      - concepts
+
+  core:
+    path_patterns:
+      - tab
+      - agent
+      - inline-edit
+      - context/rules
+      - bugbot
+    tag_mapping:
+      - agent
+      - tab
+      - inline-edit
+    content_terms:
+      - tab
+      - agent
+      - inline edit
+      - bugbot
+
+  context:
+    path_patterns:
+      - context
+      - codebase
+      - ignore
+      - mcp
+      - mentions
+    tag_mapping:
+      - context
+      - mcp
+    content_terms:
+      - context
+      - codebase
+      - indexing
+      - mcp
+
+  integrations:
+    path_patterns:
+      - integrations
+      - slack
+      - linear
+      - github
+      - gitlab
+    tag_mapping:
+      - integrations
+    content_terms:
+      - integration
+      - slack
+      - linear
+      - github
+
+  configuration:
+    path_patterns:
+      - configuration
+      - extensions
+      - kbd
+      - themes
+      - shell
+    tag_mapping:
+      - configuration
+    content_terms:
+      - configuration
+      - extensions
+      - keyboard
+      - themes
+
+  account:
+    path_patterns:
+      - account
+      - billing
+      - teams
+    tag_mapping:
+      - billing
+      - teams
+    content_terms:
+      - account
+      - billing
+      - team
+      - subscription
+
+  enterprise:
+    path_patterns:
+      - enterprise
+      - scim
+      - identity
+    tag_mapping:
+      - enterprise
+    content_terms:
+      - enterprise
+      - scim
+      - compliance
+      - governance
+
+  cookbook:
+    path_patterns:
+      - cookbook
+      - recipe
+    tag_mapping:
+      - cookbook
+    content_terms:
+      - cookbook
+      - example
+      - tutorial
+
+  troubleshooting:
+    path_patterns:
+      - troubleshooting
+      - common-issues
+    tag_mapping:
+      - troubleshooting
+    content_terms:
+      - troubleshoot
+      - issue
+      - problem
+      - fix
+
+  cli:
+    path_patterns:
+      - cli
+      - headless
+    tag_mapping:
+      - cli
+    content_terms:
+      - cli
+      - command line
+      - headless
+      - shell mode

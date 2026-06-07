@@ -1,0 +1,13 @@
+[
+  {
+    "name": "cursor.com (llms-txt)",
+    "type": "llms-txt",
+    "url": "https://cursor.com/llms.txt",
+    "skip_existing": true,
+    "expected_count": 90,
+    "expected_count_tolerance": 20,
+    "timeout": 300,
+    "try_markdown": true,
+    "comment": "Cursor IDE and CLI documentation from llms.txt discovery index. The llms.txt contains direct .md URLs that can be fetched directly without HTML parsing."
+  }
+]

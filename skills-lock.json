@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "behat-automation-skill": {
+      "source": "SparshKesari/testmu-skills",
+      "sourceType": "github",
+      "skillPath": "behat-automation-skill/SKILL.md",
+      "computedHash": "3ba01632df46d43e74c604b4f0c5fb0c7cfae6013cf63c86b01b795f3e6dbded"
+    },
+    "moodle-plugin": {
+      "source": "Af1ah/moodle-plugin-skills",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "2b18af6cff574fe245456d2560e0e916f82890f86f8944b35f1b3d6b2f6d5430"
+    }
+  }
+}

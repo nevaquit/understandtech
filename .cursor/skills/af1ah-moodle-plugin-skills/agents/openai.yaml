@@ -1,0 +1,4 @@
+interface:
+  display_name: "Moodle Plugin"
+  short_description: "Build and maintain Moodle LMS plugins with current Moodle-native patterns"
+  default_prompt: "Use Moodle Plugin to create, review, debug, or extend Moodle plugins, and load the matching reference files before writing subsystem-specific code."
