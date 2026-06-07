@@ -98,7 +98,7 @@ function security_plus_add_page(stdClass $course, int $sectionnum, string $name,
     $page->introformat = FORMAT_HTML;
     $page->content = $html;
     $page->contentformat = FORMAT_HTML;
-    $page->display = PAGE_DISPLAY_OPEN;
+    $page->display = 0; // PAGE_DISPLAY_OPEN
     $page->displayoptions = 'a:0:{}';
     $page->revision = 1;
     $page->module = $DB->get_field('modules', 'id', ['name' => 'page']);
