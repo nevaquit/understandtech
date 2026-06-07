@@ -13,4 +13,13 @@ $tasks = [
         'month' => '*',
         'dayofweek' => '*',
     ],
+    [
+        'classname' => 'local_certmaster\task\generate_study_plans_task',
+        'blocking' => 0,
+        'minute' => '45',
+        'hour' => '*',
+        'day' => '*',
+        'month' => '*',
+        'dayofweek' => '*',
+    ],
 ];

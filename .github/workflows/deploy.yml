@@ -353,11 +353,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Post deployment result
+        env:
+          NOTIFY_WEBHOOK_URL: ${{ secrets.NOTIFY_WEBHOOK_URL }}
         run: |
           set -euo pipefail
           echo "Validate: ${{ needs.validate.result }}"
           echo "Deploy: ${{ needs.validate.outputs.has_plugin_changes == 'true' && needs.deploy.result || 'skipped' }}"
-          # Uncomment when NOTIFY_WEBHOOK_URL secret is configured:
-          # curl -sS -X POST -H 'Content-Type: application/json' \
-          #   -d "{\"text\":\"Deploy ${{ needs.deploy.result }} — ${{ github.sha }}\"}" \
-          #   "${{ secrets.NOTIFY_WEBHOOK_URL }}"
+          if [ -n "${NOTIFY_WEBHOOK_URL:-}" ]; then
+            payload=$(printf '{"text":"Deploy %s — %s (%s)"}' \
+              "${{ needs.deploy.result }}" "${{ github.sha }}" "${{ github.repository }}")
+            curl -sS -X POST -H 'Content-Type: application/json' -d "$payload" "$NOTIFY_WEBHOOK_URL" || true
+          fi

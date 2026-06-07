@@ -4,7 +4,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_certmaster';
-$plugin->version   = 2026060700;
+$plugin->version   = 2026060802;
 $plugin->requires  = 2024100700;
 $plugin->maturity  = MATURITY_BETA;
 $plugin->release   = '1.0.0';

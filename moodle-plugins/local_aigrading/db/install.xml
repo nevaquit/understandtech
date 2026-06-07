@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/aigrading/db" VERSION="20260608" COMMENT="AI-assisted grading"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+  <TABLES>
+    <TABLE NAME="aigrading_recommendations" COMMENT="AI grade recommendations awaiting instructor review">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="assignid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Learner"/>
+        <FIELD NAME="submissiontext" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="rubric" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="ai_score" TYPE="number" LENGTH="10" NOTNULL="true" DECIMALS="2" SEQUENCE="false"/>
+        <FIELD NAME="ai_maxscore" TYPE="number" LENGTH="10" NOTNULL="true" DECIMALS="2" SEQUENCE="false"/>
+        <FIELD NAME="ai_feedback" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="ai_breakdown" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON rubric breakdown"/>
+        <FIELD NAME="provider" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="prompt_version" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="pending" SEQUENCE="false"/>
+        <FIELD NAME="instructor_score" TYPE="number" LENGTH="10" NOTNULL="false" DECIMALS="2" SEQUENCE="false"/>
+        <FIELD NAME="instructor_feedback" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="reviewerid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="assign_user" TYPE="unique" FIELDS="assignid, userid"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="status_idx" UNIQUE="false" FIELDS="status"/>
+        <INDEX NAME="cmid_idx" UNIQUE="false" FIELDS="cmid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="aigrading_audit_log" COMMENT="Immutable instructor decision audit trail">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="recommendationid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="reviewerid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="action" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="detail" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="JSON snapshot"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="recommendationid" TYPE="foreign" FIELDS="recommendationid" REFTABLE="aigrading_recommendations" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

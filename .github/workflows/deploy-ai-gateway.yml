@@ -1,0 +1,42 @@
+# Deploy Cloudflare AI Gateway Worker (manual; requires CLOUDFLARE_API_TOKEN secret).
+
+name: Deploy AI Gateway
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'cloudflare-worker/ai-gateway/**'
+
+jobs:
+  deploy:
+    name: Wrangler deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: cloudflare-worker/ai-gateway/package-lock.json
+
+      - name: Typecheck
+        working-directory: cloudflare-worker/ai-gateway
+        run: |
+          npm ci
+          npm run typecheck
+          npm test
+
+      - name: Deploy
+        if: github.event_name == 'workflow_dispatch' || (github.ref == 'refs/heads/main' && github.event_name == 'push')
+        working-directory: cloudflare-worker/ai-gateway
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
+            echo "CLOUDFLARE_API_TOKEN not set — skipping deploy (validate-only on push)"
+            exit 0
+          fi
+          npx wrangler deploy

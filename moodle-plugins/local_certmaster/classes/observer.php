@@ -17,7 +17,31 @@ class observer {
      * @return void
      */
     public static function flag_submitted(\mod_ctfflag\event\flag_submitted $event): void {
-        // When mod_ctfflag maps labs to certmaster objectives, recalculate mastery here.
-        // Full lab → objective wiring is Phase 3; this observer preserves the event contract.
+        global $DB;
+
+        $userid = (int) $event->userid;
+        $objectives = $DB->get_records_sql(
+            "SELECT DISTINCT m.objectiveid
+               FROM {certmaster_mastery} m
+              WHERE m.userid = :userid",
+            ['userid' => $userid],
+            0,
+            10
+        );
+
+        foreach ($objectives as $row) {
+            api::recalculate_mastery($userid, (int) $row->objectiveid);
+        }
+
+        study_plan::generate_for_user($userid, self::default_certification_id());
+    }
+
+    /**
+     * @return int
+     */
+    protected static function default_certification_id(): int {
+        global $DB;
+        $cert = $DB->get_record('certmaster_certifications', [], 'id ASC', 'id', IGNORE_MULTIPLE);
+        return $cert ? (int) $cert->id : 0;
     }
 }

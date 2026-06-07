@@ -1,0 +1,15 @@
+<div class="ut-community-feed">
+    {{#hasentries}}
+    <ul class="list-unstyled">
+        {{#entries}}
+        <li class="mb-3 pb-3 border-bottom">
+            <a href="{{url}}" class="fw-semibold">{{subject}}</a>
+            <div class="text-muted small">{{author}} · {{date}}</div>
+        </li>
+        {{/entries}}
+    </ul>
+    {{/hasentries}}
+    {{^hasentries}}
+    <p class="text-muted">{{#str}}feedempty, local_community{{/str}}</p>
+    {{/hasentries}}
+</div>

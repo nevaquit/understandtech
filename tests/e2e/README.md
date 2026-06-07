@@ -48,8 +48,9 @@ Tests without credentials skip authenticated flows; the invalid-login test alway
 | `ai-tutor.spec.ts` | Sidebar visibility, streaming, Socratic refusal, worker outage |
 
 | `payment-flow.spec.ts` | Stripe checkout — **deferred**; excluded from `chromium`; use `--project=chromium-stripe` with `STRIPE_TEST=1` |
-
-Future playbook specs (video playback, quiz confidence, lab flag) belong here once staging content is seeded.
+| `video-playback.spec.ts` | Stream signed JWT player — set `E2E_STREAM_COURSE_PATH` |
+| `quiz-confidence.spec.ts` | CertMaster confidence UI — set `E2E_QUIZ_PATH` |
+| `lab-flag.spec.ts` | CTF flag submission — set `E2E_CTFFLAG_PATH` |
 
 ## CI
 

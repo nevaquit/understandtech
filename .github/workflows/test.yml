@@ -1,0 +1,55 @@
+# Validate PHPUnit syntax and run integration smoke checks (no self-hosted deploy).
+
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  phpunit-lint:
+    name: PHPUnit + plugin tests lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, curl, intl, zip
+          coverage: none
+
+      - name: Lint plugin test files
+        run: |
+          set -euo pipefail
+          mapfile -t tests < <(find moodle-plugins -path '*/tests/*_test.php' -print)
+          for f in "${tests[@]}"; do
+            php -l "$f"
+            echo "OK $f"
+          done
+
+  integration:
+    name: Integration smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Worker health check
+        run: node tests/integration/worker-health.mjs
+        env:
+          WORKER_URL: https://ai.understandtech.app
+
+      - name: AI Gateway unit tests
+        run: |
+          cd cloudflare-worker/ai-gateway
+          npm ci
+          npm test

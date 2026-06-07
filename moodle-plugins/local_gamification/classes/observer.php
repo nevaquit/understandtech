@@ -20,11 +20,49 @@ class observer {
      * @return void
      */
     public static function quiz_attempt_submitted(\mod_quiz\event\attempt_submitted $event): void {
-        if (!class_exists('\block_xp\local\rule\event_rule')) {
+        if (!class_exists('\block_xp\local\factory')) {
             return;
         }
 
-        // Level Up XP ships its own quiz rules engine; custom grants belong here when
-        // readiness thresholds (local_certmaster) should unlock bonus XP tiers.
+        $userid = (int) $event->userid;
+        $courseid = (int) $event->courseid;
+        $bonus = 10;
+
+        if (class_exists('\local_certmaster\api')) {
+            $cert = self::first_certification();
+            if ($cert) {
+                $readiness = \local_certmaster\api::get_user_readiness($userid, (int) $cert->id);
+                if (($readiness['overall_readiness'] ?? 0) >= 80) {
+                    $bonus = 25;
+                }
+            }
+        }
+
+        api::award_xp($userid, $courseid, $bonus, 'quiz_attempt_submitted');
+    }
+
+    /**
+     * Award XP when a CTF lab flag is captured successfully.
+     *
+     * @param \mod_ctfflag\event\flag_submitted $event
+     * @return void
+     */
+    public static function flag_submitted(\mod_ctfflag\event\flag_submitted $event): void {
+        global $DB;
+
+        $instance = $DB->get_record('ctfflag', ['id' => $event->objectid], 'xp_award', MUST_EXIST);
+        $userid = (int) $event->userid;
+        $courseid = (int) $event->courseid;
+        $points = (int) ($instance->xp_award ?: 50);
+        api::award_xp($userid, $courseid, $points, 'ctfflag_success');
+    }
+
+    /**
+     * @return \stdClass|null
+     */
+    protected static function first_certification(): ?\stdClass {
+        global $DB;
+        $record = $DB->get_record('certmaster_certifications', [], 'id ASC', '*', IGNORE_MULTIPLE);
+        return $record ?: null;
     }
 }

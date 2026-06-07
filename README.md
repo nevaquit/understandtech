@@ -27,12 +27,15 @@ See [docs/white-paper.md](docs/white-paper.md) for the full architectural bluepr
 
 ## Local development quick start
 
-> Docker Compose stack coming in Phase 3. For now:
-
 ```bash
 git clone git@github.com:nevaquit/understandtech.git
 cd understandtech
+cp docker/.env.example docker/.env.local
+# Edit docker/.env.local — set POSTGRES_PASSWORD and MOODLE_ADMIN_PASSWORD
+docker compose --env-file docker/.env.local up -d --build
 ```
+
+Moodle: `http://localhost:8080` (plugins mounted from `moodle-plugins/` after first-time Moodle install in the container).
 
 1. Review [Phase 0 toolchain audit](docs/phase-0-toolchain.md) and install missing tools
 2. Follow [Creation Playbook](docs/playbook.md) phase by phase

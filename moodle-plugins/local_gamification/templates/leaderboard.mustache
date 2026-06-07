@@ -1,0 +1,20 @@
+<div class="ut-leaderboard local_gamification" data-region="xp-leaderboard">
+    <h2 class="h4 mb-4">{{#str}}leaderboard, local_gamification{{/str}}</h2>
+    {{#hasentries}}
+    <div class="ut-leaderboard-list" role="list">
+        {{#entries}}
+        <div class="ut-leaderboard-row d-flex align-items-center mb-2" role="listitem">
+            <span class="ut-rank badge bg-secondary me-2">{{rank}}</span>
+            <span class="ut-name flex-grow-1">{{name}}</span>
+            <div class="ut-xp-bar flex-grow-1 mx-3" aria-hidden="true">
+                <div class="ut-xp-fill" style="width: {{percent}}%"></div>
+            </div>
+            <span class="ut-points text-nowrap">{{points}}</span>
+        </div>
+        {{/entries}}
+    </div>
+    {{/hasentries}}
+    {{^hasentries}}
+    <p class="text-muted">{{#str}}noentries, local_gamification{{/str}}</p>
+    {{/hasentries}}
+</div>
