@@ -397,6 +397,12 @@ if (!$course) {
 }
 
 course_create_sections_if_missing($course, 5);
+for ($i = 1; $i <= 5; $i++) {
+    if (!$DB->record_exists('course_sections', ['course' => $course->id, 'section' => $i])) {
+        course_create_section($course, $i);
+    }
+}
+rebuild_course_cache((int) $course->id, true);
 
 $sectionnames = [
     1 => 'Domain 1: General Security Concepts (12%)',
