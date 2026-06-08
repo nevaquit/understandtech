@@ -27,12 +27,11 @@ if "$CFG->session_handler_class" not in text:
         sys.exit(1)
     text = text.replace(needle, redis_block + "\n" + needle, 1)
 else:
-    text = re.sub(
-        r"\$CFG->session_handler_class\s*=\s*'[^']*';\n",
-        redis_block,
-        text,
-        count=1,
-    )
+    match = re.search(r"\$CFG->session_handler_class\s*=\s*'[^']*';\n", text)
+    if not match:
+        print("ERROR: session_handler_class line not found", file=sys.stderr)
+        sys.exit(1)
+    text = text[: match.start()] + redis_block + text[match.end() :]
 
 config.write_text(text)
 print("migrated_to_redis")
