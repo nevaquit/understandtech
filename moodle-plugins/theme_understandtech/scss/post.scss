@@ -486,8 +486,8 @@ body.ut-theme {
     .moremenu .nav-link.active:focus,
     .secondary-navigation .nav-link:hover,
     .secondary-navigation .nav-link.active {
-        background: rgba($ut-gold, 0.08) !important;
-        color: $ut-gold !important;
+        background: rgba($ut-gold, 0.35) !important;
+        color: $ut-white !important;
     }
 
     .moremenu .dropdown-menu {
@@ -567,5 +567,18 @@ body.ut-theme {
 
     .footer-popover.bg-white {
         background: $ut-navy-deep !important;
+    }
+
+    .message-app {
+        background: $ut-surface !important;
+        color: $ut-white !important;
+    }
+
+    .message-app .header-container,
+    .message-app .footer-container,
+    .message-app .body-container {
+        background: $ut-surface;
+        color: $ut-white;
+        border-color: rgba($ut-gold, 0.18);
     }
 }

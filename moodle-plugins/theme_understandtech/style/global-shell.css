@@ -186,7 +186,8 @@ body.ut-theme .primary-navigation .nav-link:focus {
 
 body.ut-theme .navbar .nav-link.active,
 body.ut-theme .primary-navigation .nav-link.active {
-    color: var(--ut-gold) !important;
+    color: #fff !important;
+    background: rgba(201, 162, 39, 0.35) !important;
 }
 
 body.ut-theme .navbar .divider,
@@ -573,8 +574,8 @@ body.ut-theme .more-nav .nav-link.active,
 body.ut-theme .moremenu .nav-link.active,
 body.ut-theme .moremenu .show > .nav-link,
 body.ut-theme .moremenu .active > .nav-link {
-    color: var(--ut-gold) !important;
-    background: rgba(201, 162, 39, 0.08) !important;
+    color: #fff !important;
+    background: rgba(201, 162, 39, 0.35) !important;
     border-bottom: 2px solid var(--ut-gold) !important;
 }
 
@@ -695,6 +696,23 @@ body.ut-theme .popover-region-footer-container,
 body.ut-theme .message-drawer-header {
     background: rgba(11, 31, 58, 0.55);
     border-color: var(--ut-border);
+}
+
+body.ut-theme .message-app {
+    background: var(--ut-surface-elevated) !important;
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme .message-app .header-container,
+body.ut-theme .message-app .footer-container,
+body.ut-theme .message-app .body-container {
+    background: var(--ut-surface-elevated);
+    color: var(--ut-text);
+    border-color: var(--ut-border);
+}
+
+body.ut-theme .alert-danger a {
+    color: var(--ut-gold-light);
 }
 
 /* ── Quiz & question UI ─────────────────────────────────────────────────────── */
