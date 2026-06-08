@@ -244,8 +244,11 @@ body.ut-theme .courseindex-item.current a {
     border-radius: var(--ut-radius-sm);
 }
 
-/* Course index drawer — hide skeleton once Moodle marks it aria-hidden */
-body.ut-theme #course-index-placeholder[aria-hidden="true"] {
+/* Course index drawer — hide skeleton only after real sections render.
+   Do NOT key off aria-hidden alone: placeholder ships aria-hidden="true" in HTML and
+   native hydration may fail while the skeleton is the only content left. */
+body.ut-theme #courseindex-content:has(.courseindex-section) #course-index-placeholder,
+body.ut-theme #courseindex-content:has([data-for="section"]) #course-index-placeholder {
     display: none !important;
 }
 
@@ -800,7 +803,6 @@ body.ut-theme a.list-group-item-action:focus {
     color: var(--ut-gold) !important;
 }
 
-body.ut-theme .list-group-item.active,
 body.ut-theme .list-group-item-action.active,
 body.ut-theme a.list-group-item-action.active {
     background-color: rgba(201, 162, 39, 0.12) !important;
@@ -808,42 +810,86 @@ body.ut-theme a.list-group-item-action.active {
     border-color: var(--ut-border-strong) !important;
 }
 
-/* ── Dashboard / calendar / edit-mode polish ────────────────────────────────── */
-body.ut-theme .calendartable td.today,
-body.ut-theme .calendar .today {
-    background: rgba(26, 138, 125, 0.35) !important;
-    border-radius: var(--ut-radius-sm);
-}
-
-body.ut-theme .calendartable td.today a,
-body.ut-theme .calendar .today a {
+/* ── Calendar today cell (teal, not Bootstrap blue) ───────────────────────── */
+body.ut-theme .calendar .today,
+body.ut-theme .calendarmonth td.today,
+body.ut-theme .maincalendar .calendartable td.today,
+body.ut-theme .maincalendar .calendartable td.today .day-number-circle {
+    background-color: rgba(26, 138, 125, 0.22) !important;
+    border-color: var(--ut-teal) !important;
     color: #fff !important;
-    font-weight: 700;
 }
 
-body.ut-theme .custom-control.custom-switch .custom-control-label::before,
-body.ut-theme .form-check.form-switch .form-check-input {
+body.ut-theme .calendar .today a,
+body.ut-theme .calendarmonth td.today a {
+    color: var(--ut-teal-light) !important;
+}
+
+/* ── Custom switches (dark shell) ─────────────────────────────────────────── */
+body.ut-theme .custom-control.custom-switch .custom-control-label::before {
     background-color: var(--ut-navy-mid);
     border-color: var(--ut-border-strong);
 }
 
+body.ut-theme .custom-control.custom-switch .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--ut-teal);
+    border-color: var(--ut-teal);
+}
+
+body.ut-theme .custom-control.custom-switch .custom-control-label::after {
+    background-color: #fff;
+}
+
+body.ut-theme .custom-control.custom-switch .custom-control-label {
+    color: var(--ut-text);
+}
+
+/* ── Outline secondary — no Bootstrap blue leak ───────────────────────────── */
 body.ut-theme .btn-outline-secondary {
     border-color: var(--ut-border-strong) !important;
     color: var(--ut-text) !important;
+    --bs-btn-border-color: var(--ut-border-strong);
+    --bs-btn-hover-border-color: var(--ut-gold);
+    --bs-btn-hover-color: var(--ut-gold);
+    --bs-btn-active-border-color: var(--ut-gold);
+    --bs-btn-active-color: var(--ut-gold);
 }
 
 body.ut-theme .btn-outline-secondary:hover,
-body.ut-theme .btn-outline-secondary:focus {
+body.ut-theme .btn-outline-secondary:focus,
+body.ut-theme .btn-outline-secondary:active {
+    border-color: var(--ut-gold) !important;
+    color: var(--ut-gold) !important;
+    background: rgba(201, 162, 39, 0.1) !important;
+}
+
+/* ── Drawer / block toggles (dark) ────────────────────────────────────────── */
+body.ut-theme .drawer-toggler .btn,
+body.ut-theme [data-region="drawer-toggle"] .btn,
+body.ut-theme .block-region .drawertoggle,
+body.ut-theme .drawer-toggles .btn {
+    background: transparent !important;
+    border-color: var(--ut-border) !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+body.ut-theme .drawer-toggler .btn:hover,
+body.ut-theme .drawer-toggler .btn:focus,
+body.ut-theme [data-region="drawer-toggle"] .btn:hover,
+body.ut-theme [data-region="drawer-toggle"] .btn:focus,
+body.ut-theme .block-region .drawertoggle:hover,
+body.ut-theme .block-region .drawertoggle:focus,
+body.ut-theme .drawer-toggles .btn:hover,
+body.ut-theme .drawer-toggles .btn:focus {
+    background: rgba(201, 162, 39, 0.12) !important;
     border-color: var(--ut-gold) !important;
     color: var(--ut-gold) !important;
 }
 
-body.ut-theme .drawer-toggler,
-body.ut-theme .block-drawer .drawer-toggle,
-body.ut-theme [data-action="toggle-drawer"] {
-    background: var(--ut-navy-mid) !important;
-    border-color: var(--ut-border) !important;
-    color: var(--ut-gold) !important;
+body.ut-theme .footer-popover.ut-theme-footer {
+    background: var(--ut-navy-deep) !important;
+    border-top: 1px solid var(--ut-border);
+    color: var(--ut-text-muted);
 }
 
 body.ut-theme .ut-theme-footer,

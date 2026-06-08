@@ -86,8 +86,16 @@ function theme_understandtech_page_init(moodle_page $page): void {
         $page->add_body_class('ut-lesson-page');
     }
 
-    if ($page->course && (int) $page->course->id !== SITEID) {
-        $page->add_body_class('ut-incourse');
+    if ($page->context) {
+        if ($page->context->contextlevel === CONTEXT_MODULE) {
+            $page->add_body_class('ut-incourse');
+        } else if (
+            $page->context->contextlevel === CONTEXT_COURSE
+            && $page->course
+            && (int) $page->course->id !== SITEID
+        ) {
+            $page->add_body_class('ut-incourse');
+        }
     }
 
     // Marketing/login UX only — never on incourse pages. js_call_amd registers a pending
@@ -96,6 +104,18 @@ function theme_understandtech_page_init(moodle_page $page): void {
     if (in_array($page->pagelayout, ['frontpage', 'login'], true)) {
         $page->requires->js_amd_inline(
             "require(['theme_understandtech/theme'], function(m) { m.init(); });",
+        );
+    }
+
+    // Course index drawer: core placeholder hydration uses Templates.replaceNode (YUI).
+    // When Y.NodeList is unavailable the drawer stays empty while CSS hides the skeleton.
+    if (
+        in_array($page->pagelayout, ['course', 'incourse'], true)
+        && $page->course
+        && (int) $page->course->id !== SITEID
+    ) {
+        $page->requires->js_amd_inline(
+            "require(['theme_understandtech/courseindex_fallback'], function(m) { m.init(); });",
         );
     }
 }
@@ -159,6 +179,8 @@ function theme_understandtech_process_css(string $css, theme_config $theme): str
     $navymid = theme_understandtech_lighten_hex($navy, 0.05);
     $surface = theme_understandtech_lighten_hex($navy, 0.08);
     $surfaceelevated = theme_understandtech_lighten_hex($navy, 0.06);
+    $goldlight = theme_understandtech_lighten_hex($gold, 0.15);
+    $teallight = theme_understandtech_lighten_hex($teal, 0.15);
 
     $vars = ":root{"
         . "--ut-navy:{$navy};"
@@ -167,7 +189,14 @@ function theme_understandtech_process_css(string $css, theme_config $theme): str
         . "--ut-surface:{$surface};"
         . "--ut-surface-elevated:{$surfaceelevated};"
         . "--ut-gold:{$gold};"
+        . "--ut-gold-light:{$goldlight};"
         . "--ut-teal:{$teal};"
+        . "--ut-teal-light:{$teallight};"
+        . "--ut-text:rgba(255,255,255,0.94);"
+        . "--ut-text-muted:rgba(255,255,255,0.72);"
+        . "--ut-text-subtle:rgba(255,255,255,0.55);"
+        . "--ut-border:rgba(201,162,39,0.18);"
+        . "--ut-border-strong:rgba(201,162,39,0.32);"
         . "}\n";
 
     return $vars . $css;

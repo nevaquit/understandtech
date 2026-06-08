@@ -565,10 +565,67 @@ body.ut-theme {
         color: $ut-gold !important;
     }
 
-    .footer-popover.bg-white {
+    .footer-popover.bg-white,
+    .footer-popover.ut-theme-footer {
         background: $ut-navy-deep !important;
+        border-top: 1px solid rgba($ut-gold, 0.18);
+        color: rgba($ut-white, 0.72);
     }
 
+    .drawer-toggler .btn,
+    [data-region="drawer-toggle"] .btn,
+    .drawer-toggles .btn {
+        background: transparent !important;
+        border-color: rgba($ut-gold, 0.18) !important;
+        color: rgba($ut-white, 0.85) !important;
+
+        &:hover,
+        &:focus {
+            background: rgba($ut-gold, 0.12) !important;
+            border-color: $ut-gold !important;
+            color: $ut-gold !important;
+        }
+    }
+
+    .btn-outline-secondary {
+        border-color: rgba($ut-gold, 0.32) !important;
+        color: rgba($ut-white, 0.94) !important;
+
+        &:hover,
+        &:focus,
+        &:active {
+            border-color: $ut-gold !important;
+            color: $ut-gold !important;
+            background: rgba($ut-gold, 0.1) !important;
+        }
+    }
+
+    .custom-control.custom-switch .custom-control-label::before {
+        background-color: $ut-navy-mid;
+        border-color: rgba($ut-gold, 0.32);
+    }
+
+    .custom-control.custom-switch .custom-control-input:checked ~ .custom-control-label::before {
+        background-color: $ut-teal;
+        border-color: $ut-teal;
+    }
+}
+
+// ── Custom marketing footer social links ──────────────────────────────────────
+.ut-footer-social {
+    a,
+    .ut-footer-social-link {
+        color: rgba($ut-white, 0.45);
+        transition: color $ut-transition-fast;
+
+        &:hover,
+        &:focus {
+            color: $ut-gold;
+        }
+    }
+}
+
+body.ut-theme {
     .message-app {
         background: $ut-surface !important;
         color: $ut-white !important;
