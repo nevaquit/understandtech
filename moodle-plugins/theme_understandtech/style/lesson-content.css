@@ -181,9 +181,44 @@
 }
 
 .path-mod-page .main-inner,
-#page-mod-page-view .main-inner {
+#page-mod-page-view .main-inner,
+.ut-lesson-page .main-inner,
+body.path-mod-page #page.drawers .main-inner,
+body.ut-lesson-page #page.drawers .main-inner {
     min-height: 0;
     align-items: flex-start;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.path-mod-page #page.drawers #page-content,
+body.ut-lesson-page #page.drawers #page-content,
+body.path-mod-page #page.drawers #region-main-box,
+body.ut-lesson-page #page.drawers #region-main-box {
+    background: transparent !important;
+}
+
+/* Course index drawer — navy shell instead of Boost light gray */
+body.path-mod-page .drawer.drawer-left,
+body.ut-lesson-page .drawer.drawer-left,
+body.ut-incourse .drawer.drawer-left {
+    background: #071426 !important;
+    border-right: 1px solid rgba(201, 162, 39, 0.15) !important;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+body.path-mod-page .drawer.drawer-left .drawerheader,
+body.ut-lesson-page .drawer.drawer-left .drawerheader,
+body.ut-incourse .drawer.drawer-left .drawerheader {
+    background: #071426 !important;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.12) !important;
+}
+
+body.path-mod-page .drawer.drawer-left .drawercontent,
+body.ut-lesson-page .drawer.drawer-left .drawercontent,
+body.ut-incourse .drawer.drawer-left .drawercontent {
+    background: #071426 !important;
 }
 
 .path-mod-page:not(.hasblocks) [data-region="blocks-content"],

@@ -44,6 +44,13 @@
     .main-inner {
         min-height: 0;
         align-items: flex-start;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    #page.drawers .main-inner {
+        background: transparent !important;
     }
 
     &:not(.hasblocks) [data-region="blocks-content"] {
