@@ -11,7 +11,7 @@ require_once($CFG->dirroot . '/question/behaviour/deferredfeedback/behaviour.php
 class qbehaviour_certmasterconfidence extends qbehaviour_deferredfeedback {
 
     #[\Override]
-    public static function is_compatible_question(question_definition $question): bool {
+    public function is_compatible_question(question_definition $question): bool {
         return $question->get_type_name() !== 'description';
     }
 
