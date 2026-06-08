@@ -138,7 +138,7 @@ function security_plus_disable_page_module_filters(stdClass $course): void {
     foreach ($pages as $cm) {
         $context = context_module::instance($cm->id);
         foreach (array_keys(filter_get_active_in_context($context)) as $filtername) {
-            filter_set_local_state($filtername, $context, TEXTFILTER_DISABLED);
+            filter_set_local_state($filtername, $context, TEXTFILTER_OFF);
         }
     }
     filter_manager::reset_caches();

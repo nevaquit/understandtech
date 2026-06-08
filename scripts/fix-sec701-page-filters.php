@@ -26,7 +26,7 @@ echo "=== disable filters on SEC701 page modules course={$courseid} count=" . co
 foreach ($pages as $cm) {
     $context = context_module::instance($cm->id);
     foreach (array_keys(filter_get_active_in_context($context)) as $filtername) {
-        filter_set_local_state($filtername, $context, TEXTFILTER_DISABLED);
+        filter_set_local_state($filtername, $context, TEXTFILTER_OFF);
     }
     echo "filters_disabled cmid={$cm->id} name={$cm->name}\n";
 }
