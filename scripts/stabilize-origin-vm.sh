@@ -10,6 +10,7 @@ if [ -d "${REPO}/.git" ]; then
 fi
 
 bash "${REPO}/scripts/recover-origin-db.sh" || true
+bash "${REPO}/scripts/fix-moodle-dir-permissions-vm.sh" || true
 bash "${REPO}/scripts/fix-redis-session-env-vm.sh" || true
 bash "${REPO}/scripts/restart-origin-stack-vm.sh"
 bash "${REPO}/scripts/fix-sec701-course-filters-vm.sh" || true
