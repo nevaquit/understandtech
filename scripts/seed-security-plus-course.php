@@ -159,33 +159,14 @@ function security_plus_disable_page_module_filters(stdClass $course): void {
 function security_plus_update_page_content(stdClass $course, stdClass $page, string $name, string $html): void {
     global $DB;
 
-    $cm = get_coursemodule_from_instance('page', (int) $page->id, (int) $course->id, false);
-    if ($cm) {
-        $update = new stdClass();
-        $update->id = (int) $page->id;
-        $update->course = (int) $course->id;
-        $update->coursemodule = (int) $cm->id;
-        $update->name = $name;
-        $update->intro = $page->intro ?? '';
-        $update->introformat = (int) ($page->introformat ?? FORMAT_HTML);
-        $update->content = $html;
-        $update->contentformat = FORMAT_HTML;
-        $update->display = (int) ($page->display ?? 0);
-        $update->displayoptions = $page->displayoptions ?? 'a:2:{s:10:"printintro";N;s:17:"printlastmodified";N;}';
-        $update->revision = (int) $page->revision + 1;
-        $update->timemodified = time();
-        page_update_instance($update, null);
-        return;
-    }
-
-    $fallback = new stdClass();
-    $fallback->id = (int) $page->id;
-    $fallback->name = $name;
-    $fallback->content = $html;
-    $fallback->contentformat = FORMAT_HTML;
-    $fallback->timemodified = time();
-    $fallback->revision = (int) $page->revision + 1;
-    $DB->update_record('page', $fallback);
+    $update = new stdClass();
+    $update->id = (int) $page->id;
+    $update->name = $name;
+    $update->content = $html;
+    $update->contentformat = FORMAT_HTML;
+    $update->timemodified = time();
+    $update->revision = (int) $page->revision + 1;
+    $DB->update_record('page', $update);
 }
 
 /**
