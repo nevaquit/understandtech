@@ -718,8 +718,12 @@ body.ut-theme .alert-danger a {
     color: var(--ut-gold-light);
 }
 
-/* ── Quiz & question UI ─────────────────────────────────────────────────────── */
+/* ── Quiz & question UI ───────────────────────────────────────────────────────
+ * Boost extends .que .formulation as .alert-info (light panel). Our shell sets
+ * light label/text globally — without these overrides quiz attempt pages render
+ * white-on-white. Keep dark quiz panels + light prose (WCAG AA on #0f2447). */
 body.ut-theme.path-mod-quiz .que,
+body.ut-theme.path-question .que,
 body.ut-theme .que {
     background: rgba(15, 36, 71, 0.65);
     border: 1px solid var(--ut-border);
@@ -729,8 +733,42 @@ body.ut-theme .que {
     margin-bottom: 1rem;
 }
 
+body.ut-theme .que .content {
+    color: var(--ut-text);
+}
+
+/* Kill Boost alert-info / alert-warning leakage inside questions. */
+body.ut-theme .que .formulation,
+body.ut-theme .que .outcome,
+body.ut-theme .que .comment {
+    background: rgba(15, 36, 71, 0.85) !important;
+    border: 1px solid var(--ut-border) !important;
+    color: var(--ut-text) !important;
+    border-radius: var(--ut-radius-sm);
+}
+
+body.ut-theme .que .info {
+    background: rgba(11, 31, 58, 0.75) !important;
+    border: 1px solid var(--ut-border) !important;
+    color: var(--ut-text) !important;
+    border-radius: var(--ut-radius-sm);
+}
+
+body.ut-theme .que .info h3,
+body.ut-theme .que .info .questionno,
+body.ut-theme .que .info .grade,
+body.ut-theme .que .info .state {
+    color: var(--ut-gold) !important;
+}
+
 body.ut-theme .que .qtext,
-body.ut-theme .que .formulation {
+body.ut-theme .que .qtext p,
+body.ut-theme .que .qtext li,
+body.ut-theme .que .formulation,
+body.ut-theme .que .formulation p,
+body.ut-theme .que .formulation li,
+body.ut-theme .que .ablock,
+body.ut-theme .que .prompt {
     color: var(--ut-text);
     font-family: var(--ut-font-body);
 }
@@ -738,6 +776,159 @@ body.ut-theme .que .formulation {
 body.ut-theme .que .prompt {
     color: var(--ut-gold);
     font-family: var(--ut-font-heading);
+    font-weight: 700;
+}
+
+body.ut-theme .que .answer,
+body.ut-theme .que .answer label,
+body.ut-theme .que .answer .answernumber,
+body.ut-theme .que .answer .flex-fill,
+body.ut-theme .que .answer div.r0,
+body.ut-theme .que .answer div.r1 {
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme .que .answer label:hover,
+body.ut-theme .que .answer .r0:hover,
+body.ut-theme .que .answer .r1:hover {
+    color: var(--ut-gold) !important;
+}
+
+body.ut-theme .que .answer input[type="radio"],
+body.ut-theme .que .answer input[type="checkbox"] {
+    accent-color: var(--ut-teal);
+}
+
+body.ut-theme .que .correctness {
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+body.ut-theme .que .correctness.correct,
+body.ut-theme .formulation .correct,
+body.ut-theme .que .rightanswer {
+    color: #6ee7b7 !important;
+}
+
+body.ut-theme .que .correctness.partiallycorrect,
+body.ut-theme .formulation .partiallycorrect {
+    color: var(--ut-gold-light) !important;
+}
+
+body.ut-theme .que .correctness.incorrect,
+body.ut-theme .que .correctness.notanswered,
+body.ut-theme .formulation .incorrect,
+body.ut-theme .que .validationerror {
+    color: #fca5a5 !important;
+}
+
+body.ut-theme .que .feedback,
+body.ut-theme .que .specificfeedback,
+body.ut-theme .que .generalfeedback {
+    color: var(--ut-text-muted) !important;
+}
+
+body.ut-theme #responseform,
+body.ut-theme #responseform .qn_buttons,
+body.ut-theme .path-mod-quiz .submitbtns,
+body.ut-theme .path-mod-quiz .othernav,
+body.ut-theme .path-mod-quiz .quizreviewsummary,
+body.ut-theme .path-mod-quiz .quizattemptsummary,
+body.ut-theme .path-mod-quiz .quizattempt,
+body.ut-theme .path-mod-quiz .mod_quiz-next-nav {
+    color: var(--ut-text);
+}
+
+/* CertMaster confidence qbehaviour — dark shell, not light-paper navy text. */
+body.ut-theme .ut-confidence-rating {
+    background: rgba(26, 138, 125, 0.12) !important;
+    border-color: var(--ut-border) !important;
+}
+
+body.ut-theme .ut-confidence-prompt,
+body.ut-theme .ut-confidence-label,
+body.ut-theme .ut-confidence-feedback {
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme .ut-confidence-option {
+    color: var(--ut-text);
+}
+
+body.ut-theme .ut-confidence-option:hover {
+    background: rgba(201, 162, 39, 0.08) !important;
+    border-color: var(--ut-border-strong) !important;
+}
+
+body.ut-theme .ut-confidence-option input:checked + .ut-confidence-label {
+    color: var(--ut-teal-light) !important;
+}
+
+/* Quiz navigation block — already dark; reinforce readable states. */
+body.ut-theme #mod_quiz_navblock .qnbutton,
+body.ut-theme #mod_quiz_navblock .qnbutton .thispageholder,
+body.ut-theme #mod_quiz_navblock .qnbutton .trafficlight {
+    color: var(--ut-text);
+}
+
+body.ut-theme #mod_quiz_navblock .qnbutton.thispage .thispageholder {
+    border-color: var(--ut-gold) !important;
+}
+
+/* ── Moodle generalbox / mform white leaks (not lesson pages) ─────────────── */
+body.ut-theme:not(.path-mod-page) .generalbox,
+body.ut-theme:not(.path-mod-page) .box.generalbox,
+body.ut-theme:not(.ut-lesson-page) .generalbox,
+body.ut-theme:not(.ut-lesson-page) .box.generalbox {
+    background: var(--ut-surface-elevated);
+    border: 1px solid var(--ut-border);
+    color: var(--ut-text);
+    border-radius: var(--ut-radius-md);
+}
+
+body.ut-theme .mform fieldset,
+body.ut-theme .mform .fitem,
+body.ut-theme .mform .fcontainer,
+body.ut-theme .collapsible-actions {
+    color: var(--ut-text);
+}
+
+body.ut-theme .mform fieldset.collapsible legend a,
+body.ut-theme .mform .fdescription {
+    color: var(--ut-text-muted);
+}
+
+/* Activity modules — forum, assign, user profile, grades */
+body.ut-theme.path-mod-forum .forumpost,
+body.ut-theme.path-mod-forum .discussion-list .discussion,
+body.ut-theme.path-mod-assign .submissionstatustable,
+body.ut-theme.path-mod-assign .gradingtable,
+body.ut-theme.path-user .userprofile dl.list,
+body.ut-theme.path-grade .gradereport-grader-table,
+body.ut-theme.path-grade-report .gradereport-grader-table {
+    color: var(--ut-text);
+}
+
+body.ut-theme.path-mod-forum .forumpost .header,
+body.ut-theme.path-mod-forum .discussion-list .discussion .discussion-name {
+    color: var(--ut-gold);
+    font-family: var(--ut-font-heading);
+}
+
+body.ut-theme.path-mod-forum .forumpost .content,
+body.ut-theme.path-mod-forum .posting.fullpost {
+    background: rgba(15, 36, 71, 0.55);
+    border: 1px solid var(--ut-border);
+    border-radius: var(--ut-radius-sm);
+    color: var(--ut-text);
+    padding: 1rem;
+}
+
+body.ut-theme .userpicture,
+body.ut-theme .userinitials {
+    background: var(--ut-navy-mid);
+    color: var(--ut-text);
 }
 
 /* ── Pagination, tabs, nav pills ────────────────────────────────────────────── */
