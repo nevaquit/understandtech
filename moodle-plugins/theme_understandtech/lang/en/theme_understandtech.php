@@ -20,6 +20,9 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname']          = 'UnderstandTech';
 $string['choosereadme']        = 'UnderstandTech is a world-class Moodle theme built for AI-powered, mastery-based learning. It features a navy/gold/teal design system, adaptive AI tutor integration, blockchain-verified certifications, and gamified progress tracking.';
 $string['configtitle']         = 'UnderstandTech Theme Settings';
+$string['settings_tab_brand']    = 'Brand colours';
+$string['settings_tab_layout']   = 'Layout & logo';
+$string['settings_tab_advanced'] = 'Advanced';
 
 // ── Accessibility ─────────────────────────────────────────────────────────────
 $string['skiptomain']          = 'Skip to main content';

@@ -7,7 +7,8 @@ $THEME->name = 'understandtech';
 $THEME->parents = ['boost'];
 
 $THEME->sheets = ['understandtech', 'global-shell', 'lesson-content'];
-$THEME->editor_sheets = [];
+// Plain CSS sheets above complement compiled SCSS; consolidate in a future pass.
+$THEME->editor_sheets = ['editor'];
 $THEME->enable_dock = false;
 $THEME->haseditswitch = true;
 $THEME->yuicssmodules = [];

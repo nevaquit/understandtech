@@ -1,14 +1,12 @@
 {{!
     @template core/toast
-    Skool-style notification toast (used by notification popup flows).
+    Skool-style notification toast (Bootstrap 5).
 }}
 <div class="toast ut-notification-toast" role="alert" aria-live="assertive" aria-atomic="true"
     data-delay="{{delay}}" data-autohide="{{autohide}}">
     <div class="toast-header">
-        <strong class="mr-auto">{{title}}</strong>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="{{#str}}dismissnotification, core{{/str}}">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <strong class="me-auto">{{title}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="{{#str}}dismissnotification, core{{/str}}"></button>
     </div>
     <div class="toast-body">
         {{{message}}}

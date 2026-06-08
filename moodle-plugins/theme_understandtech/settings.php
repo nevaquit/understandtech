@@ -25,7 +25,7 @@ if ($ADMIN->fulltree) {
     // ── Brand Colours Tab ─────────────────────────────────────────────────────
     $page = new admin_settingpage(
         'theme_understandtech_brand',
-        get_string('configtitle', 'theme_understandtech')
+        get_string('settings_tab_brand', 'theme_understandtech')
     );
 
     // Navy
@@ -57,7 +57,7 @@ if ($ADMIN->fulltree) {
     // ── Layout & Logo Tab ─────────────────────────────────────────────────────
     $page = new admin_settingpage(
         'theme_understandtech_layout',
-        get_string('configtitle', 'theme_understandtech')
+        get_string('settings_tab_layout', 'theme_understandtech')
     );
 
     // Custom logo
@@ -84,7 +84,7 @@ if ($ADMIN->fulltree) {
     // ── Advanced Tab ──────────────────────────────────────────────────────────
     $page = new admin_settingpage(
         'theme_understandtech_advanced',
-        get_string('configtitle', 'theme_understandtech')
+        get_string('settings_tab_advanced', 'theme_understandtech')
     );
 
     // Footer footnote

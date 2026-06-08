@@ -9,8 +9,7 @@
 /**
  * UnderstandTech core renderer.
  *
- * Overrides theme_boost's renderer to inject the world-class navbar,
- * frontpage hero, and footer templates.
+ * Extends theme_boost's renderer for custom logos, login branding, and font injection.
  *
  * @package   theme_understandtech
  * @copyright 2026 UnderstandTech
@@ -21,38 +20,113 @@ namespace theme_understandtech\output;
 
 defined('MOODLE_INTERNAL') || die();
 
-use html_writer;
+use context_course;
+use core_auth\output\login;
 use moodle_url;
 
 /**
- * Extends theme_boost's core_renderer to add UnderstandTech-specific rendering.
+ * Extends theme_boost's core_renderer with UnderstandTech-specific rendering.
  */
 class core_renderer extends \theme_boost\output\core_renderer {
 
     /**
-     * Render the global navigation bar using the theme's navbar.mustache template.
+     * Return the admin-uploaded theme logo URL, if configured.
      *
+     * @return string|null Protocol-relative pluginfile URL or null when unset.
+     */
+    public function get_custom_logo_url(): ?string {
+        return $this->page->theme->setting_file_url('custom_logo', 'custom_logo');
+    }
+
+    /**
+     * Export logo context variables consumed by core/loginform.mustache.
+     *
+     * @return array{logourl: string|null, hascustomlogo: bool}
+     */
+    public function export_login_logo_context(): array {
+        $logourl = $this->get_custom_logo_url();
+
+        return [
+            'logourl' => $logourl,
+            'hascustomlogo' => !empty($logourl),
+        ];
+    }
+
+    /**
+     * Prefer the theme custom logo, then fall back to the site admin logo.
+     *
+     * @param int|null $maxwidth Maximum width.
+     * @param int $maxheight Maximum height.
+     * @return moodle_url|false
+     */
+    public function get_logo_url($maxwidth = null, $maxheight = 200) {
+        $custom = $this->get_custom_logo_url();
+        if (!empty($custom)) {
+            return new moodle_url($custom);
+        }
+
+        return parent::get_logo_url($maxwidth, $maxheight);
+    }
+
+    /**
+     * Prefer the theme custom logo for compact navbar branding.
+     *
+     * @param int $maxwidth Maximum width.
+     * @param int $maxheight Maximum height.
+     * @return moodle_url|false
+     */
+    public function get_compact_logo_url($maxwidth = 300, $maxheight = 300) {
+        $custom = $this->get_custom_logo_url();
+        if (!empty($custom)) {
+            return new moodle_url($custom);
+        }
+
+        return parent::get_compact_logo_url($maxwidth, $maxheight);
+    }
+
+    /**
+     * Render the login form with UnderstandTech logo context.
+     *
+     * @param login $form The renderable login form.
      * @return string Rendered HTML.
      */
-    public function render_navbar(): string {
-        global $CFG, $USER;
+    public function render_login(login $form): string {
+        global $SITE;
 
-        $isloggedin = isloggedin() && !isguestuser();
+        $context = $form->export_for_template($this);
+        $context->errorformatted = $this->error_text($context->error);
 
-        $context = [
-            'wwwroot'      => $CFG->wwwroot,
-            'sitename'     => format_string(get_site()->fullname),
-            'isloggedin'   => $isloggedin,
-            'loginurl'     => (new moodle_url('/login/index.php'))->out(false),
-            'dashboardurl' => (new moodle_url('/my/'))->out(false),
-            'profileurl'   => (new moodle_url('/user/profile.php', ['id' => $USER->id]))->out(false),
-            'logouturl'    => (new moodle_url('/login/logout.php', ['sesskey' => sesskey()]))->out(false),
-            'username'     => $isloggedin ? fullname($USER) : '',
-            'userpictureurl' => $isloggedin ? $this->get_user_picture_url($USER) : '',
-            'hasnavdrawer' => false,
-        ];
+        $logocontext = $this->export_login_logo_context();
+        $context->logourl = $logocontext['logourl'];
+        $context->hascustomlogo = $logocontext['hascustomlogo'];
 
-        return $this->render_from_template('theme_understandtech/navbar', $context);
+        if (empty($context->logourl)) {
+            $url = parent::get_logo_url();
+            if ($url) {
+                $context->logourl = $url->out(false);
+            }
+        }
+
+        $context->sitename = format_string(
+            $SITE->fullname,
+            true,
+            ['context' => context_course::instance(SITEID), 'escape' => false]
+        );
+
+        return $this->render_from_template('core/loginform', $context);
+    }
+
+    /**
+     * Inject frontpage hero markup on the site home layout.
+     *
+     * @return string HTML.
+     */
+    public function standard_top_of_body_html(): string {
+        $html = parent::standard_top_of_body_html();
+        if ($this->page->pagelayout === 'frontpage') {
+            $html .= $this->render_frontpage_hero();
+        }
+        return $html;
     }
 
     /**
@@ -77,36 +151,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
-     * Render the global footer using the theme's footer.mustache template.
-     *
-     * @return string Rendered HTML.
-     */
-    public function render_footer(): string {
-        global $CFG, $OUTPUT;
-
-        $context = [
-            'wwwroot'       => $CFG->wwwroot,
-            'sitename'      => format_string(get_site()->fullname),
-            'currentyear'   => date('Y'),
-            'footnote'      => $this->page->theme->settings->footnote ?? '',
-            'moodledocslink' => $this->moodle_docs_link(),
-            'logininfo'     => $this->login_info(),
-            'homelink'      => $this->home_link(),
-        ];
-
-        return $this->render_from_template('theme_understandtech/footer', $context);
-    }
-
-    /**
      * Override standard_head_html to inject Google Fonts preconnect/preload.
-     * This fixes the render-blocking font loading deficiency from the audit.
      *
      * @return string HTML to inject into <head>.
      */
     public function standard_head_html(): string {
         $output = parent::standard_head_html();
 
-        // Inject font preconnect + preload only if not already present.
         if (strpos($output, 'fonts.googleapis.com') === false) {
             $fonturl = 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700'
                 . '&family=Source+Serif+4:ital,wght@0,400;0,600;1,400'
@@ -122,17 +173,5 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
 
         return $output;
-    }
-
-    /**
-     * Get the user's profile picture URL as a string.
-     *
-     * @param \stdClass $user The user object.
-     * @return string URL string or empty string.
-     */
-    protected function get_user_picture_url(\stdClass $user): string {
-        $userpicture = new \user_picture($user);
-        $userpicture->size = 64;
-        return $userpicture->get_url($this->page)->out(false);
     }
 }

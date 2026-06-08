@@ -2,7 +2,7 @@
  * Loaded on every page via $THEME->sheets. Plain CSS for reliable deploy. */
 
 :root {
-    --ut-navy-deep: #071426;
+    --ut-navy-deep: #071529;
     --ut-navy: #0B1F3A;
     --ut-navy-mid: #112847;
     --ut-surface: #0f2447;
@@ -806,4 +806,58 @@ body.ut-theme a.list-group-item-action.active {
     background-color: rgba(201, 162, 39, 0.12) !important;
     color: var(--ut-gold) !important;
     border-color: var(--ut-border-strong) !important;
+}
+
+/* ── Dashboard / calendar / edit-mode polish ────────────────────────────────── */
+body.ut-theme .calendartable td.today,
+body.ut-theme .calendar .today {
+    background: rgba(26, 138, 125, 0.35) !important;
+    border-radius: var(--ut-radius-sm);
+}
+
+body.ut-theme .calendartable td.today a,
+body.ut-theme .calendar .today a {
+    color: #fff !important;
+    font-weight: 700;
+}
+
+body.ut-theme .custom-control.custom-switch .custom-control-label::before,
+body.ut-theme .form-check.form-switch .form-check-input {
+    background-color: var(--ut-navy-mid);
+    border-color: var(--ut-border-strong);
+}
+
+body.ut-theme .btn-outline-secondary {
+    border-color: var(--ut-border-strong) !important;
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme .btn-outline-secondary:hover,
+body.ut-theme .btn-outline-secondary:focus {
+    border-color: var(--ut-gold) !important;
+    color: var(--ut-gold) !important;
+}
+
+body.ut-theme .drawer-toggler,
+body.ut-theme .block-drawer .drawer-toggle,
+body.ut-theme [data-action="toggle-drawer"] {
+    background: var(--ut-navy-mid) !important;
+    border-color: var(--ut-border) !important;
+    color: var(--ut-gold) !important;
+}
+
+body.ut-theme .ut-theme-footer,
+body.ut-theme .ut-theme-footer .footer-content-popover {
+    background: var(--ut-navy-deep) !important;
+    color: var(--ut-text-muted);
+}
+
+body.ut-theme .ut-footer-social-link {
+    color: rgba(255, 255, 255, 0.45);
+    transition: color 0.15s ease;
+}
+
+body.ut-theme .ut-footer-social-link:hover,
+body.ut-theme .ut-footer-social-link:focus {
+    color: var(--ut-gold);
 }

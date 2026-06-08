@@ -14,12 +14,23 @@
     - guestloginurl: string - Guest login URL
     - forgotpasswordurl: string - Forgot password URL
     - canloginbyemail: bool - Allow email login
+    - hasidentityproviders: bool - Whether SSO providers are available
     - identityproviders: array - SSO providers
+    - logourl: string|null - Custom or site logo URL
+    - hascustomlogo: bool - Whether a theme custom logo is configured
+    - togglepassword: bool - Enable core password visibility toggle
+    - smallscreensonly: bool - Limit password toggle to small screens
 }}
 <a class="ut-skip-link" href="#maincontent">{{#str}}skiptomain, theme_understandtech{{/str}}</a>
 
 <div class="login-container" role="main" id="maincontent">
 
+    {{#logourl}}
+    <div class="ut-login-logo">
+        <img src="{{logourl}}" class="img-fluid" alt="{{sitename}}" width="200" height="50">
+    </div>
+    {{/logourl}}
+    {{^logourl}}
     <div class="ut-login-logo" aria-hidden="true">
         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="48" height="48" rx="10" fill="#C9A227"/>
@@ -28,17 +39,18 @@
             <path d="M33 32l2 2 4-4" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </div>
+    {{/logourl}}
 
     <h1 class="ut-login-heading">{{#str}}login, core{{/str}}</h1>
     <p class="ut-login-subheading">{{#str}}loginwelcomemessage, theme_understandtech{{/str}}</p>
 
     {{#error}}
-    <div class="alert alert-danger" role="alert" aria-live="assertive">
+    <div class="alert alert-danger" role="alert" id="loginerrormessage" aria-live="assertive">
         <strong>{{#str}}error, core{{/str}}:</strong> {{error}}
     </div>
     {{/error}}
 
-    {{#identityproviders}}
+    {{#hasidentityproviders}}
     <div class="ut-sso-providers mb-3" aria-label="{{#str}}potentialidps, auth{{/str}}">
         {{#identityproviders}}
         <a href="{{url}}" class="btn btn-outline-secondary w-100 mb-2 d-flex align-items-center justify-content-center gap-2">
@@ -50,13 +62,13 @@
             <span>{{#str}}or, core{{/str}}</span>
         </div>
     </div>
-    {{/identityproviders}}
+    {{/hasidentityproviders}}
 
-    <form class="ut-login-form-fields" action="{{loginurl}}" method="post" id="login" autocomplete="on">
+    <form class="ut-login-form-fields login-form" action="{{loginurl}}" method="post" id="login" autocomplete="on">
         <input type="hidden" name="logintoken" value="{{logintoken}}">
-        <input type="hidden" name="anchor" value="">
+        <input id="anchor" type="hidden" name="anchor" value="">
 
-        <div class="form-group mb-3">
+        <div class="form-group mb-3 login-form-username">
             <label for="username" class="form-label">
                 {{#canloginbyemail}}{{#str}}usernameemail, core{{/str}}{{/canloginbyemail}}
                 {{^canloginbyemail}}{{#str}}username, core{{/str}}{{/canloginbyemail}}
@@ -73,37 +85,27 @@
                    aria-required="true">
         </div>
 
-        <div class="form-group mb-4" style="position:relative;">
+        <div class="form-group mb-4 login-form-password">
             <label for="password" class="form-label">{{#str}}password, core{{/str}}</label>
             <input type="password"
                    name="password"
                    id="password"
                    class="form-control form-control-lg"
                    autocomplete="current-password"
-                   style="padding-right:3rem;"
                    required
                    aria-required="true">
-            <button type="button"
-                    id="ut-pwd-toggle"
-                    aria-label="{{#str}}showpassword, core{{/str}}"
-                    style="position:absolute;right:0.75rem;bottom:0.625rem;background:none;border:none;color:rgba(255,255,255,0.45);cursor:pointer;padding:0.25rem;line-height:1;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                </svg>
-            </button>
         </div>
 
         {{#recaptcha}}
-        <div class="mb-3">{{{recaptcha}}}</div>
+        <div class="mb-3 login-form-recaptcha">{{{recaptcha}}}</div>
         {{/recaptcha}}
 
-        <button type="submit" class="btn btn-primary btn-lg w-100" id="loginbtn">
+        <button type="submit" class="btn btn-primary btn-lg w-100 login-form-submit" id="loginbtn">
             {{#str}}login, core{{/str}}
         </button>
     </form>
 
-    <div class="ut-login-links mt-3">
+    <div class="ut-login-links mt-3 login-form-forgotpassword">
         {{#forgotpasswordurl}}
         <a href="{{forgotpasswordurl}}">{{#str}}forgotaccount, core{{/str}}</a>
         {{/forgotpasswordurl}}
@@ -115,16 +117,29 @@
 
 </div>
 
-<script>
-(function() {
-    var btn = document.getElementById('ut-pwd-toggle');
-    var inp = document.getElementById('password');
-    if (!btn || !inp) return;
-    btn.addEventListener('click', function() {
-        var isText = inp.type === 'text';
-        inp.type = isText ? 'password' : 'text';
-        btn.setAttribute('aria-label', isText ? 'Show password' : 'Hide password');
-        btn.style.color = isText ? 'rgba(255,255,255,0.45)' : '#C9A227';
+{{#js}}
+    require(['core/pending'], function(Pending) {
+        document.getElementById('anchor').value = location.hash;
+        const errorMessageDiv = document.getElementById('loginerrormessage');
+        const errorMessage = errorMessageDiv?.textContent.trim();
+        if (errorMessage) {
+            const pendingJS = new Pending('login-move-focus');
+            const usernameField = document.getElementById('username');
+            setTimeout(function() {
+                if (usernameField) {
+                    usernameField.focus();
+                }
+                errorMessageDiv.innerHTML += "&nbsp;";
+                pendingJS.resolve();
+            }, 500);
+        }
     });
-}());
-</script>
+    {{#togglepassword}}
+        require(['core/togglesensitive'], function(ToggleSensitive) {
+            ToggleSensitive.init("password", {{smallscreensonly}});
+        });
+    {{/togglepassword}}
+    require(['core_form/submit'], function(Submit) {
+        Submit.init("loginbtn");
+    });
+{{/js}}

@@ -1,0 +1,114 @@
+/* UnderstandTech — Atto / TinyMCE editor content area (dark prose) */
+
+body.ut-theme .editor_atto_content,
+body.ut-theme .editor_atto_content_wrap,
+body.ut-theme .tox-edit-area__iframe,
+body.ut-theme .tox .tox-edit-area iframe,
+body.ut-theme .form-control[data-fieldtype="editor"],
+body.ut-theme .form-control[data-fieldtype="editor"] iframe {
+    background: var(--ut-navy-mid, #112847) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+body.ut-theme .editor_atto_content,
+body.ut-theme .editor_atto_content_wrap .editor_atto_content,
+body.ut-theme .tox .tox-edit-area iframe body,
+body.ut-theme .mce-content-body {
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    padding: 1rem 1.25rem;
+}
+
+body.ut-theme .editor_atto_content h1,
+body.ut-theme .editor_atto_content h2,
+body.ut-theme .editor_atto_content h3,
+body.ut-theme .editor_atto_content h4,
+body.ut-theme .editor_atto_content h5,
+body.ut-theme .editor_atto_content h6,
+body.ut-theme .mce-content-body h1,
+body.ut-theme .mce-content-body h2,
+body.ut-theme .mce-content-body h3,
+body.ut-theme .mce-content-body h4,
+body.ut-theme .mce-content-body h5,
+body.ut-theme .mce-content-body h6 {
+    font-family: "Rajdhani", "Segoe UI", system-ui, sans-serif;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+body.ut-theme .editor_atto_content a,
+body.ut-theme .mce-content-body a {
+    color: var(--ut-teal-light, #22B5A5);
+}
+
+body.ut-theme .editor_atto_content a:hover,
+body.ut-theme .mce-content-body a:hover {
+    color: var(--ut-gold, #C9A227);
+}
+
+body.ut-theme .editor_atto_content blockquote,
+body.ut-theme .mce-content-body blockquote {
+    border-left: 4px solid var(--ut-gold, #C9A227);
+    padding-left: 1rem;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 1rem 0;
+}
+
+body.ut-theme .editor_atto_content pre,
+body.ut-theme .editor_atto_content code,
+body.ut-theme .mce-content-body pre,
+body.ut-theme .mce-content-body code {
+    font-family: "Share Tech Mono", Consolas, "Courier New", monospace;
+    background: rgba(7, 21, 41, 0.65);
+    border: 1px solid rgba(201, 162, 39, 0.22);
+    border-radius: 0.375rem;
+}
+
+body.ut-theme .editor_atto_content pre,
+body.ut-theme .mce-content-body pre {
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+}
+
+body.ut-theme .editor_atto_content table,
+body.ut-theme .mce-content-body table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+body.ut-theme .editor_atto_content th,
+body.ut-theme .editor_atto_content td,
+body.ut-theme .mce-content-body th,
+body.ut-theme .mce-content-body td {
+    border: 1px solid rgba(201, 162, 39, 0.22);
+    padding: 0.5rem 0.75rem;
+}
+
+body.ut-theme .editor_atto_content th,
+body.ut-theme .mce-content-body th {
+    background: rgba(11, 31, 58, 0.75);
+    color: var(--ut-gold, #C9A227);
+    font-family: "Rajdhani", "Segoe UI", system-ui, sans-serif;
+}
+
+body.ut-theme .editor_atto_content hr,
+body.ut-theme .mce-content-body hr {
+    border: none;
+    border-top: 1px solid rgba(201, 162, 39, 0.22);
+    margin: 1.25rem 0;
+}
+
+body.ut-theme .editor_atto_content ul,
+body.ut-theme .editor_atto_content ol,
+body.ut-theme .mce-content-body ul,
+body.ut-theme .mce-content-body ol {
+    padding-left: 1.35rem;
+}
+
+body.ut-theme .editor_atto_content ::selection,
+body.ut-theme .mce-content-body ::selection {
+    background: rgba(26, 138, 125, 0.45);
+    color: #fff;
+}

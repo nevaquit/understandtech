@@ -58,8 +58,8 @@ function theme_understandtech_get_pre_scss(theme_config $theme): string {
     $scss .= "\$ut-brand-gold:  {$gold};\n";
     $scss .= "\$ut-brand-teal:  {$teal};\n";
 
-    if (!empty($theme->settings->scsspre)) {
-        $scss .= $theme->settings->scsspre;
+    if (!empty($theme->settings->rawscsspre)) {
+        $scss .= $theme->settings->rawscsspre;
     }
 
     return $scss;
@@ -86,7 +86,7 @@ function theme_understandtech_page_init(moodle_page $page): void {
         $page->add_body_class('ut-lesson-page');
     }
 
-    if ($page->context && $page->context->contextlevel === CONTEXT_COURSE) {
+    if ($page->course && (int) $page->course->id !== SITEID) {
         $page->add_body_class('ut-incourse');
     }
 
@@ -132,8 +132,8 @@ function theme_understandtech_get_main_scss_content(theme_config $theme): string
 function theme_understandtech_get_extra_scss(theme_config $theme): string {
     $scsspath = $theme->dir . '/scss/post.scss';
     $scss = is_readable($scsspath) ? file_get_contents($scsspath) : '';
-    if (!empty($theme->settings->scss)) {
-        $scss .= "\n" . $theme->settings->scss;
+    if (!empty($theme->settings->rawscss)) {
+        $scss .= "\n" . $theme->settings->rawscss;
     }
     return $scss;
 }
@@ -155,8 +155,60 @@ function theme_understandtech_process_css(string $css, theme_config $theme): str
     $gold = preg_match('/^#[0-9A-Fa-f]{3,6}$/', $gold) ? $gold : '#C9A227';
     $teal = preg_match('/^#[0-9A-Fa-f]{3,6}$/', $teal) ? $teal : '#1A8A7D';
 
-    $vars = ":root{--ut-navy:{$navy};--ut-gold:{$gold};--ut-teal:{$teal};}\n";
+    $navydeep = theme_understandtech_darken_hex($navy, 0.3);
+    $navymid = theme_understandtech_lighten_hex($navy, 0.05);
+    $surface = theme_understandtech_lighten_hex($navy, 0.08);
+    $surfaceelevated = theme_understandtech_lighten_hex($navy, 0.06);
+
+    $vars = ":root{"
+        . "--ut-navy:{$navy};"
+        . "--ut-navy-deep:{$navydeep};"
+        . "--ut-navy-mid:{$navymid};"
+        . "--ut-surface:{$surface};"
+        . "--ut-surface-elevated:{$surfaceelevated};"
+        . "--ut-gold:{$gold};"
+        . "--ut-teal:{$teal};"
+        . "}\n";
+
     return $vars . $css;
+}
+
+/**
+ * Serve theme uploaded files (custom logo).
+ *
+ * @param stdClass $course Course object.
+ * @param stdClass $cm Course module object.
+ * @param context $context Context object.
+ * @param string $filearea File area name.
+ * @param array $args Remaining args (itemid, path, filename).
+ * @param bool $forcedownload Force download.
+ * @param array $options Additional options.
+ * @return bool False if not handled.
+ */
+function theme_understandtech_pluginfile(
+    $course,
+    $cm,
+    $context,
+    $filearea,
+    $args,
+    $forcedownload,
+    array $options = [],
+) {
+    if ($context->contextlevel !== CONTEXT_SYSTEM || $filearea !== 'custom_logo') {
+        return false;
+    }
+
+    $itemid = array_shift($args);
+    $filename = array_pop($args);
+    $filepath = $args ? '/' . implode('/', $args) . '/' : '/';
+
+    $fs = get_file_storage();
+    $file = $fs->get_file($context->id, 'theme_understandtech', $filearea, $itemid, $filepath, $filename);
+    if (!$file) {
+        return false;
+    }
+
+    send_stored_file($file, DAYSECS, 0, $forcedownload, $options);
 }
 
 // ── Colour Utility Functions ──────────────────────────────────────────────────
