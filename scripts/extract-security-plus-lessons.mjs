@@ -33,8 +33,9 @@ const sourcePath = path.resolve(process.argv[2] || defaultSource);
 function markdownToHtml(md) {
   const lines = md.replace(/\r\n/g, '\n').split('\n');
   const out = [];
-  let inUl = false;
   let para = [];
+  /** @type {number[]} open list indent levels (spaces) */
+  const ulIndents = [];
 
   const flushPara = () => {
     if (!para.length) {
@@ -44,74 +45,83 @@ function markdownToHtml(md) {
     para = [];
   };
 
-  const closeUl = () => {
-    if (inUl) {
+  const closeAllLists = () => {
+    while (ulIndents.length) {
       out.push('</ul>');
-      inUl = false;
+      ulIndents.pop();
+    }
+  };
+
+  const closeListsAbove = (indent) => {
+    while (ulIndents.length && ulIndents[ulIndents.length - 1] > indent) {
+      out.push('</ul>');
+      ulIndents.pop();
     }
   };
 
   for (const raw of lines) {
-    const line = raw.trimEnd();
+    const trimmed = raw.trimEnd();
 
-    if (/^## .+/.test(line.trim())) {
+    if (/^## .+/.test(trimmed.trim())) {
       flushPara();
-      closeUl();
+      closeAllLists();
       break;
     }
 
-    if (line.startsWith('![')) {
+    if (trimmed.startsWith('![')) {
       flushPara();
-      closeUl();
+      closeAllLists();
       continue;
     }
 
-    if (/^---+$/.test(line.trim())) {
+    if (/^---+$/.test(trimmed.trim())) {
       flushPara();
-      closeUl();
+      closeAllLists();
       out.push('<hr />');
       continue;
     }
 
-    const h5 = line.match(/^##### (.+)$/);
+    const h5 = trimmed.match(/^##### (.+)$/);
     if (h5) {
       flushPara();
-      closeUl();
+      closeAllLists();
       out.push(`<h5>${inlineFormat(h5[1])}</h5>`);
       continue;
     }
 
-    const h4 = line.match(/^#### (.+)$/);
+    const h4 = trimmed.match(/^#### (.+)$/);
     if (h4) {
       flushPara();
-      closeUl();
+      closeAllLists();
       out.push(`<h4>${inlineFormat(h4[1])}</h4>`);
       continue;
     }
 
-    const bullet = line.match(/^- (.+)$/);
+    const bullet = trimmed.match(/^(\s*)- (.+)$/);
     if (bullet) {
       flushPara();
-      if (!inUl) {
+      const indent = bullet[1].replace(/\t/g, '  ').length;
+      closeListsAbove(indent);
+      if (!ulIndents.length || ulIndents[ulIndents.length - 1] < indent) {
         out.push('<ul>');
-        inUl = true;
+        ulIndents.push(indent);
       }
-      out.push(`<li>${inlineFormat(bullet[1])}</li>`);
+      out.push(`<li>${inlineFormat(bullet[2])}</li>`);
       continue;
     }
 
-    if (line.trim() === '') {
+    if (trimmed.trim() === '') {
       flushPara();
-      closeUl();
+      closeAllLists();
       continue;
     }
 
-    closeUl();
-    para.push(line.trim());
+    closeAllLists();
+    para.push(trimmed.trim());
   }
 
   flushPara();
-  closeUl();
+  closeAllLists();
   return out.join('\n');
 }
 

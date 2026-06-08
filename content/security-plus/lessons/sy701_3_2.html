@@ -10,16 +10,46 @@
 <li><strong>Attack Surface</strong>: Reducing the number of entry points or vulnerabilities that an attacker can exploit.</li>
 <li><strong>Connectivity</strong>: Securely managing network connections, both internal and external.</li>
 <li><strong>Failure Modes</strong>: Understanding how systems behave when they fail and designing for secure failure states.</li>
-</ul>
-<p>- <strong>Fail-open</strong>: System fails in a state that allows access (e.g., a firewall failing open and allowing all traffic). Generally undesirable for security. - <strong>Fail-closed</strong>: System fails in a state that denies access (e.g., a firewall failing closed and blocking all traffic). Generally preferred for security.</p>
 <ul>
+<li><strong>Fail-open</strong>: System fails in a state that allows access (e.g., a firewall failing open and allowing all traffic). Generally undesirable for security.</li>
+<li><strong>Fail-closed</strong>: System fails in a state that denies access (e.g., a firewall failing closed and blocking all traffic). Generally preferred for security.</li>
+</ul>
 <li><strong>Device Attributes</strong>:</li>
-</ul>
-<p>- <strong>Active vs. Passive</strong>: - <strong>Active</strong>: Devices that actively intervene to prevent or mitigate threats (e.g., IPS). - <strong>Passive</strong>: Devices that monitor and detect threats without actively intervening (e.g., IDS). - <strong>Inline vs. Tap/Monitor</strong>: - <strong>Inline</strong>: Devices placed directly in the network path, allowing them to block or modify traffic. - <strong>Tap/Monitor</strong>: Devices that receive a copy of network traffic for analysis without being in the direct path.</p>
 <ul>
-<li><strong>Network Appliances</strong>:</li>
+<li><strong>Active vs. Passive</strong>:</li>
+<ul>
+<li><strong>Active</strong>: Devices that actively intervene to prevent or mitigate threats (e.g., IPS).</li>
+<li><strong>Passive</strong>: Devices that monitor and detect threats without actively intervening (e.g., IDS).</li>
 </ul>
-<p>- <strong>Jump server</strong>: A hardened server used as an intermediary to access sensitive network segments, providing a controlled and monitored access point. - <strong>Proxy server</strong>: A server that acts as an intermediary for requests from clients seeking resources from other servers. Can be used for content filtering, caching, and anonymity. - <strong>Intrusion Prevention System (IPS)/Intrusion Detection System (IDS)</strong>: - <strong>IDS</strong>: Detects suspicious activity and alerts administrators. - <strong>IPS</strong>: Detects and actively blocks suspicious activity. - <strong>Load balancer</strong>: Distributes network traffic across multiple servers to improve performance, availability, and resilience. Can also provide some security features. - <strong>Sensors</strong>: Devices or software that collect data for security monitoring (e.g., network sensors, host-based agents). - <strong>Port security</strong>: Limiting the number of MAC addresses that can connect to a switch port to prevent unauthorized devices. - <strong>802.1X</strong>: A port-based network access control standard that provides an authentication mechanism for devices trying to connect to a network. - <strong>Extensible Authentication Protocol (EAP)</strong>: A framework for authentication often used with 802.1X. - <strong>Firewall types</strong>: - <strong>Web Application Firewall (WAF)</strong>: Protects web applications from common web-based attacks (e.g., SQL injection, XSS). - <strong>Unified Threat Management (UTM)</strong>: An all-in-one security appliance that combines multiple security functions (e.g., firewall, IPS, antivirus, content filtering). - <strong>Next-generation firewall (NGFW)</strong>: Firewalls that go beyond traditional port/protocol inspection to include application awareness, intrusion prevention, and threat intelligence. - <strong>Layer 4/Layer 7</strong>: Refers to the OSI model layers at which a firewall operates. Layer 4 (transport layer) firewalls inspect TCP/UDP ports; Layer 7 (application layer) firewalls inspect application-level traffic.</p>
+<li><strong>Inline vs. Tap/Monitor</strong>:</li>
+<ul>
+<li><strong>Inline</strong>: Devices placed directly in the network path, allowing them to block or modify traffic.</li>
+<li><strong>Tap/Monitor</strong>: Devices that receive a copy of network traffic for analysis without being in the direct path.</li>
+</ul>
+</ul>
+<li><strong>Network Appliances</strong>:</li>
+<ul>
+<li><strong>Jump server</strong>: A hardened server used as an intermediary to access sensitive network segments, providing a controlled and monitored access point.</li>
+<li><strong>Proxy server</strong>: A server that acts as an intermediary for requests from clients seeking resources from other servers. Can be used for content filtering, caching, and anonymity.</li>
+<li><strong>Intrusion Prevention System (IPS)/Intrusion Detection System (IDS)</strong>:</li>
+<ul>
+<li><strong>IDS</strong>: Detects suspicious activity and alerts administrators.</li>
+<li><strong>IPS</strong>: Detects and actively blocks suspicious activity.</li>
+</ul>
+<li><strong>Load balancer</strong>: Distributes network traffic across multiple servers to improve performance, availability, and resilience. Can also provide some security features.</li>
+<li><strong>Sensors</strong>: Devices or software that collect data for security monitoring (e.g., network sensors, host-based agents).</li>
+<li><strong>Port security</strong>: Limiting the number of MAC addresses that can connect to a switch port to prevent unauthorized devices.</li>
+<li><strong>802.1X</strong>: A port-based network access control standard that provides an authentication mechanism for devices trying to connect to a network.</li>
+<li><strong>Extensible Authentication Protocol (EAP)</strong>: A framework for authentication often used with 802.1X.</li>
+<li><strong>Firewall types</strong>:</li>
+<ul>
+<li><strong>Web Application Firewall (WAF)</strong>: Protects web applications from common web-based attacks (e.g., SQL injection, XSS).</li>
+<li><strong>Unified Threat Management (UTM)</strong>: An all-in-one security appliance that combines multiple security functions (e.g., firewall, IPS, antivirus, content filtering).</li>
+<li><strong>Next-generation firewall (NGFW)</strong>: Firewalls that go beyond traditional port/protocol inspection to include application awareness, intrusion prevention, and threat intelligence.</li>
+<li><strong>Layer 4/Layer 7</strong>: Refers to the OSI model layers at which a firewall operates. Layer 4 (transport layer) firewalls inspect TCP/UDP ports; Layer 7 (application layer) firewalls inspect application-level traffic.</li>
+</ul>
+</ul>
+</ul>
 <h4>Secure Communication/Access</h4>
 <ul>
 <li><strong>Virtual Private Network (VPN)</strong>: Creates a secure, encrypted connection over a public network, allowing remote users to securely access internal network resources.</li>

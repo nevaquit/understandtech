@@ -6,14 +6,17 @@
 <h4>Architecture and Infrastructure Concepts</h4>
 <ul>
 <li><strong>Cloud</strong>: Utilizing third-party cloud providers (e.g., AWS, Azure, Google Cloud) for computing resources. Security is a shared responsibility model.</li>
-</ul>
-<p>- <strong>Responsibility matrix</strong>: Defines the security responsibilities between the cloud provider and the customer. - <strong>Hybrid considerations</strong>: Integrating on-premises infrastructure with cloud services, requiring careful security planning for connectivity and data flow. - <strong>Third-party vendors</strong>: Relying on external vendors for services, necessitating vendor risk management.</p>
 <ul>
+<li><strong>Responsibility matrix</strong>: Defines the security responsibilities between the cloud provider and the customer.</li>
+<li><strong>Hybrid considerations</strong>: Integrating on-premises infrastructure with cloud services, requiring careful security planning for connectivity and data flow.</li>
+<li><strong>Third-party vendors</strong>: Relying on external vendors for services, necessitating vendor risk management.</li>
+</ul>
 <li><strong>On-premises</strong>: Hosting all IT infrastructure within the organization's own facilities. Full control over security, but also full responsibility.</li>
 <li><strong>Centralized vs. Decentralized</strong>:</li>
-</ul>
-<p>- <strong>Centralized</strong>: Security management and controls are managed from a single point. Can offer consistency but also a single point of failure. - <strong>Decentralized</strong>: Security management and controls are distributed across different teams or locations. Can offer flexibility but may lead to inconsistencies.</p>
 <ul>
+<li><strong>Centralized</strong>: Security management and controls are managed from a single point. Can offer consistency but also a single point of failure.</li>
+<li><strong>Decentralized</strong>: Security management and controls are distributed across different teams or locations. Can offer flexibility but may lead to inconsistencies.</li>
+</ul>
 <li><strong>Containerization</strong>: Packaging applications and their dependencies into isolated containers (e.g., Docker, Kubernetes). Offers portability and efficiency, but requires container-specific security measures.</li>
 <li><strong>Virtualization</strong>: Creating virtual versions of computing resources (e.g., servers, operating systems, storage). Offers resource utilization and flexibility, but introduces new attack surfaces (e.g., VM escape).</li>
 <li><strong>IoT (Internet of Things)</strong>: Network of physical objects embedded with sensors, software, and other technologies for connecting and exchanging data over the internet. Often have limited security features and are vulnerable to attacks.</li>
@@ -28,8 +31,12 @@
 <li><strong>Serverless</strong>: Cloud execution model where the cloud provider dynamically manages the allocation and provisioning of servers. Reduces operational overhead but shifts some security responsibilities to the cloud provider.</li>
 <li><strong>Microservices</strong>: An architectural style that structures an application as a collection of loosely coupled, independently deployable services. Increases complexity in securing inter-service communication.</li>
 <li><strong>Network Infrastructure</strong>:</li>
+<ul>
+<li><strong>Physical isolation / Air-gapped</strong>: Completely separating a network segment from other networks, including the internet, for maximum security.</li>
+<li><strong>Logical segmentation</strong>: Dividing a network into smaller, isolated segments using VLANs, subnets, or firewalls to control traffic flow and limit the impact of breaches.</li>
+<li><strong>Software-defined networking (SDN)</strong>: Decoupling the control plane from the data plane, allowing for centralized and programmable network management. Offers flexibility but introduces new security considerations for the control plane.</li>
 </ul>
-<p>- <strong>Physical isolation / Air-gapped</strong>: Completely separating a network segment from other networks, including the internet, for maximum security. - <strong>Logical segmentation</strong>: Dividing a network into smaller, isolated segments using VLANs, subnets, or firewalls to control traffic flow and limit the impact of breaches. - <strong>Software-defined networking (SDN)</strong>: Decoupling the control plane from the data plane, allowing for centralized and programmable network management. Offers flexibility but introduces new security considerations for the control plane.</p>
+</ul>
 <h4>Considerations (General Security Implications)</h4>
 <ul>
 <li><strong>Availability</strong>: Ensuring systems and data are accessible when needed. Security measures should not negatively impact availability.</li>

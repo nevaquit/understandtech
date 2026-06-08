@@ -212,6 +212,13 @@ function security_plus_import_gift(int $contextid, stdClass $category, string $g
         return 0;
     }
 
+    $existingmap = security_plus_map_questions_by_objective((int) $category->id);
+    if (count($existingmap) >= 28) {
+        echo 'gift_skip_existing objectives=' . count($existingmap) . ' total='
+            . count(security_plus_category_question_ids((int) $category->id)) . "\n";
+        return count(security_plus_category_question_ids((int) $category->id));
+    }
+
     $context = context::instance_by_id($contextid);
     $before = count(security_plus_category_question_ids((int) $category->id));
 
@@ -267,8 +274,13 @@ function security_plus_map_questions_by_objective(int $categoryid): array {
         ['catid' => $categoryid, 'status' => 'ready']
     );
     foreach ($records as $row) {
-        if (preg_match('/\b(sy701_\d+_\d+)\b/', $row->name, $m)) {
-            $map[$m[1]] = (int) $row->id;
+        if (!preg_match('/\b(sy701_\d+_\d+)\b/', $row->name, $m)) {
+            continue;
+        }
+        $key = $m[1];
+        $qid = (int) $row->id;
+        if (!isset($map[$key]) || $qid < $map[$key]) {
+            $map[$key] = $qid;
         }
     }
     return $map;
