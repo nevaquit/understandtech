@@ -71,6 +71,19 @@ function theme_understandtech_get_pre_scss(theme_config $theme): string {
 function theme_understandtech_page_init(moodle_page $page): void {
     global $CFG;
 
+    $theme = theme_config::load('understandtech');
+    if (!empty($theme->settings->enable_skool_layout)) {
+        $page->add_body_class('ut-skool-enabled');
+    }
+
+    if ($page->cm && $page->cm->modname === 'page') {
+        $page->add_body_class('ut-lesson-page');
+    }
+
+    if ($page->context && $page->context->contextlevel === CONTEXT_COURSE) {
+        $page->add_body_class('ut-incourse');
+    }
+
     // Load the AMD theme module on every page.
     $page->requires->js_call_amd('theme_understandtech/theme', 'init');
 

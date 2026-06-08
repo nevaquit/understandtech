@@ -15,3 +15,85 @@
 #page-login-index .card{background:#0F2035;border:1px solid rgba(201,162,39,0.2);color:#fff}
 #page-login-index .card-body{background:#0F2035;color:#fff}
 #page-login-index .card p,#page-login-index .card h4,#page-login-index .card h3,#page-login-index .card h2{color:#fff}
+
+/* ── Incourse pages: unified navy shell, readable headers ── */
+.ut-incourse #page-header,
+.path-course-view #page-header,
+.path-mod-quiz #page-header {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.ut-incourse #page-header .header-maxwidth,
+.path-course-view #page-header .header-maxwidth,
+.path-mod-quiz #page-header .header-maxwidth {
+    background: transparent;
+    border: none;
+    padding-left: clamp(1rem, 3vw, 2rem);
+    padding-right: clamp(1rem, 3vw, 2rem);
+}
+
+.ut-incourse #region-main,
+.path-course-view #region-main,
+.path-mod-quiz #region-main {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 3rem);
+}
+
+.ut-incourse .course-section-header,
+.path-course-view .course-section-header {
+    border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+}
+
+.ut-incourse .course-section-header h3,
+.path-course-view .course-section-header h3 {
+    font-family: "Rajdhani", sans-serif;
+    font-size: 1.125rem;
+    letter-spacing: 0.06em;
+    color: #C9A227;
+}
+
+.ut-incourse .activity-item,
+.path-course-view .activity-item {
+    border-radius: 0.75rem;
+    border: 1px solid rgba(201, 162, 39, 0.12);
+    background: rgba(15, 36, 71, 0.55);
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.ut-incourse .activity-item:hover,
+.path-course-view .activity-item:hover {
+    border-color: rgba(201, 162, 39, 0.28);
+    background: rgba(15, 36, 71, 0.75);
+}
+
+.path-mod-quiz .activity-header,
+.path-mod-quiz #region-main .card {
+    background: rgba(15, 36, 71, 0.65);
+    border: 1px solid rgba(201, 162, 39, 0.15);
+    border-radius: 1rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.path-mod-quiz .btn-primary,
+.path-mod-quiz input[type="submit"].btn {
+    background: #C9A227;
+    border-color: #C9A227;
+    color: #0B1F3A;
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.path-mod-quiz .btn-primary:hover,
+.path-mod-quiz input[type="submit"].btn:hover {
+    background: #d4b452;
+    border-color: #d4b452;
+    color: #0B1F3A;
+}
