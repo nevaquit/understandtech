@@ -11,8 +11,8 @@ require_once($CFG->dirroot . '/question/behaviour/deferredfeedback/behaviour.php
 class qbehaviour_certmasterconfidence extends qbehaviour_deferredfeedback {
 
     #[\Override]
-    public function is_compatible_question(question_definition $question): bool {
-        return $question->get_type_name() !== 'description';
+    public function is_compatible_question(question_definition $question) {
+        return $question instanceof question_automatically_gradable;
     }
 
     #[\Override]
@@ -48,16 +48,23 @@ class qbehaviour_certmasterconfidence extends qbehaviour_deferredfeedback {
     }
 
     #[\Override]
-    public function question_summary_finished(question_attempt $qa): void {
-        parent::question_summary_finished($qa);
+    public function process_finish(question_attempt_pending_step $pendingstep) {
+        $result = parent::process_finish($pendingstep);
 
-        $confidence = $qa->get_last_behaviour_var('confidence');
+        $confidence = $this->qa->get_last_behaviour_var('confidence');
         if (!$confidence) {
-            return;
+            return $result;
         }
 
-        $fraction = $qa->get_fraction();
+        $fraction = $pendingstep->get_fraction();
         $iscorrect = $fraction !== null && $fraction > 0.99;
-        \local_certmaster\api::record_confidence($qa->get_usage_id(), $qa->get_slot(), $confidence, $iscorrect);
+        \local_certmaster\api::record_confidence(
+            $this->qa->get_usage_id(),
+            $this->qa->get_slot(),
+            $confidence,
+            $iscorrect
+        );
+
+        return $result;
     }
 }
