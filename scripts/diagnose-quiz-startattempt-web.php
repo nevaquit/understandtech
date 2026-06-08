@@ -34,7 +34,12 @@ $course = get_course($cm->course);
 $quiz = $DB->get_record('quiz', ['id' => $cm->instance], '*', MUST_EXIST);
 echo "quiz={$quiz->name} behaviour={$quiz->preferredbehaviour}\n";
 
-require_capability('mod/quiz:preview', context_module::instance($cmid));
+try {
+    require_capability('mod/quiz:preview', context_module::instance($cmid));
+} catch (Throwable $e) {
+    echo 'capability_error=' . $e->getMessage() . "\n";
+    exit(1);
+}
 
 try {
     $quizobj = mod_quiz\quiz_settings::create($cm->instance, $cm->id);
