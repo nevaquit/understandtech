@@ -117,7 +117,7 @@
                 </ul>
 </div>
 <div class="ut-lesson-supplement">
-<h4>Exam Cram supplement</h4>
+<h4>Exam focus</h4>
 <p>Given a scenario, apply security principles to secure enterprise infrastructure</p>
 <ul>
 <li>Infrastructure considerations</li>
@@ -201,6 +201,481 @@
 <p>3.1.11 Secure access service edge A networking model that merges traditional WAN management and security capabilities into a unified whole. SASE is built, implemented and managed using cloud- native architectures. SASE is a response to the edge-centric trends in mobility, cloud, SD-WAN and the internet of things. According to Gartner: First described in 2019 Still considered an emerging / evolving cybersecurity concept SASE</p>
 <p>SELECTION OF EFFECTIVE CONTROLS Identify Assets and Vulnerabilities: identify valuable assets, potential vulnerabilities, and associated threats. Impact Analysis: Analyze the potential impact of a security breach on each asset. Threat Landscape: Understand the types of threats most likely to target your environment. Knowing the criteria for selecting the right security controls for different threats and scenarios is key to effective security Selecting effective security controls depends on several key criteria, tailoring them to the specific environment and potential threats.</p>
 <p>3.0 Security Architecture</p>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p>Remote Access Architecture (1)</p>
+<p>Images © 123RF.com.</p>
+<p>Remote Access Architecture (2)</p>
+<p>Images © 123RF.com.</p>
+<p>Transport Layer Security Tunneling</p>
+<ul>
+<li>Use TLS to negotiate a secure</li>
+</ul>
+<p>connection</p>
+<ul>
+<li>Machines authenticated by PKI</li>
+</ul>
+<p>certificates</p>
+<ul>
+<li>Mutual authentication allows</li>
+</ul>
+<p>VPN gateway to authenticate client certificates</p>
+<ul>
+<li>User account authentication via</li>
+</ul>
+<p>RADIUS</p>
+<ul>
+<li>Tunnel network traffic over TLS</li>
+<li>Can use TCP or UDP</li>
+</ul>
+<p>Screenshot used with permission from Rubicon Communications, LLC.</p>
+<p>Internet Protocol Security Tunneling</p>
+<ul>
+<li>Provides confidentiality and/or integrity</li>
+<li>Authentication Header (AH)</li>
+<li>Signs packet but does not encrypt payload</li>
+<li>Provides authentication/integrity only</li>
+<li>Encapsulation Security Payload (ESP)</li>
+<li>Provides confidentiality and/or</li>
+</ul>
+<p>authentication/integrity</p>
+<ul>
+<li>Modes</li>
+<li>Transport mode for host-to-host connections on</li>
+</ul>
+<p>a private network</p>
+<ul>
+<li>Tunnel mode between gateways across an</li>
+</ul>
+<p>unsecure network</p>
+<p>Screenshot used with permission from Rubicon Communications, LLC.</p>
+<p>Internet Key Exchange</p>
+<ul>
+<li>Establishes Security Association (SA)</li>
+</ul>
+<p>between peers</p>
+<ul>
+<li>Phase I provides authentication</li>
+<li>PKI/certificates</li>
+<li>Pre-shared key</li>
+<li>Phase II establishes cipher suites</li>
+</ul>
+<p>and key sizes and use of AH or ESP</p>
+<ul>
+<li>IKE v1 supports host-to-host and site-</li>
+</ul>
+<p>to-site tunneling</p>
+<ul>
+<li>IKE v2 adds better support for client-</li>
+</ul>
+<p>to-site remote access VPN 31 Screenshot used with permission from Rubicon Communications, LLC.</p>
+<p>Remote Desktop</p>
+<ul>
+<li>GUI-based remote terminal software</li>
+<li>Remote Desktop Protocol (RDP)</li>
+<li>Connect to physical machines</li>
+<li>RDP gateway to virtual desktops and apps</li>
+<li>HTML5/clientless</li>
+<li>Access desktops and web applications from Internet via gateway to internal</li>
+</ul>
+<p>network</p>
+<ul>
+<li>Browser support for canvas element plus WebSockets</li>
+</ul>
+<p>Secure Shell</p>
+<ul>
+<li>Remote administration with public key</li>
+</ul>
+<p>cryptography security</p>
+<ul>
+<li>Host key identifies server</li>
+<li>Client authentication</li>
+<li>Username/password</li>
+<li>Public key authentication</li>
+<li>Kerberos</li>
+<li>Key management</li>
+<li>SSH commands</li>
+<li>ssh versus scp (Secure Copy)</li>
+</ul>
+<p>Screenshot used with permission from PuTTY.</p>
+<p>Out-of-band Management and Jump Servers</p>
+<p>Images © 123rf.com.</p>
+<ul>
+<li>Secure admin workstations (SAWs)</li>
+<li>Out-of-band (OOB) management</li>
+<li>Serial/modem/console port</li>
+<li>Virtual terminal</li>
+<li>Separate cabling or VLAN isolation</li>
+<li>Jump servers</li>
+<li>Single host accepts SSH or RDP connections</li>
+</ul>
+<p>from SAWs</p>
+<ul>
+<li>Forwards connections to app servers</li>
+<li>App servers only accept connections from jump</li>
+</ul>
+<p>server</p>
+<ul>
+<li>Remote access architecture</li>
+<li>Tunneling, client-to-site remote access VPN, site-to-site VPN</li>
+<li>Transport Layer Security (TLS) tunneling</li>
+<li>Internet Protocol Security (IPSec) tunneling</li>
+<li>Internet Key Exchange</li>
+<li>Remote Desktop</li>
+<li>Secure Shell</li>
+<li>Out-of-band management and jump servers</li>
+</ul>
+<p>Virtual Private Networks</p>
+<ul>
+<li>Assisted Lab: Setting up Remote Access</li>
+<li>Assisted Lab: Using IPSec Tunneling</li>
+</ul>
+<p>Summary</p>
+<p>Cloud Deployment Models</p>
+<ul>
+<li>Public (or multi-tenant)</li>
+<li>Private</li>
+<li>Hosted Private</li>
+<li>Community</li>
+<li>Hybrid Cloud</li>
+</ul>
+<p>Cloud Deployment Models</p>
+<ul>
+<li>Security Considerations</li>
+<li>Single-tenant architecture</li>
+<li>Multi-tenant architecture</li>
+<li>Hybrid architecture</li>
+<li>Serverless architecture</li>
+</ul>
+<p>Cloud Service Models</p>
+<ul>
+<li>Models</li>
+<li>Software as a Service</li>
+<li>Platform as a Service</li>
+<li>Infrastructure as a Service</li>
+<li>Third-Party Vendors</li>
+</ul>
+<p>Responsibility Matrix</p>
+<ul>
+<li>Describes the balance of</li>
+</ul>
+<p>responsibility between a customer and a cloud service provider</p>
+<p>Responsibility model</p>
+<p>Responsibility Matrix</p>
+<ul>
+<li>Cloud Service Provider</li>
+<li>Physical security of the infrastructure</li>
+<li>Securing computer, storage, and network equipment</li>
+<li>Securing foundational elements of networking, such as DDoS protection</li>
+<li>Cloud storage backup and recovery</li>
+<li>Security of cloud infrastructure resource isolation among tenants</li>
+<li>Tenant resource identity and access control</li>
+<li>Security, monitoring, and incident response for the infrastructure</li>
+<li>Securing and managing the datacenters located in multiple geographic regions</li>
+</ul>
+<p>Responsibility Matrix</p>
+<ul>
+<li>Cloud Service Customer</li>
+<li>User identity management</li>
+<li>Configuring the geographic location for storing data and running services</li>
+<li>User and service access controls to cloud resources</li>
+<li>Data and application security configuration</li>
+<li>Protection of operating systems, when deployed</li>
+<li>Use and configuration of encryption, especially the protection of keys</li>
+</ul>
+<p>Centralized and Decentralized Computing</p>
+<ul>
+<li>Centralized computing architecture</li>
+<li>All data processing and storage is performed in a single location</li>
+<li>All users and devices rely on the central server/authority</li>
+<li>Decentralized computing architecture</li>
+<li>Data processing and storage distributed across multiple locations or devices</li>
+<li>Increasingly important design trend impacting modern infrastructures</li>
+</ul>
+<p>Centralized and Decentralized Computing</p>
+<ul>
+<li>Decentralized computing examples</li>
+<li>Blockchain</li>
+<li>Peer-to-peer (P2P)</li>
+<li>Content Delivery Networks (CDNs)</li>
+<li>Internet of Things (IoT)</li>
+<li>Distributed databases</li>
+<li>TOR (The Onion Router)</li>
+</ul>
+<p>Resilient Architecture Concepts</p>
+<ul>
+<li>Replication</li>
+<li>High Availability Across Zones</li>
+<li>Local replication</li>
+<li>Regional replication</li>
+<li>Geo-redundant storage (GRS)</li>
+</ul>
+<p>Application Virtualization and Container Virtualization</p>
+<ul>
+<li>Application virtualization</li>
+<li>Containerization</li>
+<li>Container versus virtual</li>
+</ul>
+<p>machine</p>
+<p>Comparison of VMs versus containers.</p>
+<p>Cloud Architecture</p>
+<ul>
+<li>Virtual Private Cloud (VPC)</li>
+<li>A cloud computing model in which the cloud provider manages the infrastructure</li>
+</ul>
+<p>and automatically allocates resources as needed, charging only for the actual usage of the application</p>
+<ul>
+<li>Serverless Computing</li>
+<li>A private network segment made available to a single cloud consumer on a</li>
+</ul>
+<p>public cloud</p>
+<ul>
+<li>Microservices</li>
+<li>An architectural approach to building software applications as a collection of</li>
+</ul>
+<p>small and independent services focusing on a specific business capability</p>
+<p>Cloud Automation Technologies</p>
+<ul>
+<li>Infrastructure as Code (IaC)</li>
+<li>Responsiveness</li>
+<li>Load Balancing</li>
+<li>Edge Computing</li>
+<li>Auto-Scaling</li>
+</ul>
+<p>Software Defined Networking</p>
+<ul>
+<li>Network functions are divided into three “planes”</li>
+<li>Control plane</li>
+<li>Decisions about how traffic should be prioritized, secured, and where it should</li>
+</ul>
+<p>be switched</p>
+<ul>
+<li>Data plane</li>
+<li>Handles the switching and routing of traffic and imposition of security access</li>
+</ul>
+<p>controls</p>
+<ul>
+<li>Management plane</li>
+<li>Monitors traffic conditions and network status</li>
+</ul>
+<p>Software Defined Networking</p>
+<ul>
+<li>SDN is an important part of the</li>
+</ul>
+<p>latest automation and orchestration technologies</p>
+<ul>
+<li>SDN architecture reduces</li>
+</ul>
+<p>complexity of enforcing security policy</p>
+<ul>
+<li>Enables fully automated</li>
+</ul>
+<p>deployment (or provisioning) of network links, appliances, and servers</p>
+<p>Data plane devices managed by a control plane device and monitored by a management plane. (Images © 123RF.com.)</p>
+<p>Cloud Architecture Features</p>
+<ul>
+<li>Considerations for Cloud Infrastructure</li>
+<li>Cost</li>
+<li>Scalability</li>
+<li>Resilience</li>
+<li>Ease of deployment</li>
+<li>Ease of recovery</li>
+<li>SLA and ISA</li>
+<li>Power</li>
+<li>Compute</li>
+</ul>
+<p>Cloud Security Considerations</p>
+<ul>
+<li>Considerations for Cloud Infrastructure Security</li>
+<li>Data protection</li>
+<li>Patching</li>
+<li>Secure Communication</li>
+<li>Software-Defined Wide Area Network (SD-WAN)</li>
+<li>Secure Access</li>
+<li>Secure Access Service Edge (SASE)</li>
+</ul>
+<ul>
+<li>Cloud Deployment Models</li>
+<li>Cloud Services Models</li>
+<li>Responsibility Matrix</li>
+<li>Centralized and Decentralized Computing</li>
+<li>Resilient Architecture Concepts</li>
+<li>Application Virtualization and Container Virtualization</li>
+<li>Cloud Architecture</li>
+<li>Cloud Automation Technologies</li>
+<li>Software Defined Networking</li>
+<li>Cloud Architecture Features</li>
+<li>Cloud Security Considerations</li>
+</ul>
+<p>Cloud Infrastructure</p>
+<ul>
+<li>Assisted Lab: Using Containers</li>
+<li>Assisted Lab: Using Virtualization</li>
+</ul>
+<p>Embedded Systems and Zero Trust Architecture</p>
+<p>Device Placement</p>
+<ul>
+<li>Selection of effective controls</li>
+<li>Enforce segmentation, apply</li>
+</ul>
+<p>access controls, monitor traffic</p>
+<ul>
+<li>Defense in depth</li>
+<li>Zone border (mostly preventive)</li>
+<li>Within zone (mostly detective)</li>
+<li>Endpoint controls (preventive,</li>
+</ul>
+<p>detective, and corrective)</p>
+<p>Device Attributes</p>
+<ul>
+<li>Active versus passive</li>
+<li>Passive controls don’t require hosts to be configured to use</li>
+</ul>
+<p>them (and might not be detectable by hosts)</p>
+<ul>
+<li>Active controls require host configuration or software agents</li>
+<li>Inline versus tap/monitor</li>
+<li>Inline is installed as part of cable path (“bump-in-the-wire”)</li>
+<li>Switched port analyzer (SPAN) or mirror port</li>
+<li>Test access point (TAP)</li>
+<li>Fail-open</li>
+<li>Preserves access on fail to prioritize availability</li>
+<li>Fail-close</li>
+<li>Prevents access on fail to priorities confidentiality/integrity</li>
+</ul>
+<p>Firewalls</p>
+<ul>
+<li>Enforce a network access control list (ACL)</li>
+<li>Packet filtering inspects headers only</li>
+<li>Source and destination IP address</li>
+<li>Protocol ID/type (TCP, UDP, ICMP, routing</li>
+</ul>
+<p>protocols, and so on)</p>
+<ul>
+<li>Source and destination port numbers (TCP or</li>
+</ul>
+<p>UDP application type)</p>
+<ul>
+<li>Drop/deny/reject or accept/permit a packet</li>
+</ul>
+<p>(and/or log)</p>
+<ul>
+<li>Inbound, outbound, or both</li>
+<li>Placement and attributes</li>
+<li>Routed, bridged, or inline placement</li>
+<li>Firewall appliance versus router firewall 18</li>
+</ul>
+<p>Layer 4 and Layer 7 Firewalls</p>
+<ul>
+<li>Stateful inspection validates connections</li>
+<li>State table stores connection</li>
+</ul>
+<p>information</p>
+<ul>
+<li>Transport layer (layer 4)</li>
+<li>TCP handshake</li>
+<li>New versus established and related connections</li>
+<li>Application layer (layer 7)</li>
+<li>Validate protocol and match threat signatures</li>
+<li>Application layer gateway, stateful multilayer</li>
+</ul>
+<p>inspection, or deep packet inspection</p>
+<ul>
+<li>Application-specific filtering</li>
+</ul>
+<p>Screenshot used with permission from Rubicon Communications, LLC</p>
+<p>Proxy Servers</p>
+<ul>
+<li>Forward proxy server</li>
+<li>Proxy opens connections with external</li>
+</ul>
+<p>servers on behalf of internal clients</p>
+<ul>
+<li>Application-specific filters</li>
+<li>Non-transparent and transparent</li>
+</ul>
+<p>proxies</p>
+<ul>
+<li>User authentication</li>
+<li>Reverse proxy server</li>
+<li>Proxy opens connections with internal</li>
+</ul>
+<p>servers on behalf of external clients</p>
+<p>Intrusion Detection Systems</p>
+<ul>
+<li>Sensor captures traffic</li>
+<li>Placement</li>
+<li>Inline versus mirror/tap/monitor</li>
+<li>Intrusion Detection System (IDS)</li>
+<li>Detection engine performs real-time</li>
+</ul>
+<p>analysis of indicators</p>
+<ul>
+<li>Passive logging/alerting</li>
+<li>Intrusion Prevention System (IPS)</li>
+<li>Active response (block, reset, redirect)</li>
+<li>Inline response versus integration with</li>
+</ul>
+<p>other security tools</p>
+<p>Screenshot Security Onion securityonion.net</p>
+<p>Next-generation Firewalls and Unified Threat Management</p>
+<ul>
+<li>Next-generation firewall</li>
+<li>Application-aware filtering, user account-based filtering, IPS, cloud</li>
+</ul>
+<p>inspection, …</p>
+<ul>
+<li>Unified threat management (UTM)</li>
+<li>Combining security controls into single agent and management platforms</li>
+<li>Firewall, anti-malware, network intrusion prevention, spam filtering, content</li>
+</ul>
+<p>filtering, data loss prevention, VPN, cloud access gateway, …</p>
+<p>Load Balancers</p>
+<ul>
+<li>Distributes requests across farm or pool of servers</li>
+</ul>
+<p>(nodes)</p>
+<ul>
+<li>Layer 4 load balancer</li>
+<li>Layer 7 load balancer (content switch)</li>
+<li>Scheduling</li>
+<li>Round robin</li>
+<li>Fewest existing connections / best response time</li>
+<li>Weighting</li>
+<li>Heartbeat and health checks</li>
+<li>Source IP affinity</li>
+<li>Session persistence</li>
+</ul>
+<p>Images © 123rf.com.</p>
+<p>Web Application Firewalls</p>
+<ul>
+<li>Able to inspect code in HTTP</li>
+</ul>
+<p>packets</p>
+<ul>
+<li>Matches suspicious code to</li>
+</ul>
+<p>vulnerability database</p>
+<ul>
+<li>Can be implemented as</li>
+</ul>
+<p>software on host or as appliance</p>
+<p>Screenshot used with permission from Microsoft.</p>
+<ul>
+<li>Device placement</li>
+<li>Defense in depth plus use of preventive, detective, and corrective controls</li>
+<li>Device attributes</li>
+<li>Active versus passive, inline versus TAP/monitor, fail-open versus fail-closed</li>
+<li>Firewalls (layer 4/7)</li>
+<li>Proxy servers</li>
+<li>Intrusion detection systems</li>
+<li>Next-generation firewalls and unified threat management</li>
+<li>Load balancers</li>
+<li>Web application firewalls</li>
+</ul>
+<p>Network Security Appliances</p>
+<p>Virtual Private Networks</p>
 </div>
 </div>
 <h4>Next steps</h4>

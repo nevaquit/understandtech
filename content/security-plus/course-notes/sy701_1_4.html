@@ -1,0 +1,371 @@
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p>Cryptographic Concepts</p>
+<ul>
+<li>Encryption and decryption—encoding and decoding</li>
+<li>Plaintext is the unencoded message</li>
+<li>Ciphertext is the coded message</li>
+<li>Cipher is the means of change or algorithm</li>
+<li>Cryptanalysis is the art of cracking cryptographic systems</li>
+<li>Meet Alice and Bob (and observe Mallory, lurking)</li>
+<li>Hashing algorithms</li>
+<li>Encryption ciphers</li>
+<li>Symmetric</li>
+<li>Asymmetric</li>
+</ul>
+<p>Symmetric Encryption</p>
+<ul>
+<li>Encryption uses a reversible process</li>
+</ul>
+<p>(algorithm) based on a key that is only known by authorized persons</p>
+<ul>
+<li>Substitution and transposition</li>
+<li>Process should be too complex to unravel</li>
+</ul>
+<p>without the key</p>
+<ul>
+<li>Symmetric algorithms</li>
+<li>Same secret key is used for encryption</li>
+</ul>
+<p>and decryption</p>
+<ul>
+<li>Fast—suitable for bulk encryption of</li>
+</ul>
+<p>large amounts of data</p>
+<ul>
+<li>Problem storing and distributing key securely</li>
+<li>Confidentiality only— sender and</li>
+</ul>
+<p>recipient know the same key</p>
+<p>Key Length</p>
+<ul>
+<li>Key ensures ciphertext remains protected even when the operation</li>
+</ul>
+<p>of the algorithm is known</p>
+<ul>
+<li>Range of key values is the keyspace</li>
+<li>Longer key bit length means a larger keyspace</li>
+<li>Protects against brute force cryptanalysis</li>
+<li>Advanced Encryption Standard (AES/AES256)</li>
+<li>256-bit key is exponentially stronger than 128-bit key</li>
+<li>Larger keys use more CPU/memory/power resources</li>
+</ul>
+<p>Asymmetric Encryption</p>
+<ul>
+<li>Public/private key pair</li>
+<li>If the public key encrypts, only the private key can</li>
+</ul>
+<p>decrypt</p>
+<ul>
+<li>Private key cannot be derived from the public key</li>
+<li>Private key must be kept secret</li>
+<li>Public key is easy to distribute (anyone can have it)</li>
+<li>Used for small amounts of authentication data</li>
+<li>Different ciphers have different recommended key</li>
+</ul>
+<p>lengths</p>
+<ul>
+<li>Rivest, Shamir, Adelman (RSA) cipher (2,048-bit or</li>
+</ul>
+<p>better)</p>
+<ul>
+<li>Elliptic Curve Cryptography (ECC) cipher (256-bit or</li>
+</ul>
+<p>better)</p>
+<p>Hashing</p>
+<ul>
+<li>Fixed length digest from variable string</li>
+</ul>
+<p>with cryptographic properties</p>
+<ul>
+<li>One-way (plaintext cannot be recovered from</li>
+</ul>
+<p>the digest)</p>
+<ul>
+<li>Anti-collision (no two plaintexts are likely</li>
+</ul>
+<p>to produce the same digest)</p>
+<ul>
+<li>Used for password storage and checksums</li>
+</ul>
+<p>(integrity)</p>
+<ul>
+<li>Secure Hash Algorithm (SHA)</li>
+<li>256-bit or better</li>
+<li>Message Digest Algorithm (MD5)</li>
+<li>128-bit only</li>
+</ul>
+<p>Images © 123rf.com.</p>
+<p>Digital Signatures</p>
+<ul>
+<li>Using public key cryptography with hashing</li>
+<li>Digital signatures provide integrity, authentication, non-repudiation</li>
+</ul>
+<ul>
+<li>Cryptographic concepts</li>
+<li>Symmetric encryption</li>
+<li>Same secret key encrypts and decrypts</li>
+<li>Key length</li>
+<li>Asymmetric encryption</li>
+<li>Public/private key pair</li>
+<li>Hashing</li>
+<li>Non-reversible</li>
+<li>Digital signatures</li>
+<li>Sign message hash with private key and validate with public key</li>
+</ul>
+<p>Cryptographic Algorithms</p>
+<ul>
+<li>Applied Lab: Using Storage Encryption</li>
+</ul>
+<p>Public Key Infrastructure</p>
+<p>Encryption Supporting Confidentiality</p>
+<ul>
+<li>Data states</li>
+<li>Data at rest, data in transit, data in use</li>
+<li>Bulk encryption</li>
+<li>Using a private asymmetric key is inefficient for large amounts of data</li>
+<li>Private key (key encryption key) is used to encrypt a symmetric key</li>
+</ul>
+<p>(media/data encryption key)</p>
+<p>Disk and File Encryption</p>
+<ul>
+<li>Data at rest storage levels</li>
+<li>Full disk and partition encryption</li>
+<li>Encrypt whole disk or partition on disk</li>
+<li>Often performed by drive firmware (self-encrypting)</li>
+<li>Volume and file encryption</li>
+<li>Often performed by OS/software</li>
+<li>Usually requires file system support</li>
+</ul>
+<p>Database Encryption</p>
+<ul>
+<li>Structured data</li>
+<li>Tables, columns (fields), and rows (records)</li>
+<li>Database Management System (DBMS)</li>
+<li>Structured Query Language (SQL)</li>
+<li>Database-level encryption</li>
+<li>Page-level decryption and encryption as data is moved from disk to memory</li>
+<li>Record-level encryption</li>
+<li>Cell/column versus record-level</li>
+<li>Enforce fine-grained access controls to support compliance requirements for</li>
+</ul>
+<p>privacy/security</p>
+<p>Transport Encryption and Key Exchange</p>
+<p>Perfect Forward Secrecy</p>
+<p>Salting and Key Stretching</p>
+<ul>
+<li>Password hashes</li>
+<li>User-generated data is low entropy</li>
+<li>Brute force attack discovers value by generating every possible value and finding a match</li>
+<li>Salting</li>
+<li>Add a random value to each password when hashing it for storage</li>
+<li>Prevents use of pre-computed hash tables</li>
+<li>Key stretching</li>
+<li>Use additional rounds to strengthen keys</li>
+<li>Makes attacker do more work, so slows down brute force</li>
+</ul>
+<p>Blockchain</p>
+<ul>
+<li>Expanding list of transactional records (blocks)</li>
+<li>Each block is linked by hashing</li>
+<li>Open public ledger</li>
+<li>Ledger of transactions performed on a digital asset</li>
+<li>Peer-to-peer so transactions are public</li>
+<li>Transactions cannot be deleted or reversed</li>
+<li>Widely used for cryptocurrencies</li>
+<li>Potential uses for financial transactions, online voting systems,</li>
+</ul>
+<p>identity management systems, notarization, data storage, …</p>
+<p>Obfuscation</p>
+<ul>
+<li>Steganography</li>
+<li>Concealing messages within a covertext</li>
+<li>Often uses file data that can be manipulated without introducing obvious artifacts</li>
+<li>Covert channels</li>
+<li>Data masking</li>
+<li>Redacting information from fields</li>
+<li>Tokenization</li>
+<li>Substituting data with token</li>
+<li>Reversible with access to the token server</li>
+<li>De-identification</li>
+</ul>
+<ul>
+<li>Encryption supporting confidentiality</li>
+<li>Disk and file encryption</li>
+<li>Database encryption</li>
+<li>Transport encryption and key exchange</li>
+<li>Perfect forward secrecy</li>
+<li>Salting and key stretching</li>
+<li>Blockchain</li>
+<li>Obfuscation</li>
+</ul>
+<p>Cryptographic Solutions</p>
+<ul>
+<li>Assisted Lab: Using Hashing and Salting</li>
+</ul>
+<p>Summary</p>
+<p>Certificate Authorities</p>
+<ul>
+<li>Public key infrastructure (PKI)</li>
+<li>Prove identity of a public key</li>
+</ul>
+<p>holder (subject user or computer)</p>
+<ul>
+<li>Certificate authority (CA)</li>
+<li>Repository of certificates and public</li>
+</ul>
+<p>keys issued to verified subjects</p>
+<ul>
+<li>Third-party CA</li>
+<li>Entity that has established</li>
+</ul>
+<p>widespread trust in its policies and procedures for issuing certificates</p>
+<p>Digital Certificates</p>
+<ul>
+<li>Contains subject’s public key</li>
+<li>Information identifying the</li>
+</ul>
+<p>subject plus usage and validity</p>
+<ul>
+<li>Digital certificate standards</li>
+<li>X.509 Public Key</li>
+</ul>
+<p>Infrastructure (PKIX)</p>
+<ul>
+<li>PKCS (Public Key</li>
+</ul>
+<p>Cryptography Standards)</p>
+<p>Root of Trust</p>
+<ul>
+<li>Root certificate</li>
+<li>Self-signed, so users must trust in the CA’s security</li>
+</ul>
+<p>procedures</p>
+<ul>
+<li>Single CA</li>
+<li>CA issues certificates directly to subjects</li>
+<li>Hierarchical/chain of trust</li>
+<li>Root CA</li>
+<li>Intermediate CAs</li>
+<li>Leaf certificates</li>
+<li>Self-signed certificates</li>
+<li>Use certificate security without PKI, but provide no</li>
+</ul>
+<p>root of trust 15Screenshot used with permission from Microsoft.</p>
+<p>Certificate Signing Requests</p>
+<ul>
+<li>Registration identification and</li>
+</ul>
+<p>authentication procedures</p>
+<ul>
+<li>Certificate Signing Request (CSR)</li>
+<li>Subject generates key pair and</li>
+</ul>
+<p>sends public key to CA with CSR</p>
+<ul>
+<li>Subject does NOT send private key:</li>
+</ul>
+<p>this must be kept known to the subject</p>
+<ul>
+<li>CA performs subject identity</li>
+</ul>
+<p>checks</p>
+<ul>
+<li>CA signs and issues certificate</li>
+</ul>
+<p>Subject Name Attributes</p>
+<ul>
+<li>Common Name (CN)</li>
+<li>Legacy method of recording fully</li>
+</ul>
+<p>qualified domain name (FQDN)</p>
+<ul>
+<li>Deprecated by standards</li>
+<li>BUT still used in many implementations</li>
+<li>Subject Alternative Name (SAN)</li>
+<li>Structured identifiers: name and/or IP</li>
+</ul>
+<p>address</p>
+<ul>
+<li>List multiple host/subdomains</li>
+<li>Use wildcard subdomain</li>
+</ul>
+<p>17Screenshot used with permission from Microsoft.</p>
+<p>Certificate Revocation</p>
+<ul>
+<li>Revocation versus suspension</li>
+<li>Reason codes</li>
+<li>Certificate Revocation List (CRL)</li>
+<li>List of revoked and suspended certificates</li>
+<li>Browser CRL checking</li>
+<li>Online Certificate Status Protocol</li>
+</ul>
+<p>(OCSP)</p>
+<ul>
+<li>Client queries single certificate per</li>
+</ul>
+<p>transaction</p>
+<ul>
+<li>Provide real-time status information</li>
+</ul>
+<p>(though some rely on CRLs)</p>
+<p>Screenshot used with permission from Microsoft.</p>
+<p>Key Management</p>
+<ul>
+<li>Key lifecycle</li>
+<li>Key generation</li>
+<li>Storage</li>
+<li>Revocation</li>
+<li>Expiration and renewal</li>
+<li>Decentralized key management</li>
+<li>Each host or user account stores its own private key</li>
+<li>Key management system</li>
+<li>Keys are generated and stored on a centralized server</li>
+<li>Key Management Interoperability Protocol (KMIP)</li>
+</ul>
+<p>Cryptoprocessors and Secure Enclaves</p>
+<ul>
+<li>Key generation challenges</li>
+<li>Entropy and random number generation</li>
+<li>Tamper-evident storage</li>
+<li>Trusted Platform Module (TPM)</li>
+<li>Cryptoprocessor implemented on CPU (or</li>
+</ul>
+<p>motherboard)</p>
+<ul>
+<li>Hardware Security Module (HSM)</li>
+<li>Cryptoprocessor in removable or dedicated</li>
+</ul>
+<p>hardware form factor (or virtual appliance)</p>
+<ul>
+<li>Reduced attack surface and tamper-evident</li>
+<li>Secure enclave</li>
+<li>Protect keys loaded in system memory</li>
+</ul>
+<p>Key Escrow</p>
+<ul>
+<li>Keys can be backed up to protect against data loss</li>
+<li>Anyone with access to backup keys could impersonate the true key</li>
+</ul>
+<p>holder</p>
+<ul>
+<li>Escrow backup</li>
+<li>Placing archived keys with a trusted third party</li>
+<li>M-of-N control</li>
+<li>Key recovery processes can be protected by M of N control</li>
+<li>Split key into multiple parts held by different key recovery agents</li>
+</ul>
+<ul>
+<li>Certificate authorities</li>
+<li>Digital certificates</li>
+<li>Root of trust</li>
+<li>Certificate signing requests</li>
+<li>Subject name attributes</li>
+<li>Certificate revocation</li>
+<li>Key management</li>
+<li>Cryptoprocessors and secure enclaves</li>
+<li>Key escrow</li>
+</ul>
+<p>Public Key Infrastructure</p>
+<p>Cryptographic Solutions</p>
+</div>

@@ -39,7 +39,7 @@
 <li><strong>Vulnerability scanners</strong>: Tools used to identify security weaknesses in systems and applications.</li>
 </ul>
 <div class="ut-lesson-supplement">
-<h4>Exam Cram supplement</h4>
+<h4>Exam focus</h4>
 <p>Explain security alerting and monitoring concepts and tools</p>
 <ul>
 <li>Monitoring computing</li>
@@ -112,6 +112,122 @@
 <p>4.4 NETFLOW A feature available on many routers and switches that can collect IP traffic statistics and send them to a NetFlow collector. The NetFlow collector receives and stores the data. Protocol analyzers like Wireshark enable capture and view of data, including headers and payloads of individual packets. By comparison, NetFlow only records counts or stats related to data a device receives. Uses templates to identify what data to include in a NetFlow packet, but generally includes: Output interface identifier (will be zero if a packet is dropped) Source information (source IP address and port number, if used) Timestamps identifying the start and finish time of the flow Input interface identifier (on router or switch)</p>
 <p>vulnerability scans Vulnerability scan A scan to identify weaknesses in your IT infrastructure. Uses automated tools to scan systems for known vulnerabilities. Reports the identified weaknesses and categorizes their severity (often a CVE). May also suggest potential remediation steps. Like a fire alarm warns of a fire but doesn’t say exactly where or how severe it is! Role of vulnerability scans in monitoring and maintenance A monthly vulnerability scan establishes a pattern in which the team can quickly spot negative changes month-to-month Regular vulnerability scans can verify the efficacy of your configuration management, identifying new issues and regressions</p>
 <p>4.0 Security Operations</p>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p>Security Information and Event Management</p>
+<ul>
+<li>Log collection</li>
+<li>Agent-based</li>
+<li>Local agent to forward logs</li>
+<li>Listener/collector</li>
+<li>Protocol-based remote log forwarding (syslog)</li>
+<li>Sensor</li>
+<li>Packet capture and traffic flow data</li>
+<li>Log aggregation</li>
+<li>Consolidation of multiple log formats to</li>
+</ul>
+<p>facilitate search/query and correlation</p>
+<ul>
+<li>Normalization of fields</li>
+<li>Time synchronization 37</li>
+</ul>
+<p>Wazuh SIEM dashboard—Configurable dashboards provide the high-level status view of network security metrics. (Screenshot used with permission from Wazuh Inc.)</p>
+<p>Alerting and Monitoring Activities</p>
+<ul>
+<li>Alerting and correlation</li>
+<li>Static rules and logical expressions</li>
+<li>Threat intelligence feeds</li>
+<li>Validation of alerts as true positives versus false positives</li>
+<li>Quarantine for remediation</li>
+<li>Reporting</li>
+<li>Executive, managerial, and compliance audiences</li>
+<li>Archiving</li>
+<li>Preserve evidence of attack</li>
+<li>Facilitate threat hunting and retrospective incident identification</li>
+</ul>
+<p>Alert Tuning (1)</p>
+<ul>
+<li>Correlation action to log only, trigger alert, or trigger alarm</li>
+<li>Reduce false positives without increasing false negatives</li>
+<li>False positives raise an alert when there is no actual malicious activity</li>
+<li>False negatives do not raise an alert when there is malicious activity</li>
+<li>True positives measure successful detection of incidents</li>
+</ul>
+<p>Alert Tuning (2)</p>
+<ul>
+<li>Techniques for tuning</li>
+<li>Refining detection rules and muting alert levels</li>
+<li>Redirecting sudden alert “floods“</li>
+<li>Redirecting infrastructure-related alerts</li>
+<li>Continuous monitoring of alert volume and analyst feedback</li>
+<li>Deploying machine learning (ML) analysis</li>
+</ul>
+<p>Monitoring Infrastructure</p>
+<ul>
+<li>Network monitors</li>
+<li>Appliance state data</li>
+<li>Heartbeat availability monitoring</li>
+<li>Simple Network Management</li>
+</ul>
+<p>Protocol (SNMP) traps</p>
+<ul>
+<li>Netflow/IPFIX</li>
+<li>Records traffic statistics</li>
+<li>Flows defined by endpoints and</li>
+</ul>
+<p>ports (keys)</p>
+<ul>
+<li>Netflow exporters and collectors</li>
+</ul>
+<p>ntopng community edition being used to monitor NetFlow traffic data. (Screenshot used courtesy of ntop.)</p>
+<p>Monitoring Systems and Applications</p>
+<ul>
+<li>System monitors and logs</li>
+<li>System health reporting</li>
+<li>System logs to diagnose availability issues</li>
+<li>Security logs to audit access</li>
+<li>Application and cloud monitors</li>
+<li>Application health monitoring</li>
+<li>Cloud service health</li>
+<li>Vulnerability scanners</li>
+<li>Antivirus</li>
+<li>Data loss prevention (DLP)</li>
+</ul>
+<p>Benchmarks</p>
+<ul>
+<li>Scanning for configuration</li>
+</ul>
+<p>vulnerabilities</p>
+<ul>
+<li>Lack of controls</li>
+<li>Improper configuration</li>
+<li>Security content automation</li>
+</ul>
+<p>protocol (SCAP)</p>
+<ul>
+<li>Language to enable scanners to</li>
+</ul>
+<p>load configuration benchmarks and scan for deviations</p>
+<p>Monitoring template aligned to NIST 800-53 framework requirements.</p>
+<ul>
+<li>Security Information and Event Management</li>
+<li>Collection and aggregation</li>
+<li>Alerting and monitoring activities</li>
+<li>Correlation, reporting, archiving</li>
+<li>Alert tuning</li>
+<li>False positives, false negatives, alert fatigue</li>
+<li>Monitoring infrastructure</li>
+<li>Network monitors, NetFlow</li>
+<li>Monitoring systems and applications</li>
+<li>Benchmarks</li>
+<li>SCAP, OVAL, XCCDF configuration baseline scanning</li>
+</ul>
+<p>Alerting and Monitoring Tools</p>
+<ul>
+<li>Assisted Lab: Performing Root Cause Analysis</li>
+</ul>
+<p>Summary</p>
 </div>
 </div>
 <h4>Next steps</h4>

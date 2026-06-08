@@ -63,7 +63,7 @@
 <li><strong>Monitoring</strong>: Continuously observing systems and networks for suspicious activity and security events.</li>
 </ul>
 <div class="ut-lesson-supplement">
-<h4>Exam Cram supplement</h4>
+<h4>Exam focus</h4>
 <p>Given a scenario, apply common security techniques to computing resources</p>
 <ul>
 <li>Secure baselines</li>
@@ -189,6 +189,355 @@
 <p>That is, they are valuable only if the organization makes use of them to identify activity that is unauthorized or compromising. SIEM (Security Information Event Monitoring) tools can help to solve some of these problems by offering these key features: We will cover SIEM in depth later in Domain 4</p>
 <p>Log Ingestion with a SIEM 1 XDR via syslog connector SIEM SQL via API connector 1IDaaS 1 Network VMs CASB Endpoint activity data in IaaS and PaaS often via local agent Usage alerts, events, etc EXAMPLE</p>
 <p>4.0 Security Operations</p>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p>Benchmarks and Secure Configuration Guides (1 of 2)</p>
+<ul>
+<li>Secure baseline</li>
+<li>Collection of standard configurations and settings for operating systems,</li>
+</ul>
+<p>network devices, software, cloud instances, patching and updates, access controls, logging, monitoring, password policies, encryption, endpoint protection, and many others</p>
+<ul>
+<li>Center for Internet Security (CIS)</li>
+<li>Security Technical Implementation Guides (STIGs)</li>
+<li>Vendor provided guidance</li>
+</ul>
+<p>Benchmarks and Secure Configuration Guides (2 of 2)</p>
+<ul>
+<li>Configuration management</li>
+<li>Help manage, deploy, and measure compliance with established secure baselines</li>
+<li>Puppet</li>
+<li>Chef</li>
+<li>Ansible</li>
+<li>Security Content Automation Protocol (SCAP)</li>
+<li>OpenSCAP</li>
+<li>CIS-CAT Pro</li>
+<li>SCAP Compliance Checker (SCC)</li>
+</ul>
+<p>Switches and Routers</p>
+<ul>
+<li>Examples of changes designed to improve security:</li>
+<li>Change Default Credentials</li>
+<li>Disable Unnecessary</li>
+<li>Use Secure Management Protocols</li>
+<li>Implement Access Control Lists (ACLs)</li>
+<li>Enable Logging and Monitoring</li>
+<li>Configure Port Security</li>
+<li>Strong Password</li>
+<li>Physically Secure Equipment</li>
+</ul>
+<p>Server Hardware and Operating Systems</p>
+<ul>
+<li>Examples of changes designed to improve security:</li>
+<li>Change Default Credentials</li>
+<li>Disable Unnecessary Services</li>
+<li>Apply Software Security Patches and Updates Regularly</li>
+<li>Least Privilege Principle</li>
+<li>Use Firewalls and Intrusion Detection Systems (IDS)</li>
+<li>Secure Configuration using CIS or STIG baselines</li>
+<li>Strong Access Controls</li>
+<li>Enable Logging and Monitoring</li>
+<li>Use Antivirus and Antimalware Solutions</li>
+<li>Physical Security of server equipment racks, server rooms, and datacenters</li>
+</ul>
+<p>Wireless Network Installation Considerations</p>
+<ul>
+<li>Wireless Access Point (WAP)</li>
+</ul>
+<p>Placement</p>
+<ul>
+<li>Site Surveys and Heat Maps</li>
+</ul>
+<p>Example output from Lizard System's Wi-Fi Scanner tool. (Screenshot courtesy of Lizard Systems.)</p>
+<p>Wireless Encryption</p>
+<ul>
+<li>Open</li>
+<li>WEP</li>
+<li>WPS</li>
+<li>WPA &amp; WPA2</li>
+<li>WPA3</li>
+<li>Device Provisioning Protocol (DPP)</li>
+</ul>
+<p>a.k.a. “Easy Connect” to replace WPS</p>
+<ul>
+<li>Simultaneous Authentication of Equals</li>
+</ul>
+<p>(SAE)</p>
+<ul>
+<li>Enhanced Open</li>
+</ul>
+<p>Configuring a TP-LINK SOHO access point with wireless encryption and authentication settings. In this example, the 2.4 GHz band allows legacy connections with WPA2-Personal security, while the 5 GHz network is for 802.11ax (Wi-Fi 6) capable devices using WPA3-SAE authentication. (Screenshot used with permission from TP-Link Technologies.)</p>
+<p>Wi-Fi Authentication Methods</p>
+<ul>
+<li>WPA2 Pre-Shared Key Authentication</li>
+<li>WPA3 Personal Authentication</li>
+<li>WPA2/WPA3-Enterprise</li>
+<li>RADIUS</li>
+<li>EAP</li>
+</ul>
+<p>Network Access Control</p>
+<ul>
+<li>Authenticates users/devices</li>
+</ul>
+<p>before allowing them access to the network</p>
+<ul>
+<li>Agent versus agentless</li>
+</ul>
+<p>PacketFence supports the use of several scanning techniques, including vulnerability scanners, such as Nessus and OpenVAS, Windows Management Instrumentation (WMI) queries, and log parsers. (Screenshot used with permission from packetfence.org.)</p>
+<ul>
+<li>Benchmarks and Secure Configuration Guides</li>
+<li>Wireless Network Installation Considerations</li>
+<li>Wireless Encryption</li>
+<li>Wi-Fi Authentication Methods</li>
+<li>Network Access Control</li>
+</ul>
+<p>Network Security Baselines</p>
+<ul>
+<li>Assisted Lab: Understanding Security Baselines</li>
+</ul>
+<p>Network Security Capability Enhancement</p>
+<p>Endpoint Hardening</p>
+<ul>
+<li>Operating System Security</li>
+<li>Workstations</li>
+<li>Servers</li>
+<li>Baseline Configuration</li>
+<li>Interfaces</li>
+<li>Services</li>
+<li>Ports</li>
+<li>Storage</li>
+<li>Many others</li>
+</ul>
+<p>Using Security Compliance Manager to compare settings in a production GPO with Microsoft's template policy settings. (Screenshot used with permission from Microsoft.)</p>
+<p>Endpoint Protection</p>
+<ul>
+<li>Segmentation</li>
+<li>Isolation</li>
+<li>Antivirus and Antimalware</li>
+<li>Disk Encryption</li>
+<li>Patch Management</li>
+</ul>
+<p>A segmented network showing Marketing and Finance subnets and the placement of network devices. Traffic between the two networks is controlled by the router. (Images © 123RF.com.)</p>
+<p>Advanced Endpoint Protection</p>
+<ul>
+<li>Endpoint Detection and Response (EDR)</li>
+<li>Extended Detection and Response (XDR)</li>
+<li>Host-Based Intrusion Detection/Prevention (HIDS/HIPS)</li>
+<li>User Behavior Analytics (UBA)/User and Entity Behavior Analytics</li>
+</ul>
+<p>(UEBA)</p>
+<p>Endpoint Configuration</p>
+<ul>
+<li>Principle of Least Privilege</li>
+<li>Access Control Lists</li>
+<li>File System Permissions</li>
+<li>Application Allow Lists and Block</li>
+</ul>
+<p>Lists</p>
+<ul>
+<li>Monitoring</li>
+<li>Configuration Enforcement</li>
+<li>Group Policy</li>
+<li>SELinux</li>
+</ul>
+<p>Configuring an access control entry for a folder. (Screenshot used with permission from Microsoft.)</p>
+<p>Hardening Techniques</p>
+<ul>
+<li>Protecting Physical Ports</li>
+<li>Encryption</li>
+<li>Full Disk Encryption (FDE)</li>
+<li>Removable Media Encryption</li>
+<li>Virtual Private Networks (VPNs)</li>
+<li>Email Encryption</li>
+<li>Host-Based Firewalls and IPS</li>
+<li>Endpoint Protection</li>
+<li>Changing Defaults</li>
+<li>Removing Unnecessary Software</li>
+</ul>
+<p>Hardening Specialized Devices</p>
+<ul>
+<li>ICS/SCADA</li>
+<li>Strict network segmentation</li>
+<li>Robust authentication</li>
+<li>Unidirectional gateways (or data diodes)</li>
+<li>Limit data flow to one direction</li>
+<li>Embedded and RTOS</li>
+<li>Select devices based on security capabilities</li>
+</ul>
+<ul>
+<li>Endpoint Hardening</li>
+<li>Endpoint Protection</li>
+<li>Advanced Endpoint Protection</li>
+<li>Endpoint Configuration</li>
+<li>Hardening Techniques</li>
+<li>Hardening Specialized Devices</li>
+</ul>
+<p>Endpoint Security</p>
+<ul>
+<li>Assisted Lab: Using Group Policy</li>
+<li>Applied Lab: Hardening</li>
+</ul>
+<p>Mobile Device Hardening</p>
+<p>Secure Coding Techniques (1 of 2)</p>
+<ul>
+<li>Pressure to release an application</li>
+</ul>
+<p>often overshadows the requirement to ensure it is secure</p>
+<ul>
+<li>Coding practices must implement</li>
+</ul>
+<p>secure development practices</p>
+<ul>
+<li>Code Signing</li>
+<li>Secure Cookies</li>
+<li>Static/Dynamic Code Analysis</li>
+<li>Peer Review</li>
+</ul>
+<p>Reviewing the digital signature contained within the Bitwarden Password Management app installer.</p>
+<p>Secure Coding Techniques (2 of 2)</p>
+<ul>
+<li>Input Validation</li>
+<li>Attacker provides specially crafted data to an application to manipulate its</li>
+</ul>
+<p>behavior</p>
+<ul>
+<li>Injection Attack</li>
+<li>Methods used to perform input validation:</li>
+<li>Allow/Block Lists</li>
+<li>Data Type checks</li>
+<li>Range checks</li>
+<li>Regular Expressions</li>
+<li>Encoding</li>
+</ul>
+<p>Application Protections (1 of 2)</p>
+<ul>
+<li>Data exposure</li>
+<li>Allows privileged information to be read by unauthorized user</li>
+<li>Access token</li>
+<li>Password</li>
+<li>Personal data</li>
+<li>Error Handling</li>
+<li>Safely handle and control errors</li>
+<li>Report errors to logs instead of user interface</li>
+<li>Application Security in the Cloud</li>
+<li>Application security supports the shared responsibility model</li>
+<li>Secure applications running on a secure cloud platform</li>
+</ul>
+<p>Application Protections (2 of 2)</p>
+<ul>
+<li>Memory Management</li>
+<li>Buffer overflow attacks are a decades-old problem</li>
+<li>Input validation is an important defense</li>
+<li>Client-Side vs. Server-Side Validation</li>
+<li>Security checks should be performed server-side</li>
+<li>Developers often use client-side checks to improve application performance</li>
+<li>Client-side checks can be bypassed</li>
+</ul>
+<p>Software Sandboxing</p>
+<ul>
+<li>A security mechanism used to</li>
+</ul>
+<p>isolate software</p>
+<ul>
+<li>Prevent it from accessing</li>
+</ul>
+<p>operating system features</p>
+<ul>
+<li>Isolate is from other</li>
+</ul>
+<p>processes/software</p>
+<ul>
+<li>Prevent access to network</li>
+<li>“Safe Detonation”</li>
+</ul>
+<p>Joe Sandbox analysis of a malicious executable file. (Screenshot courtesy of Joe Security, LLC.)</p>
+<ul>
+<li>Secure Coding Techniques</li>
+<li>Application Protections</li>
+<li>Software Sandboxing</li>
+</ul>
+<ul>
+<li>Assisted Lab: Configuring System Monitoring</li>
+</ul>
+<p>Summary</p>
+<p>Mobile Hardening Techniques</p>
+<ul>
+<li>Many similarities between hardening mobile devices or traditional computers</li>
+<li>Mobile devices are more prone to physical loss or theft</li>
+<li>Deployment Models</li>
+<li>Bring your own device (BYOD</li>
+<li>Corporate owned, business only (COBO)</li>
+<li>Corporate owned, personally enabled (COPE)</li>
+<li>Choose your own device (CYOD)</li>
+<li>Mobile Device Management</li>
+<li>Full Device and External Media Encryption</li>
+</ul>
+<p>Full Device Encryption and External Media</p>
+<ul>
+<li>In iOS, there are various levels of encryption</li>
+<li>All user data on the device is always encrypted</li>
+<li>Email data and any apps using the “Data Protection” option are subject to a</li>
+</ul>
+<p>second round of encryption</p>
+<ul>
+<li>In iOS, Data Protection encryption is enabled automatically when</li>
+</ul>
+<p>you configure a password lock on the device</p>
+<ul>
+<li>A mobile device contains a solid state (flash memory) drive for</li>
+</ul>
+<p>persistent storage of apps and data</p>
+<p>Location Services</p>
+<ul>
+<li>Global Positioning</li>
+</ul>
+<p>System (GPS)</p>
+<ul>
+<li>Indoor Positioning</li>
+</ul>
+<p>System (IPS)</p>
+<ul>
+<li>Geofencing</li>
+<li>GPS Tagging (ex. EXIF</li>
+</ul>
+<p>Data)</p>
+<ul>
+<li>Primary concern of</li>
+</ul>
+<p>location services is privacy</p>
+<p>Restricting device permissions such as camera and screen capture using Intune. (Screenshot used with permission from Microsoft.)</p>
+<p>Cellular and GPS Connection Methods</p>
+<ul>
+<li>Cellular/Mobile</li>
+</ul>
+<p>Data Connections</p>
+<ul>
+<li>Global</li>
+</ul>
+<p>Positioning System (GPS)</p>
+<p>Locking down Android connectivity methods with Intune—note that most settings can be applied only to Samsung KNOX-capable devices. (Screenshot used with permission from Microsoft.)</p>
+<p>Wi-Fi and Tethering Connection Methods</p>
+<ul>
+<li>Mobile devices usually default to using a Wi-Fi connection</li>
+<li>Home/Public vs Enterprise Network</li>
+<li>Rogue/Evil Twin networks</li>
+<li>Personal Area Networks (PANs)</li>
+<li>Peripherals</li>
+<li>Other devices/computers</li>
+<li>Ad Hoc Wi-Fi and Wi-Fi Direct</li>
+<li>Tethering and Hotspots</li>
+</ul>
+<ul>
+<li>Mobile Hardening Techniques</li>
+<li>Full Device Encryption and External Media</li>
+<li>Location Services</li>
+<li>Cellular and GPS Connection Methods</li>
+<li>Wi-Fi and Tethering Connection Methods</li>
+<li>Bluetooth Connection Methods</li>
+<li>Near-Field Communications and Mobile Payment Services</li>
+</ul>
+<p>Summary</p>
 </div>
 </div>
 <h4>Next steps</h4>

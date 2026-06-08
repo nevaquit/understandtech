@@ -67,7 +67,7 @@
 <li><strong>Missing Logs</strong>: Gaps in log files, suggesting an attacker has tampered with or deleted logs to hide their tracks.</li>
 </ul>
 <div class="ut-lesson-supplement">
-<h4>Exam Cram supplement</h4>
+<h4>Exam focus</h4>
 <p>Given a scenario, analyze indicators of malicious activity.</p>
 <ul>
 <li>Malware attacks</li>
@@ -225,6 +225,431 @@
 <p>Password attacks Attempts to randomly find the correct cryptographic key attempting all possible combinations (trial and error) Password complexity and attacker resources will determine effectiveness of this attack. rainbow tables and powerful compute resources make this attack more effective Brute Force Attack Effective countermeasures include cryptographic salts, Captcha, throttling the rate of repeated logins, and IP blocklists</p>
 <p>Account lockout: Repeated failed login attempts from a single account are highly likely to trigger lockouts. Resource consumption: Brute-force attacks can consume resources as login attempts are processed. Out-of-cycle logging: Security systems might log excessive login attempts from a single source. Published/documented: If a large brute-force attack is underway, security professionals might be tracking it. 2 . 4 INDICATORS OF MALICIOUS ACTIVITY Brute Force</p>
 <p>2.0 Threats, Vulnerabilities, and Mitigations</p>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p>Physical Attacks</p>
+<ul>
+<li>Brute force</li>
+<li>Physical denial of service</li>
+<li>Breaking into premises/cabinets</li>
+<li>Environmental</li>
+<li>RFID cloning and skimming</li>
+<li>Radio Frequency Identification (RFID) and Nearfield Communications (NFC)</li>
+<li>Contactless cards, badges, and fobs</li>
+<li>Static tokens versus cryptoprocessors</li>
+</ul>
+<p>Network Attacks</p>
+<ul>
+<li>Reconnaissance and credential harvesting</li>
+<li>Denial of service</li>
+<li>Weaponization/delivery/breach</li>
+<li>Command and control (C2 or C&amp;C), beaconing, and persistence</li>
+<li>Lateral movement, pivoting, and privilege escalation</li>
+<li>Data exfiltration</li>
+</ul>
+<p>Distributed Denial of Service Attacks (1)</p>
+<ul>
+<li>Leverage bandwidth from compromised hosts/networks</li>
+<li>Handlers form a command and control (C&amp;C) network</li>
+<li>Compromised hosts installed with bots that can run automated scripts</li>
+<li>Co-ordinated by the C&amp;C network as a botnet</li>
+<li>Overwhelm with superior bandwidth (number of bots)</li>
+<li>Consume resources with spoof session requests (SYN flood)</li>
+</ul>
+<p>Distributed Denial of Service Attacks (2)</p>
+<ul>
+<li>Reflected attacks</li>
+<li>Spoof victim's IP address and attempt to</li>
+</ul>
+<p>open connections with multiple servers</p>
+<ul>
+<li>Those servers direct their SYN/ACK</li>
+</ul>
+<p>responses to the victim</p>
+<ul>
+<li>Amplified attacks</li>
+<li>Bogus DNS/NTP queries</li>
+<li>Direct responses at victim</li>
+<li>Queries can be constructed to generate</li>
+</ul>
+<p>large response packets</p>
+<ul>
+<li>DDoS indicators</li>
+</ul>
+<p>Dropping traffic from blocklisted IP ranges using Security Onion IDS. (Screenshot used with permission from Security Onion.)</p>
+<p>On-path Attacks</p>
+<ul>
+<li>Threat actor positioned between</li>
+</ul>
+<p>two hosts</p>
+<ul>
+<li>“Man-in-the-middle”</li>
+<li>Can target forwarding/protocols at</li>
+</ul>
+<p>different network layers</p>
+<ul>
+<li>Address Resolution Protocol (ARP)</li>
+</ul>
+<p>poisoning</p>
+<ul>
+<li>Broadcasting unsolicited ARP</li>
+</ul>
+<p>replies to poison the cache of local hosts with spoofed MAC address</p>
+<ul>
+<li>Attacker usually tries to</li>
+</ul>
+<p>masquerade as default gateway</p>
+<p>Screenshot used with permission from wireshark.org.</p>
+<p>Domain Name System Attacks</p>
+<ul>
+<li>Attacks on public DNS services</li>
+<li>Typosquatting, DRDoS, and hijacking</li>
+<li>DNS poisoning</li>
+<li>DNS-based on-path attacks</li>
+<li>Get client to use malicious resolver</li>
+<li>DNS client cache poisoning</li>
+<li>HOSTS file</li>
+<li>DNS server cache poisoning</li>
+<li>DNS attack indicators</li>
+</ul>
+<p>Wireless Attacks</p>
+<ul>
+<li>Rogue access points</li>
+<li>Non-malicious backdoors</li>
+<li>Evil twins masquerade as legitimate</li>
+</ul>
+<p>AP</p>
+<ul>
+<li>Launch on-path attacks</li>
+<li>Indicators and detection</li>
+<li>Wireless denial of service</li>
+<li>Jamming and disassociation</li>
+<li>Wireless replay and key recovery</li>
+</ul>
+<p>Screenshot used with permission from MetaGeek.</p>
+<p>Password Attacks</p>
+<ul>
+<li>Online password attack</li>
+<li>Adversary interacts with authentication service</li>
+<li>Offline attacks</li>
+<li>Password database</li>
+<li>Hash transmitted directly</li>
+<li>Hash used as key to sign an HMAC</li>
+<li>Brute force attack</li>
+<li>Dictionary and hybrid attacks</li>
+<li>Password spraying</li>
+</ul>
+<p>Credential Replay Attacks</p>
+<ul>
+<li>Credential dumping against</li>
+</ul>
+<p>Windows cached credentials</p>
+<ul>
+<li>Kerberos tickets</li>
+<li>NTLM hashes</li>
+<li>Reversible encryption passwords</li>
+<li>Credential replay against hosts</li>
+</ul>
+<p>and applications</p>
+<ul>
+<li>Pass the hash (PtH) against NTLM</li>
+<li>Pass the ticket (PtT) against</li>
+</ul>
+<p>Kerberos</p>
+<p>Images © 123rf.com.</p>
+<p>Cryptographic Attacks</p>
+<ul>
+<li>Downgrade attacks</li>
+<li>Reduce transport encryption version/force use of weak cipher suites</li>
+<li>Use weak cipher suites in Kerberos</li>
+<li>Collision attacks</li>
+<li>Forge digital signatures</li>
+<li>Birthday attacks</li>
+<li>Design more efficient collision attacks</li>
+</ul>
+<p>Malicious Code Indicators</p>
+<ul>
+<li>Shellcode</li>
+<li>Credential dumping</li>
+<li>Lateral movement</li>
+<li>Psexec</li>
+<li>PowerShell code</li>
+<li>Persistence</li>
+<li>Registry keys</li>
+<li>Scheduled tasks</li>
+</ul>
+<ul>
+<li>Physical attacks</li>
+<li>Brute force, environmental, card cloning</li>
+<li>Network attacks</li>
+<li>Reconnaissance, weaponization, C&amp;C, data exfiltration</li>
+<li>Distributed denial of service attacks</li>
+<li>On-path, Domain Name System, and wireless attacks</li>
+<li>Password and credential replay attacks</li>
+<li>Cryptographic attacks</li>
+<li>Malicious code indicators</li>
+<li>Shellcode, credential dumping, lateral movement/pivoting, persistence</li>
+</ul>
+<p>Physical and Network Attack Indicators</p>
+<p>Application Attack Indicators</p>
+<p>Application Attacks</p>
+<ul>
+<li>Attacks that target vulnerabilities in application code or</li>
+</ul>
+<p>architecture/design</p>
+<ul>
+<li>Privilege escalation</li>
+<li>Get privileges from target vulnerable process to run arbitrary code</li>
+<li>Remote execution when code is transferred from another machine</li>
+<li>Vertical and horizontal privilege escalation</li>
+<li>Detect by process logging and auditing plus automated detection scanning</li>
+<li>Buffer overflow</li>
+</ul>
+<p>Replay Attacks</p>
+<ul>
+<li>Resubmitting or guessing</li>
+</ul>
+<p>authorization tokens</p>
+<ul>
+<li>Session management cookies</li>
+<li>Replay cookie to obtain</li>
+</ul>
+<p>authenticated session</p>
+<p>Using The Browser Exploitation Framework (BeEF) to obtain the session cookie from a browser.</p>
+<p>Forgery Attacks (1)</p>
+<ul>
+<li>Cookie hijacking and session</li>
+</ul>
+<p>prediction</p>
+<ul>
+<li>Client-side/cross-site</li>
+</ul>
+<p>(CSRF/XSRF) request forgery</p>
+<ul>
+<li>Passes a URL to another site</li>
+</ul>
+<p>where the user has an authenticated session</p>
+<ul>
+<li>Confused deputy</li>
+</ul>
+<p>Images © 123rf.com.</p>
+<p>Forgery Attacks (2)</p>
+<ul>
+<li>Server-side Request Forgery</li>
+</ul>
+<p>(SSRF)</p>
+<ul>
+<li>Cause a server to make API calls</li>
+</ul>
+<p>or HTTP requests with arbitrary parameters</p>
+<ul>
+<li>Weak authentication/access</li>
+</ul>
+<p>control between internal services</p>
+<ul>
+<li>Weak input validation and faults</li>
+</ul>
+<p>in request parsing</p>
+<p>Images © 123rf.com.</p>
+<p>Injection Attacks</p>
+<ul>
+<li>Persistent XSS and SQL</li>
+</ul>
+<p>injection</p>
+<ul>
+<li>Extensible Markup Language</li>
+</ul>
+<p>(XML) injection</p>
+<ul>
+<li>XML tagged documents</li>
+<li>XML External Entity (XXE) to</li>
+</ul>
+<p>exfiltrate data and files</p>
+<ul>
+<li>Lightweight Directory Access</li>
+</ul>
+<p>Protocol (LDAP) injection</p>
+<ul>
+<li>Query language to read and</li>
+</ul>
+<p>update network directories</p>
+<p>SELECT * FROM tbl_user WHERE username = '' or 1=1--# &lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;!DOCTYPE foo [&lt;!ELEMENT foo ANY &gt;&lt;!ENTITY bar SYSTEM "file:///etc/config"&gt; ]&gt; &lt;bar&gt;&amp;bar;&lt;/bar&gt; (&amp;(username=Bob)(&amp;))</p>
+<p>Directory Traversal and Command Injection Attacks</p>
+<ul>
+<li>Directory traversal</li>
+<li>Obtain access to files outside web site root directory</li>
+<li>Canonicalization attack and percent encoding</li>
+<li>Command injection</li>
+<li>Cause server to run OS shell commands</li>
+</ul>
+<p>http://victim.foo/?show=../../../../etc/config http://victim.foo/?show=%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f etc/config</p>
+<p>URL Analysis</p>
+<ul>
+<li>Uniform Resource Locator</li>
+</ul>
+<p>(URL) format</p>
+<ul>
+<li>HTTP methods</li>
+<li>TCP connections</li>
+<li>GET, POST, PUT</li>
+<li>URL (query parameters)</li>
+<li>Percent encoding</li>
+</ul>
+<p>Web Server Logs</p>
+<ul>
+<li>Error log</li>
+<li>Traffic log</li>
+<li>Status codes</li>
+<li>HTTP headers</li>
+</ul>
+<ul>
+<li>Application attacks</li>
+<li>Arbitrary/remote code execution, privilege escalation, buffer overflow</li>
+<li>Replay attacks</li>
+<li>Forgery attacks</li>
+<li>Cross-site and server-side forgery</li>
+<li>Injection attacks</li>
+<li>SQL, XML, LDAP, directory traversal, command injection</li>
+<li>URL analysis</li>
+<li>Web server logs</li>
+</ul>
+<p>Application Attack Indicators</p>
+<p>Summary</p>
+<p>Malware Classification</p>
+<ul>
+<li>Classification by vector or infection method</li>
+<li>Viruses and worms</li>
+<li>Spread within code without authorization</li>
+<li>Trojans</li>
+<li>A malicious program concealed within a benign one</li>
+<li>Potentially unwanted programs/applications (PUPs/PUAs)</li>
+<li>Pre-installed “bloatware” or installed alongside another app</li>
+<li>Not completely concealed, but installation may be covert</li>
+<li>Also called grayware</li>
+<li>Classification by payload</li>
+</ul>
+<p>Computer Viruses</p>
+<ul>
+<li>Rely on some sort of host file</li>
+</ul>
+<p>or media delivery vector</p>
+<ul>
+<li>Non-resident/file infector</li>
+<li>Memory resident</li>
+<li>Boot</li>
+<li>Script/macro</li>
+</ul>
+<p>Screenshot used with permission from Microsoft.</p>
+<p>Computer Worms and Fileless Malware</p>
+<ul>
+<li>Early computer worms</li>
+<li>Propagate in memory/over network links</li>
+<li>Consume bandwidth and crash process</li>
+<li>Fileless malware</li>
+<li>Exploiting remote execution and memory residence to deliver payloads</li>
+<li>May run from an initial script or Trojan</li>
+<li>Persistence via the registry</li>
+<li>Use of shellcode to create backdoors and download additional tools</li>
+<li>“Living off the land” exploitation of built-in scripting tools</li>
+<li>Advanced persistent threat (APT)/advanced volatile threat (AVT)/</li>
+</ul>
+<p>low observable characteristics (LOC) 6</p>
+<p>Spyware, Adware, and Keyloggers</p>
+<ul>
+<li>Tracking cookies, supercookies, and</li>
+</ul>
+<p>beacons</p>
+<ul>
+<li>Adware (PUP/bloatware)</li>
+<li>Changes to browser settings</li>
+<li>Spyware (malware)</li>
+<li>Log all local activity</li>
+<li>Use of recording devices and screenshots</li>
+<li>Redirection</li>
+<li>Keylogger</li>
+<li>Software and hardware</li>
+</ul>
+<p>Backdoors and Remote Access Trojans</p>
+<ul>
+<li>Backdoor malware</li>
+<li>Remote access trojan (RAT)</li>
+<li>Bots and botnets</li>
+<li>Command &amp; control (C2 or</li>
+</ul>
+<p>C&amp;C)</p>
+<ul>
+<li>Backdoors from</li>
+</ul>
+<p>misconfiguration and unauthorized software</p>
+<p>Screenshot used with permission from Wikimedia Commons by CCAS4.0 International.</p>
+<p>Rootkits</p>
+<ul>
+<li>Local administrator versus SYSTEM/root privileges</li>
+<li>Replace key system files and utilities</li>
+<li>Purge log files</li>
+<li>Firmware rootkits</li>
+</ul>
+<p>Ransomware, Crypto-Malware, and Logic Bombs</p>
+<ul>
+<li>Ransomware</li>
+<li>Nuisance (lock out user by</li>
+</ul>
+<p>replacing shell)</p>
+<ul>
+<li>Crypto-malware</li>
+<li>High impact ransomware</li>
+</ul>
+<p>(encrypt data files or drives)</p>
+<ul>
+<li>Cryptomining/crypojacking</li>
+<li>Hijack resources to</li>
+</ul>
+<p>mine cryptocurrency</p>
+<ul>
+<li>Logic bombs</li>
+</ul>
+<p>Image by Wikimedia Commons.</p>
+<p>TTPs and IoCs</p>
+<ul>
+<li>Signature detection by anti-virus often ineffective</li>
+<li>Tactics, Techniques, and Procedures (TTPs)</li>
+<li>Indicators of Compromise (IoCs)</li>
+<li>Documented and published TTPs and IoCs</li>
+<li>MITRE ATT&amp;CK</li>
+<li>Pattern-matching via artificial intelligence (AI) systems</li>
+</ul>
+<p>Malicious Activity Indicators</p>
+<ul>
+<li>Browser changes or overt ransomware</li>
+</ul>
+<p>notification</p>
+<ul>
+<li>Sandbox execution</li>
+<li>Resource consumption</li>
+<li>File system</li>
+<li>Blocked content</li>
+<li>Resource inaccessibility</li>
+<li>Account compromise</li>
+<li>Logging</li>
+<li>Missing and out-of-cycle logging</li>
+</ul>
+<p>Windows Performance Monitor recording CPU utilization on a client PC. Anomalous activity is difficult to diagnose, but this graph shows load rarely dropping below 50%. Continual load is not typical of a client system, and could be an indicator of cryptojacking malware. (Screenshot used with permission from Microsoft.)</p>
+<ul>
+<li>Malware classification</li>
+<li>Vector versus payload</li>
+<li>Computer viruses</li>
+<li>Computer worms and fileless malware</li>
+<li>Spyware, adware, and keyloggers</li>
+<li>Backdoors and remote access trojans</li>
+<li>Rootkits</li>
+<li>Ransomware, crypto-malware, and logic bombs</li>
+<li>TTPs and IOCs</li>
+<li>Malicious activity indicators</li>
+<li>Resource consumption, file system, resource inaccessibility, account compromise, logging</li>
+</ul>
+<p>Malware Attack Indicators</p>
+<p>Physical and Network Attack Indicators</p>
 </div>
 </div>
 <h4>Next steps</h4>

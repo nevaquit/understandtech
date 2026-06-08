@@ -18,6 +18,7 @@ const repoRoot = path.resolve(__dirname, '..');
 const outDir = path.join(repoRoot, 'content', 'security-plus', 'lessons');
 const diagramDir = path.join(repoRoot, 'content', 'security-plus', 'diagrams');
 const supplementDir = path.join(repoRoot, 'content', 'security-plus', 'supplements');
+const courseNotesDir = path.join(repoRoot, 'content', 'security-plus', 'course-notes');
 
 const defaultSource = path.join(
   process.env.USERPROFILE || '',
@@ -220,6 +221,14 @@ for (const key of expected) {
     html = html.replace(
       '</div>\n<h4>Next steps</h4>',
       `${supplement}\n</div>\n<h4>Next steps</h4>`
+    );
+  }
+  const notesPath = path.join(courseNotesDir, `${shortname}.html`);
+  if (fs.existsSync(notesPath)) {
+    const notes = fs.readFileSync(notesPath, 'utf8').trim();
+    html = html.replace(
+      '</div>\n<h4>Next steps</h4>',
+      `${notes}\n</div>\n<h4>Next steps</h4>`
     );
   }
   const outfile = path.join(outDir, `${shortname}.html`);

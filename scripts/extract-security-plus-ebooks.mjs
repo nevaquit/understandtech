@@ -152,7 +152,7 @@ function splitObjectives(text, domain, objectiveCount) {
 function wrapSupplement(body) {
   return [
     '<div class="ut-lesson-supplement">',
-    '<h4>Exam Cram supplement</h4>',
+    '<h4>Exam focus</h4>',
     body,
     '</div>',
   ].join('\n');

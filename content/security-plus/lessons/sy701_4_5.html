@@ -55,7 +55,7 @@
 <li><strong>User behavior analytics (UBA)</strong>: Analyzing user activity patterns to detect anomalies that may indicate a security threat.</li>
 </ul>
 <div class="ut-lesson-supplement">
-<h4>Exam Cram supplement</h4>
+<h4>Exam focus</h4>
 <p>Given a scenario, modify enterprise capabilities to enhance security</p>
 <ul>
 <li>Firewall</li>
@@ -147,6 +147,482 @@
 <p>User behavior analytics (UBA) Data is then analyzed using statistical methods, machine learning algorithms, and historical baselines UBA looks for anomalies or suspicious patterns that might indicate: Compromised accounts If a user logs in from an unusual location or time, or accesses unauthorized files, it could indicate a compromised account. Insider threats UBA can identify unusual activity patterns for employees, identifying anomalies that indicate potentially malicious insider behavior. Malware infections Malware can exhibit specific behaviors like unusual network traffic or file access patterns. UBA can help detect these anomalies. e.g. mass upload, download, or deletion</p>
 <p>Goals and Benefits: Early detection of security threats By identifying suspicious activity early, security teams can investigate and respond before any damage occurs. Reduced false positives UBA focuses on user behavior patterns, leading to fewer alerts compared to traditional security tools that rely solely on signatures. Improved investigation efficiency UBA provides valuable context about user activity, helping security teams investigate potential threats more efficiently. User behavior analytics (UBA) UBA can make security investigation and detection more proactive, more accurate, and more efficient (lower effort).</p>
 <p>4.0 Security Operations</p>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p>Access Control Lists</p>
+<ul>
+<li>ACL</li>
+<li>List of permissions associated with a</li>
+</ul>
+<p>network device, such as a router or a switch, that controls traffic at a network interface level</p>
+<ul>
+<li>Firewall Rule</li>
+<li>Dictates how inbound or outbound</li>
+</ul>
+<p>network traffic for specific IP addresses, IP ranges, or network interfaces</p>
+<ul>
+<li>Screened Subnet</li>
+<li>A neutral zone, separating public-facing</li>
+</ul>
+<p>servers from sensitive internal network resources</p>
+<p>Sample firewall rules configured on IPFire. This ruleset allows any HTTP, HTTPS, or SMTP traffic to specific internal addresses. (Screenshot used with permission from IPFire)</p>
+<p>Intrusion Detection and Prevention Systems</p>
+<ul>
+<li>Host-based</li>
+<li>Network-based</li>
+<li>Both look for suspicious patterns or</li>
+</ul>
+<p>activities that could indicate a network or system intrusion</p>
+<ul>
+<li>They differ in their responses to</li>
+</ul>
+<p>perceived threats</p>
+<ul>
+<li>Snort</li>
+<li>Suricata</li>
+<li>OSSEC</li>
+</ul>
+<p>The Security Onion Alerts dashboard displaying several alerts captured using the Emerging Threats (ET) ruleset and Suricata. (Screenshot used with permission from Security Onion.)</p>
+<p>IDS and IPS Detection Methods</p>
+<ul>
+<li>Signature-Based Detection</li>
+<li>Anomaly-based detection</li>
+<li>Trend Analysis</li>
+<li>Behavioral-based detection</li>
+<li>Network Behavior and Anomaly</li>
+</ul>
+<p>Detection (NBAD)</p>
+<ul>
+<li>User and Entity Behavior Analytics</li>
+</ul>
+<p>(UEBA)</p>
+<p>Snort rules file supplied by the open-source Emerging Threats community feed.</p>
+<p>Web Filtering</p>
+<ul>
+<li>Block users from accessing malicious or inappropriate</li>
+</ul>
+<p>websites</p>
+<ul>
+<li>Enforce compliance with acceptable use</li>
+<li>Block malware</li>
+<li>Protection from phishing attacks</li>
+<li>Agent-Based Filtering</li>
+<li>Centralized Web Filtering</li>
+<li>URL Scanning</li>
+<li>Content Categorization</li>
+<li>Block Rules</li>
+<li>Reputation-Based Filtering</li>
+<li>Decrypting and inspecting HTTPS traffic</li>
+</ul>
+<p>Web filter content categories using the IPFire open-source firewall. (Screenshot used with permission from IPFire.)</p>
+<ul>
+<li>Access Control Lists</li>
+<li>Intrusion Detection and Prevention Systems</li>
+<li>IDS and IPS Detection Methods</li>
+<li>Web Filtering</li>
+</ul>
+<p>Network Security Capability Enhancement</p>
+<ul>
+<li>Applied Lab: Implementing a Firewall</li>
+</ul>
+<p>Summary</p>
+<p>Endpoint Hardening</p>
+<ul>
+<li>Operating System Security</li>
+<li>Workstations</li>
+<li>Servers</li>
+<li>Baseline Configuration</li>
+<li>Interfaces</li>
+<li>Services</li>
+<li>Ports</li>
+<li>Storage</li>
+<li>Many others</li>
+</ul>
+<p>Using Security Compliance Manager to compare settings in a production GPO with Microsoft's template policy settings. (Screenshot used with permission from Microsoft.)</p>
+<p>Endpoint Protection</p>
+<ul>
+<li>Segmentation</li>
+<li>Isolation</li>
+<li>Antivirus and Antimalware</li>
+<li>Disk Encryption</li>
+<li>Patch Management</li>
+</ul>
+<p>A segmented network showing Marketing and Finance subnets and the placement of network devices. Traffic between the two networks is controlled by the router. (Images © 123RF.com.)</p>
+<p>Advanced Endpoint Protection</p>
+<ul>
+<li>Endpoint Detection and Response (EDR)</li>
+<li>Extended Detection and Response (XDR)</li>
+<li>Host-Based Intrusion Detection/Prevention (HIDS/HIPS)</li>
+<li>User Behavior Analytics (UBA)/User and Entity Behavior Analytics</li>
+</ul>
+<p>(UEBA)</p>
+<p>Endpoint Configuration</p>
+<ul>
+<li>Principle of Least Privilege</li>
+<li>Access Control Lists</li>
+<li>File System Permissions</li>
+<li>Application Allow Lists and Block</li>
+</ul>
+<p>Lists</p>
+<ul>
+<li>Monitoring</li>
+<li>Configuration Enforcement</li>
+<li>Group Policy</li>
+<li>SELinux</li>
+</ul>
+<p>Configuring an access control entry for a folder. (Screenshot used with permission from Microsoft.)</p>
+<p>Hardening Techniques</p>
+<ul>
+<li>Protecting Physical Ports</li>
+<li>Encryption</li>
+<li>Full Disk Encryption (FDE)</li>
+<li>Removable Media Encryption</li>
+<li>Virtual Private Networks (VPNs)</li>
+<li>Email Encryption</li>
+<li>Host-Based Firewalls and IPS</li>
+<li>Endpoint Protection</li>
+<li>Changing Defaults</li>
+<li>Removing Unnecessary Software</li>
+</ul>
+<p>Hardening Specialized Devices</p>
+<ul>
+<li>ICS/SCADA</li>
+<li>Strict network segmentation</li>
+<li>Robust authentication</li>
+<li>Unidirectional gateways (or data diodes)</li>
+<li>Limit data flow to one direction</li>
+<li>Embedded and RTOS</li>
+<li>Select devices based on security capabilities</li>
+</ul>
+<ul>
+<li>Endpoint Hardening</li>
+<li>Endpoint Protection</li>
+<li>Advanced Endpoint Protection</li>
+<li>Endpoint Configuration</li>
+<li>Hardening Techniques</li>
+<li>Hardening Specialized Devices</li>
+</ul>
+<p>Endpoint Security</p>
+<ul>
+<li>Assisted Lab: Using Group Policy</li>
+<li>Applied Lab: Hardening</li>
+</ul>
+<p>Mobile Device Hardening</p>
+<p>Secure Protocols</p>
+<ul>
+<li>Many of the protocols used today were developed many decades ago</li>
+<li>Functionality was primary focus</li>
+<li>Trustworthiness was assumed</li>
+<li>Cybersecurity was less of an issue than it is today</li>
+<li>Insecure Protocols</li>
+<li>Transmit data in clear text format</li>
+<li>Generally, cannot be secured</li>
+<li>Must be avoided</li>
+<li>Secure Protocols</li>
+<li>Same functionality and secure</li>
+<li>More complex to configure</li>
+</ul>
+<p>Insecure Secure Alternative Telnet SSH HTTP HTTPS FTP FTPS/SFTP</p>
+<p>Transport Layer Security</p>
+<ul>
+<li>Most Common Uses</li>
+<li>Secure HTTP communications</li>
+<li>Virtual Private Networking (VPN)</li>
+<li>SSL/TLS Versions</li>
+<li>SSL 2.0, 3.0</li>
+<li>TLS 1.0, 1.1, 1.2, 1.3</li>
+<li>Only use TLS version 1.2 or newer</li>
+<li>Disable all others</li>
+<li>Downgrade attack</li>
+</ul>
+<p>Transport Layer Security</p>
+<ul>
+<li>Cipher Suites</li>
+<li>Describe the mix of algorithms used to</li>
+</ul>
+<p>implement TLS protections</p>
+<ul>
+<li>Prior to TLS 1.3</li>
+</ul>
+<p>ECDHE-RSA-AES128-GCM-SHA256</p>
+<ul>
+<li>TLS 1.3 uses shortened suites</li>
+</ul>
+<p>TLS_AES_256_GCM_SHA384</p>
+<ul>
+<li>Only lists bulk encryption key</li>
+</ul>
+<p>strength, mode of operation and hash type</p>
+<p>Viewing the TLS handshake in a Wireshark packet capture. Note that the connection is using TLS 1.3 and one of the shortened cipher suites (TLS_AES_128_GCM_SHA256).</p>
+<p>Secure Directory Services</p>
+<ul>
+<li>A Network directory contains</li>
+<li>Subjects (users, computers, and services)</li>
+<li>Objects (directories and files) available in the environment</li>
+<li>Permissions that subjects have over objects</li>
+<li>High-value attack target</li>
+<li>Lightweight Directory Access Protocol (LDAP)</li>
+<li>Default is cleartext communication</li>
+</ul>
+<p>Simple Network Management Protocol Security</p>
+<ul>
+<li>Simple Network Management Protocol (SNMP)</li>
+<li>Management and monitoring</li>
+<li>SNMP monitor + agents</li>
+<li>Provides very detailed information about systems</li>
+<li>Uses “Community Strings” default “Public” and “Private”</li>
+<li>Can be used to issue commands</li>
+<li>SNMPv3 has secure features, other versions should be avoided</li>
+</ul>
+<p>File Transfer Services</p>
+<ul>
+<li>File Transfer Protocol</li>
+<li>Cleartext</li>
+<li>Used to host and share files</li>
+<li>SSH</li>
+<li>Primarily used to access a shell remotely</li>
+<li>Very versatile protocol</li>
+<li>Can be used as a tunnel for other protocols</li>
+<li>FTP (SFTP) and FTP Over SSL (FTPS)</li>
+<li>SFTP is FTP tunneled through SSH</li>
+<li>FTPS is FTP secured using TLS</li>
+</ul>
+<p>Email Services</p>
+<ul>
+<li>SMTP</li>
+<li>Cleartext by default</li>
+<li>Transmit email between systems</li>
+<li>SMTPS is secure configuration</li>
+<li>Open Relay</li>
+<li>Improperly configured SMTP server</li>
+<li>Used to send SPAM</li>
+<li>POP &amp; IMAP</li>
+<li>Used to access mailboxes</li>
+<li>Cleartext by default</li>
+<li>POPS &amp; IMAPS are secure</li>
+</ul>
+<p>Configuring mailbox access protocols on a server.</p>
+<p>Email Security (1 of 3)</p>
+<ul>
+<li>Sender Policy Framework (SPF)</li>
+<li>Email validation method that</li>
+</ul>
+<p>helps detect and prevent sender address forgery</p>
+<ul>
+<li>Uses data saved in DNS TXT</li>
+</ul>
+<p>Records</p>
+<ul>
+<li>Can use to identify “authorized</li>
+</ul>
+<p>senders”</p>
+<ul>
+<li>Hosted email</li>
+<li>Marketing campaigns, etc.</li>
+</ul>
+<p>Displaying the TXT records for microsoft.com using the dig tool. (Screenshot used with permission from Microsoft.)</p>
+<p>Email Security (2 of 3)</p>
+<ul>
+<li>DomainKeys Identified Mail (DKIM)</li>
+<li>Sender signs emails using a digital signature</li>
+<li>Receiver uses a DKIM record in the sender's</li>
+</ul>
+<p>DNS to verify the signature</p>
+<ul>
+<li>Domain-based Message Authentication,</li>
+</ul>
+<p>Reporting &amp; Conformance (DMARC)</p>
+<ul>
+<li>Uses the results of SPF and DKIM checks to</li>
+</ul>
+<p>define rules for handling messages</p>
+<ul>
+<li>Provides reporting capabilities</li>
+<li>Email activity</li>
+<li>Identify systems sending emails</li>
+<li>Identify unauthorized activity</li>
+</ul>
+<p>Performing a DMARC lookup using the DNSChecker website https://dnschecker.org.</p>
+<p>Email Security (3 of 3)</p>
+<ul>
+<li>Email Gateway</li>
+<li>Control point for all incoming and outgoing email</li>
+<li>Anti-spam filters and antivirus scanners</li>
+<li>Sophisticated threat detection algorithms</li>
+<li>Identify phishing attempts, Business Email Compromise (BEC) Attack</li>
+<li>Harmful attachments and malicious URLs</li>
+<li>URL Sanitization/Link Anonymization/Safe Linking/Web Link Transformation</li>
+<li>Secure/Multipurpose Internet Mail Extensions (S/MIME)</li>
+<li>Encrypts emails to provide the confidentiality and integrity protections</li>
+<li>Requires Public Key Infrastructure (PKI)</li>
+</ul>
+<p>Email Data Loss Prevention</p>
+<ul>
+<li>Email is one of the most frequently used communication channels within organizations</li>
+<li>Conduit for sensitive data</li>
+<li>Encourages careless handling of sensitive data (ease of use) and prone to human error</li>
+<li>Common channel for data loss</li>
+<li>GDPR, HIPAA, and PCI DSS, (and others) have requirements for protecting data</li>
+<li>DLP scans emails and attachments for certain types of sensitive information</li>
+<li>Prevents unauthorized sharing of sensitive information</li>
+<li>Create organization-wide DLP policies</li>
+<li>Actions are based on predefined rules, such as</li>
+<li>Blocking the email, alerting the sender, automatically encrypting it</li>
+</ul>
+<p>DNS Filtering</p>
+<ul>
+<li>Block or allow access to specific websites</li>
+<li>DNS filter checks requests against a database of domain</li>
+</ul>
+<p>names</p>
+<ul>
+<li>Block access to malicious sites</li>
+<li>Content/Site Restrictions</li>
+<li>Ad-blocking (Pi-Hole, AdGuard)</li>
+<li>OpenDNS opendns.com</li>
+<li>Quad9 quad9.net</li>
+<li>CleanBrowsing cleanbrowsing.org</li>
+<li>Cisco Umbrella umbrella.cisco.com/products/dns-layer-</li>
+</ul>
+<p>network-security</p>
+<ul>
+<li>CloudFlare DNS cloudflare.com/application-</li>
+</ul>
+<p>services/products/dns/</p>
+<p>The Pi-hole administrative dashboard showing DNS resolution statistics. (Screenshot courtesy of Pi-hole.)</p>
+<p>DNS Security</p>
+<ul>
+<li>DNS Contains valuable information about hosts on a network</li>
+<li>Internal records should not be accessible from the Internet</li>
+<li>DNS protocol is often exploited to perform data exfiltration</li>
+<li>DNS can be exploited to provide malicious data (ex. Attacker IP instead of real IP)</li>
+<li>DNS Security Extensions (DNSSEC)</li>
+<li>Mitigate spoofing and poisoning attacks</li>
+<li>Provides a validation process for DNS responses</li>
+<li>Authoritative server for the zone creates a "package" of resource records (RRset)</li>
+</ul>
+<ul>
+<li>Secure Protocols</li>
+<li>Transport Layer Security</li>
+<li>Secure Directory Services</li>
+<li>Simple Network Management Protocol Security</li>
+<li>File Transfer Services</li>
+<li>Email Services</li>
+<li>Email Security</li>
+<li>Email Data Loss Prevention</li>
+<li>DNS Filtering</li>
+</ul>
+<p>Application Protocol Security Baselines</p>
+<ul>
+<li>Assisted Lab: Performing DNS Filtering</li>
+</ul>
+<p>Cloud and Web Application Security Concepts</p>
+<p>Benchmarks and Secure Configuration Guides (1 of 2)</p>
+<ul>
+<li>Secure baseline</li>
+<li>Collection of standard configurations and settings for operating systems,</li>
+</ul>
+<p>network devices, software, cloud instances, patching and updates, access controls, logging, monitoring, password policies, encryption, endpoint protection, and many others</p>
+<ul>
+<li>Center for Internet Security (CIS)</li>
+<li>Security Technical Implementation Guides (STIGs)</li>
+<li>Vendor provided guidance</li>
+</ul>
+<p>Benchmarks and Secure Configuration Guides (2 of 2)</p>
+<ul>
+<li>Configuration management</li>
+<li>Help manage, deploy, and measure compliance with established secure baselines</li>
+<li>Puppet</li>
+<li>Chef</li>
+<li>Ansible</li>
+<li>Security Content Automation Protocol (SCAP)</li>
+<li>OpenSCAP</li>
+<li>CIS-CAT Pro</li>
+<li>SCAP Compliance Checker (SCC)</li>
+</ul>
+<p>Switches and Routers</p>
+<ul>
+<li>Examples of changes designed to improve security:</li>
+<li>Change Default Credentials</li>
+<li>Disable Unnecessary</li>
+<li>Use Secure Management Protocols</li>
+<li>Implement Access Control Lists (ACLs)</li>
+<li>Enable Logging and Monitoring</li>
+<li>Configure Port Security</li>
+<li>Strong Password</li>
+<li>Physically Secure Equipment</li>
+</ul>
+<p>Server Hardware and Operating Systems</p>
+<ul>
+<li>Examples of changes designed to improve security:</li>
+<li>Change Default Credentials</li>
+<li>Disable Unnecessary Services</li>
+<li>Apply Software Security Patches and Updates Regularly</li>
+<li>Least Privilege Principle</li>
+<li>Use Firewalls and Intrusion Detection Systems (IDS)</li>
+<li>Secure Configuration using CIS or STIG baselines</li>
+<li>Strong Access Controls</li>
+<li>Enable Logging and Monitoring</li>
+<li>Use Antivirus and Antimalware Solutions</li>
+<li>Physical Security of server equipment racks, server rooms, and datacenters</li>
+</ul>
+<p>Wireless Network Installation Considerations</p>
+<ul>
+<li>Wireless Access Point (WAP)</li>
+</ul>
+<p>Placement</p>
+<ul>
+<li>Site Surveys and Heat Maps</li>
+</ul>
+<p>Example output from Lizard System's Wi-Fi Scanner tool. (Screenshot courtesy of Lizard Systems.)</p>
+<p>Wireless Encryption</p>
+<ul>
+<li>Open</li>
+<li>WEP</li>
+<li>WPS</li>
+<li>WPA &amp; WPA2</li>
+<li>WPA3</li>
+<li>Device Provisioning Protocol (DPP)</li>
+</ul>
+<p>a.k.a. “Easy Connect” to replace WPS</p>
+<ul>
+<li>Simultaneous Authentication of Equals</li>
+</ul>
+<p>(SAE)</p>
+<ul>
+<li>Enhanced Open</li>
+</ul>
+<p>Configuring a TP-LINK SOHO access point with wireless encryption and authentication settings. In this example, the 2.4 GHz band allows legacy connections with WPA2-Personal security, while the 5 GHz network is for 802.11ax (Wi-Fi 6) capable devices using WPA3-SAE authentication. (Screenshot used with permission from TP-Link Technologies.)</p>
+<p>Wi-Fi Authentication Methods</p>
+<ul>
+<li>WPA2 Pre-Shared Key Authentication</li>
+<li>WPA3 Personal Authentication</li>
+<li>WPA2/WPA3-Enterprise</li>
+<li>RADIUS</li>
+<li>EAP</li>
+</ul>
+<p>Network Access Control</p>
+<ul>
+<li>Authenticates users/devices</li>
+</ul>
+<p>before allowing them access to the network</p>
+<ul>
+<li>Agent versus agentless</li>
+</ul>
+<p>PacketFence supports the use of several scanning techniques, including vulnerability scanners, such as Nessus and OpenVAS, Windows Management Instrumentation (WMI) queries, and log parsers. (Screenshot used with permission from packetfence.org.)</p>
+<ul>
+<li>Benchmarks and Secure Configuration Guides</li>
+<li>Wireless Network Installation Considerations</li>
+<li>Wireless Encryption</li>
+<li>Wi-Fi Authentication Methods</li>
+<li>Network Access Control</li>
+</ul>
+<p>Network Security Baselines</p>
+<ul>
+<li>Assisted Lab: Understanding Security Baselines</li>
+</ul>
+<p>Network Security Capability Enhancement</p>
 </div>
 </div>
 <h4>Next steps</h4>
