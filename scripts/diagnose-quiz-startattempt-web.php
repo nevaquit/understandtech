@@ -36,14 +36,16 @@ echo "quiz={$quiz->name} behaviour={$quiz->preferredbehaviour}\n";
 
 try {
     require_capability('mod/quiz:preview', context_module::instance($cmid));
+    echo "capability_ok\n";
 } catch (Throwable $e) {
     echo 'capability_error=' . $e->getMessage() . "\n";
     exit(1);
 }
 
 try {
+    echo "creating_quizobj\n";
     $quizobj = mod_quiz\quiz_settings::create($cm->instance, $cm->id);
-    $timenow = time();
+    echo "starting_preview_attempt\n";
     $attempt = quiz_prepare_and_start_new_attempt($quizobj, 1, false, false, [], [], $USER->id);
     echo "preview_attempt_ok id={$attempt->id} uniqueid={$attempt->uniqueid}\n";
 
