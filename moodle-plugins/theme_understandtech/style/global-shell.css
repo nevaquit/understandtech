@@ -482,6 +482,45 @@ body.ut-theme .badge {
     letter-spacing: 0.04em;
 }
 
+/* ── Secondary navigation (course tabs) ─────────────────────────────────────── */
+body.ut-theme .secondary-navigation,
+body.ut-theme .tertiary-navigation {
+    background: transparent !important;
+    border: none !important;
+    margin-bottom: 1rem;
+}
+
+body.ut-theme .secondary-navigation .nav-tabs,
+body.ut-theme .more-nav.nav-tabs,
+body.ut-theme .nav.more-nav {
+    background: transparent !important;
+    border-bottom: 1px solid var(--ut-border) !important;
+}
+
+body.ut-theme .secondary-navigation .nav-link,
+body.ut-theme .more-nav .nav-link {
+    color: var(--ut-text-muted) !important;
+    background: transparent !important;
+    border: none !important;
+    font-family: var(--ut-font-heading);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+body.ut-theme .secondary-navigation .nav-link.active,
+body.ut-theme .more-nav .nav-link.active {
+    color: var(--ut-gold) !important;
+    background: rgba(201, 162, 39, 0.08) !important;
+    border-bottom: 2px solid var(--ut-gold) !important;
+}
+
+body.ut-theme .secondary-navigation .nav-link:hover,
+body.ut-theme .more-nav .nav-link:hover {
+    color: var(--ut-gold) !important;
+}
+
 /* ── Course view & activities ───────────────────────────────────────────────── */
 body.ut-theme.path-course-view .course-section-header h3,
 body.ut-theme .course-section-header h3 {
