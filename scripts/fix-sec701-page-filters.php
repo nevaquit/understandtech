@@ -18,17 +18,22 @@ global $DB;
 
 $courseid = 3;
 $course = get_course($courseid);
+$coursecontext = context_course::instance($courseid);
 $modinfo = get_fast_modinfo($course);
 $pages = $modinfo->get_instances_of('page');
 
-echo "=== disable filters on SEC701 page modules course={$courseid} count=" . count($pages) . " ===\n";
+echo "=== disable filters on SEC701 lesson pages course={$courseid} pages=" . count($pages) . " ===\n";
 
 foreach ($pages as $cm) {
     $context = context_module::instance($cm->id);
-    foreach (array_keys(filter_get_active_in_context($context)) as $filtername) {
-        filter_set_local_state($filtername, $context, TEXTFILTER_OFF);
+    if ($context->contextlevel !== CONTEXT_MODULE) {
+        echo "skip_invalid_context cmid={$cm->id} level={$context->contextlevel}\n";
+        continue;
     }
-    echo "filters_disabled cmid={$cm->id} name={$cm->name}\n";
+    foreach (array_keys(filter_get_active_in_context($context)) as $filtername) {
+        filter_set_local_state($filtername, $context->id, TEXTFILTER_OFF);
+    }
+    echo "filters_disabled cmid={$cm->id} ctx={$context->id} name={$cm->name}\n";
 }
 
 filter_manager::reset_caches();
