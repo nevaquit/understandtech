@@ -2,7 +2,9 @@
 # Sync moodle-plugins from monorepo into Moodle dirroot on VM.
 set -euo pipefail
 
-SRC="${1:-${SRC:-/tmp/understandtech-plugins/moodle-plugins}}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+SRC="${1:-${SRC:-${REPO_ROOT}/moodle-plugins}}"
 MOODLE="${MOODLE_DIR:-/var/www/moodle}"
 
 # Map monorepo folder names to Moodle dirroot paths.
