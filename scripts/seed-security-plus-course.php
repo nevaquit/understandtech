@@ -22,6 +22,7 @@ require_once($CFG->dirroot . '/question/engine/lib.php');
 require_once($CFG->dirroot . '/question/format.php');
 require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->dirroot . '/lib/questionlib.php');
+require_once($CFG->libdir . '/filterlib.php');
 
 /**
  * Build fallback lesson HTML when no CyberKraft content file exists.
@@ -117,6 +118,35 @@ function security_plus_page_exists(int $courseid, int $sectionnum, string $name)
 }
 
 /**
+ * Update page content through Moodle APIs so filter/modinfo caches stay valid.
+ *
+ * @param stdClass $course
+ * @param stdClass $page
+ * @param string $name
+ * @param string $html
+ * @return void
+ */
+function security_plus_update_page_content(stdClass $course, stdClass $page, string $name, string $html): void {
+    global $DB;
+
+    $update = clone $page;
+    $update->course = $course->id;
+    $update->name = $name;
+    $update->content = $html;
+    $update->contentformat = FORMAT_HTML;
+    $update->timemodified = time();
+    $update->revision = (int) $page->revision + 1;
+
+    $cm = get_coursemodule_from_instance('page', (int) $page->id, (int) $course->id, false);
+    if ($cm) {
+        $update->coursemodule = $cm->id;
+        page_update_instance($update, null);
+    } else {
+        $DB->update_record('page', $update);
+    }
+}
+
+/**
  * Create or update a lesson page with CyberKraft content.
  *
  * @param stdClass $course
@@ -126,16 +156,10 @@ function security_plus_page_exists(int $courseid, int $sectionnum, string $name)
  * @return void
  */
 function security_plus_upsert_page(stdClass $course, int $sectionnum, string $name, string $html): void {
-    global $DB;
-
     $existing = security_plus_find_page((int) $course->id, $sectionnum, $name);
     if ($existing) {
         if ($existing->content !== $html) {
-            $existing->content = $html;
-            $existing->contentformat = FORMAT_HTML;
-            $existing->timemodified = time();
-            $existing->revision = (int) $existing->revision + 1;
-            $DB->update_record('page', $existing);
+            security_plus_update_page_content($course, $existing, $name, $html);
             echo "page_updated id={$existing->id} name={$name} section={$sectionnum}\n";
         } else {
             echo "page_unchanged id={$existing->id} name={$name} section={$sectionnum}\n";
@@ -764,11 +788,7 @@ foreach ($objectives as $objective) {
             $legacypage->name = $pagename;
         }
         if ($legacypage->content !== $html) {
-            $legacypage->content = $html;
-            $legacypage->contentformat = FORMAT_HTML;
-            $legacypage->timemodified = time();
-            $legacypage->revision = (int) $legacypage->revision + 1;
-            $DB->update_record('page', $legacypage);
+            security_plus_update_page_content($course, $legacypage, $pagename, $html);
             echo "page_updated_legacy id={$legacypage->id} name={$pagename} section={$sectionnum}\n";
         } else {
             echo "page_unchanged_legacy id={$legacypage->id} name={$pagename} section={$sectionnum}\n";
@@ -821,5 +841,6 @@ if ($enrol) {
 }
 
 rebuild_course_cache((int) $course->id, true);
+filter_manager::reset_caches();
 echo "COURSE_PATH=/course/view.php?id={$course->id}\n";
 echo "=== seed complete ===\n";
