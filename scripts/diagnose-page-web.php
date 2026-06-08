@@ -51,11 +51,29 @@ $page = $DB->get_record('page', ['id' => $cm->instance], '*', MUST_EXIST);
 echo 'page_name=' . $page->name . "\n";
 
 try {
+    $content = file_rewrite_pluginfile_urls(
+        $page->content,
+        'pluginfile.php',
+        $context->id,
+        'mod_page',
+        'content',
+        0
+    );
+    echo 'pluginfile_rewrite_ok len=' . strlen($content) . "\n";
+} catch (Throwable $e) {
+    echo 'pluginfile_rewrite_error=' . $e->getMessage() . "\n";
+    if (!empty($e->debuginfo)) {
+        echo 'pluginfile_rewrite_debug=' . $e->debuginfo . "\n";
+    }
+    $content = $page->content;
+}
+
+try {
     $options = new stdClass();
     $options->noclean = true;
     $options->overflowdiv = true;
     $options->context = $context;
-    $formatted = format_text($page->content, $page->contentformat, $options);
+    $formatted = format_text($content, $page->contentformat, $options);
     echo 'format_text_ok len=' . strlen($formatted) . "\n";
 } catch (Throwable $e) {
     echo 'format_text_error=' . $e->getMessage() . "\n";

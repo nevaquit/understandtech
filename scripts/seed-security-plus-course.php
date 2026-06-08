@@ -126,6 +126,33 @@ function security_plus_page_exists(int $courseid, int $sectionnum, string $name)
  * @param string $html
  * @return void
  */
+/**
+ * Disable text filters on lesson page modules (prevents filter MUC DB errors on large HTML).
+ *
+ * @param stdClass $course
+ * @return void
+ */
+function security_plus_disable_page_module_filters(stdClass $course): void {
+    $modinfo = get_fast_modinfo($course);
+    $pages = $modinfo->get_instances_of('page');
+    foreach ($pages as $cm) {
+        $context = context_module::instance($cm->id);
+        foreach (array_keys(filter_get_active_in_context($context)) as $filtername) {
+            filter_set_local_state($filtername, $context, TEXTFILTER_DISABLED);
+        }
+    }
+    filter_manager::reset_caches();
+}
+
+/**
+ * Update page content through Moodle APIs so filter/modinfo caches stay valid.
+ *
+ * @param stdClass $course
+ * @param stdClass $page
+ * @param string $name
+ * @param string $html
+ * @return void
+ */
 function security_plus_update_page_content(stdClass $course, stdClass $page, string $name, string $html): void {
     global $DB;
 
@@ -840,7 +867,9 @@ if ($enrol) {
     }
 }
 
+security_plus_disable_page_module_filters($course);
 rebuild_course_cache((int) $course->id, true);
 filter_manager::reset_caches();
+echo "page_filters_disabled=1\n";
 echo "COURSE_PATH=/course/view.php?id={$course->id}\n";
 echo "=== seed complete ===\n";
