@@ -30,7 +30,7 @@ curl -sS -b /tmp/moodle-cj -c /tmp/moodle-cj -L \
 curl -sS -b /tmp/moodle-cj -c /tmp/moodle-cj -L \
   -o /tmp/page.html -w "page_http:%{http_code}\n" "${PAGE_URL}"
 grep -o '<title>[^<]*</title>' /tmp/page.html | head -1
-grep -oE 'ut-lesson-content|path-mod-page|lesson-content\.css|SY701\.1\.2|Error reading from database' /tmp/page.html | sort -u | tr '\n' ' '
+grep -oE 'ut-lesson-content|path-mod-page|lesson-content\.css|SY701\.1\.2|Error reading from database' /tmp/page.html | sort -u | tr '\n' ' ' || true
 echo
 wc -c /tmp/page.html
 echo "ut_lesson_count=$(grep -c 'ut-lesson-content' /tmp/page.html || true)"
