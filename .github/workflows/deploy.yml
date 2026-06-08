@@ -263,6 +263,12 @@ jobs:
             echo "No core-patches/apply-patches.sh — skipping"
           fi
 
+      - name: Ensure Redis Moodle sessions
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          bash "${PLUGINS_REPO_DIR}/scripts/migrate-moodle-sessions-to-redis-vm.sh"
+
       - name: Purge Moodle caches
         run: |
           set -euo pipefail

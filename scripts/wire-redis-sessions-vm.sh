@@ -5,8 +5,13 @@ set -euo pipefail
 CONFIG="${MOODLE_CONFIG:-/var/www/moodle/config.php}"
 MARKER='$CFG->session_handler_class'
 
-if sudo grep -qF 'session_handler_class' "$CONFIG" 2>/dev/null; then
+if sudo grep -qF "\\core\\session\\redis" "$CONFIG" 2>/dev/null; then
     echo 'redis_sessions=already_configured'
+elif sudo grep -qF 'session_handler_class' "$CONFIG" 2>/dev/null; then
+    REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
+    sudo python3 "${REPO}/scripts/patch-moodle-redis-sessions.py" "$CONFIG"
+    sudo php -l "$CONFIG" >/dev/null
+    echo 'redis_sessions=migrated_from_database'
 else
     sudo cp "$CONFIG" "${CONFIG}.bak.$(date +%Y%m%d%H%M%S)"
     sudo python3 - <<'PY'
