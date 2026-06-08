@@ -148,6 +148,32 @@ foreach ($filterstates as $filtername => $state) {
 filter_manager::reset_caches();
 
 $enabled = array_keys(array_filter($filterstates, static fn(int $s): bool => $s === TEXTFILTER_ON));
+$chain = [];
+foreach ($enabled as $name) {
+    $chain[] = $name;
+    foreach ($filterstates as $filtername => $state) {
+        filter_set_global_state($filtername, TEXTFILTER_DISABLED);
+    }
+    foreach ($chain as $on) {
+        filter_set_global_state($on, TEXTFILTER_ON);
+    }
+    filter_manager::reset_caches();
+    try {
+        $context = context_module::instance($cmid);
+        $page = $DB->get_record('page', ['id' => $cm->instance], '*', MUST_EXIST);
+        $options = new stdClass();
+        $options->noclean = true;
+        $options->overflowdiv = true;
+        $options->context = $context;
+        $filtered = format_text($page->content, $page->contentformat, $options);
+        echo 'chain_ok filters=' . implode('+', $chain) . ' len=' . strlen($filtered) . "\n";
+    } catch (Throwable $e) {
+        echo 'chain_fail filters=' . implode('+', $chain) . ' err=' . $e->getMessage() . "\n";
+        break;
+    }
+}
+
+$enabled = array_keys(array_filter($filterstates, static fn(int $s): bool => $s === TEXTFILTER_ON));
 foreach ($enabled as $skip) {
     foreach ($filterstates as $filtername => $state) {
         filter_set_global_state($filtername, TEXTFILTER_DISABLED);
