@@ -591,14 +591,8 @@ function security_plus_sync_quiz(stdClass $course, int $sectionnum, string $quiz
     $cm = get_coursemodule_from_instance('quiz', (int) $quizrecord->id, (int) $course->id, false, MUST_EXIST);
     $quizrecord->cmid = $cm->id;
 
-    $slots = $DB->get_records('quiz_slots', ['quizid' => $quizrecord->id], 'slot ASC', 'slot,questionid');
-    $existing = array_map(static fn($s) => (int) $s->questionid, $slots);
-
     $added = 0;
     foreach ($questionids as $qid) {
-        if (in_array($qid, $existing, true)) {
-            continue;
-        }
         try {
             if (quiz_add_quiz_question($qid, $quizrecord, 0) === false) {
                 continue;
