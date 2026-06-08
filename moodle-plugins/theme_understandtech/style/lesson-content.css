@@ -104,6 +104,10 @@
     background: transparent;
 }
 
+body.ut-lesson-page:has(.ut-lesson-content) .activity-header {
+    display: none;
+}
+
 .path-mod-page .activity-header .activityicon,
 #page-mod-page-view .activity-header .activityicon,
 .ut-lesson-page .activity-header .activityicon {
