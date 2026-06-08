@@ -71,6 +71,8 @@ function theme_understandtech_get_pre_scss(theme_config $theme): string {
 function theme_understandtech_page_init(moodle_page $page): void {
     global $CFG;
 
+    $page->add_body_class('ut-theme');
+
     $theme = theme_config::load('understandtech');
     if (!empty($theme->settings->enable_skool_layout)) {
         $page->add_body_class('ut-skool-enabled');
@@ -86,20 +88,6 @@ function theme_understandtech_page_init(moodle_page $page): void {
 
     // Load the AMD theme module on every page.
     $page->requires->js_call_amd('theme_understandtech/theme', 'init');
-
-    // Add Google Fonts preconnect hints via additional_html (head section).
-    // These are injected as raw HTML since Moodle has no API for <link rel="preconnect">.
-    $fontlinks = '<link rel="preconnect" href="https://fonts.googleapis.com">'
-        . '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-        . '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Share+Tech+Mono&display=swap" onload="this.onload=null;this.rel=\'stylesheet\'">'
-        . '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Share+Tech+Mono&display=swap"></noscript>';
-
-    // Inject via $CFG->additionalhtmlhead if not already present.
-    if (empty($CFG->additionalhtmlhead) || strpos($CFG->additionalhtmlhead, 'Rajdhani') === false) {
-        // Note: in production, set $CFG->additionalhtmlhead in config.php or via Site Admin > Appearance > Additional HTML.
-        // This is a fallback for environments where that config is not set.
-        $page->requires->string_for_js('pluginname', 'theme_understandtech');
-    }
 }
 
 /**

@@ -1,0 +1,634 @@
+/* UnderstandTech — global Moodle shell (Boost drawers layout)
+ * Loaded on every page via $THEME->sheets. Plain CSS for reliable deploy. */
+
+:root {
+    --ut-navy-deep: #071426;
+    --ut-navy: #0B1F3A;
+    --ut-navy-mid: #112847;
+    --ut-surface: #0f2447;
+    --ut-surface-elevated: #0F2035;
+    --ut-gold: #C9A227;
+    --ut-gold-light: #E8C547;
+    --ut-teal: #1A8A7D;
+    --ut-teal-light: #22B5A5;
+    --ut-text: rgba(255, 255, 255, 0.94);
+    --ut-text-muted: rgba(255, 255, 255, 0.72);
+    --ut-text-subtle: rgba(255, 255, 255, 0.55);
+    --ut-border: rgba(201, 162, 39, 0.18);
+    --ut-border-strong: rgba(201, 162, 39, 0.32);
+    --ut-font-heading: "Rajdhani", "Segoe UI", system-ui, sans-serif;
+    --ut-font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --ut-font-mono: "Share Tech Mono", Consolas, "Courier New", monospace;
+    --ut-radius-sm: 0.375rem;
+    --ut-radius-md: 0.75rem;
+    --ut-radius-lg: 1rem;
+    --ut-content-max: 75rem;
+}
+
+/* ── Typography (site-wide) ─────────────────────────────────────────────────── */
+body.ut-theme,
+body.understandtech-app--learn {
+    font-family: var(--ut-font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ut-text);
+    background-color: var(--ut-navy);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.ut-theme h1,
+body.ut-theme h2,
+body.ut-theme h3,
+body.ut-theme h4,
+body.ut-theme h5,
+body.ut-theme h6,
+body.ut-theme .h1,
+body.ut-theme .h2,
+body.ut-theme .h3,
+body.ut-theme .h4,
+body.ut-theme .h5,
+body.ut-theme .h6,
+body.ut-theme .page-header-headings,
+body.ut-theme .activity-header,
+body.ut-theme .navbar,
+body.ut-theme .btn,
+body.ut-theme label,
+body.ut-theme legend,
+body.ut-theme th,
+body.ut-theme .breadcrumb,
+body.ut-theme .nav-tabs,
+body.ut-theme .dropdown-menu,
+body.ut-theme .courseindex,
+body.ut-theme .drawerheader {
+    font-family: var(--ut-font-heading);
+}
+
+body.ut-theme p,
+body.ut-theme li,
+body.ut-theme dd,
+body.ut-theme .card-text,
+body.ut-theme .form-text,
+body.ut-theme .editor_atto_content,
+body.ut-theme .atto_editor {
+    font-family: var(--ut-font-body);
+    color: var(--ut-text);
+}
+
+body.ut-theme code,
+body.ut-theme pre,
+body.ut-theme kbd,
+body.ut-theme samp,
+body.ut-theme .code,
+body.ut-theme .generaltable code {
+    font-family: var(--ut-font-mono);
+}
+
+body.ut-theme .text-muted,
+body.ut-theme .text-secondary,
+body.ut-theme small.text-muted,
+body.ut-theme .dimmed_text,
+body.ut-theme .dimmed {
+    color: var(--ut-text-muted) !important;
+}
+
+body.ut-theme a:not(.btn):not(.dropdown-item):not(.nav-link) {
+    color: var(--ut-teal-light);
+}
+
+body.ut-theme a:not(.btn):not(.dropdown-item):not(.nav-link):hover {
+    color: var(--ut-gold);
+}
+
+/* ── Page shell (Boost drawers) ───────────────────────────────────────────── */
+body.ut-theme #page-wrapper,
+body.ut-theme #page,
+body.ut-theme #page.drawers {
+    background: var(--ut-navy);
+    color: var(--ut-text);
+}
+
+body.ut-theme #page.drawers .main-inner,
+body.ut-theme #page.drawers .drawer-main-content {
+    background: transparent !important;
+    color: var(--ut-text);
+    box-shadow: none !important;
+    border: none !important;
+}
+
+body.ut-theme #page-header,
+body.ut-theme #page-header .header-maxwidth {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--ut-text);
+}
+
+body.ut-theme #region-main,
+body.ut-theme #region-main-box,
+body.ut-theme #page-content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--ut-text);
+}
+
+body.ut-theme #region-main {
+    padding: 0 clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 3rem);
+}
+
+body.ut-theme .page-header-headings h1,
+body.ut-theme .page-header-headings .h2 {
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+/* ── Top navigation (Boost default + custom ut-navbar) ─────────────────────── */
+body.ut-theme .navbar,
+body.ut-theme nav.navbar.fixed-top,
+body.ut-theme .navbar.bg-white,
+body.ut-theme .navbar-light,
+body.ut-theme .navbar.ut-navbar {
+    background: rgba(7, 20, 38, 0.98) !important;
+    border-bottom: 1px solid var(--ut-border) !important;
+    box-shadow: 0 4px 24px rgba(7, 20, 38, 0.35);
+    min-height: 4rem;
+}
+
+body.ut-theme .navbar .navbar-brand,
+body.ut-theme .navbar .navbar-brand .site-name,
+body.ut-theme .navbar .navbar-brand .logo {
+    color: #fff !important;
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+body.ut-theme .navbar .nav-link,
+body.ut-theme .primary-navigation .nav-link,
+body.ut-theme .navbar .dropdown-toggle {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-family: var(--ut-font-heading);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+body.ut-theme .navbar .nav-link:hover,
+body.ut-theme .navbar .nav-link:focus,
+body.ut-theme .primary-navigation .nav-link:hover,
+body.ut-theme .primary-navigation .nav-link:focus {
+    color: var(--ut-gold) !important;
+}
+
+body.ut-theme .navbar .nav-link.active,
+body.ut-theme .primary-navigation .nav-link.active {
+    color: var(--ut-gold) !important;
+}
+
+body.ut-theme .navbar .divider,
+body.ut-theme .navbar .border-start,
+body.ut-theme .navbar .border-end {
+    border-color: var(--ut-border) !important;
+}
+
+/* ── Drawers (course index, blocks) ───────────────────────────────────────── */
+body.ut-theme .drawer,
+body.ut-theme .drawer.drawer-left,
+body.ut-theme .drawer.drawer-right {
+    background: var(--ut-navy-deep) !important;
+    border-color: var(--ut-border) !important;
+    color: var(--ut-text);
+}
+
+body.ut-theme .drawer .drawerheader,
+body.ut-theme .drawer .drawercontent {
+    background: var(--ut-navy-deep) !important;
+    color: var(--ut-text);
+    border-color: var(--ut-border) !important;
+}
+
+body.ut-theme .drawer .btn-close,
+body.ut-theme .drawer .drawertoggle {
+    color: var(--ut-gold);
+    opacity: 0.85;
+}
+
+body.ut-theme .courseindex,
+body.ut-theme .courseindex-item,
+body.ut-theme .courseindex-section {
+    color: var(--ut-text);
+}
+
+body.ut-theme .courseindex-section-title,
+body.ut-theme .courseindex .icon {
+    color: var(--ut-gold);
+}
+
+body.ut-theme .courseindex-item a,
+body.ut-theme .courseindex-item .courseindex-link {
+    color: rgba(255, 255, 255, 0.82);
+    font-family: var(--ut-font-heading);
+    font-size: 0.875rem;
+}
+
+body.ut-theme .courseindex-item.active a,
+body.ut-theme .courseindex-item a.active,
+body.ut-theme .courseindex-item.current a {
+    color: var(--ut-gold);
+    background: rgba(201, 162, 39, 0.1);
+    border-radius: var(--ut-radius-sm);
+}
+
+/* ── Breadcrumbs ────────────────────────────────────────────────────────────── */
+body.ut-theme .breadcrumb {
+    background: transparent;
+    padding: 0.5rem 0;
+    margin-bottom: 0.75rem;
+}
+
+body.ut-theme .breadcrumb .breadcrumb-item {
+    color: var(--ut-text-subtle);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+body.ut-theme .breadcrumb .breadcrumb-item a {
+    color: var(--ut-text-muted);
+    text-decoration: none;
+}
+
+body.ut-theme .breadcrumb .breadcrumb-item a:hover {
+    color: var(--ut-gold);
+}
+
+body.ut-theme .breadcrumb .breadcrumb-item.active {
+    color: var(--ut-gold);
+}
+
+body.ut-theme .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(201, 162, 39, 0.45);
+}
+
+/* ── Cards, blocks, regions ─────────────────────────────────────────────────── */
+body.ut-theme .card,
+body.ut-theme .block,
+body.ut-theme .block .card,
+body.ut-theme .block .card-body {
+    background: var(--ut-surface-elevated);
+    border: 1px solid var(--ut-border);
+    color: var(--ut-text);
+    border-radius: var(--ut-radius-md);
+}
+
+body.ut-theme .card-header,
+body.ut-theme .card-footer {
+    background: rgba(11, 31, 58, 0.55);
+    border-color: var(--ut-border);
+    color: var(--ut-text);
+}
+
+body.ut-theme .card-title,
+body.ut-theme .block .card-title {
+    color: #fff;
+    font-weight: 700;
+}
+
+body.ut-theme .block {
+    border-radius: var(--ut-radius-md);
+}
+
+body.ut-theme .block .card-body p,
+body.ut-theme .block .card-body li {
+    color: var(--ut-text-muted);
+}
+
+/* ── Forms ──────────────────────────────────────────────────────────────────── */
+body.ut-theme .form-control,
+body.ut-theme .form-select,
+body.ut-theme .custom-select,
+body.ut-theme input[type="text"],
+body.ut-theme input[type="password"],
+body.ut-theme input[type="email"],
+body.ut-theme input[type="search"],
+body.ut-theme textarea,
+body.ut-theme select {
+    background: var(--ut-navy-mid);
+    border: 1px solid var(--ut-border-strong);
+    color: #fff;
+    border-radius: var(--ut-radius-sm);
+    font-family: var(--ut-font-body);
+}
+
+body.ut-theme .form-control::placeholder {
+    color: var(--ut-text-subtle);
+}
+
+body.ut-theme .form-control:focus,
+body.ut-theme .form-select:focus {
+    background: var(--ut-navy-mid);
+    border-color: var(--ut-gold);
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.25);
+}
+
+body.ut-theme label,
+body.ut-theme .col-form-label,
+body.ut-theme .form-label {
+    color: var(--ut-text);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────────── */
+body.ut-theme .btn-primary {
+    background: var(--ut-teal);
+    border-color: var(--ut-teal);
+    color: #fff;
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+body.ut-theme .btn-primary:hover,
+body.ut-theme .btn-primary:focus {
+    background: var(--ut-teal-light);
+    border-color: var(--ut-teal-light);
+    color: #fff;
+}
+
+body.ut-theme .btn-secondary {
+    background: var(--ut-gold);
+    border-color: var(--ut-gold);
+    color: var(--ut-navy);
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+}
+
+body.ut-theme .btn-secondary:hover,
+body.ut-theme .btn-secondary:focus {
+    background: var(--ut-gold-light);
+    border-color: var(--ut-gold-light);
+    color: var(--ut-navy);
+}
+
+body.ut-theme .btn-outline-secondary {
+    border-color: var(--ut-border-strong);
+    color: var(--ut-text);
+}
+
+body.ut-theme .btn-outline-secondary:hover {
+    background: rgba(201, 162, 39, 0.1);
+    border-color: var(--ut-gold);
+    color: var(--ut-gold);
+}
+
+/* ── Tables ─────────────────────────────────────────────────────────────────── */
+body.ut-theme .table,
+body.ut-theme .generaltable {
+    color: var(--ut-text);
+}
+
+body.ut-theme .table thead th,
+body.ut-theme .generaltable thead th {
+    color: var(--ut-gold);
+    border-color: var(--ut-border);
+    font-family: var(--ut-font-heading);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+body.ut-theme .table td,
+body.ut-theme .table th,
+body.ut-theme .generaltable td,
+body.ut-theme .generaltable th {
+    border-color: var(--ut-border);
+}
+
+body.ut-theme .table-striped tbody tr:nth-of-type(odd),
+body.ut-theme .generaltable tbody tr:nth-of-type(odd) {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Dropdowns, popovers, modals ────────────────────────────────────────────── */
+body.ut-theme .dropdown-menu {
+    background: var(--ut-surface-elevated);
+    border: 1px solid var(--ut-border);
+    box-shadow: 0 12px 40px rgba(7, 20, 38, 0.55);
+}
+
+body.ut-theme .dropdown-item {
+    color: var(--ut-text);
+    font-family: var(--ut-font-heading);
+}
+
+body.ut-theme .dropdown-item:hover,
+body.ut-theme .dropdown-item:focus,
+body.ut-theme .dropdown-item.active {
+    background: rgba(201, 162, 39, 0.12);
+    color: var(--ut-gold);
+}
+
+body.ut-theme .modal-content {
+    background: var(--ut-surface-elevated);
+    border: 1px solid var(--ut-border-strong);
+    color: var(--ut-text);
+}
+
+body.ut-theme .modal-header,
+body.ut-theme .modal-footer {
+    background: rgba(11, 31, 58, 0.55);
+    border-color: var(--ut-border);
+}
+
+body.ut-theme .popover-body,
+body.ut-theme .popover-header {
+    background: var(--ut-surface-elevated);
+    color: var(--ut-text);
+    border-color: var(--ut-border);
+}
+
+/* ── Alerts & badges ────────────────────────────────────────────────────────── */
+body.ut-theme .alert {
+    border-radius: var(--ut-radius-md);
+    border-width: 1px;
+}
+
+body.ut-theme .alert-info {
+    background: rgba(26, 138, 125, 0.15);
+    border-color: rgba(26, 138, 125, 0.35);
+    color: #fff;
+}
+
+body.ut-theme .alert-warning {
+    background: rgba(201, 162, 39, 0.12);
+    border-color: rgba(201, 162, 39, 0.35);
+    color: #fff;
+}
+
+body.ut-theme .alert-danger {
+    background: rgba(180, 50, 50, 0.15);
+    border-color: rgba(220, 80, 80, 0.35);
+    color: #fff;
+}
+
+body.ut-theme .badge {
+    font-family: var(--ut-font-heading);
+    letter-spacing: 0.04em;
+}
+
+/* ── Course view & activities ───────────────────────────────────────────────── */
+body.ut-theme.path-course-view .course-section-header h3,
+body.ut-theme .course-section-header h3 {
+    color: var(--ut-gold);
+    font-size: 1.125rem;
+    letter-spacing: 0.05em;
+}
+
+body.ut-theme .activity-item,
+body.ut-theme .activity {
+    border-radius: var(--ut-radius-md);
+}
+
+body.ut-theme .activity-item {
+    background: rgba(15, 36, 71, 0.55);
+    border: 1px solid var(--ut-border);
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+body.ut-theme .activity-item:hover {
+    background: rgba(15, 36, 71, 0.8);
+    border-color: var(--ut-border-strong);
+}
+
+body.ut-theme .activityname,
+body.ut-theme .activityname a,
+body.ut-theme .activityinstance a {
+    color: var(--ut-text);
+    font-family: var(--ut-font-heading);
+    font-weight: 600;
+}
+
+body.ut-theme .activityicon .icon,
+body.ut-theme .activityicon img {
+    filter: none;
+}
+
+/* ── Dashboard / My courses ─────────────────────────────────────────────────── */
+body.ut-theme.pagelayout-mydashboard #region-main,
+body.ut-theme.pagelayout-frontpage #region-main,
+body.ut-theme.pagelayout-coursecategory #region-main {
+    max-width: var(--ut-content-max);
+    margin: 0 auto;
+}
+
+body.ut-theme .dashboard-card,
+body.ut-theme .card-grid .card {
+    background: var(--ut-surface);
+    border: 1px solid var(--ut-border);
+    border-top: 3px solid var(--ut-teal);
+}
+
+body.ut-theme .dashboard-card .card-img,
+body.ut-theme .coursebox .content {
+    color: var(--ut-text);
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────────── */
+body.ut-theme #page-footer,
+body.ut-theme .footer-popover {
+    background: var(--ut-navy-deep);
+    border-top: 1px solid var(--ut-border);
+    color: var(--ut-text-muted);
+}
+
+body.ut-theme #page-footer a {
+    color: var(--ut-teal-light);
+}
+
+body.ut-theme #page-footer a:hover {
+    color: var(--ut-gold);
+}
+
+/* ── Messaging / notification panels ────────────────────────────────────────── */
+body.ut-theme .popover-region-container,
+body.ut-theme .message-drawer,
+body.ut-theme .navbar .popover-region {
+    background: var(--ut-surface-elevated);
+    border: 1px solid var(--ut-border);
+    color: var(--ut-text);
+}
+
+body.ut-theme .popover-region-footer-container,
+body.ut-theme .message-drawer-header {
+    background: rgba(11, 31, 58, 0.55);
+    border-color: var(--ut-border);
+}
+
+/* ── Quiz & question UI ─────────────────────────────────────────────────────── */
+body.ut-theme.path-mod-quiz .que,
+body.ut-theme .que {
+    background: rgba(15, 36, 71, 0.65);
+    border: 1px solid var(--ut-border);
+    border-radius: var(--ut-radius-md);
+    color: var(--ut-text);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+body.ut-theme .que .qtext,
+body.ut-theme .que .formulation {
+    color: var(--ut-text);
+    font-family: var(--ut-font-body);
+}
+
+body.ut-theme .que .prompt {
+    color: var(--ut-gold);
+    font-family: var(--ut-font-heading);
+}
+
+/* ── Pagination, tabs, nav pills ────────────────────────────────────────────── */
+body.ut-theme .nav-tabs {
+    border-bottom-color: var(--ut-border);
+}
+
+body.ut-theme .nav-tabs .nav-link {
+    color: var(--ut-text-muted);
+    border-color: transparent;
+}
+
+body.ut-theme .nav-tabs .nav-link.active,
+body.ut-theme .nav-tabs .nav-link:hover {
+    color: var(--ut-gold);
+    background: rgba(201, 162, 39, 0.08);
+    border-color: var(--ut-border) var(--ut-border) transparent;
+}
+
+body.ut-theme .page-link {
+    background: var(--ut-surface);
+    border-color: var(--ut-border);
+    color: var(--ut-text);
+}
+
+body.ut-theme .page-item.active .page-link {
+    background: var(--ut-gold);
+    border-color: var(--ut-gold);
+    color: var(--ut-navy);
+}
+
+/* ── Fix legacy light-theme leaks in post.scss widgets ──────────────────────── */
+body.ut-theme .ut-leaderboard .ut-leaderboard-row,
+body.ut-theme .ut-member-card {
+    background: rgba(15, 36, 71, 0.65) !important;
+    border: 1px solid var(--ut-border) !important;
+    color: var(--ut-text);
+}
+
+body.ut-theme .ut-member-card .ut-avatar {
+    background: var(--ut-navy-mid);
+}

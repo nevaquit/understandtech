@@ -7,9 +7,9 @@
         justify-content: space-between;
         padding: 0.75rem 1rem;
         border-radius: 0.5rem;
-        background: #fff;
+        background: rgba($ut-brand-navy, 0.55);
         margin-bottom: 0.5rem;
-        border: 1px solid rgba($ut-brand-navy, 0.08);
+        border: 1px solid rgba($ut-brand-gold, 0.12);
     }
 
     .ut-rank {
@@ -36,8 +36,8 @@
     text-align: center;
     padding: 1.25rem;
     border-radius: $card-border-radius;
-    background: #fff;
-    border: 1px solid rgba($ut-brand-navy, 0.1);
+    background: rgba($ut-brand-navy, 0.55);
+    border: 1px solid rgba($ut-brand-gold, 0.12);
 
     .ut-avatar {
         width: 4rem;
@@ -418,5 +418,46 @@
 
     .ut-lesson-media {
         min-width: 0;
+    }
+}
+
+// =============================================================================
+// Boost drawers shell — site-wide (mirrors style/global-shell.css)
+// =============================================================================
+
+body.ut-theme {
+    #page.drawers .main-inner,
+    #page.drawers .drawer-main-content {
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+
+    .navbar,
+    nav.navbar.fixed-top {
+        background: rgba($ut-navy-deep, 0.98) !important;
+        border-bottom: 1px solid rgba($ut-gold, 0.15) !important;
+    }
+
+    .drawer.drawer-left,
+    .drawer.drawer-right {
+        background: $ut-navy-deep !important;
+        border-color: rgba($ut-gold, 0.15) !important;
+    }
+
+    .drawer .drawerheader,
+    .drawer .drawercontent {
+        background: $ut-navy-deep !important;
+        border-color: rgba($ut-gold, 0.12) !important;
+    }
+
+    #page-header,
+    #page-header .header-maxwidth,
+    #region-main,
+    #region-main-box,
+    #page-content {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 }

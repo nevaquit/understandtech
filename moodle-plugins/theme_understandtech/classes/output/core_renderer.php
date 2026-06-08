@@ -108,19 +108,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         // Inject font preconnect + preload only if not already present.
         if (strpos($output, 'fonts.googleapis.com') === false) {
+            $fonturl = 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700'
+                . '&family=Source+Serif+4:ital,wght@0,400;0,600;1,400'
+                . '&family=Share+Tech+Mono&display=swap';
             $fonthtml  = '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
             $fonthtml .= '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
-            $fonthtml .= '<link rel="preload" as="style" '
-                . 'href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700'
-                . '&amp;family=Source+Serif+4:ital,wght@0,400;0,600;1,400'
-                . '&amp;family=Share+Tech+Mono&amp;display=swap" '
-                . 'onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
-            $fonthtml .= '<noscript><link rel="stylesheet" '
-                . 'href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700'
-                . '&amp;family=Source+Serif+4:ital,wght@0,400;0,600;1,400'
-                . '&amp;family=Share+Tech+Mono&amp;display=swap"></noscript>' . "\n";
+            $fonthtml .= '<link rel="stylesheet" href="' . $fonturl . '">' . "\n";
 
-            // Insert before </head> or at the end of the head HTML.
             $output = str_replace('</head>', $fonthtml . '</head>', $output);
             if (strpos($output, $fonthtml) === false) {
                 $output = $fonthtml . $output;
