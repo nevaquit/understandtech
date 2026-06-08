@@ -3,18 +3,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->dirroot . '/question/behaviour/deferredfeedback/behaviourtype.php');
+
 /**
- * Behaviour type registration.
+ * Behaviour type registration for CertMaster confidence rating (deferred feedback + confidence).
  */
-class qbehaviour_certmasterconfidence_type extends question_behaviour_type {
+class qbehaviour_certmasterconfidence_type extends qbehaviour_deferredfeedback_type {
 
     #[\Override]
     public function is_archetypal(): bool {
-        return false;
-    }
-
-    #[\Override]
-    public function get_unused_display_options(): array {
-        return [];
+        return true;
     }
 }
