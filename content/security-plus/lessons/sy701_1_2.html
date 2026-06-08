@@ -327,6 +327,95 @@
                     </div>
                 </div>
 </div>
+<div class="ut-lesson-supplement">
+<h4>Exam Cram supplement</h4>
+<p>Summarize fundamental security concepts</p>
+<ul>
+<li>Confidentiality, Integrity, and</li>
+</ul>
+<p>Availability (CIA)</p>
+<ul>
+<li>Non-repudiation</li>
+<li>Authentication,</li>
+</ul>
+<p>Authorization, and Accounting (AAA)</p>
+<ul>
+<li>Authenticating people</li>
+<li>Authenticating systems</li>
+<li>Authorization models</li>
+<li>Gap analysis</li>
+<li>Zero Trust</li>
+<li>Control Plane</li>
+<li>Adaptive identity</li>
+<li>Threat scope reduction</li>
+<li>Policy-driven access control</li>
+<li>Policy Administrator</li>
+<li>Policy Engine</li>
+<li>Data Plane</li>
+<li>Implicit trust zones</li>
+<li>Subject/System</li>
+<li>Policy Enforcement Point</li>
+<li>Physical security</li>
+<li>Bollards</li>
+<li>Access control vestibule</li>
+<li>Fencing</li>
+<li>Video surveillance</li>
+<li>Security guard</li>
+<li>Access badge</li>
+<li>Lighting</li>
+<li>Sensors</li>
+<li>Infrared</li>
+<li>Pressure</li>
+<li>Microwave</li>
+<li>Ultrasonic</li>
+<li>Deception and disruption</li>
+</ul>
+<p>technology</p>
+<ul>
+<li>Honeypot</li>
+<li>Honeynet</li>
+<li>Honeyfile</li>
+<li>Honeytoken</li>
+</ul>
+<p>Security controls</p>
+<p>D O M A I N 1 : SECURITY &amp; RISK MANAGEMENT KNOW BY HEART!</p>
+<p>D O M A I N 1 : SECURITY &amp; RISK MANAGEMENT A C I onfidentiality ntegrity vailability</p>
+<p>D O M A I N 1 : SECURITY &amp; RISK MANAGEMENT A C I onfidentiality ntegrity vailability 1 2 3</p>
+<p>D O M A I N 1 : SECURITY &amp; RISK MANAGEMENT Confidentiality Access controls help ensure that only authorized subjects can access objects</p>
+<p>Integrity D O M A I N 1 : GENERAL SECURITY CONCEPTS Ensures that data or system configurations are not modified without authorization</p>
+<p>Availability D O M A I N 1 : GENERAL SECURITY CONCEPTS Authorized requests for objects must be granted to subjects within a reasonable amount of time</p>
+<p>Non-repudiation Methods to provide non-repudiation Digital Signatures prove that a digital message or document was not modified—intentionally or unintentionally—from the time it was signed. based on asymmetric cryptography (a public/private key pair) the digital equivalent of a handwritten signature or stamped seal. provides non-repudiation in a publicly verifiable manner. Non-repudiation is the ability to defeat/counter a false rejection or refusal of an obligation with irrefutable evidence. Non-repudiation is the guarantee that no one can deny a transaction. REMEMBER: shared accounts/identities prevent non-repudiation!</p>
+<p>AAA Several protocols provide authentication, authorization, and accounting services. Authentication user/service proves identity with some type of credentials, such as a username and password. Authorization authenticated users are granted access to resources based on the roles and/or permissions assigned to their identity. Accounting methods that track user activity and records these activity in logs. Tracks user activity and resource access as part of the audit trail</p>
+<p>identification and authentication Subjects prove their identity by providing authentication credentials such as the matching password for a username. Subjects claim an identity, and identification can be as simple as a username for a user.Identification Authentication</p>
+<p>authorization and accountability Auditing logs and audit trails record events including the identity of the subject that performed an action. After authenticating subjects, systems authorize access to objects based on their proven identity. Authorization Accountability provides proof after authentication identification + authentication + auditing = ACCOUNTABILITY</p>
+<p>Why is accountability important? is maintained for individual subjects using auditing. logs record user activities and users can be held accountable for their logged actions. HOW THIS HELPS directly promotes good user behavior and compliance with the organization’s security policy. Provides an audit trail for investigation if needed maintaining accountability</p>
+<p>But it’s not only for people… In modern enterprises, systems and devices have identities as well! EXAMPLES: In the cloud, VMs have a managed identity (managed by platform) used to access resources, such as data. Client devices have machine identities in mobile device management (MDM) platforms. maintaining accountability</p>
+<p>Discretionary Access Control (DAC) A key characteristic of the Discretionary Access Control (DAC) model is that every object has an owner, and the owner can grant or deny access to any other subject. Example: New Technology File System (NTFS) Role Based Access Control (RBAC) A key characteristic is the use of roles or groups. Instead of assigning permissions directly to users, user accounts are placed in roles and administrators assign privileges to the roles. Rule-based access control A key characteristic is that it applies global rules that apply to all subjects. Rules within this model are sometimes referred to as restrictions or filters. EXAMPLE: a firewall uses rules that allow or block traffic to all users equally. Typically mapped to job roles. D O M A I N 1 . 2 : AUTHORIZATION MODELS Non-discretionary Access Control Enables the enforcement of system-wide restrictions that override object-specific access control. Use-based, user-centric RBAC is considered non-discretionary</p>
+<p>MADATORY ACCESS CONTROL A key point about the MAC model is that every object and every subject has one or more labels. These labels are predefined, and the system determines access based on assigned labels. “ EXAMPLE: in military security, data owner does not set access</p>
+<p>ACCESS CONTROL access is restricted based on an attribute on the account, such as department, location, or functional designation. ATTRIBUTE-BASED D O M A I N 1 . 2 : AUTHORIZATION MODELS For example, admins may require user accounts have the Legal department attribute to view contracts</p>
+<p>SUBJECTS AND OBJECTS IN ACCESS CONTROL Resources, such as files, folders, shares, and printers, accessed by subjects A user, group, or service accessing resources, known as objects. Subjects Objects The authorization model determines how a system grants users access to files and other resources. These come up often in discussions of access control, so you should be familiar for the exam</p>
+<p>Gap analysis A common task performed on a recurring basis, and often in preparation for external audits is the gap analysis. Auditors will follow a standard (often ISO 27001) and then compare standard requirements to the org’s current operations. Deficiencies versus the standard will be captured in the audit report as gaps, sometimes called control gaps. Control gap a discrepancy between the security measures an organization should have in place versus controls actually in place. All auditors should have independence, but attestations from external auditors carry more weight (higher confidence) The outcome of an audit is an attestation, which is a formal statement made by the auditor on controls and processes in place.</p>
+<p>Zero trust An approach to security architecture in which no entity is trusted by default Based on three principles: 1) Assume breach 2) Verify explicitly 3) Least privilege access Zero Trust Has largely replaced trust but verify and its network perimeter strategy. Supported by defense in depth, that advises a layered approach to security.</p>
+<p>addresses the limitations of the legacy network perimeter-based security model. treats user identity as the control plane assumes compromise / breach in verifying every request. Zero Trust Security no entity is trusted by default VERIFY IDENTITY MANAGE DEVICES MANAGE APPS PROTECT DATA</p>
+<p>Access policy enforcement Policy Enforcement Point responsible for enabling, monitoring, and terminating connections between a subject (such as a user or device) and an enterprise resource. acts as the gateway that enforces access control policies. when an access request occurs, the PEP evaluates the request against predefined policies and applies the necessary controls. For example, PEP might enforce Multi-Factor Authentication (MFA) for access requests from unexpected locations. Policy Decision Point is where access decisions are made based on various factors such as user identity, device health, and risk assessment. evaluates the context of an access request and decides whether it should be allowed, denied, or subjected to additional controls. considers the 5 W’s (who, what, when, where, and why) In short, the PEP enforces policies at the connection level, while the PDP makes access decisions based on contextual information. Dynamic based on conditions/context</p>
+<p>Control Plane ✓ Adaptive Identity ✓ Threat Scope Reduction ✓ Policy-Driven Access Control ✓ Policy Administrator ✓ Policy Engine Data Plane ✓ Implicit Trust Zones ✓ Subject/System ✓ Policy Enforcement Point The key elements of Zero Trust Network Architecture: Drives the policy-based decision logic for zero trust Enforces the decisions defined in control plane Described in NIST SP 800-207 Access policy enforcement</p>
+<p>Zero trust Adaptive Identity changes the way that the system asks a user to authenticate based on context of the request. Threat Scope Reduction an end goal of ZTNA, which is to decrease risks to the organization. Policy-Driven Access Control controls based upon a user’s identity rather than simply their system’s location. Policy Administrator (PA) responsible for communicating the decisions made by the policy engine. Policy Engine (PE) decides whether to grant access to a resource for a given subject. CONTROL PLANE EXAMPLES: location, device, app, risk EXAMPLE: Conditional Access in MSFT Entra ID EXAMPLE: MSFT Entra ID (Azure Active Directory) PA + PE = Policy Decision Point (PDP)</p>
+<p>Zero trust Implicit Trust Zones part of traditional security approach in which firewalls and other security devices formed a perimeter. Systems belonging to the org were placed inside this boundary. Subject/System A subject is a user who wishes to access a resource. A system is a non-human entity, often the device used by the user, to access the resource. Policy Enforcement Point when a user or system requests access to a resource, the PEP evaluates it against predefined policies and applies the necessary controls. DATA PLANE EXAMPLE: MSFT Entra ID (Azure Active Directory)</p>
+<p>conditional access image credit: Microsoft signal &gt; decision &gt; enforcement enforcing “conditions of access”</p>
+<p>Data Access Policy Zero Trust CDM System Industry Compliance Threat Intelligence Activity Logs PKI Identity Management SIEM System Policy Enforcement Point Policy Engine Policy Administrator Policy Decision Point Control Plane Data Plane Subject and System Enterprise Resource Untrusted Trusted Supporting Components Supporting Components (logical diagram) Where security controls are applied Where policy decisions are made</p>
+<p>A quick tour of Conditional Access EXAMPLE FOR CONTEXT – The</p>
+<p>physical security There is no security without physical security Without control over the physical environment, no amount of administrative or technical/logical access controls can provide adequate security. If a malicious person can gain physical access to your facility or equipment, they can do just about anything they want, from destruction to disclosure and alteration.</p>
+<p>bollard A short, sturdy vertical post, usually made of concrete, steel, or other heavy-duty materials. They can be fixed in place or retractable. Act as physical barriers, preventing vehicles from forcibly entering a restricted area. Delineate pedestrian areas, parking lots, and sensitive zones to minimize accidental damage bollard Primarily used to control traffic flow and protect buildings or areas from vehicle-based attacks.</p>
+<p>Access control vestibule Access control vestibule A physical security system comprising a small space with two interlocking doors. Only one door can be opened at a time. Designed to strictly control access to highly secure areas by allowing only one person at a time to pass through. Protects against Tailgating (slipping in on someone else's badge) Piggybacking (like tailgating, but with bad intent) Unauthorized entry of any kind Previously called a mantrap</p>
+<p>FENCES 3-4 feet deters the casual trespasser 6-7 feet too difficult to climb easily may block vision (providing additional security) 8-feet (topped with barbed wire) will deter determined intruders Efficacy of fences by height PIDAS (perimeter intrusion detection and assessment system) will detect someone attempting to climb a fence. EXPENSIVE and may generate false positives Fence is a DETERRENT control PIDAS is a DETECTIVE control</p>
+<p>FENCES 3-4 feet deters the casual trespasser 6-7 feet too difficult to climb easily may block vision (providing additional security) 8-feet (topped with barbed wire) will deter determined intruders Efficacy of fences by height To augment fences some orgs may erect stronger barricades, or zig-zag paths to prevent a vehicle from ramming a gate. Fence is a DETERRENT control PIDAS is a DETECTIVE control</p>
+<p>Physical security Video surveillance Cameras and closed-circuit television (CCTV) systems provide video surveillance and reliable proof of a person’s identity and activity. Many cameras include motion and object detection capabilities. Security guards a preventive physical security control, and they can prevent unauthorized personnel from entering a secure area. can recognize people and compare an individual’s picture ID for people they don’t recognize. Access badges can electronically unlock a door and help prevent unauthorized personnel from entering a secure area. Can you see how each may also serve to deter potential attacks? Detective control Preventive control Preventive control</p>
+<p>lighting Location installing lights at all the entrances and exits to a building can deter attackers from trying to break in. Efficiency a combination of automation, light dimmers, and motion sensors to save on electricity costs without sacrificing security. automatically turn on at dusk, automatically turn off at dawn. Protection protect the lights. If an attacker can remove the light bulbs, it defeats the control. either place the lights high enough so that they can’t be reached or protect them with a metal cage. Deterrent control When planning lighting, think about location, efficiency and protection.</p>
+<p>Infrared detects heat signatures in the form of infrared radiation emitted by people, animals, or objects. Pressure designed to detect changes in pressure on a surface or in a specific area, such as a person walking on a floor or stepping on a mat. Microwave uses microwave technology to detect movement within a specific area. Ultrasonic emits high-frequency sound waves and measure the time it takes for the sound waves to bounce back after hitting an object or surface. integrated into security cameras and alarm systems to improve detection capabilities often used with other types of sensors to reduce false alarms commonly used in parking assistance, robotic navigation, and intrusion detection used in access control systems to ensure that only authorized individuals can enter sensors</p>
+<p>Deception and disruption Goal is to distract from real assets and isolate in a padded cell until you can track them down. Lure bad people into doing bad things. Lets you watch them. Only ENTICE, not ENTRAP. You are not allowed to let them download items with “Enticement”. For example, allowing download of a fake payroll file would be entrapment. Honeypot A group of honeypots is called a honeynet.</p>
+<p>a fake record inserted into a database to detect data theft. a decoy file deceptively named so it attracts the attention of an attacker. Honeyfile Honeytoken These are all intended to deceive attackers and disrupt attackers, divert them from live networks and allow observation. Deception and disruption</p>
+<p>1.0 General Security Concepts</p>
+</div>
 </div>
 <h4>Next steps</h4>
 <p>Complete the domain knowledge check quiz after this lesson and use the AI tutor for scenario-based practice. The tutor guides you Socratically without revealing assessment answers.</p>

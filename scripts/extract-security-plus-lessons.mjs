@@ -17,6 +17,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
 const outDir = path.join(repoRoot, 'content', 'security-plus', 'lessons');
 const diagramDir = path.join(repoRoot, 'content', 'security-plus', 'diagrams');
+const supplementDir = path.join(repoRoot, 'content', 'security-plus', 'supplements');
 
 const defaultSource = path.join(
   process.env.USERPROFILE || '',
@@ -211,6 +212,14 @@ for (const key of expected) {
     html = html.replace(
       '</div>\n<h4>Next steps</h4>',
       `${diagram}\n</div>\n<h4>Next steps</h4>`
+    );
+  }
+  const supplementPath = path.join(supplementDir, `${shortname}.html`);
+  if (fs.existsSync(supplementPath)) {
+    const supplement = fs.readFileSync(supplementPath, 'utf8').trim();
+    html = html.replace(
+      '</div>\n<h4>Next steps</h4>',
+      `${supplement}\n</div>\n<h4>Next steps</h4>`
     );
   }
   const outfile = path.join(outDir, `${shortname}.html`);

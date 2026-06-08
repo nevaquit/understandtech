@@ -1,0 +1,15 @@
+{
+  "sy0_701": {
+    "cyberkraft_study_guide_md": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA Security +/security_plus_study_guide.md",
+    "orange_study_guide_html": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA Security +/security_plus_corrected Final.html",
+    "ebooks_exam_cram_root": "%USERPROFILE%/OneDrive/Ebooks/Comptia/Security +",
+    "certmaster_mapping_pdf": "%USERPROFILE%/OneDrive/Ebooks/Comptia/Security +/Mapping Course Content to CompTIA Security+ (Exam SY0-701).pdf",
+    "certmaster_lesson_notes": "%USERPROFILE%/OneDrive/Ebooks/Comptia/Security +/Study Notes for Security+/Study Notes"
+  },
+  "extract_scripts": {
+    "lessons": "node scripts/extract-security-plus-lessons.mjs",
+    "diagrams": "node scripts/extract-security-plus-diagrams.mjs",
+    "ebooks_supplements": "node scripts/extract-security-plus-ebooks.mjs",
+    "quiz_extra": "node scripts/generate-security-plus-quiz-gift.mjs"
+  }
+}
