@@ -16,6 +16,7 @@ chdir('/var/www/moodle');
 require('/var/www/moodle/config.php');
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 require_once($CFG->dirroot . '/course/lib.php');
+require_once($CFG->dirroot . '/mod/quiz/classes/quiz_settings.php');
 
 global $DB, $USER;
 
@@ -36,14 +37,12 @@ echo "quiz={$quiz->name} behaviour={$quiz->preferredbehaviour}\n";
 require_capability('mod/quiz:preview', context_module::instance($cmid));
 
 try {
+    $quizobj = mod_quiz\quiz_settings::create($cm->instance, $cm->id);
     $timenow = time();
-    $preview = true;
-    $attempt = quiz_create_attempt($quiz, 1, false, $timenow, $preview, $USER->id);
-    echo "attempt_create_ok id={$attempt->id}\n";
+    $attempt = quiz_prepare_and_start_new_attempt($quizobj, 1, false, false, [], [], $USER->id);
+    echo "preview_attempt_ok id={$attempt->id} uniqueid={$attempt->uniqueid}\n";
 
-    quiz_start_new_attempt($quiz, $attempt, false, $timenow, false, $USER->id);
-    echo "attempt_start_ok\n";
-
+    $DB->delete_records('question_usages', ['id' => $attempt->uniqueid]);
     $DB->delete_records('quiz_attempts', ['id' => $attempt->id]);
     echo "attempt_cleanup_ok\n";
 } catch (Throwable $e) {
