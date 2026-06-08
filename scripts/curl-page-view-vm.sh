@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 CMID="${1:-4}"
-BASE="${2:-http://127.0.0.1}"
+BASE="${2:-https://127.0.0.1}"
 WWWROOT_PATH="${3:-/learn}"
 
 rm -f /tmp/moodle-cj /tmp/login.html /tmp/page.html
@@ -16,14 +16,14 @@ try_login() {
   local p="$2"
   echo "=== try user=${u} ==="
   rm -f /tmp/moodle-cj
-  curl -sS -b /tmp/moodle-cj -c /tmp/moodle-cj "${LOGIN_URL}" -o /tmp/login.html
+  curl -k -sS -b /tmp/moodle-cj -c /tmp/moodle-cj "${LOGIN_URL}" -o /tmp/login.html
   local tok
   tok=$(grep -oP 'name="logintoken" value="\K[^"]+' /tmp/login.html | head -1 || true)
   if [ -z "${tok}" ]; then
     echo 'login_token_missing'
     return 1
   fi
-  curl -sS -b /tmp/moodle-cj -c /tmp/moodle-cj -L \
+  curl -k -sS -b /tmp/moodle-cj -c /tmp/moodle-cj -L \
     --data-urlencode "username=${u}" \
     --data-urlencode "password=${p}" \
     --data-urlencode "logintoken=${tok}" \
@@ -32,7 +32,7 @@ try_login() {
     echo 'login_failed'
     return 1
   fi
-  curl -sS -b /tmp/moodle-cj -c /tmp/moodle-cj -L \
+  curl -k -sS -b /tmp/moodle-cj -c /tmp/moodle-cj -L \
     -o /tmp/page.html -w "page_http:%{http_code}\n" "${PAGE_URL}"
   grep -o '<title>[^<]*</title>' /tmp/page.html | head -1
   grep -oE 'Error reading from database|ut-lesson-content|debuginfo|SY701\.1\.2' /tmp/page.html | head -10 || echo 'no_match'
