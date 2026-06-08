@@ -97,3 +97,35 @@
     border-color: #d4b452;
     color: #0B1F3A;
 }
+
+/* ── Site-wide: kill Boost white blocks (navbar, secondary nav, main-inner) ── */
+body.ut-theme #page.drawers .main-inner,
+body.ut-theme #page.drawers .drawer-main-content {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+body.ut-theme .navbar,
+body.ut-theme nav.navbar.fixed-top,
+body.ut-theme .navbar.bg-white,
+body.ut-theme .navbar-light {
+    background: rgba(7, 20, 38, 0.98) !important;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.15) !important;
+}
+
+body.ut-theme .secondary-navigation .navigation,
+body.ut-theme .secondary-navigation .moremenu,
+body.ut-theme .secondary-navigation .moremenu.navigation,
+body.ut-theme .moremenu .nav-tabs {
+    background: transparent !important;
+}
+
+body.ut-theme .moremenu .nav-link:hover,
+body.ut-theme .moremenu .nav-link:focus,
+body.ut-theme .moremenu .nav-link.active,
+body.ut-theme .moremenu .nav-link.active:hover,
+body.ut-theme .moremenu .nav-link.active:focus {
+    background: rgba(201, 162, 39, 0.08) !important;
+    color: #C9A227 !important;
+}

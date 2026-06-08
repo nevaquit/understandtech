@@ -426,6 +426,7 @@
 // =============================================================================
 
 body.ut-theme {
+    // Boost drawers — kill the white content card shell.
     #page.drawers .main-inner,
     #page.drawers .drawer-main-content {
         background: transparent !important;
@@ -433,10 +434,77 @@ body.ut-theme {
         border: none !important;
     }
 
+    // Primary navbar (Boost defaults to bg-white).
     .navbar,
-    nav.navbar.fixed-top {
+    nav.navbar.fixed-top,
+    .navbar.bg-white,
+    .navbar-light {
         background: rgba($ut-navy-deep, 0.98) !important;
         border-bottom: 1px solid rgba($ut-gold, 0.15) !important;
+        box-shadow: none !important;
+    }
+
+    .navbar .nav-link,
+    .primary-navigation .nav-link {
+        color: rgba($ut-white, 0.85) !important;
+    }
+
+    // Secondary navigation — Course / Participants / Grades bar.
+    .secondary-navigation,
+    .tertiary-navigation,
+    .secondary-navigation .navigation,
+    .secondary-navigation .moremenu,
+    .secondary-navigation .moremenu.navigation {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .secondary-navigation .nav-tabs,
+    .secondary-navigation .navigation .nav-tabs,
+    .secondary-navigation .moremenu .nav-tabs,
+    .moremenu .nav-tabs {
+        background: transparent !important;
+        border-bottom: 1px solid rgba($ut-gold, 0.18) !important;
+    }
+
+    .moremenu .nav-link,
+    .secondary-navigation .nav-link {
+        color: rgba($ut-white, 0.72) !important;
+        background: transparent !important;
+        font-family: $ut-font-heading;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+    }
+
+    .moremenu .nav-link:hover,
+    .moremenu .nav-link:focus,
+    .moremenu .nav-link.active,
+    .moremenu .nav-link.active:hover,
+    .moremenu .nav-link.active:focus,
+    .secondary-navigation .nav-link:hover,
+    .secondary-navigation .nav-link.active {
+        background: rgba($ut-gold, 0.08) !important;
+        color: $ut-gold !important;
+    }
+
+    .moremenu .dropdown-menu {
+        background: $ut-navy-mid !important;
+        border: 1px solid rgba($ut-gold, 0.18) !important;
+    }
+
+    .moremenu .dropdown-item {
+        color: rgba($ut-white, 0.85) !important;
+
+        &:hover,
+        &:focus,
+        &.active,
+        &[aria-current="true"] {
+            background: rgba($ut-gold, 0.12) !important;
+            color: $ut-gold !important;
+        }
     }
 
     .drawer.drawer-left,
@@ -449,6 +517,7 @@ body.ut-theme {
     .drawer .drawercontent {
         background: $ut-navy-deep !important;
         border-color: rgba($ut-gold, 0.12) !important;
+        color: $ut-white;
     }
 
     #page-header,
@@ -459,5 +528,11 @@ body.ut-theme {
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
+    }
+
+    .activity-header,
+    .page-context-header {
+        background: transparent !important;
+        color: $ut-white;
     }
 }

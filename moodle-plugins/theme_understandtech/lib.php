@@ -86,8 +86,14 @@ function theme_understandtech_page_init(moodle_page $page): void {
         $page->add_body_class('ut-incourse');
     }
 
-    // Load the AMD theme module on every page.
-    $page->requires->js_call_amd('theme_understandtech/theme', 'init');
+    // Marketing/login UX only — never on incourse pages. js_call_amd registers a pending
+    // operation before core/first boots; a missing amd/build file blocks the whole AMD
+    // pipeline and prevents the course-index placeholder from hydrating.
+    if (in_array($page->pagelayout, ['frontpage', 'login'], true)) {
+        $page->requires->js_amd_inline(
+            "require(['theme_understandtech/theme'], function(m) { m.init(); });",
+        );
+    }
 }
 
 /**

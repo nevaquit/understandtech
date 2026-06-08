@@ -243,6 +243,49 @@ body.ut-theme .courseindex-item.current a {
     border-radius: var(--ut-radius-sm);
 }
 
+/* Course index drawer — hide skeleton once Moodle marks it aria-hidden */
+body.ut-theme #course-index-placeholder[aria-hidden="true"] {
+    display: none !important;
+}
+
+body.ut-theme .drawer .placeholders .bg-pulse-grey {
+    background: rgba(26, 138, 125, 0.28) !important;
+}
+
+body.ut-theme .drawer .placeholders .rounded-circle.bg-pulse-grey {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    background: rgba(201, 162, 39, 0.35) !important;
+}
+
+body.ut-theme .drawer .placeholders .bg-pulse-grey.w-100 {
+    height: 0.625rem;
+    border-radius: var(--ut-radius-sm);
+}
+
+body.ut-theme #theme_boost-drawers-courseindex .courseindex {
+    padding: 0.5rem 0.75rem 1rem;
+}
+
+body.ut-theme #theme_boost-drawers-courseindex .courseindex-section-title {
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ut-gold);
+    margin-top: 0.75rem;
+}
+
+body.ut-theme #theme_boost-drawers-courseindex .courseindex-item {
+    margin: 0.125rem 0;
+    border-radius: var(--ut-radius-sm);
+}
+
+body.ut-theme #theme_boost-drawers-courseindex .courseindex-item a:hover {
+    color: var(--ut-gold);
+    background: rgba(201, 162, 39, 0.08);
+}
+
 /* ── Breadcrumbs ────────────────────────────────────────────────────────────── */
 body.ut-theme .breadcrumb {
     background: transparent;
@@ -482,15 +525,30 @@ body.ut-theme .badge {
     letter-spacing: 0.04em;
 }
 
-/* ── Secondary navigation (course tabs) ─────────────────────────────────────── */
+/* ── Boost drawer content panel (white card shell) ─────────────────────────── */
+body.ut-theme #page.drawers .main-inner,
+body.ut-theme #page.drawers .drawer-main-content {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* ── Secondary navigation (Course / Participants / Grades tabs) ────────────── */
 body.ut-theme .secondary-navigation,
-body.ut-theme .tertiary-navigation {
+body.ut-theme .tertiary-navigation,
+body.ut-theme .secondary-navigation .navigation,
+body.ut-theme .secondary-navigation .moremenu,
+body.ut-theme .secondary-navigation .moremenu.navigation {
     background: transparent !important;
     border: none !important;
+    box-shadow: none !important;
     margin-bottom: 1rem;
 }
 
 body.ut-theme .secondary-navigation .nav-tabs,
+body.ut-theme .secondary-navigation .navigation .nav-tabs,
+body.ut-theme .secondary-navigation .moremenu .nav-tabs,
+body.ut-theme .moremenu .nav-tabs,
 body.ut-theme .more-nav.nav-tabs,
 body.ut-theme .nav.more-nav {
     background: transparent !important;
@@ -498,7 +556,8 @@ body.ut-theme .nav.more-nav {
 }
 
 body.ut-theme .secondary-navigation .nav-link,
-body.ut-theme .more-nav .nav-link {
+body.ut-theme .more-nav .nav-link,
+body.ut-theme .moremenu .nav-link {
     color: var(--ut-text-muted) !important;
     background: transparent !important;
     border: none !important;
@@ -510,14 +569,42 @@ body.ut-theme .more-nav .nav-link {
 }
 
 body.ut-theme .secondary-navigation .nav-link.active,
-body.ut-theme .more-nav .nav-link.active {
+body.ut-theme .more-nav .nav-link.active,
+body.ut-theme .moremenu .nav-link.active,
+body.ut-theme .moremenu .show > .nav-link,
+body.ut-theme .moremenu .active > .nav-link {
     color: var(--ut-gold) !important;
     background: rgba(201, 162, 39, 0.08) !important;
     border-bottom: 2px solid var(--ut-gold) !important;
 }
 
 body.ut-theme .secondary-navigation .nav-link:hover,
-body.ut-theme .more-nav .nav-link:hover {
+body.ut-theme .secondary-navigation .nav-link:focus,
+body.ut-theme .more-nav .nav-link:hover,
+body.ut-theme .more-nav .nav-link:focus,
+body.ut-theme .moremenu .nav-link:hover,
+body.ut-theme .moremenu .nav-link:focus,
+body.ut-theme .moremenu .nav-link.active:hover,
+body.ut-theme .moremenu .nav-link.active:focus {
+    color: var(--ut-gold) !important;
+    background: rgba(201, 162, 39, 0.08) !important;
+}
+
+body.ut-theme .moremenu .dropdown-menu {
+    background: var(--ut-surface-elevated) !important;
+    border: 1px solid var(--ut-border) !important;
+}
+
+body.ut-theme .moremenu .dropdown-item {
+    color: var(--ut-text) !important;
+    font-family: var(--ut-font-heading);
+}
+
+body.ut-theme .moremenu .dropdown-item:hover,
+body.ut-theme .moremenu .dropdown-item:focus,
+body.ut-theme .moremenu .dropdown-item.active,
+body.ut-theme .moremenu .dropdown-item[aria-current="true"] {
+    background: rgba(201, 162, 39, 0.12) !important;
     color: var(--ut-gold) !important;
 }
 
