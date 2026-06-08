@@ -41,7 +41,7 @@ jobs:
           STAGING_URL: ${{ secrets.STAGING_URL || 'https://understandtech.app' }}
           STAGING_TEST_USER_EMAIL: ${{ secrets.STAGING_TEST_USER_EMAIL }}
           STAGING_TEST_USER_PASSWORD: ${{ secrets.STAGING_TEST_USER_PASSWORD }}
-          E2E_COURSE_PATH: ${{ secrets.E2E_COURSE_PATH || '/course/view.php?id=2' }}
+          E2E_COURSE_PATH: ${{ secrets.E2E_COURSE_PATH || '/course/view.php?id=3' }}
           CI: 'true'
         run: npx playwright test --project=chromium --workers=1
 

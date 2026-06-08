@@ -1,8 +1,6 @@
 <?php
 /**
- * Remove duplicate Security+ SY0-701 question bank entries (keeps lowest id per objective tag).
- *
- * Idempotent. Run on VM before seed when re-imports created duplicates.
+ * Remove duplicate Security+ SY0-701 question bank entries (same question name).
  *
  * @package    understandtech
  */
@@ -40,26 +38,18 @@ $records = $DB->get_records_sql(
     ['catid' => $category->id, 'status' => 'ready']
 );
 
-/** @var array<string,int[]> */
-$groups = [];
+/** @var array<string,int> $seen */
+$seen = [];
+$deleted = 0;
 foreach ($records as $row) {
-    if (!preg_match('/\b(sy701_\d+_\d+)\b/', $row->name, $m)) {
+    $name = (string) $row->name;
+    if (!isset($seen[$name])) {
+        $seen[$name] = (int) $row->id;
         continue;
     }
-    $groups[$m[1]][] = (int) $row->id;
+    question_delete_question((int) $row->id);
+    $deleted++;
+    echo "question_deleted name={$name} id={$row->id} kept={$seen[$name]}\n";
 }
 
-$deleted = 0;
-$kept = 0;
-foreach ($groups as $tag => $ids) {
-    sort($ids);
-    $keepid = array_shift($ids);
-    $kept++;
-    foreach ($ids as $duplicateid) {
-        question_delete_question($duplicateid);
-        $deleted++;
-        echo "question_deleted tag={$tag} id={$duplicateid} kept={$keepid}\n";
-    }
-}
-
-echo "questions_kept={$kept} questions_deleted={$deleted} category_total=" . count($records) . "\n";
+echo "questions_deleted={$deleted} unique=" . count($seen) . " category_total=" . count($records) . "\n";

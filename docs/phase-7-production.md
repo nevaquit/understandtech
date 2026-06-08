@@ -105,7 +105,7 @@ Full script: `ORIGIN_IP=52.252.59.54 PROD_URL=https://understandtech.app ./scrip
 
 ```bash
 cd tests/e2e
-cp .env.example .env   # set STAGING_TEST_USER_EMAIL=e2etest, password, E2E_COURSE_PATH=/course/view.php?id=2
+cp .env.example .env   # set STAGING_TEST_USER_EMAIL=e2etest, password, E2E_COURSE_PATH=/course/view.php?id=3
 npx playwright install chromium
 npx playwright test --project=chromium --workers=1
 ```
@@ -122,7 +122,7 @@ Production test user (created via `scripts/setup-e2e-test-user-vm.sh` on VM):
 
 - Username: `e2etest`
 - Email: `e2e-test@understandtech.app`
-- Course: `E2E Test Course` (`/course/view.php?id=2`)
+- Course: `CompTIA Security+ SY0-701` (`/course/view.php?id=3`)
 
 ## Deployment sequence (core v1.0.0)
 

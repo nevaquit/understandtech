@@ -64,6 +64,58 @@
 <ul>
 <li>Choosing the right security controls based on risk assessment, compliance requirements, and the specific threats and vulnerabilities faced by the organization.</li>
 </ul>
+<div class="ut-lesson-diagram">
+<style>.ut-lesson-diagram { margin: 1.25rem 0; padding: 1rem; border: 1px solid #1A8A7D; border-radius: 8px; background: #f8fbfa; }
+.ut-lesson-diagram .diagram-title { font-weight: 700; color: #0B1F3A; margin-bottom: 0.75rem; }
+.ut-lesson-diagram .controls-matrix, .ut-lesson-diagram .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; }
+.ut-lesson-diagram .control-card, .ut-lesson-diagram .concept-item { background: #fff; border-left: 4px solid #C9A227; padding: 0.75rem; border-radius: 4px; }
+.ut-lesson-diagram .flow-diagram { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: stretch; }
+.ut-lesson-diagram .flow-step { flex: 1 1 140px; background: #0B1F3A; color: #fff; padding: 0.6rem; border-radius: 6px; text-align: center; font-size: 0.9rem; }
+.ut-lesson-diagram .flow-arrow { align-self: center; color: #C9A227; font-weight: bold; }
+.ut-lesson-diagram ul { margin: 0.35rem 0 0.35rem 1.1rem; }
+.ut-lesson-diagram h4 { color: #0B1F3A; margin: 0.5rem 0; }</style>
+<div class="diagram-title">🏰 Enterprise Security Infrastructure Components</div>
+                <div class="architecture-grid">
+                    <div class="arch-component">
+                        <h4>🌐 Demilitarized Zone (DMZ)</h4>
+                        <p>Isolated network segment hosting public-facing services with controlled access from internal networks</p>
+                    </div>
+                    <div class="arch-component">
+                        <h4>🔥 Next-Generation Firewalls</h4>
+                        <p>Advanced packet filtering with application awareness, intrusion prevention, and threat intelligence integration</p>
+                    </div>
+                    <div class="arch-component">
+                        <h4>🔍 Intrusion Detection/Prevention</h4>
+                        <p>Network and host-based monitoring systems for malicious activity detection and automated response</p>
+                    </div>
+                    <div class="arch-component">
+                        <h4>🌐 Virtual Private Networks</h4>
+                        <p>Encrypted tunneling for secure remote access and site-to-site connectivity over untrusted networks</p>
+                    </div>
+                    <div class="arch-component">
+                        <h4>🎯 Network Access Control</h4>
+                        <p>Device authentication and policy enforcement before network access authorization</p>
+                    </div>
+                    <div class="arch-component">
+                        <h4>⚖️ Load Balancers</h4>
+                        <p>Traffic distribution, SSL termination, and application delivery with built-in DDoS protection</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🎯 Fundamental Secure Design Principles</h4>
+                <ul>
+                    <li><strong>Least Privilege:</strong> Grant minimum necessary access rights to users and systems</li>
+                    <li><strong>Defense in Depth:</strong> Implement multiple overlapping layers of security controls</li>
+                    <li><strong>Fail Secure/Safe:</strong> Systems default to secure state when encountering failures</li>
+                    <li><strong>Separation of Duties:</strong> Divide critical tasks among multiple individuals</li>
+                    <li><strong>Keep It Simple (KISS):</strong> Reduce complexity to minimize attack surface and errors</li>
+                    <li><strong>Zero Trust Architecture:</strong> Continuous verification with no implicit trust</li>
+                    <li><strong>Privacy by Design:</strong> Build privacy protection into systems from inception</li>
+                    <li><strong>Secure by Default:</strong> Ship systems with secure default configurations</li>
+                </ul>
+</div>
 </div>
 <h4>Next steps</h4>
 <p>Complete the domain knowledge check quiz after this lesson and use the AI tutor for scenario-based practice. The tutor guides you Socratically without revealing assessment answers.</p>

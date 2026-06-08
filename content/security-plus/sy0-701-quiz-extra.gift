@@ -1,0 +1,391 @@
+::sy701_1_1 technical_controls_use_t 2::For SY0-701 objective 1.1, which item best matches: Compare and contrast various types of security controls?{
+=Technical Controls use technology-based solutions like firewalls, IDS, and secure configurations
+~Managerial Controls focus on policies, procedures, and administrative oversight
+~Operational Controls involve human-implemented processes like security awareness and incident response
+~Physical Controls protect tangible assets through barriers, environmental controls, and access restrictions
+}
+
+::sy701_1_1 managerial_controls_focu 3::For SY0-701 objective 1.1, which item best matches: Compare and contrast various types of security controls?{
+=Managerial Controls focus on policies, procedures, and administrative oversight
+~Technical Controls use technology-based solutions like firewalls, IDS, and secure configurations
+~Operational Controls involve human-implemented processes like security awareness and incident response
+~Physical Controls protect tangible assets through barriers, environmental controls, and access restrictions
+}
+
+::sy701_1_2 confidentiality 2::For SY0-701 objective 1.2, which item best matches: Summarize fundamental security concepts?{
+=Confidentiality
+~Measures
+~Integrity
+~Availability
+}
+
+::sy701_1_2 measures 3::For SY0-701 objective 1.2, which item best matches: Summarize fundamental security concepts?{
+=Measures
+~Confidentiality
+~Integrity
+~Availability
+}
+
+::sy701_1_3 approval_process 2::For SY0-701 objective 1.3, which item best matches: Explain the importance of change management processes and the impact to security?{
+=Approval Process
+~Ownership
+~Stakeholders
+~Impact Analysis
+}
+
+::sy701_1_3 ownership 3::For SY0-701 objective 1.3, which item best matches: Explain the importance of change management processes and the impact to security?{
+=Ownership
+~Approval Process
+~Stakeholders
+~Impact Analysis
+}
+
+::sy701_1_4 public_key 2::For SY0-701 objective 1.4, which item best matches: Explain the importance of using appropriate cryptographic solutions?{
+=Public Key
+~Private Key
+~Key Escrow
+~Certificates
+}
+
+::sy701_1_4 private_key 3::For SY0-701 objective 1.4, which item best matches: Explain the importance of using appropriate cryptographic solutions?{
+=Private Key
+~Public Key
+~Key Escrow
+~Certificates
+}
+
+::sy701_2_1 nation_state 2::For SY0-701 objective 2.1, which item best matches: Compare and contrast common threat actors and motivations?{
+=Nation-state
+~Unskilled Attacker (Script Kiddie)
+~Hacktivist
+~Insider Threat
+}
+
+::sy701_2_1 unskilled_attacker_scrip 3::For SY0-701 objective 2.1, which item best matches: Compare and contrast common threat actors and motivations?{
+=Unskilled Attacker (Script Kiddie)
+~Nation-state
+~Hacktivist
+~Insider Threat
+}
+
+::sy701_2_2 email 2::For SY0-701 objective 2.2, which item best matches: Explain common threat vectors and attack surfaces?{
+=Email
+~Short Message Service (SMS)
+~Instant Messaging (IM)
+~Image-based
+}
+
+::sy701_2_2 short_message_service_sm 3::For SY0-701 objective 2.2, which item best matches: Explain common threat vectors and attack surfaces?{
+=Short Message Service (SMS)
+~Email
+~Instant Messaging (IM)
+~Image-based
+}
+
+::sy701_2_3 memory_injection 2::For SY0-701 objective 2.3, which item best matches: Explain various types of vulnerabilities?{
+=Memory Injection
+~Buffer Overflow
+~Race Conditions
+~Time-of-check (TOC) / Time-of-use (TOU)
+}
+
+::sy701_2_3 buffer_overflow 3::For SY0-701 objective 2.3, which item best matches: Explain various types of vulnerabilities?{
+=Buffer Overflow
+~Memory Injection
+~Race Conditions
+~Time-of-check (TOC) / Time-of-use (TOU)
+}
+
+::sy701_2_4 ransomware 2::For SY0-701 objective 2.4, which item best matches: Given a scenario, analyze indicators of malicious activity?{
+=Ransomware
+~Trojan
+~Worm
+~Spyware
+}
+
+::sy701_2_4 trojan 3::For SY0-701 objective 2.4, which item best matches: Given a scenario, analyze indicators of malicious activity?{
+=Trojan
+~Ransomware
+~Worm
+~Spyware
+}
+
+::sy701_2_5 segmentation 2::For SY0-701 objective 2.5, which item best matches: Explain the purpose of mitigation techniques used to secure the enterprise?{
+=Segmentation
+~Access Control
+~Access Control List (ACL)
+~Permissions
+}
+
+::sy701_2_5 access_control 3::For SY0-701 objective 2.5, which item best matches: Explain the purpose of mitigation techniques used to secure the enterprise?{
+=Access Control
+~Segmentation
+~Access Control List (ACL)
+~Permissions
+}
+
+::sy701_3_1 cloud 2::For SY0-701 objective 3.1, which item best matches: Compare and contrast security implications of different architecture models?{
+=Cloud
+~Responsibility matrix
+~Hybrid considerations
+~Third-party vendors
+}
+
+::sy701_3_1 responsibility_matrix 3::For SY0-701 objective 3.1, which item best matches: Compare and contrast security implications of different architecture models?{
+=Responsibility matrix
+~Cloud
+~Hybrid considerations
+~Third-party vendors
+}
+
+::sy701_3_2 device_placement 2::For SY0-701 objective 3.2, which item best matches: Given a scenario, apply security principles to secure enterprise infrastructure?{
+=Device Placement
+~Security Zones
+~Attack Surface
+~Connectivity
+}
+
+::sy701_3_2 security_zones 3::For SY0-701 objective 3.2, which item best matches: Given a scenario, apply security principles to secure enterprise infrastructure?{
+=Security Zones
+~Device Placement
+~Attack Surface
+~Connectivity
+}
+
+::sy701_3_3 regulated 2::For SY0-701 objective 3.3, which item best matches: Compare and contrast concepts and strategies to protect data?{
+=Regulated
+~Trade Secret
+~Intellectual Property
+~Legal Information
+}
+
+::sy701_3_3 trade_secret 3::For SY0-701 objective 3.3, which item best matches: Compare and contrast concepts and strategies to protect data?{
+=Trade Secret
+~Regulated
+~Intellectual Property
+~Legal Information
+}
+
+::sy701_3_4 load_balancing_vs_cluste 2::For SY0-701 objective 3.4, which item best matches: Explain the importance of resilience and recovery in security architecture?{
+=Load Balancing vs. Clustering:
+~Load Balancing
+~Clustering
+~Hot Site
+}
+
+::sy701_3_4 load_balancing 3::For SY0-701 objective 3.4, which item best matches: Explain the importance of resilience and recovery in security architecture?{
+=Load Balancing
+~Load Balancing vs. Clustering:
+~Clustering
+~Hot Site
+}
+
+::sy701_4_1 establish 2::For SY0-701 objective 4.1, which item best matches: Given a scenario, apply common security techniques to computing resources?{
+=Establish
+~Deploy
+~Maintain
+~Mobile Devices
+}
+
+::sy701_4_1 deploy 3::For SY0-701 objective 4.1, which item best matches: Given a scenario, apply common security techniques to computing resources?{
+=Deploy
+~Establish
+~Maintain
+~Mobile Devices
+}
+
+::sy701_4_2 acquisition_procurement_ 2::For SY0-701 objective 4.2, which item best matches: Explain the security implications of proper hardware, software, and data asset management?{
+=Acquisition/Procurement Process
+~Assignment/Accounting:
+~Ownership
+~Classification
+}
+
+::sy701_4_2 assignment_accounting_ 3::For SY0-701 objective 4.2, which item best matches: Explain the security implications of proper hardware, software, and data asset management?{
+=Assignment/Accounting:
+~Acquisition/Procurement Process
+~Ownership
+~Classification
+}
+
+::sy701_4_3 vulnerability_scan 2::For SY0-701 objective 4.3, which item best matches: Explain various activities associated with vulnerability management?{
+=Vulnerability Scan
+~Application Security:
+~Static analysis (SAST)
+~Dynamic analysis (DAST)
+}
+
+::sy701_4_3 application_security_ 3::For SY0-701 objective 4.3, which item best matches: Explain various activities associated with vulnerability management?{
+=Application Security:
+~Vulnerability Scan
+~Static analysis (SAST)
+~Dynamic analysis (DAST)
+}
+
+::sy701_4_4 systems 2::For SY0-701 objective 4.4, which item best matches: Explain security alerting and monitoring concepts and tools?{
+=Systems
+~Applications
+~Infrastructure
+~Log Aggregation
+}
+
+::sy701_4_4 applications 3::For SY0-701 objective 4.4, which item best matches: Explain security alerting and monitoring concepts and tools?{
+=Applications
+~Systems
+~Infrastructure
+~Log Aggregation
+}
+
+::sy701_4_5 firewall 2::For SY0-701 objective 4.5, which item best matches: Given a scenario, modify enterprise capabilities to enhance security?{
+=Firewall
+~Rules
+~Access lists
+~Ports/protocols
+}
+
+::sy701_4_5 rules 3::For SY0-701 objective 4.5, which item best matches: Given a scenario, modify enterprise capabilities to enhance security?{
+=Rules
+~Firewall
+~Access lists
+~Ports/protocols
+}
+
+::sy701_4_6 provisioning_de_provisio 2::For SY0-701 objective 4.6, which item best matches: Given a scenario, implement and maintain identity and access management?{
+=Provisioning/De-provisioning User Accounts
+~Permission Assignments and Implications
+~Identity Proofing
+~Federation
+}
+
+::sy701_4_6 permission_assignments_a 3::For SY0-701 objective 4.6, which item best matches: Given a scenario, implement and maintain identity and access management?{
+=Permission Assignments and Implications
+~Provisioning/De-provisioning User Accounts
+~Identity Proofing
+~Federation
+}
+
+::sy701_4_7 user_provisioning 2::For SY0-701 objective 4.7, which item best matches: Explain the importance of automation and orchestration related to secure operations?{
+=User Provisioning
+~Resource Provisioning
+~Guard Rails
+~Security Groups
+}
+
+::sy701_4_7 resource_provisioning 3::For SY0-701 objective 4.7, which item best matches: Explain the importance of automation and orchestration related to secure operations?{
+=Resource Provisioning
+~User Provisioning
+~Guard Rails
+~Security Groups
+}
+
+::sy701_4_8 preparation 2::For SY0-701 objective 4.8, which item best matches: Explain appropriate incident response activities?{
+=Preparation
+~Detection
+~Analysis
+~Containment
+}
+
+::sy701_4_8 detection 3::For SY0-701 objective 4.8, which item best matches: Explain appropriate incident response activities?{
+=Detection
+~Preparation
+~Analysis
+~Containment
+}
+
+::sy701_4_9 firewall_logs 2::For SY0-701 objective 4.9, which item best matches: Given a scenario, use data sources to support an investigation?{
+=Firewall Logs
+~Application Logs
+~Endpoint Logs
+~OS-specific Security Logs
+}
+
+::sy701_4_9 application_logs 3::For SY0-701 objective 4.9, which item best matches: Given a scenario, use data sources to support an investigation?{
+=Application Logs
+~Firewall Logs
+~Endpoint Logs
+~OS-specific Security Logs
+}
+
+::sy701_5_1 acceptable_use_policy_au 2::For SY0-701 objective 5.1, which item best matches: Summarize elements of effective security governance?{
+=Acceptable Use Policy (AUP)
+~Information Security Policies
+~Business Continuity
+~Disaster Recovery
+}
+
+::sy701_5_1 information_security_pol 3::For SY0-701 objective 5.1, which item best matches: Summarize elements of effective security governance?{
+=Information Security Policies
+~Acceptable Use Policy (AUP)
+~Business Continuity
+~Disaster Recovery
+}
+
+::sy701_5_2 risk_identification 2::For SY0-701 objective 5.2, which item best matches: Explain elements of the risk management process?{
+=Risk Identification
+~Risk Assessment
+~Ad hoc
+~Recurring
+}
+
+::sy701_5_2 risk_assessment 3::For SY0-701 objective 5.2, which item best matches: Explain elements of the risk management process?{
+=Risk Assessment
+~Risk Identification
+~Ad hoc
+~Recurring
+}
+
+::sy701_5_3 vendor_assessment 2::For SY0-701 objective 5.3, which item best matches: Explain the processes associated with third-party risk assessment and management?{
+=Vendor Assessment
+~Penetration testing
+~Right-to-audit clause
+~Evidence of internal audits
+}
+
+::sy701_5_3 penetration_testing 3::For SY0-701 objective 5.3, which item best matches: Explain the processes associated with third-party risk assessment and management?{
+=Penetration testing
+~Vendor Assessment
+~Right-to-audit clause
+~Evidence of internal audits
+}
+
+::sy701_5_4 compliance_reporting 2::For SY0-701 objective 5.4, which item best matches: Summarize elements of effective security compliance?{
+=Compliance Reporting
+~Internal
+~External
+~Consequences of Non-compliance
+}
+
+::sy701_5_4 internal 3::For SY0-701 objective 5.4, which item best matches: Summarize elements of effective security compliance?{
+=Internal
+~Compliance Reporting
+~External
+~Consequences of Non-compliance
+}
+
+::sy701_5_5 attestation 2::For SY0-701 objective 5.5, which item best matches: Explain types and purposes of audits and assessments?{
+=Attestation
+~Internal
+~Compliance
+~Audit committee
+}
+
+::sy701_5_5 internal 3::For SY0-701 objective 5.5, which item best matches: Explain types and purposes of audits and assessments?{
+=Internal
+~Attestation
+~Compliance
+~Audit committee
+}
+
+::sy701_5_6 phishing 2::For SY0-701 objective 5.6, which item best matches: Given a scenario, implement security awareness practices?{
+=Phishing
+~Campaigns
+~Recognizing a phishing attempt
+~Responding to reported suspicious messages
+}
+
+::sy701_5_6 campaigns 3::For SY0-701 objective 5.6, which item best matches: Given a scenario, implement security awareness practices?{
+=Campaigns
+~Phishing
+~Recognizing a phishing attempt
+~Responding to reported suspicious messages
+}

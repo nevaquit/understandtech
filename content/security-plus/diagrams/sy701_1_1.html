@@ -1,0 +1,117 @@
+<div class="ut-lesson-diagram">
+<style>.ut-lesson-diagram { margin: 1.25rem 0; padding: 1rem; border: 1px solid #1A8A7D; border-radius: 8px; background: #f8fbfa; }
+.ut-lesson-diagram .diagram-title { font-weight: 700; color: #0B1F3A; margin-bottom: 0.75rem; }
+.ut-lesson-diagram .controls-matrix, .ut-lesson-diagram .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; }
+.ut-lesson-diagram .control-card, .ut-lesson-diagram .concept-item { background: #fff; border-left: 4px solid #C9A227; padding: 0.75rem; border-radius: 4px; }
+.ut-lesson-diagram .flow-diagram { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: stretch; }
+.ut-lesson-diagram .flow-step { flex: 1 1 140px; background: #0B1F3A; color: #fff; padding: 0.6rem; border-radius: 6px; text-align: center; font-size: 0.9rem; }
+.ut-lesson-diagram .flow-arrow { align-self: center; color: #C9A227; font-weight: bold; }
+.ut-lesson-diagram ul { margin: 0.35rem 0 0.35rem 1.1rem; }
+.ut-lesson-diagram h4 { color: #0B1F3A; margin: 0.5rem 0; }</style>
+<div class="diagram-title">🎯 Security Controls Classification Matrix</div>
+                <div class="controls-matrix">
+                    <div class="control-card">
+                        <h4>🔧 Technical Controls</h4>
+                        <p><strong>Technology-implemented safeguards:</strong></p>
+                        <ul>
+                            <li><strong>Firewalls:</strong> Filter network traffic based on rules</li>
+                            <li><strong>Antivirus/Anti-malware:</strong> Detect and remove malicious software</li>
+                            <li><strong>IDS/IPS:</strong> Monitor and prevent intrusions</li>
+                            <li><strong>Encryption:</strong> Protect data confidentiality and integrity</li>
+                            <li><strong>Multi-Factor Authentication:</strong> Additional identity verification</li>
+                            <li><strong>SIEM:</strong> Centralized security information management</li>
+                            <li><strong>DLP:</strong> Data loss prevention systems</li>
+                        </ul>
+                    </div>
+                    <div class="control-card">
+                        <h4>📋 Managerial Controls</h4>
+                        <p><strong>Administrative policies and procedures:</strong></p>
+                        <ul>
+                            <li><strong>Security Policies:</strong> High-level security directives</li>
+                            <li><strong>Risk Assessments:</strong> Systematic threat identification</li>
+                            <li><strong>Training Programs:</strong> Security awareness and education</li>
+                            <li><strong>Incident Response Plans:</strong> Structured breach response</li>
+                            <li><strong>Business Continuity Plans:</strong> Operational resilience</li>
+                            <li><strong>Background Checks:</strong> Personnel security screening</li>
+                            <li><strong>Change Management:</strong> Controlled system modifications</li>
+                        </ul>
+                    </div>
+                    <div class="control-card">
+                        <h4>👥 Operational Controls</h4>
+                        <p><strong>Day-to-day human-implemented processes:</strong></p>
+                        <ul>
+                            <li><strong>Security Guards:</strong> Physical premise monitoring</li>
+                            <li><strong>User Account Management:</strong> Access provisioning/deprovisioning</li>
+                            <li><strong>Security Audits:</strong> Regular compliance assessments</li>
+                            <li><strong>Backup Operations:</strong> Data protection procedures</li>
+                            <li><strong>Configuration Management:</strong> System baseline maintenance</li>
+                            <li><strong>Separation of Duties:</strong> Fraud prevention through role division</li>
+                            <li><strong>Vulnerability Management:</strong> Systematic weakness remediation</li>
+                        </ul>
+                    </div>
+                    <div class="control-card">
+                        <h4>🏢 Physical Controls</h4>
+                        <p><strong>Tangible security measures:</strong></p>
+                        <ul>
+                            <li><strong>Access Control Systems:</strong> Card readers, biometric scanners</li>
+                            <li><strong>CCTV Systems:</strong> Visual surveillance and monitoring</li>
+                            <li><strong>Environmental Controls:</strong> HVAC, fire suppression, power</li>
+                            <li><strong>Perimeter Security:</strong> Fencing, barriers, lighting</li>
+                            <li><strong>Cable Management:</strong> Secure data transmission paths</li>
+                            <li><strong>Device Security:</strong> Laptop locks, equipment fastening</li>
+                            <li><strong>Secure Disposal:</strong> Media destruction and sanitization</li>
+                        </ul>
+                    </div>
+                </div>
+<h4>🔍 Security Control Functions</h4>
+                <div class="concept-grid">
+                    <div class="concept-item">
+                        <strong>🛡️ Preventive Controls</strong><br>
+                        <em>Stop incidents before they occur:</em><br>
+                        • Firewalls blocking malicious traffic<br>
+                        • Access controls preventing unauthorized entry<br>
+                        • Antivirus preventing malware execution<br>
+                        • Security awareness preventing social engineering
+                    </div>
+                    <div class="concept-item">
+                        <strong>⚠️ Deterrent Controls</strong><br>
+                        <em>Discourage potential attackers:</em><br>
+                        • Visible security cameras<br>
+                        • Warning signs about monitoring<br>
+                        • Security guard presence<br>
+                        • Legal consequences documentation
+                    </div>
+                    <div class="concept-item">
+                        <strong>🔍 Detective Controls</strong><br>
+                        <em>Identify ongoing or completed incidents:</em><br>
+                        • Intrusion detection systems<br>
+                        • SIEM correlation engines<br>
+                        • Security audit logs<br>
+                        • Motion detection sensors
+                    </div>
+                    <div class="concept-item">
+                        <strong>🔧 Corrective Controls</strong><br>
+                        <em>Remediate after incident detection:</em><br>
+                        • Incident response procedures<br>
+                        • System backup restoration<br>
+                        • Patch management deployment<br>
+                        • Malware quarantine systems
+                    </div>
+                    <div class="concept-item">
+                        <strong>⚖️ Compensating Controls</strong><br>
+                        <em>Alternative protection methods:</em><br>
+                        • Manual processes when automation fails<br>
+                        • Additional monitoring for encryption gaps<br>
+                        • Enhanced logging for access control limitations<br>
+                        • Segregation of duties for single-person tasks
+                    </div>
+                    <div class="concept-item">
+                        <strong>📋 Directive Controls</strong><br>
+                        <em>Guide behavior through documentation:</em><br>
+                        • Security policies and procedures<br>
+                        • Technical implementation standards<br>
+                        • Operational guidelines<br>
+                        • Compliance requirements
+                    </div>
+                </div>
+</div>

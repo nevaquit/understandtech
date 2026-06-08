@@ -68,7 +68,19 @@ function security_plus_load_lesson_html(string $repopath, string $code, string $
             return $html;
         }
     }
-    return security_plus_lesson_html($code, $title);
+    $diagrampath = $repopath . '/content/security-plus/diagrams/' . $code . '.html';
+    $base = security_plus_lesson_html($code, $title);
+    if (is_readable($diagrampath)) {
+        $diagram = trim((string) file_get_contents($diagrampath));
+        if ($diagram !== '') {
+            return str_replace(
+                '</div>' . "\n" . '<h4>Next steps</h4>',
+                $diagram . "\n" . '</div>' . "\n" . '<h4>Next steps</h4>',
+                $base
+            );
+        }
+    }
+    return $base;
 }
 
 /**
@@ -198,6 +210,35 @@ function security_plus_get_question_category(int $contextid, string $categorynam
     return $record;
 }
 
+function security_plus_count_tagged_questions(int $categoryid): int {
+    global $DB;
+    $count = 0;
+    foreach (security_plus_category_question_ids($categoryid) as $qid) {
+        $name = (string) $DB->get_field('question', 'name', ['id' => $qid]);
+        if (preg_match('/\b(sy701_\d+_\d+)\b/', $name)) {
+            $count++;
+        }
+    }
+    return $count;
+}
+
+/**
+ * Count ::sy701_* questions declared in a GIFT file.
+ *
+ * @param string $giftpath
+ * @return int
+ */
+function security_plus_gift_expected_count(string $giftpath): int {
+    if (!is_readable($giftpath)) {
+        return 28;
+    }
+    $content = file_get_contents($giftpath);
+    if ($content === false) {
+        return 28;
+    }
+    return preg_match_all('/::[^:\n]*sy701_\d+_\d+/m', $content) ?: 28;
+}
+
 /**
  * @param int $contextid
  * @param stdClass $category
@@ -212,9 +253,15 @@ function security_plus_import_gift(int $contextid, stdClass $category, string $g
         return 0;
     }
 
-    $existingmap = security_plus_map_questions_by_objective((int) $category->id);
-    if (count($existingmap) >= 28) {
-        echo 'gift_skip_existing objectives=' . count($existingmap) . ' total='
+    $expected = security_plus_gift_expected_count($giftpath);
+    $tagged = security_plus_count_tagged_questions((int) $category->id);
+    if ($tagged >= 28 && $expected <= 28) {
+        echo "gift_skip_existing tagged={$tagged} expected={$expected} total="
+            . count(security_plus_category_question_ids((int) $category->id)) . "\n";
+        return count(security_plus_category_question_ids((int) $category->id));
+    }
+    if ($expected > 28 && $tagged >= ($expected + 28)) {
+        echo "gift_skip_existing tagged={$tagged} expected_extra={$expected} total="
             . count(security_plus_category_question_ids((int) $category->id)) . "\n";
         return count(security_plus_category_question_ids((int) $category->id));
     }
@@ -284,6 +331,64 @@ function security_plus_map_questions_by_objective(int $categoryid): array {
         }
     }
     return $map;
+}
+
+/**
+ * @param int $categoryid
+ * @return array<string,int[]> Map objective shortname => question ids
+ */
+function security_plus_map_all_questions_by_objective(int $categoryid): array {
+    global $DB;
+
+    /** @var array<string,int[]> $map */
+    $map = [];
+    $records = $DB->get_records_sql(
+        "SELECT q.id, q.name
+           FROM {question} q
+           JOIN {question_versions} qv ON qv.questionid = q.id
+           JOIN {question_bank_entries} qbe ON qbe.id = qv.questionbankentryid
+          WHERE qbe.questioncategoryid = :catid
+            AND qv.status = :status
+       ORDER BY q.id ASC",
+        ['catid' => $categoryid, 'status' => 'ready']
+    );
+    foreach ($records as $row) {
+        if (!preg_match('/\b(sy701_\d+_\d+)\b/', $row->name, $m)) {
+            continue;
+        }
+        $key = $m[1];
+        if (!isset($map[$key])) {
+            $map[$key] = [];
+        }
+        $map[$key][] = (int) $row->id;
+    }
+    return $map;
+}
+
+/**
+ * @param int $categoryid
+ * @return array<int,int[]> Map domain number => question ids
+ */
+function security_plus_map_questions_by_domain(int $categoryid): array {
+    $all = security_plus_map_all_questions_by_objective($categoryid);
+    $domains = [
+        1 => [],
+        2 => [],
+        3 => [],
+        4 => [],
+        5 => [],
+    ];
+    foreach ($all as $objshort => $qids) {
+        if (preg_match('/sy701_(\d)_/', $objshort, $m)) {
+            $domains[(int) $m[1]] = array_merge($domains[(int) $m[1]], $qids);
+        }
+    }
+    foreach ($domains as $num => $qids) {
+        $qids = array_values(array_unique($qids));
+        sort($qids);
+        $domains[$num] = $qids;
+    }
+    return $domains;
 }
 
 /**
@@ -453,29 +558,92 @@ function security_plus_add_quiz(stdClass $course, int $sectionnum, string $quizn
 }
 
 /**
- * @param array<string,int> $questionmap
+ * Add missing questions to an existing domain quiz.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $quizname
+ * @param int[] $questionids
+ * @return void
+ */
+function security_plus_sync_quiz(stdClass $course, int $sectionnum, string $quizname, array $questionids): void {
+    global $DB;
+
+    if (!$questionids) {
+        echo "quiz_skip_empty name={$quizname}\n";
+        return;
+    }
+
+    $quizrecord = $DB->get_record_sql(
+        "SELECT q.*
+           FROM {quiz} q
+           JOIN {course_modules} cm ON cm.instance = q.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
+          WHERE cm.course = :courseid AND q.name = :name",
+        ['courseid' => $course->id, 'name' => $quizname]
+    );
+
+    if (!$quizrecord) {
+        security_plus_add_quiz($course, $sectionnum, $quizname, $questionids);
+        return;
+    }
+
+    $cm = get_coursemodule_from_instance('quiz', (int) $quizrecord->id, (int) $course->id, false, MUST_EXIST);
+    $quizrecord->cmid = $cm->id;
+
+    $slots = $DB->get_records('quiz_slots', ['quizid' => $quizrecord->id], 'slot ASC', 'slot,questionid');
+    $existing = array_map(static fn($s) => (int) $s->questionid, $slots);
+
+    $added = 0;
+    foreach ($questionids as $qid) {
+        if (in_array($qid, $existing, true)) {
+            continue;
+        }
+        try {
+            if (quiz_add_quiz_question($qid, $quizrecord, 0) === false) {
+                continue;
+            }
+            $added++;
+        } catch (Throwable $e) {
+            echo "quiz_sync_failed name={$quizname} qid={$qid} error=" . $e->getMessage() . "\n";
+            break;
+        }
+    }
+
+    if ($added > 0) {
+        quiz_update_sumgrades($quizrecord);
+    }
+    echo "quiz_synced id={$quizrecord->id} name={$quizname} added={$added} total="
+        . count($questionids) . "\n";
+}
+
+/**
+ * @param array<string,int|int[]> $questionmap
  * @return int Mappings created
  */
 function security_plus_link_questions_to_objectives(array $questionmap): int {
     global $DB;
 
     $linked = 0;
-    foreach ($questionmap as $objshort => $questionid) {
+    foreach ($questionmap as $objshort => $questionids) {
+        $ids = is_array($questionids) ? $questionids : [(int) $questionids];
         $objective = $DB->get_record('certmaster_objectives', ['shortname' => $objshort]);
         if (!$objective) {
             continue;
         }
-        if ($DB->record_exists('certmaster_question_objective', [
-            'questionid' => $questionid,
-            'objectiveid' => $objective->id,
-        ])) {
-            continue;
+        foreach ($ids as $questionid) {
+            if ($DB->record_exists('certmaster_question_objective', [
+                'questionid' => $questionid,
+                'objectiveid' => $objective->id,
+            ])) {
+                continue;
+            }
+            $DB->insert_record('certmaster_question_objective', (object) [
+                'questionid' => $questionid,
+                'objectiveid' => $objective->id,
+            ]);
+            $linked++;
         }
-        $DB->insert_record('certmaster_question_objective', (object) [
-            'questionid' => $questionid,
-            'objectiveid' => $objective->id,
-        ]);
-        $linked++;
     }
     return $linked;
 }
@@ -618,31 +786,23 @@ foreach ($objectives as $objective) {
 
 $context = context_course::instance((int) $course->id);
 $qcat = security_plus_get_question_category((int) $context->id, 'Security+ SY0-701');
-$giftpath = $repopath . '/content/security-plus/sy0-701-quiz.gift';
-security_plus_import_gift((int) $context->id, $qcat, $giftpath);
+$giftbase = $repopath . '/content/security-plus/sy0-701-quiz.gift';
+$giftextra = $repopath . '/content/security-plus/sy0-701-quiz-extra.gift';
+security_plus_import_gift((int) $context->id, $qcat, $giftbase);
+if (is_readable($giftextra)) {
+    security_plus_import_gift((int) $context->id, $qcat, $giftextra);
+}
 
-$questionmap = security_plus_map_questions_by_objective((int) $qcat->id);
-$linked = security_plus_link_questions_to_objectives($questionmap);
+$allquestionmap = security_plus_map_all_questions_by_objective((int) $qcat->id);
+$linked = security_plus_link_questions_to_objectives($allquestionmap);
 echo "question_objective_links={$linked}\n";
 
-$domainquestions = [
-    1 => [],
-    2 => [],
-    3 => [],
-    4 => [],
-    5 => [],
-];
-foreach ($questionmap as $objshort => $qid) {
-    if (preg_match('/sy701_(\d)_/', $objshort, $m)) {
-        $domainquestions[(int) $m[1]][] = $qid;
-    }
-}
+$domainquestions = security_plus_map_questions_by_domain((int) $qcat->id);
 foreach ($domainquestions as $domainnum => $qids) {
     if (!$qids) {
         continue;
     }
-    sort($qids);
-    security_plus_add_quiz(
+    security_plus_sync_quiz(
         $course,
         $domainnum,
         "Domain {$domainnum} Knowledge Check",

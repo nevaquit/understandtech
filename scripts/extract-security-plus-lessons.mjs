@@ -16,6 +16,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
 const outDir = path.join(repoRoot, 'content', 'security-plus', 'lessons');
+const diagramDir = path.join(repoRoot, 'content', 'security-plus', 'diagrams');
 
 const defaultSource = path.join(
   process.env.USERPROFILE || '',
@@ -203,7 +204,15 @@ for (const key of expected) {
     process.exit(1);
   }
   const shortname = `sy701_${key.replace('.', '_')}`;
-  const html = wrapLesson(shortname, section.title, markdownToHtml(section.body));
+  let html = wrapLesson(shortname, section.title, markdownToHtml(section.body));
+  const diagramPath = path.join(diagramDir, `${shortname}.html`);
+  if (fs.existsSync(diagramPath)) {
+    const diagram = fs.readFileSync(diagramPath, 'utf8').trim();
+    html = html.replace(
+      '</div>\n<h4>Next steps</h4>',
+      `${diagram}\n</div>\n<h4>Next steps</h4>`
+    );
+  }
   const outfile = path.join(outDir, `${shortname}.html`);
   fs.writeFileSync(outfile, html, 'utf8');
   written++;

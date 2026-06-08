@@ -82,6 +82,31 @@ if (!is_enrolled($context, $userid)) {
     echo "user_already_enrolled course=$courseid\n";
 }
 
-echo "E2E_COURSE_PATH=/course/view.php?id=$courseid\n";
+$sec701 = $DB->get_record('course', ['shortname' => 'SEC701']);
+if ($sec701) {
+    $seccontext = context_course::instance((int) $sec701->id);
+    $secinstances = enrol_get_instances((int) $sec701->id, true);
+    $secmanual = null;
+    foreach ($secinstances as $instance) {
+        if ($instance->enrol === 'manual') {
+            $secmanual = $instance;
+            break;
+        }
+    }
+    if (!$secmanual) {
+        $secmanualid = $enrol->add_instance((object) ['id' => (int) $sec701->id]);
+        $secmanual = $DB->get_record('enrol', ['id' => $secmanualid]);
+    }
+    if (!is_enrolled($seccontext, $userid)) {
+        $enrol->enrol_user($secmanual, $userid, 5);
+        echo "user_enrolled sec701={$sec701->id}\n";
+    } else {
+        echo "user_already_enrolled sec701={$sec701->id}\n";
+    }
+    echo "E2E_COURSE_PATH=/course/view.php?id={$sec701->id}\n";
+} else {
+    echo "E2E_COURSE_PATH=/course/view.php?id=$courseid\n";
+}
+
 echo "STAGING_TEST_USER_EMAIL=$email\n";
 PHP

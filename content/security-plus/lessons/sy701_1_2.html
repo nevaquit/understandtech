@@ -171,6 +171,162 @@
 <p><strong>Honeynets</strong> Honeynets are networks of honeypots that create more realistic environments for attackers. They provide comprehensive views of attack campaigns and allow researchers to study coordinated attacks.</p>
 <p><strong>Honeyfiles</strong> Honeyfiles are decoy documents placed in file systems to detect unauthorized access. When accessed, they trigger alerts indicating potential compromise.</p>
 <p><strong>Honeytokens</strong> Honeytokens are pieces of data (credentials, URLs, database records) that have no legitimate use but trigger alerts when accessed, indicating unauthorized activity.</p>
+<div class="ut-lesson-diagram">
+<style>.ut-lesson-diagram { margin: 1.25rem 0; padding: 1rem; border: 1px solid #1A8A7D; border-radius: 8px; background: #f8fbfa; }
+.ut-lesson-diagram .diagram-title { font-weight: 700; color: #0B1F3A; margin-bottom: 0.75rem; }
+.ut-lesson-diagram .controls-matrix, .ut-lesson-diagram .concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; }
+.ut-lesson-diagram .control-card, .ut-lesson-diagram .concept-item { background: #fff; border-left: 4px solid #C9A227; padding: 0.75rem; border-radius: 4px; }
+.ut-lesson-diagram .flow-diagram { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: stretch; }
+.ut-lesson-diagram .flow-step { flex: 1 1 140px; background: #0B1F3A; color: #fff; padding: 0.6rem; border-radius: 6px; text-align: center; font-size: 0.9rem; }
+.ut-lesson-diagram .flow-arrow { align-self: center; color: #C9A227; font-weight: bold; }
+.ut-lesson-diagram ul { margin: 0.35rem 0 0.35rem 1.1rem; }
+.ut-lesson-diagram h4 { color: #0B1F3A; margin: 0.5rem 0; }</style>
+<div class="diagram-title">🔺 CIA Triad - The Foundation of Information Security</div>
+                <div class="cia-triad">
+                    <div class="cia-element">
+                        <h4>🔒 Confidentiality</h4>
+                        <p>Information accessible only to authorized parties</p>
+                    </div>
+                    <div class="cia-element">
+                        <h4>✅ Integrity</h4>
+                        <p>Data accuracy, completeness, and trustworthiness</p>
+                    </div>
+                    <div class="cia-element">
+                        <h4>🌐 Availability</h4>
+                        <p>Systems and data accessible when needed</p>
+                    </div>
+                </div>
+<div class="diagram-title">🔐 AAA Process Flow and Integration</div>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <strong>1. Authentication</strong><br>
+                        "Who are you?"<br>
+                        Identity verification<br>
+                        Multi-factor validation
+                    </div>
+                    <div class="flow-step">
+                        <strong>2. Authorization</strong><br>
+                        "What can you access?"<br>
+                        Permission assignment<br>
+                        Resource access control
+                    </div>
+                    <div class="flow-step">
+                        <strong>3. Accounting</strong><br>
+                        "What did you do?"<br>
+                        Activity logging<br>
+                        Audit trail generation
+                    </div>
+                </div>
+<h4>🔐 Authentication Factors - Comprehensive Analysis</h4>
+                <div class="concept-grid">
+                    <div class="concept-item">
+                        <h4>🧠 Type 1: Something You Know</h4>
+                        <p><strong>Knowledge Factor (Cognitive):</strong></p>
+                        <ul>
+                            <li>Passwords and passphrases</li>
+                            <li>Personal identification numbers (PINs)</li>
+                            <li>Security questions and answers</li>
+                            <li>Cognitive passwords (image selection)</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>📱 Type 2: Something You Have</h4>
+                        <p><strong>Possession Factor (Physical):</strong></p>
+                        <ul>
+                            <li>Hardware tokens (RSA SecurID)</li>
+                            <li>Software tokens (mobile apps)</li>
+                            <li>Smart cards and CAC cards</li>
+                            <li>FIDO2 security keys</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>👁️ Type 3: Something You Are</h4>
+                        <p><strong>Inherence Factor (Biometric):</strong></p>
+                        <ul>
+                            <li>Fingerprint recognition</li>
+                            <li>Facial recognition systems</li>
+                            <li>Iris and retinal scanning</li>
+                            <li>Voice pattern analysis</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>📍 Type 4: Somewhere You Are</h4>
+                        <p><strong>Location Factor (Geographic):</strong></p>
+                        <ul>
+                            <li>GPS-based location verification</li>
+                            <li>IP address geolocation</li>
+                            <li>Network proximity detection</li>
+                            <li>Time-zone based restrictions</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>⚡ Type 5: Something You Do</h4>
+                        <p><strong>Behavioral Factor (Dynamic):</strong></p>
+                        <ul>
+                            <li>Keystroke dynamics analysis</li>
+                            <li>Mouse movement patterns</li>
+                            <li>Signature recognition</li>
+                            <li>Gait analysis and walking patterns</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-concepts">
+                <h4>🔒 Authorization Models - Detailed Comparison</h4>
+                <div class="concept-grid">
+                    <div class="concept-item">
+                        <h4>👔 Role-Based Access Control (RBAC)</h4>
+                        <p><strong>Permissions through role assignment:</strong></p>
+                        <ul>
+                            <li>Users assigned to roles</li>
+                            <li>Roles granted specific permissions</li>
+                            <li>Hierarchical role inheritance</li>
+                            <li>Simplifies large organization management</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>🏛️ Mandatory Access Control (MAC)</h4>
+                        <p><strong>Central authority enforcement:</strong></p>
+                        <ul>
+                            <li>Security labels classify data</li>
+                            <li>Clearance levels for users</li>
+                            <li>Non-discretionary access decisions</li>
+                            <li>Common in government/military</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>👤 Discretionary Access Control (DAC)</h4>
+                        <p><strong>Owner-controlled permissions:</strong></p>
+                        <ul>
+                            <li>Resource owners set permissions</li>
+                            <li>Flexible but potentially inconsistent</li>
+                            <li>Identity-based access control</li>
+                            <li>Common in commercial environments</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>📋 Rule-Based Access Control</h4>
+                        <p><strong>Conditional access enforcement:</strong></p>
+                        <ul>
+                            <li>Access based on predefined rules</li>
+                            <li>Time, location, and context factors</li>
+                            <li>System state considerations</li>
+                            <li>Dynamic policy enforcement</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>🏷️ Attribute-Based Access Control (ABAC)</h4>
+                        <p><strong>Multi-factor decision making:</strong></p>
+                        <ul>
+                            <li>Subject, object, action attributes</li>
+                            <li>Environmental context factors</li>
+                            <li>Dynamic policy evaluation</li>
+                            <li>Most flexible and granular model</li>
+                        </ul>
+                    </div>
+                </div>
+</div>
 </div>
 <h4>Next steps</h4>
 <p>Complete the domain knowledge check quiz after this lesson and use the AI tutor for scenario-based practice. The tutor guides you Socratically without revealing assessment answers.</p>

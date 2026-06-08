@@ -24,7 +24,7 @@ cp .env.example .env
 | `STAGING_URL` | No | Base URL (default `https://understandtech.app`) |
 | `STAGING_TEST_USER_EMAIL` | For auth/tutor | Student login email |
 | `STAGING_TEST_USER_PASSWORD` | For auth/tutor | Student login password |
-| `E2E_COURSE_PATH` | For tutor tests | e.g. `/course/view.php?id=2` |
+| `E2E_COURSE_PATH` | For tutor tests | e.g. `/course/view.php?id=3` (SEC701) |
 
 ## Run
 
