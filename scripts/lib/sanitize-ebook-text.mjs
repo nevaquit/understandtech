@@ -33,6 +33,12 @@ export function sanitizeEbookText(raw) {
   text = text.replace(/Remember, the Official Study Guide suggests\s*/gi, '');
   text = text.replace(/^Available on\s*$/gim, '');
   text = text.replace(/D O M A I N \d+\s*:\s*/g, '');
+  text = text.replace(/SECURITY\s*&\s*RISK\s*MANAGEMENT\s*KNOW\s*BY\s*HEART!?/gi, '');
+  text = text.replace(/SECURITY\s*&\s*RISK\s*MANAGEMENT\s*A\s*C\s*I\s*onfidentiality/gi, '');
+  text = text.replace(/^SECURITY\s*&\s*RISK\s*MANAGEMENT[^\n]{0,80}$/gim, '');
+  text = text.replace(/GENERAL SECURITY CONCEPTS\s+/gi, '');
+  text = text.replace(/image credit:\s*[^\n]+/gi, '');
+  text = text.replace(/conditional access image credit:[^\n]+/gi, '');
   text = text.replace(/Pearson IT Certification/gi, '');
   text = text.replace(/Pearson VUE/gi, '');
 
@@ -111,6 +117,21 @@ export function sanitizeEbookHtml(html) {
         return false;
       }
       if (/^Hands-?On\s+Lab/i.test(plain)) {
+        return false;
+      }
+      if (/KNOW\s*BY\s*HEART/i.test(plain)) {
+        return false;
+      }
+      if (/^SECURITY\s*&\s*RISK\s*MANAGEMENT/i.test(plain) && plain.length < 120) {
+        return false;
+      }
+      if (/^SECURITY\s*&\s*RISK\s*MANAGEMENT\s*A\s*C\s*I/i.test(plain)) {
+        return false;
+      }
+      if (/^image credit:/i.test(plain)) {
+        return false;
+      }
+      if (/^\d+\.0\s+General Security Concepts\s*$/i.test(plain)) {
         return false;
       }
       return true;
