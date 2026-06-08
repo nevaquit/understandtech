@@ -134,10 +134,15 @@ function security_plus_page_exists(int $courseid, int $sectionnum, string $name)
  */
 function security_plus_disable_page_module_filters(stdClass $course): void {
     $modinfo = get_fast_modinfo($course);
-    $pages = $modinfo->get_instances_of('page');
-    foreach ($pages as $cm) {
-        $context = context_module::instance($cm->id);
-        if ($context->contextlevel !== CONTEXT_MODULE) {
+    $contexts = [context_course::instance((int) $course->id)];
+    foreach ($modinfo->get_cms() as $cm) {
+        if ($cm->deletioninprogress) {
+            continue;
+        }
+        $contexts[] = context_module::instance($cm->id);
+    }
+    foreach ($contexts as $context) {
+        if ($context->contextlevel !== CONTEXT_COURSE && $context->contextlevel !== CONTEXT_MODULE) {
             continue;
         }
         foreach (array_keys(filter_get_active_in_context($context)) as $filtername) {
