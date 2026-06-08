@@ -87,11 +87,64 @@ try {
     $options->noclean = true;
     $options->overflowdiv = true;
     $options->context = $context;
+    $options->filter = false;
     $formatted = format_text($page->content, $page->contentformat, $options);
-    echo 'format_text_len=' . strlen($formatted) . "\n";
-    echo "format_text_ok\n";
+    echo 'format_text_no_filter_len=' . strlen($formatted) . "\n";
+    echo "format_text_no_filter_ok\n";
 } catch (Throwable $e) {
-    echo 'format_text_error=' . $e->getMessage() . "\n";
+    echo 'format_text_no_filter_error=' . $e->getMessage() . "\n";
 }
+
+try {
+    $context = context_module::instance($cmid);
+    $page = $DB->get_record('page', ['id' => $cm->instance], '*', MUST_EXIST);
+    $options = new stdClass();
+    $options->noclean = true;
+    $options->overflowdiv = true;
+    $options->context = $context;
+    $formatted = format_text($page->content, $page->contentformat, $options);
+    echo 'format_text_with_filters_len=' . strlen($formatted) . "\n";
+    echo "format_text_with_filters_ok\n";
+} catch (Throwable $e) {
+    echo 'format_text_with_filters_error=' . $e->getMessage() . "\n";
+}
+
+$activefilters = filter_get_active_in_context(context_module::instance($cmid));
+echo 'active_filters=' . implode(',', array_keys($activefilters)) . "\n";
+
+require_once($CFG->libdir . '/filterlib.php');
+$filterstates = [];
+foreach ($DB->get_records('filter_active') as $row) {
+    $filterstates[$row->filter] = (int) $row->active;
+    filter_set_global_state($row->filter, TEXTFILTER_DISABLED);
+}
+filter_manager::reset_caches();
+
+foreach ($filterstates as $filtername => $state) {
+    if ($state !== TEXTFILTER_ON) {
+        continue;
+    }
+    filter_set_global_state($filtername, TEXTFILTER_ON);
+    filter_manager::reset_caches();
+    try {
+        $context = context_module::instance($cmid);
+        $page = $DB->get_record('page', ['id' => $cm->instance], '*', MUST_EXIST);
+        $options = new stdClass();
+        $options->noclean = true;
+        $options->overflowdiv = true;
+        $options->context = $context;
+        $filtered = format_text($page->content, $page->contentformat, $options);
+        echo "filter_ok name={$filtername} len=" . strlen($filtered) . "\n";
+    } catch (Throwable $e) {
+        echo "filter_fail name={$filtername} err=" . $e->getMessage() . "\n";
+    }
+    filter_set_global_state($filtername, TEXTFILTER_DISABLED);
+    filter_manager::reset_caches();
+}
+
+foreach ($filterstates as $filtername => $state) {
+    filter_set_global_state($filtername, $state);
+}
+filter_manager::reset_caches();
 
 echo "=== done ===\n";
