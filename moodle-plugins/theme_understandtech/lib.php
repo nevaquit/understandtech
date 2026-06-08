@@ -118,6 +118,14 @@ function theme_understandtech_page_init(moodle_page $page): void {
             "require(['theme_understandtech/courseindex_fallback'], function(m) { m.init(); });",
         );
     }
+
+    // My courses / dashboard: block_myoverview uses Templates.replaceNodeContents (YUI).
+    // When Y.NodeList is unavailable course cards stay as skeleton placeholders forever.
+    if (in_array($page->pagelayout, ['mycourses', 'mydashboard'], true)) {
+        $page->requires->js_amd_inline(
+            "require(['theme_understandtech/myoverview_fallback'], function(m) { m.init(); });",
+        );
+    }
 }
 
 /**

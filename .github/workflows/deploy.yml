@@ -293,6 +293,12 @@ jobs:
             exit "${code}"
           fi
 
+      - name: Fix Moodle directory permissions
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-dir-permissions-vm.sh"
+
       - name: Flush Redis application cache
         continue-on-error: true
         run: |
