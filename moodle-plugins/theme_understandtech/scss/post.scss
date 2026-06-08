@@ -107,8 +107,32 @@
 
 .path-mod-page,
 #page-mod-page-view {
+    .ut-lesson-content {
+        background: var(--ut-lesson-card);
+        border: 1px solid var(--ut-lesson-border);
+        border-radius: $ut-radius-md;
+        box-shadow: $ut-shadow-lg;
+    }
+
     #region-main {
         max-width: none;
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    #region-main-box,
+    #page-content {
+        min-height: 0;
+        height: auto;
+    }
+
+    .main-inner {
+        min-height: 0;
+        align-items: flex-start;
+    }
+
+    &:not(.hasblocks) [data-region="blocks-content"] {
+        display: none;
     }
 
     #region-main .generalbox,

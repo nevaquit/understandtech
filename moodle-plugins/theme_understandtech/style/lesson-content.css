@@ -1,9 +1,40 @@
 /* SEC701 lesson pages (mod_page) — plain CSS, always loaded via $THEME->sheets */
 
+/* Topics/incourse layout: card shell (Skool single-activity adds this via _layout.scss). */
+.path-mod-page .ut-lesson-content,
+#page-mod-page-view .ut-lesson-content {
+    background: var(--ut-lesson-card, rgba(15, 32, 53, 0.92));
+    border: 1px solid var(--ut-lesson-border, rgba(201, 162, 39, 0.22));
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 40px rgba(11, 31, 58, 0.35);
+}
+
+/* Boost drawers + h-100 stretch #region-main to viewport height → large blank navy gap. */
 .path-mod-page #region-main,
 #page-mod-page-view #region-main {
     max-width: none;
     width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+.path-mod-page #region-main-box,
+.path-mod-page #page-content,
+#page-mod-page-view #region-main-box,
+#page-mod-page-view #page-content {
+    min-height: 0;
+    height: auto;
+}
+
+.path-mod-page .main-inner,
+#page-mod-page-view .main-inner {
+    min-height: 0;
+    align-items: flex-start;
+}
+
+.path-mod-page:not(.hasblocks) [data-region="blocks-content"],
+#page-mod-page-view:not(.hasblocks) [data-region="blocks-content"] {
+    display: none;
 }
 
 .path-mod-page #region-main .generalbox,
