@@ -667,8 +667,9 @@ body.ut-theme .coursebox .content {
 
 /* ── Footer ─────────────────────────────────────────────────────────────────── */
 body.ut-theme #page-footer,
-body.ut-theme .footer-popover {
-    background: var(--ut-navy-deep);
+body.ut-theme .footer-popover,
+body.ut-theme .footer-popover.bg-white {
+    background: var(--ut-navy-deep) !important;
     border-top: 1px solid var(--ut-border);
     color: var(--ut-text-muted);
 }
@@ -757,4 +758,34 @@ body.ut-theme .ut-member-card {
 
 body.ut-theme .ut-member-card .ut-avatar {
     background: var(--ut-navy-mid);
+}
+
+/* ── Boost utility / list-group white leaks ─────────────────────────────────── */
+body.ut-theme .bg-white,
+body.ut-theme .bg-light,
+body.ut-theme .bg-body,
+body.ut-theme .list-group-item,
+body.ut-theme .list-group-item-action,
+body.ut-theme a.list-group-item-action {
+    background-color: var(--ut-surface-elevated) !important;
+    color: var(--ut-text) !important;
+    border-color: var(--ut-border) !important;
+}
+
+body.ut-theme .list-group-item:hover,
+body.ut-theme .list-group-item:focus,
+body.ut-theme .list-group-item-action:hover,
+body.ut-theme .list-group-item-action:focus,
+body.ut-theme a.list-group-item-action:hover,
+body.ut-theme a.list-group-item-action:focus {
+    background-color: rgba(201, 162, 39, 0.08) !important;
+    color: var(--ut-gold) !important;
+}
+
+body.ut-theme .list-group-item.active,
+body.ut-theme .list-group-item-action.active,
+body.ut-theme a.list-group-item-action.active {
+    background-color: rgba(201, 162, 39, 0.12) !important;
+    color: var(--ut-gold) !important;
+    border-color: var(--ut-border-strong) !important;
 }

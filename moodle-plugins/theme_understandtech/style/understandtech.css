@@ -129,3 +129,17 @@ body.ut-theme .moremenu .nav-link.active:focus {
     background: rgba(201, 162, 39, 0.08) !important;
     color: #C9A227 !important;
 }
+
+body.ut-theme .bg-white,
+body.ut-theme .bg-light,
+body.ut-theme .list-group-item,
+body.ut-theme .list-group-item-action,
+body.ut-theme a.list-group-item-action {
+    background-color: #0F2035 !important;
+    color: rgba(255, 255, 255, 0.94) !important;
+    border-color: rgba(201, 162, 39, 0.18) !important;
+}
+
+body.ut-theme .footer-popover.bg-white {
+    background: #071426 !important;
+}

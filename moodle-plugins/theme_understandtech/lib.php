@@ -58,6 +58,10 @@ function theme_understandtech_get_pre_scss(theme_config $theme): string {
     $scss .= "\$ut-brand-gold:  {$gold};\n";
     $scss .= "\$ut-brand-teal:  {$teal};\n";
 
+    if (!empty($theme->settings->scsspre)) {
+        $scss .= $theme->settings->scsspre;
+    }
+
     return $scss;
 }
 
@@ -127,10 +131,11 @@ function theme_understandtech_get_main_scss_content(theme_config $theme): string
  */
 function theme_understandtech_get_extra_scss(theme_config $theme): string {
     $scsspath = $theme->dir . '/scss/post.scss';
-    if (!is_readable($scsspath)) {
-        return '';
+    $scss = is_readable($scsspath) ? file_get_contents($scsspath) : '';
+    if (!empty($theme->settings->scss)) {
+        $scss .= "\n" . $theme->settings->scss;
     }
-    return file_get_contents($scsspath);
+    return $scss;
 }
 
 /**
@@ -143,7 +148,15 @@ function theme_understandtech_get_extra_scss(theme_config $theme): string {
  * @return string The processed CSS.
  */
 function theme_understandtech_process_css(string $css, theme_config $theme): string {
-    return $css;
+    $navy = $theme->settings->brand_navy ?? '#0B1F3A';
+    $gold = $theme->settings->brand_gold ?? '#C9A227';
+    $teal = $theme->settings->brand_teal ?? '#1A8A7D';
+    $navy = preg_match('/^#[0-9A-Fa-f]{3,6}$/', $navy) ? $navy : '#0B1F3A';
+    $gold = preg_match('/^#[0-9A-Fa-f]{3,6}$/', $gold) ? $gold : '#C9A227';
+    $teal = preg_match('/^#[0-9A-Fa-f]{3,6}$/', $teal) ? $teal : '#1A8A7D';
+
+    $vars = ":root{--ut-navy:{$navy};--ut-gold:{$gold};--ut-teal:{$teal};}\n";
+    return $vars . $css;
 }
 
 // ── Colour Utility Functions ──────────────────────────────────────────────────
