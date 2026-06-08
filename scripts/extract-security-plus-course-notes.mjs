@@ -11,6 +11,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PDFParse } from 'pdf-parse';
+import { sanitizeEbookHtml, sanitizeEbookText } from './lib/sanitize-ebook-text.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -38,26 +39,8 @@ function inlineFormat(text) {
 }
 
 /** @param {string} raw */
-function cleanLessonText(raw) {
-  return raw
-    .replace(/\r\n/g, '\n')
-    .replace(/Copyright ©[^\n]+\n/g, '')
-    .replace(/LICENSED FOR USE ONLY BY:[^\n]+\n/g, '')
-    .replace(/-- \d+ of \d+ --/g, '')
-    .replace(/CompTIA Security\+ Exam SY0-701/gi, '')
-    .replace(/CompTIA\.org/gi, '')
-    .replace(/^Lesson \d+\s*$/gm, '')
-    .replace(/^Objectives\s*$/gm, '')
-    .replace(/^\d{1,2}\s*$/gm, '')
-    .replace(/^Lab Activity[\s\S]*?(?=Topic \d+[A-D]|Copyright|$)/gm, '')
-    .replace(/^Review Activity[\s\S]*?(?=Topic \d+[A-D]|Copyright|$)/gm, '')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
-}
-
-/** @param {string} raw */
 function textToHtml(raw) {
-  const text = cleanLessonText(raw);
+  const text = sanitizeEbookText(raw);
   const lines = text.split('\n');
   const out = [];
   let para = [];
@@ -231,7 +214,7 @@ for (const key of expected) {
     continue;
   }
   const unique = [...new Set(chunks)];
-  const html = wrapCourseNotes(textToHtml(unique.join('\n\n')));
+  const html = sanitizeEbookHtml(wrapCourseNotes(textToHtml(unique.join('\n\n'))));
   fs.writeFileSync(path.join(outDir, `${key}.html`), html, 'utf8');
   written++;
   console.log(`wrote ${key}.html refs=${refs.length} chunks=${unique.length}`);

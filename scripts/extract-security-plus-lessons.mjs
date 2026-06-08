@@ -12,6 +12,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { sanitizeEbookHtml } from './lib/sanitize-ebook-text.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -217,7 +218,7 @@ for (const key of expected) {
   }
   const supplementPath = path.join(supplementDir, `${shortname}.html`);
   if (fs.existsSync(supplementPath)) {
-    const supplement = fs.readFileSync(supplementPath, 'utf8').trim();
+    const supplement = sanitizeEbookHtml(fs.readFileSync(supplementPath, 'utf8').trim());
     html = html.replace(
       '</div>\n<h4>Next steps</h4>',
       `${supplement}\n</div>\n<h4>Next steps</h4>`
@@ -225,7 +226,7 @@ for (const key of expected) {
   }
   const notesPath = path.join(courseNotesDir, `${shortname}.html`);
   if (fs.existsSync(notesPath)) {
-    const notes = fs.readFileSync(notesPath, 'utf8').trim();
+    const notes = sanitizeEbookHtml(fs.readFileSync(notesPath, 'utf8').trim());
     html = html.replace(
       '</div>\n<h4>Next steps</h4>',
       `${notes}\n</div>\n<h4>Next steps</h4>`

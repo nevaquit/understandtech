@@ -13,6 +13,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PDFParse } from 'pdf-parse';
+import { sanitizeEbookHtml, sanitizeEbookText } from './lib/sanitize-ebook-text.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
@@ -186,7 +187,7 @@ for (const spec of domainFiles) {
       continue;
     }
     const shortname = `sy701_${key.replace('.', '_')}`;
-    const html = wrapSupplement(textToHtml(chunk));
+    const html = sanitizeEbookHtml(wrapSupplement(textToHtml(sanitizeEbookText(chunk))));
     const outfile = path.join(outDir, `${shortname}.html`);
     fs.writeFileSync(outfile, html, 'utf8');
     written++;
