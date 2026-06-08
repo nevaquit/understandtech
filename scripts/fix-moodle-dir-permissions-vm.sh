@@ -19,10 +19,11 @@ chown root:www-data "${MOODLE_DIR}/config.php"
 echo "=== verify www-data chdir ==="
 sudo -u www-data php -r "
 chdir('${MOODLE_DIR}');
+define('CLI_SCRIPT', true);
 require '${MOODLE_DIR}/config.php';
 global \$DB;
 \$DB->get_field('config', 'value', ['name' => 'version']);
-echo \"www_data_web_db_ok\n\";
+echo \"www_data_chdir_db_ok\n\";
 "
 
 echo "=== php-fpm reload ==="
