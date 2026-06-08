@@ -165,17 +165,45 @@ check_db_vm() {
     warn "VM DB check skipped (not on production VM)"
     return
   fi
-  local dbhost="" dbhost_line=""
-  dbhost_line="$(sudo grep dbhost "$config" 2>/dev/null | grep -v dbpass | head -n1 || true)"
-  if [[ -n "$dbhost_line" ]]; then
-    dbhost="$(printf '%s' "$dbhost_line" | sed -n "s/.*['\"]\([^'\"]*\)['\"].*/\1/p" | head -n1 || true)"
-    if [[ -n "$dbhost" ]]; then
-      pass "Moodle dbhost configured: $dbhost"
-    else
-      pass "Moodle dbhost line present in config.php"
+
+  local dbhost=""
+  if [[ -f "${MOODLE_DIR}/admin/cli/cfg.php" ]]; then
+    dbhost="$(sudo -u www-data /usr/bin/php "${MOODLE_DIR}/admin/cli/cfg.php" --name=dbhost 2>/dev/null || true)"
+  fi
+  if [[ -z "$dbhost" ]]; then
+    dbhost="$(sudo -u www-data /usr/bin/php -r "
+      define('CLI_SCRIPT', true);
+      require '${config}';
+      global \$CFG;
+      echo \$CFG->dbhost ?? '';
+    " 2>/dev/null || true)"
+  fi
+  if [[ -z "$dbhost" ]]; then
+    local dbhost_line=""
+    dbhost_line="$(sudo grep -E '\$CFG->dbhost' "$config" 2>/dev/null | grep -v dbpass | head -n1 || true)"
+    if [[ -n "$dbhost_line" ]]; then
+      dbhost="$(printf '%s' "$dbhost_line" | sed -n "s/.*['\"]\([^'\"]*\)['\"].*/\1/p" | head -n1 || true)"
+      [[ -z "$dbhost" ]] && dbhost="present"
     fi
+  fi
+
+  if [[ -z "$dbhost" ]]; then
+    fail "Could not read Moodle dbhost (cfg.php, bootstrap, and config grep all empty)"
+    return
+  fi
+
+  pass "Moodle dbhost configured: ${dbhost}"
+
+  if sudo -u www-data /usr/bin/php -r "
+    define('CLI_SCRIPT', true);
+    require '${config}';
+    global \$DB;
+    \$DB->get_field('config', 'value', ['name' => 'version']);
+    echo 'db_query_ok';
+  " 2>/dev/null | grep -q db_query_ok; then
+    pass "Moodle DB query OK"
   else
-    fail "Could not read Moodle dbhost from config.php"
+    fail "Moodle DB query failed (dbhost=${dbhost})"
   fi
 }
 
@@ -189,11 +217,28 @@ check_redis_vm() {
     warn "redis-cli not found — Redis check skipped"
     return
   fi
-  local pong=""
-  if [[ -f /etc/moodle/redis_password ]]; then
+  local pong="" redis_host="127.0.0.1" redis_port="6379" redis_auth=""
+  if [[ -f /etc/moodle/env ]]; then
+    # shellcheck disable=SC1091
+    set -a
+    source /etc/moodle/env
+    set +a
+    if [[ -n "${MOODLE_REDIS_HOST:-}" ]]; then
+      redis_host="$MOODLE_REDIS_HOST"
+      redis_port="${MOODLE_REDIS_PORT:-10000}"
+      redis_auth="${MOODLE_REDIS_PASSWORD:-}"
+    fi
+  fi
+  if [[ -n "$redis_auth" ]]; then
+    if [[ "$redis_port" == "10000" ]]; then
+      pong="$(redis-cli -h "$redis_host" -p "$redis_port" --tls -a "$redis_auth" PING 2>/dev/null || true)"
+    else
+      pong="$(redis-cli -h "$redis_host" -p "$redis_port" -a "$redis_auth" PING 2>/dev/null || true)"
+    fi
+  elif [[ -f /etc/moodle/redis_password ]]; then
     pong="$(redis-cli -h 127.0.0.1 -p 6379 -a "$(sudo cat /etc/moodle/redis_password 2>/dev/null)" PING 2>/dev/null || true)"
   else
-    pong="$(redis-cli -h 127.0.0.1 PING 2>/dev/null || true)"
+    pong="$(redis-cli -h "$redis_host" -p "$redis_port" PING 2>/dev/null || true)"
   fi
   if [[ "$pong" == "PONG" ]]; then
     pass "Redis PING -> PONG"
