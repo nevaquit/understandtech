@@ -33,4 +33,7 @@ grep -o '<title>[^<]*</title>' /tmp/page.html | head -1
 grep -oE 'ut-lesson-content|path-mod-page|lesson-content\.css|SY701\.1\.2|Error reading from database' /tmp/page.html | sort -u | tr '\n' ' '
 echo
 wc -c /tmp/page.html
+echo "ut_lesson_count=$(grep -c 'ut-lesson-content' /tmp/page.html || true)"
+echo "path_mod_page_count=$(grep -c 'path-mod-page' /tmp/page.html || true)"
+echo "lesson_css_count=$(grep -c 'lesson-content.css' /tmp/page.html || true)"
 echo '=== done ==='
