@@ -203,4 +203,18 @@ foreach ($filterstates as $filtername => $state) {
 }
 filter_manager::reset_caches();
 
+try {
+    $context = context_module::instance($cmid);
+    $page = $DB->get_record('page', ['id' => $cm->instance], '*', MUST_EXIST);
+    $options = new stdClass();
+    $options->noclean = true;
+    $options->overflowdiv = true;
+    $options->context = $context;
+    $formatted = format_text($page->content, $page->contentformat, $options);
+    echo 'format_text_final_len=' . strlen($formatted) . "\n";
+    echo "format_text_final_ok\n";
+} catch (Throwable $e) {
+    echo 'format_text_final_error=' . $e->getMessage() . "\n";
+}
+
 echo "=== done ===\n";
