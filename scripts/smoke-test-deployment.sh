@@ -18,6 +18,7 @@ PROD_URL="${PROD_URL%/}"
 AI_WORKER_URL="${AI_WORKER_URL:-https://ai.understandtech.app}"
 MOODLE_DIR="${MOODLE_DIR:-/var/www/moodle}"
 ORIGIN_HOST="${ORIGIN_HOST:-understandtech.app}"
+MOODLE_WWW="${MOODLE_WWWROOT_PATH:-/learn}"
 
 PASS=0
 WARN=0
@@ -130,7 +131,7 @@ check_ai_auth() {
 # --- 7. Moodle login must not show PHP exceptions ---
 check_moodle_login_healthy() {
   local html
-  html="$(curl_max "${PROD_URL}/login/index.php" 2>/dev/null || true)"
+  html="$(curl_max "${PROD_URL}${MOODLE_WWW}/login/index.php" 2>/dev/null || true)"
   if echo "$html" | grep -qiE 'Exception -|Fatal error|Call to undefined method|Error reading from database'; then
     fail "Moodle login page shows fatal error/exception"
     echo "$html" | grep -oiE 'Exception -[^<]{0,120}|Call to undefined method[^<]{0,120}|Error reading from database' | head -2 || true
@@ -158,7 +159,7 @@ check_moodle_version() {
     fi
   fi
   local html
-  html="$(curl_max "${PROD_URL}/login/index.php" 2>/dev/null || true)"
+  html="$(curl_max "${PROD_URL}${MOODLE_WWW}/login/index.php" 2>/dev/null || true)"
   if echo "$html" | grep -qi 'moodle'; then
     if echo "$html" | grep -q '4\.5'; then
       pass "Moodle 4.5 detected on login page"
