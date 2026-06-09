@@ -20,6 +20,10 @@ curl -sS -c "$CJ" -b "$CJ" -L \
 curl -sS -c "$CJ" -b "$CJ" "${PROD}${WWW}/my/" -o "$LOGIN"
 
 echo "pagelayout=$(grep -oE 'pagelayout-[a-z]+' "$LOGIN" | head -1 || echo none)"
+echo "title=$(grep -o '<title>[^<]*</title>' "$LOGIN" | head -1 || true)"
+echo "logout_links=$(grep -c 'Log out' "$LOGIN" || true)"
+echo "bytes=$(wc -c < "$LOGIN" | tr -d ' ')"
+echo "body_tag=$(grep -oE '<body[^>]+>' "$LOGIN" | head -1 || true)"
 echo "timeline_fallback_count=$(grep -c 'timeline_fallback' "$LOGIN" || true)"
 echo "myoverview_fallback_count=$(grep -c 'myoverview_fallback' "$LOGIN" || true)"
 echo "templates_dom_patch_count=$(grep -c 'templates_dom_patch' "$LOGIN" || true)"
