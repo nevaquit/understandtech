@@ -6,7 +6,7 @@
  * Run on VM: sudo -u www-data php /opt/understandtech-plugins/scripts/enroll-sec701-default-users.php
  *
  * Optional env:
- *   SEC701_ENROL_USERNAMES=admin,e2etest,nevaquit  (comma-separated; default admin,e2etest)
+ *   SEC701_ENROL_USERNAMES=admin,e2etest,nevaquit  (comma-separated; default admin,e2etest,nevaquit)
  *
  * @package    understandtech
  */
@@ -48,7 +48,7 @@ function sec701_user_can_view_course(stdClass $course, stdClass $user): bool {
     return can_access_course($course, $user);
 }
 
-$defaultnames = 'admin,e2etest';
+$defaultnames = 'admin,e2etest,nevaquit';
 $usernamesraw = getenv('SEC701_ENROL_USERNAMES') ?: $defaultnames;
 $usernames = array_values(array_unique(array_filter(array_map('trim', explode(',', $usernamesraw)))));
 

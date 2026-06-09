@@ -54,9 +54,12 @@ class course_index_prerender {
 
         require_once($CFG->dirroot . '/course/lib.php');
 
+        require_once($CFG->libdir . '/enrollib.php');
+
         $course = get_course($courseid);
-        $context = context_course::instance($courseid);
-        require_capability('moodle/course:view', $context);
+        if (!can_access_course($course)) {
+            return '';
+        }
 
         $modinfo = get_fast_modinfo($course);
 
