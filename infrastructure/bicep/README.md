@@ -61,6 +61,8 @@ Moodle URL: `https://staging.understandtech.app/learn` (same Origin Pulls + orig
 1. Populate Key Vault secrets (replace `REPLACE-ME` placeholders)
 2. Generate PgBouncer SCRAM hash in `infrastructure/pgbouncer/userlist.txt`
 3. Render cloud-init with secrets and re-deploy VM customData if needed
+
+   Bicep currently embeds the **raw** `cloud-init.yaml` template (`{{POSTGRES_FQDN}}` placeholders). Before first boot, run `scripts/render-cloud-init.sh` with deployment outputs and pass the rendered file to the VM (or extend Bicep to substitute parameters). Unrendered customData causes bootstrap to fail at the Azure Files mount step.
 4. Install Cloudflare Origin Certificate on the VM at `/etc/ssl/cloudflare/`
 5. **Staging only:** register GHA runner with label `staging` — see `scripts/bootstrap-gha-runner-vm.sh`
 

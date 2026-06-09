@@ -24,8 +24,10 @@ fi
 if [ -f "${REPO}/scripts/inline-lesson-visuals.php" ]; then
   php "${REPO}/scripts/inline-lesson-visuals.php" || true
 fi
-sudo -u www-data php "${REPO}/scripts/cleanup-sec701-duplicate-pages.php"
-sudo -u www-data php "${REPO}/scripts/cleanup-sec701-duplicate-questions.php"
+if [ "${SKIP_CLEANUP:-0}" != "1" ]; then
+  sudo -u www-data php "${REPO}/scripts/cleanup-sec701-duplicate-pages.php"
+  sudo -u www-data php "${REPO}/scripts/cleanup-sec701-duplicate-questions.php"
+fi
 sudo -u www-data php "${REPO}/scripts/seed-security-plus-course.php"
 sudo -u www-data php "${REPO}/scripts/fix-sec701-course-filters.php"
 sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php

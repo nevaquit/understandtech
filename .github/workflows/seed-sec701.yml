@@ -39,20 +39,13 @@ jobs:
             echo "WARNING: VM is at ${actual}, expected ${EXPECTED_SHA} — proceeding anyway"
           fi
 
-      - name: Cleanup duplicate SEC701 content
-        if: ${{ !inputs.skip_cleanup }}
-        run: |
-          set -euo pipefail
-          sudo -u www-data php "${PLUGINS_REPO_DIR}/scripts/cleanup-sec701-duplicate-pages.php"
-          sudo -u www-data php "${PLUGINS_REPO_DIR}/scripts/cleanup-sec701-duplicate-questions.php"
-
       - name: Seed SEC701 course
         id: seed
+        env:
+          SKIP_CLEANUP: ${{ inputs.skip_cleanup && '1' || '0' }}
         run: |
           set -euo pipefail
-          sudo -u www-data php "${PLUGINS_REPO_DIR}/scripts/seed-security-plus-course.php"
-          sudo -u www-data php "${PLUGINS_REPO_DIR}/scripts/fix-sec701-course-filters.php"
-          sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/seed-security-plus-course-vm.sh"
           echo 'seed_security_plus_complete=1'
 
       - name: Post-seed stabilize (enrol, theme, permissions)
