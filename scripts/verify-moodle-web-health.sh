@@ -18,8 +18,22 @@ COURSE="/tmp/verify-moodle-course-$$"
 
 cleanup() {
   rm -f "$CJ" "$LOGIN" "$COURSE"
+  if [ "${MAINT_WAS_ON:-0}" = 1 ] && [ "${HEALTH_OK:-0}" != 1 ]; then
+    sudo -u www-data php /var/www/moodle/admin/cli/maintenance.php --enable 2>/dev/null || true
+  fi
 }
 trap cleanup EXIT
+
+lift_maintenance_for_probe() {
+  MAINT_WAS_ON=0
+  if ! command -v sudo >/dev/null 2>&1 || [ ! -f /var/www/moodle/config.php ]; then
+    return 0
+  fi
+  if sudo -u www-data php /var/www/moodle/admin/cli/maintenance.php 2>/dev/null | grep -qi 'enabled'; then
+    MAINT_WAS_ON=1
+    sudo -u www-data php /var/www/moodle/admin/cli/maintenance.php --disable
+  fi
+}
 
 assert_no_fatal_html() {
   local label="$1"
@@ -120,9 +134,12 @@ prepare_retry() {
 }
 
 attempt=1
+HEALTH_OK=0
+lift_maintenance_for_probe
 while [ "$attempt" -le "$VERIFY_RETRIES" ]; do
   echo "=== health attempt ${attempt}/${VERIFY_RETRIES} ==="
   if run_checks; then
+    HEALTH_OK=1
     exit 0
   fi
   if [ "$attempt" -lt "$VERIFY_RETRIES" ]; then
