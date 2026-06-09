@@ -6,17 +6,43 @@
 # Environment (first match wins for origin host):
 #   PROD_URL      — production default https://understandtech.app
 #   STAGING_URL   — staging host, e.g. https://staging.understandtech.app
-# On VM: export PROD_URL or STAGING_URL before invoking (sudo -E preserves env).
+# On VM without env: origin host and SEC701 course id are inferred from config.php wwwroot.
 set -euo pipefail
 
-PROD="${STAGING_URL:-${PROD_URL:-https://understandtech.app}}"
 WWW="${MOODLE_WWWROOT_PATH:-/learn}"
 E2E_USER="${MOODLE_E2E_USER:-e2etest}"
 E2E_PASS="${MOODLE_E2E_PASS:-UtE2eTest2026Secure}"
-COURSE_ID="${VERIFY_COURSE_ID:-3}"
 VERIFY_RETRIES="${VERIFY_RETRIES:-5}"
 VERIFY_RETRY_DELAY="${VERIFY_RETRY_DELAY:-6}"
 REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
+
+PROD=""
+COURSE_ID=""
+if [ -f /var/www/moodle/config.php ]; then
+  _wwwroot="$(/usr/bin/php -r 'define("CLI_SCRIPT", true); require "/var/www/moodle/config.php"; echo rtrim($CFG->wwwroot, "/");' 2>/dev/null || true)"
+  if [ -n "$_wwwroot" ]; then
+    PROD="${_wwwroot%$WWW}"
+    PROD="${PROD%/}"
+    if [[ "$_wwwroot" == *staging* ]]; then
+      COURSE_ID=2
+    else
+      COURSE_ID=3
+    fi
+  fi
+fi
+
+if [ -n "${STAGING_URL:-}" ]; then
+  PROD="${STAGING_URL%/learn}"
+  PROD="${PROD%/}"
+  COURSE_ID="${VERIFY_COURSE_ID:-2}"
+elif [ -n "${PROD_URL:-}" ]; then
+  PROD="${PROD_URL%/learn}"
+  PROD="${PROD%/}"
+  COURSE_ID="${VERIFY_COURSE_ID:-3}"
+fi
+
+PROD="${PROD:-https://understandtech.app}"
+COURSE_ID="${VERIFY_COURSE_ID:-${COURSE_ID:-3}}"
 CJ="/tmp/verify-moodle-cj-$$"
 LOGIN="/tmp/verify-moodle-login-$$"
 COURSE="/tmp/verify-moodle-course-$$"

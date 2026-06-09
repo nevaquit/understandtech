@@ -3,7 +3,17 @@
 set -euo pipefail
 
 REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
+
+if [ -z "${SEC701_COURSE_ID:-}" ] && [ -f /var/www/moodle/config.php ]; then
+  _wwwroot="$(/usr/bin/php -r 'define("CLI_SCRIPT", true); require "/var/www/moodle/config.php"; echo $CFG->wwwroot;' 2>/dev/null || true)"
+  if [[ "$_wwwroot" == *staging* ]]; then
+    SEC701_COURSE_ID=2
+  fi
+fi
 export SEC701_COURSE_ID="${SEC701_COURSE_ID:-3}"
+if [ -f /tmp/ut-seed-skip-cleanup-gha ]; then
+  export SKIP_CLEANUP=1
+fi
 
 if [ -d "${REPO}/.git" ]; then
   sudo -u gha-runner git -C "$REPO" fetch origin main

@@ -226,9 +226,7 @@ jobs:
           STAGING_URL: ${{ secrets.STAGING_URL }}
         run: |
           set -euo pipefail
-          export PROD_URL="${STAGING_URL:-https://staging.understandtech.app}"
-          export VERIFY_COURSE_ID="${VERIFY_COURSE_ID:-2}"
-          sudo -E /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
 
       - name: Post-deploy smoke test
         env:
