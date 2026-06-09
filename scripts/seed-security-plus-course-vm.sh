@@ -3,6 +3,7 @@
 set -euo pipefail
 
 REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
+export SEC701_COURSE_ID="${SEC701_COURSE_ID:-3}"
 
 if [ -d "${REPO}/.git" ]; then
   sudo -u gha-runner git -C "$REPO" fetch origin main

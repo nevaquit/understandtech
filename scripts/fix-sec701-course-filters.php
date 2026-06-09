@@ -18,7 +18,7 @@ require_once($CFG->dirroot . '/course/lib.php');
 
 global $DB;
 
-$courseid = 3;
+$courseid = (int) (getenv('SEC701_COURSE_ID') ?: 3);
 $course = get_course($courseid);
 $modinfo = get_fast_modinfo($course);
 
