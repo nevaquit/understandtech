@@ -4,8 +4,8 @@ set -euo pipefail
 
 REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
 cd "$REPO"
-git fetch origin main
-git reset --hard origin/main
+sudo -u gha-runner git fetch origin main
+sudo -u gha-runner git reset --hard origin/main
 
 bash "${REPO}/scripts/sync-theme-understandtech-vm.sh"
 bash "${REPO}/scripts/post-deploy-stabilize-vm.sh"
