@@ -9,6 +9,9 @@ if [ -d "${REPO}/.git" ]; then
   sudo -u gha-runner git -C "$REPO" reset --hard origin/main
 fi
 
+if [ -f "${REPO}/scripts/inline-lesson-visuals.php" ]; then
+  php "${REPO}/scripts/inline-lesson-visuals.php" || true
+fi
 sudo -u www-data php "${REPO}/scripts/cleanup-sec701-duplicate-pages.php"
 sudo -u www-data php "${REPO}/scripts/cleanup-sec701-duplicate-questions.php"
 sudo -u www-data php "${REPO}/scripts/seed-security-plus-course.php"

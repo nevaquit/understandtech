@@ -7,6 +7,52 @@
 <p>The CIA Triad represents the three core principles of information security. Every security control and decision should be evaluated against these three pillars.</p>
 <h4>Visual Representation: CIA Triad</h4>
 <p>The CIA Triad forms the foundation of information security, with each component being equally important and interconnected.</p>
+<div class="ut-lesson-diagram ut-infographic">
+<div class="diagram-title">🔺 CIA Triad — Foundation of Information Security</div>
+<figure class="ut-svg-figure" aria-label="CIA Triad triangle: Confidentiality, Integrity, Availability">
+<svg class="ut-cia-triangle" viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg" role="img">
+<defs>
+<linearGradient id="ciaTriadFill" x1="0%" y1="0%" x2="0%" y2="100%">
+<stop offset="0%" stop-color="#1A8A7D" stop-opacity="0.35"/>
+<stop offset="100%" stop-color="#0B1F3A" stop-opacity="0.15"/>
+</linearGradient>
+</defs>
+<polygon points="210,30 390,310 30,310" fill="url(#ciaTriadFill)" stroke="#C9A227" stroke-width="2.5"/>
+<line x1="210" y1="30" x2="210" y2="310" stroke="#1A8A7D" stroke-width="1" stroke-dasharray="6 4" opacity="0.6"/>
+<line x1="30" y1="310" x2="390" y2="310" stroke="#1A8A7D" stroke-width="1" stroke-dasharray="6 4" opacity="0.6"/>
+<g class="cia-node cia-node--c">
+<circle cx="210" cy="72" r="46" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="210" y="68" text-anchor="middle" fill="#C9A227" font-size="13" font-weight="700">C</text>
+<text x="210" y="86" text-anchor="middle" fill="#f8fafc" font-size="11">Confidentiality</text>
+</g>
+<g class="cia-node cia-node--i">
+<circle cx="95" cy="280" r="46" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="95" y="276" text-anchor="middle" fill="#C9A227" font-size="13" font-weight="700">I</text>
+<text x="95" y="294" text-anchor="middle" fill="#f8fafc" font-size="11">Integrity</text>
+</g>
+<g class="cia-node cia-node--a">
+<circle cx="325" cy="280" r="46" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="325" y="276" text-anchor="middle" fill="#C9A227" font-size="13" font-weight="700">A</text>
+<text x="325" y="294" text-anchor="middle" fill="#f8fafc" font-size="11">Availability</text>
+</g>
+<text x="210" y="340" text-anchor="middle" fill="#94a3b8" font-size="10">Every security control maps to one or more pillars</text>
+</svg>
+</figure>
+<div class="cia-triad">
+<div class="cia-element">
+<h4>🔒 Confidentiality</h4>
+<p>Information accessible only to authorized parties</p>
+</div>
+<div class="cia-element">
+<h4>✅ Integrity</h4>
+<p>Data accuracy, completeness, and trustworthiness</p>
+</div>
+<div class="cia-element">
+<h4>🌐 Availability</h4>
+<p>Systems and data accessible when needed</p>
+</div>
+</div>
+</div>
 <p><strong>Confidentiality</strong> Confidentiality ensures that sensitive information is accessed only by authorized individuals, entities, or processes. This principle protects information from unauthorized disclosure and maintains privacy.</p>
 <p>Key aspects of confidentiality include:</p>
 <ul>
@@ -99,8 +145,32 @@
 </ul>
 <h4>Visual Representation: AAA Process Flow</h4>
 <p>The following diagram illustrates the sequential AAA (Authentication, Authorization, Accounting) process:</p>
-<p>This diagram shows the essential AAA workflow:</p>
-<p>1. <strong>Authentication</strong> - Verifying the user's identity through credentials, biometrics, or other factors 2. <strong>Authorization</strong> - Granting appropriate permissions based on the authenticated identity and access policies 3. <strong>Accounting</strong> - Logging all actions and resource usage for audit trails and compliance</p>
+<div class="ut-lesson-diagram">
+<div class="diagram-title">🔐 AAA Process Flow and Integration</div>
+<div class="flow-diagram">
+<div class="flow-step">
+<strong>1. Authentication</strong><br>
+"Who are you?"<br>
+Identity verification<br>
+Multi-factor validation
+</div>
+<div class="flow-arrow" aria-hidden="true">→</div>
+<div class="flow-step">
+<strong>2. Authorization</strong><br>
+"What can you access?"<br>
+Permission assignment<br>
+Resource access control
+</div>
+<div class="flow-arrow" aria-hidden="true">→</div>
+<div class="flow-step">
+<strong>3. Accounting</strong><br>
+"What did you do?"<br>
+Activity logging<br>
+Audit trail generation
+</div>
+</div>
+</div>
+<p>1. <strong>Authentication</strong> — verifying identity. 2. <strong>Authorization</strong> — granting permissions. 3. <strong>Accounting</strong> — logging actions for audit trails.</p>
 <p>The AAA framework ensures:</p>
 <ul>
 <li>Proper identity verification before system access</li>
@@ -171,46 +241,6 @@
 <p><strong>Honeynets</strong> Honeynets are networks of honeypots that create more realistic environments for attackers. They provide comprehensive views of attack campaigns and allow researchers to study coordinated attacks.</p>
 <p><strong>Honeyfiles</strong> Honeyfiles are decoy documents placed in file systems to detect unauthorized access. When accessed, they trigger alerts indicating potential compromise.</p>
 <p><strong>Honeytokens</strong> Honeytokens are pieces of data (credentials, URLs, database records) that have no legitimate use but trigger alerts when accessed, indicating unauthorized activity.</p>
-<div class="ut-lesson-diagram">
-<div class="diagram-title">🔺 CIA Triad - The Foundation of Information Security</div>
-                <div class="cia-triad">
-                    <div class="cia-element">
-                        <h4>🔒 Confidentiality</h4>
-                        <p>Information accessible only to authorized parties</p>
-                    </div>
-                    <div class="cia-element">
-                        <h4>✅ Integrity</h4>
-                        <p>Data accuracy, completeness, and trustworthiness</p>
-                    </div>
-                    <div class="cia-element">
-                        <h4>🌐 Availability</h4>
-                        <p>Systems and data accessible when needed</p>
-                    </div>
-                </div>
-</div>
-<div class="ut-lesson-diagram">
-<div class="diagram-title">🔐 AAA Process Flow and Integration</div>
-                <div class="flow-diagram">
-                    <div class="flow-step">
-                        <strong>1. Authentication</strong><br>
-                        "Who are you?"<br>
-                        Identity verification<br>
-                        Multi-factor validation
-                    </div>
-                    <div class="flow-step">
-                        <strong>2. Authorization</strong><br>
-                        "What can you access?"<br>
-                        Permission assignment<br>
-                        Resource access control
-                    </div>
-                    <div class="flow-step">
-                        <strong>3. Accounting</strong><br>
-                        "What did you do?"<br>
-                        Activity logging<br>
-                        Audit trail generation
-                    </div>
-                </div>
-</div>
 <div class="ut-lesson-diagram">
 <h4>🔐 Authentication Factors - Comprehensive Analysis</h4>
                 <div class="concept-grid">
