@@ -457,7 +457,8 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
     justify-content: center;
 }
 
-.ut-lesson-content .ut-cia-triangle {
+.ut-lesson-content .ut-cia-triangle,
+.ut-lesson-content .ut-mitigation-hub {
     width: min(100%, 28rem);
     height: auto;
     display: block;
@@ -466,6 +467,35 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 
 .ut-lesson-content .ut-infographic .cia-triad {
     margin-top: 0.5rem;
+}
+
+.ut-lesson-content .ut-lesson-diagram .concept-item,
+.ut-lesson-content .ut-lesson-diagram .control-card,
+.ut-lesson-content .ut-lesson-diagram .malware-card {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.ut-lesson-content .ut-lesson-diagram .concept-item strong,
+.ut-lesson-content .ut-lesson-diagram .control-card strong {
+    display: block;
+    font-family: "Rajdhani", "Segoe UI", sans-serif;
+    color: #C9A227;
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+}
+
+.ut-lesson-content .ut-lesson-diagram .diagram-title {
+    display: block;
+    visibility: visible;
+    min-height: 1.25rem;
+}
+
+.ut-lesson-content .ut-lesson-diagram .concept-grid,
+.ut-lesson-content .ut-lesson-diagram .malware-grid,
+.ut-lesson-content .ut-lesson-diagram .cia-triad {
+    min-height: 2rem;
 }
 
 /* CyberKraft companion blocks (siblings of ut-lesson-diagram in lesson HTML) */

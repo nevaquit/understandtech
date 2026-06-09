@@ -186,7 +186,14 @@ function security_plus_update_page_content(stdClass $course, stdClass $page, str
 function security_plus_upsert_page(stdClass $course, int $sectionnum, string $name, string $html): void {
     $existing = security_plus_find_page((int) $course->id, $sectionnum, $name);
     if ($existing) {
-        if ($existing->content !== $html) {
+        $hasdiagram = strpos($html, 'ut-lesson-diagram') !== false;
+        $storedhasdiagram = strpos((string) $existing->content, 'ut-lesson-diagram') !== false;
+        $needsdiagramsync = $hasdiagram && (
+            !$storedhasdiagram
+            || strpos((string) $existing->content, 'ut-svg-figure') === false && strpos($html, 'ut-svg-figure') !== false
+            || strpos((string) $existing->content, 'diagram-title') === false
+        );
+        if ($existing->content !== $html || $needsdiagramsync) {
             security_plus_update_page_content($course, $existing, $name, $html);
             echo "page_updated id={$existing->id} name={$name} section={$sectionnum}\n";
         } else {
