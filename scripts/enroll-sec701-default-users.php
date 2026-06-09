@@ -18,6 +18,7 @@ require('/var/www/moodle/config.php');
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->dirroot . '/enrol/manual/lib.php');
 require_once($CFG->libdir . '/accesslib.php');
+require_once($CFG->libdir . '/enrollib.php');
 
 global $DB;
 
@@ -37,14 +38,14 @@ function sec701_ensure_manual_enrol_enabled(): void {
 }
 
 /**
- * Verify a user can view the course after enrolment.
+ * Verify a user can open the course home page.
  *
+ * @param stdClass $course Course record.
  * @param stdClass $user User record.
- * @param context_course $context Course context.
  * @return bool
  */
-function sec701_user_can_view_course(stdClass $user, context_course $context): bool {
-    return has_capability('moodle/course:view', $context, $user);
+function sec701_user_can_view_course(stdClass $course, stdClass $user): bool {
+    return can_access_course($course, $user);
 }
 
 $defaultnames = 'admin,e2etest';
@@ -68,6 +69,12 @@ echo "=== enroll SEC701 course={$courseid} ===\n";
 if ((int) $course->visible !== 1) {
     $DB->set_field('course', 'visible', 1, ['id' => $courseid]);
     echo "course_visible_enabled=1\n";
+}
+
+$category = $DB->get_record('course_categories', ['id' => $course->category]);
+if ($category && (int) $category->visible !== 1) {
+    $DB->set_field('course_categories', 'visible', 1, ['id' => (int) $category->id]);
+    echo "category_visible_enabled id={$category->id}\n";
 }
 
 $studentroleid = (int) $DB->get_field('role', 'id', ['shortname' => 'student']);
@@ -155,12 +162,21 @@ purge_all_caches();
 
 $failed = 0;
 foreach ($verifiedusers as $user) {
-    if (!sec701_user_can_view_course($user, $context)) {
+    if (!sec701_user_can_view_course($course, $user)) {
         $rolecount = $DB->count_records('role_assignments', [
             'contextid' => $context->id,
             'userid' => (int) $user->id,
         ]);
-        echo "capability_missing username={$user->username} id={$user->id} role_assignments={$rolecount}\n";
+        $roles = $DB->get_records_sql(
+            "SELECT r.shortname
+               FROM {role_assignments} ra
+               JOIN {role} r ON r.id = ra.roleid
+              WHERE ra.contextid = :contextid
+                AND ra.userid = :userid",
+            ['contextid' => $context->id, 'userid' => (int) $user->id]
+        );
+        $rolenames = implode(',', array_column($roles, 'shortname'));
+        echo "capability_missing username={$user->username} id={$user->id} roles={$rolenames} role_assignments={$rolecount}\n";
         $failed++;
     } else {
         echo "capability_ok username={$user->username} id={$user->id}\n";

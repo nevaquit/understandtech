@@ -750,9 +750,13 @@ if (!$category) {
         'name' => 'Certifications',
         'description' => 'Industry certification training tracks',
         'descriptionformat' => FORMAT_HTML,
+        'visible' => 1,
     ]);
     $category = $DB->get_record('course_categories', ['id' => $created->id], '*', MUST_EXIST);
     echo "category_created id={$category->id}\n";
+} else if ((int) $category->visible !== 1) {
+    $DB->set_field('course_categories', 'visible', 1, ['id' => (int) $category->id]);
+    echo "category_visible_enabled id={$category->id}\n";
 }
 
 $course = $DB->get_record('course', ['shortname' => 'SEC701']);
