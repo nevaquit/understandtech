@@ -45,15 +45,15 @@ PROD="${PROD:-https://understandtech.app}"
 COURSE_ID="${VERIFY_COURSE_ID:-${COURSE_ID:-3}}"
 
 # Staging health runs on the VM: curl via Cloudflare loses session cookies (Redirect on /my/).
-# Probe loopback nginx with Host + forwarded HTTPS headers instead.
+# Resolve the public hostname to loopback so nginx/ssl and Moodle sessions match wwwroot.
 CURL_EXTRA=()
 if [ -f /var/www/moodle/config.php ] && [[ "${PROD}" == *staging* ]]; then
   _staging_host="${PROD#https://}"
   _staging_host="${_staging_host#http://}"
   _staging_host="${_staging_host%%/*}"
-  PROD="http://127.0.0.1"
-  CURL_EXTRA=( -H "Host: ${_staging_host}" -H "X-Forwarded-Proto: https" -H "X-Forwarded-Ssl: on" )
-  echo "staging_loopback_probe host=${_staging_host}"
+  PROD="https://${_staging_host}"
+  CURL_EXTRA=( --resolve "${_staging_host}:443:127.0.0.1" -k )
+  echo "staging_loopback_probe host=${_staging_host} resolve=127.0.0.1:443"
 fi
 
 CJ="/tmp/verify-moodle-cj-$$"
