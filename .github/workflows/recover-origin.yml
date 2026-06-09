@@ -38,6 +38,18 @@ jobs:
           set -euo pipefail
           sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
 
+      - name: Sync theme_understandtech from monorepo
+        run: |
+          set -euo pipefail
+          SRC="/opt/understandtech-plugins/moodle-plugins/theme_understandtech/"
+          DST="/var/www/moodle/theme/understandtech/"
+          sudo /usr/bin/rsync -av --delete \
+            --exclude='.git' --exclude='tests/' --exclude='*.md' \
+            "$SRC" "$DST"
+          sudo /usr/bin/chown -R www-data:www-data "$DST"
+          sudo -u www-data php /var/www/moodle/admin/cli/upgrade.php --non-interactive
+          sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
+
       - name: Fix page module filters
         if: inputs.fix_page_filters
         run: |
