@@ -4,6 +4,43 @@
 <div class="ut-lesson-body">
 <p>Different architecture models have distinct security implications, affecting how security controls are implemented and managed.</p>
 <h4>Architecture and Infrastructure Concepts</h4>
+<h4>Visual Representation: Infrastructure Architecture Models</h4>
+<p>The following diagram compares on-premises, cloud, hybrid, and modern deployment models.</p>
+<div class="ut-lesson-diagram">
+<div class="diagram-title">Infrastructure Architecture Models</div>
+<div class="concept-grid">
+<div class="concept-item">
+<strong>On-Premises Infrastructure</strong><br>
+<em>Traditional data center model:</em><br>
+Complete control; full security responsibility; high CapEx.
+</div>
+<div class="concept-item">
+<strong>Cloud Computing</strong><br>
+<em>Shared responsibility model:</em><br>
+Provider secures infrastructure; customer secures data and apps.
+</div>
+<div class="concept-item">
+<strong>Hybrid Cloud</strong><br>
+<em>Combined on-premises and cloud:</em><br>
+Sensitive data on-prem; scalable workloads in cloud.
+</div>
+<div class="concept-item">
+<strong>Multi-Cloud</strong><br>
+<em>Multiple provider strategy:</em><br>
+Reduces vendor lock-in; increases policy consistency challenges.
+</div>
+<div class="concept-item">
+<strong>Serverless</strong><br>
+<em>Function-as-a-Service:</em><br>
+Reduced attack surface; limited runtime control.
+</div>
+<div class="concept-item">
+<strong>Containerization</strong><br>
+<em>Lightweight virtualization:</em><br>
+Portable apps; image security and orchestration required.
+</div>
+</div>
+</div>
 <ul>
 <li><strong>Cloud</strong>: Utilizing third-party cloud providers (e.g., AWS, Azure, Google Cloud) for computing resources. Security is a shared responsibility model.</li>
 <ul>
@@ -52,94 +89,42 @@
 <li><strong>Power</strong>: Ensuring reliable power supply for security systems and critical infrastructure.</li>
 <li><strong>Compute</strong>: The processing power and resources required for security operations, such as encryption, logging, and analysis.</li>
 </ul>
+<h4>Visual Representation: Cloud Service Model Security</h4>
+<p>The following diagram compares shared-responsibility boundaries across IaaS, PaaS, SaaS, and FaaS.</p>
 <div class="ut-lesson-diagram">
-<h4>☁️ Infrastructure Architecture Models</h4>
+<div class="diagram-title">Cloud Service Model Security Implications</div>
                 <div class="concept-grid">
                     <div class="concept-item">
-                        <strong>🏢 On-Premises Infrastructure</strong><br>
-                        <em>Traditional data center model:</em><br>
-                        • Complete control over hardware and software<br>
-                        • Full responsibility for security implementation<br>
-                        • High capital expenditure requirements<br>
-                        • Maximum customization capabilities
-                    </div>
-                    <div class="concept-item">
-                        <strong>☁️ Cloud Computing</strong><br>
-                        <em>Shared responsibility security model:</em><br>
-                        • Provider secures physical infrastructure<br>
-                        • Customer secures data and applications<br>
-                        • Scalable resource allocation<br>
-                        • Reduced capital expenditure
-                    </div>
-                    <div class="concept-item">
-                        <strong>🌩️ Hybrid Cloud Architecture</strong><br>
-                        <em>Combined on-premises and cloud:</em><br>
-                        • Sensitive data on-premises retention<br>
-                        • Cloud scalability for variable workloads<br>
-                        • Complex security boundary management<br>
-                        • Secure connectivity requirements
-                    </div>
-                    <div class="concept-item">
-                        <strong>🔄 Multi-Cloud Strategy</strong><br>
-                        <em>Multiple cloud provider utilization:</em><br>
-                        • Vendor lock-in risk reduction<br>
-                        • Best-of-breed service selection<br>
-                        • Increased complexity management<br>
-                        • Consistent security policy challenges
-                    </div>
-                    <div class="concept-item">
-                        <strong>🎯 Serverless Computing</strong><br>
-                        <em>Function-as-a-Service model:</em><br>
-                        • Reduced attack surface exposure<br>
-                        • Limited runtime environment control<br>
-                        • Event-driven execution model<br>
-                        • Automatic scaling capabilities
-                    </div>
-                    <div class="concept-item">
-                        <strong>📦 Containerization</strong><br>
-                        <em>Lightweight virtualization approach:</em><br>
-                        • Application portability enhancement<br>
-                        • Container image security requirements<br>
-                        • Runtime protection mechanisms<br>
-                        • Orchestration platform security
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-concepts">
-                <h4>🌐 Cloud Service Model Security Implications</h4>
-                <div class="concept-grid">
-                    <div class="concept-item">
-                        <strong>💻 Infrastructure as a Service (IaaS)</strong><br>
+                        <strong>?? Infrastructure as a Service (IaaS)</strong><br>
                         <em>Virtual infrastructure provision:</em><br>
-                        • Customer: OS, applications, data security<br>
-                        • Provider: Physical infrastructure, hypervisor<br>
-                        • Maximum customer control and responsibility<br>
-                        • Network security configuration required
+                        ? Customer: OS, applications, data security<br>
+                        ? Provider: Physical infrastructure, hypervisor<br>
+                        ? Maximum customer control and responsibility<br>
+                        ? Network security configuration required
                     </div>
                     <div class="concept-item">
-                        <strong>🔧 Platform as a Service (PaaS)</strong><br>
+                        <strong>?? Platform as a Service (PaaS)</strong><br>
                         <em>Development platform provision:</em><br>
-                        • Customer: Applications and data security<br>
-                        • Provider: Platform, OS, infrastructure<br>
-                        • Reduced management overhead<br>
-                        • Limited customization capabilities
+                        ? Customer: Applications and data security<br>
+                        ? Provider: Platform, OS, infrastructure<br>
+                        ? Reduced management overhead<br>
+                        ? Limited customization capabilities
                     </div>
                     <div class="concept-item">
-                        <strong>📱 Software as a Service (SaaS)</strong><br>
+                        <strong>?? Software as a Service (SaaS)</strong><br>
                         <em>Complete application provision:</em><br>
-                        • Customer: User access and data classification<br>
-                        • Provider: Application, platform, infrastructure<br>
-                        • Minimal customer security responsibilities<br>
-                        • Limited configuration control
+                        ? Customer: User access and data classification<br>
+                        ? Provider: Application, platform, infrastructure<br>
+                        ? Minimal customer security responsibilities<br>
+                        ? Limited configuration control
                     </div>
                     <div class="concept-item">
-                        <strong>🛠️ Function as a Service (FaaS)</strong><br>
+                        <strong>??? Function as a Service (FaaS)</strong><br>
                         <em>Event-driven code execution:</em><br>
-                        • Customer: Function code security<br>
-                        • Provider: Runtime environment, scaling<br>
-                        • Stateless execution model<br>
-                        • Reduced persistent attack surface
+                        ? Customer: Function code security<br>
+                        ? Provider: Runtime environment, scaling<br>
+                        ? Stateless execution model<br>
+                        ? Reduced persistent attack surface
                     </div>
                 </div>
 </div>
@@ -160,7 +145,7 @@
 <li>Microservices</li>
 <li>Network infrastructure</li>
 </ul>
-<p>o Physical isolation ◊ Air-gapped o Logical segmentation o Software-defined networking (SDN)</p>
+<p>o Physical isolation ? Air-gapped o Logical segmentation o Software-defined networking (SDN)</p>
 <ul>
 <li>On-premises</li>
 <li>Centralized vs. decentralized</li>
@@ -222,7 +207,7 @@
 <li>monitor the cloud infrastructure</li>
 <li>allow for the patching and updating of systems</li>
 </ul>
-<p>The logical design of a datacenter is an abstraction In the now legacy co-location (colo) scenario, customers were separated at the server rack or cage-level. In logical data center design in the cloud, customers utilize software and services provided by the CSP. The CSP focuses on “tenant partitioning” and “access control”. LOGICAL vs PHYSICAL</p>
+<p>The logical design of a datacenter is an abstraction In the now legacy co-location (colo) scenario, customers were separated at the server rack or cage-level. In logical data center design in the cloud, customers utilize software and services provided by the CSP. The CSP focuses on ?tenant partitioning? and ?access control?. LOGICAL vs PHYSICAL</p>
 <p>Third party Logical isolation in CSP multitenancy makes cloud computing more affordable but create some security and privacy concerns. If isolation between tenants is breached, customer data is at risk. Multitenancy is a concept developed decades ago:</p>
 <ul>
 <li>business centers physically housed multiple tenants</li>
@@ -230,41 +215,41 @@
 </ul>
 <p>The risk in these scenarios is largely physical (server, rack, cage) In the public cloud, tenant partitioning is largely logical. Customers are sharing capacity across the CSP datacenter, including physical components. CSP and tenant share responsibility for implementing and enforcing controls that address the unique multitenant risks of the public cloud. MULTITENANCY</p>
 <p>is the management of infrastructure (networks, VMs, load balancers, and connection topology) described in code just as the same source code generates the same binary, code in the IaC model results in the same environment every time it is applied. IaC is a key DevOps practice and is used in conjunction with continuous integration and continuous delivery (CI/CD). IaC Infrastructure as Code Infrastructure as code IaC is very common (the standard) in the cloud</p>
-<p>Infrastructure as code Deployment of an IaC template can be applied multiple times without changing the results. IaC must know the current state; it must know whether the infrastructure already exists to know whether to create it or not. Declarative Idempotent There are two distinct characteristics of infrastructure-as-code (IaC) that improve resiliency in IaaS and PaaS service models: Imperative deployment methodologies are unaware of current state If the IaC template says, “deploy 4 VMs”” and 3 exist, 1 more is deployed These characteristics help reduce errors and configuration drift</p>
-<p>A quick example of Infrastructure as Code EXAMPLE FOR CONTEXT – The</p>
+<p>Infrastructure as code Deployment of an IaC template can be applied multiple times without changing the results. IaC must know the current state; it must know whether the infrastructure already exists to know whether to create it or not. Declarative Idempotent There are two distinct characteristics of infrastructure-as-code (IaC) that improve resiliency in IaaS and PaaS service models: Imperative deployment methodologies are unaware of current state If the IaC template says, ?deploy 4 VMs?? and 3 exist, 1 more is deployed These characteristics help reduce errors and configuration drift</p>
+<p>A quick example of Infrastructure as Code EXAMPLE FOR CONTEXT ? The</p>
 <p>a cloud computing execution model where the cloud provider dynamically manages the allocation and provisioning of servers. hosted as a pay-as-you-go model based on use. Resources are stateless, servers ephemeral, and often capable of being triggered serverless Serverless Architecture Example: Function-as-service</p>
 <p>HOWis SERVERLESS Different from PAAS in terms of responsibility?</p>
 <p>More control over deployment environment Application has to be configured to auto-scale Application takes a while to spin up Less control over deployment environment Application scales automatically Application code only executes when invoked Devs have to write code No server management PaaS Serverless</p>
-<p>MICROSERVICES What are microservices? Fine-grained services with a discrete function. They are code modules designed to perform one function very well. Services are “loosely coupled” and technology agnostic. Enabling services coded in different languages to communicate. Each service is deployed, operated, scaled, and updated independently</p>
+<p>MICROSERVICES What are microservices? Fine-grained services with a discrete function. They are code modules designed to perform one function very well. Services are ?loosely coupled? and technology agnostic. Enabling services coded in different languages to communicate. Each service is deployed, operated, scaled, and updated independently</p>
 <p>MICROSERVICES An analogy Imagine an e-commerce application built with microservices. Here's how it might be structured: Product Service: This service manages product information, including adding, editing, and retrieving product details. Cart Service: This service handles user carts, adding and removing items, and calculating totals. Order Service: This service processes orders, handles payments, and manages order fulfillment. User Service: This service manages user accounts, authentication, and user profiles. And this architecture greatly reduces the attack surface!</p>
 <p>Phyical isolation the practice of physically isolating a computer, network, or device from any external connections, including the internet or other internal networks. It creates a barrier similar to an air gap in plumbing, preventing malicious actors from accessing the system. Air Gap Air gap = PHYSICAL ISOLATION Air-gapped systems are common in financial systems, medical devices, military networks, and industrial control systems.</p>
 <p>3 . 1 LOGICAL SEGMENTATION VLANs logically segment a local area network into subnetworks. VPNs creating an encrypted tunnel between devices or networks to pass traffic, using protocols like IPSec. Virtual Routing and Forwarding allows a single router or switch to function as multiple virtual routers or switches. Subnets divide larger IP ranges into smaller ranges which routers can segment using access control lists (ACL) Happens at layer 2 (where network switches operate) Segmenting the network without additional physical hardware</p>
-<p>a network architecture approach that enables the network to be intelligently and centrally controlled, or ‘programmed,’ using software and has capacity to reprogram the data plane at any time use cases include SD-LAN and SD-WAN separating the control plane from the data plane opens up a number of security challenges SDN Software Defined Networks Software defined networks SDN vulnerabilities can include man-in-the-middle attack (MITM) and a service denial (DoS) secure with TLS ! Supports IaC, CI/CD, and DevOps pratices</p>
+<p>a network architecture approach that enables the network to be intelligently and centrally controlled, or ?programmed,? using software and has capacity to reprogram the data plane at any time use cases include SD-LAN and SD-WAN separating the control plane from the data plane opens up a number of security challenges SDN Software Defined Networks Software defined networks SDN vulnerabilities can include man-in-the-middle attack (MITM) and a service denial (DoS) secure with TLS ! Supports IaC, CI/CD, and DevOps pratices</p>
 <p>Storage defined network (SDN) Northbound Interface Southbound Interface Switch Switch SDN Controller Application Orchestration Firewall Accounting Load Balancer Management Plane Control Plane Data Plane</p>
 <p>Storage defined network (SDN) Northbound Interface Southbound Interface Switch Switch SDN Controller Application Orchestration Firewall Accounting Load Balancer Northbound interface ensures only trusted, authorized applications access critical network resources. OpenFlow protocol interfaces with devices through southbound interfaces.</p>
-<p>ON-PREMISES vs OFF-PREMISES Advantages of on- vs –off-premises? On-Premises the organization retains complete control of the full stack, which can be beneficial in legacy and compliance scenarios. Off-Premises Offloads responsibility for infrastructure and many utilitarian management functions to the cloud service provider (CSP). Full control of patching, upgrades, data residency &amp; security More time (and budget) to focus on delivering business value</p>
+<p>ON-PREMISES vs OFF-PREMISES Advantages of on- vs ?off-premises? On-Premises the organization retains complete control of the full stack, which can be beneficial in legacy and compliance scenarios. Off-Premises Offloads responsibility for infrastructure and many utilitarian management functions to the cloud service provider (CSP). Full control of patching, upgrades, data residency &amp; security More time (and budget) to focus on delivering business value</p>
 <p>ON-PREMISES and OFF-PREMISES Cloud versus on-premises hosting On-premises servers are the traditional enterprise computing model. A business purchases and maintains its own servers, located in a secure, climate-controlled room onsite. Moving to cloud shifts some responsibilities to the CSP Shifts IT spending from capital expense (CAPEX) to operational expense (OPEX). Know the advantages of cloud and on-premises for the exam Covered earlier in cloud models and responsibility matrix</p>
 <p>CENTRALIZED vs DECENTRALIZED Advantages of centralized vs decentralized ? Centralized Model where infrastructure and equipment is located in one or a small number of large data centers. Decentralized Model where infrastructure and equipment is spread across a larger number of locations. Often reduces cost and management, but potentially increases the impact of a datacenter outage May increase cost and complexity, but decreases impact of the outage at a single location May improve efficiency or user experience</p>
-<p>MODERN COMPUTE &amp; SECURITY Containerization A lightweight, granular, and portable way to package applications for multiple platforms. Reduces overhead of server virtualization by enabling containerized apps to run on a shared OS kernel. Share many concerns of server virtualization: isolation at host, process, network, and storage levels containers don’t have their own OS ! Can be used in some cases to isolate existing applications developed to run in a VM with a dedicated operating system. Examples include Docker and Kubernetes</p>
-<p>TYPE 1 HYPERVISOR “Bare metal“ VIRTUALIZATION SECURITY: CONTAINERS VM1 (guest OS) VM2 (guest OS) Hypervisor Hardware Bins/Libs Bins/Libs App A App B VMware ESXi, KVM Microsoft Hyper-V</p>
-<p>CONTAINER HOST Usually, a cloud VM TYPE 1 HYPERVISOR “Bare metal“ VIRTUALIZATION SECURITY: CONTAINERS VM1 (guest OS) VM2 (guest OS) Hypervisor Hardware Bins/Libs Bins/Libs App A App B Docker Engine Host OS Hardware Bins/Libs Bins/Libs App A App A App A App B App B App B App B Each VM has its own OS kernel and memory, resulting in more overhead Containers are isolated, but share a single OS kernel, as well as bins/libs where possible VM Container</p>
+<p>MODERN COMPUTE &amp; SECURITY Containerization A lightweight, granular, and portable way to package applications for multiple platforms. Reduces overhead of server virtualization by enabling containerized apps to run on a shared OS kernel. Share many concerns of server virtualization: isolation at host, process, network, and storage levels containers don?t have their own OS ! Can be used in some cases to isolate existing applications developed to run in a VM with a dedicated operating system. Examples include Docker and Kubernetes</p>
+<p>TYPE 1 HYPERVISOR ?Bare metal? VIRTUALIZATION SECURITY: CONTAINERS VM1 (guest OS) VM2 (guest OS) Hypervisor Hardware Bins/Libs Bins/Libs App A App B VMware ESXi, KVM Microsoft Hyper-V</p>
+<p>CONTAINER HOST Usually, a cloud VM TYPE 1 HYPERVISOR ?Bare metal? VIRTUALIZATION SECURITY: CONTAINERS VM1 (guest OS) VM2 (guest OS) Hypervisor Hardware Bins/Libs Bins/Libs App A App B Docker Engine Host OS Hardware Bins/Libs Bins/Libs App A App A App A App B App B App B App B Each VM has its own OS kernel and memory, resulting in more overhead Containers are isolated, but share a single OS kernel, as well as bins/libs where possible VM Container</p>
 <p>CONTAINER HOST Usually, a cloud VM VIRTUALIZATION SECURITY: CONTAINERS Docker Engine Host OS Hardware Bins/Libs Bins/Libs App A App A App A App B App B App B App B</p>
 <p>Core components in a container platform (Docker, Kubernetes): -Orchestration/scheduling controller -Network, storage -Container host -Container images -Container registry The isolation is logical, isolating processes, compute, storage, network, secrets, and management plane</p>
 <p>Container hosts are cloud-based virtual machines (VM). Most CSPs offer hosted Kubernetes service, handles critical tasks like health monitoring and maintenance for you. You pay only for the agent nodes within your clusters, not for the management cluster. Major CSPs also offer a monitoring solution that will identify at least some potential security concerns Managed Kubernetes Container security Platform-as-a-Service This is where the containers run Shares many of the concerns of server virtualization, but must enforce isolation of network, data, storage access at container-level. EXAMPLES: AKS (MSFT), EKS (AWS), GKE (GCP) REAL WORLD ADOPTION</p>
 <p>3.1 VIRTUALIZATION Virtualization Server virtualization the process of dividing a physical server into multiple unique and isolated virtual servers by means of a software application (hypervisor). VM Escape Where an attacker gains access to a VM, then attacks either the host machine that holds all VMs, the hypervisor, or any of the other VMs. Protection: ensure patches and hypervisor and VMs are always up to date, guest privileges are low. Server-level redundancy and HIPS/HIDS protection also effective. VM Sprawl When unmanaged VMs have been deployed on your network. Because IT doesn't know it is there, it may not be patched and protected, and thus more vulnerable to attack Avoidance: enforcement of security policies for adding VMs to the network, as well as periodic scanning to identify new virtualization hosts.</p>
-<p>TYPE “Bare metal“ VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware ESXi, KVM Microsoft Hyper-V</p>
-<p>TYPE “Hosted“ TYPE “Bare metal“ VM1 VM2 Hypervisor Hardware VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware ESXi, KVM Microsoft Hyper-V</p>
-<p>VM1 VM2 Hypervisor Host OS Hardware TYPE “Hosted“ TYPE “Bare metal“ VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware Workstation, Oracle Virtualbox VMware ESXi, KVM Microsoft Hyper-V</p>
-<p>TYPE “Bare metal“ VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware ESXi, KVM Microsoft Hyper-V Reduced attack surface (compared to a Type 2 hypervisor) This makes it more secure if implemented properly Commonly used for QA, load testing, and production scenarios Typically, more expensive than a Type 2 hypervisor CHARACTERISTICS</p>
-<p>TYPE “Bare metal“ VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware ESXi, KVM Microsoft Hyper-V</p>
-<p>VM1 VM2 Hypervisor Host OS Hardware TYPE “Hosted“ BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware Workstation, Oracle Virtualbox CHARACTERISTICS Increased attack surface (due to the host operating system) This makes it less secure vs Type 1, even if implemented properly Commonly used for individual development and lab scenarios Typically, less expensive than a Type 1 hypervisor</p>
+<p>TYPE ?Bare metal? VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware ESXi, KVM Microsoft Hyper-V</p>
+<p>TYPE ?Hosted? TYPE ?Bare metal? VM1 VM2 Hypervisor Hardware VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware ESXi, KVM Microsoft Hyper-V</p>
+<p>VM1 VM2 Hypervisor Host OS Hardware TYPE ?Hosted? TYPE ?Bare metal? VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware Workstation, Oracle Virtualbox VMware ESXi, KVM Microsoft Hyper-V</p>
+<p>TYPE ?Bare metal? VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware ESXi, KVM Microsoft Hyper-V Reduced attack surface (compared to a Type 2 hypervisor) This makes it more secure if implemented properly Commonly used for QA, load testing, and production scenarios Typically, more expensive than a Type 2 hypervisor CHARACTERISTICS</p>
+<p>TYPE ?Bare metal? VM1 VM2 Hypervisor Hardware BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware ESXi, KVM Microsoft Hyper-V</p>
+<p>VM1 VM2 Hypervisor Host OS Hardware TYPE ?Hosted? BUILDING BLOCK TECHNOLOGIES: HYPERVISORS VMware Workstation, Oracle Virtualbox CHARACTERISTICS Increased attack surface (due to the host operating system) This makes it less secure vs Type 1, even if implemented properly Commonly used for individual development and lab scenarios Typically, less expensive than a Type 1 hypervisor</p>
 <p>internet of things Internet of Things A class of devices connected to the internet in order to provide automation, remote control, or AI processing in a home or business setting Often have limited compute resources (affects cryptographic options) and often limited ability to patch (embedded systems).</p>
 <p>You will often find SCADA systems in place where there is a large amount of industrial equipment. In an industrial, manufacturing, or public utility setting, equipment is often network-connected and monitored. And it can all be centrally configured, controlled, and monitored from a computer using a SCADA network. Usually do not have direct internet access for greater security. SCADA Supervisory Control And Data Acquisition / Industrial Control System (ICS) Should be segmented off from the rest of the network and protected by security controls to restrict access.</p>
-<p>EMBEDDED AND SPECIALIZED SYSTEMS Real-time operating system (RTOS) is an operating system that’s designed to work on a very deterministic schedule. This means that the hardware and software of this device is able to operate with very specific scheduling. Security of these devices is important, but it’s often difficult to know exactly what’s running inside of those embedded systems. They process data immediately, and if a task or process does not complete within a certain time, the process will fail. Smart devices like wearables and embedded systems like in cars and industrial equipment often use an RTOS.</p>
-<p>MODERN COMPUTE &amp; SECURITY Embedded Systems the technology component of an IOT device is often referred to as an embedded system. a full computer system embedded inside of another larger system. examples: hosts of embedded systems include printers, GPS, drones, VoIP phone, modern vehicles. Need to be managed and patched much like a computer If you can’t patch, add other layers of security (FW, IDPS)</p>
+<p>EMBEDDED AND SPECIALIZED SYSTEMS Real-time operating system (RTOS) is an operating system that?s designed to work on a very deterministic schedule. This means that the hardware and software of this device is able to operate with very specific scheduling. Security of these devices is important, but it?s often difficult to know exactly what?s running inside of those embedded systems. They process data immediately, and if a task or process does not complete within a certain time, the process will fail. Smart devices like wearables and embedded systems like in cars and industrial equipment often use an RTOS.</p>
+<p>MODERN COMPUTE &amp; SECURITY Embedded Systems the technology component of an IOT device is often referred to as an embedded system. a full computer system embedded inside of another larger system. examples: hosts of embedded systems include printers, GPS, drones, VoIP phone, modern vehicles. Need to be managed and patched much like a computer If you can?t patch, add other layers of security (FW, IDPS)</p>
 <p>3.1 CONSIDERATIONS There are several considerations that should be weighed as part of architecture design and implementation Resilience Cost Responsiveness Scalability Ease of deployment Risk transference Ease of recovery Patch availability Inability to patch Power Compute Many of these require the input of business needs</p>
-<p>Considerations Availability Ensuring a system or service is accessible to authorized users when needed. Targets are set based on organizational needs, balanced against other factors like cost and security Resilience A subset of availability that focuses on the system's ability to handle disruptions (outages, attacks) without impacting availability. Optimizing performance through outages or attacks ensures users experience acceptable response times during imperfect conditions. Cost Includes financial expenses (hardware, software, licenses), staffing (IT personnel), and any other associated costs. Should align with business needs to optimize costs May be built into a service or security layers in front of… Striking a balance between cost, security, and functionality is crucial</p>
-<p>Considerations Responsiveness Refers to the system or service's ability to respond to user requests or events in a timely manner. Optimizing performance ensures users experience acceptable response times for their tasks. Scalability Refers to ability to scale resources (vertically – adding compute power, or horizontally - adding more systems). Crucial to support changing demands while maintaining availability, resilience, and responsiveness. Ease of deployment Refers to the complexity and effort required to implement the solution. Complexity can increase initial costs and ongoing operation Strike a balance between performance and costs Should protect availability and allow for future growth Balance security and ease of deployment</p>
+<p>Considerations Availability Ensuring a system or service is accessible to authorized users when needed. Targets are set based on organizational needs, balanced against other factors like cost and security Resilience A subset of availability that focuses on the system's ability to handle disruptions (outages, attacks) without impacting availability. Optimizing performance through outages or attacks ensures users experience acceptable response times during imperfect conditions. Cost Includes financial expenses (hardware, software, licenses), staffing (IT personnel), and any other associated costs. Should align with business needs to optimize costs May be built into a service or security layers in front of? Striking a balance between cost, security, and functionality is crucial</p>
+<p>Considerations Responsiveness Refers to the system or service's ability to respond to user requests or events in a timely manner. Optimizing performance ensures users experience acceptable response times for their tasks. Scalability Refers to ability to scale resources (vertically ? adding compute power, or horizontally - adding more systems). Crucial to support changing demands while maintaining availability, resilience, and responsiveness. Ease of deployment Refers to the complexity and effort required to implement the solution. Complexity can increase initial costs and ongoing operation Strike a balance between performance and costs Should protect availability and allow for future growth Balance security and ease of deployment</p>
 <p>Considerations Risk transference Security risks mitigated by transferring some responsibility to third parties through insurance, security contracts, or service agreement. Enables the organization to mitigate critical risks too expensive or complex to address with their in-house resources. Ease of recovery Recovery time and effort are crucial for availability and resilience. Complex solutions might necessitate additional investments in automation or redundancy to minimize downtime. Patch availability Evaluate how often patching is required and the vendor's support responsiveness. Timely patching is essential for maintaining system security. and vendor support</p>
 <p>Considerations Inability to patch In high availability scenarios, patching might not be feasible due to potential downtime. Consider alternative security measures like segmentation or intrusion detection to mitigate risks associated with unpatched systems. Power Power consumption is a significant factor in data center design and contributes to ongoing costs. Energy-efficient solutions can help reduce operational costs and environmental impact. Compute Drives ongoing costs, both in the cloud (pay-as-you-go) and for on- premises solutions (hardware replacement). Built into service/solution price in public cloud Optimizing compute to manage costs and improve efficiency.</p>
 <p>3.0 Security Architecture</p>
@@ -385,7 +370,7 @@
 </ul>
 <p>Software Defined Networking</p>
 <ul>
-<li>Network functions are divided into three “planes”</li>
+<li>Network functions are divided into three ?planes?</li>
 <li>Control plane</li>
 <li>Decisions about how traffic should be prioritized, secured, and where it should</li>
 </ul>

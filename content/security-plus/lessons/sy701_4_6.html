@@ -4,6 +4,48 @@
 <div class="ut-lesson-body">
 <p>Identity and Access Management (IAM) is a framework of policies and technologies that enables an organization to manage digital identities and control user access to resources.</p>
 <h4>Identity and Access Management</h4>
+<h4>Visual Representation: IAM Lifecycle</h4>
+<p>The following diagram illustrates identity provisioning through de-provisioning and access enforcement.</p>
+<div class="ut-lesson-diagram ut-infographic">
+<div class="diagram-title">🔐 Identity and Access Management Lifecycle</div>
+<figure class="ut-svg-figure" aria-label="IAM lifecycle: provision, authenticate, authorize, audit, deprovision">
+<svg class="ut-cia-triangle" viewBox="0 0 480 120" xmlns="http://www.w3.org/2000/svg" role="img">
+<defs>
+<linearGradient id="iamFlowGrad46" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#1A8A7D" stop-opacity="0.5"/>
+<stop offset="100%" stop-color="#C9A227" stop-opacity="0.35"/>
+</linearGradient>
+</defs>
+<rect x="10" y="40" width="460" height="8" rx="4" fill="url(#iamFlowGrad46)"/>
+<circle cx="50" cy="44" r="28" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="50" y="48" text-anchor="middle" fill="#f8fafc" font-size="9">Provision</text>
+<circle cx="146" cy="44" r="28" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="146" y="48" text-anchor="middle" fill="#f8fafc" font-size="9">Authenticate</text>
+<circle cx="242" cy="44" r="28" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="242" y="48" text-anchor="middle" fill="#f8fafc" font-size="9">Authorize</text>
+<circle cx="338" cy="44" r="28" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="338" y="48" text-anchor="middle" fill="#f8fafc" font-size="9">Audit</text>
+<circle cx="434" cy="44" r="28" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="434" y="48" text-anchor="middle" fill="#f8fafc" font-size="9">Deprovision</text>
+</svg>
+</figure>
+<div class="flow-diagram">
+<div class="flow-step">
+<strong>Federation / SSO</strong><br>
+SAML, OAuth, LDAP
+</div>
+<div class="flow-arrow" aria-hidden="true">→</div>
+<div class="flow-step">
+<strong>MFA</strong><br>
+Biometrics, tokens, FIDO2
+</div>
+<div class="flow-arrow" aria-hidden="true">→</div>
+<div class="flow-step">
+<strong>Access Models</strong><br>
+RBAC, ABAC, least privilege
+</div>
+</div>
+</div>
 <ul>
 <li><strong>Provisioning/De-provisioning User Accounts</strong>: Creating new user accounts with appropriate permissions and disabling/deleting accounts when users leave the organization or no longer require access.</li>
 <li><strong>Permission Assignments and Implications</strong>: Granting specific rights and privileges to users or groups based on their roles and responsibilities. Understanding the security implications of over-privileged accounts.</li>

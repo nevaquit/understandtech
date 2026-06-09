@@ -9,6 +9,15 @@ if [ -d "${REPO}/.git" ]; then
   sudo -u gha-runner git -C "$REPO" reset --hard origin/main
 fi
 
+if [ -f "${REPO}/scripts/insert-missing-lesson-diagrams.php" ]; then
+  php "${REPO}/scripts/insert-missing-lesson-diagrams.php" || true
+fi
+if [ -f "${REPO}/scripts/ensure-lesson-visual-headings.php" ]; then
+  php "${REPO}/scripts/ensure-lesson-visual-headings.php" || true
+fi
+if [ -f "${REPO}/scripts/add-flow-arrows.php" ]; then
+  php "${REPO}/scripts/add-flow-arrows.php" || true
+fi
 if [ -f "${REPO}/scripts/inline-lesson-visuals.php" ]; then
   php "${REPO}/scripts/inline-lesson-visuals.php" || true
 fi

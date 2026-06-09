@@ -26,14 +26,14 @@ foreach ($files as $file) {
         $headingend = $headingstart + strlen($headingmatch[0][0]);
         $offset = $headingend;
 
-        $diagramstart = stripos($html, '<div class="ut-lesson-diagram">', $headingend);
-        if ($diagramstart === false) {
+        if (!preg_match('/<div\s+class="[^"]*\but-lesson-diagram\b[^"]*"/i', $html, $diagmatch, PREG_OFFSET_CAPTURE, $headingend)) {
             continue;
         }
+        $diagramstart = $diagmatch[0][1];
 
         // Already adjacent (only whitespace / one intro <p> between heading and diagram).
         $between = substr($html, $headingend, $diagramstart - $headingend);
-        if (strlen(trim(strip_tags($between))) < 280 && substr_count($between, '<div class="ut-lesson-diagram">') === 0) {
+        if (strlen(trim(strip_tags($between))) < 280 && !preg_match('/\but-lesson-diagram\b/i', $between)) {
             continue;
         }
 
