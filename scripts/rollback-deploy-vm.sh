@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Roll back plugin deploy on production VM to a known-good git SHA.
+# Does NOT disable maintenance — caller must run ensure-origin-healthy-vm.sh and verify health.
 set -euo pipefail
 
 PLUGINS_REPO_DIR="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
@@ -49,6 +50,5 @@ done
 
 sudo php "${MOODLE_DIR}/admin/cli/purge_caches.php"
 sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-chdir-quick-vm.sh"
-sudo php "${MOODLE_DIR}/admin/cli/maintenance.php" --disable || true
 
 echo "rollback_deploy_complete sha=${ROLLBACK_SHA}"

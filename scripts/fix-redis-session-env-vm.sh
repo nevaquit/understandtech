@@ -62,8 +62,8 @@ echo "=== redis ping ==="
 PONG=$(redis-cli -h "$MOODLE_REDIS_HOST" -p "$MOODLE_REDIS_PORT" --tls -a "$MOODLE_REDIS_PASSWORD" PING 2>/dev/null || true)
 echo "redis_ping=${PONG:-FAILED}"
 
-echo "=== php-fpm reload ==="
-sudo systemctl reload php8.3-fpm
+echo "=== php-fpm restart ==="
+sudo systemctl restart php8.3-fpm
 sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
 
 echo "=== localhost auth smoke ==="

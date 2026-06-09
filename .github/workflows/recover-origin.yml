@@ -8,6 +8,9 @@ on:
         type: boolean
         default: true
 
+env:
+  PLUGINS_REPO_DIR: /opt/understandtech-plugins
+
 jobs:
   recover:
     runs-on: [self-hosted, linux, production]
@@ -19,63 +22,40 @@ jobs:
       - name: Sync monorepo
         run: |
           set -euo pipefail
-          cd /opt/understandtech-plugins
+          cd "$PLUGINS_REPO_DIR"
           sudo -u gha-runner git fetch origin main
           sudo -u gha-runner git reset --hard origin/main
 
-      - name: Ensure origin healthy
+      - name: Ensure origin healthy (DB, PHP-FPM, enrol, theme, strict health)
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/ensure-origin-healthy-vm.sh
-
-      - name: Enrol default SEC701 users
-        run: |
-          set -euo pipefail
-          sudo -u www-data php /opt/understandtech-plugins/scripts/enroll-sec701-default-users.php
-
-      - name: Purge Moodle caches after enrolment
-        run: |
-          set -euo pipefail
-          sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
-
-      - name: Sync theme_understandtech from monorepo
-        run: |
-          set -euo pipefail
-          SRC="/opt/understandtech-plugins/moodle-plugins/theme_understandtech/"
-          DST="/var/www/moodle/theme/understandtech/"
-          sudo /usr/bin/rsync -av --delete \
-            --exclude='.git' --exclude='tests/' --exclude='*.md' \
-            "$SRC" "$DST"
-          sudo /usr/bin/chown -R www-data:www-data "$DST"
-          sudo -u www-data php /var/www/moodle/admin/cli/upgrade.php --non-interactive
-          sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/ensure-origin-healthy-vm.sh"
 
       - name: Fix page module filters
         if: inputs.fix_page_filters
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/fix-page-filter-cache-vm.sh 4
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-page-filter-cache-vm.sh" 4
 
       - name: Diagnose course index drawer
         continue-on-error: true
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/diagnose-course-index-vm.sh 3
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/diagnose-course-index-vm.sh" 3
 
-      - name: Verify web health
-        continue-on-error: true
+      - name: Verify Moodle web health (strict)
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/origin-web-health-vm.sh
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
 
       - name: Verify page module CLI
         continue-on-error: true
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/diagnose-page-cmid-vm.sh 4
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/diagnose-page-cmid-vm.sh" 4
 
       - name: Disable maintenance mode
-        if: always()
+        if: success()
         run: |
           set -euo pipefail
           sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable

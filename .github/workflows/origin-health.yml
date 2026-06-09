@@ -3,8 +3,13 @@ name: Origin health check
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    # Every 3 minutes (was 5) — shorter blind window between deploy and detection.
+    - cron: '*/3 * * * *'
   workflow_dispatch:
+  workflow_run:
+    workflows: ['Deploy Moodle Plugins']
+    types: [completed]
+    branches: [main]
 
 env:
   PLUGINS_REPO_DIR: /opt/understandtech-plugins
@@ -29,12 +34,12 @@ jobs:
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/apply-php-fpm-pool-vm.sh"
 
-      - name: Authenticated web health check
+      - name: Authenticated web health check (strict)
         id: health
         continue-on-error: true
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/origin-web-health-vm.sh"
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
 
       - name: Full origin recovery
         if: steps.health.outcome == 'failure'
@@ -43,7 +48,7 @@ jobs:
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/ensure-origin-healthy-vm.sh"
 
       - name: Disable maintenance mode
-        if: always()
+        if: success()
         run: |
           set -euo pipefail
           sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
@@ -54,6 +59,7 @@ jobs:
           set -euo pipefail
           {
             echo "## Origin health"
+            echo "- Trigger: ${{ github.event_name }}"
             echo "- Authenticated check: ${{ steps.health.outcome }}"
             echo "- Recovery run: ${{ steps.health.outcome == 'failure' && 'yes' || 'no' }}"
             echo "- Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

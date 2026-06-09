@@ -345,6 +345,11 @@ jobs:
           fi
           echo "php-fpm socket: ok"
 
+      - name: Post-deploy stabilize (enrol, theme, permissions)
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/post-deploy-stabilize-vm.sh"
+
       - name: Verify Moodle web health (strict)
         run: |
           set -euo pipefail
@@ -370,8 +375,10 @@ jobs:
         run: |
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/rollback-deploy-vm.sh" || true
-          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/ensure-origin-healthy-vm.sh" || true
-          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable || true
+          if ! sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/ensure-origin-healthy-vm.sh"; then
+            echo "Origin still unhealthy after rollback — maintenance left ON" >&2
+            exit 1
+          fi
 
       - name: Deployment summary
         if: always()

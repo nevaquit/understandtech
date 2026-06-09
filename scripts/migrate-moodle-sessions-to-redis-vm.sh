@@ -43,6 +43,6 @@ echo "=== verify session handler in config ==="
 grep -E 'session_handler_class|session_redis_host' "$CONFIG"
 
 sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
-sudo systemctl reload php8.3-fpm
+sudo systemctl restart php8.3-fpm
 
 echo 'migrate_moodle_sessions_to_redis_complete=1'

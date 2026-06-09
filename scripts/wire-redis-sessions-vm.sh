@@ -61,6 +61,6 @@ REDIS_PASS=$(grep MOODLE_REDIS_PASSWORD /etc/moodle/env | cut -d= -f2-)
 PONG=$(redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" --tls -a "$REDIS_PASS" PING 2>/dev/null || true)
 echo "redis_ping=${PONG:-FAILED}"
 
-sudo systemctl reload php8.3-fpm
+sudo systemctl restart php8.3-fpm
 sudo systemctl restart pgbouncer || true
 echo 'php_fpm_reloaded=1'

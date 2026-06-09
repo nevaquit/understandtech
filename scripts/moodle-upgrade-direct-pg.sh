@@ -92,7 +92,8 @@ if [ -f "${REPO}/scripts/moodle-sync-version-hash.sh" ]; then
 fi
 
 sudo -u www-data /usr/bin/php admin/cli/purge_caches.php
-systemctl reload php8.3-fpm
+# Full restart (never reload) — reload leaves stale workers with broken DB bootstrap.
+systemctl restart php8.3-fpm
 
 NGINX_SRC="${REPO}/infrastructure/nginx/understandtech.conf"
 NGINX_DST="/etc/nginx/sites-available/understandtech.conf"

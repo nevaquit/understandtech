@@ -1,20 +1,30 @@
 #!/usr/bin/env bash
-# Full origin recovery: permissions, PgBouncer, PHP-FPM pool, Redis, authenticated smoke.
+# Full idempotent origin recovery: DB, PHP-FPM pool, permissions, enrolment, theme, strict health.
+# Disables maintenance mode ONLY when verify-moodle-web-health.sh passes.
 set -euo pipefail
 
 REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
 
+echo "=== apply PHP-FPM pool ==="
 bash "${REPO}/scripts/apply-php-fpm-pool-vm.sh"
-chmod 755 /var/www
-chmod 755 /var/www/moodle
+
+echo "=== recover DB connectivity ==="
 bash "${REPO}/scripts/recover-origin-db.sh" || true
-bash "${REPO}/scripts/fix-moodle-chdir-quick-vm.sh"
-bash "${REPO}/scripts/migrate-moodle-sessions-to-redis-vm.sh" || bash "${REPO}/scripts/fix-redis-session-env-vm.sh" || true
+
+echo "=== migrate / fix Redis sessions ==="
+bash "${REPO}/scripts/migrate-moodle-sessions-to-redis-vm.sh" \
+  || bash "${REPO}/scripts/fix-redis-session-env-vm.sh" || true
+
+echo "=== restart stack ==="
 systemctl restart pgbouncer
 systemctl restart php8.3-fpm
 systemctl reload nginx
-sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
-sudo -u www-data php /var/www/moodle/admin/cli/maintenance.php --disable || true
 
-bash "${REPO}/scripts/origin-web-health-vm.sh" || bash "${REPO}/scripts/origin-web-health-cli.sh"
+echo "=== post-deploy stabilize (enrol, theme, permissions) ==="
+bash "${REPO}/scripts/post-deploy-stabilize-vm.sh"
+
+echo "=== strict web health ==="
+bash "${REPO}/scripts/verify-moodle-web-health.sh"
+
+sudo -u www-data php /var/www/moodle/admin/cli/maintenance.php --disable
 echo 'ensure_origin_healthy_complete=1'
