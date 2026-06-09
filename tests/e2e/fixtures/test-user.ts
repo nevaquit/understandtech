@@ -9,8 +9,8 @@ export type TestCredentials = {
  * Read student credentials from environment (never hardcode secrets).
  */
 export function getStudentCredentials(): TestCredentials | null {
-  const email = process.env.STAGING_TEST_USER_EMAIL;
-  const password = process.env.STAGING_TEST_USER_PASSWORD;
+  const email = process.env.STAGING_TEST_USER_EMAIL || process.env.MOODLE_E2E_USER;
+  const password = process.env.STAGING_TEST_USER_PASSWORD || process.env.MOODLE_E2E_PASS;
   if (!email || !password) {
     return null;
   }

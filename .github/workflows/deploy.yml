@@ -215,7 +215,7 @@ jobs:
           set -euo pipefail
           export STAGING_URL="${STAGING_URL:-https://staging.understandtech.app/learn}"
           # Staging VM user from setup-e2e-test-user-vm.sh (post-deploy-stabilize); secrets override when set.
-          export STAGING_TEST_USER_EMAIL="${STAGING_TEST_USER_EMAIL:-${MOODLE_E2E_USER:-e2e-test@understandtech.app}}"
+          export STAGING_TEST_USER_EMAIL="${STAGING_TEST_USER_EMAIL:-${MOODLE_E2E_USER:-e2etest}}"
           export STAGING_TEST_USER_PASSWORD="${STAGING_TEST_USER_PASSWORD:-${MOODLE_E2E_PASS:-UtE2eTest2026Secure}}"
           export E2E_COURSE_PATH="${E2E_COURSE_PATH:-/course/view.php?id=2}"
           npx playwright test --project=chromium --workers=1

@@ -24,6 +24,16 @@ function loadDotEnv(): void {
 
 loadDotEnv();
 
+/** Staging VM user from setup-e2e-test-user-vm.sh / post-deploy-stabilize (CI only). */
+if (process.env.CI === 'true') {
+  if (!process.env.STAGING_TEST_USER_EMAIL) {
+    process.env.STAGING_TEST_USER_EMAIL = process.env.MOODLE_E2E_USER || 'e2etest';
+  }
+  if (!process.env.STAGING_TEST_USER_PASSWORD) {
+    process.env.STAGING_TEST_USER_PASSWORD = process.env.MOODLE_E2E_PASS || 'UtE2eTest2026Secure';
+  }
+}
+
 /** Moodle wwwroot path is /learn on staging and production marketing hosts. */
 function normalizeMoodleBaseUrl(raw: string | undefined): string {
   const fallback = 'https://staging.understandtech.app/learn';
