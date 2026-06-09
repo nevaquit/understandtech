@@ -879,5 +879,18 @@ security_plus_disable_page_module_filters($course);
 rebuild_course_cache((int) $course->id, true);
 filter_manager::reset_caches();
 echo "page_filters_disabled=1\n";
+
+$enrollscript = $repopath . '/scripts/enroll-sec701-default-users.php';
+if (is_readable($enrollscript)) {
+    echo "--- default enrolments ---\n";
+    passthru(PHP_BINARY . ' ' . escapeshellarg($enrollscript), $enrollstatus);
+    if ($enrollstatus !== 0) {
+        fwrite(STDERR, "enroll_sec701_failed exit={$enrollstatus}\n");
+        exit($enrollstatus);
+    }
+} else {
+    echo "enroll_script_missing path={$enrollscript}\n";
+}
+
 echo "COURSE_PATH=/course/view.php?id={$course->id}\n";
 echo "=== seed complete ===\n";

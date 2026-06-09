@@ -121,6 +121,7 @@ sudo ./scripts/install-cloudflare-origin-certs.sh \
 | `wire-redis-sessions-remote.sh` | Azure Run Command wrapper for Redis sessions script |
 | `setup-e2e-test-user-vm.sh` | Create `e2etest` user + `e2e101` course on VM |
 | `setup-e2e-test-user-remote.sh` | Azure Run Command wrapper (set `E2E_PASSWORD`) |
+| `enroll-sec701-default-users.php` | Enrol `admin` + `e2etest` in SEC701 (idempotent; runs in Seed SEC701 workflow) |
 | `generate-stream-signed-url.sh` | RS256 Stream manifest URL for smoke `TEST_VIDEO_URL` |
 | `setup-postmark-smtp-vm.sh` / `-remote.sh` | Moodle Postmark SMTP from KV token |
 | `sync-sudoers-vm.sh` / `-remote.sh` | Install `gha-runner-sudoers` from repo on VM |
