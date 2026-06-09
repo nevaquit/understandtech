@@ -49,6 +49,10 @@ curl -sS -b "$CJ" -c "$CJ" -L \
 
 curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/my/" -o "$LOGIN"
 assert_no_fatal_html "auth_my" "$LOGIN"
+if ! grep -q 'timeline_fallback' "$LOGIN"; then
+  echo "timeline_fallback_missing"
+  exit 1
+fi
 echo "auth_my_ok=1"
 
 echo "=== course view id=${COURSE_ID} ==="

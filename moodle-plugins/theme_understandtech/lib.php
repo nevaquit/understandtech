@@ -139,11 +139,14 @@ function theme_understandtech_page_init(moodle_page $page): void {
         );
     }
 
-    // My courses / dashboard: block_myoverview uses Templates.replaceNodeContents (YUI).
-    // When Y.NodeList is unavailable course cards stay as skeleton placeholders forever.
+    // My courses / dashboard: block_myoverview and block_timeline use Templates.replaceNodeContents (YUI).
+    // When Y.NodeList is unavailable course cards and timeline events stay as skeleton placeholders forever.
     if (in_array($page->pagelayout, ['mycourses', 'mydashboard'], true)) {
         $page->requires->js_amd_inline(
             "require(['theme_understandtech/myoverview_fallback'], function(m) { m.init(); });",
+        );
+        $page->requires->js_amd_inline(
+            "require(['theme_understandtech/timeline_fallback'], function(m) { m.init(); });",
         );
     }
 }
