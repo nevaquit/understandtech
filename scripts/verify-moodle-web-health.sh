@@ -44,18 +44,6 @@ fi
 PROD="${PROD:-https://understandtech.app}"
 COURSE_ID="${VERIFY_COURSE_ID:-${COURSE_ID:-3}}"
 
-# Staging health runs on the VM: curl via Cloudflare loses session cookies (Redirect on /my/).
-# Resolve the public hostname to loopback so nginx/ssl and Moodle sessions match wwwroot.
-CURL_EXTRA=()
-if [ -f /var/www/moodle/config.php ] && [[ "${PROD}" == *staging* ]]; then
-  _staging_host="${PROD#https://}"
-  _staging_host="${_staging_host#http://}"
-  _staging_host="${_staging_host%%/*}"
-  PROD="https://${_staging_host}"
-  CURL_EXTRA=( --resolve "${_staging_host}:443:127.0.0.1" -k )
-  echo "staging_loopback_probe host=${_staging_host} resolve=127.0.0.1:443"
-fi
-
 CJ="/tmp/verify-moodle-cj-$$"
 LOGIN="/tmp/verify-moodle-login-$$"
 COURSE="/tmp/verify-moodle-course-$$"
@@ -97,7 +85,7 @@ has_timeline_fallback() {
 
 run_checks() {
   echo "=== guest login ==="
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" "${PROD}${WWW}/login/index.php" -o "$LOGIN"
+  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/login/index.php" -o "$LOGIN"
   assert_no_fatal_html "guest_login" "$LOGIN"
 
   if ! grep -q 'name="logintoken"' "$LOGIN"; then
@@ -109,13 +97,13 @@ run_checks() {
 
   echo "=== authenticated login ==="
   tok=$(grep -oP 'name="logintoken" value="\K[^"]+' "$LOGIN" | head -1 || true)
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L \
+  curl -sS -b "$CJ" -c "$CJ" -L \
     --data-urlencode "username=${E2E_USER}" \
     --data-urlencode "password=${E2E_PASS}" \
     --data-urlencode "logintoken=${tok}" \
     "${PROD}${WWW}/login/index.php" -o /dev/null
 
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" "${PROD}${WWW}/my/" -o "$LOGIN"
+  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/my/" -o "$LOGIN"
   assert_no_fatal_html "auth_my" "$LOGIN"
   if ! has_timeline_fallback "$LOGIN"; then
     echo "timeline_fallback_missing (expected on /my/ after auth, not guest login)"
@@ -124,7 +112,7 @@ run_checks() {
   echo "auth_my_ok=1"
 
   echo "=== course view id=${COURSE_ID} ==="
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" "${PROD}${WWW}/course/view.php?id=${COURSE_ID}" -o "$COURSE"
+  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/course/view.php?id=${COURSE_ID}" -o "$COURSE"
   assert_no_fatal_html "auth_course" "$COURSE"
 
   if ! grep -q 'templates_dom_patch' "$COURSE"; then

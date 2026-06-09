@@ -11,6 +11,13 @@ bash "${REPO}/scripts/sync-sudoers-vm.sh"
 echo "=== SEC701 default enrolment ==="
 sudo -u www-data php "${REPO}/scripts/enroll-sec701-default-users.php"
 
+_wwwroot="$(sudo -u www-data php -r 'define("CLI_SCRIPT", true); require "/var/www/moodle/config.php"; echo $CFG->wwwroot;' 2>/dev/null || true)"
+if [[ "${_wwwroot}" == *staging* ]]; then
+  echo "=== staging E2E test user (health gate login) ==="
+  export E2E_PASSWORD="${MOODLE_E2E_PASS:-UtE2eTest2026Secure}"
+  bash "${REPO}/scripts/setup-e2e-test-user-vm.sh"
+fi
+
 echo "=== theme sync ==="
 bash "${REPO}/scripts/sync-theme-understandtech-vm.sh"
 
