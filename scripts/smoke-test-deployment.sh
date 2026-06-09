@@ -127,7 +127,23 @@ check_ai_auth() {
   fi
 }
 
-# --- 7. Moodle version / reachability ---
+# --- 7. Moodle login must not show PHP exceptions ---
+check_moodle_login_healthy() {
+  local html
+  html="$(curl_max "${PROD_URL}/login/index.php" 2>/dev/null || true)"
+  if echo "$html" | grep -qiE 'Exception -|Fatal error|Call to undefined method|Error reading from database'; then
+    fail "Moodle login page shows fatal error/exception"
+    echo "$html" | grep -oiE 'Exception -[^<]{0,120}|Call to undefined method[^<]{0,120}|Error reading from database' | head -2 || true
+    return
+  fi
+  if echo "$html" | grep -q 'name="logintoken"'; then
+    pass "Moodle login healthy (logintoken present, no exception)"
+  else
+    fail "Moodle login missing logintoken or unreachable"
+  fi
+}
+
+# --- 8. Moodle version / reachability ---
 check_moodle_version() {
   if [[ -x /usr/bin/php && -f "$MOODLE_DIR/admin/cli/cfg.php" ]]; then
     local release
@@ -311,6 +327,7 @@ check_http_cf
 check_origin_pulls
 check_ai_health
 check_ai_auth
+check_moodle_login_healthy
 check_moodle_version
 check_db_vm
 check_redis_vm

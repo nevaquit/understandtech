@@ -1,0 +1,2 @@
+# moodle_page methods that break Moodle 4.5.x (added in later releases).
+add_body_attributes

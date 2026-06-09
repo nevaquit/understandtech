@@ -81,6 +81,11 @@ jobs:
             ' "$versionfile"
           done < <(find moodle-plugins -name version.php -print0)
 
+      - name: Validate Moodle 4.5 plugin API compatibility
+        run: |
+          set -euo pipefail
+          php scripts/validate-moodle-plugin-api.php
+
       - name: Moodle CodeChecker (warn only)
         continue-on-error: true
         run: |
@@ -160,10 +165,17 @@ jobs:
       github.event_name != 'pull_request' &&
       (github.event_name == 'workflow_dispatch' || needs.validate.outputs.has_plugin_changes == 'true')
     runs-on: [self-hosted, linux, production]
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Record pre-deploy SHA for rollback
+        run: |
+          set -euo pipefail
+          cd /opt/understandtech-plugins
+          git rev-parse HEAD | sudo tee /tmp/understandtech-pre-deploy-sha >/dev/null
+          echo "pre_deploy_sha=$(cat /tmp/understandtech-pre-deploy-sha)"
 
       - name: Enable maintenance mode
         run: |
@@ -307,12 +319,6 @@ jobs:
             -a "$(sudo /usr/bin/cat /etc/moodle/redis_password)" \
             -n 0 FLUSHDB
 
-      - name: Disable maintenance mode
-        if: always()
-        run: |
-          set -euo pipefail
-          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
-
       - name: Health check
         run: |
           set -euo pipefail
@@ -333,6 +339,11 @@ jobs:
           fi
           echo "php-fpm socket: ok"
 
+      - name: Verify Moodle web health (strict)
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
+
       - name: Post-deploy smoke test
         env:
           ON_VM: '1'
@@ -341,6 +352,20 @@ jobs:
         run: |
           set -euo pipefail
           bash "${PLUGINS_REPO_DIR}/scripts/smoke-test-deployment.sh"
+
+      - name: Disable maintenance mode
+        if: success()
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
+
+      - name: Rollback failed deploy
+        if: failure()
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/rollback-deploy-vm.sh" || true
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/ensure-origin-healthy-vm.sh" || true
+          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable || true
 
       - name: Deployment summary
         if: always()

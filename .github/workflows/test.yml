@@ -32,6 +32,11 @@ jobs:
             echo "OK $f"
           done
 
+      - name: Validate Moodle 4.5 plugin API compatibility
+        run: |
+          set -euo pipefail
+          php scripts/validate-moodle-plugin-api.php
+
   integration:
     name: Integration smoke
     runs-on: ubuntu-latest
