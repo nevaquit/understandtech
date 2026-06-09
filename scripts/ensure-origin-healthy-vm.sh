@@ -5,6 +5,9 @@ set -euo pipefail
 
 REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
 
+echo "=== sync gha-runner sudoers (restart-only policy) ==="
+bash "${REPO}/scripts/sync-sudoers-vm.sh"
+
 echo "=== apply PHP-FPM pool ==="
 bash "${REPO}/scripts/apply-php-fpm-pool-vm.sh"
 

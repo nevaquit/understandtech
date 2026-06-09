@@ -5,6 +5,9 @@ set -euo pipefail
 
 REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
 
+echo "=== sync gha-runner sudoers (restart-only policy) ==="
+bash "${REPO}/scripts/sync-sudoers-vm.sh"
+
 echo "=== SEC701 default enrolment ==="
 sudo -u www-data php "${REPO}/scripts/enroll-sec701-default-users.php"
 

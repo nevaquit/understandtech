@@ -29,6 +29,12 @@ jobs:
           sudo -u gha-runner git fetch origin main
           sudo -u gha-runner git reset --hard origin/main
 
+      - name: Sync gha-runner sudoers
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
+
       - name: Apply PHP-FPM pool config
         run: |
           set -euo pipefail
