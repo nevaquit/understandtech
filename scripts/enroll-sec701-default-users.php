@@ -107,7 +107,7 @@ if ((int) $manual->status !== ENROL_INSTANCE_ENABLED) {
 $enrolled = 0;
 $skipped = 0;
 $missing = 0;
-$failed = 0;
+$verifiedusers = [];
 
 foreach ($usernames as $username) {
     $user = $DB->get_record('user', ['username' => $username, 'deleted' => 0]);
@@ -148,20 +148,24 @@ foreach ($usernames as $username) {
         $skipped++;
     }
 
-    accesslib_clear_all_caches_for_unit_testing();
-    if (!sec701_user_can_view_course($user, $context)) {
-        $rolecount = $DB->count_records('role_assignments', [
-            'contextid' => $context->id,
-            'userid' => $userid,
-        ]);
-        echo "capability_missing username={$username} id={$userid} role_assignments={$rolecount}\n";
-        $failed++;
-    } else {
-        echo "capability_ok username={$username} id={$userid}\n";
-    }
+    $verifiedusers[] = $user;
 }
 
 purge_all_caches();
+
+$failed = 0;
+foreach ($verifiedusers as $user) {
+    if (!sec701_user_can_view_course($user, $context)) {
+        $rolecount = $DB->count_records('role_assignments', [
+            'contextid' => $context->id,
+            'userid' => (int) $user->id,
+        ]);
+        echo "capability_missing username={$user->username} id={$user->id} role_assignments={$rolecount}\n";
+        $failed++;
+    } else {
+        echo "capability_ok username={$user->username} id={$user->id}\n";
+    }
+}
 
 echo "enrol_summary enrolled={$enrolled} skipped={$skipped} missing={$missing} failed={$failed}\n";
 echo "COURSE_PATH=/course/view.php?id={$courseid}\n";
