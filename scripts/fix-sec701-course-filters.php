@@ -18,7 +18,11 @@ require_once($CFG->dirroot . '/course/lib.php');
 
 global $DB;
 
-$courseid = (int) (getenv('SEC701_COURSE_ID') ?: 3);
+$courseid = (int) (getenv('SEC701_COURSE_ID') ?: 0);
+if ($courseid <= 0) {
+    $byshort = $DB->get_record('course', ['shortname' => 'SEC701']);
+    $courseid = $byshort ? (int) $byshort->id : 3;
+}
 $course = get_course($courseid);
 $modinfo = get_fast_modinfo($course);
 
