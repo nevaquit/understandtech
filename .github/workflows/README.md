@@ -16,7 +16,7 @@ Four-stage pipeline (Phase 5.1 + 6):
 
 1. **validate** — PHP lint, `version.php` checks, Moodle CodeChecker (warn-only), Bicep build, AI Gateway typecheck, changed-plugin detection
 2. **deploy-staging** — same steps as prod on staging VM; health/smoke against `STAGING_URL`
-3. **staging-e2e** — Playwright chromium on staging (blocks prod)
+3. **staging-e2e** — Playwright gate: auth setup + `auth.spec`, `course-navigation`, `exam-readiness` (blocks prod; full suite via `e2e.yml`)
 4. **deploy** (production) — only after staging + E2E pass; `skip_staging_gate` on manual dispatch for emergencies
 5. **notify** — posts to Slack/Discord when `NOTIFY_WEBHOOK_URL` secret is set
 
