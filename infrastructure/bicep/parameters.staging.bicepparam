@@ -7,6 +7,6 @@ param vmAdminUsername = 'azureadmin'
 param vmAdminPublicKey = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILAhcY/cKe3kILtC3+VS0IC8bzEqxIuP03xZgPU258DX nevaquit@gmail.com'
 param environment = 'staging'
 param location = 'eastus2'
-// Cheaper burstable VM; B2ms often lacks capacity in eastus2 — use B2s.
-param vmSize = 'Standard_B2s'
+// Same family as prod; burstable B-series often lacks capacity in eastus2.
+param vmSize = 'Standard_D2s_v3'
 param vmZone = ''
