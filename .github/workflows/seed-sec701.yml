@@ -50,6 +50,12 @@ jobs:
           sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
           echo 'seed_security_plus_complete=1'
 
+      - name: Fix Moodle directory permissions
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-dir-permissions-vm.sh"
+
       - name: Disable maintenance mode
         if: always()
         run: |

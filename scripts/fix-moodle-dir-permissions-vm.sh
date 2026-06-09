@@ -26,8 +26,8 @@ global \$DB;
 echo \"www_data_chdir_db_ok\n\";
 "
 
-echo "=== php-fpm reload ==="
-systemctl reload php8.3-fpm
+echo "=== php-fpm restart (recycle all workers) ==="
+systemctl restart php8.3-fpm
 sudo -u www-data php "${MOODLE_DIR}/admin/cli/purge_caches.php"
 
 echo 'fix_moodle_dir_permissions_complete=1'
