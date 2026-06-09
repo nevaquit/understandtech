@@ -106,7 +106,19 @@ $env:CLOUDFLARE_API_TOKEN = '<YOUR_TOKEN>'
 $env:CLOUDFLARE_ZONE_ID = '<YOUR_ZONE_ID>'
 ```
 
-Verify token: `curl -s "https://api.cloudflare.com/client/v4/user/tokens/verify" -H "Authorization: Bearer $env:CLOUDFLARE_API_TOKEN"`
+Verify token (pick the URL that matches your token type):
+
+- **User API token** (legacy user tokens): `GET /client/v4/user/tokens/verify`
+- **Account API token** (`cfat_` prefix): `GET /client/v4/accounts/{account_id}/tokens/verify` (use your Cloudflare account ID; `/user/tokens/verify` often fails for account tokens)
+
+```powershell
+# User-scoped token
+curl.exe -sS "https://api.cloudflare.com/client/v4/user/tokens/verify" -H "Authorization: Bearer $env:CLOUDFLARE_API_TOKEN"
+
+# Account-scoped token (cfat_)
+$accountId = "365965a7234fe266200abe63be3b63ba"
+curl.exe -sS "https://api.cloudflare.com/client/v4/accounts/$accountId/tokens/verify" -H "Authorization: Bearer $env:CLOUDFLARE_API_TOKEN"
+```
 
 ## Cloudflare origin certificate
 
