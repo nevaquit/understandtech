@@ -54,7 +54,20 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/script
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/sync-sudoers-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/ensure-origin-healthy-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/seed-security-plus-course-vm.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/verify-moodle-web-health.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/fix-moodle-dir-permissions-vm.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/fix-moodle-chdir-quick-vm.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/rollback-deploy-vm.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/apply-php-fpm-pool-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/systemctl reload pgbouncer
+
+# Pre-deploy SHA marker (deploy workflow)
+gha-runner ALL=(root) NOPASSWD: /usr/bin/tee /tmp/understandtech-pre-deploy-sha
+
+# verify-moodle-web-health.sh drops to www-data for Moodle CLI probes
+gha-runner ALL=(www-data) NOPASSWD: /usr/bin/php /var/www/moodle/admin/cli/maintenance.php
+gha-runner ALL=(www-data) NOPASSWD: /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php
+gha-runner ALL=(www-data) NOPASSWD: /usr/bin/php
 
 # Runner service management (bootstrap only — restrict in production if desired)
 gha-runner ALL=(root) NOPASSWD: /opt/actions-runner/svc.sh *

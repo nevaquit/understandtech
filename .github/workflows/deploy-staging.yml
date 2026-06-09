@@ -68,6 +68,12 @@ jobs:
             echo "WARNING: VM is at ${actual}, expected ${EXPECTED_SHA} — proceeding anyway"
           fi
 
+      - name: Sync gha-runner sudoers
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
+
       - name: Remove undeployed plugin placeholders on VM
         continue-on-error: true
         run: |
@@ -221,6 +227,7 @@ jobs:
         run: |
           set -euo pipefail
           export PROD_URL="${STAGING_URL:-https://staging.understandtech.app}"
+          export VERIFY_COURSE_ID="${VERIFY_COURSE_ID:-2}"
           sudo -E /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
 
       - name: Post-deploy smoke test

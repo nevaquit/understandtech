@@ -39,6 +39,12 @@ jobs:
             echo "WARNING: VM is at ${actual}, expected ${EXPECTED_SHA} — proceeding anyway"
           fi
 
+      - name: Sync gha-runner sudoers
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
+
       - name: Seed SEC701 course
         id: seed
         env:
@@ -60,8 +66,10 @@ jobs:
           set -euo pipefail
           if [ "${{ inputs.target }}" = "staging" ]; then
             export PROD_URL="${STAGING_URL:-https://staging.understandtech.app}"
+            export VERIFY_COURSE_ID="${VERIFY_COURSE_ID:-2}"
           else
             export PROD_URL="${PROD_URL:-https://understandtech.app}"
+            export VERIFY_COURSE_ID="${VERIFY_COURSE_ID:-3}"
           fi
           sudo -E /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
 
