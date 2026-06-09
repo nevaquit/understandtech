@@ -42,7 +42,10 @@ export class TestUser {
    * Wait for login form or backoff when nginx rate-limits /login (5 req/min).
    */
   async waitForLoginForm(): Promise<void> {
-    const loginForm = this.page.locator('.loginform, .ut-login-form');
+    const loginForm = this.page.locator(
+      '.loginform, .ut-login-form, .ut-login-form-fields, .login-form, #login',
+    );
+    const loginFields = this.page.locator('#username, input[name="username"]');
     const maxAttempts = 5;
 
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
@@ -64,7 +67,7 @@ export class TestUser {
         );
       }
 
-      await expect(loginForm).toBeVisible({ timeout: 15_000 });
+      await expect(loginForm.or(loginFields).first()).toBeVisible({ timeout: 15_000 });
       return;
     }
   }
@@ -88,7 +91,9 @@ export class TestUser {
     } else {
       await this.page.goto('/login/logout.php?sesskey=skip');
     }
-    await expect(this.page.locator('.loginform')).toBeVisible({ timeout: 15_000 });
+    await expect(
+      this.page.locator('.loginform, .ut-login-form, .ut-login-form-fields, .login-form, #login, #username'),
+    ).toBeVisible({ timeout: 15_000 });
   }
 
   async expectDashboard(): Promise<void> {

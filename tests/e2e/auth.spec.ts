@@ -48,7 +48,7 @@ test.describe('Authentication', () => {
     }
 
     await expect(page).toHaveURL(/\/login\/index\.php|\/\?redirect=0/, { timeout: 15_000 });
-    const loginForm = page.locator('.loginform, .ut-login-form');
+    const loginForm = page.locator('.loginform, .ut-login-form, .ut-login-form-fields, .login-form, #login, #username');
     const guestHome = page.getByRole('link', { name: /log in|login/i });
     await expect(loginForm.or(guestHome)).toBeVisible({ timeout: 15_000 });
   });

@@ -24,10 +24,22 @@ function loadDotEnv(): void {
 
 loadDotEnv();
 
-const baseURL =
-  process.env.STAGING_URL?.replace(/\/$/, '') ??
-  process.env.BASE_URL?.replace(/\/$/, '') ??
-  'https://staging.understandtech.app/learn';
+/** Moodle wwwroot path is /learn on staging and production marketing hosts. */
+function normalizeMoodleBaseUrl(raw: string | undefined): string {
+  const fallback = 'https://staging.understandtech.app/learn';
+  const trimmed = (raw ?? fallback).replace(/\/$/, '');
+  if (trimmed.endsWith('/learn')) {
+    return trimmed;
+  }
+  if (/understandtech\.app$/i.test(trimmed) || /staging\.understandtech\.app$/i.test(trimmed)) {
+    return `${trimmed}/learn`;
+  }
+  return trimmed;
+}
+
+const baseURL = normalizeMoodleBaseUrl(
+  process.env.STAGING_URL ?? process.env.BASE_URL,
+);
 
 const authFile = path.join(__dirname, '.auth', 'student.json');
 
