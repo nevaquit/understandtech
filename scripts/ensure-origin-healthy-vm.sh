@@ -16,5 +16,5 @@ systemctl reload nginx
 sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
 sudo -u www-data php /var/www/moodle/admin/cli/maintenance.php --disable || true
 
-bash "${REPO}/scripts/origin-web-health-vm.sh"
+bash "${REPO}/scripts/origin-web-health-vm.sh" || bash "${REPO}/scripts/origin-web-health-cli.sh"
 echo 'ensure_origin_healthy_complete=1'

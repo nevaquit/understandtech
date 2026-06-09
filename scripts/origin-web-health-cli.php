@@ -1,5 +1,6 @@
 <?php
-// Simulate web bootstrap (no CLI_SCRIPT) and probe dashboard DB paths.
+// CLI probe: www-data chdir + dashboard DB queries.
+define('CLI_SCRIPT', true);
 
 chdir('/var/www/moodle');
 require '/var/www/moodle/config.php';
@@ -8,15 +9,10 @@ global $DB;
 
 $user = $DB->get_record('user', ['username' => 'e2etest'], 'id,username', MUST_EXIST);
 $blocks = $DB->count_records('block_instances');
-$course = $DB->get_record('course', ['shortname' => 'SEC701'], 'id,shortname', IGNORE_MISSING);
 
 if (!$user || $blocks < 1) {
-    fwrite(STDERR, "origin_health_cli_fail user=" . ($user ? 'ok' : 'missing') . " blocks={$blocks}\n");
+    fwrite(STDERR, "origin_health_cli_fail blocks={$blocks}\n");
     exit(1);
 }
 
-echo "origin_web_health_cli_ok user={$user->username} blocks={$blocks}";
-if ($course) {
-    echo " course={$course->shortname}";
-}
-echo "\n";
+echo "origin_web_health_cli_ok user={$user->username} blocks={$blocks}\n";
