@@ -26,6 +26,8 @@ Deploy sudo commands must match `infrastructure/runner/gha-runner-sudoers`.
 
 | Secret | Required | Notes |
 |--------|----------|-------|
+| `CLOUDFLARE_API_TOKEN` | For Worker deploy + optional automation | See [scripts/README.md](../scripts/README.md#cloudflare-api-token-github--local) |
+| `CLOUDFLARE_ZONE_ID` | For marketing cache purge | Zone `understandtech.app` — Overview → Zone ID |
 | `STAGING_URL` | Recommended | `https://staging.understandtech.app/learn` (Playwright base URL) |
 | `STAGING_TEST_USER_EMAIL` | E2E | Or reuse `MOODLE_E2E_USER` (username `e2etest`) |
 | `STAGING_TEST_USER_PASSWORD` | E2E | Or reuse `MOODLE_E2E_PASS` |

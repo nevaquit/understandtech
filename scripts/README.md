@@ -71,6 +71,43 @@ Deploy (checks auth, placeholders, runs typecheck):
 
 Expected route after deploy: `https://ai.understandtech.app/*`
 
+## Cloudflare API token (GitHub + local)
+
+Used by `deploy-ai-gateway.yml`, `deploy-marketing.yml` (cache purge), and `create-cloudflare-origin-cert.ps1`. **Never commit the token.**
+
+| Secret / env | Used by | Required? |
+|--------------|---------|-----------|
+| `CLOUDFLARE_API_TOKEN` | AI Gateway wrangler deploy, origin cert script, marketing purge (alias) | Yes for CI deploys + API origin cert |
+| `CLOUDFLARE_ZONE_ID` | Marketing cache purge (`deploy-marketing.yml`) | Yes for post-deploy purge |
+| `CF_API_TOKEN` / `CF_ZONE_ID` | Marketing workflow aliases | Optional (fallback names) |
+
+**One custom token** scoped to your account + zone `understandtech.app` is enough. Minimum permissions:
+
+| Scope | Permission |
+|-------|------------|
+| Account | Cloudflare Workers Scripts: **Edit** |
+| Account | Workers KV Storage: **Edit** |
+| Account | Workers Routes: **Edit** |
+| Account | Account Settings: **Read** |
+| Account | Cloudflare Origin CA: **Edit** |
+| Zone `understandtech.app` | DNS: **Edit** (staging `A` record) |
+| Zone `understandtech.app` | Cache Purge: **Edit** (marketing deploy) |
+| Zone `understandtech.app` | SSL and Certificates: **Edit** (Worker custom domain `ai.understandtech.app`) |
+
+**Zone ID:** Cloudflare → **understandtech.app** → Overview → right column **Zone ID**.
+
+```powershell
+# GitHub (run locally after creating token in dashboard)
+gh secret set CLOUDFLARE_API_TOKEN --body "<YOUR_TOKEN>"
+gh secret set CLOUDFLARE_ZONE_ID --body "<YOUR_ZONE_ID>"
+
+# PowerShell scripts (current session only)
+$env:CLOUDFLARE_API_TOKEN = '<YOUR_TOKEN>'
+$env:CLOUDFLARE_ZONE_ID = '<YOUR_ZONE_ID>'
+```
+
+Verify token: `curl -s "https://api.cloudflare.com/client/v4/user/tokens/verify" -H "Authorization: Bearer $env:CLOUDFLARE_API_TOKEN"`
+
 ## Cloudflare origin certificate
 
 Production nginx (`infrastructure/nginx/understandtech.conf`) requires:
