@@ -314,6 +314,65 @@
         }
     }
 
+    // CyberKraft companion blocks (siblings of ut-lesson-diagram in lesson HTML).
+    .key-concepts,
+    .highlight-box {
+        margin: $ut-space-lg 0;
+        padding: clamp(1rem, 2vw, 1.35rem);
+        border-radius: $ut-radius-md;
+        background: rgba($ut-navy, 0.55);
+        border: 1px solid var(--ut-lesson-border);
+
+        > h4 {
+            font-family: $ut-font-heading;
+            color: $ut-gold;
+            font-size: 1rem;
+            margin: 0 0 $ut-space-sm;
+        }
+    }
+
+    .key-concepts {
+        border-left: 4px solid $ut-teal;
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+            gap: $ut-space-md;
+        }
+    }
+
+    .highlight-box {
+        border-left: 4px solid $ut-gold;
+    }
+
+    .malware-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+        gap: $ut-space-md;
+    }
+
+    .malware-card {
+        background: rgba($ut-navy, 0.55);
+        border: 1px solid rgba($ut-teal, 0.35);
+        border-top: 3px solid $ut-teal;
+        border-radius: $ut-radius-sm;
+        padding: $ut-space-md;
+
+        h4 {
+            font-family: $ut-font-heading;
+            color: $ut-white;
+            font-size: 1rem;
+            margin: 0 0 $ut-space-sm;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 1.15rem;
+            font-size: 0.9rem;
+            color: var(--ut-lesson-muted);
+        }
+    }
+
     > h4:last-of-type {
         font-family: $ut-font-heading;
         color: $ut-teal-light;

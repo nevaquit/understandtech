@@ -438,6 +438,77 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
     border: 1px solid rgba(201, 162, 39, 0.25);
 }
 
+.ut-lesson-content .ut-lesson-diagram .flow-arrow {
+    align-self: center;
+    color: #C9A227;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+/* CyberKraft companion blocks (siblings of ut-lesson-diagram in lesson HTML) */
+.ut-lesson-content .key-concepts,
+.ut-lesson-content .highlight-box {
+    margin: 1.25rem 0;
+    padding: clamp(1rem, 2vw, 1.35rem);
+    border-radius: 0.75rem;
+    background: rgba(11, 31, 58, 0.55);
+    border: 1px solid rgba(201, 162, 39, 0.22);
+}
+
+.ut-lesson-content .key-concepts {
+    border-left: 4px solid #1A8A7D;
+}
+
+.ut-lesson-content .highlight-box {
+    border-left: 4px solid #C9A227;
+}
+
+.ut-lesson-content .key-concepts > h4,
+.ut-lesson-content .highlight-box > h4 {
+    font-family: "Rajdhani", "Segoe UI", sans-serif;
+    color: #C9A227;
+    font-size: 1rem;
+    margin: 0 0 0.75rem;
+}
+
+.ut-lesson-content .key-concepts .concept-grid,
+.ut-lesson-content .highlight-box ul,
+.ut-lesson-content .highlight-box ol {
+    margin: 0;
+}
+
+.ut-lesson-content .malware-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1rem;
+}
+
+.ut-lesson-content .malware-card {
+    background: rgba(11, 31, 58, 0.55);
+    border: 1px solid rgba(26, 138, 125, 0.35);
+    border-top: 3px solid #1A8A7D;
+    border-radius: 0.5rem;
+    padding: 1.125rem;
+}
+
+.ut-lesson-content .malware-card h4 {
+    font-family: "Rajdhani", "Segoe UI", sans-serif;
+    color: #fff;
+    font-size: 1rem;
+    margin: 0 0 0.5rem;
+}
+
+.ut-lesson-content .malware-card ul {
+    margin: 0;
+    padding-left: 1.15rem;
+    font-size: 0.9rem;
+    color: var(--ut-lesson-muted);
+}
+
+.ut-lesson-content .malware-card li {
+    margin-bottom: 0.3rem;
+}
+
 .ut-lesson-content .ut-lesson-supplement,
 .ut-lesson-content .ut-lesson-depth {
     margin-top: 2.5rem;

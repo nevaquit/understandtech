@@ -8,6 +8,34 @@
 <h4>Visual Representation: PKI Process Flow</h4>
 <p>The following diagram illustrates the fundamental PKI process for certificate issuance and key management:</p>
 <p>This diagram shows the essential PKI workflow:</p>
+<div class="ut-lesson-diagram">
+<div class="diagram-title">🔑 PKI Certificate Issuance Process Flow</div>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <strong>1. Registration Authority</strong><br>
+                        Receives certificate request<br>
+                        Validates identity evidence
+                    </div>
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+                    <div class="flow-step">
+                        <strong>2. Certificate Authority</strong><br>
+                        Issues digital certificate<br>
+                        Signs with CA private key
+                    </div>
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+                    <div class="flow-step">
+                        <strong>3. Certificate</strong><br>
+                        Binds public key to identity<br>
+                        Published to trust store
+                    </div>
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+                    <div class="flow-step">
+                        <strong>4. Key Generation</strong><br>
+                        Asymmetric key pair created<br>
+                        Private key secured by subject
+                    </div>
+                </div>
+</div>
 <p>1. <strong>Registration Authority (RA)</strong> receives and validates certificate requests from users 2. <strong>Certificate Authority (CA)</strong> issues digital certificates after verification 3. <strong>Certificate</strong> contains the user's public key and identity information 4. <strong>Key Generation</strong> creates the cryptographic key pairs for users</p>
 <p>The PKI process ensures:</p>
 <ul>
@@ -70,6 +98,41 @@
 <h4>Visual Representation: Symmetric vs Asymmetric Encryption</h4>
 <p>The following diagram illustrates the fundamental differences between symmetric and asymmetric cryptographic algorithms:</p>
 <p>This comparison highlights the key operational differences:</p>
+<div class="ut-lesson-diagram">
+<div class="diagram-title">⚖️ Symmetric vs Asymmetric Encryption</div>
+                <div class="concept-grid">
+                    <div class="concept-item">
+                        <h4>🔐 Symmetric Encryption</h4>
+                        <p><strong>Single shared secret key:</strong></p>
+                        <ul>
+                            <li>Same key encrypts and decrypts</li>
+                            <li>Requires secure key distribution</li>
+                            <li>Faster for bulk data at rest</li>
+                            <li>Examples: AES-256, ChaCha20</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>🔓 Asymmetric Encryption</h4>
+                        <p><strong>Mathematically related key pair:</strong></p>
+                        <ul>
+                            <li>Public key encrypts; private key decrypts</li>
+                            <li>Enables secure key exchange in transit</li>
+                            <li>Slower; used for signatures and key wrap</li>
+                            <li>Examples: RSA, ECC, Diffie-Hellman</li>
+                        </ul>
+                    </div>
+                    <div class="concept-item">
+                        <h4>🔗 Hybrid Cryptography</h4>
+                        <p><strong>Production systems combine both:</strong></p>
+                        <ul>
+                            <li>Asymmetric exchange establishes session key</li>
+                            <li>Symmetric cipher protects payload data</li>
+                            <li>TLS/SSL and S/MIME use this pattern</li>
+                            <li>Balances security with performance</li>
+                        </ul>
+                    </div>
+                </div>
+</div>
 <p><strong>Symmetric Encryption:</strong></p>
 <ul>
 <li>Uses a single shared key for both encryption and decryption</li>

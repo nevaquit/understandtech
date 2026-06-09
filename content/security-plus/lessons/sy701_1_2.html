@@ -397,7 +397,53 @@
 <p>Zero trust Implicit Trust Zones part of traditional security approach in which firewalls and other security devices formed a perimeter. Systems belonging to the org were placed inside this boundary. Subject/System A subject is a user who wishes to access a resource. A system is a non-human entity, often the device used by the user, to access the resource. Policy Enforcement Point when a user or system requests access to a resource, the PEP evaluates it against predefined policies and applies the necessary controls. DATA PLANE EXAMPLE: MSFT Entra ID (Azure Active Directory)</p>
 <p>conditional access</p>
 <p>signal &gt; decision &gt; enforcement enforcing “conditions of access”</p>
-<p>Data Access Policy Zero Trust CDM System Industry Compliance Threat Intelligence Activity Logs PKI Identity Management SIEM System Policy Enforcement Point Policy Engine Policy Administrator Policy Decision Point Control Plane Data Plane Subject and System Enterprise Resource Untrusted Trusted Supporting Components Supporting Components (logical diagram) Where security controls are applied Where policy decisions are made</p>
+<div class="ut-lesson-diagram">
+<div class="diagram-title">🛡️ Zero Trust Architecture (NIST SP 800-207)</div>
+                <div class="concept-grid">
+                    <div class="concept-item">
+                        <strong>Control Plane</strong><br>
+                        <em>Where policy decisions are made:</em><br>
+                        • Policy Engine (PE) — access decisions<br>
+                        • Policy Administrator (PA) — communicates decisions<br>
+                        • Policy Decision Point (PDP) = PE + PA<br>
+                        • Signals: identity, device, risk, compliance
+                    </div>
+                    <div class="concept-item">
+                        <strong>Data Plane</strong><br>
+                        <em>Where security controls are applied:</em><br>
+                        • Policy Enforcement Point (PEP)<br>
+                        • Subject / System requesting access<br>
+                        • Enterprise resource (protected asset)<br>
+                        • No implicit trust zones
+                    </div>
+                    <div class="concept-item">
+                        <strong>Supporting Components</strong><br>
+                        <em>Continuous verification inputs:</em><br>
+                        • Identity management &amp; PKI<br>
+                        • SIEM, threat intelligence, activity logs<br>
+                        • CDM, data access policy, compliance
+                    </div>
+                </div>
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <strong>Signal</strong><br>
+                        Context gathered<br>
+                        (who, what, when, where, why)
+                    </div>
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+                    <div class="flow-step">
+                        <strong>Decision</strong><br>
+                        PDP evaluates policy<br>
+                        Allow / deny / step-up
+                    </div>
+                    <div class="flow-arrow" aria-hidden="true">→</div>
+                    <div class="flow-step">
+                        <strong>Enforcement</strong><br>
+                        PEP applies controls<br>
+                        (MFA, segmentation, etc.)
+                    </div>
+                </div>
+</div>
 <p>A quick tour of Conditional Access EXAMPLE FOR CONTEXT – The</p>
 <p>physical security There is no security without physical security Without control over the physical environment, no amount of administrative or technical/logical access controls can provide adequate security. If a malicious person can gain physical access to your facility or equipment, they can do just about anything they want, from destruction to disclosure and alteration.</p>
 <p>bollard A short, sturdy vertical post, usually made of concrete, steel, or other heavy-duty materials. They can be fixed in place or retractable. Act as physical barriers, preventing vehicles from forcibly entering a restricted area. Delineate pedestrian areas, parking lots, and sensitive zones to minimize accidental damage bollard Primarily used to control traffic flow and protect buildings or areas from vehicle-based attacks.</p>
