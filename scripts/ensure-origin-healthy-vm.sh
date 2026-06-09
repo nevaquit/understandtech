@@ -16,14 +16,5 @@ systemctl reload nginx
 sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
 sudo -u www-data php /var/www/moodle/admin/cli/maintenance.php --disable || true
 
-bash "${REPO}/scripts/origin-web-health-vm.sh" || {
-  echo "=== web health failed; running CLI dashboard probe ==="
-  sudo -u www-data php -r "
-    define('CLI_SCRIPT', true);
-    require '/var/www/moodle/config.php';
-    global \$DB;
-    \$DB->get_record('user', ['username' => 'e2etest'], 'id', MUST_EXIST);
-    echo \"cli_dashboard_probe_ok\n\";
-  "
-}
+bash "${REPO}/scripts/origin-web-health-vm.sh"
 echo 'ensure_origin_healthy_complete=1'
