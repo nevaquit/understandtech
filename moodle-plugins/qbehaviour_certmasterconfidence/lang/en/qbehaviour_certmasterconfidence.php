@@ -4,7 +4,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'CertMaster confidence';
-$string['howconfident'] = 'How confident are you in your answer? {$a->help}{$a->choices}';
+$string['howconfident'] = 'How confident are you in your answer? {$a->help}';
 $string['confidencehelp'] = 'Your confidence rating helps CertMaster track mastery and dangerous misconceptions. It does not change your quiz score.';
 $string['confidence_recorded'] = 'Confidence: {$a}';
 $string['confidence_guessing'] = 'Guessing';

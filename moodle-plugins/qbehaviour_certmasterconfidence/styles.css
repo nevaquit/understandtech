@@ -1,21 +1,28 @@
 .ut-confidence-rating {
     margin-top: 1rem;
     padding: clamp(0.75rem, 0.5rem + 0.8vw, 1.25rem);
-    border: 1px solid rgba(11, 31, 58, 0.12);
+    border: 1px solid rgba(201, 162, 39, 0.22);
     border-radius: 0.5rem;
-    background: rgba(26, 138, 125, 0.06);
+    background: rgba(26, 138, 125, 0.1);
 }
 
 .ut-confidence-prompt {
     margin: 0 0 0.75rem;
     font-weight: 600;
-    color: #0B1F3A;
+    color: inherit;
+    line-height: 1.5;
 }
 
 .ut-confidence-options {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.5rem;
+}
+
+@media (min-width: 36rem) {
+    .ut-confidence-options {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 
 .ut-confidence-option {
@@ -27,12 +34,25 @@
     border-radius: 0.375rem;
     border: 1px solid transparent;
     cursor: pointer;
+    min-width: 0;
     transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .ut-confidence-option:hover {
     border-color: rgba(201, 162, 39, 0.45);
     background: rgba(201, 162, 39, 0.08);
+}
+
+.ut-confidence-option input[type="radio"] {
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.ut-confidence-label {
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .ut-confidence-option input:checked + .ut-confidence-label {
@@ -42,5 +62,5 @@
 
 .ut-confidence-feedback {
     margin-top: 0.5rem;
-    color: #0B1F3A;
+    color: inherit;
 }

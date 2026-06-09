@@ -303,13 +303,48 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
     margin: 0 0 0.5rem;
 }
 
-.ut-lesson-content .ut-lesson-body > ul {
+.ut-lesson-content .ut-lesson-body > ul,
+.ut-lesson-content .ut-lesson-body > ol {
     margin: 0 0 1rem;
-    padding-left: 1.35rem;
+    padding-left: 1.5rem;
 }
 
-.ut-lesson-content .ut-lesson-body > ul li {
+.ut-lesson-content .ut-lesson-body > ul {
+    list-style-type: disc;
+}
+
+.ut-lesson-content .ut-lesson-body > ol {
+    list-style-type: decimal;
+}
+
+.ut-lesson-content .ut-lesson-body > ul li,
+.ut-lesson-content .ut-lesson-body > ol li {
     margin-bottom: 0.35rem;
+    padding-left: 0.15rem;
+}
+
+.ut-lesson-content .ut-lesson-body > ul li::marker,
+.ut-lesson-content .ut-lesson-body > ol li::marker {
+    color: #C9A227;
+}
+
+.ut-lesson-content .ut-lesson-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.ut-lesson-content .ut-lesson-body th,
+.ut-lesson-content .ut-lesson-body td {
+    border: 1px solid rgba(201, 162, 39, 0.22);
+    padding: 0.625rem 0.875rem;
+    vertical-align: top;
+}
+
+.ut-lesson-content .ut-lesson-body th {
+    font-family: "Rajdhani", "Segoe UI", sans-serif;
+    color: #C9A227;
+    background: rgba(11, 31, 58, 0.55);
 }
 
 .ut-lesson-content .ut-lesson-diagram {

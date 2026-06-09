@@ -72,12 +72,48 @@
     background: rgba(15, 36, 71, 0.75);
 }
 
+/* Quiz attempt: no nested card shell — avoids large empty navy panel above questions. */
+.path-mod-quiz #region-main,
+.path-mod-quiz-attempt #region-main {
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+.path-mod-quiz #region-main-box,
+.path-mod-quiz #page-content,
+.path-mod-quiz-attempt #region-main-box,
+.path-mod-quiz-attempt #page-content {
+    min-height: 0;
+    height: auto;
+}
+
+body.path-mod-quiz #page.drawers .main-inner,
+body.path-mod-quiz-attempt #page.drawers .main-inner {
+    min-height: 0;
+    align-items: flex-start;
+}
+
 .path-mod-quiz .activity-header,
-.path-mod-quiz #region-main .card {
-    background: rgba(15, 36, 71, 0.65);
-    border: 1px solid rgba(201, 162, 39, 0.15);
-    border-radius: 1rem;
-    padding: clamp(1.25rem, 3vw, 2rem);
+.path-mod-quiz-attempt .activity-header {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.path-mod-quiz #region-main > .card,
+.path-mod-quiz-attempt #region-main > .card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+}
+
+.path-mod-quiz #region-main > .card > .card-body,
+.path-mod-quiz-attempt #region-main > .card > .card-body {
+    padding: 0;
+    background: transparent;
 }
 
 .path-mod-quiz .btn-primary,

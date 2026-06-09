@@ -1098,3 +1098,281 @@ body.ut-theme .ut-footer-social-link:hover,
 body.ut-theme .ut-footer-social-link:focus {
     color: var(--ut-gold);
 }
+
+/* ── Typographic hierarchy (DOCX-equivalent: H1–H4, body, captions) ─────── */
+body.ut-theme #region-main h1,
+body.ut-theme #region-main .h1 {
+    font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+    color: #fff;
+}
+
+body.ut-theme #region-main h2,
+body.ut-theme #region-main .h2 {
+    font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 1.5rem 0 0.75rem;
+    color: #fff;
+}
+
+body.ut-theme #region-main h3,
+body.ut-theme #region-main .h3 {
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 1.25rem 0 0.5rem;
+    color: var(--ut-gold);
+}
+
+body.ut-theme #region-main h4,
+body.ut-theme #region-main .h4 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 1rem 0 0.5rem;
+    color: var(--ut-teal-light);
+}
+
+body.ut-theme #region-main p {
+    margin: 0 0 1rem;
+}
+
+body.ut-theme #region-main small,
+body.ut-theme #region-main .caption,
+body.ut-theme #region-main figcaption {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--ut-text-muted);
+}
+
+/* ── Lists (proper bullets/numbering, no broken unicode) ─────────────────── */
+body.ut-theme #region-main ul,
+body.ut-theme #region-main ol {
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+}
+
+body.ut-theme #region-main ul {
+    list-style-type: disc;
+}
+
+body.ut-theme #region-main ol {
+    list-style-type: decimal;
+}
+
+body.ut-theme #region-main ul ul {
+    list-style-type: circle;
+    margin-bottom: 0.35rem;
+}
+
+body.ut-theme #region-main li {
+    margin-bottom: 0.35rem;
+    padding-left: 0.15rem;
+}
+
+body.ut-theme #region-main li::marker {
+    color: var(--ut-gold);
+}
+
+/* ── Tables (borders, padding, contrast — dual-width equivalent) ─────────── */
+body.ut-theme .table td,
+body.ut-theme .table th,
+body.ut-theme .generaltable td,
+body.ut-theme .generaltable th {
+    padding: 0.625rem 0.875rem;
+    vertical-align: top;
+}
+
+body.ut-theme .table tbody tr:hover,
+body.ut-theme .generaltable tbody tr:hover {
+    background: rgba(201, 162, 39, 0.05);
+}
+
+body.ut-theme .table caption,
+body.ut-theme .generaltable caption {
+    caption-side: top;
+    padding: 0 0 0.5rem;
+    color: var(--ut-text-muted);
+    font-size: 0.8125rem;
+    text-align: left;
+}
+
+/* ── Form controls (radio/checkbox alignment, label spacing) ─────────────── */
+body.ut-theme .form-check,
+body.ut-theme .fcheckbox,
+body.ut-theme .fradio {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    min-height: 1.5rem;
+}
+
+body.ut-theme .form-check-input,
+body.ut-theme input[type="radio"],
+body.ut-theme input[type="checkbox"] {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    accent-color: var(--ut-teal);
+}
+
+body.ut-theme .form-check-label {
+    line-height: 1.45;
+    color: var(--ut-text);
+}
+
+/* ── Quiz attempt — kill h-100 viewport stretch (empty navy gap) ─────────── */
+body.ut-theme.path-mod-quiz #region-main,
+body.ut-theme.path-mod-quiz-attempt #region-main,
+body.ut-theme.path-mod-quiz-summary #region-main {
+    max-width: none;
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+body.ut-theme.path-mod-quiz #region-main-box,
+body.ut-theme.path-mod-quiz #page-content,
+body.ut-theme.path-mod-quiz-attempt #region-main-box,
+body.ut-theme.path-mod-quiz-attempt #page-content {
+    min-height: 0;
+    height: auto;
+}
+
+body.ut-theme.path-mod-quiz #page.drawers .main-inner,
+body.ut-theme.path-mod-quiz-attempt #page.drawers .main-inner,
+body.ut-theme.path-mod-quiz-summary #page.drawers .main-inner {
+    min-height: 0;
+    align-items: flex-start;
+}
+
+body.ut-theme.path-mod-quiz .activity-header,
+body.ut-theme.path-mod-quiz-attempt .activity-header {
+    margin: 0 0 1rem;
+    padding: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.ut-theme.path-mod-quiz-attempt .activity-header .activityicon {
+    display: none;
+}
+
+body.ut-theme.path-mod-quiz #region-main > .card,
+body.ut-theme.path-mod-quiz-attempt #region-main > .card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+}
+
+body.ut-theme.path-mod-quiz #region-main > .card > .card-body,
+body.ut-theme.path-mod-quiz-attempt #region-main > .card > .card-body {
+    padding: 0;
+    background: transparent;
+}
+
+/* CertMaster confidence — layout after duplicate-render fix */
+body.ut-theme .ut-confidence-rating {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+}
+
+body.ut-theme .ut-confidence-prompt {
+    margin-bottom: 0.875rem;
+    font-family: var(--ut-font-heading);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+body.ut-theme .ut-confidence-prompt .ut-confidence-options {
+    display: none;
+}
+
+body.ut-theme .ut-confidence-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+@media (min-width: 36rem) {
+    body.ut-theme .ut-confidence-options {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+body.ut-theme .ut-confidence-option {
+    min-width: 0;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid transparent;
+    border-radius: var(--ut-radius-sm);
+}
+
+body.ut-theme .ut-confidence-option:has(input:checked) {
+    background: rgba(26, 138, 125, 0.15) !important;
+    border-color: var(--ut-teal) !important;
+}
+
+body.ut-theme .ut-confidence-label {
+    font-family: var(--ut-font-body);
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Dashboard / my courses cards ────────────────────────────────────────── */
+body.ut-theme .dashboard-card .card-body,
+body.ut-theme .course-summaryitem .card-body {
+    padding: 1.25rem;
+}
+
+body.ut-theme .dashboard-card .coursename,
+body.ut-theme .course-summaryitem .coursename {
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+}
+
+body.ut-theme .dashboard-card .text-muted,
+body.ut-theme .course-summaryitem .text-muted {
+    font-size: 0.8125rem;
+}
+
+/* ── Forum / assign / grades panels ───────────────────────────────────────── */
+body.ut-theme.path-mod-forum .discussion-list .discussion {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: rgba(15, 36, 71, 0.55);
+    border: 1px solid var(--ut-border);
+    border-radius: var(--ut-radius-md);
+}
+
+body.ut-theme.path-mod-assign .gradingtable .generaltable,
+body.ut-theme.path-grade .gradereport-grader-table {
+    border: 1px solid var(--ut-border);
+    border-radius: var(--ut-radius-sm);
+    overflow: hidden;
+}
+
+body.ut-theme.path-mod-assign .submissionstatustable,
+body.ut-theme.path-mod-assign .gradingtable {
+    margin-top: 1rem;
+}
+
+/* ── Empty placeholder shells (no broken containers) ─────────────────────── */
+body.ut-theme .placeholders:empty,
+body.ut-theme .card:empty,
+body.ut-theme .generalbox:empty {
+    display: none !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}

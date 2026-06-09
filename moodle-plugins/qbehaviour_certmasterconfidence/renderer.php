@@ -77,15 +77,15 @@ class qbehaviour_certmasterconfidence_renderer extends qbehaviour_renderer {
         $controlname = $qa->get_behaviour_field_name('confidence');
         $selected = $qa->get_last_behaviour_var('confidence');
 
-        $a = (object) [
+        $help = (object) [
             'help' => $this->output->help_icon('confidencehelp', 'qbehaviour_certmasterconfidence'),
-            'choices' => $this->confidence_choices($controlname, $selected, $options->readonly),
         ];
+        $choices = $this->confidence_choices($controlname, $selected, $options->readonly);
 
         return html_writer::tag(
             'div',
-            html_writer::tag('p', get_string('howconfident', 'qbehaviour_certmasterconfidence', $a), ['class' => 'ut-confidence-prompt']) .
-            $a->choices,
+            html_writer::tag('p', get_string('howconfident', 'qbehaviour_certmasterconfidence', $help), ['class' => 'ut-confidence-prompt']) .
+            $choices,
             ['class' => 'ut-confidence-rating']
         );
     }
