@@ -41,6 +41,9 @@ set_primary_active_tab
 set_secondary_active_tab
 set_secondary_navigation
 set_secondarynav
+has_secondary_navigation
+has_tablist_secondary_navigation
+include_region_main_settings_in_header_actions
 set_show_course_index
 set_state
 set_subpage
