@@ -16,6 +16,6 @@ bash "${REPO}/scripts/fix-moodle-dir-permissions-vm.sh"
 
 sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
 # Full restart (never reload) — recycles all PHP-FPM workers after cache/theme changes.
-systemctl restart php8.3-fpm
+bash "${REPO}/scripts/restart-php-fpm-vm.sh"
 
 echo 'post_deploy_stabilize_complete=1'

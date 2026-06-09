@@ -75,7 +75,8 @@ function theme_understandtech_get_pre_scss(theme_config $theme): string {
 function theme_understandtech_page_init(moodle_page $page): void {
     global $CFG;
 
-    // FIRST: patch core/templates before any placeholder hydration runs (fixes Y.NodeList crash).
+    // FIRST on every pagelayout (course, incourse, mydashboard, frontpage, …):
+    // patch core/templates before any placeholder hydration runs (fixes Y.NodeList crash).
     $page->requires->js_amd_inline(
         "require(['theme_understandtech/templates_dom_patch']);",
     );

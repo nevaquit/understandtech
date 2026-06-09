@@ -166,7 +166,8 @@ Adjust `rate=` and `burst=` together; test with `curl` from multiple IPs.
 | `infrastructure/nginx/understandtech-rate-limit.conf` | `/etc/nginx/conf.d/understandtech-rate-limit.conf` |
 | `infrastructure/php-fpm/moodle.conf` | `/etc/php/8.3/fpm/pool.d/moodle.conf` |
 
-Reload: `nginx -t && systemctl reload nginx && systemctl reload php8.3-fpm`
+Reload nginx only: `nginx -t && systemctl reload nginx`
+PHP-FPM: **always** `systemctl restart php8.3-fpm` (never reload — stale workers cause DB errors)
 
 ---
 
@@ -259,7 +260,7 @@ sudo /opt/actions-runner/svc.sh start
 
 Deploy `infrastructure/runner/gha-runner-sudoers` → `/etc/sudoers.d/gha-runner` (mode 0440).
 
-Allowed: Moodle CLI (`maintenance.php`, `upgrade.php`, `purge_caches.php`), targeted `chown` for plugin dirs, `systemctl reload` for nginx/php-fpm/pgbouncer.
+Allowed: Moodle CLI (`maintenance.php`, `upgrade.php`, `purge_caches.php`), targeted `chown` for plugin dirs, `systemctl reload nginx`, `systemctl restart php8.3-fpm` (never reload php-fpm), `systemctl reload pgbouncer`.
 
 **Every workflow sudo command must match the allowlist exactly** — no broad `NOPASSWD: ALL`.
 

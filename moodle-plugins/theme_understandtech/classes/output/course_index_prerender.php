@@ -99,4 +99,33 @@ class course_index_prerender {
 
         return $sectionshtml;
     }
+
+    /**
+     * Replace skeleton placeholders in drawer HTML with server-rendered sections.
+     *
+     * @param string $drawerhtml HTML from core_course_drawer().
+     * @param string $prerender Sections HTML from render_html().
+     * @return string Updated drawer HTML.
+     */
+    public static function embed_in_drawer(string $drawerhtml, string $prerender): string {
+        if ($prerender === '' || $drawerhtml === '') {
+            return $drawerhtml;
+        }
+
+        if (strpos($drawerhtml, 'courseindex-section') !== false) {
+            return $drawerhtml;
+        }
+
+        $placeholderpattern = '/<div[^>]*id="course-index-placeholder"[^>]*>.*?<\/div>\s*/s';
+        if (preg_match($placeholderpattern, $drawerhtml)) {
+            return (string) preg_replace($placeholderpattern, $prerender, $drawerhtml, 1);
+        }
+
+        $contentpattern = '/(<div[^>]*id="courseindex-content"[^>]*>)/';
+        if (preg_match($contentpattern, $drawerhtml)) {
+            return (string) preg_replace($contentpattern, '$1' . $prerender, $drawerhtml, 1);
+        }
+
+        return $drawerhtml . $prerender;
+    }
 }

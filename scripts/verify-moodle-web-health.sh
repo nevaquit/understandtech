@@ -75,8 +75,21 @@ run_checks() {
   fi
 
   # Server prerender or hydrated index must appear in page output (not skeleton-only).
-  if ! grep -qE 'courseindex-section|courseindexhtml' "$COURSE"; then
-    echo "course_index_content_missing"
+  sectioncount=$(grep -o 'courseindex-section' "$COURSE" | wc -l | tr -d ' ')
+  if [ "${sectioncount:-0}" -lt 1 ]; then
+    echo "course_index_sections_count_low count=${sectioncount:-0}"
+    return 1
+  fi
+  echo "course_index_sections=${sectioncount}"
+
+  if grep -q 'course-index-placeholder' "$COURSE" && ! grep -q 'courseindex-section' "$COURSE"; then
+    echo "course_index_skeleton_only"
+    return 1
+  fi
+
+  if grep -qE 'id="course-index-placeholder"[^>]*class="[^"]*placeholders' "$COURSE" \
+    && ! grep -q 'courseindex-item' "$COURSE"; then
+    echo "course_index_placeholder_without_items"
     return 1
   fi
 

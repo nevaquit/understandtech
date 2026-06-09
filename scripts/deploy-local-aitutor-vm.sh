@@ -20,7 +20,7 @@ cd "$REPO" && sudo git pull --ff-only origin main || true
 
 sudo -u www-data /usr/bin/php "${MOODLE}/admin/cli/upgrade.php" --non-interactive
 sudo -u www-data /usr/bin/php "${MOODLE}/admin/cli/purge_caches.php"
-# Full restart (never reload) — reload leaves stale workers that cause site-wide DB errors.
-sudo systemctl restart php8.3-fpm
 
-echo "upgrade + purge complete"
+bash "${REPO}/scripts/post-deploy-stabilize-vm.sh"
+
+echo "upgrade + stabilize complete"

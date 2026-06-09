@@ -90,4 +90,6 @@ foreach (['local_aitutor','local_aigrading','local_community','local_integration
 echo 'active_theme=' . get_config('core', 'theme') . PHP_EOL;
 "
 
+bash "${REPO}/scripts/post-deploy-stabilize-vm.sh"
+
 echo "=== done ==="

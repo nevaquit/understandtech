@@ -45,3 +45,8 @@ done
 
 sudo chown -R www-data:www-data "$MOODLE/theme" "$MOODLE/local" "$MOODLE/block" "$MOODLE/mod" "$MOODLE/question/behaviour" 2>/dev/null || true
 echo "plugins deployed"
+
+REPO="${PLUGINS_REPO_DIR:-$(cd "${SCRIPT_DIR}/.." && pwd)}"
+if [ -x "${REPO}/scripts/post-deploy-stabilize-vm.sh" ]; then
+  bash "${REPO}/scripts/post-deploy-stabilize-vm.sh"
+fi

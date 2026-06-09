@@ -16,4 +16,4 @@ az vm run-command invoke \
   -o json \
   --query 'value[0].message' -o tsv
 
-echo 'Done. Verify: Moodle login survives sudo systemctl reload php8.3-fpm on VM.'
+echo 'Done. Verify: Moodle login survives sudo systemctl restart php8.3-fpm on VM.'

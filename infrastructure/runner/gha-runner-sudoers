@@ -46,9 +46,12 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/cat /etc/moodle/redis_password
 # Post-deploy smoke test: read PgBouncer dbhost from config.php (640 root:www-data)
 gha-runner ALL=(root) NOPASSWD: /usr/bin/grep dbhost /var/www/moodle/config.php
 
-# Service reload after config changes
+# Service reload/restart after config changes (PHP-FPM: restart ONLY — reload forbidden)
 gha-runner ALL=(root) NOPASSWD: /usr/bin/systemctl reload nginx
-gha-runner ALL=(root) NOPASSWD: /usr/bin/systemctl reload php8.3-fpm
+gha-runner ALL=(root) NOPASSWD: /usr/bin/systemctl restart php8.3-fpm
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/restart-php-fpm-vm.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/post-deploy-stabilize-vm.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/ensure-origin-healthy-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/systemctl reload pgbouncer
 
 # Runner service management (bootstrap only — restrict in production if desired)

@@ -10,4 +10,5 @@ cd /var/www/moodle
 sudo -u www-data php admin/cli/upgrade.php --non-interactive --allow-unstable
 sudo -u www-data php admin/cli/purge_caches.php
 bash "${REPO}/scripts/seed-security-plus-course-vm.sh"
+bash "${REPO}/scripts/post-deploy-stabilize-vm.sh"
 echo 'deploy_lesson_layout_complete=1'
