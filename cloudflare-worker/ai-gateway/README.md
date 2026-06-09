@@ -80,6 +80,8 @@ When set, `src/llm/aig.ts` sends `cf-aig-authorization: Bearer <token>` on upstr
 npm run deploy
 ```
 
+**CI (`deploy-ai-gateway.yml`) auth error on Workers Routes:** If wrangler uploads the script but fails with `Authentication error [code: 10000]` on `/zones/.../workers/routes`, the `CLOUDFLARE_API_TOKEN` secret is missing **Account → Workers Routes: Edit** (see `scripts/README.md` token table). Worker script upload can succeed while route binding fails — add the permission, rotate the token, and re-run the workflow. Moodle deploy is independent of this job.
+
 ### 5. Smoke test
 
 ```bash

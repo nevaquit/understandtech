@@ -29,9 +29,9 @@ Deploy sudo commands must match `infrastructure/runner/gha-runner-sudoers`.
 | `CLOUDFLARE_API_TOKEN` | For Worker deploy + optional automation | See [scripts/README.md](../scripts/README.md#cloudflare-api-token-github--local) |
 | `CLOUDFLARE_ZONE_ID` | For marketing cache purge | Zone `understandtech.app` — Overview → Zone ID |
 | `STAGING_URL` | Recommended | `https://staging.understandtech.app/learn` (Playwright base URL) |
-| `STAGING_TEST_USER_EMAIL` | E2E | Or reuse `MOODLE_E2E_USER` (username `e2etest`) |
-| `STAGING_TEST_USER_PASSWORD` | E2E | Or reuse `MOODLE_E2E_PASS` |
-| `MOODLE_E2E_USER` / `MOODLE_E2E_PASS` | Fallback | Same test user on staging after `setup-e2e-test-user-vm.sh` |
+| `STAGING_TEST_USER_EMAIL` | E2E | Default `e2e-test@understandtech.app` (staging VM user) if unset |
+| `STAGING_TEST_USER_PASSWORD` | E2E | Default matches `setup-e2e-test-user-vm.sh` / post-deploy-stabilize if unset |
+| `MOODLE_E2E_USER` / `MOODLE_E2E_PASS` | Fallback | Override staging E2E defaults when set as secrets |
 | `E2E_COURSE_PATH` | Optional | Default `/course/view.php?id=3` |
 
 ## Prerequisites (user action)

@@ -53,13 +53,9 @@ jobs:
         run: |
           set -euo pipefail
           export STAGING_URL="${STAGING_URL:-https://staging.understandtech.app/learn}"
-          export STAGING_TEST_USER_EMAIL="${STAGING_TEST_USER_EMAIL:-${MOODLE_E2E_USER:-}}"
-          export STAGING_TEST_USER_PASSWORD="${STAGING_TEST_USER_PASSWORD:-${MOODLE_E2E_PASS:-}}"
+          export STAGING_TEST_USER_EMAIL="${STAGING_TEST_USER_EMAIL:-${MOODLE_E2E_USER:-e2e-test@understandtech.app}}"
+          export STAGING_TEST_USER_PASSWORD="${STAGING_TEST_USER_PASSWORD:-${MOODLE_E2E_PASS:-UtE2eTest2026Secure}}"
           export E2E_COURSE_PATH="${E2E_COURSE_PATH:-/course/view.php?id=2}"
-          if [ -z "$STAGING_TEST_USER_EMAIL" ] || [ -z "$STAGING_TEST_USER_PASSWORD" ]; then
-            echo "STAGING_TEST_USER_* or MOODLE_E2E_USER/MOODLE_E2E_PASS not configured — skipping E2E"
-            exit 0
-          fi
           npx playwright test --project=chromium --workers=1
 
       - uses: actions/upload-artifact@v4
