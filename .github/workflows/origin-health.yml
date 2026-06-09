@@ -1,0 +1,69 @@
+# Proactive origin health — recycle PHP-FPM when Moodle web bootstrap fails.
+name: Origin health check
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+env:
+  PLUGINS_REPO_DIR: /opt/understandtech-plugins
+
+jobs:
+  health:
+    runs-on: [self-hosted, linux, production]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync monorepo on VM
+        run: |
+          set -euo pipefail
+          cd "$PLUGINS_REPO_DIR"
+          sudo -u gha-runner git fetch origin main
+          sudo -u gha-runner git reset --hard origin/main
+
+      - name: Web health check
+        id: health
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/origin-web-health-vm.sh"
+
+      - name: Quick chdir fix
+        if: steps.health.outcome == 'failure'
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-chdir-quick-vm.sh"
+
+      - name: Re-check after quick fix
+        id: recheck
+        if: steps.health.outcome == 'failure'
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/origin-web-health-vm.sh"
+
+      - name: Full permission fix
+        if: steps.health.outcome == 'failure' && steps.recheck.outcome == 'failure'
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-dir-permissions-vm.sh"
+
+      - name: Disable maintenance mode
+        if: always()
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
+
+      - name: Health summary
+        if: always()
+        run: |
+          set -euo pipefail
+          {
+            echo "## Origin health"
+            echo "- Initial check: ${{ steps.health.outcome }}"
+            echo "- After quick fix: ${{ steps.recheck.outcome || 'skipped' }}"
+            echo "- Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"
