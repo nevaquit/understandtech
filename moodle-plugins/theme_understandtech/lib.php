@@ -98,6 +98,10 @@ function theme_understandtech_page_init(moodle_page $page): void {
         }
     }
 
+    if ($page->course && (int) $page->course->id !== SITEID) {
+        $page->add_body_attributes(['data-course-id' => (string) (int) $page->course->id]);
+    }
+
     // Marketing/login UX only — never on incourse pages. js_call_amd registers a pending
     // operation before core/first boots; a missing amd/build file blocks the whole AMD
     // pipeline and prevents the course-index placeholder from hydrating.
@@ -114,8 +118,9 @@ function theme_understandtech_page_init(moodle_page $page): void {
         && $page->course
         && (int) $page->course->id !== SITEID
     ) {
+        $courseid = (int) $page->course->id;
         $page->requires->js_amd_inline(
-            "require(['theme_understandtech/courseindex_fallback'], function(m) { m.init(); });",
+            "require(['theme_understandtech/courseindex_fallback'], function(m) { m.init({$courseid}); });",
         );
     }
 
