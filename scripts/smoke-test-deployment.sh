@@ -14,11 +14,25 @@
 set -uo pipefail
 
 PROD_URL="${PROD_URL:-${STAGING_URL:-https://understandtech.app}}"
+# STAGING_URL is often the Playwright base URL (.../learn); strip path so MOODLE_WWW is not doubled.
+PROD_URL="${PROD_URL%/learn}"
 PROD_URL="${PROD_URL%/}"
 AI_WORKER_URL="${AI_WORKER_URL:-https://ai.understandtech.app}"
 MOODLE_DIR="${MOODLE_DIR:-/var/www/moodle}"
 ORIGIN_HOST="${ORIGIN_HOST:-understandtech.app}"
 MOODLE_WWW="${MOODLE_WWWROOT_PATH:-/learn}"
+
+# On deploy runner, prefer Moodle wwwroot from config.php (matches verify-moodle-web-health.sh).
+if [[ "${ON_VM:-0}" == "1" && -f "${MOODLE_DIR}/config.php" && -x /usr/bin/php ]]; then
+  _wwwroot="$(/usr/bin/php -r 'define("CLI_SCRIPT", true); require "'"${MOODLE_DIR}"'/config.php"; echo rtrim($CFG->wwwroot, "/");' 2>/dev/null || true)"
+  if [[ -n "$_wwwroot" ]]; then
+    PROD_URL="${_wwwroot%$MOODLE_WWW}"
+    PROD_URL="${PROD_URL%/}"
+    if [[ "$_wwwroot" == *staging* ]]; then
+      ORIGIN_HOST="staging.understandtech.app"
+    fi
+  fi
+fi
 
 PASS=0
 WARN=0
