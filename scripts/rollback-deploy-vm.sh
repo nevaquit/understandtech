@@ -48,7 +48,7 @@ for srcname in $(find "${PLUGINS_REPO_DIR}/moodle-plugins" -mindepth 1 -maxdepth
 done
 
 sudo php "${MOODLE_DIR}/admin/cli/purge_caches.php"
-sudo systemctl reload php8.3-fpm
+sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-chdir-quick-vm.sh"
 sudo php "${MOODLE_DIR}/admin/cli/maintenance.php" --disable || true
 
 echo "rollback_deploy_complete sha=${ROLLBACK_SHA}"
