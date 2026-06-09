@@ -27,7 +27,7 @@ loadDotEnv();
 const baseURL =
   process.env.STAGING_URL?.replace(/\/$/, '') ??
   process.env.BASE_URL?.replace(/\/$/, '') ??
-  'https://understandtech.app';
+  'https://staging.understandtech.app/learn';
 
 const authFile = path.join(__dirname, '.auth', 'student.json');
 

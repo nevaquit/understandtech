@@ -6,6 +6,8 @@ param privateDnsZoneName string
 
 var storageAccountName = toLower('utst${uniqueString(resourceGroup().id)}')
 var keyVaultName = toLower('utkv${uniqueString(resourceGroup().id)}')
+var postgresSkuName = environment == 'staging' ? 'Standard_B1ms' : 'Standard_B2s'
+var moodleDataQuotaGb = environment == 'staging' ? 50 : 100
 
 @secure()
 param postgresAdminPassword string = newGuid()
@@ -15,7 +17,7 @@ resource postgres 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
   location: location
   tags: tags
   sku: {
-    name: 'Standard_B2s'
+    name: postgresSkuName
     tier: 'Burstable'
   }
   properties: {
@@ -101,7 +103,7 @@ resource fileShare 'Microsoft.Storage/storageAccounts/fileServices/shares@2023-0
   parent: fileServices
   name: 'moodledata'
   properties: {
-    shareQuota: 100
+    shareQuota: moodleDataQuotaGb
     enabledProtocols: 'SMB'
   }
 }

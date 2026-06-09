@@ -1,5 +1,5 @@
-# Production plugin deployment — Phase 5.1 (docs/playbook.md)
-# Validate on GitHub-hosted runners; deploy on self-hosted production VM.
+# Staging-first plugin deployment — Phase 5.1 / 6 (docs/playbook.md)
+# validate → deploy staging → Playwright E2E → deploy production
 
 name: Deploy Moodle Plugins
 
@@ -15,9 +15,13 @@ on:
         type: choice
         options: ['false', 'true']
         default: 'false'
+      skip_staging_gate:
+        description: Emergency promote to prod without staging E2E (manual dispatch only)
+        type: boolean
+        default: false
 
 concurrency:
-  group: production-deploy
+  group: moodle-deploy-${{ github.ref }}
   cancel-in-progress: true
 
 env:
@@ -158,12 +162,83 @@ jobs:
           echo "has_plugin_changes=true" >> "$GITHUB_OUTPUT"
           echo "Changed plugins: ${joined}"
 
-  deploy:
-    name: Deploy
+  deploy-staging:
+    name: Deploy staging
     needs: validate
     if: |
       github.event_name != 'pull_request' &&
       (github.event_name == 'workflow_dispatch' || needs.validate.outputs.has_plugin_changes == 'true')
+    uses: ./.github/workflows/deploy-staging.yml
+    with:
+      changed_plugins: ${{ needs.validate.outputs.changed_plugins }}
+      skip_upgrade: ${{ inputs.skip_upgrade || 'false' }}
+      github_sha: ${{ github.sha }}
+    secrets: inherit
+
+  staging-e2e:
+    name: Staging E2E
+    needs: [validate, deploy-staging]
+    if: |
+      github.event_name != 'pull_request' &&
+      (github.event_name == 'workflow_dispatch' || needs.validate.outputs.has_plugin_changes == 'true')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: tests/e2e/package-lock.json
+
+      - name: Install Playwright
+        working-directory: tests/e2e
+        run: |
+          set -euo pipefail
+          npm ci
+          npx playwright install chromium --with-deps
+
+      - name: Run Playwright (staging)
+        working-directory: tests/e2e
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+          STAGING_TEST_USER_EMAIL: ${{ secrets.STAGING_TEST_USER_EMAIL }}
+          STAGING_TEST_USER_PASSWORD: ${{ secrets.STAGING_TEST_USER_PASSWORD }}
+          MOODLE_E2E_USER: ${{ secrets.MOODLE_E2E_USER }}
+          MOODLE_E2E_PASS: ${{ secrets.MOODLE_E2E_PASS }}
+          E2E_COURSE_PATH: ${{ secrets.E2E_COURSE_PATH }}
+          CI: 'true'
+        run: |
+          set -euo pipefail
+          export STAGING_URL="${STAGING_URL:-https://staging.understandtech.app/learn}"
+          export STAGING_TEST_USER_EMAIL="${STAGING_TEST_USER_EMAIL:-${MOODLE_E2E_USER:-}}"
+          export STAGING_TEST_USER_PASSWORD="${STAGING_TEST_USER_PASSWORD:-${MOODLE_E2E_PASS:-}}"
+          export E2E_COURSE_PATH="${E2E_COURSE_PATH:-/course/view.php?id=3}"
+          if [ -z "$STAGING_TEST_USER_EMAIL" ] || [ -z "$STAGING_TEST_USER_PASSWORD" ]; then
+            echo "E2E credentials missing — set STAGING_TEST_USER_* or MOODLE_E2E_USER/MOODLE_E2E_PASS" >&2
+            exit 1
+          fi
+          npx playwright test --project=chromium --workers=1
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-staging-report
+          path: tests/e2e/playwright-report/
+          retention-days: 7
+
+  deploy:
+    name: Deploy production
+    needs: [validate, deploy-staging, staging-e2e]
+    if: |
+      github.event_name != 'pull_request' &&
+      (github.event_name == 'workflow_dispatch' || needs.validate.outputs.has_plugin_changes == 'true') &&
+      (needs.staging-e2e.result == 'success' ||
+        (github.event_name == 'workflow_dispatch' && inputs.skip_staging_gate == true))
     runs-on: [self-hosted, linux, production]
     timeout-minutes: 15
     steps:
@@ -394,7 +469,7 @@ jobs:
 
   notify:
     name: Notify
-    needs: [validate, deploy]
+    needs: [validate, deploy-staging, staging-e2e, deploy]
     if: always() && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
@@ -404,9 +479,12 @@ jobs:
         run: |
           set -euo pipefail
           echo "Validate: ${{ needs.validate.result }}"
-          echo "Deploy: ${{ needs.validate.outputs.has_plugin_changes == 'true' && needs.deploy.result || 'skipped' }}"
+          echo "Staging: ${{ needs.deploy-staging.result }}"
+          echo "E2E: ${{ needs.staging-e2e.result }}"
+          echo "Production: ${{ needs.validate.outputs.has_plugin_changes == 'true' && needs.deploy.result || 'skipped' }}"
           if [ -n "${NOTIFY_WEBHOOK_URL:-}" ]; then
-            payload=$(printf '{"text":"Deploy %s — %s (%s)"}' \
-              "${{ needs.deploy.result }}" "${{ github.sha }}" "${{ github.repository }}")
+            payload=$(printf '{"text":"Deploy prod %s — staging %s / e2e %s — %s (%s)"}' \
+              "${{ needs.deploy.result }}" "${{ needs.deploy-staging.result }}" \
+              "${{ needs.staging-e2e.result }}" "${{ github.sha }}" "${{ github.repository }}")
             curl -sS -X POST -H 'Content-Type: application/json' -d "$payload" "$NOTIFY_WEBHOOK_URL" || true
           fi

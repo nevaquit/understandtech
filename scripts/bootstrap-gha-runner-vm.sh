@@ -5,6 +5,8 @@ set -euo pipefail
 
 REGISTRATION_TOKEN="${REGISTRATION_TOKEN:-${1:-}}"
 REPO_URL="${REPO_URL:-https://github.com/nevaquit/understandtech.git}"
+RUNNER_NAME="${RUNNER_NAME:-understandtech-web-prod}"
+RUNNER_LABELS="${RUNNER_LABELS:-self-hosted,linux,production}"
 
 log() { echo "[bootstrap-gha-runner] $*"; }
 
@@ -29,12 +31,12 @@ if [ ! -f /opt/actions-runner/.runner ]; then
   if [ -z "$REGISTRATION_TOKEN" ]; then
     log "SKIP registration — set REGISTRATION_TOKEN or pass token as arg 1"
   else
-    log "Registering runner understandtech-web-prod"
+    log "Registering runner ${RUNNER_NAME} (labels: ${RUNNER_LABELS})"
     sudo -u gha-runner /opt/actions-runner/config.sh --unattended \
       --url https://github.com/nevaquit/understandtech \
       --token "$REGISTRATION_TOKEN" \
-      --labels self-hosted,linux,production \
-      --name understandtech-web-prod
+      --labels "${RUNNER_LABELS}" \
+      --name "${RUNNER_NAME}"
     sudo bash -c 'cd /opt/actions-runner && ./svc.sh install gha-runner'
     sudo bash -c 'cd /opt/actions-runner && ./svc.sh start'
     log "Runner service started"

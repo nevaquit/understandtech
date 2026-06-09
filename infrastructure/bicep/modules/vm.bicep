@@ -14,7 +14,11 @@ param vmSize string = 'Standard_D2s_v3'
 @description('Availability zone for the web VM (empty string = regional).')
 param vmZone string = ''
 
+@description('OS disk size in GB.')
+param osDiskSizeGB int = 64
+
 var vmName = 'understandtech-web-${environment}'
+var effectiveOsDiskSizeGB = environment == 'staging' ? min(osDiskSizeGB, 32) : osDiskSizeGB
 var vmZones array = empty(vmZone) ? [] : [ vmZone ]
 
 resource publicIp 'Microsoft.Network/publicIPAddresses@2024-01-01' = {
@@ -93,7 +97,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2024-03-01' = {
       }
       osDisk: {
         createOption: 'FromImage'
-        diskSizeGB: 64
+        diskSizeGB: effectiveOsDiskSizeGB
         managedDisk: {
           storageAccountType: 'Premium_LRS'
         }

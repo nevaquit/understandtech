@@ -1,0 +1,263 @@
+# Staging Moodle plugin deploy — called from deploy.yml before production promote.
+name: Deploy Moodle Plugins (staging)
+
+on:
+  workflow_call:
+    inputs:
+      changed_plugins:
+        required: true
+        type: string
+      skip_upgrade:
+        required: false
+        type: string
+        default: 'false'
+      github_sha:
+        required: true
+        type: string
+    secrets:
+      STAGING_URL:
+        required: false
+
+concurrency:
+  group: staging-deploy
+  cancel-in-progress: true
+
+env:
+  MOODLE_DIR: /var/www/moodle
+  MOODLE_DATAROOT: /var/www/moodledata
+  PLUGINS_REPO_DIR: /opt/understandtech-plugins
+  PHP_BIN: /usr/bin/php
+  RSYNC_BIN: /usr/bin/rsync
+  REDIS_HOST: 127.0.0.1
+  REDIS_PORT: 6379
+  STAGING_BASE_URL: https://staging.understandtech.app
+
+jobs:
+  deploy:
+    name: Deploy staging
+    runs-on: [self-hosted, linux, staging]
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Record pre-deploy SHA for rollback
+        run: |
+          set -euo pipefail
+          cd /opt/understandtech-plugins
+          git rev-parse HEAD | sudo tee /tmp/understandtech-pre-deploy-sha >/dev/null
+          echo "pre_deploy_sha=$(cat /tmp/understandtech-pre-deploy-sha)"
+
+      - name: Enable maintenance mode
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --enable
+
+      - name: Sync monorepo on VM
+        env:
+          EXPECTED_SHA: ${{ inputs.github_sha }}
+        run: |
+          set -euo pipefail
+          cd /opt/understandtech-plugins
+          sudo -u gha-runner git fetch origin main
+          sudo -u gha-runner git reset --hard origin/main
+          actual="$(git rev-parse HEAD)"
+          if git merge-base --is-ancestor "${EXPECTED_SHA}" "${actual}" 2>/dev/null || [ "$actual" = "$EXPECTED_SHA" ]; then
+            echo "Monorepo synced: VM is at ${actual} (expected ${EXPECTED_SHA} or newer)"
+          else
+            echo "WARNING: VM is at ${actual}, expected ${EXPECTED_SHA} — proceeding anyway"
+          fi
+
+      - name: Remove undeployed plugin placeholders on VM
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /opt/understandtech-plugins/scripts/remove-placeholder-plugins.sh
+
+      - name: Rsync changed plugins
+        env:
+          CHANGED_PLUGINS: ${{ inputs.changed_plugins }}
+        run: |
+          set -euo pipefail
+
+          plugin_moodle_path() {
+            local name="$1"
+            case "$name" in
+              local_*) echo "local/${name#local_}" ;;
+              mod_*) echo "mod/${name#mod_}" ;;
+              theme_*) echo "theme/${name#theme_}" ;;
+              block_*) echo "blocks/${name#block_}" ;;
+              qbehaviour_*) echo "question/behaviour/${name#qbehaviour_}" ;;
+              *)
+                echo "Unknown plugin prefix: $name" >&2
+                return 1
+                ;;
+            esac
+          }
+
+          chown_plugin() {
+            local relpath="$1"
+            case "$relpath" in
+              local/*|mod/*|theme/*|blocks/*)
+                local type="${relpath%%/*}"
+                local name="${relpath#*/}"
+                sudo /usr/bin/chown -R www-data:www-data "${MOODLE_DIR}/${type}/${name}"
+                ;;
+              question/behaviour/*)
+                local name="${relpath#question/behaviour/}"
+                sudo /usr/bin/chown -R www-data:www-data "${MOODLE_DIR}/question/behaviour/${name}"
+                ;;
+              *)
+                echo "No sudo chown rule for path: $relpath" >&2
+                return 1
+                ;;
+            esac
+          }
+
+          read -r -a plugins <<< "$CHANGED_PLUGINS"
+          for srcname in "${plugins[@]}"; do
+            [ -z "$srcname" ] && continue
+            relpath="$(plugin_moodle_path "$srcname")"
+            src="${PLUGINS_REPO_DIR}/moodle-plugins/${srcname}/"
+            dst="${MOODLE_DIR}/${relpath}/"
+            if [ ! -d "$src" ]; then
+              echo "Skip missing source: $src" >&2
+              continue
+            fi
+            if [ ! -f "${src}version.php" ]; then
+              echo "Skip placeholder (no version.php): $srcname" >&2
+              continue
+            fi
+            sudo /usr/bin/mkdir -p "$dst"
+            sudo "${RSYNC_BIN}" -av --delete \
+              --exclude='.git' --exclude='.github' --exclude='*.md' --exclude='tests/' \
+              "$src" "$dst"
+            chown_plugin "$relpath"
+            echo "Synced $srcname -> $relpath"
+          done
+
+      - name: Apply core patches
+        run: |
+          set -euo pipefail
+          if [ -x "${PLUGINS_REPO_DIR}/core-patches/apply-patches.sh" ]; then
+            bash "${PLUGINS_REPO_DIR}/core-patches/apply-patches.sh"
+          else
+            echo "No core-patches/apply-patches.sh — skipping"
+          fi
+
+      - name: Ensure Redis Moodle sessions
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          bash "${PLUGINS_REPO_DIR}/scripts/migrate-moodle-sessions-to-redis-vm.sh"
+
+      - name: Purge Moodle caches
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php
+
+      - name: Restart PHP-FPM
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/systemctl restart php8.3-fpm
+
+      - name: Run Moodle upgrade
+        if: inputs.skip_upgrade != 'true'
+        run: |
+          set -euo pipefail
+          UPGRADE_LOG="${RUNNER_TEMP}/moodle-upgrade.log"
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/moodle-upgrade-direct-pg.sh" 2>&1 | tee "$UPGRADE_LOG"
+          code=${PIPESTATUS[0]}
+          echo "upgrade exit code: ${code}"
+          if [ "${code}" -ne 0 ]; then
+            echo "=== upgrade log ===" >&2
+            sudo /usr/bin/cat "$UPGRADE_LOG" >&2 || true
+            exit "${code}"
+          fi
+
+      - name: Fix Moodle directory permissions
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-dir-permissions-vm.sh"
+
+      - name: Verify www-data chdir and recycle PHP-FPM
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-chdir-quick-vm.sh"
+
+      - name: Flush Redis application cache
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          redis-cli -h "$REDIS_HOST" -p "$REDIS_PORT" \
+            -a "$(sudo /usr/bin/cat /etc/moodle/redis_password)" \
+            -n 0 FLUSHDB
+
+      - name: Health check
+        run: |
+          set -euo pipefail
+          for svc in nginx php8.3-fpm pgbouncer; do
+            if ! systemctl is-active --quiet "$svc"; then
+              echo "Service not active: $svc" >&2
+              systemctl status "$svc" --no-pager >&2 || true
+              exit 1
+            fi
+            echo "$svc: active"
+          done
+          if [ ! -S /run/php/moodle.sock ]; then
+            echo "PHP-FPM socket missing: /run/php/moodle.sock" >&2
+            exit 1
+          fi
+          echo "php-fpm socket: ok"
+
+      - name: Post-deploy stabilize (enrol, theme, permissions)
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/post-deploy-stabilize-vm.sh"
+
+      - name: Verify Moodle web health (strict)
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+        run: |
+          set -euo pipefail
+          export PROD_URL="${STAGING_URL:-https://staging.understandtech.app}"
+          sudo -E /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
+
+      - name: Post-deploy smoke test
+        env:
+          ON_VM: '1'
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+          GITHUB_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          export PROD_URL="${STAGING_URL:-https://staging.understandtech.app}"
+          bash "${PLUGINS_REPO_DIR}/scripts/smoke-test-deployment.sh"
+
+      - name: Disable maintenance mode
+        if: success()
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
+
+      - name: Rollback failed deploy
+        if: failure()
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/rollback-deploy-vm.sh" || true
+          if ! sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/ensure-origin-healthy-vm.sh"; then
+            echo "Staging origin still unhealthy after rollback — maintenance left ON" >&2
+            exit 1
+          fi
+
+      - name: Deployment summary
+        if: always()
+        run: |
+          set -euo pipefail
+          {
+            echo "## Staging deployment summary"
+            echo "- Commit: ${{ inputs.github_sha }}"
+            echo "- Plugins: ${{ inputs.changed_plugins }}"
+            echo "- Skip upgrade: ${{ inputs.skip_upgrade }}"
+            echo "- URL: ${STAGING_BASE_URL}"
+            echo "- Workflow: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"

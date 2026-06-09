@@ -1,0 +1,58 @@
+# Validate and document staging Bicep deploy (Azure credentials required for actual provision).
+name: Deploy Staging Infrastructure
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Bicep
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Bicep
+        run: |
+          set -euo pipefail
+          az config set bicep.use_binary_from_path=false
+          az bicep build --file infrastructure/bicep/main.bicep
+
+      - name: Validate subscription deployment (dry-run)
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          az deployment sub validate \
+            --location eastus2 \
+            --template-file infrastructure/bicep/main.bicep \
+            --parameters infrastructure/bicep/parameters.staging.bicepparam
+
+      - name: Provision command
+        run: |
+          set -euo pipefail
+          {
+            echo "## Staging infrastructure"
+            echo ""
+            echo "Bicep template validated. Run locally with Azure CLI credentials:"
+            echo ""
+            echo '```bash'
+            echo "az deployment sub create \\"
+            echo "  --name understandtech-staging-\$(date +%Y%m%d) \\"
+            echo "  --location eastus2 \\"
+            echo "  --template-file infrastructure/bicep/main.bicep \\"
+            echo "  --parameters infrastructure/bicep/parameters.staging.bicepparam"
+            echo '```'
+            echo ""
+            echo "### Post-deploy"
+            echo "1. Note \`vmPublicIp\` output — create Cloudflare **A** record:"
+            echo "   - Name: \`staging\`"
+            echo "   - Target: VM public IP"
+            echo "   - Proxy: **Proxied** (orange cloud)"
+            echo "   - TLS: Full (strict) + Authenticated Origin Pulls (same as prod)"
+            echo "2. Populate staging Key Vault secrets (replace \`REPLACE-ME\` placeholders)"
+            echo "3. Bootstrap Moodle on VM (cloud-init + Phase 2.2–2.4 configs)"
+            echo "4. Register self-hosted runner with labels \`self-hosted,linux,staging\`:"
+            echo "   \`RUNNER_NAME=understandtech-web-staging RUNNER_LABELS=self-hosted,linux,staging REGISTRATION_TOKEN=<token> sudo -E bash scripts/bootstrap-gha-runner-vm.sh\`"
+            echo "5. Set GitHub repository variable \`STAGING_URL\` = \`https://staging.understandtech.app\`"
+            echo "6. Seed SEC701: \`gh workflow run seed-sec701.yml -f target=staging\`"
+          } >> "$GITHUB_STEP_SUMMARY"

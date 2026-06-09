@@ -2,9 +2,14 @@
 # Strict Moodle web health — fails on login exceptions, DB errors, or broken course pages.
 # Used as a deploy gate and by origin-health monitoring.
 # Retries absorb post-purge / PHP-FPM recycle races (e.g. timeline_fallback AMD not yet served).
+#
+# Environment (first match wins for origin host):
+#   PROD_URL      — production default https://understandtech.app
+#   STAGING_URL   — staging host, e.g. https://staging.understandtech.app
+# On VM: export PROD_URL or STAGING_URL before invoking (sudo -E preserves env).
 set -euo pipefail
 
-PROD="${PROD_URL:-https://understandtech.app}"
+PROD="${STAGING_URL:-${PROD_URL:-https://understandtech.app}}"
 WWW="${MOODLE_WWWROOT_PATH:-/learn}"
 E2E_USER="${MOODLE_E2E_USER:-e2etest}"
 E2E_PASS="${MOODLE_E2E_PASS:-UtE2eTest2026Secure}"

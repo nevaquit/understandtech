@@ -124,6 +124,32 @@ Production test user (created via `scripts/setup-e2e-test-user-vm.sh` on VM):
 - Email: `e2e-test@understandtech.app`
 - Course: `CompTIA Security+ SY0-701` (`/course/view.php?id=3`)
 
+## Staging-first deploy (required before prod)
+
+Plugin pushes to `main` run **staging → E2E → production** (`deploy.yml`). Provision staging once:
+
+```bash
+# 1. Azure staging stack (separate RG, smaller SKU)
+az deployment sub create \
+  --name understandtech-staging-$(date +%Y%m%d) \
+  --location eastus2 \
+  --template-file infrastructure/bicep/main.bicep \
+  --parameters infrastructure/bicep/parameters.staging.bicepparam
+
+# 2. Cloudflare: A record staging → <vmPublicIp> (proxied, Origin Pulls)
+# 3. Bootstrap Moodle + runner on staging VM
+RUNNER_NAME=understandtech-web-staging \
+RUNNER_LABELS=self-hosted,linux,staging \
+REGISTRATION_TOKEN=<gh-token> \
+sudo -E bash scripts/bootstrap-gha-runner-vm.sh
+
+# 4. GitHub secrets: STAGING_URL=https://staging.understandtech.app/learn
+#    STAGING_TEST_USER_* or MOODLE_E2E_USER / MOODLE_E2E_PASS
+gh workflow run seed-sec701.yml -f target=staging
+```
+
+Emergency prod-only promote (manual dispatch): `skip_staging_gate=true`.
+
 ## Deployment sequence (core v1.0.0)
 
 See [v1.0.0-core-release.md](v1.0.0-core-release.md) for exact tag + deploy + smoke commands.
@@ -132,7 +158,7 @@ See [v1.0.0-core-release.md](v1.0.0-core-release.md) for exact tag + deploy + sm
 git tag -a v1.0.0 -m "Core production release — LMS, AI tutor, CI/CD (billing/Stream deferred)"
 git push origin v1.0.0
 gh workflow run deploy.yml --ref v1.0.0
-gh run watch
+gh run watch   # staging deploy → Playwright → prod deploy
 PROD_URL=https://understandtech.app GITHUB_REPO=nevaquit/understandtech \
   ./scripts/smoke-test-deployment.sh
 ```

@@ -64,19 +64,37 @@ Scripts that enforce restart: `restart-php-fpm-vm.sh`, `fix-moodle-chdir-quick-v
 
 Health gate (`verify-moodle-web-health.sh`) requires `courseindex-section` count ≥ 1, rejects skeleton-only state, and runs CLI modinfo check when on VM.
 
+## Staging-first deploy rule (CRITICAL)
+
+**Never promote plugin changes to production without passing staging deploy + Playwright E2E.**
+
+Pipeline order (`deploy.yml`):
+
+1. **validate** — API lint, Bicep, changed-plugin detection (GitHub-hosted)
+2. **deploy-staging** — full sync on `[self-hosted, linux, staging]`; health against `STAGING_URL`
+3. **staging-e2e** — Playwright chromium on staging (blocks prod)
+4. **deploy production** — only after steps 2–3 succeed
+
+Emergency bypass: `workflow_dispatch` with `skip_staging_gate=true` (manual only).
+
+Staging VM bootstrap: `parameters.staging.bicepparam` → Cloudflare `staging` A record →
+`RUNNER_NAME=understandtech-web-staging RUNNER_LABELS=self-hosted,linux,staging … bootstrap-gha-runner-vm.sh` →
+`gh workflow run seed-sec701.yml -f target=staging`.
+
 ## Deploy pipeline (`.github/workflows/deploy.yml`)
 
-1. **Validate** on GitHub-hosted runner (blocks deploy)
-2. **Record pre-deploy SHA** on VM (`/tmp/understandtech-pre-deploy-sha`)
-3. **Enable maintenance** during sync
-4. Rsync plugins → purge caches → **`restart` PHP-FPM** → upgrade
-5. Fix permissions → chdir verify → **`restart` PHP-FPM** again
-6. **`post-deploy-stabilize-vm.sh`** — SEC701 enrolment, theme sync, permissions
-7. **`verify-moodle-web-health.sh`** — strict, with retries (login, `/my/` timeline, course 3, course index sections)
-8. **`smoke-test-deployment.sh`**
-9. **Disable maintenance** only if steps 7–8 pass
-10. **On failure:** rollback → `ensure-origin-healthy-vm.sh` → maintenance stays ON if health fails
-11. **Origin health check** auto-runs via `workflow_run` after deploy completes
+Per-environment steps (staging then production):
+
+1. **Record pre-deploy SHA** on VM (`/tmp/understandtech-pre-deploy-sha`)
+2. **Enable maintenance** during sync
+3. Rsync plugins → purge caches → **`restart` PHP-FPM** → upgrade
+4. Fix permissions → chdir verify → **`restart` PHP-FPM** again
+5. **`post-deploy-stabilize-vm.sh`** — SEC701 enrolment, theme sync, permissions
+6. **`verify-moodle-web-health.sh`** — strict, with retries (`PROD_URL` or `STAGING_URL`)
+7. **`smoke-test-deployment.sh`**
+8. **Disable maintenance** only if steps 6–7 pass
+9. **On failure:** rollback → `ensure-origin-healthy-vm.sh` → maintenance stays ON if health fails
+10. **Origin health check** auto-runs via `workflow_run` after **production** deploy completes
 
 ## Bypass scripts (must call post-deploy-stabilize)
 
@@ -124,9 +142,9 @@ These paths do **not** run full `deploy.yml`; each ends with `post-deploy-stabil
 - [ ] version.php bumped for every changed plugin
 - [ ] No new $PAGE->method() without allowlist entry
 - [ ] PR validate job green; merge to main
-- [ ] Wait for Deploy workflow green (maintenance → health → smoke)
-- [ ] Confirm Origin health check passes within 3 min (auto after deploy)
-- [ ] Spot-check: login, /my/ dashboard timeline, course SEC701 (id=3), course index drawer
+- [ ] Wait for Deploy workflow: staging deploy → Playwright E2E → prod deploy
+- [ ] Confirm Origin health check passes within 3 min (auto after prod deploy)
+- [ ] Spot-check staging then prod: login, /my/ timeline, course SEC701 (id=3), course index drawer
 ```
 
 ## Operator checklist after manual VM intervention

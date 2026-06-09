@@ -1,16 +1,29 @@
-# Playwright E2E against staging/production (requires repository secrets).
+# Playwright E2E against staging (default) or production override.
+# Required before production deploy (staging-e2e job in deploy.yml).
 
 name: E2E
 
 on:
   workflow_dispatch:
+    inputs:
+      target_url:
+        description: Moodle base URL (default staging /learn)
+        type: string
+        default: 'https://staging.understandtech.app/learn'
   schedule:
     - cron: '0 6 * * 1'
+  workflow_call:
+    inputs:
+      target_url:
+        required: false
+        type: string
+        default: 'https://staging.understandtech.app/learn'
 
 jobs:
   playwright:
     name: Playwright chromium
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -23,27 +36,31 @@ jobs:
       - name: Install Playwright
         working-directory: tests/e2e
         run: |
+          set -euo pipefail
           npm ci
           npx playwright install chromium --with-deps
 
-      - name: Check credentials
-        id: creds
-        run: |
-          if [ -z "${{ secrets.STAGING_TEST_USER_EMAIL }}" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "STAGING_TEST_USER_EMAIL not configured — skipping E2E"
-          fi
-
       - name: Run E2E
-        if: steps.creds.outputs.skip != 'true'
         working-directory: tests/e2e
         env:
-          STAGING_URL: ${{ secrets.STAGING_URL || 'https://understandtech.app' }}
+          STAGING_URL: ${{ inputs.target_url || secrets.STAGING_URL }}
           STAGING_TEST_USER_EMAIL: ${{ secrets.STAGING_TEST_USER_EMAIL }}
           STAGING_TEST_USER_PASSWORD: ${{ secrets.STAGING_TEST_USER_PASSWORD }}
-          E2E_COURSE_PATH: ${{ secrets.E2E_COURSE_PATH || '/course/view.php?id=3' }}
+          MOODLE_E2E_USER: ${{ secrets.MOODLE_E2E_USER }}
+          MOODLE_E2E_PASS: ${{ secrets.MOODLE_E2E_PASS }}
+          E2E_COURSE_PATH: ${{ secrets.E2E_COURSE_PATH }}
           CI: 'true'
-        run: npx playwright test --project=chromium --workers=1
+        run: |
+          set -euo pipefail
+          export STAGING_URL="${STAGING_URL:-https://staging.understandtech.app/learn}"
+          export STAGING_TEST_USER_EMAIL="${STAGING_TEST_USER_EMAIL:-${MOODLE_E2E_USER:-}}"
+          export STAGING_TEST_USER_PASSWORD="${STAGING_TEST_USER_PASSWORD:-${MOODLE_E2E_PASS:-}}"
+          export E2E_COURSE_PATH="${E2E_COURSE_PATH:-/course/view.php?id=3}"
+          if [ -z "$STAGING_TEST_USER_EMAIL" ] || [ -z "$STAGING_TEST_USER_PASSWORD" ]; then
+            echo "STAGING_TEST_USER_* or MOODLE_E2E_USER/MOODLE_E2E_PASS not configured — skipping E2E"
+            exit 0
+          fi
+          npx playwright test --project=chromium --workers=1
 
       - uses: actions/upload-artifact@v4
         if: failure()
