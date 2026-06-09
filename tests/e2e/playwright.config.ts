@@ -83,7 +83,7 @@ export default defineConfig({
       name: 'chromium-auth',
       testMatch: /auth\.spec\.ts/,
       use: { ...devices['Desktop Chrome'] },
-      dependencies: ['chromium'],
+      dependencies: ['setup'],
     },
     {
       name: 'firefox',
