@@ -250,9 +250,11 @@ jobs:
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/rollback-deploy-vm.sh" || true
           if ! sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/ensure-origin-healthy-vm.sh"; then
-            echo "Staging origin still unhealthy after rollback — maintenance left ON" >&2
+            echo "Staging origin still unhealthy after rollback — disabling maintenance for guest access" >&2
+            sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable || true
             exit 1
           fi
+          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
 
       - name: Deployment summary
         if: always()
