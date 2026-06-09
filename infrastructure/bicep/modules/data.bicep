@@ -7,7 +7,9 @@ param privateDnsZoneName string
 var storageAccountName = toLower('utst${uniqueString(resourceGroup().id)}')
 var keyVaultName = toLower('utkv${uniqueString(resourceGroup().id)}')
 var postgresSkuName = environment == 'staging' ? 'Standard_B1ms' : 'Standard_B2s'
-var moodleDataQuotaGb = environment == 'staging' ? 50 : 100
+var moodleDataQuotaGb = 100
+// Premium FileStorage shares require quota >= 100 GiB (lower values return InvalidHeaderValue).
+var fileShareQuotaGb = max(moodleDataQuotaGb, 100)
 
 @secure()
 param postgresAdminPassword string = newGuid()
@@ -103,7 +105,7 @@ resource fileShare 'Microsoft.Storage/storageAccounts/fileServices/shares@2023-0
   parent: fileServices
   name: 'moodledata'
   properties: {
-    shareQuota: moodleDataQuotaGb
+    shareQuota: fileShareQuotaGb
     enabledProtocols: 'SMB'
   }
 }

@@ -34,7 +34,7 @@ az deployment sub create \
 
 ## Deploy staging
 
-Separate resource group (`understandtech-staging-rg`), smaller VM (`Standard_B2ms`), Postgres `Standard_B1ms`, 50 GB moodledata share.
+Separate resource group (`understandtech-staging-rg`), smaller VM (`Standard_B2ms`), Postgres `Standard_B1ms`, 100 GB moodledata share (Premium Files minimum).
 
 ```bash
 az deployment sub create \
