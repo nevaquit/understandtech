@@ -20,8 +20,11 @@ trap cleanup EXIT
 echo "=== theme version ==="
 grep version /var/www/moodle/theme/understandtech/version.php | head -1
 
-echo "=== amd fallback present ==="
+echo "=== amd modules present ==="
+test -f /var/www/moodle/theme/understandtech/amd/build/templates_dom_patch.min.js && echo templates_dom_patch_ok=1 || echo templates_dom_patch_missing=1
+test -f /var/www/moodle/theme/understandtech/amd/build/courseindex_prerender.min.js && echo courseindex_prerender_ok=1 || echo courseindex_prerender_missing=1
 test -f /var/www/moodle/theme/understandtech/amd/build/courseindex_fallback.min.js && echo courseindex_fallback_ok=1 || echo courseindex_fallback_missing=1
+test -f /var/www/moodle/theme/understandtech/classes/output/course_index_prerender.php && echo course_index_prerender_php_ok=1 || echo course_index_prerender_php_missing=1
 
 echo "=== authenticated course view ==="
 curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/login/index.php" -o "$LOGIN"
@@ -42,7 +45,10 @@ curl -sS -b "$CJ" -c "$CJ" \
 
 grep -o '<title>[^<]*</title>' "$COURSE" | head -1 || true
 grep -o 'Error reading from database' "$COURSE" | head -1 || echo db_ok=1
-grep -o 'courseindex_fallback' "$COURSE" | head -1 || echo fallback_amd_missing=1
+grep -o 'templates_dom_patch' "$COURSE" | head -1 || echo templates_dom_patch_amd_missing=1
+grep -o 'courseindex_prerender' "$COURSE" | head -1 || echo courseindex_prerender_amd_missing=1
+grep -o 'courseindex_fallback' "$COURSE" | head -1 || echo courseindex_fallback_amd_missing=1
+grep -o 'theme_understandtech' "$COURSE" | head -1 || echo theme_cfg_missing=1
 sections=$(grep -o 'courseindex-section' "$COURSE" | wc -l | tr -d ' ')
 items=$(grep -o 'courseindex-item' "$COURSE" | wc -l | tr -d ' ')
 placeholder=$(grep -o 'course-index-placeholder' "$COURSE" | wc -l | tr -d ' ')

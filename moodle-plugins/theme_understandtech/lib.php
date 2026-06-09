@@ -75,6 +75,11 @@ function theme_understandtech_get_pre_scss(theme_config $theme): string {
 function theme_understandtech_page_init(moodle_page $page): void {
     global $CFG;
 
+    // FIRST: patch core/templates before any placeholder hydration runs (fixes Y.NodeList crash).
+    $page->requires->js_amd_inline(
+        "require(['theme_understandtech/templates_dom_patch']);",
+    );
+
     $page->add_body_class('ut-theme');
 
     $theme = theme_config::load('understandtech');
@@ -111,14 +116,28 @@ function theme_understandtech_page_init(moodle_page $page): void {
         );
     }
 
-    // Course index drawer: core placeholder hydration uses Templates.replaceNode (YUI).
-    // When Y.NodeList is unavailable the drawer stays empty while CSS hides the skeleton.
+    // Course index drawer: server prerender + AMD fallback (templates_dom_patch fixes core path).
     if (
         in_array($page->pagelayout, ['course', 'incourse'], true)
         && $page->course
         && (int) $page->course->id !== SITEID
     ) {
         $courseid = (int) $page->course->id;
+
+        if (\theme_understandtech\output\course_index_prerender::should_prerender($page)) {
+            $indexhtml = \theme_understandtech\output\course_index_prerender::render_html($courseid);
+            if ($indexhtml !== '') {
+                $page->requires->data_for_js(
+                    'theme_understandtech',
+                    ['courseindexhtml' => $indexhtml],
+                    true,
+                );
+                $page->requires->js_amd_inline(
+                    "require(['theme_understandtech/courseindex_prerender'], function(m) { m.init(); });",
+                );
+            }
+        }
+
         $page->requires->js_amd_inline(
             "require(['theme_understandtech/courseindex_fallback'], function(m) { m.init({$courseid}); });",
         );

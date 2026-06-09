@@ -53,6 +53,11 @@ curl -sS -b "$CJ" -c "$CJ" \
   "${PROD}${WWW}/course/view.php?id=${COURSE_ID}" -o "$COURSE"
 check_html "auth_course" "$COURSE"
 
+if ! grep -q 'templates_dom_patch' "$COURSE"; then
+  echo "templates_dom_patch_missing course_id=${COURSE_ID}"
+  exit 1
+fi
+
 if ! grep -q 'courseindex_fallback' "$COURSE"; then
   echo "courseindex_fallback_missing course_id=${COURSE_ID}"
   exit 1
