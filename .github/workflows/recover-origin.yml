@@ -23,10 +23,10 @@ jobs:
           sudo -u gha-runner git fetch origin main
           sudo -u gha-runner git reset --hard origin/main
 
-      - name: Stabilize origin stack
+      - name: Ensure origin healthy
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/stabilize-origin-vm.sh
+          sudo /usr/bin/bash /opt/understandtech-plugins/scripts/ensure-origin-healthy-vm.sh
 
       - name: Fix page module filters
         if: inputs.fix_page_filters

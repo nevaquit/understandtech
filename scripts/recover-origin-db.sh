@@ -52,7 +52,7 @@ apply_config() {
 finalize_recovery() {
   sudo -u www-data php "${MOODLE_DIR}/admin/cli/purge_caches.php"
   sudo -u www-data php "${MOODLE_DIR}/admin/cli/maintenance.php" --disable || true
-  systemctl reload php8.3-fpm
+  systemctl restart php8.3-fpm
 }
 
 if is_pgbouncer_config && db_ping; then

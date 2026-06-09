@@ -6,7 +6,7 @@ CONFIG="/var/www/moodle/config.php"
 
 echo "=== restart services ==="
 systemctl restart pgbouncer
-systemctl reload php8.3-fpm
+systemctl restart php8.3-fpm
 systemctl reload nginx
 
 echo "=== cli db ==="
