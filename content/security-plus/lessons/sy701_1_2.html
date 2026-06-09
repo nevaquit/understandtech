@@ -5,7 +5,7 @@
 <p>Understanding fundamental security concepts is essential for building a strong foundation in cybersecurity. These concepts form the basis for all security decisions and implementations in an organization.</p>
 <h4>CIA Triad</h4>
 <p>The CIA Triad represents the three core principles of information security. Every security control and decision should be evaluated against these three pillars.</p>
-<h4>Visual Representation: CIA Triad</h4>
+<h4 class="ut-visual-representation">Visual Representation: CIA Triad</h4>
 <p>The CIA Triad forms the foundation of information security, with each component being equally important and interconnected.</p>
 <div class="ut-lesson-diagram ut-infographic">
 <div class="diagram-title">🔺 CIA Triad — Foundation of Information Security</div>
@@ -143,10 +143,32 @@
 <li>Monitoring system changes and administrative actions</li>
 <li>Generating reports for compliance and security analysis</li>
 </ul>
-<h4>Visual Representation: AAA Process Flow</h4>
+<h4 class="ut-visual-representation">Visual Representation: AAA Process Flow</h4>
 <p>The following diagram illustrates the sequential AAA (Authentication, Authorization, Accounting) process:</p>
-<div class="ut-lesson-diagram">
+<div class="ut-lesson-diagram ut-infographic">
 <div class="diagram-title">🔐 AAA Process Flow and Integration</div>
+<figure class="ut-svg-figure" aria-label="Sequential process flow">
+<svg class="ut-visual-banner ut-flow-banner" viewBox="0 0 400 52" xmlns="http://www.w3.org/2000/svg" role="img">
+<defs>
+<linearGradient id="utGradc20880fa" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#1A8A7D" stop-opacity="0.55"/>
+<stop offset="100%" stop-color="#C9A227" stop-opacity="0.35"/>
+</linearGradient>
+</defs>
+<rect x="8" y="16" width="360" height="6" rx="3" fill="url(#utGradc20880fa)"/>
+<circle cx="40" cy="19" r="14" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<circle cx="140" cy="19" r="14" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<circle cx="240" cy="19" r="14" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<circle cx="340" cy="19" r="14" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="40" y="23" text-anchor="middle" fill="#f8fafc" font-size="9">1</text>
+<text x="140" y="23" text-anchor="middle" fill="#f8fafc" font-size="9">2</text>
+<text x="240" y="23" text-anchor="middle" fill="#f8fafc" font-size="9">3</text>
+<text x="340" y="23" text-anchor="middle" fill="#f8fafc" font-size="9">4</text>
+<text x="200" y="46" text-anchor="middle" fill="#94a3b8" font-size="9">Sequential process — left to right</text>
+</svg>
+</figure>
+
+
 <div class="flow-diagram">
 <div class="flow-step">
 <strong>1. Authentication</strong><br>
@@ -241,11 +263,24 @@ Audit trail generation
 <p><strong>Honeynets</strong> Honeynets are networks of honeypots that create more realistic environments for attackers. They provide comprehensive views of attack campaigns and allow researchers to study coordinated attacks.</p>
 <p><strong>Honeyfiles</strong> Honeyfiles are decoy documents placed in file systems to detect unauthorized access. When accessed, they trigger alerts indicating potential compromise.</p>
 <p><strong>Honeytokens</strong> Honeytokens are pieces of data (credentials, URLs, database records) that have no legitimate use but trigger alerts when accessed, indicating unauthorized activity.</p>
-<h4>Visual Representation: 🔐 Authentication Factors - Comprehensive Analysis</h4>
-<p>The following diagram illustrates this concept.</p>
-<div class="ut-lesson-diagram">
+<h4 class="ut-visual-representation">Visual Representation: Authentication Factors - Comprehensive Analysis</h4>
+<p>The following diagram illustrates <strong>Authentication Factors - Comprehensive Analysis</strong> with a branded visual summary.</p>
+<div class="ut-lesson-diagram ut-infographic">
+<div class="diagram-title">🔐 Authentication Factors - Comprehensive Analysis</div>
+<figure class="ut-svg-figure" aria-label="Concept comparison grid">
+<svg class="ut-visual-banner ut-grid-banner" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" role="img">
+<rect x="30" y="20" width="150" height="40" rx="6" fill="#0B1F3A" stroke="#C9A227" stroke-width="1.5"/>
+<rect x="220" y="20" width="150" height="40" rx="6" fill="#0B1F3A" stroke="#C9A227" stroke-width="1.5"/>
+<rect x="30" y="70" width="150" height="40" rx="6" fill="#0B1F3A" stroke="#1A8A7D" stroke-width="1.5"/>
+<rect x="220" y="70" width="150" height="40" rx="6" fill="#0B1F3A" stroke="#1A8A7D" stroke-width="1.5"/>
+<text x="105" y="45" text-anchor="middle" fill="#C9A227" font-size="10">Category A</text>
+<text x="295" y="45" text-anchor="middle" fill="#C9A227" font-size="10">Category B</text>
+<text x="105" y="95" text-anchor="middle" fill="#f8fafc" font-size="10">Category C</text>
+<text x="295" y="95" text-anchor="middle" fill="#f8fafc" font-size="10">Category D</text>
+</svg>
+</figure>
 
-                <div class="diagram-title">🔐 Authentication Factors - Comprehensive Analysis</div>
+
 <div class="concept-grid">
                     <div class="concept-item">
                         <h4>🧠 Type 1: Something You Know</h4>
@@ -430,11 +465,32 @@ Audit trail generation
 <p>Zero trust Implicit Trust Zones part of traditional security approach in which firewalls and other security devices formed a perimeter. Systems belonging to the org were placed inside this boundary. Subject/System A subject is a user who wishes to access a resource. A system is a non-human entity, often the device used by the user, to access the resource. Policy Enforcement Point when a user or system requests access to a resource, the PEP evaluates it against predefined policies and applies the necessary controls. DATA PLANE EXAMPLE: MSFT Entra ID (Azure Active Directory)</p>
 <p>conditional access</p>
 <p>signal &gt; decision &gt; enforcement enforcing “conditions of access”</p>
-<h4>Visual Representation: 🛡️ Zero Trust Architecture (NIST SP 800-207)</h4>
-<p>The following diagram illustrates this concept.</p>
-<div class="ut-lesson-diagram">
+<h4 class="ut-visual-representation">Visual Representation: ️ Zero Trust Architecture (NIST SP 800-207)</h4>
+<p>The following diagram illustrates <strong>️ Zero Trust Architecture (NIST SP 800-207)</strong> with a branded visual summary.</p>
+<div class="ut-lesson-diagram ut-infographic">
+<div class="diagram-title">🛡️ Zero Trust Architecture (NIST SP 800-207)</div>
+<figure class="ut-svg-figure" aria-label="Sequential process flow">
+<svg class="ut-visual-banner ut-flow-banner" viewBox="0 0 400 52" xmlns="http://www.w3.org/2000/svg" role="img">
+<defs>
+<linearGradient id="utGrad608b6b4f" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#1A8A7D" stop-opacity="0.55"/>
+<stop offset="100%" stop-color="#C9A227" stop-opacity="0.35"/>
+</linearGradient>
+</defs>
+<rect x="8" y="16" width="360" height="6" rx="3" fill="url(#utGrad608b6b4f)"/>
+<circle cx="40" cy="19" r="14" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<circle cx="140" cy="19" r="14" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<circle cx="240" cy="19" r="14" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<circle cx="340" cy="19" r="14" fill="#0B1F3A" stroke="#C9A227" stroke-width="2"/>
+<text x="40" y="23" text-anchor="middle" fill="#f8fafc" font-size="9">1</text>
+<text x="140" y="23" text-anchor="middle" fill="#f8fafc" font-size="9">2</text>
+<text x="240" y="23" text-anchor="middle" fill="#f8fafc" font-size="9">3</text>
+<text x="340" y="23" text-anchor="middle" fill="#f8fafc" font-size="9">4</text>
+<text x="200" y="46" text-anchor="middle" fill="#94a3b8" font-size="9">Sequential process — left to right</text>
+</svg>
+</figure>
 
-                <div class="diagram-title">🛡️ Zero Trust Architecture (NIST SP 800-207)</div>
+
 <div class="concept-grid">
                     <div class="concept-item">
                         <strong>Control Plane</strong><br>

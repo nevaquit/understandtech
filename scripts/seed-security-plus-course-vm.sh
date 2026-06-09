@@ -9,6 +9,9 @@ if [ -d "${REPO}/.git" ]; then
   sudo -u gha-runner git -C "$REPO" reset --hard origin/main
 fi
 
+if [ -f "${REPO}/scripts/upgrade-all-lesson-visuals.php" ]; then
+  php "${REPO}/scripts/upgrade-all-lesson-visuals.php" || true
+fi
 if [ -f "${REPO}/scripts/insert-missing-lesson-diagrams.php" ]; then
   php "${REPO}/scripts/insert-missing-lesson-diagrams.php" || true
 fi

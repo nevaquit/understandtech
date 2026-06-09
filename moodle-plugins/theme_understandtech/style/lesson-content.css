@@ -299,6 +299,15 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
     letter-spacing: 0.03em;
 }
 
+.ut-lesson-content .ut-lesson-body > h4.ut-visual-representation {
+    color: #C9A227;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    padding-left: 0.75rem;
+    border-left: 3px solid #1A8A7D;
+}
+
 .ut-lesson-content .ut-lesson-body > p {
     margin: 0 0 0.5rem;
 }
@@ -458,11 +467,16 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 }
 
 .ut-lesson-content .ut-cia-triangle,
-.ut-lesson-content .ut-mitigation-hub {
+.ut-lesson-content .ut-mitigation-hub,
+.ut-lesson-content .ut-visual-banner {
     width: min(100%, 28rem);
     height: auto;
     display: block;
     filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.35));
+}
+
+.ut-lesson-content .ut-flow-banner {
+    width: min(100%, 32rem);
 }
 
 .ut-lesson-content .ut-infographic .cia-triad {

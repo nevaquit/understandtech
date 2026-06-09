@@ -74,9 +74,9 @@ All SVG fills, strokes, and text colors must use the project palette:
 Every visual section follows this skeleton:
 
 ```html
-<h4>Visual Representation: [Topic]</h4>
-<p>One sentence introducing the diagram.</p>
-<div class="ut-lesson-diagram [ut-infographic]">
+<h4 class="ut-visual-representation">Visual Representation: [Topic]</h4>
+<p>One sentence introducing the diagram (never use generic "illustrates this concept" copy).</p>
+<div class="ut-lesson-diagram ut-infographic">
   <div class="diagram-title">…</div>
   <!-- SVG and/or grid/flow markup -->
 </div>
@@ -85,7 +85,9 @@ Every visual section follows this skeleton:
 After editing, run (on VM or any PHP host):
 
 ```bash
+php scripts/upgrade-all-lesson-visuals.php
 php scripts/inline-lesson-visuals.php
+php scripts/audit-visual-representations.php
 ```
 
 This moves orphaned diagrams adjacent to their Visual Representation headings.
