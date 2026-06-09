@@ -74,6 +74,12 @@ run_checks() {
     return 1
   fi
 
+  # Server prerender or hydrated index must appear in page output (not skeleton-only).
+  if ! grep -qE 'courseindex-section|courseindexhtml' "$COURSE"; then
+    echo "course_index_content_missing"
+    return 1
+  fi
+
   if command -v sudo >/dev/null 2>&1 && [ -f /var/www/moodle/config.php ]; then
     sudo -u www-data php -r "
 define('CLI_SCRIPT', true);
