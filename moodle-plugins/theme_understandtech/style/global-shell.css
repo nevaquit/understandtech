@@ -839,6 +839,199 @@ body.ut-theme.pagelayout-coursecategory #region-main {
     margin: 0 auto;
 }
 
+/* Custom LMS home — hide default Moodle frontpage course list below marketing sections. */
+body.ut-theme.ut-frontpage.pagelayout-frontpage #page-header,
+body.ut-theme.ut-frontpage.pagelayout-frontpage #region-main-box {
+    display: none !important;
+}
+
+body.ut-theme.ut-frontpage.pagelayout-frontpage #page-content {
+    padding-top: 0;
+}
+
+body.ut-theme .ut-frontpage-tracks {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.25rem;
+}
+
+body.ut-theme .ut-cert-track-card {
+    background: var(--ut-navy);
+    border: 1px solid var(--ut-border);
+    border-radius: var(--ut-radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 100%;
+}
+
+body.ut-theme .ut-cert-track-card.ut-cert-track-active {
+    border-color: rgba(26, 138, 125, 0.45);
+    box-shadow: 0 0 0 1px rgba(26, 138, 125, 0.2);
+}
+
+body.ut-theme .ut-cert-track-card h3 {
+    font-family: var(--ut-font-heading);
+    font-size: 1.25rem;
+    margin: 0;
+    color: var(--ut-white);
+}
+
+body.ut-theme .ut-cert-track-exam {
+    font-family: var(--ut-font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ut-teal-light);
+    margin: 0;
+}
+
+body.ut-theme .ut-cert-track-card > p:last-of-type {
+    flex-grow: 1;
+    color: var(--ut-text-muted);
+    margin: 0;
+    line-height: 1.65;
+    font-size: 0.9375rem;
+}
+
+body.ut-theme .ut-cert-track-badge {
+    align-self: flex-start;
+    font-family: var(--ut-font-heading);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.625rem;
+    border-radius: var(--ut-radius-pill);
+    background: rgba(26, 138, 125, 0.18);
+    color: var(--ut-teal-light);
+    border: 1px solid rgba(26, 138, 125, 0.35);
+}
+
+body.ut-theme .ut-cert-track-badge-soon {
+    background: rgba(201, 162, 39, 0.12);
+    color: var(--ut-gold-light);
+    border-color: rgba(201, 162, 39, 0.3);
+}
+
+body.ut-theme .ut-frontpage-pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1.25rem;
+}
+
+body.ut-theme .ut-frontpage-pillars .ut-card-badge {
+    text-decoration: none;
+}
+
+body.ut-theme .ut-frontpage-pillars .ut-card-badge:hover {
+    color: var(--ut-gold-light);
+    border-color: var(--ut-gold);
+}
+
+body.ut-theme .ut-frontpage-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.ut-theme .ut-frontpage-steps li {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 1.25rem 1.5rem;
+    background: rgba(11, 31, 58, 0.55);
+    border: 1px solid var(--ut-border);
+    border-radius: var(--ut-radius-lg);
+}
+
+body.ut-theme .ut-step-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: rgba(201, 162, 39, 0.15);
+    border: 2px solid var(--ut-gold);
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--ut-gold);
+}
+
+body.ut-theme .ut-frontpage-steps h3 {
+    font-size: 1.125rem;
+    margin: 0 0 0.35rem;
+}
+
+body.ut-theme .ut-frontpage-steps p {
+    margin: 0;
+    color: var(--ut-text-muted);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+}
+
+body.ut-theme .ut-frontpage-audience {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1.25rem;
+}
+
+body.ut-theme .ut-audience-card {
+    padding: 1.5rem;
+    border-left: 3px solid var(--ut-teal);
+    background: rgba(26, 138, 125, 0.08);
+    border-radius: 0 var(--ut-radius-md) var(--ut-radius-md) 0;
+}
+
+body.ut-theme .ut-audience-card h3 {
+    font-size: 1.125rem;
+    margin: 0 0 0.5rem;
+    color: var(--ut-gold-light);
+}
+
+body.ut-theme .ut-audience-card p {
+    margin: 0;
+    color: var(--ut-text-muted);
+    line-height: 1.65;
+    font-size: 0.9375rem;
+}
+
+body.ut-theme .ut-frontpage-cta-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+body.ut-theme .ut-frontpage-cta-inner > div:first-child {
+    max-width: 36rem;
+}
+
+body.ut-theme .ut-frontpage-cta-actions {
+    flex-shrink: 0;
+}
+
+body.ut-theme .ut-progress-fill-muted {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.ut-theme .ut-cert-track-card,
+    body.ut-theme .ut-feature-card {
+        transition: none;
+    }
+}
+
 body.ut-theme .dashboard-card,
 body.ut-theme .card-grid .card {
     background: var(--ut-surface);

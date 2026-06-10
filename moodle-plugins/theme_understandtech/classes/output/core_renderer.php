@@ -130,24 +130,46 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
+     * Export Mustache context for the LMS home (frontpage) marketing layout.
+     *
+     * @return array<string, mixed>
+     */
+    protected function export_frontpage_context(): array {
+        global $CFG, $DB;
+
+        $isloggedin = isloggedin() && !isguestuser();
+        $sec701 = $DB->get_record('course', ['shortname' => 'SEC701'], 'id', IGNORE_MISSING);
+        $hassec701 = !empty($sec701);
+        $sec701url = $hassec701
+            ? (new moodle_url('/course/view.php', ['id' => $sec701->id]))->out(false)
+            : '';
+
+        return [
+            'wwwroot'         => $CFG->wwwroot,
+            'sitename'        => format_string(get_site()->fullname),
+            'isloggedin'      => $isloggedin,
+            'hassec701'       => $hassec701,
+            'loginurl'        => (new moodle_url('/login/index.php'))->out(false),
+            'dashboardurl'    => (new moodle_url('/my/'))->out(false),
+            'sec701url'       => $sec701url,
+            'coursesurl'      => (new moodle_url('/course/index.php'))->out(false),
+            'communityurl'    => (new moodle_url('/local/community/community.php'))->out(false),
+            'certmasterurl'   => (new moodle_url('/local/certmaster/index.php'))->out(false),
+            'aitutorurl'      => (new moodle_url('/local/aitutor/index.php'))->out(false),
+            'leaderboardurl'  => (new moodle_url('/local/gamification/leaderboard.php'))->out(false),
+        ];
+    }
+
+    /**
      * Render the frontpage hero section.
      *
      * @return string Rendered HTML.
      */
     public function render_frontpage_hero(): string {
-        global $CFG;
-
-        $isloggedin = isloggedin() && !isguestuser();
-
-        $context = [
-            'wwwroot'      => $CFG->wwwroot,
-            'sitename'     => format_string(get_site()->fullname),
-            'isloggedin'   => $isloggedin,
-            'loginurl'     => (new moodle_url('/login/index.php'))->out(false),
-            'dashboardurl' => (new moodle_url('/my/'))->out(false),
-        ];
-
-        return $this->render_from_template('theme_understandtech/frontpage_hero', $context);
+        return $this->render_from_template(
+            'theme_understandtech/frontpage_hero',
+            $this->export_frontpage_context(),
+        );
     }
 
     /**

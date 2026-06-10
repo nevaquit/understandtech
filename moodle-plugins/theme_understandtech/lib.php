@@ -92,6 +92,10 @@ function theme_understandtech_page_init(moodle_page $page): void {
         $page->add_body_class('ut-lesson-page');
     }
 
+    if ($page->pagelayout === 'frontpage') {
+        $page->add_body_class('ut-frontpage');
+    }
+
     if ($page->cm && $page->cm->modname === 'quiz') {
         $page->add_body_class('ut-quiz-page');
         // Question flags use YUI M.core_question_flags.init; when YUI fails to boot the

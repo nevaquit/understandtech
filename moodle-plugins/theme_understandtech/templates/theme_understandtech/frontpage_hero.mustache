@@ -1,147 +1,373 @@
 {{!
     @template theme_understandtech/frontpage_hero
 
-    UnderstandTech frontpage hero section.
-    Rendered by core_renderer::render_frontpage_hero() on the site front page.
+    UnderstandTech LMS home — certification training for cybersecurity, cloud, and sysadmin paths.
+    Rendered by core_renderer::render_frontpage_hero() on pagelayout frontpage.
 
     Context variables:
-    - sitename: string - The Moodle site name
-    - siteurl: string - The site root URL
-    - isloggedin: bool - Whether the user is logged in
-    - loginurl: string - Login page URL
-    - dashboardurl: string - User dashboard URL
-    - wwwroot: string - Moodle $CFG->wwwroot
+    - wwwroot, sitename, isloggedin, loginurl, dashboardurl
+    - sec701url, coursesurl, communityurl, certmasterurl, aitutorurl, leaderboardurl
+    - hassec701: bool — SEC701 course is available on this site
 }}
-<section class="ut-hero" aria-labelledby="ut-hero-heading">
+<div class="ut-frontpage" id="ut-frontpage-top">
+
+{{! ── Hero ─────────────────────────────────────────────────────────────────── }}
+<section class="ut-hero ut-frontpage-hero" aria-labelledby="ut-hero-heading">
     <div class="ut-container">
         <div class="ut-hero-inner">
-
-            {{! Left: Copy }}
             <div class="ut-hero-content">
-                <span class="ut-eyebrow">AI-Powered Learning Platform</span>
+                <span class="ut-eyebrow">Certification Training for IT Professionals</span>
                 <h1 id="ut-hero-heading">
-                    Master Any Subject.<br>
-                    <span class="ut-accent">Earn Credentials</span><br>
-                    That Matter.
+                    Master Cybersecurity,<br>
+                    <span class="ut-accent">Cloud &amp; Systems</span><br>
+                    Administration.
                 </h1>
                 <p>
-                    UnderstandTech combines an adaptive AI tutor, mastery-based certification,
-                    and gamified learning to help professionals and students achieve deep,
-                    verifiable expertise — faster than any traditional course.
+                    Certification-grade rigor meets community-first learning. Every lesson maps to
+                    exam objectives, practice questions capture your confidence level, and an AI tutor
+                    mentors you between instructor sessions — built for Security+, Network+, A+, and
+                    cloud career paths.
                 </p>
 
                 <div class="ut-hero-cta-group">
                     {{#isloggedin}}
-                    <a href="{{dashboardurl}}" class="btn-ut-primary">
-                        Go to Dashboard
+                    {{#hassec701}}
+                    <a href="{{sec701url}}" class="btn-ut-primary">
+                        Continue Security+ Track
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
+                    {{/hassec701}}
+                    <a href="{{dashboardurl}}" class="btn-ut-outline">My Dashboard</a>
                     {{/isloggedin}}
                     {{^isloggedin}}
                     <a href="{{loginurl}}" class="btn-ut-primary">
-                        Start Learning Free
+                        Start Free Audit
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
-                    <a href="#ut-features" class="btn-ut-outline">See How It Works</a>
+                    <a href="#ut-tracks" class="btn-ut-outline">Browse Cert Tracks</a>
                     {{/isloggedin}}
                 </div>
 
                 <div class="ut-hero-trust">
-                    <span class="ut-trust-item">No credit card required</span>
+                    <span class="ut-trust-item">SY0-701 objective mapped</span>
+                    <span class="ut-trust-item">Confidence-based mastery</span>
                     <span class="ut-trust-item">WCAG 2.1 AA accessible</span>
-                    <span class="ut-trust-item">Blockchain-verified credentials</span>
                 </div>
             </div>
 
-            {{! Right: Live Dashboard Widget }}
             <div class="ut-hero-visual" aria-hidden="true">
                 <div class="ut-dashboard-widget">
                     <div class="ut-widget-header">
-                        <span>Your Learning Dashboard</span>
+                        <span>Exam Readiness Snapshot</span>
                         <span class="ut-live-badge">● Live</span>
                     </div>
 
                     <div class="ut-progress-row">
                         <div class="ut-progress-label">
-                            <span>AWS Solutions Architect</span>
-                            <span class="ut-progress-pct">78%</span>
+                            <span>Security+ SY0-701</span>
+                            <span class="ut-progress-pct">Domain 3 · 72%</span>
                         </div>
                         <div class="ut-progress">
-                            <div class="ut-progress-fill" style="width:78%;" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="ut-progress-fill" style="width:72%;" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
                     <div class="ut-progress-row">
                         <div class="ut-progress-label">
-                            <span>Python for Data Science</span>
-                            <span class="ut-progress-pct">45%</span>
+                            <span>Network+ N10-009</span>
+                            <span class="ut-progress-pct">Enrolling soon</span>
                         </div>
                         <div class="ut-progress">
-                            <div class="ut-progress-fill" style="width:45%;" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="ut-progress-fill ut-progress-fill-muted" style="width:18%;" role="progressbar" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
                     <div class="ut-progress-row">
                         <div class="ut-progress-label">
-                            <span>Cybersecurity Fundamentals</span>
-                            <span class="ut-progress-pct">92%</span>
+                            <span>Cloud &amp; Sysadmin Labs</span>
+                            <span class="ut-progress-pct">Portfolio ready</span>
                         </div>
                         <div class="ut-progress">
-                            <div class="ut-progress-fill" style="width:92%;" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="ut-progress-fill" style="width:54%;" role="progressbar" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
                     <div class="ut-xp-bar-container mt-3">
                         <div class="ut-xp-bar-label">
-                            <span>Level 12 — Cloud Architect</span>
-                            <span>2,340 / 3,000 XP</span>
+                            <span>Confidence mastery — 3 of 5 domains</span>
+                            <span>CertMaster model</span>
                         </div>
                         <div class="ut-xp-bar">
-                            <div class="ut-xp-fill" style="width:78%;"></div>
+                            <div class="ut-xp-fill" style="width:60%;"></div>
                         </div>
                     </div>
 
                     <div class="ut-widget-footer">
                         <div class="ut-widget-stat">
                             <span class="ut-widget-stat-label">Streak</span>
-                            <span class="ut-widget-stat-value">🔥 14d</span>
+                            <span class="ut-widget-stat-value">Daily</span>
                         </div>
                         <div class="ut-widget-stat">
-                            <span class="ut-widget-stat-label">Rank</span>
-                            <span class="ut-widget-stat-value">#47</span>
+                            <span class="ut-widget-stat-label">Labs</span>
+                            <span class="ut-widget-stat-value">Hands-on</span>
                         </div>
                         <div class="ut-widget-stat">
-                            <span class="ut-widget-stat-label">Badges</span>
-                            <span class="ut-widget-stat-value">23</span>
+                            <span class="ut-widget-stat-label">AI Tutor</span>
+                            <span class="ut-widget-stat-value">24/7</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
-{{! Stats Row }}
-<section class="ut-section-sm ut-section-dark" aria-label="Platform statistics">
+{{! ── Capability stats ─────────────────────────────────────────────────────── }}
+<section class="ut-section-sm ut-section-dark" aria-label="Platform capabilities">
     <div class="ut-container">
         <div class="ut-stats-row">
             <div class="ut-stat-block">
-                <span class="ut-stat-value" data-counter="12000" aria-label="12,000 plus active learners">12K+</span>
-                <span class="ut-stat-label">Active Learners</span>
+                <span class="ut-stat-value" aria-label="Five Security plus domains mapped">5</span>
+                <span class="ut-stat-label">SY0-701 Domains Mapped</span>
             </div>
             <div class="ut-stat-block">
-                <span class="ut-stat-value" data-counter="8500" aria-label="8,500 plus credentials issued">8.5K+</span>
-                <span class="ut-stat-label">Credentials Issued</span>
+                <span class="ut-stat-value" aria-label="Four level confidence model">4-Level</span>
+                <span class="ut-stat-label">Confidence Mastery Model</span>
             </div>
             <div class="ut-stat-block">
-                <span class="ut-stat-value" data-counter="94" aria-label="94 percent pass rate">94%</span>
-                <span class="ut-stat-label">Exam Pass Rate</span>
+                <span class="ut-stat-value" aria-label="Twenty four seven AI tutor">24/7</span>
+                <span class="ut-stat-label">AI Tutor &amp; Grading</span>
             </div>
             <div class="ut-stat-block">
-                <span class="ut-stat-value" aria-label="4.9 out of 5 rating">4.9★</span>
-                <span class="ut-stat-label">Learner Rating</span>
+                <span class="ut-stat-value" aria-label="Community and cohort learning">Cohort</span>
+                <span class="ut-stat-label">Community + Live Pods</span>
             </div>
         </div>
     </div>
 </section>
+
+{{! ── Certification tracks ─────────────────────────────────────────────────── }}
+<section class="ut-section ut-section-surface" id="ut-tracks" aria-labelledby="ut-tracks-heading">
+    <div class="ut-container">
+        <div class="ut-section-header">
+            <span class="ut-eyebrow">Certification Paths</span>
+            <h2 id="ut-tracks-heading">Structured tracks for the roles you hire for</h2>
+            <p>
+                Each track follows CompTIA exam blueprints with objective-mapped lessons, knowledge checks,
+                hands-on labs, and readiness dashboards — the CertMaster methodology inside a community you
+                actually want to open every day.
+            </p>
+        </div>
+
+        <div class="ut-frontpage-tracks">
+            <article class="ut-cert-track-card ut-cert-track-active">
+                <span class="ut-cert-track-badge">Available now</span>
+                <h3>CompTIA Security+</h3>
+                <p class="ut-cert-track-exam">Exam SY0-701 · 5 domains · 90 min</p>
+                <p>
+                    Threat management, architecture, operations, program management, and governance —
+                    with confidence-rated quizzes that surface dangerous misconceptions before exam day.
+                </p>
+                {{#hassec701}}
+                <a href="{{sec701url}}" class="btn-ut-teal">Enter SEC701 Classroom</a>
+                {{/hassec701}}
+                {{^hassec701}}
+                <a href="{{coursesurl}}" class="btn-ut-teal">View Courses</a>
+                {{/hassec701}}
+            </article>
+
+            <article class="ut-cert-track-card">
+                <span class="ut-cert-track-badge ut-cert-track-badge-soon">Coming soon</span>
+                <h3>CompTIA Network+</h3>
+                <p class="ut-cert-track-exam">Exam N10-009 · Infrastructure &amp; troubleshooting</p>
+                <p>
+                    Routing, switching, wireless, cloud networking, and network security for administrators
+                    moving into hybrid infrastructure roles.
+                </p>
+            </article>
+
+            <article class="ut-cert-track-card">
+                <span class="ut-cert-track-badge ut-cert-track-badge-soon">Coming soon</span>
+                <h3>CompTIA A+</h3>
+                <p class="ut-cert-track-exam">Exams 220-1101 &amp; 220-1102 · Core 1 &amp; Core 2</p>
+                <p>
+                    Hardware, OS, security, cloud, and operational procedures — the foundation path for
+                    help desk technicians and junior sysadmins entering IT.
+                </p>
+            </article>
+
+            <article class="ut-cert-track-card">
+                <span class="ut-cert-track-badge ut-cert-track-badge-soon">Roadmap</span>
+                <h3>Cloud &amp; Sysadmin</h3>
+                <p class="ut-cert-track-exam">AWS · Azure · Linux operations</p>
+                <p>
+                    Cloud architecture, identity, automation, and production operations with portfolio
+                    artifacts you can show hiring managers — not just multiple-choice memorization.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+{{! ── Platform pillars ───────────────────────────────────────────────────────── }}
+<section class="ut-section" id="ut-features" aria-labelledby="ut-features-heading">
+    <div class="ut-container">
+        <div class="ut-section-header">
+            <span class="ut-eyebrow">Why UnderstandTech</span>
+            <h2 id="ut-features-heading">Three proven models. One certification platform.</h2>
+            <p>
+                We synthesize the best of Skool's community engagement, Loom's cinematic instruction, and
+                CertMaster's exam readiness — then add AI augmentation and named instructors who teach as a vocation.
+            </p>
+        </div>
+
+        <div class="ut-frontpage-pillars">
+            <article class="ut-feature-card">
+                <span class="ut-card-icon" aria-hidden="true">🎯</span>
+                <h3 class="ut-card-title">Exam Readiness Engine</h3>
+                <p class="ut-card-body">
+                    Every question ties to a certification objective. After each attempt you rate confidence —
+                    Guessing, Unsure, Confident, or Certain — so study time targets dangerous misconceptions first.
+                </p>
+                <a href="{{certmasterurl}}" class="ut-card-badge">CertMaster-equivalent tracking</a>
+            </article>
+
+            <article class="ut-feature-card">
+                <span class="ut-card-icon" aria-hidden="true">🎬</span>
+                <h3 class="ut-card-title">Cinematic Video Lessons</h3>
+                <p class="ut-card-body">
+                    Instructor-led async video with face overlay, signed stream delivery, and lesson navigation
+                    beside the player — the Loom production model inside a structured LMS.
+                </p>
+                <span class="ut-card-badge">Edge-secured video</span>
+            </article>
+
+            <article class="ut-feature-card">
+                <span class="ut-card-icon" aria-hidden="true">🤝</span>
+                <h3 class="ut-card-title">Community-First Classroom</h3>
+                <p class="ut-card-body">
+                    Classroom, community feed, calendar, members, and leaderboards in one identity — daily
+                    engagement that certification libraries alone cannot replicate.
+                </p>
+                <a href="{{communityurl}}" class="ut-card-badge">Join the community</a>
+            </article>
+
+            <article class="ut-feature-card">
+                <span class="ut-card-icon" aria-hidden="true">🤖</span>
+                <h3 class="ut-card-title">AI Tutor &amp; Grading</h3>
+                <p class="ut-card-body">
+                    A 24/7 tutor that knows your progress, never reveals quiz answers, and gives instructors
+                    leverage through AI-assisted grading and feedback at scale.
+                </p>
+                <a href="{{aitutorurl}}" class="ut-card-badge">Open AI tutor</a>
+            </article>
+        </div>
+    </div>
+</section>
+
+{{! ── How it works ───────────────────────────────────────────────────────────── }}
+<section class="ut-section ut-section-dark" id="ut-how-it-works" aria-labelledby="ut-how-heading">
+    <div class="ut-container">
+        <div class="ut-section-header">
+            <span class="ut-eyebrow">Learning Loop</span>
+            <h2 id="ut-how-heading">How certification training works here</h2>
+            <p>
+                A deliberate loop — not a content library you binge once. Progress is measured, shared, and
+                defensible for employers and auditors alike.
+            </p>
+        </div>
+
+        <ol class="ut-frontpage-steps">
+            <li>
+                <span class="ut-step-num" aria-hidden="true">1</span>
+                <div>
+                    <h3>Choose your certification track</h3>
+                    <p>Start with Security+ SEC701 or preview upcoming Network+, A+, and cloud sysadmin paths aligned to job roles.</p>
+                </div>
+            </li>
+            <li>
+                <span class="ut-step-num" aria-hidden="true">2</span>
+                <div>
+                    <h3>Learn with video, labs &amp; community</h3>
+                    <p>Watch objective-mapped lessons, complete hands-on labs that build portfolio artifacts, and discuss concepts with peers and instructors.</p>
+                </div>
+            </li>
+            <li>
+                <span class="ut-step-num" aria-hidden="true">3</span>
+                <div>
+                    <h3>Practice with confidence-rated checks</h3>
+                    <p>Knowledge checks capture correctness and confidence together — surfacing lucky guesses and solid mastery before you sit the real exam.</p>
+                </div>
+            </li>
+            <li>
+                <span class="ut-step-num" aria-hidden="true">4</span>
+                <div>
+                    <h3>Earn credentials that matter</h3>
+                    <p>Track domain readiness, climb the leaderboard, and graduate with verifiable outcomes — not just a completion checkbox.</p>
+                </div>
+            </li>
+        </ol>
+    </div>
+</section>
+
+{{! ── Audience ───────────────────────────────────────────────────────────────── }}
+<section class="ut-section" id="ut-audience" aria-labelledby="ut-audience-heading">
+    <div class="ut-container">
+        <div class="ut-section-header">
+            <span class="ut-eyebrow">Built For</span>
+            <h2 id="ut-audience-heading">Professionals pursuing high-stakes IT credentials</h2>
+        </div>
+
+        <div class="ut-frontpage-audience">
+            <article class="ut-audience-card">
+                <h3>Cybersecurity</h3>
+                <p>
+                    Analysts, SOC engineers, and career changers preparing for Security+ and advanced
+                    defensive roles — with labs that mirror real incident response workflows.
+                </p>
+            </article>
+            <article class="ut-audience-card">
+                <h3>Cloud Engineering</h3>
+                <p>
+                    Architects and platform engineers who need structured paths through identity, networking,
+                    and automation — not scattered vendor slide decks.
+                </p>
+            </article>
+            <article class="ut-audience-card">
+                <h3>System Administration</h3>
+                <p>
+                    Help desk graduates and infrastructure admins building Network+ and A+ foundations before
+                    specializing in hybrid cloud operations.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+{{! ── Final CTA ──────────────────────────────────────────────────────────────── }}
+<section class="ut-section ut-section-dark ut-frontpage-cta" aria-labelledby="ut-cta-heading">
+    <div class="ut-container ut-frontpage-cta-inner">
+        <div>
+            <span class="ut-eyebrow">Start Today</span>
+            <h2 id="ut-cta-heading">Your next certification starts in the classroom</h2>
+            <p>
+                Audit sample lessons free, explore the community, and experience the AI tutor demo —
+                then upgrade when you are ready for full labs and exam readiness tracking.
+            </p>
+        </div>
+        <div class="ut-hero-cta-group ut-frontpage-cta-actions">
+            {{#isloggedin}}
+            {{#hassec701}}
+            <a href="{{sec701url}}" class="btn-ut-primary">Open SEC701</a>
+            {{/hassec701}}
+            <a href="{{leaderboardurl}}" class="btn-ut-outline">View Leaderboard</a>
+            {{/isloggedin}}
+            {{^isloggedin}}
+            <a href="{{loginurl}}" class="btn-ut-primary">Create Free Account</a>
+            <a href="{{coursesurl}}" class="btn-ut-outline">Browse Courses</a>
+            {{/isloggedin}}
+        </div>
+    </div>
+</section>
+
+</div>
