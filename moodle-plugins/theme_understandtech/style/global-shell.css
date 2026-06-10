@@ -1574,6 +1574,103 @@ body.ut-theme.ut-quiz-page #page.drawers .main-inner {
     justify-content: flex-start;
 }
 
+/* ── mod/page lesson — collapse Boost drawers viewport stretch (same root cause as quiz) */
+body.ut-theme.path-mod-page #page.drawers,
+body.ut-theme.ut-lesson-page #page.drawers,
+body.ut-theme.ut-incourse.path-mod-page #page.drawers,
+#page-mod-page-view.drawers {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+body.ut-theme.path-mod-page #page.drawers .main-inner,
+body.ut-theme.ut-lesson-page #page.drawers .main-inner,
+body.ut-theme.ut-incourse.path-mod-page #page.drawers .main-inner,
+#page-mod-page-view.drawers .main-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin-top: 0.75rem;
+}
+
+body.ut-theme.path-mod-page #page-header,
+body.ut-theme.ut-lesson-page #page-header,
+#page-mod-page-view #page-header {
+    margin-top: 0 !important;
+    padding-top: 0.5rem;
+    flex: 0 0 auto;
+}
+
+body.ut-theme.path-mod-page #region-main,
+body.ut-theme.ut-lesson-page #region-main,
+body.ut-theme.path-mod-page #region-main.h-100,
+body.ut-theme.ut-lesson-page #region-main.h-100,
+#page-mod-page-view #region-main {
+    max-width: none;
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+body.ut-theme.path-mod-page #region-main-box,
+body.ut-theme.path-mod-page #page-content,
+body.ut-theme.ut-lesson-page #region-main-box,
+body.ut-theme.ut-lesson-page #page-content,
+#page-mod-page-view #region-main-box,
+#page-mod-page-view #page-content {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+body.ut-theme.path-mod-page .activity-header,
+body.ut-theme.ut-lesson-page .activity-header {
+    margin: 0 0 1rem;
+    padding: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.ut-theme.path-mod-page #region-main > .card,
+body.ut-theme.ut-lesson-page #region-main > .card,
+#page-mod-page-view #region-main > .card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+body.ut-theme.path-mod-page #region-main > .card > .card-body,
+body.ut-theme.ut-lesson-page #region-main > .card > .card-body,
+#page-mod-page-view #region-main > .card > .card-body {
+    padding: 0;
+    background: transparent;
+}
+
+body.ut-theme.ut-lesson-page #page.drawers,
+body.ut-theme.ut-lesson-page #page.drawers .main-inner,
+body.ut-theme.ut-lesson-page #page-content,
+body.ut-theme.ut-lesson-page #region-main-box,
+body.ut-theme.ut-lesson-page #region-main {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+body.ut-theme.ut-lesson-page #page.drawers .main-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
 /* CertMaster confidence — layout after duplicate-render fix */
 body.ut-theme .ut-confidence-rating {
     margin-top: 1.25rem;

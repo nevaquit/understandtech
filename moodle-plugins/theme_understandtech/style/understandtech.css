@@ -168,6 +168,65 @@ body.path-mod-quiz-summary #page.drawers .main-inner,
     color: #0B1F3A;
 }
 
+/* mod/page lesson — collapse Boost drawers viewport stretch (see global-shell.css). */
+body.path-mod-page #page.drawers,
+body.ut-lesson-page #page.drawers,
+#page-mod-page-view.drawers {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+body.path-mod-page #page.drawers .main-inner,
+body.ut-lesson-page #page.drawers .main-inner,
+#page-mod-page-view.drawers .main-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+.path-mod-page #region-main,
+.ut-lesson-page #region-main,
+.path-mod-page #region-main.h-100,
+.ut-lesson-page #region-main.h-100 {
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+.path-mod-page #region-main-box,
+.path-mod-page #page-content,
+.ut-lesson-page #region-main-box,
+.ut-lesson-page #page-content {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+.path-mod-page #page-header,
+.ut-lesson-page #page-header {
+    margin-top: 0 !important;
+    padding-top: 0.5rem;
+}
+
+.path-mod-page #region-main > .card,
+.ut-lesson-page #region-main > .card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+.path-mod-page #region-main > .card > .card-body,
+.ut-lesson-page #region-main > .card > .card-body {
+    padding: 0;
+    background: transparent;
+}
+
 /* ── Site-wide: kill Boost white blocks (navbar, secondary nav, main-inner) ── */
 body.ut-theme #page.drawers .main-inner,
 body.ut-theme #page.drawers .drawer-main-content {

@@ -28,6 +28,12 @@
         box-shadow: none !important;
     }
 
+    #page.drawers {
+        flex: 0 1 auto !important;
+        min-height: 0 !important;
+        height: auto !important;
+    }
+
     #region-main {
         max-width: none;
         height: auto !important;
@@ -37,20 +43,43 @@
 
     #region-main-box,
     #page-content {
-        min-height: 0;
-        height: auto;
+        flex: 0 1 auto !important;
+        min-height: 0 !important;
+        height: auto !important;
     }
 
-    .main-inner {
-        min-height: 0;
-        align-items: flex-start;
+    #page-header {
+        margin-top: 0 !important;
+        padding-top: 0.5rem;
+        flex: 0 0 auto;
+    }
+
+    .main-inner,
+    #page.drawers .main-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        flex: 0 1 auto !important;
+        min-height: 0 !important;
+        height: auto !important;
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
     }
 
-    #page.drawers .main-inner {
+    #region-main > .card {
         background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        height: auto !important;
+
+        > .card-body {
+            padding: 0;
+            background: transparent;
+        }
     }
 
     &:not(.hasblocks) [data-region="blocks-content"] {

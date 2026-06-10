@@ -167,11 +167,52 @@ body.ut-lesson-page:has(.ut-lesson-content) .activity-header {
     pointer-events: none;
 }
 
-/* Boost drawers + h-100 stretch #region-main to viewport height → large blank navy gap. */
+/* Boost drawers + h-100 stretch #region-main to viewport height → large blank navy gap.
+ * Requires flex: 0 1 auto on #page.drawers and ancestors (quiz fix in global-shell.css). */
+body.path-mod-page #page.drawers,
+body.ut-lesson-page #page.drawers,
+#page-mod-page-view.drawers {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+body.path-mod-page #page.drawers .main-inner,
+body.ut-lesson-page #page.drawers .main-inner,
+#page-mod-page-view.drawers .main-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin-top: 0.75rem;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.path-mod-page #page-header,
+body.ut-lesson-page #page-header,
+#page-mod-page-view #page-header {
+    margin-top: 0 !important;
+    padding-top: 0.5rem;
+    flex: 0 0 auto;
+}
+
 .path-mod-page #region-main,
-#page-mod-page-view #region-main {
+#page-mod-page-view #region-main,
+.ut-lesson-page #region-main {
     max-width: none;
     width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+.path-mod-page #region-main.h-100,
+.ut-lesson-page #region-main.h-100,
+#page-mod-page-view #region-main.h-100 {
     height: auto !important;
     min-height: 0 !important;
 }
@@ -179,21 +220,12 @@ body.ut-lesson-page:has(.ut-lesson-content) .activity-header {
 .path-mod-page #region-main-box,
 .path-mod-page #page-content,
 #page-mod-page-view #region-main-box,
-#page-mod-page-view #page-content {
-    min-height: 0;
-    height: auto;
-}
-
-.path-mod-page .main-inner,
-#page-mod-page-view .main-inner,
-.ut-lesson-page .main-inner,
-body.path-mod-page #page.drawers .main-inner,
-body.ut-lesson-page #page.drawers .main-inner {
-    min-height: 0;
-    align-items: flex-start;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+#page-mod-page-view #page-content,
+.ut-lesson-page #region-main-box,
+.ut-lesson-page #page-content {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
 }
 
 body.path-mod-page #page.drawers #page-content,
@@ -201,6 +233,24 @@ body.ut-lesson-page #page.drawers #page-content,
 body.path-mod-page #page.drawers #region-main-box,
 body.ut-lesson-page #page.drawers #region-main-box {
     background: transparent !important;
+}
+
+.path-mod-page #region-main > .card,
+.ut-lesson-page #region-main > .card,
+#page-mod-page-view #region-main > .card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+.path-mod-page #region-main > .card > .card-body,
+.ut-lesson-page #region-main > .card > .card-body,
+#page-mod-page-view #region-main > .card > .card-body {
+    padding: 0;
+    background: transparent;
 }
 
 /* Course index drawer — navy shell instead of Boost light gray */
