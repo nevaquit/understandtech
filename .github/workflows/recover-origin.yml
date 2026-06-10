@@ -35,7 +35,8 @@ jobs:
         if: inputs.fix_page_filters
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-page-filter-cache-vm.sh" 4
+          export SEC701_COURSE_ID=3
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-sec701-course-filters-vm.sh"
 
       - name: Diagnose course index drawer
         continue-on-error: true
