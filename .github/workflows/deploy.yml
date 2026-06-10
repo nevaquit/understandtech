@@ -218,9 +218,9 @@ jobs:
           export STAGING_TEST_USER_EMAIL="${STAGING_TEST_USER_EMAIL:-${MOODLE_E2E_USER:-e2etest}}"
           export STAGING_TEST_USER_PASSWORD="${STAGING_TEST_USER_PASSWORD:-${MOODLE_E2E_PASS:-UtE2eTest2026Secure}}"
           export E2E_COURSE_PATH="${E2E_COURSE_PATH:-/course/view.php?id=2}"
-          # Deploy gate: chromium only (runner installs chromium deps); explicit specs avoid ai-tutor/video.
-          npx playwright test --project=setup --project=chromium --project=chromium-auth --workers=1 \
-            auth.setup.ts auth.spec.ts course-navigation.spec.ts exam-readiness.spec.ts
+          # Deploy gate: setup login + navigation (skip auth.spec — duplicates setup and hits /login rate limit).
+          npx playwright test --project=setup --project=chromium --workers=1 \
+            auth.setup.ts course-navigation.spec.ts exam-readiness.spec.ts
 
       - name: Upload Playwright report
         if: failure()
