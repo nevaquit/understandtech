@@ -130,12 +130,77 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
 
     /**
+     * Member-area navigation cards for the logged-in LMS home page.
+     *
+     * @param string $profileurl Logged-in user profile URL.
+     * @return list<array{title: string, description: string, url: string, icon: string}>
+     */
+    protected function export_frontpage_member_nav(string $profileurl): array {
+        return [
+            [
+                'title'       => get_string('community', 'local_community'),
+                'description' => get_string('frontpage_nav_community_desc', 'theme_understandtech'),
+                'url'         => (new moodle_url('/local/community/community.php'))->out(false),
+                'icon'        => 'community',
+            ],
+            [
+                'title'       => get_string('classroom', 'local_community'),
+                'description' => get_string('frontpage_nav_classroom_desc', 'theme_understandtech'),
+                'url'         => (new moodle_url('/local/community/classroom.php'))->out(false),
+                'icon'        => 'classroom',
+            ],
+            [
+                'title'       => get_string('calendar', 'local_community'),
+                'description' => get_string('frontpage_nav_calendar_desc', 'theme_understandtech'),
+                'url'         => (new moodle_url('/local/community/calendar.php'))->out(false),
+                'icon'        => 'calendar',
+            ],
+            [
+                'title'       => get_string('members', 'local_community'),
+                'description' => get_string('frontpage_nav_members_desc', 'theme_understandtech'),
+                'url'         => (new moodle_url('/local/community/members.php'))->out(false),
+                'icon'        => 'members',
+            ],
+            [
+                'title'       => get_string('frontpage_nav_leaderboard_title', 'theme_understandtech'),
+                'description' => get_string('frontpage_nav_leaderboard_desc', 'theme_understandtech'),
+                'url'         => (new moodle_url('/local/gamification/leaderboard.php'))->out(false),
+                'icon'        => 'leaderboard',
+            ],
+            [
+                'title'       => get_string('myhome', 'moodle'),
+                'description' => get_string('frontpage_nav_dashboard_desc', 'theme_understandtech'),
+                'url'         => (new moodle_url('/my/'))->out(false),
+                'icon'        => 'dashboard',
+            ],
+            [
+                'title'       => get_string('frontpage_nav_certmaster_title', 'theme_understandtech'),
+                'description' => get_string('frontpage_nav_certmaster_desc', 'theme_understandtech'),
+                'url'         => (new moodle_url('/local/certmaster/index.php'))->out(false),
+                'icon'        => 'readiness',
+            ],
+            [
+                'title'       => get_string('pluginname', 'local_aitutor'),
+                'description' => get_string('frontpage_nav_aitutor_desc', 'theme_understandtech'),
+                'url'         => (new moodle_url('/local/aitutor/index.php'))->out(false),
+                'icon'        => 'tutor',
+            ],
+            [
+                'title'       => get_string('frontpage_nav_profile_title', 'theme_understandtech'),
+                'description' => get_string('frontpage_nav_profile_desc', 'theme_understandtech'),
+                'url'         => $profileurl,
+                'icon'        => 'profile',
+            ],
+        ];
+    }
+
+    /**
      * Export Mustache context for the LMS home (frontpage) marketing layout.
      *
      * @return array<string, mixed>
      */
     protected function export_frontpage_context(): array {
-        global $CFG, $DB;
+        global $CFG, $DB, $USER;
 
         $isloggedin = isloggedin() && !isguestuser();
         $sec701 = $DB->get_record('course', ['shortname' => 'SEC701'], 'id', IGNORE_MISSING);
@@ -144,19 +209,38 @@ class core_renderer extends \theme_boost\output\core_renderer {
             ? (new moodle_url('/course/view.php', ['id' => $sec701->id]))->out(false)
             : '';
 
+        $profileurl = $isloggedin
+            ? (new moodle_url('/user/profile.php', ['id' => $USER->id]))->out(false)
+            : '';
+
         return [
-            'wwwroot'         => $CFG->wwwroot,
-            'sitename'        => format_string(get_site()->fullname),
-            'isloggedin'      => $isloggedin,
-            'hassec701'       => $hassec701,
-            'loginurl'        => (new moodle_url('/login/index.php'))->out(false),
-            'dashboardurl'    => (new moodle_url('/my/'))->out(false),
-            'sec701url'       => $sec701url,
-            'coursesurl'      => (new moodle_url('/course/index.php'))->out(false),
-            'communityurl'    => (new moodle_url('/local/community/community.php'))->out(false),
-            'certmasterurl'   => (new moodle_url('/local/certmaster/index.php'))->out(false),
-            'aitutorurl'      => (new moodle_url('/local/aitutor/index.php'))->out(false),
-            'leaderboardurl'  => (new moodle_url('/local/gamification/leaderboard.php'))->out(false),
+            'wwwroot'          => $CFG->wwwroot,
+            'sitename'         => format_string(get_site()->fullname),
+            'isloggedin'       => $isloggedin,
+            'hassec701'        => $hassec701,
+            'username'         => $isloggedin ? fullname($USER) : '',
+            'loginurl'         => (new moodle_url('/login/index.php'))->out(false),
+            'dashboardurl'     => (new moodle_url('/my/'))->out(false),
+            'profileurl'       => $profileurl,
+            'sec701url'        => $sec701url,
+            'coursesurl'       => (new moodle_url('/course/index.php'))->out(false),
+            'communityurl'     => (new moodle_url('/local/community/community.php'))->out(false),
+            'classroomurl'     => (new moodle_url('/local/community/classroom.php'))->out(false),
+            'calendarurl'      => (new moodle_url('/local/community/calendar.php'))->out(false),
+            'membersurl'       => (new moodle_url('/local/community/members.php'))->out(false),
+            'certmasterurl'    => (new moodle_url('/local/certmaster/index.php'))->out(false),
+            'aitutorurl'       => (new moodle_url('/local/aitutor/index.php'))->out(false),
+            'leaderboardurl'   => (new moodle_url('/local/gamification/leaderboard.php'))->out(false),
+            'membersheading'   => get_string('frontpage_members_heading', 'theme_understandtech'),
+            'membersdesc'      => get_string('frontpage_members_desc', 'theme_understandtech'),
+            'memberswelcome'   => $isloggedin
+                ? get_string('frontpage_members_welcome', 'theme_understandtech', fullname($USER))
+                : '',
+            'membersherotitle' => get_string('frontpage_members_hero_title', 'theme_understandtech'),
+            'membersherodesc'  => get_string('frontpage_members_hero_desc', 'theme_understandtech'),
+            'membersguestheading' => get_string('frontpage_members_guest_heading', 'theme_understandtech'),
+            'membersguestdesc'   => get_string('frontpage_members_guest_desc', 'theme_understandtech'),
+            'membernav'        => $isloggedin ? $this->export_frontpage_member_nav($profileurl) : [],
         ];
     }
 

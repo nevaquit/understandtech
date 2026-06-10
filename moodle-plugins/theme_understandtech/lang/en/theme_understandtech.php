@@ -54,3 +54,24 @@ $string['rawscsspre_desc']     = 'SCSS injected before the theme preset. Use to 
 
 // ── Privacy ───────────────────────────────────────────────────────────────────
 $string['privacy:metadata']    = 'The UnderstandTech theme does not store any personal data.';
+
+// ── Front page (members hub) ──────────────────────────────────────────────────
+$string['frontpage_members_heading'] = 'Members area';
+$string['frontpage_members_desc'] = 'Your home base after sign-in — community, classroom, calendar, and certification tools in one place.';
+$string['frontpage_members_welcome'] = 'Welcome back, {$a}';
+$string['frontpage_members_hero_title'] = 'Your certification command center';
+$string['frontpage_members_hero_desc'] = 'Use the members area below to pick up lessons, join discussions, check the calendar, or review exam readiness.';
+$string['frontpage_nav_community_desc'] = 'Community feed, forum highlights, and peer discussions.';
+$string['frontpage_nav_classroom_desc'] = 'Certification tracks, enrolled courses, and lesson progress.';
+$string['frontpage_nav_calendar_desc'] = 'Live cohort sessions, office hours, and scheduled events.';
+$string['frontpage_nav_members_desc'] = 'Member directory, profiles, levels, and cohort peers.';
+$string['frontpage_nav_leaderboard_title'] = 'Leaderboard';
+$string['frontpage_nav_leaderboard_desc'] = 'XP rankings, streaks, badges, and weekly standings.';
+$string['frontpage_nav_dashboard_desc'] = 'Your Moodle dashboard, timeline, and enrolled courses.';
+$string['frontpage_nav_certmaster_title'] = 'Exam readiness';
+$string['frontpage_nav_certmaster_desc'] = 'Domain readiness, confidence mastery, and study plans.';
+$string['frontpage_nav_aitutor_desc'] = 'AI tutor sessions grounded in your course progress.';
+$string['frontpage_nav_profile_title'] = 'My profile';
+$string['frontpage_nav_profile_desc'] = 'Your public profile, achievements, and account settings.';
+$string['frontpage_members_guest_heading'] = 'Members area (sign in required)';
+$string['frontpage_members_guest_desc'] = 'After you sign in, Home becomes your hub for Community, Classroom, Calendar, Members, and more.';

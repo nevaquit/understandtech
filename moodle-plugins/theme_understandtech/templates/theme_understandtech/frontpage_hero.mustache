@@ -16,6 +16,29 @@
     <div class="ut-container">
         <div class="ut-hero-inner">
             <div class="ut-hero-content">
+                {{#isloggedin}}
+                <span class="ut-eyebrow">{{memberswelcome}}</span>
+                <h1 id="ut-hero-heading">{{membersherotitle}}</h1>
+                <p>{{membersherodesc}}</p>
+
+                <div class="ut-hero-cta-group">
+                    <a href="#ut-members" class="btn-ut-primary">
+                        Open Members Area
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                    </a>
+                    {{#hassec701}}
+                    <a href="{{sec701url}}" class="btn-ut-outline">Continue Security+</a>
+                    {{/hassec701}}
+                    <a href="{{classroomurl}}" class="btn-ut-outline">Classroom</a>
+                </div>
+
+                <div class="ut-hero-trust">
+                    <span class="ut-trust-item">Community &amp; classroom</span>
+                    <span class="ut-trust-item">Calendar &amp; members</span>
+                    <span class="ut-trust-item">Readiness &amp; AI tutor</span>
+                </div>
+                {{/isloggedin}}
+                {{^isloggedin}}
                 <span class="ut-eyebrow">Certification Training for IT Professionals</span>
                 <h1 id="ut-hero-heading">
                     Master Cybersecurity,<br>
@@ -30,22 +53,11 @@
                 </p>
 
                 <div class="ut-hero-cta-group">
-                    {{#isloggedin}}
-                    {{#hassec701}}
-                    <a href="{{sec701url}}" class="btn-ut-primary">
-                        Continue Security+ Track
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    {{/hassec701}}
-                    <a href="{{dashboardurl}}" class="btn-ut-outline">My Dashboard</a>
-                    {{/isloggedin}}
-                    {{^isloggedin}}
                     <a href="{{loginurl}}" class="btn-ut-primary">
                         Start Free Audit
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
                     <a href="#ut-tracks" class="btn-ut-outline">Browse Cert Tracks</a>
-                    {{/isloggedin}}
                 </div>
 
                 <div class="ut-hero-trust">
@@ -53,6 +65,7 @@
                     <span class="ut-trust-item">Confidence-based mastery</span>
                     <span class="ut-trust-item">WCAG 2.1 AA accessible</span>
                 </div>
+                {{/isloggedin}}
             </div>
 
             <div class="ut-hero-visual" aria-hidden="true">
@@ -121,6 +134,52 @@
         </div>
     </div>
 </section>
+
+{{! ── Members area hub (logged in) ──────────────────────────────────────────── }}
+{{#isloggedin}}
+<section class="ut-section ut-section-surface ut-frontpage-members" id="ut-members" aria-labelledby="ut-members-heading">
+    <div class="ut-container">
+        <div class="ut-section-header">
+            <span class="ut-eyebrow">Members area</span>
+            <h2 id="ut-members-heading">{{membersheading}}</h2>
+            <p>{{membersdesc}}</p>
+        </div>
+
+        <nav class="ut-member-nav-grid" aria-label="Members area navigation">
+            {{#membernav}}
+            <a href="{{url}}" class="ut-member-nav-card">
+                <span class="ut-member-nav-icon ut-member-nav-icon--{{icon}}" aria-hidden="true"></span>
+                <span class="ut-member-nav-title">{{title}}</span>
+                <span class="ut-member-nav-desc">{{description}}</span>
+            </a>
+            {{/membernav}}
+        </nav>
+    </div>
+</section>
+{{/isloggedin}}
+
+{{^isloggedin}}
+<section class="ut-section ut-section-surface ut-frontpage-members-guest" id="ut-members" aria-labelledby="ut-members-guest-heading">
+    <div class="ut-container">
+        <div class="ut-section-header">
+            <span class="ut-eyebrow">After sign-in</span>
+            <h2 id="ut-members-guest-heading">{{membersguestheading}}</h2>
+            <p>{{membersguestdesc}}</p>
+        </div>
+
+        <div class="ut-member-nav-grid ut-member-nav-grid--locked" aria-hidden="true">
+            <div class="ut-member-nav-card ut-member-nav-card--locked"><span class="ut-member-nav-title">Community</span></div>
+            <div class="ut-member-nav-card ut-member-nav-card--locked"><span class="ut-member-nav-title">Classroom</span></div>
+            <div class="ut-member-nav-card ut-member-nav-card--locked"><span class="ut-member-nav-title">Calendar</span></div>
+            <div class="ut-member-nav-card ut-member-nav-card--locked"><span class="ut-member-nav-title">Members</span></div>
+        </div>
+
+        <p class="ut-frontpage-members-guest-cta">
+            <a href="{{loginurl}}" class="btn-ut-primary">Sign in to open members area</a>
+        </p>
+    </div>
+</section>
+{{/isloggedin}}
 
 {{! ── Capability stats ─────────────────────────────────────────────────────── }}
 <section class="ut-section-sm ut-section-dark" aria-label="Platform capabilities">
@@ -357,10 +416,10 @@
         </div>
         <div class="ut-hero-cta-group ut-frontpage-cta-actions">
             {{#isloggedin}}
+            <a href="#ut-members" class="btn-ut-primary">Members area</a>
             {{#hassec701}}
-            <a href="{{sec701url}}" class="btn-ut-primary">Open SEC701</a>
+            <a href="{{sec701url}}" class="btn-ut-outline">Open SEC701</a>
             {{/hassec701}}
-            <a href="{{leaderboardurl}}" class="btn-ut-outline">View Leaderboard</a>
             {{/isloggedin}}
             {{^isloggedin}}
             <a href="{{loginurl}}" class="btn-ut-primary">Create Free Account</a>

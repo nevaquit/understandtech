@@ -1027,9 +1027,102 @@ body.ut-theme .ut-progress-fill-muted {
 
 @media (prefers-reduced-motion: reduce) {
     body.ut-theme .ut-cert-track-card,
-    body.ut-theme .ut-feature-card {
+    body.ut-theme .ut-feature-card,
+    body.ut-theme .ut-member-nav-card {
         transition: none;
     }
+}
+
+/* ── Frontpage members area navigation ─────────────────────────────────────── */
+body.ut-theme .ut-member-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1rem;
+}
+
+body.ut-theme .ut-member-nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    min-height: 100%;
+    background: var(--ut-navy);
+    border: 1px solid var(--ut-border);
+    border-radius: var(--ut-radius-lg);
+    text-decoration: none !important;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.ut-theme .ut-member-nav-card:hover,
+body.ut-theme .ut-member-nav-card:focus,
+body.ut-theme .ut-member-nav-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: rgba(201, 162, 39, 0.45);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    outline: 2px solid rgba(201, 162, 39, 0.35);
+    outline-offset: 2px;
+}
+
+body.ut-theme .ut-member-nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--ut-radius-md);
+    background: rgba(26, 138, 125, 0.18);
+    border: 1px solid rgba(26, 138, 125, 0.35);
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ut-teal-light);
+}
+
+body.ut-theme .ut-member-nav-icon--community::before { content: "Feed"; }
+body.ut-theme .ut-member-nav-icon--classroom::before { content: "Learn"; }
+body.ut-theme .ut-member-nav-icon--calendar::before { content: "Cal"; }
+body.ut-theme .ut-member-nav-icon--members::before { content: "Dir"; }
+body.ut-theme .ut-member-nav-icon--leaderboard::before { content: "Rank"; }
+body.ut-theme .ut-member-nav-icon--dashboard::before { content: "Home"; }
+body.ut-theme .ut-member-nav-icon--readiness::before { content: "Exam"; }
+body.ut-theme .ut-member-nav-icon--tutor::before { content: "AI"; }
+body.ut-theme .ut-member-nav-icon--profile::before { content: "You"; }
+
+body.ut-theme .ut-member-nav-title {
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: var(--ut-white);
+}
+
+body.ut-theme .ut-member-nav-desc {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--ut-text-muted);
+}
+
+body.ut-theme .ut-member-nav-grid--locked .ut-member-nav-card--locked {
+    opacity: 0.45;
+    pointer-events: none;
+    min-height: 5rem;
+    justify-content: center;
+}
+
+body.ut-theme .ut-frontpage-members-guest-cta {
+    text-align: center;
+    margin: 1.5rem 0 0;
+}
+
+body.ut-theme.ut-frontpage.pagelayout-frontpage .ut-frontpage-hero.ut-hero {
+    min-height: auto;
+    padding-bottom: 0;
+}
+
+body.ut-theme.ut-frontpage.pagelayout-frontpage .ut-frontpage-members {
+    padding-top: clamp(2rem, 5vw, 3rem);
 }
 
 body.ut-theme .dashboard-card,
