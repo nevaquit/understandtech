@@ -87,12 +87,12 @@ Used by `deploy-ai-gateway.yml`, `deploy-marketing.yml` (cache purge), and `crea
 |-------|------------|
 | Account | Cloudflare Workers Scripts: **Edit** |
 | Account | Workers KV Storage: **Edit** |
-| Account | Workers Routes: **Edit** |
 | Account | Account Settings: **Read** |
 | Account | Cloudflare Origin CA: **Edit** |
 | Zone `understandtech.app` | DNS: **Edit** (staging `A` record) |
 | Zone `understandtech.app` | Cache Purge: **Edit** (marketing deploy) |
 | Zone `understandtech.app` | SSL and Certificates: **Edit** (Worker custom domain `ai.understandtech.app`) |
+| Zone `understandtech.app` | Workers Routes: **Edit** (wrangler route/custom domain bind; dashboard label may show **Write**) |
 
 **Zone ID:** Cloudflare → **understandtech.app** → Overview → right column **Zone ID**.
 
