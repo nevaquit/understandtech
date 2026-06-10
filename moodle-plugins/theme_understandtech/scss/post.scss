@@ -694,6 +694,33 @@ body.ut-theme {
         color: rgba($ut-white, 0.94) !important;
     }
 
+    .que .info .questionflag {
+        margin-top: 0.75rem;
+        pointer-events: auto;
+    }
+
+    .que .info .questionflag label,
+    .que .info .questionflag a.aabtn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.25rem 0.5rem;
+        border: 1px solid rgba($ut-gold, 0.18);
+        border-radius: 0.375rem;
+        background: rgba($ut-teal, 0.14);
+        color: $ut-teal-light !important;
+        font-weight: 600;
+        text-decoration: none !important;
+        cursor: pointer;
+    }
+
+    .que .info .questionflag a.aabtn[aria-pressed="true"],
+    .que .info .questionflag input[type="checkbox"]:checked + label {
+        background: rgba($ut-gold, 0.2);
+        border-color: $ut-gold;
+        color: $ut-gold-light !important;
+    }
+
     .que .answer label,
     .que .qtext,
     .que .qtext p {

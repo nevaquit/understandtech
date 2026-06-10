@@ -94,6 +94,11 @@ function theme_understandtech_page_init(moodle_page $page): void {
 
     if ($page->cm && $page->cm->modname === 'quiz') {
         $page->add_body_class('ut-quiz-page');
+        // Question flags use YUI M.core_question_flags.init; when YUI fails to boot the
+        // raw checkbox stays visible and clicks do not persist — AMD fallback handles it.
+        $page->requires->js_amd_inline(
+            "require(['theme_understandtech/quiz_flag_fallback'], function(m) { m.init(); });",
+        );
     }
 
     if ($page->context) {
