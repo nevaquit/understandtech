@@ -571,32 +571,77 @@ body.ut-theme .btn-outline-secondary:hover {
     color: var(--ut-gold);
 }
 
-/* ── Tables ─────────────────────────────────────────────────────────────────── */
+/* ── Tables (Bootstrap 5 dark — site-wide readability) ─────────────────────── */
 body.ut-theme .table,
-body.ut-theme .generaltable {
-    color: var(--ut-text);
+body.ut-theme .generaltable,
+body.ut-theme table.table,
+body.ut-theme table.generaltable {
+    --bs-table-bg: var(--ut-surface);
+    --bs-table-color: var(--ut-text);
+    --bs-table-border-color: var(--ut-border);
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+    --bs-table-striped-color: var(--ut-text);
+    --bs-table-active-bg: rgba(26, 138, 125, 0.12);
+    --bs-table-active-color: var(--ut-text);
+    --bs-table-hover-bg: rgba(201, 162, 39, 0.06);
+    --bs-table-hover-color: var(--ut-text);
+    background-color: var(--ut-surface) !important;
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme .table > :not(caption) > * > *,
+body.ut-theme .generaltable > :not(caption) > * > *,
+body.ut-theme .table td,
+body.ut-theme .table th,
+body.ut-theme .generaltable td,
+body.ut-theme .generaltable th,
+body.ut-theme .generaltable td.cell,
+body.ut-theme .generaltable th.cell {
+    background-color: transparent !important;
+    color: var(--ut-text) !important;
+    border-color: var(--ut-border) !important;
+}
+
+body.ut-theme .table tbody tr,
+body.ut-theme .generaltable tbody tr {
+    background-color: transparent !important;
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme .table-striped > tbody > tr:nth-of-type(odd) > *,
+body.ut-theme .table-striped tbody tr:nth-of-type(odd) > *,
+body.ut-theme .generaltable tbody tr:nth-of-type(odd) > * {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    color: var(--ut-text) !important;
+}
+
+/* Even rows were staying white (quiz attempt "Started" row) — force dark. */
+body.ut-theme .table-striped > tbody > tr:nth-of-type(even) > *,
+body.ut-theme .table-striped tbody tr:nth-of-type(even) > *,
+body.ut-theme .generaltable tbody tr:nth-of-type(even) > * {
+    background-color: transparent !important;
+    color: var(--ut-text) !important;
 }
 
 body.ut-theme .table thead th,
 body.ut-theme .generaltable thead th {
-    color: var(--ut-gold);
-    border-color: var(--ut-border);
+    color: var(--ut-gold) !important;
+    border-color: var(--ut-border) !important;
     font-family: var(--ut-font-heading);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     font-size: 0.75rem;
+    background-color: rgba(11, 31, 58, 0.55) !important;
 }
 
-body.ut-theme .table td,
-body.ut-theme .table th,
-body.ut-theme .generaltable td,
-body.ut-theme .generaltable th {
-    border-color: var(--ut-border);
-}
-
-body.ut-theme .table-striped tbody tr:nth-of-type(odd),
-body.ut-theme .generaltable tbody tr:nth-of-type(odd) {
-    background: rgba(255, 255, 255, 0.03);
+body.ut-theme .generaltable th.cell[scope="row"],
+body.ut-theme table.quizreviewsummary th.cell[scope="row"],
+body.ut-theme table.quizattemptsummary th.cell[scope="row"] {
+    color: var(--ut-text-muted) !important;
+    font-family: var(--ut-font-body);
+    font-weight: 600;
+    text-transform: none;
+    font-size: 0.875rem;
 }
 
 /* ── Dropdowns, popovers, modals ────────────────────────────────────────────── */
@@ -1059,6 +1104,7 @@ body.ut-theme.path-mod-quiz-review .list-unstyled.row .card-body {
     color: var(--ut-text);
 }
 
+/* Moodle 4.5 attempt_summary_information uses table.quizreviewsummary (not quizattemptsummary). */
 body.ut-theme.path-mod-quiz table.generaltable.generalbox,
 body.ut-theme.path-mod-quiz table.quizattemptsummary,
 body.ut-theme.path-mod-quiz table.quizreviewsummary,
@@ -1067,9 +1113,13 @@ body.ut-theme.path-mod-quiz-summary table.quizreviewsummary,
 body.ut-theme.path-mod-quiz-review table.generaltable.generalbox,
 body.ut-theme.path-mod-quiz-review table.quizreviewsummary,
 body.ut-theme.path-mod-quiz .quizattemptsummary,
-body.ut-theme.path-mod-quiz .quizreviewsummary {
-    --bs-table-bg: transparent;
-    --bs-table-striped-bg: rgba(255, 255, 255, 0.03);
+body.ut-theme.path-mod-quiz .quizreviewsummary,
+body.ut-theme.path-mod-quiz-attempt table.quizreviewsummary,
+body.ut-theme.path-mod-quiz-summary table.quizreviewsummary,
+body.ut-theme.path-mod-quiz-review table.quizreviewsummary {
+    --bs-table-bg: var(--ut-surface);
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+    --bs-table-striped-color: var(--ut-text);
     --bs-table-active-bg: rgba(26, 138, 125, 0.12);
     --bs-table-hover-bg: rgba(201, 162, 39, 0.06);
     --bs-table-color: var(--ut-text);
@@ -1084,35 +1134,30 @@ body.ut-theme.path-mod-quiz .quizreviewsummary {
     width: 100%;
 }
 
+body.ut-theme.path-mod-quiz table.generaltable.generalbox tbody tr,
+body.ut-theme.path-mod-quiz table.quizreviewsummary tbody tr,
+body.ut-theme.path-mod-quiz-summary table.quizreviewsummary tbody tr,
+body.ut-theme.path-mod-quiz-review table.quizreviewsummary tbody tr {
+    background-color: transparent !important;
+}
+
 body.ut-theme.path-mod-quiz table.generaltable.generalbox th.cell,
 body.ut-theme.path-mod-quiz table.generaltable.generalbox td.cell,
 body.ut-theme.path-mod-quiz table.quizattemptsummary th,
 body.ut-theme.path-mod-quiz table.quizattemptsummary td,
-body.ut-theme.path-mod-quiz table.quizreviewsummary th,
-body.ut-theme.path-mod-quiz table.quizreviewsummary td,
+body.ut-theme.path-mod-quiz table.quizreviewsummary th.cell,
+body.ut-theme.path-mod-quiz table.quizreviewsummary td.cell,
 body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox th,
 body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox td,
 body.ut-theme.path-mod-quiz-review table.generaltable.generalbox th,
 body.ut-theme.path-mod-quiz-review table.generaltable.generalbox td {
-    background: transparent !important;
+    background-color: transparent !important;
     color: var(--ut-text) !important;
     border-color: var(--ut-border) !important;
 }
 
-body.ut-theme.path-mod-quiz table.generaltable.generalbox th.cell,
-body.ut-theme.path-mod-quiz table.quizattemptsummary thead th,
-body.ut-theme.path-mod-quiz table.quizreviewsummary th.cell,
-body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox th.cell,
-body.ut-theme.path-mod-quiz-review table.generaltable.generalbox th.cell {
-    color: var(--ut-gold) !important;
-    font-family: var(--ut-font-heading);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-}
-
 body.ut-theme.path-mod-quiz table.generaltable.generalbox th.cell[scope="row"],
+body.ut-theme.path-mod-quiz table.quizreviewsummary th.cell[scope="row"],
 body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox th.cell[scope="row"],
 body.ut-theme.path-mod-quiz-review table.generaltable.generalbox th.cell[scope="row"] {
     color: var(--ut-text-muted) !important;
@@ -1146,16 +1191,22 @@ body.ut-theme.path-mod-quiz .list-unstyled.row .card-body a:hover {
     color: var(--ut-gold-light);
 }
 
-body.ut-theme.path-mod-quiz table.quizattemptsummary tbody tr:nth-of-type(odd),
-body.ut-theme.path-mod-quiz table.generaltable.generalbox tbody tr:nth-of-type(odd) {
-    background: rgba(255, 255, 255, 0.02) !important;
+body.ut-theme.path-mod-quiz table.quizreviewsummary tbody tr:nth-of-type(odd) > *,
+body.ut-theme.path-mod-quiz table.generaltable.generalbox tbody tr:nth-of-type(odd) > * {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+body.ut-theme.path-mod-quiz table.quizreviewsummary tbody tr:nth-of-type(even) > *,
+body.ut-theme.path-mod-quiz table.generaltable.generalbox tbody tr:nth-of-type(even) > * {
+    background-color: transparent !important;
+    color: var(--ut-text) !important;
 }
 
 /* ── Moodle generalbox / mform white leaks (not lesson pages) ─────────────── */
-body.ut-theme:not(.path-mod-page) .generalbox,
-body.ut-theme:not(.path-mod-page) .box.generalbox,
-body.ut-theme:not(.ut-lesson-page) .generalbox,
-body.ut-theme:not(.ut-lesson-page) .box.generalbox {
+body.ut-theme:not(.path-mod-page):not(.ut-lesson-page) .generalbox:not(table),
+body.ut-theme:not(.path-mod-page):not(.ut-lesson-page) .box.generalbox:not(table),
+body.ut-theme:not(.path-mod-page):not(.ut-lesson-page) div.generalbox,
+body.ut-theme:not(.path-mod-page):not(.ut-lesson-page) div.box.generalbox {
     background: var(--ut-surface-elevated);
     border: 1px solid var(--ut-border);
     color: var(--ut-text);
@@ -1790,10 +1841,28 @@ body.ut-theme.path-mod-forum .discussion-list .discussion {
 }
 
 body.ut-theme.path-mod-assign .gradingtable .generaltable,
-body.ut-theme.path-grade .gradereport-grader-table {
+body.ut-theme.path-mod-assign .submissionstatustable .generaltable,
+body.ut-theme.path-grade .gradereport-grader-table,
+body.ut-theme.path-grade-report .gradereport-grader-table,
+body.ut-theme.path-admin .generaltable,
+body.ut-theme.path-user .generaltable,
+body.ut-theme.path-course-view .generaltable,
+body.ut-theme #region-main .userenrolmentfull .generaltable {
     border: 1px solid var(--ut-border);
     border-radius: var(--ut-radius-sm);
     overflow: hidden;
+    background-color: var(--ut-surface) !important;
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme.path-mod-assign .gradingtable .generaltable td,
+body.ut-theme.path-mod-assign .gradingtable .generaltable th,
+body.ut-theme.path-grade .gradereport-grader-table td,
+body.ut-theme.path-grade .gradereport-grader-table th,
+body.ut-theme.path-admin .generaltable td,
+body.ut-theme.path-admin .generaltable th {
+    background-color: transparent !important;
+    color: var(--ut-text) !important;
 }
 
 body.ut-theme.path-mod-assign .submissionstatustable,
