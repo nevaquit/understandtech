@@ -47,9 +47,11 @@ COURSE_ID="${VERIFY_COURSE_ID:-${COURSE_ID:-3}}"
 CJ="/tmp/verify-moodle-cj-$$"
 LOGIN="/tmp/verify-moodle-login-$$"
 COURSE="/tmp/verify-moodle-course-$$"
+PAGE="/tmp/verify-moodle-page-$$"
+PAGE_CMID="${VERIFY_PAGE_CMID:-}"
 
 cleanup() {
-  rm -f "$CJ" "$LOGIN" "$COURSE"
+  rm -f "$CJ" "$LOGIN" "$COURSE" "$PAGE"
   if [ "${MAINT_WAS_ON:-0}" = 1 ] && [ "${HEALTH_OK:-0}" != 1 ]; then
     sudo -u www-data php /var/www/moodle/admin/cli/maintenance.php --enable 2>/dev/null || true
   fi
@@ -150,6 +152,42 @@ if (\$sections < 1) { fwrite(STDERR, 'course_index_state_empty sections=' . \$se
 echo 'course_index_state_sections=' . \$sections . PHP_EOL;
     "
   fi
+
+  if [ -z "${PAGE_CMID}" ] && command -v sudo >/dev/null 2>&1 && [ -f /var/www/moodle/config.php ]; then
+    PAGE_CMID="$(sudo -u www-data php -r "
+define('CLI_SCRIPT', true);
+require '/var/www/moodle/config.php';
+global \$DB;
+\$cmid = \$DB->get_field_sql(
+    'SELECT cm.id FROM {course_modules} cm JOIN {modules} m ON m.id = cm.module AND m.name = ? WHERE cm.course = ? AND cm.deletioninprogress = 0 ORDER BY cm.id ASC',
+    ['page', ${COURSE_ID}],
+    IGNORE_MISSING
+);
+echo (int) (\$cmid ?: 0);
+" 2>/dev/null || true)"
+  fi
+  PAGE_CMID="${PAGE_CMID:-4}"
+
+  echo "=== mod_page view id=${PAGE_CMID} ==="
+  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/mod/page/view.php?id=${PAGE_CMID}" -o "$PAGE"
+  assert_no_fatal_html "auth_page" "$PAGE"
+
+  if grep -qi 'Error reading from database' "$PAGE"; then
+    echo "page_db_error cmid=${PAGE_CMID}"
+    return 1
+  fi
+
+  if ! grep -q 'ut-lesson-content' "$PAGE"; then
+    echo "page_lesson_content_missing cmid=${PAGE_CMID}"
+    return 1
+  fi
+
+  if grep -q '<title>Error | UT</title>' "$PAGE"; then
+    echo "page_error_title cmid=${PAGE_CMID}"
+    return 1
+  fi
+
+  echo "page_lesson_content_ok=1 cmid=${PAGE_CMID}"
 
   echo "verify_moodle_web_health_ok=1"
   return 0
