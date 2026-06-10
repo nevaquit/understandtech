@@ -425,6 +425,32 @@
 // Boost drawers shell — site-wide (mirrors style/global-shell.css)
 // =============================================================================
 
+// Collapse #page-wrapper phantom height when fixed drawers inflate flex layout.
+body.ut-theme.uses-drawers {
+    #page-wrapper {
+        display: block !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        flex: 0 0 auto !important;
+        overflow: visible !important;
+    }
+
+    #page-wrapper > .drawer {
+        flex: 0 0 0 !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        overflow: visible !important;
+    }
+
+    #page.drawers {
+        margin-top: 60px !important;
+    }
+}
+
 body.ut-theme {
     // Boost drawers — kill the white content card shell.
     #page.drawers .main-inner,

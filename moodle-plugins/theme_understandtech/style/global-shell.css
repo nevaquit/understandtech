@@ -150,6 +150,36 @@ body.ut-theme #page.drawers {
     color: var(--ut-text);
 }
 
+/* ── Boost drawers: collapse #page-wrapper phantom height (all uses-drawers pages)
+ * Prod root cause (2026-06): Boost nests position:fixed .drawer panels inside
+ * #page-wrapper (flex column). Fixed drawers still inflate flex layout to ~100vh,
+ * while #page is a following sibling — breadcrumbs/content start ~1140px down.
+ * cbcd4c2 flex-collapse on #page.drawers inner chain was deployed but irrelevant. */
+body.ut-theme.uses-drawers #page-wrapper {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    flex: 0 0 auto !important;
+    overflow: visible !important;
+}
+
+body.ut-theme.uses-drawers #page-wrapper > .drawer.drawer-left,
+body.ut-theme.uses-drawers #page-wrapper > .drawer.drawer-right,
+body.ut-theme.uses-drawers #page-wrapper > .drawer {
+    flex: 0 0 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    overflow: visible !important;
+}
+
+body.ut-theme.uses-drawers #page.drawers {
+    margin-top: 60px !important;
+}
+
 body.ut-theme #page.drawers .main-inner,
 body.ut-theme #page.drawers .drawer-main-content {
     background: transparent !important;

@@ -167,8 +167,8 @@ body.ut-lesson-page:has(.ut-lesson-content) .activity-header {
     pointer-events: none;
 }
 
-/* Boost drawers + h-100 stretch #region-main to viewport height → large blank navy gap.
- * Requires flex: 0 1 auto on #page.drawers and ancestors (quiz fix in global-shell.css). */
+/* Inner flex chain collapse (secondary). Primary gap fix: global-shell.css #page-wrapper
+ * phantom height when fixed .drawer children inflate Boost flex column layout. */
 body.path-mod-page #page.drawers,
 body.ut-lesson-page #page.drawers,
 #page-mod-page-view.drawers {
