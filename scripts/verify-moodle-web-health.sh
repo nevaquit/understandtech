@@ -46,12 +46,13 @@ COURSE_ID="${VERIFY_COURSE_ID:-${COURSE_ID:-3}}"
 
 CJ="/tmp/verify-moodle-cj-$$"
 LOGIN="/tmp/verify-moodle-login-$$"
+HOME="/tmp/verify-moodle-home-$$"
 COURSE="/tmp/verify-moodle-course-$$"
 PAGE="/tmp/verify-moodle-page-$$"
 PAGE_CMID="${VERIFY_PAGE_CMID:-}"
 
 cleanup() {
-  rm -f "$CJ" "$LOGIN" "$COURSE" "$PAGE"
+  rm -f "$CJ" "$LOGIN" "$HOME" "$COURSE" "$PAGE"
   if [ "${MAINT_WAS_ON:-0}" = 1 ] && [ "${HEALTH_OK:-0}" != 1 ]; then
     sudo -u www-data php /var/www/moodle/admin/cli/maintenance.php --enable 2>/dev/null || true
   fi
@@ -112,6 +113,20 @@ run_checks() {
     return 1
   fi
   echo "auth_my_ok=1"
+
+  echo "=== site home redirect=0 ==="
+  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/?redirect=0" -o "$HOME"
+  assert_no_fatal_html "auth_home" "$HOME"
+  if grep -q '<title>Error | UT</title>' "$HOME"; then
+    echo "home_error_title"
+    return 1
+  fi
+  if ! grep -qi '<title>Home | UT</title>' "$HOME"; then
+    echo "home_title_unexpected"
+    grep -o '<title>[^<]*</title>' "$HOME" | head -1 || true
+    return 1
+  fi
+  echo "auth_home_ok=1"
 
   echo "=== course view id=${COURSE_ID} ==="
   curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/course/view.php?id=${COURSE_ID}" -o "$COURSE"

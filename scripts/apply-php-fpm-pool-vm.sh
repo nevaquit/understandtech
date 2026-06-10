@@ -11,6 +11,13 @@ if [ ! -f "$SRC" ]; then
   exit 1
 fi
 
+# Origin health runs every 3 minutes; restarting PHP-FPM on every pass drops live
+# requests and surfaces as Cloudflare 502 Bad Gateway (e.g. menu Home link).
+if [ -f "$DEST" ] && cmp -s "$SRC" "$DEST"; then
+  echo 'apply_php_fpm_pool_unchanged=1'
+  exit 0
+fi
+
 cp "$SRC" "$DEST"
 chmod 644 "$DEST"
 php-fpm8.3 -t
