@@ -436,14 +436,23 @@ body.ut-theme.uses-drawers {
         overflow: visible !important;
     }
 
+    // Keep drawers visible — height:0 hid course index (.drawercontent uses % height).
     #page-wrapper > .drawer {
-        flex: 0 0 0 !important;
-        height: 0 !important;
+        position: fixed !important;
+        top: 60px !important;
+        bottom: 0 !important;
+        height: auto !important;
         min-height: 0 !important;
+        flex: none !important;
         margin: 0 !important;
-        padding: 0 !important;
-        border: none !important;
         overflow: visible !important;
+    }
+
+    #page-wrapper > .drawer .drawercontent {
+        height: calc(100vh - 60px) !important;
+        max-height: calc(100vh - 60px) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
     }
 
     #page.drawers {
