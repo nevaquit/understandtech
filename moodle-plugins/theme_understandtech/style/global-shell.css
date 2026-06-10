@@ -25,6 +25,48 @@
     --ut-content-max: 75rem;
 }
 
+/* ── Skip link (Boost sr-only + theme .ut-skip-link) ───────────────────────── */
+body.ut-theme a.ut-skip-link,
+body.ut-theme a.sr-only-focusable[href="#maincontent"] {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 1100;
+    background: var(--ut-gold);
+    color: var(--ut-navy);
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 var(--ut-radius-sm) var(--ut-radius-sm);
+    text-decoration: none;
+    transition: top 0.15s ease;
+}
+
+body.ut-theme a.ut-skip-link:focus,
+body.ut-theme a.ut-skip-link:focus-visible,
+body.ut-theme a.sr-only-focusable[href="#maincontent"]:focus,
+body.ut-theme a.sr-only-focusable[href="#maincontent"]:focus-visible {
+    top: 0;
+    outline: 3px solid var(--ut-navy);
+    outline-offset: 2px;
+    clip: auto;
+    width: auto;
+    height: auto;
+    overflow: visible;
+}
+
+body.ut-theme #maincontent:focus {
+    outline: none;
+}
+
+body.ut-theme #maincontent:focus-visible {
+    outline: 3px solid var(--ut-gold);
+    outline-offset: 4px;
+}
+
 /* ── Typography (site-wide) ─────────────────────────────────────────────────── */
 body.ut-theme,
 body.understandtech-app--learn {
@@ -234,6 +276,13 @@ body.ut-theme .courseindex-item .courseindex-link {
     color: rgba(255, 255, 255, 0.82);
     font-family: var(--ut-font-heading);
     font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.375rem 0.5rem;
+    text-decoration: none;
+    border-radius: var(--ut-radius-sm);
+    line-height: 1.35;
 }
 
 body.ut-theme .courseindex-item.active a,
@@ -288,6 +337,36 @@ body.ut-theme #theme_boost-drawers-courseindex .courseindex-item {
 body.ut-theme #theme_boost-drawers-courseindex .courseindex-item a:hover {
     color: var(--ut-gold);
     background: rgba(201, 162, 39, 0.08);
+}
+
+/* ── Student-facing error states (DB/filter failures) ─────────────────────── */
+body.ut-theme .alert-danger,
+body.ut-theme .notifyproblem,
+body.ut-theme #region-main .errorbox {
+    background: rgba(180, 40, 40, 0.12);
+    border: 1px solid rgba(220, 80, 80, 0.4);
+    border-left: 4px solid #dc3545;
+    color: var(--ut-text);
+    border-radius: var(--ut-radius-md);
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+}
+
+body.ut-theme .alert-danger .btn-link,
+body.ut-theme .notifyproblem .btn-link {
+    color: var(--ut-gold-light);
+}
+
+/* ── Dashboard block loading polish ─────────────────────────────────────────── */
+body.ut-theme [data-region="courses-view"] .placeholders,
+body.ut-theme [data-region="event-list-loading-placeholder"]:not(.hidden) {
+    min-height: 6rem;
+}
+
+body.ut-theme [data-region="no-events-empty-message"]:not(.hidden) {
+    color: var(--ut-text-muted);
+    font-family: var(--ut-font-body);
+    padding: 1rem 0;
 }
 
 /* ── Breadcrumbs ────────────────────────────────────────────────────────────── */

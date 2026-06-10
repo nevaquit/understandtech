@@ -50,7 +50,7 @@ class course_index_prerender {
      * @return string Rendered HTML or empty string on failure.
      */
     public static function render_html(int $courseid): string {
-        global $CFG;
+        global $CFG, $PAGE;
 
         require_once($CFG->dirroot . '/course/lib.php');
 
@@ -62,6 +62,7 @@ class course_index_prerender {
         }
 
         $modinfo = get_fast_modinfo($course);
+        $currentcmid = ($PAGE->cm && (int) $PAGE->course->id === $courseid) ? (int) $PAGE->cm->id : 0;
 
         $sectionshtml = '';
         foreach ($modinfo->get_section_info_all() as $section) {
@@ -80,8 +81,13 @@ class course_index_prerender {
 
                 $url = $cm->url instanceof moodle_url ? $cm->url->out(false) : '';
                 $name = format_string($cm->name, true, ['context' => $cm->context]);
-                $itemshtml .= '<li class="courseindex-item" data-for="cm" data-id="' . (int) $cm->id . '">'
-                    . '<a class="courseindex-link" href="' . s($url) . '">' . s($name) . '</a></li>';
+                $isactive = $currentcmid > 0 && (int) $cm->id === $currentcmid;
+                $itemclasses = 'courseindex-item' . ($isactive ? ' active' : '');
+                $linkclasses = 'courseindex-link' . ($isactive ? ' active' : '');
+                $arialabel = $isactive ? ' aria-current="page"' : '';
+                $itemshtml .= '<li class="' . $itemclasses . '" data-for="cm" data-id="' . (int) $cm->id . '">'
+                    . '<a class="' . $linkclasses . '" href="' . s($url) . '"' . $arialabel . '>'
+                    . s($name) . '</a></li>';
             }
 
             if ($itemshtml === '') {
@@ -97,7 +103,8 @@ class course_index_prerender {
             return '';
         }
 
-        return $sectionshtml;
+        return '<div class="courseindex" role="navigation" aria-label="'
+            . s(get_string('courseindex', 'core')) . '">' . $sectionshtml . '</div>';
     }
 
     /**

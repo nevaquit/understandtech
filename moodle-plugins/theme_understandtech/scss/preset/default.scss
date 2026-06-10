@@ -153,7 +153,7 @@ $badge-font-weight:     600         !default;
 // =============================================================================
 
 // ── 1. Skip-to-content link ───────────────────────────────────────────────────
-.ut-skip-link {
+@mixin ut-skip-link-styles {
     position: absolute;
     top: -100%;
     left: 1rem;
@@ -169,11 +169,21 @@ $badge-font-weight:     600         !default;
     border-radius: 0 0 $ut-radius-sm $ut-radius-sm;
     text-decoration: none;
     transition: top $ut-transition-fast;
+}
 
-    &:focus {
+.ut-skip-link,
+a.sr-only-focusable[href="#maincontent"] {
+    @include ut-skip-link-styles;
+
+    &:focus,
+    &:focus-visible {
         top: 0;
         outline: 3px solid $ut-navy;
         outline-offset: 2px;
+        clip: auto;
+        width: auto;
+        height: auto;
+        overflow: visible;
     }
 }
 

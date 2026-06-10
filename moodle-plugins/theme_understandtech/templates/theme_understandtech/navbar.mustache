@@ -17,7 +17,7 @@
     - hasnavdrawer: bool - Whether the nav drawer is available
     - navdrawertoggle: string - Nav drawer toggle button HTML (from Boost)
 }}
-<a class="ut-skip-link" href="#maincontent">Skip to main content</a>
+<a class="ut-skip-link" href="#maincontent">{{#str}}skiptomain, theme_understandtech{{/str}}</a>
 
 <nav class="navbar ut-navbar" role="navigation" aria-label="Main navigation">
     <div class="ut-container d-flex align-items-center justify-content-between w-100">
@@ -118,23 +118,6 @@
     </div>
 </nav>
 
-<script>
-(function() {
-    var btn = document.getElementById('ut-mobile-toggle');
-    var nav = document.getElementById('ut-primary-nav');
-    if (!btn || !nav) return;
-    btn.addEventListener('click', function() {
-        var isOpen = nav.classList.toggle('open');
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-
-    // Scroll-based navbar shadow
-    var navbar = document.querySelector('.ut-navbar');
-    if (!navbar) return;
-    var onScroll = function() {
-        navbar.classList.toggle('scrolled', window.scrollY > 20);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-}());
-</script>
+{{#js}}
+require(['theme_understandtech/theme'], function(m) { m.init(); });
+{{/js}}
