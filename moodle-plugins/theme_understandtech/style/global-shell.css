@@ -285,12 +285,29 @@ body.ut-theme .courseindex-item .courseindex-link {
     line-height: 1.35;
 }
 
+/* Boost courseindex.scss sets .courseindex-item.active { background: $gray-100 } — override on the li. */
+body.ut-theme .courseindex-item.active,
+body.ut-theme .courseindex-item.pageitem,
+body.ut-theme .courseindex-item.active.pageitem {
+    background: rgba(26, 138, 125, 0.12) !important;
+    border: 1px solid rgba(26, 138, 125, 0.35) !important;
+    border-radius: var(--ut-radius-sm);
+}
+
 body.ut-theme .courseindex-item.active a,
 body.ut-theme .courseindex-item a.active,
+body.ut-theme .courseindex-item.pageitem a,
+body.ut-theme .courseindex-item.pageitem .courseindex-link,
 body.ut-theme .courseindex-item.current a {
-    color: var(--ut-gold);
-    background: rgba(201, 162, 39, 0.1);
+    color: var(--ut-gold) !important;
+    background: transparent !important;
     border-radius: var(--ut-radius-sm);
+}
+
+body.ut-theme .courseindex-item.active a:hover,
+body.ut-theme .courseindex-item.pageitem a:hover {
+    color: var(--ut-gold-light) !important;
+    background: rgba(201, 162, 39, 0.08) !important;
 }
 
 /* Course index drawer — hide skeleton only after real sections render.
@@ -955,6 +972,144 @@ body.ut-theme #mod_quiz_navblock .qnbutton.thispage .thispageholder {
     border-color: var(--ut-gold) !important;
 }
 
+/* ── Quiz view — attempt list cards & summary tables (Moodle 4.5 list_of_attempts)
+ * Each attempt is a Bootstrap card; attempt_summary_information renders
+ * table.generaltable.generalbox with white Boost table defaults → unreadable text. */
+body.ut-theme.path-mod-quiz h3,
+body.ut-theme.path-mod-quiz-summary h3,
+body.ut-theme.path-mod-quiz-review h3 {
+    color: var(--ut-gold);
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+body.ut-theme.path-mod-quiz .list-unstyled.row .card,
+body.ut-theme.path-mod-quiz-summary .list-unstyled.row .card,
+body.ut-theme.path-mod-quiz-review .list-unstyled.row .card {
+    background: var(--ut-surface-elevated) !important;
+    border: 1px solid var(--ut-border) !important;
+    color: var(--ut-text);
+    border-radius: var(--ut-radius-md);
+    overflow: hidden;
+}
+
+body.ut-theme.path-mod-quiz .list-unstyled.row .card-header,
+body.ut-theme.path-mod-quiz-summary .list-unstyled.row .card-header,
+body.ut-theme.path-mod-quiz-review .list-unstyled.row .card-header {
+    background: rgba(11, 31, 58, 0.65) !important;
+    border-color: var(--ut-border) !important;
+}
+
+body.ut-theme.path-mod-quiz .list-unstyled.row .card-title,
+body.ut-theme.path-mod-quiz-summary .list-unstyled.row .card-title,
+body.ut-theme.path-mod-quiz-review .list-unstyled.row .card-title {
+    color: var(--ut-teal-light) !important;
+    font-family: var(--ut-font-heading);
+    font-weight: 700;
+}
+
+body.ut-theme.path-mod-quiz .list-unstyled.row .card-body,
+body.ut-theme.path-mod-quiz-summary .list-unstyled.row .card-body,
+body.ut-theme.path-mod-quiz-review .list-unstyled.row .card-body {
+    background: transparent !important;
+    color: var(--ut-text);
+}
+
+body.ut-theme.path-mod-quiz table.generaltable.generalbox,
+body.ut-theme.path-mod-quiz table.quizattemptsummary,
+body.ut-theme.path-mod-quiz table.quizreviewsummary,
+body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox,
+body.ut-theme.path-mod-quiz-summary table.quizreviewsummary,
+body.ut-theme.path-mod-quiz-review table.generaltable.generalbox,
+body.ut-theme.path-mod-quiz-review table.quizreviewsummary,
+body.ut-theme.path-mod-quiz .quizattemptsummary,
+body.ut-theme.path-mod-quiz .quizreviewsummary {
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.03);
+    --bs-table-active-bg: rgba(26, 138, 125, 0.12);
+    --bs-table-hover-bg: rgba(201, 162, 39, 0.06);
+    --bs-table-color: var(--ut-text);
+    --bs-table-border-color: var(--ut-border);
+    background: var(--ut-surface) !important;
+    border: none !important;
+    border-top: 1px solid var(--ut-border) !important;
+    border-bottom: 1px solid var(--ut-border) !important;
+    border-radius: 0 !important;
+    color: var(--ut-text) !important;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+body.ut-theme.path-mod-quiz table.generaltable.generalbox th.cell,
+body.ut-theme.path-mod-quiz table.generaltable.generalbox td.cell,
+body.ut-theme.path-mod-quiz table.quizattemptsummary th,
+body.ut-theme.path-mod-quiz table.quizattemptsummary td,
+body.ut-theme.path-mod-quiz table.quizreviewsummary th,
+body.ut-theme.path-mod-quiz table.quizreviewsummary td,
+body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox th,
+body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox td,
+body.ut-theme.path-mod-quiz-review table.generaltable.generalbox th,
+body.ut-theme.path-mod-quiz-review table.generaltable.generalbox td {
+    background: transparent !important;
+    color: var(--ut-text) !important;
+    border-color: var(--ut-border) !important;
+}
+
+body.ut-theme.path-mod-quiz table.generaltable.generalbox th.cell,
+body.ut-theme.path-mod-quiz table.quizattemptsummary thead th,
+body.ut-theme.path-mod-quiz table.quizreviewsummary th.cell,
+body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox th.cell,
+body.ut-theme.path-mod-quiz-review table.generaltable.generalbox th.cell {
+    color: var(--ut-gold) !important;
+    font-family: var(--ut-font-heading);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+body.ut-theme.path-mod-quiz table.generaltable.generalbox th.cell[scope="row"],
+body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox th.cell[scope="row"],
+body.ut-theme.path-mod-quiz-review table.generaltable.generalbox th.cell[scope="row"] {
+    color: var(--ut-text-muted) !important;
+    text-transform: none;
+    font-size: 0.875rem;
+    font-family: var(--ut-font-body);
+    font-weight: 600;
+    width: 35%;
+}
+
+body.ut-theme.path-mod-quiz table.generaltable.generalbox caption,
+body.ut-theme.path-mod-quiz table.quizreviewsummary caption,
+body.ut-theme.path-mod-quiz-summary table.generaltable.generalbox caption,
+body.ut-theme.path-mod-quiz-review table.generaltable.generalbox caption {
+    color: var(--ut-text-subtle);
+    background: transparent;
+    padding: 0.5rem 0.875rem 0;
+}
+
+body.ut-theme.path-mod-quiz table.generaltable.generalbox a,
+body.ut-theme.path-mod-quiz table.quizattemptsummary a,
+body.ut-theme.path-mod-quiz table.quizreviewsummary a,
+body.ut-theme.path-mod-quiz .list-unstyled.row .card-body a {
+    color: var(--ut-teal-light);
+}
+
+body.ut-theme.path-mod-quiz table.generaltable.generalbox a:hover,
+body.ut-theme.path-mod-quiz table.quizattemptsummary a:hover,
+body.ut-theme.path-mod-quiz table.quizreviewsummary a:hover,
+body.ut-theme.path-mod-quiz .list-unstyled.row .card-body a:hover {
+    color: var(--ut-gold-light);
+}
+
+body.ut-theme.path-mod-quiz table.quizattemptsummary tbody tr:nth-of-type(odd),
+body.ut-theme.path-mod-quiz table.generaltable.generalbox tbody tr:nth-of-type(odd) {
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
 /* ── Moodle generalbox / mform white leaks (not lesson pages) ─────────────── */
 body.ut-theme:not(.path-mod-page) .generalbox,
 body.ut-theme:not(.path-mod-page) .box.generalbox,
@@ -1303,10 +1458,53 @@ body.ut-theme .form-check-label {
     color: var(--ut-text);
 }
 
-/* ── Quiz attempt — kill h-100 viewport stretch (empty navy gap) ─────────── */
+/* ── Quiz / incourse activity — collapse Boost drawers viewport stretch ───────
+ * Root cause: #page-wrapper flex column + .main-inner { flex: 1 0 auto } and
+ * sticky-footer #page-content { flex: 1 0 auto } stretch the shell to ~100vh
+ * while #region-main may carry h-100 — breadcrumbs/title appear at the bottom
+ * above a massive empty navy band. Same pattern as mod_page in lesson-content.css. */
+body.ut-theme.path-mod-quiz #page.drawers,
+body.ut-theme.path-mod-quiz-attempt #page.drawers,
+body.ut-theme.path-mod-quiz-summary #page.drawers,
+body.ut-theme.path-mod-quiz-review #page.drawers,
+body.ut-theme.ut-incourse.path-mod-quiz #page.drawers {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+body.ut-theme.path-mod-quiz #page.drawers .main-inner,
+body.ut-theme.path-mod-quiz-attempt #page.drawers .main-inner,
+body.ut-theme.path-mod-quiz-summary #page.drawers .main-inner,
+body.ut-theme.path-mod-quiz-review #page.drawers .main-inner,
+body.ut-theme.ut-incourse.path-mod-quiz #page.drawers .main-inner,
+#page-mod-quiz-view.drawers .main-inner,
+#page-mod-quiz-attempt.drawers .main-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin-top: 0.75rem;
+}
+
+body.ut-theme.path-mod-quiz #page-header,
+body.ut-theme.path-mod-quiz-attempt #page-header,
+body.ut-theme.path-mod-quiz-summary #page-header,
+body.ut-theme.path-mod-quiz-review #page-header {
+    margin-top: 0 !important;
+    padding-top: 0.5rem;
+    flex: 0 0 auto;
+}
+
 body.ut-theme.path-mod-quiz #region-main,
 body.ut-theme.path-mod-quiz-attempt #region-main,
-body.ut-theme.path-mod-quiz-summary #region-main {
+body.ut-theme.path-mod-quiz-summary #region-main,
+body.ut-theme.path-mod-quiz-review #region-main,
+body.ut-theme.path-mod-quiz #region-main.h-100,
+body.ut-theme.path-mod-quiz-attempt #region-main.h-100 {
     max-width: none;
     width: 100%;
     height: auto !important;
@@ -1316,20 +1514,19 @@ body.ut-theme.path-mod-quiz-summary #region-main {
 body.ut-theme.path-mod-quiz #region-main-box,
 body.ut-theme.path-mod-quiz #page-content,
 body.ut-theme.path-mod-quiz-attempt #region-main-box,
-body.ut-theme.path-mod-quiz-attempt #page-content {
-    min-height: 0;
-    height: auto;
-}
-
-body.ut-theme.path-mod-quiz #page.drawers .main-inner,
-body.ut-theme.path-mod-quiz-attempt #page.drawers .main-inner,
-body.ut-theme.path-mod-quiz-summary #page.drawers .main-inner {
-    min-height: 0;
-    align-items: flex-start;
+body.ut-theme.path-mod-quiz-attempt #page-content,
+body.ut-theme.path-mod-quiz-summary #region-main-box,
+body.ut-theme.path-mod-quiz-summary #page-content,
+body.ut-theme.path-mod-quiz-review #region-main-box,
+body.ut-theme.path-mod-quiz-review #page-content {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
 }
 
 body.ut-theme.path-mod-quiz .activity-header,
-body.ut-theme.path-mod-quiz-attempt .activity-header {
+body.ut-theme.path-mod-quiz-attempt .activity-header,
+body.ut-theme.path-mod-quiz-summary .activity-header {
     margin: 0 0 1rem;
     padding: 0;
     background: transparent !important;
@@ -1342,18 +1539,39 @@ body.ut-theme.path-mod-quiz-attempt .activity-header .activityicon {
 }
 
 body.ut-theme.path-mod-quiz #region-main > .card,
-body.ut-theme.path-mod-quiz-attempt #region-main > .card {
+body.ut-theme.path-mod-quiz-attempt #region-main > .card,
+body.ut-theme.path-mod-quiz-summary #region-main > .card,
+body.ut-theme.path-mod-quiz-review #region-main > .card {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
     min-height: 0 !important;
+    height: auto !important;
 }
 
 body.ut-theme.path-mod-quiz #region-main > .card > .card-body,
-body.ut-theme.path-mod-quiz-attempt #region-main > .card > .card-body {
+body.ut-theme.path-mod-quiz-attempt #region-main > .card > .card-body,
+body.ut-theme.path-mod-quiz-summary #region-main > .card > .card-body,
+body.ut-theme.path-mod-quiz-review #region-main > .card > .card-body {
     padding: 0;
     background: transparent;
+}
+
+body.ut-theme.ut-quiz-page #page.drawers,
+body.ut-theme.ut-quiz-page #page.drawers .main-inner,
+body.ut-theme.ut-quiz-page #page-content,
+body.ut-theme.ut-quiz-page #region-main-box,
+body.ut-theme.ut-quiz-page #region-main {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+body.ut-theme.ut-quiz-page #page.drawers .main-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 /* CertMaster confidence — layout after duplicate-render fix */

@@ -92,6 +92,10 @@ function theme_understandtech_page_init(moodle_page $page): void {
         $page->add_body_class('ut-lesson-page');
     }
 
+    if ($page->cm && $page->cm->modname === 'quiz') {
+        $page->add_body_class('ut-quiz-page');
+    }
+
     if ($page->context) {
         if ($page->context->contextlevel === CONTEXT_MODULE) {
             $page->add_body_class('ut-incourse');

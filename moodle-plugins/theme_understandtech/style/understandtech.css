@@ -72,9 +72,35 @@
     background: rgba(15, 36, 71, 0.75);
 }
 
-/* Quiz attempt: no nested card shell — avoids large empty navy panel above questions. */
+/* Quiz view — collapse Boost drawers viewport stretch (see global-shell.css for full rules). */
+body.path-mod-quiz #page.drawers,
+body.path-mod-quiz-attempt #page.drawers,
+body.path-mod-quiz-summary #page.drawers,
+#page-mod-quiz-view.drawers,
+#page-mod-quiz-attempt.drawers {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+body.path-mod-quiz #page.drawers .main-inner,
+body.path-mod-quiz-attempt #page.drawers .main-inner,
+body.path-mod-quiz-summary #page.drawers .main-inner,
+#page-mod-quiz-view.drawers .main-inner,
+#page-mod-quiz-attempt.drawers .main-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+}
+
 .path-mod-quiz #region-main,
-.path-mod-quiz-attempt #region-main {
+.path-mod-quiz-attempt #region-main,
+.path-mod-quiz-summary #region-main,
+.path-mod-quiz #region-main.h-100,
+.path-mod-quiz-attempt #region-main.h-100 {
     height: auto !important;
     min-height: 0 !important;
 }
@@ -82,36 +108,44 @@
 .path-mod-quiz #region-main-box,
 .path-mod-quiz #page-content,
 .path-mod-quiz-attempt #region-main-box,
-.path-mod-quiz-attempt #page-content {
-    min-height: 0;
-    height: auto;
+.path-mod-quiz-attempt #page-content,
+.path-mod-quiz-summary #region-main-box,
+.path-mod-quiz-summary #page-content {
+    flex: 0 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
 }
 
-body.path-mod-quiz #page.drawers .main-inner,
-body.path-mod-quiz-attempt #page.drawers .main-inner {
-    min-height: 0;
-    align-items: flex-start;
+.path-mod-quiz #page-header,
+.path-mod-quiz-attempt #page-header {
+    margin-top: 0 !important;
+    padding-top: 0.5rem;
 }
 
 .path-mod-quiz .activity-header,
-.path-mod-quiz-attempt .activity-header {
-    background: transparent;
-    border: none;
+.path-mod-quiz-attempt .activity-header,
+.path-mod-quiz-summary .activity-header {
+    background: transparent !important;
+    border: none !important;
     padding: 0;
     margin-bottom: 1rem;
+    box-shadow: none !important;
 }
 
 .path-mod-quiz #region-main > .card,
-.path-mod-quiz-attempt #region-main > .card {
+.path-mod-quiz-attempt #region-main > .card,
+.path-mod-quiz-summary #region-main > .card {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
     min-height: 0 !important;
+    height: auto !important;
 }
 
 .path-mod-quiz #region-main > .card > .card-body,
-.path-mod-quiz-attempt #region-main > .card > .card-body {
+.path-mod-quiz-attempt #region-main > .card > .card-body,
+.path-mod-quiz-summary #region-main > .card > .card-body {
     padding: 0;
     background: transparent;
 }

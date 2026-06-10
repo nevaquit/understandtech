@@ -699,10 +699,20 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
     font-size: 0.875rem;
 }
 
+.ut-lesson-page .courseindex-item.active,
+.ut-incourse .courseindex-item.active,
+.ut-lesson-page .courseindex-item.pageitem,
+.ut-incourse .courseindex-item.pageitem {
+    background: rgba(26, 138, 125, 0.12) !important;
+    border: 1px solid rgba(26, 138, 125, 0.35) !important;
+}
+
 .ut-lesson-page .courseindex-item.active a,
 .ut-incourse .courseindex-item.active a,
 .ut-lesson-page .courseindex-item a.active,
-.ut-incourse .courseindex-item a.active {
-    color: #C9A227;
-    background: rgba(201, 162, 39, 0.1);
+.ut-incourse .courseindex-item a.active,
+.ut-lesson-page .courseindex-item.pageitem a,
+.ut-incourse .courseindex-item.pageitem a {
+    color: #C9A227 !important;
+    background: transparent !important;
 }
