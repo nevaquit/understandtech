@@ -1047,15 +1047,78 @@ body.ut-theme .ut-confidence-option input:checked + .ut-confidence-label {
     color: var(--ut-teal-light) !important;
 }
 
-/* Quiz navigation block — already dark; reinforce readable states. */
-body.ut-theme #mod_quiz_navblock .qnbutton,
-body.ut-theme #mod_quiz_navblock .qnbutton .thispageholder,
-body.ut-theme #mod_quiz_navblock .qnbutton .trafficlight {
+/* Quiz navigation — Moodle sets .notyetanswered { background:#fff }; theme sets light
+ * text globally → invisible question numbers. Use dark text on light buttons. */
+body.ut-theme #mod_quiz_navblock,
+body.ut-theme #mod_quiz_navblock .card-body,
+body.ut-theme #mod_quiz_navblock h3.mod_quiz-section-heading {
     color: var(--ut-text);
 }
 
-body.ut-theme #mod_quiz_navblock .qnbutton.thispage .thispageholder {
+body.ut-theme .path-mod-quiz .qnbutton,
+body.ut-theme #mod_quiz_navblock .qnbutton,
+body.ut-theme #responseform .qnbutton {
+    background-color: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid var(--ut-border) !important;
+    color: var(--ut-navy) !important;
+    font-weight: 700 !important;
+    line-height: 1.5em !important;
+    text-decoration: none !important;
+}
+
+body.ut-theme .path-mod-quiz .qnbutton:hover,
+body.ut-theme #mod_quiz_navblock .qnbutton:hover {
+    background-color: #fff !important;
     border-color: var(--ut-gold) !important;
+    color: var(--ut-navy) !important;
+    text-decoration: underline !important;
+}
+
+body.ut-theme .path-mod-quiz .qnbutton.notyetanswered,
+body.ut-theme .path-mod-quiz .qnbutton.blocked,
+body.ut-theme .path-mod-quiz .qnbutton.requiresgrading,
+body.ut-theme .path-mod-quiz .qnbutton.invalidanswer {
+    background-color: rgba(255, 255, 255, 0.92) !important;
+    color: var(--ut-navy) !important;
+}
+
+body.ut-theme .path-mod-quiz .qnbutton.thispage {
+    border-color: var(--ut-gold) !important;
+    box-shadow: 0 0 0 1px var(--ut-gold);
+}
+
+body.ut-theme .path-mod-quiz .qnbutton.thispage .thispageholder {
+    border-color: var(--ut-gold) !important;
+}
+
+body.ut-theme .path-mod-quiz .qnbutton.correct {
+    background-color: rgba(26, 138, 125, 0.45) !important;
+    color: var(--ut-navy) !important;
+}
+
+body.ut-theme .path-mod-quiz .qnbutton.partiallycorrect {
+    background-color: rgba(201, 162, 39, 0.45) !important;
+    color: var(--ut-navy) !important;
+}
+
+body.ut-theme .path-mod-quiz .qnbutton.notanswered,
+body.ut-theme .path-mod-quiz .qnbutton.incorrect {
+    background-color: rgba(220, 80, 80, 0.35) !important;
+    color: var(--ut-navy) !important;
+}
+
+body.ut-theme .path-mod-quiz .qnbutton.blocked {
+    color: var(--ut-text-muted) !important;
+}
+
+body.ut-theme #mod_quiz_navblock .othernav a,
+body.ut-theme .path-mod-quiz .othernav a {
+    color: var(--ut-teal-light);
+}
+
+body.ut-theme #mod_quiz_navblock .othernav a:hover,
+body.ut-theme .path-mod-quiz .othernav a:hover {
+    color: var(--ut-gold-light);
 }
 
 /* ── Quiz view — attempt list cards & summary tables (Moodle 4.5 list_of_attempts)
@@ -1763,7 +1826,7 @@ body.ut-theme.ut-lesson-page #page.drawers .main-inner {
     justify-content: flex-start;
 }
 
-/* CertMaster confidence — layout after duplicate-render fix */
+/* CertMaster confidence — keep radio + label on one row (grid minmax(0) was wrapping). */
 body.ut-theme .ut-confidence-rating {
     margin-top: 1.25rem;
     padding: 1rem 1.25rem;
@@ -1776,27 +1839,31 @@ body.ut-theme .ut-confidence-prompt {
     letter-spacing: 0.02em;
 }
 
-body.ut-theme .ut-confidence-prompt .ut-confidence-options {
-    display: none;
-}
-
 body.ut-theme .ut-confidence-options {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
-}
-
-@media (min-width: 36rem) {
-    body.ut-theme .ut-confidence-options {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
+    align-items: stretch;
 }
 
 body.ut-theme .ut-confidence-option {
+    display: inline-flex !important;
+    flex: 1 1 8.75rem;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
     min-width: 0;
+    margin: 0;
     padding: 0.625rem 0.75rem;
     border: 1px solid transparent;
     border-radius: var(--ut-radius-sm);
+    font-weight: 400;
+    cursor: pointer;
+}
+
+body.ut-theme .ut-confidence-option input[type="radio"] {
+    flex-shrink: 0;
+    margin: 0 !important;
 }
 
 body.ut-theme .ut-confidence-option:has(input:checked) {
@@ -1808,8 +1875,6 @@ body.ut-theme .ut-confidence-label {
     font-family: var(--ut-font-body);
     line-height: 1.35;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 /* ── Dashboard / my courses cards ────────────────────────────────────────── */

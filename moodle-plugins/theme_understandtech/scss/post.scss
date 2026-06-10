@@ -706,6 +706,31 @@ body.ut-theme {
         color: rgba($ut-white, 0.94) !important;
     }
 
+    .ut-confidence-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .ut-confidence-option {
+        display: inline-flex !important;
+        flex: 1 1 8.75rem;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+
+    .path-mod-quiz .qnbutton,
+    #mod_quiz_navblock .qnbutton {
+        background-color: rgba(255, 255, 255, 0.92) !important;
+        color: $ut-navy !important;
+        border-color: rgba($ut-gold, 0.25) !important;
+    }
+
+    .path-mod-quiz .qnbutton.thispage {
+        border-color: $ut-gold !important;
+    }
+
     &:not(.path-mod-page):not(.ut-lesson-page) {
         .generalbox,
         .box.generalbox {

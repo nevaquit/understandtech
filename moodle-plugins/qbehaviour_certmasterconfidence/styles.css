@@ -14,19 +14,16 @@
 }
 
 .ut-confidence-options {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
-}
-
-@media (min-width: 36rem) {
-    .ut-confidence-options {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
+    align-items: stretch;
 }
 
 .ut-confidence-option {
-    display: flex;
+    display: inline-flex;
+    flex: 1 1 8.75rem;
+    flex-wrap: nowrap;
     align-items: center;
     gap: 0.5rem;
     margin: 0;
@@ -51,8 +48,6 @@
 .ut-confidence-label {
     line-height: 1.35;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .ut-confidence-option input:checked + .ut-confidence-label {
