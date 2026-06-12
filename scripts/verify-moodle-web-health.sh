@@ -117,13 +117,18 @@ run_checks() {
   echo "=== site home redirect=0 ==="
   curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/?redirect=0" -o "$HOME"
   assert_no_fatal_html "auth_home" "$HOME"
-  if grep -q '<title>Error | UT</title>' "$HOME"; then
+  if grep -qiE '<title>Error \|' "$HOME"; then
     echo "home_error_title"
+    grep -o '<title>[^<]*</title>' "$HOME" | head -1 || true
     return 1
   fi
-  if ! grep -qi '<title>Home | UT</title>' "$HOME"; then
+  if ! grep -qiE '<title>Home \|' "$HOME"; then
     echo "home_title_unexpected"
     grep -o '<title>[^<]*</title>' "$HOME" | head -1 || true
+    return 1
+  fi
+  if ! grep -q 'ut-frontpage' "$HOME"; then
+    echo "home_frontpage_markup_missing"
     return 1
   fi
   echo "auth_home_ok=1"
@@ -197,7 +202,7 @@ echo (int) (\$cmid ?: 0);
     return 1
   fi
 
-  if grep -q '<title>Error | UT</title>' "$PAGE"; then
+  if grep -qiE '<title>Error \|' "$PAGE"; then
     echo "page_error_title cmid=${PAGE_CMID}"
     return 1
   fi

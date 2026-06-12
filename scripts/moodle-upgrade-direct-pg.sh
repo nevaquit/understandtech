@@ -192,7 +192,7 @@ PHPEOF3
 echo "--- PHP syntax check ---"
 /usr/bin/php -l /var/www/moodle/theme/understandtech/lib.php && echo "lib.php: OK" || echo "lib.php: SYNTAX ERROR"
 /usr/bin/php -l /var/www/moodle/theme/understandtech/config.php && echo "config.php: OK" || echo "config.php: SYNTAX ERROR"
-/usr/bin/php -l /var/www/moodle/theme/understandtech/classes/core_renderer.php 2>/dev/null && echo "core_renderer.php: OK" || echo "core_renderer.php: SYNTAX ERROR or missing"
+/usr/bin/php -l /var/www/moodle/theme/understandtech/classes/output/core_renderer.php 2>/dev/null && echo "core_renderer.php: OK" || echo "core_renderer.php: SYNTAX ERROR or missing"
 echo "--- styles.php deep diagnostic ---"
 sudo -u www-data /usr/bin/php << 'PHPEOF4'
 <?php
