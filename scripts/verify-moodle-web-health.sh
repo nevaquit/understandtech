@@ -94,6 +94,55 @@ fetch_guest_login() {
   curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/login/index.php" -o "$LOGIN"
 }
 
+origin_host() {
+  local host="${PROD#*://}"
+  host="${host%%/*}"
+  echo "$host"
+}
+
+fetch_url_follow_same_host() {
+  local outfile="$1"
+  local url="$2"
+  local host attempt=0
+  host="$(origin_host)"
+  while [ "$attempt" -lt 6 ]; do
+    local hdr="/tmp/verify-hdr-$$-${attempt}"
+    curl -sS -b "$CJ" -c "$CJ" -D "$hdr" -o "$outfile" "$url"
+    local code
+    code=$(awk 'toupper($1) ~ /^HTTP\// {c=$2} END{print c+0}' "$hdr")
+    if [ "$code" -ge 300 ] && [ "$code" -lt 400 ]; then
+      local loc
+      loc=$(grep -i '^location:' "$hdr" | tail -1 | sed 's/^[Ll]ocation:[[:space:]]*//' | tr -d '\r')
+      rm -f "$hdr"
+      if [ -z "$loc" ]; then
+        echo "fetch_redirect_missing_location code=${code} url=${url}"
+        return 1
+      fi
+      case "$loc" in
+        http://*|https://*)
+          if [[ "$loc" != *"$host"* ]]; then
+            echo "fetch_redirect_offsite location=${loc} expected_host=${host}"
+            return 1
+          fi
+          url="$loc"
+          ;;
+        /*)
+          url="${PROD}${loc}"
+          ;;
+        *)
+          url="${PROD}${WWW}/${loc#./}"
+          ;;
+      esac
+      attempt=$((attempt + 1))
+      continue
+    fi
+    rm -f "$hdr"
+    return 0
+  done
+  echo "fetch_redirect_limit url=${url}"
+  return 1
+}
+
 run_checks() {
   reset_session
 
@@ -158,14 +207,16 @@ run_checks() {
   echo "auth_home_ok=1"
 
   echo "=== course view id=${COURSE_ID} ==="
-  curl -sS -b "$CJ" -c "$CJ" -L \
-    "${PROD}${WWW}/course/view.php?id=${COURSE_ID}" -o "$COURSE"
+  if ! fetch_url_follow_same_host "$COURSE" "${PROD}${WWW}/course/view.php?id=${COURSE_ID}"; then
+    return 1
+  fi
   assert_no_fatal_html "auth_course" "$COURSE"
 
   if grep -qiE '<title>Error</title>' "$COURSE"; then
     echo "course_bare_error_title"
     grep -o '<title>[^<]*</title>' "$COURSE" | head -1 || true
     echo "course_bytes=$(wc -c < "$COURSE" | tr -d ' ')"
+    grep -oE 'alert-danger[^<]{0,160}|Exception -[^<]{0,160}|Error reading from database' "$COURSE" | head -2 || true
     return 1
   fi
   if grep -qiE '<title>Error \|' "$COURSE"; then
@@ -228,8 +279,9 @@ echo (int) (\$cmid ?: 0);
   PAGE_CMID="${PAGE_CMID:-4}"
 
   echo "=== mod_page view id=${PAGE_CMID} ==="
-  curl -sS -b "$CJ" -c "$CJ" -L \
-    "${PROD}${WWW}/mod/page/view.php?id=${PAGE_CMID}" -o "$PAGE"
+  if ! fetch_url_follow_same_host "$PAGE" "${PROD}${WWW}/mod/page/view.php?id=${PAGE_CMID}"; then
+    return 1
+  fi
   assert_no_fatal_html "auth_page" "$PAGE"
 
   if grep -qi 'Error reading from database' "$PAGE"; then

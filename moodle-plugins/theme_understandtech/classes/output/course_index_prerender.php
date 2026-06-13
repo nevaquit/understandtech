@@ -61,7 +61,11 @@ class course_index_prerender {
             return '';
         }
 
-        $modinfo = get_fast_modinfo($course);
+        try {
+            $modinfo = get_fast_modinfo($course);
+        } catch (\Throwable $e) {
+            return '';
+        }
         $currentcmid = ($PAGE->cm && (int) $PAGE->course->id === $courseid) ? (int) $PAGE->cm->id : 0;
 
         $sectionshtml = '';

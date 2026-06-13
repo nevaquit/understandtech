@@ -32,7 +32,7 @@ class hook_callbacks {
         }
 
         $context = $PAGE->context;
-        if (!in_array($context->contextlevel, [CONTEXT_COURSE, CONTEXT_MODULE], true)) {
+        if (!$context || !in_array($context->contextlevel, [CONTEXT_COURSE, CONTEXT_MODULE], true)) {
             return null;
         }
 
