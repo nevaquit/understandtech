@@ -73,7 +73,7 @@ lift_maintenance_for_probe() {
 assert_no_fatal_html() {
   local label="$1"
   local file="$2"
-  if grep -qiE 'Exception -|Fatal error|Parse error|Call to undefined method|Error reading from database' "$file"; then
+  if grep -qiE 'Exception -|Fatal error|Parse error|Call to undefined method|Error reading from database|Coding error detected' "$file"; then
     echo "fatal_html label=${label}"
     grep -oiE 'Exception -[^<]{0,120}|Fatal error[^<]{0,120}|Call to undefined method[^<]{0,120}|Error reading from database' "$file" | head -3
     return 1

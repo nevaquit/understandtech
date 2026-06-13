@@ -124,7 +124,7 @@
     }
 }
 
-body.ut-has-aitutor-sidebar #page.drawers .main-inner {
+body:has(#local-aitutor-sidebar) #page.drawers .main-inner {
     margin-right: clamp(16rem, 18rem + 2vw, 22rem);
 }
 
