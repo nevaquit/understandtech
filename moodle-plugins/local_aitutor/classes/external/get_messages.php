@@ -50,8 +50,6 @@ class get_messages extends \external_api {
             $context = \context_course::instance($courseid);
             self::validate_context($context);
             require_capability('local/aitutor:use', $context);
-        } else {
-            require_capability('local/aitutor:use', \context_system::instance());
         }
 
         $messages = \local_aitutor\api::get_conversation_messages(

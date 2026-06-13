@@ -19,6 +19,10 @@ rsync -av --delete \
   "$SRC" "$DST"
 chown -R www-data:www-data "$DST"
 
-sudo -u www-data php "${MOODLE_DIR}/admin/cli/upgrade.php" --non-interactive
+if [ "${SKIP_MOODLE_UPGRADE:-0}" = 1 ] || [ -f /tmp/understandtech-skip-moodle-upgrade ]; then
+  echo "skip: Moodle upgrade (rollback recovery — DB plugin versions may be ahead of disk)"
+else
+  sudo -u www-data php "${MOODLE_DIR}/admin/cli/upgrade.php" --non-interactive
+fi
 sudo -u www-data php "${MOODLE_DIR}/admin/cli/purge_caches.php"
 echo 'sync_theme_understandtech_complete=1'

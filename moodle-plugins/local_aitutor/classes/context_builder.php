@@ -50,9 +50,11 @@ class context_builder {
             return null;
         }
 
+        $modcontext = \context_module::instance((int) $cm->id);
+
         return [
             'modname' => $cm->modname,
-            'name' => format_string($cm->name, true, ['context' => $cm->context]),
+            'name' => format_string($cm->name, true, ['context' => $modcontext]),
             'section' => (int) $cm->sectionnum,
         ];
     }

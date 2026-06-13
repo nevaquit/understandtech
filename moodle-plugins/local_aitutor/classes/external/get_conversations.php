@@ -40,8 +40,6 @@ class get_conversations extends \external_api {
             $context = \context_course::instance($params['courseid']);
             self::validate_context($context);
             require_capability('local/aitutor:use', $context);
-        } else {
-            require_capability('local/aitutor:use', \context_system::instance());
         }
 
         $records = \local_aitutor\api::get_user_conversations($USER->id, $params['limit']);

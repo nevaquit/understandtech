@@ -19,6 +19,7 @@ if [ -z "${ROLLBACK_SHA}" ]; then
 fi
 
 echo "=== rollback to ${ROLLBACK_SHA} ==="
+export SKIP_MOODLE_UPGRADE=1
 cd "${PLUGINS_REPO_DIR}"
 sudo -u gha-runner git fetch origin main
 sudo -u gha-runner git reset --hard "${ROLLBACK_SHA}"
@@ -50,6 +51,8 @@ done
 
 sudo php "${MOODLE_DIR}/admin/cli/purge_caches.php"
 sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-chdir-quick-vm.sh"
-sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/post-deploy-stabilize-vm.sh"
+SKIP_MOODLE_UPGRADE=1 sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/post-deploy-stabilize-vm.sh"
+
+echo 1 | sudo tee /tmp/understandtech-skip-moodle-upgrade >/dev/null
 
 echo "rollback_deploy_complete sha=${ROLLBACK_SHA}"

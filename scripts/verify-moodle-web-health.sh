@@ -117,6 +117,11 @@ run_checks() {
   echo "=== site home redirect=0 ==="
   curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/?redirect=0" -o "$HOME"
   assert_no_fatal_html "auth_home" "$HOME"
+  if grep -qiE '<title>Error</title>' "$HOME"; then
+    echo "home_bare_error_title"
+    grep -o '<title>[^<]*</title>' "$HOME" | head -1 || true
+    return 1
+  fi
   if grep -qiE '<title>Error \|' "$HOME"; then
     echo "home_error_title"
     grep -o '<title>[^<]*</title>' "$HOME" | head -1 || true

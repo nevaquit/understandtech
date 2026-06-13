@@ -87,6 +87,8 @@ if ! restore_pgbouncer_config; then
   exit 1
 fi
 
+sudo rm -f /tmp/understandtech-skip-moodle-upgrade
+
 if [ -f "${REPO}/scripts/moodle-sync-version-hash.sh" ]; then
   bash "${REPO}/scripts/moodle-sync-version-hash.sh" || echo "WARN: version hash sync failed"
 fi

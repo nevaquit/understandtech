@@ -26,6 +26,11 @@ class hook_callbacks {
             return null;
         }
 
+        // Marketing site home — never inject sidebar (breaks authenticated /?redirect=0 health gate).
+        if ($PAGE->pagelayout === 'frontpage') {
+            return null;
+        }
+
         $context = $PAGE->context;
         if (!in_array($context->contextlevel, [CONTEXT_COURSE, CONTEXT_MODULE], true)) {
             return null;
@@ -34,6 +39,11 @@ class hook_callbacks {
         $coursecontext = $context->contextlevel === CONTEXT_MODULE
             ? $context->get_course_context()
             : $context;
+
+        // Site course is not a certification context; skip sidebar on SITEID.
+        if ((int) $coursecontext->instanceid === SITEID) {
+            return null;
+        }
 
         if (!has_capability('local/aitutor:use', $coursecontext)) {
             return null;

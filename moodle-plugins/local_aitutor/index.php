@@ -6,7 +6,6 @@ require(__DIR__ . '/../../config.php');
 require_login();
 
 $context = context_system::instance();
-require_capability('local/aitutor:use', $context);
 
 $PAGE->set_url(new moodle_url('/local/aitutor/index.php'));
 $PAGE->set_context($context);

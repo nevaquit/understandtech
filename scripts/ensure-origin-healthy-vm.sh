@@ -24,6 +24,10 @@ systemctl restart php8.3-fpm
 systemctl reload nginx
 
 echo "=== post-deploy stabilize (enrol, theme, permissions) ==="
+if [ -f /tmp/understandtech-skip-moodle-upgrade ]; then
+  export SKIP_MOODLE_UPGRADE=1
+  echo "rollback recovery: skipping Moodle upgrade (DB plugin versions may be ahead of disk)"
+fi
 bash "${REPO}/scripts/post-deploy-stabilize-vm.sh"
 
 echo "=== strict web health ==="
