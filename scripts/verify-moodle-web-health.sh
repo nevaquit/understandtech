@@ -44,18 +44,6 @@ fi
 PROD="${PROD:-https://understandtech.app}"
 COURSE_ID="${VERIFY_COURSE_ID:-${COURSE_ID:-3}}"
 
-# Staging health runs on the VM: resolve public hostname to loopback so nginx/ssl and
-# Moodle sessions match wwwroot without round-tripping through Cloudflare.
-CURL_EXTRA=()
-if [ -f /var/www/moodle/config.php ] && [[ "${PROD}" == *staging* ]]; then
-  _staging_host="${PROD#https://}"
-  _staging_host="${_staging_host#http://}"
-  _staging_host="${_staging_host%%/*}"
-  PROD="https://${_staging_host}"
-  CURL_EXTRA=( --resolve "${_staging_host}:443:127.0.0.1" -k )
-  echo "staging_loopback_probe host=${_staging_host} resolve=127.0.0.1:443"
-fi
-
 CJ="/tmp/verify-moodle-cj-$$"
 LOGIN="/tmp/verify-moodle-login-$$"
 HOME="/tmp/verify-moodle-home-$$"
@@ -103,7 +91,7 @@ reset_session() {
 }
 
 fetch_guest_login() {
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" "${PROD}${WWW}/login/index.php" -o "$LOGIN"
+  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/login/index.php" -o "$LOGIN"
 }
 
 run_checks() {
@@ -131,13 +119,13 @@ run_checks() {
 
   echo "=== authenticated login ==="
   tok=$(grep -oP 'name="logintoken" value="\K[^"]+' "$LOGIN" | head -1 || true)
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L \
+  curl -sS -b "$CJ" -c "$CJ" -L \
     --data-urlencode "username=${E2E_USER}" \
     --data-urlencode "password=${E2E_PASS}" \
     --data-urlencode "logintoken=${tok}" \
     "${PROD}${WWW}/login/index.php" -o /dev/null
 
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L "${PROD}${WWW}/my/" -o "$LOGIN"
+  curl -sS -b "$CJ" -c "$CJ" -L "${PROD}${WWW}/my/" -o "$LOGIN"
   assert_no_fatal_html "auth_my" "$LOGIN"
   if ! has_timeline_fallback "$LOGIN"; then
     echo "timeline_fallback_missing (expected on /my/ after auth, not guest login)"
@@ -146,7 +134,7 @@ run_checks() {
   echo "auth_my_ok=1"
 
   echo "=== site home redirect=0 ==="
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L "${PROD}${WWW}/?redirect=0" -o "$HOME"
+  curl -sS -b "$CJ" -c "$CJ" -L "${PROD}${WWW}/?redirect=0" -o "$HOME"
   assert_no_fatal_html "auth_home" "$HOME"
   if grep -qiE '<title>Error</title>' "$HOME"; then
     echo "home_bare_error_title"
@@ -170,7 +158,7 @@ run_checks() {
   echo "auth_home_ok=1"
 
   echo "=== course view id=${COURSE_ID} ==="
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L \
+  curl -sS -b "$CJ" -c "$CJ" -L \
     "${PROD}${WWW}/course/view.php?id=${COURSE_ID}" -o "$COURSE"
   assert_no_fatal_html "auth_course" "$COURSE"
 
@@ -228,7 +216,7 @@ echo (int) (\$cmid ?: 0);
   PAGE_CMID="${PAGE_CMID:-4}"
 
   echo "=== mod_page view id=${PAGE_CMID} ==="
-  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L \
+  curl -sS -b "$CJ" -c "$CJ" -L \
     "${PROD}${WWW}/mod/page/view.php?id=${PAGE_CMID}" -o "$PAGE"
   assert_no_fatal_html "auth_page" "$PAGE"
 
