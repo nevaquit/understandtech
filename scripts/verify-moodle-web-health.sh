@@ -44,6 +44,18 @@ fi
 PROD="${PROD:-https://understandtech.app}"
 COURSE_ID="${VERIFY_COURSE_ID:-${COURSE_ID:-3}}"
 
+# Staging health runs on the VM: resolve public hostname to loopback so nginx/ssl and
+# Moodle sessions match wwwroot without round-tripping through Cloudflare.
+CURL_EXTRA=()
+if [ -f /var/www/moodle/config.php ] && [[ "${PROD}" == *staging* ]]; then
+  _staging_host="${PROD#https://}"
+  _staging_host="${_staging_host#http://}"
+  _staging_host="${_staging_host%%/*}"
+  PROD="https://${_staging_host}"
+  CURL_EXTRA=( --resolve "${_staging_host}:443:127.0.0.1" -k )
+  echo "staging_loopback_probe host=${_staging_host} resolve=127.0.0.1:443"
+fi
+
 CJ="/tmp/verify-moodle-cj-$$"
 LOGIN="/tmp/verify-moodle-login-$$"
 HOME="/tmp/verify-moodle-home-$$"
@@ -86,13 +98,32 @@ has_timeline_fallback() {
   grep -qE 'theme_understandtech/timeline_fallback|timeline_fallback' "$1"
 }
 
+reset_session() {
+  rm -f "$CJ"
+}
+
+fetch_guest_login() {
+  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" "${PROD}${WWW}/login/index.php" -o "$LOGIN"
+}
+
 run_checks() {
+  reset_session
+
   echo "=== guest login ==="
-  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/login/index.php" -o "$LOGIN"
+  fetch_guest_login
   assert_no_fatal_html "guest_login" "$LOGIN"
 
   if ! grep -q 'name="logintoken"' "$LOGIN"; then
+    # Stale auth cookies from a prior attempt redirect away from the login form.
+    reset_session
+    sleep 2
+    fetch_guest_login
+    assert_no_fatal_html "guest_login_retry" "$LOGIN"
+  fi
+
+  if ! grep -q 'name="logintoken"' "$LOGIN"; then
     echo "login_token_missing"
+    grep -o '<title>[^<]*</title>' "$LOGIN" | head -1 || true
     return 1
   fi
   grep -o '<title>[^<]*</title>' "$LOGIN" | head -1 || true
@@ -100,13 +131,13 @@ run_checks() {
 
   echo "=== authenticated login ==="
   tok=$(grep -oP 'name="logintoken" value="\K[^"]+' "$LOGIN" | head -1 || true)
-  curl -sS -b "$CJ" -c "$CJ" -L \
+  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L \
     --data-urlencode "username=${E2E_USER}" \
     --data-urlencode "password=${E2E_PASS}" \
     --data-urlencode "logintoken=${tok}" \
     "${PROD}${WWW}/login/index.php" -o /dev/null
 
-  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/my/" -o "$LOGIN"
+  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L "${PROD}${WWW}/my/" -o "$LOGIN"
   assert_no_fatal_html "auth_my" "$LOGIN"
   if ! has_timeline_fallback "$LOGIN"; then
     echo "timeline_fallback_missing (expected on /my/ after auth, not guest login)"
@@ -115,7 +146,7 @@ run_checks() {
   echo "auth_my_ok=1"
 
   echo "=== site home redirect=0 ==="
-  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/?redirect=0" -o "$HOME"
+  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L "${PROD}${WWW}/?redirect=0" -o "$HOME"
   assert_no_fatal_html "auth_home" "$HOME"
   if grep -qiE '<title>Error</title>' "$HOME"; then
     echo "home_bare_error_title"
@@ -139,11 +170,14 @@ run_checks() {
   echo "auth_home_ok=1"
 
   echo "=== course view id=${COURSE_ID} ==="
-  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/course/view.php?id=${COURSE_ID}" -o "$COURSE"
+  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L \
+    "${PROD}${WWW}/course/view.php?id=${COURSE_ID}" -o "$COURSE"
   assert_no_fatal_html "auth_course" "$COURSE"
 
   if ! grep -q 'templates_dom_patch' "$COURSE"; then
     echo "templates_dom_patch_missing"
+    grep -o '<title>[^<]*</title>' "$COURSE" | head -1 || true
+    echo "course_bytes=$(wc -c < "$COURSE" | tr -d ' ')"
     return 1
   fi
 
@@ -194,7 +228,8 @@ echo (int) (\$cmid ?: 0);
   PAGE_CMID="${PAGE_CMID:-4}"
 
   echo "=== mod_page view id=${PAGE_CMID} ==="
-  curl -sS -b "$CJ" -c "$CJ" "${PROD}${WWW}/mod/page/view.php?id=${PAGE_CMID}" -o "$PAGE"
+  curl -sS "${CURL_EXTRA[@]}" -b "$CJ" -c "$CJ" -L \
+    "${PROD}${WWW}/mod/page/view.php?id=${PAGE_CMID}" -o "$PAGE"
   assert_no_fatal_html "auth_page" "$PAGE"
 
   if grep -qi 'Error reading from database' "$PAGE"; then
@@ -219,13 +254,15 @@ echo (int) (\$cmid ?: 0);
 }
 
 prepare_retry() {
-  echo "health retry prep: purge caches + PHP-FPM restart"
+  echo "health retry prep: reset session + purge caches + PHP-FPM restart"
+  reset_session
   sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php 2>/dev/null || true
   if [ -x "${REPO}/scripts/fix-moodle-chdir-quick-vm.sh" ]; then
     bash "${REPO}/scripts/fix-moodle-chdir-quick-vm.sh" 2>/dev/null || true
   else
     systemctl restart php8.3-fpm 2>/dev/null || true
   fi
+  sleep 2
 }
 
 attempt=1

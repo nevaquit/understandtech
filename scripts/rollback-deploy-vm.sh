@@ -51,8 +51,9 @@ done
 
 sudo php "${MOODLE_DIR}/admin/cli/purge_caches.php"
 sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-moodle-chdir-quick-vm.sh"
-SKIP_MOODLE_UPGRADE=1 sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/post-deploy-stabilize-vm.sh"
 
+# Skip file must exist before stabilize — sudo drops SKIP_MOODLE_UPGRADE from the env.
 echo 1 | sudo tee /tmp/understandtech-skip-moodle-upgrade >/dev/null
+sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/post-deploy-stabilize-vm.sh"
 
 echo "rollback_deploy_complete sha=${ROLLBACK_SHA}"
