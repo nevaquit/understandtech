@@ -25,7 +25,11 @@ echo "=== directory permissions + chdir verify ==="
 bash "${REPO}/scripts/fix-moodle-dir-permissions-vm.sh"
 
 echo "=== SEC701 page filter disable (prevents mod_page dmlreadexception) ==="
-export SEC701_COURSE_ID="${SEC701_COURSE_ID:-${VERIFY_COURSE_ID:-3}}"
+if [[ "${_wwwroot}" == *staging* ]]; then
+  export SEC701_COURSE_ID="${SEC701_COURSE_ID:-2}"
+else
+  export SEC701_COURSE_ID="${SEC701_COURSE_ID:-3}"
+fi
 sudo -u www-data php "${REPO}/scripts/fix-sec701-course-filters.php"
 
 sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php

@@ -162,6 +162,18 @@ run_checks() {
     "${PROD}${WWW}/course/view.php?id=${COURSE_ID}" -o "$COURSE"
   assert_no_fatal_html "auth_course" "$COURSE"
 
+  if grep -qiE '<title>Error</title>' "$COURSE"; then
+    echo "course_bare_error_title"
+    grep -o '<title>[^<]*</title>' "$COURSE" | head -1 || true
+    echo "course_bytes=$(wc -c < "$COURSE" | tr -d ' ')"
+    return 1
+  fi
+  if grep -qiE '<title>Error \|' "$COURSE"; then
+    echo "course_error_title"
+    grep -o '<title>[^<]*</title>' "$COURSE" | head -1 || true
+    return 1
+  fi
+
   if ! grep -q 'templates_dom_patch' "$COURSE"; then
     echo "templates_dom_patch_missing"
     grep -o '<title>[^<]*</title>' "$COURSE" | head -1 || true
