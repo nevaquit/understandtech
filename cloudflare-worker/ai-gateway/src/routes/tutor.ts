@@ -82,7 +82,7 @@ export async function handleTutor(
 		}
 	}
 
-	const systemPrompt = assembleTutorSystemPrompt(TUTOR_SYSTEM_PROMPT, ragChunks);
+	const systemPrompt = assembleTutorSystemPrompt(TUTOR_SYSTEM_PROMPT, ragChunks, body.learner_context);
 	const cacheKey = await buildTutorCacheKey(
 		TUTOR_SYSTEM_PROMPT_VERSION,
 		contextJson,

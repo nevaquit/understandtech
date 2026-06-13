@@ -18,6 +18,10 @@ class hook_callbacks {
     private static function get_sidebar_context(): ?array {
         global $PAGE;
 
+        if (get_config('local_aitutor', 'enablesidebar') === '0') {
+            return null;
+        }
+
         if (!isloggedin() || isguestuser()) {
             return null;
         }
@@ -55,6 +59,7 @@ class hook_callbacks {
             return;
         }
 
+        $PAGE->add_body_class('ut-has-aitutor-sidebar');
         $PAGE->requires->css('/local/aitutor/styles.css');
         // Footer hooks cannot queue PAGE->requires; register AMD here (before the lock).
         // js_call_amd emits M.util.js_pending before core/first defines M — use js_amd_inline.

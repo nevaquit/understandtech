@@ -220,7 +220,7 @@ jobs:
           export E2E_COURSE_PATH="${E2E_COURSE_PATH:-/course/view.php?id=2}"
           # Deploy gate: setup login + navigation (skip auth.spec — duplicates setup and hits /login rate limit).
           npx playwright test --project=setup --project=chromium --workers=1 \
-            auth.setup.ts course-navigation.spec.ts exam-readiness.spec.ts
+            auth.setup.ts course-navigation.spec.ts exam-readiness.spec.ts frontpage.spec.ts
 
       - name: Upload Playwright report
         if: failure()

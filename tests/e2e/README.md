@@ -25,6 +25,11 @@ cp .env.example .env
 | `STAGING_TEST_USER_EMAIL` | For auth/tutor | Student login email |
 | `STAGING_TEST_USER_PASSWORD` | For auth/tutor | Student login password |
 | `E2E_COURSE_PATH` | For tutor tests | e.g. `/course/view.php?id=3` (SEC701) |
+| `E2E_QUIZ_PATH` | For quiz flag / confidence | Quiz view URL on staging |
+| `E2E_QUIZ_ATTEMPT_PATH` | Optional quiz flag shortcut | In-progress attempt URL |
+| `E2E_CTFFLAG_PATH` | For lab flag tests | e.g. `/mod/ctfflag/view.php?id=5` |
+| `E2E_CTFFLAG_VALID_FLAG` | Lab success + XP tests | GitHub secret — never commit |
+| `E2E_LEADERBOARD_PATH` | XP leaderboard check | Defaults to `/my/` |
 
 ## Run
 
@@ -45,12 +50,14 @@ Tests without credentials skip authenticated flows; the invalid-login test alway
 |------|----------|
 | `auth.spec.ts` | Login, logout, invalid creds, session persistence |
 | `course-navigation.spec.ts` | Dashboard, optional course page |
+| `frontpage.spec.ts` | Guest marketing home + logged-in members hub |
 | `ai-tutor.spec.ts` | Sidebar visibility, streaming, Socratic refusal, worker outage |
 
 | `payment-flow.spec.ts` | Stripe checkout — **deferred**; excluded from `chromium`; use `--project=chromium-stripe` with `STRIPE_TEST=1` |
 | `video-playback.spec.ts` | Stream signed JWT player — set `E2E_STREAM_COURSE_PATH` |
 | `quiz-confidence.spec.ts` | CertMaster confidence UI — set `E2E_QUIZ_PATH` |
-| `lab-flag.spec.ts` | CTF flag submission — set `E2E_CTFFLAG_PATH` |
+| `quiz-flag.spec.ts` | Quiz question flag toggle — set `E2E_QUIZ_PATH` or `E2E_QUIZ_ATTEMPT_PATH` |
+| `lab-flag.spec.ts` | CTF flag submission + optional XP — set `E2E_CTFFLAG_PATH` |
 
 ## CI
 

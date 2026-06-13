@@ -33,6 +33,7 @@ class api {
         $expiry = (int) get_config('local_aitutor', 'tokenexpiry') ?: 300;
         $iat = time();
         $conversationuuid = $conversationuuid ?: self::uuid4();
+        self::ensure_conversation($userid, (int) $context->instanceid, $cmid, $conversationuuid);
 
         $claims = [
             'sub' => (string) $userid,
@@ -97,10 +98,29 @@ class api {
 
         if (!empty($payload->messages) && is_array($payload->messages)) {
             foreach ($payload->messages as $message) {
+                $role = $message->role ?? 'assistant';
+                $content = (string) ($message->content ?? '');
+                if ($content === '') {
+                    continue;
+                }
+
+                $duplicate = $DB->record_exists_sql(
+                    'SELECT 1 FROM {aitutor_messages}
+                      WHERE conversationid = :cid AND role = :role AND content = :content',
+                    [
+                        'cid' => $conversation->id,
+                        'role' => $role,
+                        'content' => $content,
+                    ]
+                );
+                if ($duplicate) {
+                    continue;
+                }
+
                 $DB->insert_record('aitutor_messages', (object) [
                     'conversationid' => $conversation->id,
-                    'role' => $message->role ?? 'assistant',
-                    'content' => $message->content ?? '',
+                    'role' => $role,
+                    'content' => $content,
                     'timecreated' => $now,
                 ]);
             }
@@ -117,6 +137,93 @@ class api {
     public static function get_user_conversations(int $userid, int $limit = 20): array {
         global $DB;
         return array_values($DB->get_records('aitutor_conversations', ['userid' => $userid], 'timemodified DESC', '*', 0, $limit));
+    }
+
+    /**
+     * Ensure a conversation row exists for JWT / SSE session tracking.
+     *
+     * @param int $userid
+     * @param int $courseid
+     * @param int|null $cmid
+     * @param string $conversationuuid
+     * @return \stdClass
+     */
+    public static function ensure_conversation(
+        int $userid,
+        int $courseid,
+        ?int $cmid,
+        string $conversationuuid
+    ): \stdClass {
+        global $DB;
+
+        $existing = $DB->get_record('aitutor_conversations', ['conversationuuid' => $conversationuuid]);
+        if ($existing) {
+            if ((int) $existing->userid !== $userid) {
+                throw new \moodle_exception('invalidconversation', 'local_aitutor');
+            }
+            $existing->timemodified = time();
+            $DB->update_record('aitutor_conversations', $existing);
+            return $existing;
+        }
+
+        $now = time();
+        $record = (object) [
+            'userid' => $userid,
+            'courseid' => $courseid,
+            'cmid' => $cmid,
+            'conversationuuid' => $conversationuuid,
+            'timecreated' => $now,
+            'timemodified' => $now,
+        ];
+        $record->id = $DB->insert_record('aitutor_conversations', $record);
+        return $record;
+    }
+
+    /**
+     * Fetch transcript messages for a conversation owned by the learner.
+     *
+     * @param int $userid
+     * @param string $conversationuuid
+     * @param int $limit
+     * @return array<int, array{role: string, content: string, timecreated: int}>
+     */
+    public static function get_conversation_messages(int $userid, string $conversationuuid, int $limit = 50): array {
+        global $DB;
+
+        $conversation = $DB->get_record('aitutor_conversations', ['conversationuuid' => $conversationuuid]);
+        if (!$conversation || (int) $conversation->userid !== $userid) {
+            return [];
+        }
+
+        $records = $DB->get_records(
+            'aitutor_messages',
+            ['conversationid' => $conversation->id],
+            'timecreated ASC',
+            'role, content, timecreated',
+            0,
+            $limit
+        );
+
+        $messages = [];
+        foreach ($records as $record) {
+            $messages[] = [
+                'role' => (string) $record->role,
+                'content' => (string) $record->content,
+                'timecreated' => (int) $record->timecreated,
+            ];
+        }
+
+        return $messages;
+    }
+
+    /**
+     * @param int $userid
+     * @param int $courseid
+     * @param int|null $cmid
+     * @return array<string, mixed>
+     */
+    public static function get_learner_context(int $userid, int $courseid, ?int $cmid = null): array {
+        return context_builder::build($userid, $courseid, $cmid);
     }
 
     /**

@@ -145,20 +145,44 @@ function ctfflag_grade_item_update(stdClass $instance, $grades = null) {
 }
 
 /**
+ * Award XP via Level Up XP when local_gamification is present.
+ *
+ * @param stdClass $instance ctfflag instance record.
+ * @param int $userid Learner user id.
+ * @param int $courseid Course id.
+ * @return bool True when XP was granted.
+ */
+function ctfflag_award_xp(stdClass $instance, int $userid, int $courseid): bool {
+    $points = (int) ($instance->xp_award ?? 0);
+    if ($points <= 0) {
+        $points = 50;
+    }
+
+    if (!class_exists('\local_gamification\api')) {
+        return false;
+    }
+
+    return \local_gamification\api::award_xp($userid, $courseid, $points, 'ctfflag_success');
+}
+
+/**
  * Notify readiness pipeline that a learner captured the lab flag.
  *
  * @param stdClass $cm Course-module record.
  * @param stdClass $instance ctfflag instance record.
+ * @param int $userid Learner user id.
  * @return void
  */
-function ctfflag_notify_flag_success(stdClass $cm, stdClass $instance): void {
+function ctfflag_notify_flag_success(stdClass $cm, stdClass $instance, int $userid): void {
     $event = \mod_ctfflag\event\flag_submitted::create([
         'objectid' => $instance->id,
         'context' => context_module::instance($cm->id),
+        'userid' => $userid,
         'relateduserid' => null,
         'other' => [
             'cmid' => $cm->id,
         ],
     ]);
     $event->trigger();
+    ctfflag_award_xp($instance, $userid, (int) $cm->course);
 }

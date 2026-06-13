@@ -63,8 +63,14 @@ Placeholder — capture after Moodle install:
 |----------|---------|
 | `core/loginform` | Centred Skool-style login |
 | `core_course/single_activity` | Two-pane lesson layout |
-| `core/toast` | Notification styling |
+| `core/toast` | Skool-style notifications (see below) |
 | `block_xp/main` | Leaderboard widget (requires block_xp) |
+
+### `core/notification_popup` → `core/toast` (intentional)
+
+The playbook references a `core/notification_popup` override for Skool-style toasts. Moodle 4.5 surfaces user notifications through **`core/toast`** (Bootstrap 5 toast stack), not a separate popup template. This theme therefore overrides `core/toast` with `.ut-notification-toast` styling instead of adding a redundant `notification_popup` template.
+
+Use `core/toast` for milestone unlocks (e.g. add class `ut-milestone-toast` server-side when surfacing Level Up XP unlocks).
 
 ## Gamification (Level Up XP)
 

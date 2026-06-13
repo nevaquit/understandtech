@@ -17,6 +17,7 @@ class get_conversations extends \external_api {
      */
     public static function execute_parameters(): \external_function_parameters {
         return new \external_function_parameters([
+            'courseid' => new \external_value(PARAM_INT, 'Filter by course id', VALUE_DEFAULT, 0),
             'limit' => new \external_value(PARAM_INT, 'Max records', VALUE_DEFAULT, 20),
         ]);
     }
@@ -25,16 +26,30 @@ class get_conversations extends \external_api {
      * @param int $limit
      * @return array
      */
-    public static function execute(int $limit = 20): array {
+    public static function execute(int $courseid = 0, int $limit = 20): array {
         global $USER;
 
-        self::validate_parameters(self::execute_parameters(), ['limit' => $limit]);
-        require_login();
-        require_capability('local/aitutor:use', \context_system::instance());
+        $params = self::validate_parameters(self::execute_parameters(), [
+            'courseid' => $courseid,
+            'limit' => $limit,
+        ]);
 
-        $records = \local_aitutor\api::get_user_conversations($USER->id, $limit);
+        require_login();
+
+        if ($params['courseid'] > 0) {
+            $context = \context_course::instance($params['courseid']);
+            self::validate_context($context);
+            require_capability('local/aitutor:use', $context);
+        } else {
+            require_capability('local/aitutor:use', \context_system::instance());
+        }
+
+        $records = \local_aitutor\api::get_user_conversations($USER->id, $params['limit']);
         $out = [];
         foreach ($records as $record) {
+            if ($params['courseid'] > 0 && (int) $record->courseid !== $params['courseid']) {
+                continue;
+            }
             $out[] = [
                 'id' => $record->id,
                 'conversationuuid' => $record->conversationuuid,

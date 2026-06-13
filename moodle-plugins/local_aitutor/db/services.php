@@ -31,4 +31,13 @@ $functions = [
         'ajax' => true,
         'capabilities' => 'local/aitutor:use',
     ],
+    'local_aitutor_get_messages' => [
+        'classname' => 'local_aitutor\external\get_messages',
+        'methodname' => 'execute',
+        'classpath' => '',
+        'description' => 'Fetch tutor conversation messages',
+        'type' => 'read',
+        'ajax' => true,
+        'capabilities' => 'local/aitutor:use',
+    ],
 ];

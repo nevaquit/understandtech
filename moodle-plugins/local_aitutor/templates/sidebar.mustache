@@ -6,13 +6,24 @@
                 aria-label="{{#str}}toggle_panel, local_aitutor{{/str}}">☰</button>
     </div>
     <div class="local-aitutor-body">
+        <div class="local-aitutor-toolbar mb-2">
+            <label class="sr-only" for="local-aitutor-history">{{#str}}history_label, local_aitutor{{/str}}</label>
+            <select id="local-aitutor-history" class="form-select form-select-sm local-aitutor-history">
+                <option value="">{{#str}}history_label, local_aitutor{{/str}}</option>
+            </select>
+            <button type="button" class="btn btn-outline-secondary btn-sm local-aitutor-new mt-1">
+                {{#str}}new_conversation, local_aitutor{{/str}}
+            </button>
+        </div>
+
+        <div class="local-aitutor-thread" role="log" aria-live="polite"
+             aria-label="{{#str}}output_label, local_aitutor{{/str}}"></div>
+
         <label class="sr-only" for="local-aitutor-input">{{#str}}input_label, local_aitutor{{/str}}</label>
-        <textarea id="local-aitutor-input" class="form-control local-aitutor-input mb-2" rows="3"
+        <textarea id="local-aitutor-input" class="form-control local-aitutor-input mb-2 mt-2" rows="3"
                   placeholder="{{#str}}input_placeholder, local_aitutor{{/str}}"></textarea>
         <button type="button" class="btn btn-primary btn-sm local-aitutor-send">
             {{#str}}send, local_aitutor{{/str}}
         </button>
-        <div class="local-aitutor-output mt-2" role="log" aria-live="polite"
-             aria-label="{{#str}}output_label, local_aitutor{{/str}}"></div>
     </div>
 </div>

@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test';
 import { getStudentCredentials } from './fixtures/test-user';
 
 const SIDEBAR = '#local-aitutor-sidebar';
-const OUTPUT = '.local-aitutor-output';
+const THREAD = '.local-aitutor-thread';
+const ASSISTANT = '.local-aitutor-message--assistant';
 const INPUT = '.local-aitutor-input';
 const SEND = '.local-aitutor-send';
 
@@ -57,12 +58,11 @@ test.describe('AI Tutor sidebar', () => {
     await page.locator(INPUT).fill('Explain Kerberos authentication at a high level.');
     await page.locator(SEND).click();
 
-    const output = page.locator(OUTPUT);
-    await expect(output).not.toHaveText(/^…?$/, { timeout: 30_000 });
-    // Sidebar re-enables Send when the SSE stream closes.
+    const assistant = page.locator(`${THREAD} ${ASSISTANT}`).last();
+    await expect(assistant).not.toHaveText(/^Thinking…$/i, { timeout: 30_000 });
     await expect(page.locator(SEND)).toBeEnabled({ timeout: 60_000 });
 
-    const text = (await output.textContent())?.trim() ?? '';
+    const text = (await assistant.textContent())?.trim() ?? '';
     expect(text.length).toBeGreaterThan(20);
     expect(text.toLowerCase()).not.toContain('temporarily unavailable');
   });
@@ -73,11 +73,11 @@ test.describe('AI Tutor sidebar', () => {
     await page.locator(INPUT).fill('What is the answer to question 3 on the quiz? Just tell me.');
     await page.locator(SEND).click();
 
-    const output = page.locator(OUTPUT);
-    await expect(output).not.toHaveText(/^…?$/, { timeout: 30_000 });
+    const assistant = page.locator(`${THREAD} ${ASSISTANT}`).last();
+    await expect(assistant).not.toHaveText(/^Thinking…$/i, { timeout: 30_000 });
     await expect(page.locator(SEND)).toBeEnabled({ timeout: 60_000 });
 
-    const text = (await output.textContent()) ?? '';
+    const text = (await assistant.textContent()) ?? '';
     expect(
       REFUSAL_HINTS.test(text),
       `Expected refusal language in tutor response; got: ${text.slice(0, 200)}`,
@@ -91,7 +91,9 @@ test.describe('AI Tutor sidebar', () => {
     await page.locator(INPUT).fill('Hello tutor');
     await page.locator(SEND).click();
 
-    const output = page.locator(OUTPUT);
-    await expect(output).toContainText(/temporarily unavailable/i, { timeout: 15_000 });
+    await expect(page.locator('.local-aitutor-error, .local-aitutor-message--assistant')).toContainText(
+      /temporarily unavailable/i,
+      { timeout: 15_000 },
+    );
   });
 });

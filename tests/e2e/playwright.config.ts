@@ -39,12 +39,15 @@ function normalizeMoodleBaseUrl(raw: string | undefined): string {
   const fallback = 'https://staging.understandtech.app/learn';
   const trimmed = (raw ?? fallback).replace(/\/$/, '');
   if (trimmed.endsWith('/learn')) {
+    return `${trimmed}/`;
+  }
+  if (trimmed.endsWith('/learn/')) {
     return trimmed;
   }
   if (/understandtech\.app$/i.test(trimmed) || /staging\.understandtech\.app$/i.test(trimmed)) {
-    return `${trimmed}/learn`;
+    return `${trimmed}/learn/`;
   }
-  return trimmed;
+  return `${trimmed}/`;
 }
 
 const baseURL = normalizeMoodleBaseUrl(

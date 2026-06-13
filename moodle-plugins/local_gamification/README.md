@@ -6,7 +6,9 @@ Server-side gamification hooks for understandtech.app. XP storage and leaderboar
 
 | Event | Handler | Purpose |
 |-------|---------|---------|
-| `\mod_quiz\event\attempt_submitted` | `observer::quiz_attempt_submitted` | Quiz completion → XP (stub) |
+| `\mod_quiz\event\attempt_submitted` | `observer::quiz_attempt_submitted` | Quiz completion → XP bonus |
+
+Lab flag XP is awarded by `mod_ctfflag\ctfflag_award_xp()` (not this plugin's observers).
 
 When `block_xp` is **not** installed, observers are no-ops. Configure the XP economy in **Level Up XP admin** when the plugin is present:
 

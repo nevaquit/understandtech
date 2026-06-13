@@ -42,22 +42,6 @@ class observer {
     }
 
     /**
-     * Award XP when a CTF lab flag is captured successfully.
-     *
-     * @param \mod_ctfflag\event\flag_submitted $event
-     * @return void
-     */
-    public static function flag_submitted(\mod_ctfflag\event\flag_submitted $event): void {
-        global $DB;
-
-        $instance = $DB->get_record('ctfflag', ['id' => $event->objectid], 'xp_award', MUST_EXIST);
-        $userid = (int) $event->userid;
-        $courseid = (int) $event->courseid;
-        $points = (int) ($instance->xp_award ?: 50);
-        api::award_xp($userid, $courseid, $points, 'ctfflag_success');
-    }
-
-    /**
      * @return \stdClass|null
      */
     protected static function first_certification(): ?\stdClass {

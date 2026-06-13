@@ -46,9 +46,21 @@ class get_jwt extends \external_api {
         $uuid = $params['conversationuuid'] ?: null;
         $token = \local_aitutor\api::generate_tutor_jwt($USER->id, $context, $cmid, $uuid);
 
+        $claims = \local_aitutor\jwt_helper::decode(
+            $token,
+            \local_aitutor\api::get_worker_secret()
+        );
+        $conversationuuid = $claims['context']['conversation_id'] ?? '';
+
         return [
             'token' => $token,
             'workerurl' => get_config('local_aitutor', 'workerurl') ?: 'https://ai.understandtech.app/tutor',
+            'conversationuuid' => $conversationuuid,
+            'learnercontextjson' => json_encode(\local_aitutor\api::get_learner_context(
+                $USER->id,
+                $params['courseid'],
+                $cmid
+            ), JSON_UNESCAPED_UNICODE),
         ];
     }
 
@@ -59,6 +71,8 @@ class get_jwt extends \external_api {
         return new \external_single_structure([
             'token' => new \external_value(PARAM_TEXT, 'JWT'),
             'workerurl' => new \external_value(PARAM_URL, 'Worker URL'),
+            'conversationuuid' => new \external_value(PARAM_TEXT, 'Conversation uuid'),
+            'learnercontextjson' => new \external_value(PARAM_RAW, 'Learner context JSON'),
         ]);
     }
 }

@@ -21,6 +21,7 @@ export interface ChatMessage {
 export interface TutorRequestBody {
 	messages: ChatMessage[];
 	context?: TutorContext;
+	learner_context?: Record<string, unknown> | null;
 }
 
 export interface GradeRequestBody {

@@ -28,7 +28,7 @@
     pointer-events: none;
 }
 
-.local-aitutor-sidebar.is-loading .local-aitutor-output::after {
+.local-aitutor-sidebar.is-loading .local-aitutor-message--streaming::after {
     content: '';
     display: inline-block;
     width: 0.5rem;
@@ -39,11 +39,45 @@
     animation: local-aitutor-pulse 0.9s ease-in-out infinite;
 }
 
-.local-aitutor-sidebar.has-error .local-aitutor-output {
-    color: #842029;
-    background: rgba(132, 32, 41, 0.06);
-    border-radius: 0.375rem;
-    padding: 0.5rem;
+.local-aitutor-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.local-aitutor-thread {
+    min-height: 10rem;
+    max-height: 32vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+}
+
+.local-aitutor-message {
+    padding: 0.5rem 0.65rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    max-width: 95%;
+}
+
+.local-aitutor-message--user {
+    align-self: flex-end;
+    background: rgba(26, 138, 125, 0.12);
+    color: #0b1f3a;
+}
+
+.local-aitutor-message--assistant {
+    align-self: flex-start;
+    background: rgba(11, 31, 58, 0.06);
+    color: #0b1f3a;
+}
+
+.local-aitutor-message--streaming {
+    opacity: 0.85;
 }
 
 .local-aitutor-header {
@@ -90,14 +124,8 @@
     }
 }
 
-.local-aitutor-output {
-    min-height: 8rem;
-    max-height: 40vh;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #0b1f3a;
+body.ut-has-aitutor-sidebar #page.drawers .main-inner {
+    margin-right: clamp(16rem, 18rem + 2vw, 22rem);
 }
 
 @keyframes local-aitutor-pulse {

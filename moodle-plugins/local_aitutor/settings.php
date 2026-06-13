@@ -6,6 +6,13 @@ defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_aitutor', get_string('pluginname', 'local_aitutor'));
 
+    $settings->add(new admin_setting_configcheckbox(
+        'local_aitutor/enablesidebar',
+        get_string('enablesidebar', 'local_aitutor'),
+        get_string('enablesidebar_desc', 'local_aitutor'),
+        1
+    ));
+
     $settings->add(new admin_setting_configtext(
         'local_aitutor/workerurl',
         get_string('workerurl', 'local_aitutor'),

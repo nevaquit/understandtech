@@ -1,6 +1,6 @@
 # Phase 0 — Local Toolchain Audit
 
-Audit date: 2026-06-05  
+Audit date: 2026-06-05 (re-verified)  
 Repository: `understandtech` (understandtech.app platform monorepo)
 
 ## Installed and ready
@@ -15,7 +15,7 @@ Repository: `understandtech` (understandtech.app platform monorepo)
 | Bicep CLI | Latest | OK | 0.43.8 |
 | Cursor | Latest | OK | (IDE) |
 
-## Missing — install before Phase 2+
+## Missing — install before local Moodle plugin / Worker dev
 
 | Tool | Required | Status | Install notes |
 |------|----------|--------|---------------|
@@ -25,6 +25,8 @@ Repository: `understandtech` (understandtech.app platform monorepo)
 | Docker Compose | v2+ | Missing | Bundled with Docker Desktop |
 | Wrangler | 3+ | Missing | `npm install -g wrangler` |
 | jq | 1.6+ | Missing | `winget install jqlang.jq` |
+
+Re-verified on the Windows dev machine: `php`, `composer`, `docker`, `wrangler`, and `jq` are not on PATH. CI and the Azure VM carry PHP/Moodle tooling; local plugin lint (`phpcs`) and `docker-compose.yml` stacks still need the rows above.
 
 ## Cursor IDE configuration
 
@@ -44,11 +46,11 @@ Confirm access before Phase 2:
 | Microsoft Azure | VM, Postgres, Redis, Key Vault |
 | Cloudflare (Workers Paid) | AI Gateway Worker + Stream |
 | Anthropic / OpenAI | AI Tutor LLM providers |
-| Stripe | Subscription billing |
-| Postmark | Transactional email |
+| Stripe | Subscription billing (**deferred** — see `docs/phase-7-production.md`) |
+| Postmark | Transactional email (**deferred**) |
 
 ## Phase 0 verdict
 
-**Partially complete.** Git, Node, npm, GitHub CLI, Azure CLI, and Bicep are ready for Phase 2 deployment. Install PHP, Composer, and Docker before Phase 3 (Moodle plugin development). Install Wrangler before Phase 4.
+**Partially complete.** Git, Node, npm, GitHub CLI, Azure CLI, and Bicep are ready for infrastructure and E2E work from this machine. Install PHP, Composer, Docker, Wrangler, and jq before comfortable local Moodle plugin development and Worker deploy dry-runs.
 
-Next step: Phase 1 scaffolding (complete) → install missing tools in parallel with Phase 2 planning.
+Next step: install missing tools when doing Phase 3 local `phpcs`/PHPUnit or Phase 4 `wrangler dev`; production/staging deploys do not require them on this workstation.

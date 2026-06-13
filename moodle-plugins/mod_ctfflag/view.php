@@ -57,7 +57,7 @@ if ($data = $mform->get_data()) {
     $DB->insert_record('ctfflag_submissions', $submission);
 
     if ($matched) {
-        ctfflag_notify_flag_success($cm, $instance);
+        ctfflag_notify_flag_success($cm, $instance, (int) $USER->id);
         ctfflag_update_completion($cm, $instance, $USER->id, true);
         ctfflag_update_grades($instance, $USER->id, 1.0);
         redirect($PAGE->url, get_string('flagsuccess', 'mod_ctfflag'), null, \core\output\notification::NOTIFY_SUCCESS);
