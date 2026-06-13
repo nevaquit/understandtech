@@ -5,7 +5,8 @@
         <strong>{{#str}}readiness, block_portfolio{{/str}}:</strong> {{readiness}}%
     </div>
     {{#labs.length}}
-    <ul class="list-unstyled">
+    <h4 class="h6">{{#str}}labs, block_portfolio{{/str}}</h4>
+    <ul class="list-unstyled mb-3">
         {{#labs}}
         <li class="mb-2">
             <a href="{{url}}">{{title}}</a>
@@ -14,6 +15,17 @@
         {{/labs}}
     </ul>
     {{/labs.length}}
+    {{#assessments.length}}
+    <h4 class="h6">{{#str}}assessments, block_portfolio{{/str}}</h4>
+    <ul class="list-unstyled">
+        {{#assessments}}
+        <li class="mb-2">
+            <a href="{{url}}">{{title}}</a>
+            <small class="text-muted d-block">{{date}}</small>
+        </li>
+        {{/assessments}}
+    </ul>
+    {{/assessments.length}}
     {{/empty}}
     {{#empty}}
     <p class="text-muted">{{#str}}empty, block_portfolio{{/str}}</p>

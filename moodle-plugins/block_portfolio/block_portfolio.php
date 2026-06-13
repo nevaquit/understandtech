@@ -27,14 +27,26 @@ class block_portfolio extends block_base {
 
         $this->content = new stdClass();
         $certid = (int) ($this->config->certificationid ?? 0);
+
+        if (!$certid) {
+            $this->content->text = get_string('noconfig', 'block_portfolio');
+            return $this->content;
+        }
+
         $data = \block_portfolio\api::get_portfolio($USER->id, $certid);
 
         $this->content->text = $OUTPUT->render_from_template('block_portfolio/main', [
             'readiness' => $data['readiness'],
             'labs' => $data['labs'],
-            'empty' => $data['labs'] === [] && $data['readiness'] === 0,
+            'assessments' => $data['assessments'],
+            'empty' => $data['labs'] === [] && $data['assessments'] === [] && $data['readiness'] === 0,
         ]);
 
         return $this->content;
+    }
+
+    #[\Override]
+    public function specialization(): void {
+        $this->title = format_string($this->config->title ?? get_string('pluginname', 'block_portfolio'));
     }
 }
