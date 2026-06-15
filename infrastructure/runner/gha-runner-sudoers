@@ -54,6 +54,7 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/script
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/sync-sudoers-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/ensure-origin-healthy-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/seed-security-plus-course-vm.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/seed-comptia-a-plus-course-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/verify-moodle-web-health.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/fix-moodle-dir-permissions-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/fix-moodle-chdir-quick-vm.sh
