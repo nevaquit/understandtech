@@ -9,7 +9,12 @@ if [ -d "${REPO}/.git" ]; then
   sudo -u gha-runner git -C "$REPO" reset --hard origin/main
 fi
 
-sudo /usr/bin/bash "${REPO}/scripts/kill-stale-aplus-seed-vm.sh" || true
+# End orphaned APLUS seed PHP from cancelled workflow runs (this script runs as root).
+/usr/bin/pkill -f 'seed-comptia-a-plus-course.php' 2>/dev/null || true
+/usr/bin/pkill -f 'fix-aplus-course-filters.php' 2>/dev/null || true
+/usr/bin/pkill -f 'enroll-aplus-default-users.php' 2>/dev/null || true
+sleep 2
+echo 'stale_aplus_seed_cleared=1'
 
 sudo -u www-data timeout 480 php "${REPO}/scripts/seed-comptia-a-plus-course.php"
 if [ "${APLUS_SKIP_FILTER_FIX:-0}" != "1" ]; then
