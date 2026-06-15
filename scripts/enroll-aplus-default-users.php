@@ -154,8 +154,6 @@ foreach ($usernames as $username) {
     $verifiedusers[] = $user;
 }
 
-purge_all_caches();
-
 $failed = 0;
 foreach ($verifiedusers as $user) {
     if (!aplus_user_can_view_course($course, $user)) {
