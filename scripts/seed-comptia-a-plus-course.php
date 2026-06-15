@@ -691,7 +691,9 @@ if (!$category) {
 }
 
 $course = $DB->get_record('course', ['shortname' => 'APLUS']);
+$courseisnew = false;
 if (!$course) {
+    $courseisnew = true;
     $newcourse = new stdClass();
     $newcourse->fullname = 'CompTIA A+ certification';
     $newcourse->shortname = 'APLUS';
@@ -715,7 +717,9 @@ for ($i = 1; $i <= $sectioncount; $i++) {
         course_create_section($course, $i);
     }
 }
-rebuild_course_cache((int) $course->id, true);
+if ($courseisnew) {
+    rebuild_course_cache((int) $course->id, true);
+}
 
 $sectionnames = [
     1 => 'Core 1 · Domain 1: Mobile Devices (13%)',
@@ -734,7 +738,6 @@ foreach ($sectionnames as $num => $label) {
         $DB->set_field('course_sections', 'name', $label, ['id' => $section->id]);
     }
 }
-rebuild_course_cache((int) $course->id, true);
 
 $domainsection = [
     'mobile_devices' => 1,
