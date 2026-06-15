@@ -24,5 +24,4 @@ if [ "${SKIP_MOODLE_UPGRADE:-0}" = 1 ] || [ -f /tmp/understandtech-skip-moodle-u
 else
   sudo -u www-data php "${MOODLE_DIR}/admin/cli/upgrade.php" --non-interactive
 fi
-sudo -u www-data php "${MOODLE_DIR}/admin/cli/purge_caches.php"
 echo 'sync_theme_understandtech_complete=1'

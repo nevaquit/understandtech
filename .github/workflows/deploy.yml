@@ -236,6 +236,9 @@ jobs:
     name: Deploy production
     needs: [validate, deploy-staging, staging-e2e]
     if: |
+      always() &&
+      !cancelled() &&
+      needs.validate.result == 'success' &&
       github.event_name != 'pull_request' &&
       (github.event_name == 'workflow_dispatch' || needs.validate.outputs.has_plugin_changes == 'true') &&
       (needs.staging-e2e.result == 'success' ||
