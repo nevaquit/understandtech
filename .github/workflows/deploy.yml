@@ -167,7 +167,8 @@ jobs:
     needs: validate
     if: |
       github.event_name != 'pull_request' &&
-      (github.event_name == 'workflow_dispatch' || needs.validate.outputs.has_plugin_changes == 'true')
+      (github.event_name == 'workflow_dispatch' || needs.validate.outputs.has_plugin_changes == 'true') &&
+      !(github.event_name == 'workflow_dispatch' && inputs.skip_staging_gate == true)
     uses: ./.github/workflows/deploy-staging.yml
     with:
       changed_plugins: ${{ needs.validate.outputs.changed_plugins }}
@@ -180,7 +181,8 @@ jobs:
     needs: [validate, deploy-staging]
     if: |
       github.event_name != 'pull_request' &&
-      (github.event_name == 'workflow_dispatch' || needs.validate.outputs.has_plugin_changes == 'true')
+      (github.event_name == 'workflow_dispatch' || needs.validate.outputs.has_plugin_changes == 'true') &&
+      !(github.event_name == 'workflow_dispatch' && inputs.skip_staging_gate == true)
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -354,12 +356,6 @@ jobs:
         run: |
           set -euo pipefail
           bash "${PLUGINS_REPO_DIR}/scripts/migrate-moodle-sessions-to-redis-vm.sh"
-
-      - name: Purge Moodle caches
-        continue-on-error: true
-        run: |
-          set -euo pipefail
-          timeout 120 sudo /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php || echo 'purge_caches_timed_out=1'
 
       - name: Restart PHP-FPM
         run: |

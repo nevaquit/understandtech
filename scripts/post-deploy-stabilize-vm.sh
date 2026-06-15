@@ -42,8 +42,7 @@ if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/c
   sudo -u www-data php "${REPO}/scripts/fix-aplus-course-filters.php"
 fi
 
-sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
-# Full restart (never reload) — recycles all PHP-FPM workers after cache/theme changes.
+# Redis flush + PHP-FPM restart recycle workers after theme/cache changes (purge_caches hangs on VM).
 bash "${REPO}/scripts/restart-php-fpm-vm.sh"
 
 echo 'post_deploy_stabilize_complete=1'

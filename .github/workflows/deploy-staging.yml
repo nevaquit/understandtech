@@ -157,12 +157,6 @@ jobs:
           set -euo pipefail
           bash "${PLUGINS_REPO_DIR}/scripts/migrate-moodle-sessions-to-redis-vm.sh"
 
-      - name: Purge Moodle caches
-        continue-on-error: true
-        run: |
-          set -euo pipefail
-          timeout 120 sudo /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php || echo 'purge_caches_timed_out=1'
-
       - name: Restart PHP-FPM
         run: |
           set -euo pipefail
