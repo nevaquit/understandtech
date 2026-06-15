@@ -376,37 +376,75 @@ function aplus_add_quiz(stdClass $course, int $sectionnum, string $quizname, arr
         return;
     }
 
+    $exists = $DB->record_exists_sql(
+        "SELECT q.id
+           FROM {quiz} q
+           JOIN {course_modules} cm ON cm.instance = q.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
+          WHERE cm.course = :courseid AND q.name = :name",
+        ['courseid' => $course->id, 'name' => $quizname]
+    );
+    if ($exists) {
+        echo "quiz_exists name={$quizname}\n";
+        return;
+    }
+
     $targetbehaviour = 'deferredfeedback';
     if (array_key_exists('certmasterconfidence', core_component::get_plugin_list('qbehaviour'))) {
         try {
             question_engine::get_behaviour_type('certmasterconfidence');
             $targetbehaviour = 'certmasterconfidence';
         } catch (Throwable $e) {
-            echo "quiz_warn behaviour_unavailable name={$quizname}\n";
+            echo "quiz_warn behaviour_unavailable fallback=deferredfeedback name={$quizname}\n";
         }
     }
 
-    $quiz = new stdClass();
+    $quiz = aplus_quiz_apply_defaults(new stdClass());
     $quiz->course = $course->id;
     $quiz->name = $quizname;
-    $quiz->intro = '';
+    $quiz->intro = '<p>Domain knowledge check for CompTIA A+ certification. Rate your confidence after each question.</p>';
     $quiz->introformat = FORMAT_HTML;
-    $quiz->preferredbehaviour = $targetbehaviour;
     $quiz->module = $DB->get_field('modules', 'id', ['name' => 'quiz']);
     $quiz->modulename = 'quiz';
     $quiz->section = $sectionnum;
     $quiz->visible = 1;
-    $quiz = aplus_quiz_apply_defaults($quiz);
+    $quiz->cmidnumber = '';
 
-    $cm = add_moduleinfo($quiz, $course);
+    try {
+        $cm = add_moduleinfo($quiz, $course);
+    } catch (Throwable $e) {
+        echo "quiz_create_failed name={$quizname} error=" . $e->getMessage() . "\n";
+        return;
+    }
+
     $quizrecord = $DB->get_record('quiz', ['id' => $cm->instance], '*', MUST_EXIST);
     $quizrecord->cmid = $cm->coursemodule;
 
+    $added = 0;
     foreach ($questionids as $qid) {
-        quiz_add_quiz_question($qid, $quizrecord, 0);
+        try {
+            if (quiz_add_quiz_question($qid, $quizrecord, 0) === false) {
+                continue;
+            }
+            $added++;
+        } catch (Throwable $e) {
+            echo "quiz_question_failed quiz={$quizname} qid={$qid} error=" . $e->getMessage() . "\n";
+            break;
+        }
     }
+
+    if ($added === 0) {
+        echo "quiz_no_questions_added name={$quizname} deleting_empty=1\n";
+        course_delete_module($cm->coursemodule);
+        return;
+    }
+
+    $quizrecord = $DB->get_record('quiz', ['id' => $quizrecord->id], '*', MUST_EXIST);
+    $quizrecord->preferredbehaviour = $targetbehaviour;
+    $DB->update_record('quiz', $quizrecord);
     quiz_update_sumgrades($quizrecord);
-    echo "quiz_created id={$quizrecord->id} name={$quizname} section={$sectionnum} questions=" . count($questionids) . "\n";
+
+    echo "quiz_created id={$quizrecord->id} name={$quizname} questions={$added} behaviour={$targetbehaviour}\n";
 }
 
 /**
