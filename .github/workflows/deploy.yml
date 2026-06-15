@@ -239,7 +239,7 @@ jobs:
       (needs.staging-e2e.result == 'success' ||
         (github.event_name == 'workflow_dispatch' && inputs.skip_staging_gate == true))
     runs-on: [self-hosted, linux, production]
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -356,9 +356,10 @@ jobs:
           bash "${PLUGINS_REPO_DIR}/scripts/migrate-moodle-sessions-to-redis-vm.sh"
 
       - name: Purge Moodle caches
+        continue-on-error: true
         run: |
           set -euo pipefail
-          sudo /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php
+          timeout 120 sudo /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php || echo 'purge_caches_timed_out=1'
 
       - name: Restart PHP-FPM
         run: |
