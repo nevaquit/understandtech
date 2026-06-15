@@ -60,10 +60,14 @@ jobs:
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
 
       - name: Disable maintenance mode
-        if: success()
+        if: always()
         run: |
           set -euo pipefail
-          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
+          if [ "${{ inputs.target }}" = "staging" ]; then
+            sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable || true
+          elif [ "${{ job.status }}" = "success" ]; then
+            sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
+          fi
 
       - name: Seed summary
         if: always()

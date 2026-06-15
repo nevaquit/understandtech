@@ -1,0 +1,19 @@
+name: Lift staging maintenance
+
+on:
+  workflow_dispatch:
+
+env:
+  PLUGINS_REPO_DIR: /opt/understandtech-plugins
+
+jobs:
+  lift:
+    runs-on: [self-hosted, linux, staging]
+    timeout-minutes: 5
+    steps:
+      - name: Disable maintenance mode
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
+          sudo /usr/bin/php /var/www/moodle/admin/cli/purge_caches.php
+          echo 'staging_maintenance_disabled=1'
