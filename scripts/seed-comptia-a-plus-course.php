@@ -143,6 +143,22 @@ function aplus_add_page(stdClass $course, int $sectionnum, string $name, string 
 }
 
 /**
+ * @param int $courseid
+ * @return int
+ */
+function aplus_count_lesson_pages(int $courseid): int {
+    global $DB;
+    return (int) $DB->count_records_sql(
+        "SELECT COUNT(p.id)
+           FROM {page} p
+           JOIN {course_modules} cm ON cm.instance = p.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'page'
+          WHERE cm.course = :courseid",
+        ['courseid' => $courseid]
+    );
+}
+
+/**
  * @param stdClass $course
  * @param int $sectionnum
  * @param string $name
@@ -720,11 +736,17 @@ $domainsection = [
     'operational_procedures' => 9,
 ];
 
-foreach ($objectives as $objective) {
-    $sectionnum = $domainsection[$objective->domainshort] ?? 1;
-    $pagename = aplus_page_title_prefix($objective->shortname) . ': ' . $objective->fullname;
-    $html = aplus_load_lesson_html($repopath, $objective->shortname, $objective->fullname);
-    aplus_upsert_page($course, $sectionnum, $pagename, $html);
+$expectedpages = count($objectives);
+$pagecount = aplus_count_lesson_pages((int) $course->id);
+if ($pagecount >= $expectedpages && getenv('APLUS_FORCE_PAGES') !== '1') {
+    echo "pages_skip_existing count={$pagecount} expected={$expectedpages}\n";
+} else {
+    foreach ($objectives as $objective) {
+        $sectionnum = $domainsection[$objective->domainshort] ?? 1;
+        $pagename = aplus_page_title_prefix($objective->shortname) . ': ' . $objective->fullname;
+        $html = aplus_load_lesson_html($repopath, $objective->shortname, $objective->fullname);
+        aplus_upsert_page($course, $sectionnum, $pagename, $html);
+    }
 }
 
 $context = context_course::instance((int) $course->id);

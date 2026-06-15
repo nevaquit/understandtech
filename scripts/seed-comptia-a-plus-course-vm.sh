@@ -11,5 +11,4 @@ fi
 
 sudo -u www-data php "${REPO}/scripts/seed-comptia-a-plus-course.php"
 sudo -u www-data php "${REPO}/scripts/fix-aplus-course-filters.php"
-sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
 echo 'seed_aplus_complete=1'
