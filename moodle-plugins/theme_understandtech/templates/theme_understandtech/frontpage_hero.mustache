@@ -6,8 +6,9 @@
 
     Context variables:
     - wwwroot, sitename, isloggedin, loginurl, dashboardurl
-    - sec701url, coursesurl, communityurl, certmasterurl, aitutorurl, leaderboardurl
+    - sec701url, aplusurl, coursesurl, communityurl, certmasterurl, aitutorurl, leaderboardurl
     - hassec701: bool — SEC701 course is available on this site
+    - hasaplus: bool — APLUS (CompTIA A+ certification) course is available on this site
 }}
 <div class="ut-frontpage" id="ut-frontpage-top">
 
@@ -245,14 +246,22 @@
                 </p>
             </article>
 
-            <article class="ut-cert-track-card">
+            <article class="ut-cert-track-card{{#hasaplus}} ut-cert-track-active{{/hasaplus}}">
+                {{#hasaplus}}
+                <span class="ut-cert-track-badge">Available now</span>
+                {{/hasaplus}}
+                {{^hasaplus}}
                 <span class="ut-cert-track-badge ut-cert-track-badge-soon">Coming soon</span>
-                <h3>CompTIA A+</h3>
+                {{/hasaplus}}
+                <h3>CompTIA A+ certification</h3>
                 <p class="ut-cert-track-exam">Exams 220-1101 &amp; 220-1102 · Core 1 &amp; Core 2</p>
                 <p>
                     Hardware, OS, security, cloud, and operational procedures — the foundation path for
                     help desk technicians and junior sysadmins entering IT.
                 </p>
+                {{#hasaplus}}
+                <a href="{{aplusurl}}" class="btn-ut-teal">Enter APLUS Classroom</a>
+                {{/hasaplus}}
             </article>
 
             <article class="ut-cert-track-card">

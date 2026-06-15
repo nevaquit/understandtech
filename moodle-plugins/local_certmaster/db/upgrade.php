@@ -70,6 +70,22 @@ function xmldb_local_certmaster_upgrade(int $oldversion): bool {
         upgrade_plugin_savepoint(true, 2026060803, 'local', 'certmaster');
     }
 
+    if ($oldversion < 2026061500) {
+        local_certmaster_seed_certification('comptia_a_plus', 'CompTIA A+ certification', '220-1101 / 220-1102', [
+            ['shortname' => 'mobile_devices', 'fullname' => 'Mobile Devices (Core 1)', 'weight' => 6.50, 'sortorder' => 1],
+            ['shortname' => 'networking', 'fullname' => 'Networking (Core 1)', 'weight' => 11.50, 'sortorder' => 2],
+            ['shortname' => 'hardware', 'fullname' => 'Hardware (Core 1)', 'weight' => 12.50, 'sortorder' => 3],
+            ['shortname' => 'virtualization', 'fullname' => 'Virtualization and Cloud Computing (Core 1)', 'weight' => 5.50, 'sortorder' => 4],
+            ['shortname' => 'hw_net_troubleshooting', 'fullname' => 'Hardware and Network Troubleshooting (Core 1)', 'weight' => 14.00, 'sortorder' => 5],
+            ['shortname' => 'operating_systems', 'fullname' => 'Operating Systems (Core 2)', 'weight' => 15.50, 'sortorder' => 6],
+            ['shortname' => 'security', 'fullname' => 'Security (Core 2)', 'weight' => 12.50, 'sortorder' => 7],
+            ['shortname' => 'software_troubleshooting', 'fullname' => 'Software Troubleshooting (Core 2)', 'weight' => 11.00, 'sortorder' => 8],
+            ['shortname' => 'operational_procedures', 'fullname' => 'Operational Procedures (Core 2)', 'weight' => 11.00, 'sortorder' => 9],
+        ]);
+
+        upgrade_plugin_savepoint(true, 2026061500, 'local', 'certmaster');
+    }
+
     return true;
 }
 

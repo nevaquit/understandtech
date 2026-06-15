@@ -1,0 +1,62 @@
+::ap1101_1_1 Mobile device batteries::Which battery technology is most common in modern laptops and mobile devices?{
+=Lithium-ion (Li-ion) or Lithium-ion Polymer (LiPo)
+~Nickel-cadmium (NiCd) only
+~Lead-acid rechargeable
+~Alkaline disposable cells
+}
+
+::ap1101_2_1 TCP UDP ports::Which protocol and port pair is used for secure remote shell access?{
+=SSH on TCP port 22
+~Telnet on TCP port 23
+~FTP on TCP port 21
+~HTTP on TCP port 80
+}
+
+::ap1101_3_1 Display connectors::Which connector is most commonly used for digital video on modern consumer displays?{
+=HDMI or DisplayPort
+~VGA only
+~Parallel port
+~RJ-45 Ethernet
+}
+
+::ap1101_4_1 Virtualization::What is the primary purpose of a hypervisor?{
+=To run multiple virtual machines on shared physical hardware
+~To encrypt data at rest on a NAS
+~To assign DHCP addresses on a SOHO network
+~To replace antivirus on endpoints
+}
+
+::ap1101_5_1 Troubleshooting methodology::In the CompTIA 6-step troubleshooting methodology, what is the first step?{
+=Identify the problem
+~Establish a plan of action
+~Document findings
+~Verify full system functionality
+}
+
+::ap1102_1_1 Windows editions::Which Windows edition typically includes BitLocker and domain join capabilities?{
+=Windows Pro
+~Windows Home only
+~Windows S mode without upgrades
+~Windows IoT Core only
+}
+
+::ap1102_2_1 Security measures::Which control type describes monitoring logs for suspicious activity?{
+=Detective
+~Preventive only
+~Compensating physical
+~Deterrent signage
+}
+
+::ap1102_3_1 Windows troubleshooting::A user reports slow performance after installing unknown software. What is the best first action?{
+=Identify recent changes and check for malware or unwanted programs
+~Replace the motherboard immediately
+~Reformat without backup
+~Disable all network adapters permanently
+}
+
+::ap1102_4_1 Operational procedures::Why is documenting findings after resolving an incident important?{
+=It supports future troubleshooting and organizational knowledge
+~It eliminates the need for change management
+~It replaces backup verification
+~It guarantees zero downtime
+}

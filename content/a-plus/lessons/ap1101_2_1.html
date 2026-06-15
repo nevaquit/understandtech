@@ -1,0 +1,27 @@
+<div class="ut-lesson-content">
+<h3>Exam objective 220-1101 2.1</h3>
+<p><strong>2.1 Compare and contrast TCP and UDP ports, protocols, and their purposes.</strong></p>
+<div class="ut-lesson-body">
+<table class="ut-lesson-table"><tbody>
+<tr><th>Protocol</th><th>Port(s)</th><th>TCP/UDP</th><th>Purpose &amp; Description</th></tr>
+<tr><td><strong>FTP</strong></td><td>20, 21</td><td>TCP</td><td><strong>File Transfer Protocol</strong>: Transfers files between systems. Port 21 handles control/command, Port 20 handles data transfer. Unencrypted and insecure.</td></tr>
+<tr><td><strong>SSH</strong></td><td>22</td><td>TCP</td><td><strong>Secure Shell</strong>: Provides secure, encrypted remote command-line access and file transfer (SFTP/SCP). Modern replacement for Telnet.</td></tr>
+<tr><td><strong>Telnet</strong></td><td>23</td><td>TCP</td><td><strong>Telecommunication Network</strong>: Provides insecure, unencrypted remote command-line access. Legacy protocol, avoid using.</td></tr>
+<tr><td><strong>SMTP</strong></td><td>25</td><td>TCP</td><td><strong>Simple Mail Transfer Protocol</strong>: Sends email from client to server or between mail servers. Outbound mail only.</td></tr>
+<tr><td><strong>DNS</strong></td><td>53</td><td>UDP/TCP</td><td><strong>Domain Name System</strong>: Resolves domain names to IP addresses. Uses UDP for standard queries, TCP for zone transfers and large responses.</td></tr>
+<tr><td><strong>DHCP</strong></td><td>67, 68</td><td>UDP</td><td><strong>Dynamic Host Configuration Protocol</strong>: Automatically assigns IP addresses and network configuration. Port 67 for server, 68 for client.</td></tr>
+<tr><td><strong>HTTP</strong></td><td>80</td><td>TCP</td><td><strong>Hypertext Transfer Protocol</strong>: Fundamental protocol for unencrypted web traffic. No security or encryption.</td></tr>
+<tr><td><strong>HTTPS</strong></td><td>443</td><td>TCP</td><td><strong>Hypertext Transfer Protocol Secure</strong>: Encrypts web traffic using TLS/SSL for confidentiality, integrity, and authentication.</td></tr>
+<tr><td><strong>POP3</strong></td><td>110</td><td>TCP</td><td><strong>Post Office Protocol v3</strong>: Retrieves email from server, typically downloading and deleting the server copy. Single-device access.</td></tr>
+<tr><td><strong>IMAP</strong></td><td>143</td><td>TCP</td><td><strong>Internet Message Access Protocol</strong>: Retrieves and manages email on server. Supports multi-device synchronization.</td></tr>
+<tr><td><strong>SMB/CIFS</strong></td><td>445</td><td>TCP</td><td><strong>Server Message Block</strong>: Windows file and printer sharing protocol. Port 139 used for legacy NetBIOS.</td></tr>
+<tr><td><strong>RDP</strong></td><td>3389</td><td>TCP</td><td><strong>Remote Desktop Protocol</strong>: Provides graphical remote access to Windows computers.</td></tr>
+<tr><td><strong>LDAP</strong></td><td>389</td><td>TCP</td><td><strong>Lightweight Directory Access Protocol</strong>: Accesses directory services like Active Directory for authentication and user information.</td></tr>
+</tbody></table>
+<p><strong>TCP vs. UDP Comparison</strong></p>
+<p><strong>TCP (Transmission Control Protocol)</strong> is connection-oriented and reliable. It establishes a formal connection using a three-way handshake (SYN, SYN-ACK, ACK), guarantees data arrives in the correct order, provides error checking, and retransmits lost packets. TCP is used for applications where accuracy is critical, such as web browsing, email, and file transfers.</p>
+<p><strong>UDP (User Datagram Protocol)</strong> is connectionless and unreliable. It sends data without establishing a connection or verifying receipt. UDP has minimal overhead and is much faster than TCP, making it ideal for real-time applications like DNS queries, VoIP, video streaming, and online gaming where speed is more important than perfect accuracy.</p>
+</div>
+<h4>Next steps</h4>
+<p>Complete the domain knowledge check when available, rate your confidence honestly, and use the AI tutor for scenario-based practice.</p>
+</div>

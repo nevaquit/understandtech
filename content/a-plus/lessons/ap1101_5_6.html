@@ -1,0 +1,15 @@
+<div class="ut-lesson-content">
+<h3>Exam objective 220-1101 5.6</h3>
+<p><strong>5.6 Given a scenario, troubleshoot common problems related to networks.</strong></p>
+<div class="ut-lesson-body">
+<p><strong>Connectivity Problems</strong></p>
+<p><strong>No connectivity</strong> requires checking physical connections (cable, Wi-Fi), using `ipconfig` (Windows) or `ifconfig` (Linux/macOS) to verify IP configuration. An <strong>APIPA address</strong> (169.254.x.x) indicates failure to reach DHCP server. <strong>Limited connectivity</strong> means connection to local network works but internet access fails, often indicating router or ISP problems. Test by pinging the default gateway, then external IP like 8.8.8.8.</p>
+<p><strong>Performance Issues</strong></p>
+<p><strong>Slow transfer speeds</strong> result from network congestion, bad cables, or wireless interference. Use Wi-Fi analyzer to find less congested channels. Test with wired connection to eliminate wireless as the cause. <strong>Intermittent connectivity</strong> can be caused by loose cables, failing network adapter, or Wi-Fi interference from other devices or physical obstacles.</p>
+<p><strong>IP Configuration Problems</strong></p>
+<p><strong>Incorrect IP address</strong> or <strong>duplicate IP address</strong> requires checking DHCP configuration or manually configuring static IP. <strong>DNS issues</strong> prevent name resolution while IP connectivity works. Test by pinging IP addresses directly. Flush DNS cache with `ipconfig /flushdns` (Windows) or change DNS servers to public options like 8.8.8.8 (Google) or 1.1.1.1 (Cloudflare).</p>
+<p>---</p>
+</div>
+<h4>Next steps</h4>
+<p>Complete the domain knowledge check when available, rate your confidence honestly, and use the AI tutor for scenario-based practice.</p>
+</div>

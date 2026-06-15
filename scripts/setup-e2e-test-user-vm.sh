@@ -108,5 +108,28 @@ if ($sec701) {
     echo "E2E_COURSE_PATH=/course/view.php?id=$courseid\n";
 }
 
+$aplus = $DB->get_record('course', ['shortname' => 'APLUS']);
+if ($aplus) {
+    $apluscontext = context_course::instance((int) $aplus->id);
+    $aplusinstances = enrol_get_instances((int) $aplus->id, true);
+    $aplusmanual = null;
+    foreach ($aplusinstances as $instance) {
+        if ($instance->enrol === 'manual') {
+            $aplusmanual = $instance;
+            break;
+        }
+    }
+    if (!$aplusmanual) {
+        $aplusmanualid = $enrol->add_instance((object) ['id' => (int) $aplus->id]);
+        $aplusmanual = $DB->get_record('enrol', ['id' => $aplusmanualid]);
+    }
+    if (!is_enrolled($apluscontext, $userid)) {
+        $enrol->enrol_user($aplusmanual, $userid, 5);
+        echo "user_enrolled aplus={$aplus->id}\n";
+    } else {
+        echo "user_already_enrolled aplus={$aplus->id}\n";
+    }
+}
+
 echo "STAGING_TEST_USER_EMAIL=$email\n";
 PHP

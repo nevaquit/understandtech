@@ -8,6 +8,7 @@
 | `test.yml` | Push/PR to `main` | `ubuntu-latest` — PHPUnit lint + integration smoke + Worker unit tests |
 | `e2e.yml` | Manual dispatch, weekly cron | `ubuntu-latest` — Playwright against staging (default) |
 | `seed-sec701.yml` | Manual dispatch | `staging` or `production` runner (input `target`) |
+| `seed-aplus.yml` | Manual dispatch | `staging` or `production` runner (input `target`) |
 | `deploy-ai-gateway.yml` | Push to `main` (worker paths), manual | `ubuntu-latest` — typecheck + optional wrangler deploy |
 
 ## deploy.yml (staging-first)
@@ -43,3 +44,4 @@ Deploy sudo commands must match `infrastructure/runner/gha-runner-sudoers`.
 5. `/opt/understandtech-plugins` cloned and writable by `gha-runner` on both VMs
 6. `sudoers.d/gha-runner` installed from repo on both VMs
 7. Seed SEC701 on staging: `gh workflow run seed-sec701.yml -f target=staging`
+8. Seed CompTIA A+ (`APLUS`) on staging: `gh workflow run seed-aplus.yml -f target=staging`

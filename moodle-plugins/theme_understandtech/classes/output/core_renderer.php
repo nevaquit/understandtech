@@ -209,6 +209,12 @@ class core_renderer extends \theme_boost\output\core_renderer {
             ? (new moodle_url('/course/view.php', ['id' => $sec701->id]))->out(false)
             : '';
 
+        $aplus = $DB->get_record('course', ['shortname' => 'APLUS'], 'id', IGNORE_MISSING);
+        $hasaplus = !empty($aplus);
+        $aplusurl = $hasaplus
+            ? (new moodle_url('/course/view.php', ['id' => $aplus->id]))->out(false)
+            : '';
+
         $profileurl = $isloggedin
             ? (new moodle_url('/user/profile.php', ['id' => $USER->id]))->out(false)
             : '';
@@ -218,11 +224,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
             'sitename'         => format_string(get_site()->fullname),
             'isloggedin'       => $isloggedin,
             'hassec701'        => $hassec701,
+            'hasaplus'         => $hasaplus,
             'username'         => $isloggedin ? fullname($USER) : '',
             'loginurl'         => (new moodle_url('/login/index.php'))->out(false),
             'dashboardurl'     => (new moodle_url('/my/'))->out(false),
             'profileurl'       => $profileurl,
             'sec701url'        => $sec701url,
+            'aplusurl'         => $aplusurl,
             'coursesurl'       => (new moodle_url('/course/index.php'))->out(false),
             'communityurl'     => (new moodle_url('/local/community/community.php'))->out(false),
             'classroomurl'     => (new moodle_url('/local/community/classroom.php'))->out(false),

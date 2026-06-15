@@ -1,0 +1,21 @@
+<div class="ut-lesson-content">
+<h3>Exam objective 220-1102 1.2</h3>
+<p><strong>1.2 Given a scenario, use the appropriate Microsoft command-line tool.</strong></p>
+<div class="ut-lesson-body">
+<p><strong>Network Commands</strong></p>
+<p><strong>`ipconfig`</strong> displays IP configuration. Use `ipconfig /all` for detailed information including MAC addresses and DNS servers. `ipconfig /release` releases DHCP lease, `ipconfig /renew` requests new lease, and `ipconfig /flushdns` clears local DNS cache.</p>
+<p><strong>`ping`</strong> tests connectivity using ICMP echo requests. Use `ping 8.8.8.8` to test internet connectivity or `ping hostname` to test name resolution. <strong>`tracert`</strong> (Windows) or `traceroute` (Linux/macOS) traces the route packets take to a destination, showing each hop. <strong>`netstat`</strong> displays active network connections. Use `netstat -an` to show all connections and listening ports in numerical format. <strong>`nslookup`</strong> queries DNS servers to resolve names to IP addresses or perform reverse lookups.</p>
+<p><strong>System Repair Commands</strong></p>
+<p><strong>`sfc`</strong> (System File Checker) scans and repairs corrupted Windows system files. Run `sfc /scannow` from an elevated command prompt. <strong>`chkdsk`</strong> checks disk for errors. Use `chkdsk /f` to fix errors and `chkdsk /r` to locate bad sectors and recover readable information.</p>
+<p><strong>Disk Management Commands</strong></p>
+<p><strong>`diskpart`</strong> is a powerful command-line tool for managing disks, partitions, and volumes. Common commands include `list disk`, `select disk`, `clean`, `create partition primary`, and `format`. <strong>`format`</strong> formats drives with specified file systems.</p>
+<p><strong>Group Policy Commands</strong></p>
+<p><strong>`gpupdate`</strong> forces Group Policy refresh. Use `gpupdate /force` to reapply all policies immediately. <strong>`gpresult`</strong> displays Resultant Set of Policy (RSoP) showing which policies are applied to user and computer.</p>
+<p><strong>File Management Commands</strong></p>
+<p><strong>`xcopy`</strong> copies files and directory trees with various options. <strong>`robocopy`</strong> (Robust File Copy) is an advanced file copy tool with features like resumable copying, mirroring, and logging. <strong>`copy`</strong> performs basic file copying.</p>
+<p><strong>User and Process Management</strong></p>
+<p><strong>`net user`</strong> manages local user accounts (create, delete, modify). <strong>`net use`</strong> maps network drives. <strong>`tasklist`</strong> displays running processes. <strong>`taskkill`</strong> terminates processes using `/PID` (process ID) or `/IM` (image name).</p>
+</div>
+<h4>Next steps</h4>
+<p>Complete the domain knowledge check when available, rate your confidence honestly, and use the AI tutor for scenario-based practice.</p>
+</div>

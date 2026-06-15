@@ -11,6 +11,11 @@ bash "${REPO}/scripts/sync-sudoers-vm.sh"
 echo "=== SEC701 default enrolment ==="
 sudo -u www-data php "${REPO}/scripts/enroll-sec701-default-users.php"
 
+if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";global $DB;exit($DB->record_exists("course",["shortname"=>"APLUS"])?0:1);' 2>/dev/null; then
+  echo "=== APLUS default enrolment ==="
+  sudo -u www-data php "${REPO}/scripts/enroll-aplus-default-users.php"
+fi
+
 _wwwroot="$(sudo -u www-data php -r 'define("CLI_SCRIPT", true); require "/var/www/moodle/config.php"; echo $CFG->wwwroot;' 2>/dev/null || true)"
 if [[ "${_wwwroot}" == *staging* ]]; then
   echo "=== staging E2E test user (health gate login) ==="
@@ -31,6 +36,11 @@ else
   export SEC701_COURSE_ID="${SEC701_COURSE_ID:-3}"
 fi
 sudo -u www-data php "${REPO}/scripts/fix-sec701-course-filters.php"
+
+if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";global $DB;exit($DB->record_exists("course",["shortname"=>"APLUS"])?0:1);' 2>/dev/null; then
+  echo "=== APLUS page filter disable ==="
+  sudo -u www-data php "${REPO}/scripts/fix-aplus-course-filters.php"
+fi
 
 sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
 # Full restart (never reload) — recycles all PHP-FPM workers after cache/theme changes.

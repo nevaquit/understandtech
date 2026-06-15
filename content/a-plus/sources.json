@@ -1,0 +1,10 @@
+{
+  "study_guide": "content/a-plus/CompTIA_A+_Study_Guide_Final.md",
+  "objectives_csv": "content/a-plus/aplus-objectives.csv",
+  "lessons_dir": "content/a-plus/lessons",
+  "external_sources": {
+    "cyberkraft_folder": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA A+",
+    "wifi_chart_pdf": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA A+/WiFi_IEEE_80211x_CompTIA_A_Plus_Study_Chart.pdf"
+  },
+  "regenerate": "node scripts/build-aplus-content.mjs"
+}

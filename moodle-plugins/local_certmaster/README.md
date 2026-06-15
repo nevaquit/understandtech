@@ -6,6 +6,7 @@ CertMaster-equivalent certification readiness tracking for understandtech.app.
 
 - Certification framework schema (certifications, domains, objectives)
 - Security+ SY0-701 domain seed on install (blueprint weights 11/22/25/28/14%)
+- CompTIA A+ certification (`comptia_a_plus`) seeded on upgrade — Core 1 + Core 2 domains
 - Confidence-aware mastery algorithm per white paper Section 2.4
 - `api::get_user_readiness()` for dashboard/radar JSON
 - Hourly scheduled mastery recalculation task

@@ -1,0 +1,18 @@
+<div class="ut-lesson-content">
+<h3>Exam objective 220-1101 4.1</h3>
+<p><strong>4.1 Explain virtualization concepts.</strong></p>
+<div class="ut-lesson-body">
+<p><strong>Virtual Machines</strong></p>
+<p>A <strong>virtual machine (VM)</strong> is a software-based emulation of a physical computer, running its own operating system (guest OS) and applications while sharing the physical hardware of the host machine. VMs provide isolation, allowing multiple operating systems to run simultaneously on a single physical machine.</p>
+<p><strong>Hypervisors</strong></p>
+<p>A <strong>hypervisor</strong> creates and manages virtual machines. <strong>Type 1 (Bare-Metal) hypervisors</strong> run directly on hardware without a host operating system (VMware ESXi, Microsoft Hyper-V Server, KVM, Citrix XenServer). Type 1 hypervisors offer better performance and are used in enterprise environments. <strong>Type 2 (Hosted) hypervisors</strong> run as applications on top of an existing operating system (VMware Workstation, Oracle VirtualBox, Parallels Desktop). Type 2 hypervisors are easier to set up and commonly used for development and testing.</p>
+<p><strong>Purpose of Virtualization</strong></p>
+<p><strong>Sandbox environments</strong> provide isolated spaces for testing software or analyzing malware without risking the host system. <strong>Test development</strong> allows creating multiple identical environments for developing and testing applications across different operating systems. <strong>Legacy software</strong> support enables running older applications on legacy operating systems that are no longer supported on modern hardware. <strong>Application virtualization</strong> allows running applications in isolated containers without full OS virtualization.</p>
+<p><strong>Containers</strong></p>
+<p><strong>Containers</strong> are lightweight alternatives to VMs that virtualize the operating system rather than hardware. Multiple applications run in isolated user spaces on a single host OS, sharing the kernel. Containers (Docker, Kubernetes) start faster, use fewer resources, and are more portable than VMs but provide less isolation.</p>
+<p><strong>Resource Requirements</strong></p>
+<p>Virtualization requires adequate <strong>CPU</strong> (with virtualization extensions like Intel VT-x or AMD-V), <strong>RAM</strong> (divided among host and guests), <strong>storage</strong> (for VM disk images), and <strong>network</strong> configuration (virtual switches, bridged, NAT, or host-only networking).</p>
+</div>
+<h4>Next steps</h4>
+<p>Complete the domain knowledge check when available, rate your confidence honestly, and use the AI tutor for scenario-based practice.</p>
+</div>
