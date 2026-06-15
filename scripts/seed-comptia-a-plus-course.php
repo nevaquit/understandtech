@@ -773,10 +773,7 @@ foreach ($sectionquestions as $sectionnum => $qids) {
 
 aplus_enable_enrolment($course);
 
-aplus_disable_page_module_filters($course);
-rebuild_course_cache((int) $course->id, true);
-filter_manager::reset_caches();
-echo "page_filters_disabled=1\n";
+echo "page_filters_deferred=fix-aplus-course-filters.php\n";
 
 $enrollscript = $repopath . '/scripts/enroll-aplus-default-users.php';
 if (is_readable($enrollscript)) {

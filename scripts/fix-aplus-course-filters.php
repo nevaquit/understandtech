@@ -44,7 +44,6 @@ foreach ($contexts as $context) {
 
 filter_manager::reset_caches();
 rebuild_course_cache($courseid, true);
-purge_all_caches();
 
 echo "contexts=" . count($contexts) . " filter_disables={$disabled}\n";
 echo "=== complete ===\n";
