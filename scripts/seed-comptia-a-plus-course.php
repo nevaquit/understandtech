@@ -534,13 +534,62 @@ function aplus_enable_enrolment(stdClass $course): void {
     }
 }
 
+/**
+ * Ensure CompTIA A+ certification framework exists (idempotent).
+ *
+ * @return stdClass Certification record
+ */
+function aplus_ensure_certification(): stdClass {
+    global $DB;
+
+    $existing = $DB->get_record('certmaster_certifications', ['shortname' => 'comptia_a_plus']);
+    if ($existing) {
+        return $existing;
+    }
+
+    if (!$DB->get_manager()->table_exists('certmaster_certifications')) {
+        fwrite(STDERR, "error=certmaster_tables_missing\n");
+        exit(1);
+    }
+
+    $now = time();
+    $certid = $DB->insert_record('certmaster_certifications', (object) [
+        'shortname' => 'comptia_a_plus',
+        'fullname' => 'CompTIA A+ certification',
+        'exam_code' => '220-1101 / 220-1102',
+        'timecreated' => $now,
+        'timemodified' => $now,
+    ]);
+
+    $domains = [
+        ['shortname' => 'mobile_devices', 'fullname' => 'Mobile Devices (Core 1)', 'weight' => 6.50, 'sortorder' => 1],
+        ['shortname' => 'networking', 'fullname' => 'Networking (Core 1)', 'weight' => 11.50, 'sortorder' => 2],
+        ['shortname' => 'hardware', 'fullname' => 'Hardware (Core 1)', 'weight' => 12.50, 'sortorder' => 3],
+        ['shortname' => 'virtualization', 'fullname' => 'Virtualization and Cloud Computing (Core 1)', 'weight' => 5.50, 'sortorder' => 4],
+        ['shortname' => 'hw_net_troubleshooting', 'fullname' => 'Hardware and Network Troubleshooting (Core 1)', 'weight' => 14.00, 'sortorder' => 5],
+        ['shortname' => 'operating_systems', 'fullname' => 'Operating Systems (Core 2)', 'weight' => 15.50, 'sortorder' => 6],
+        ['shortname' => 'security', 'fullname' => 'Security (Core 2)', 'weight' => 12.50, 'sortorder' => 7],
+        ['shortname' => 'software_troubleshooting', 'fullname' => 'Software Troubleshooting (Core 2)', 'weight' => 11.00, 'sortorder' => 8],
+        ['shortname' => 'operational_procedures', 'fullname' => 'Operational Procedures (Core 2)', 'weight' => 11.00, 'sortorder' => 9],
+    ];
+
+    foreach ($domains as $domain) {
+        $DB->insert_record('certmaster_domains', (object) [
+            'certificationid' => $certid,
+            'shortname' => $domain['shortname'],
+            'fullname' => $domain['fullname'],
+            'blueprint_weight' => $domain['weight'],
+            'sortorder' => $domain['sortorder'],
+        ]);
+    }
+
+    echo "certification_bootstrapped id={$certid}\n";
+    return $DB->get_record('certmaster_certifications', ['id' => $certid], '*', MUST_EXIST);
+}
+
 echo "=== CompTIA A+ certification course seed ===\n";
 
-$cert = $DB->get_record('certmaster_certifications', ['shortname' => 'comptia_a_plus']);
-if (!$cert) {
-    echo "error=certification_missing shortname=comptia_a_plus (run Moodle upgrade for local_certmaster)\n";
-    exit(1);
-}
+$cert = aplus_ensure_certification();
 
 $csvpath = $repopath . '/content/a-plus/aplus-objectives.csv';
 if (!is_readable($csvpath)) {

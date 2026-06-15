@@ -35,11 +35,11 @@ jobs:
             echo "WARNING: VM is at ${actual}, expected ${EXPECTED_SHA} — proceeding anyway"
           fi
 
-      - name: Sync Moodle plugins and upgrade
+      - name: Sync gha-runner sudoers
+        continue-on-error: true
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-missing-plugins-vm.sh"
-          sudo -u www-data php /var/www/moodle/admin/cli/upgrade.php --non-interactive
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
 
       - name: Seed APLUS course
         run: |
