@@ -650,8 +650,20 @@ if (!is_readable($csvpath)) {
     echo "error=csv_missing path={$csvpath}\n";
     exit(1);
 }
-$imported = \local_certmaster\csv_importer::import_from_csv(file_get_contents($csvpath));
-echo "objectives_imported={$imported}\n";
+$existingobjectives = (int) $DB->count_records_sql(
+    "SELECT COUNT(o.id)
+       FROM {certmaster_objectives} o
+       JOIN {certmaster_domains} d ON d.id = o.domainid
+      WHERE d.certificationid = :certid",
+    ['certid' => $cert->id]
+);
+if ($existingobjectives >= 57 && getenv('APLUS_FORCE_OBJECTIVES') !== '1') {
+    echo "objectives_skip_existing count={$existingobjectives}\n";
+    $imported = 0;
+} else {
+    $imported = \local_certmaster\csv_importer::import_from_csv(file_get_contents($csvpath));
+    echo "objectives_imported={$imported}\n";
+}
 
 $objectives = $DB->get_records_sql(
     "SELECT o.id, o.shortname, o.fullname, d.shortname AS domainshort, d.sortorder AS domainsort

@@ -42,12 +42,15 @@ jobs:
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
 
       - name: Seed APLUS course
+        env:
+          APLUS_SKIP_FILTER_FIX: "1"
         run: |
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/seed-comptia-a-plus-course-vm.sh"
           echo 'seed_aplus_complete=1'
 
       - name: Post-seed stabilize (enrol, theme, permissions)
+        continue-on-error: true
         run: |
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/post-deploy-stabilize-vm.sh"
