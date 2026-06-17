@@ -24,7 +24,7 @@ $files = glob($lessonsdir . '/sy701_*.html') ?: [];
  */
 function ut_strip_title_prefix(string $title): string {
     $title = trim($title);
-    return preg_replace('/^[\p{So}\p{Sk}\p{Extended_Pictographic}\s]+/u', '', $title) ?? $title;
+    return preg_replace('/^[\p{So}\p{Sk}\s\x{200D}\x{FE0F}]+/u', '', $title) ?? $title;
 }
 
 /**
