@@ -693,11 +693,56 @@ function network_plus_link_questions_to_objectives(array $questionmap): int {
 
 echo "=== Network+ N10-009 course seed ===\n";
 
-$cert = $DB->get_record('certmaster_certifications', ['shortname' => 'network_plus_sy0_701']);
-if (!$cert) {
-    echo "error=certification_missing\n";
-    exit(1);
+/**
+ * Ensure Network+ N10-009 certification framework exists (idempotent).
+ *
+ * @return stdClass Certification record
+ */
+function network_plus_ensure_certification(): stdClass {
+    global $DB;
+
+    $existing = $DB->get_record('certmaster_certifications', ['shortname' => 'network_plus_n10_009']);
+    if ($existing) {
+        return $existing;
+    }
+
+    if (!$DB->get_manager()->table_exists('certmaster_certifications')) {
+        fwrite(STDERR, "error=certmaster_tables_missing\n");
+        exit(1);
+    }
+
+    $now = time();
+    $certid = $DB->insert_record('certmaster_certifications', (object) [
+        'shortname' => 'network_plus_n10_009',
+        'fullname' => 'CompTIA Network+ N10-009',
+        'exam_code' => 'N10-009',
+        'timecreated' => $now,
+        'timemodified' => $now,
+    ]);
+
+    $domains = [
+        ['shortname' => 'network_fundamentals', 'fullname' => 'Networking Concepts', 'weight' => 23.00, 'sortorder' => 1],
+        ['shortname' => 'network_impl', 'fullname' => 'Network Implementation', 'weight' => 20.00, 'sortorder' => 2],
+        ['shortname' => 'network_ops', 'fullname' => 'Network Operations', 'weight' => 19.00, 'sortorder' => 3],
+        ['shortname' => 'network_security', 'fullname' => 'Network Security', 'weight' => 14.00, 'sortorder' => 4],
+        ['shortname' => 'network_troubleshoot', 'fullname' => 'Network Troubleshooting', 'weight' => 24.00, 'sortorder' => 5],
+    ];
+
+    foreach ($domains as $domain) {
+        $DB->insert_record('certmaster_domains', (object) [
+            'certificationid' => $certid,
+            'shortname' => $domain['shortname'],
+            'fullname' => $domain['fullname'],
+            'blueprint_weight' => $domain['weight'],
+            'sortorder' => $domain['sortorder'],
+        ]);
+    }
+
+    echo "certification_bootstrapped id={$certid}\n";
+    return $DB->get_record('certmaster_certifications', ['id' => $certid], '*', MUST_EXIST);
 }
+
+$cert = network_plus_ensure_certification();
 
 $weights = [
     'network_fundamentals' => 23.00,
