@@ -6,9 +6,10 @@
 
     Context variables:
     - wwwroot, sitename, isloggedin, loginurl, dashboardurl
-    - sec701url, aplusurl, coursesurl, communityurl, certmasterurl, aitutorurl, leaderboardurl
+    - sec701url, aplusurl, net009url, coursesurl, communityurl, certmasterurl, aitutorurl, leaderboardurl
     - hassec701: bool — SEC701 course is available on this site
     - hasaplus: bool — APLUS (CompTIA A+ certification) course is available on this site
+    - hasnet009: bool — NET009 (CompTIA Network+ N10-009) course is available on this site
 }}
 <div class="ut-frontpage" id="ut-frontpage-top">
 
@@ -236,14 +237,22 @@
                 {{/hassec701}}
             </article>
 
-            <article class="ut-cert-track-card">
+            <article class="ut-cert-track-card{{#hasnet009}} ut-cert-track-active{{/hasnet009}}">
+                {{#hasnet009}}
+                <span class="ut-cert-track-badge">Available now</span>
+                {{/hasnet009}}
+                {{^hasnet009}}
                 <span class="ut-cert-track-badge ut-cert-track-badge-soon">Coming soon</span>
+                {{/hasnet009}}
                 <h3>CompTIA Network+</h3>
                 <p class="ut-cert-track-exam">Exam N10-009 · Infrastructure &amp; troubleshooting</p>
                 <p>
                     Routing, switching, wireless, cloud networking, and network security for administrators
                     moving into hybrid infrastructure roles.
                 </p>
+                {{#hasnet009}}
+                <a href="{{net009url}}" class="btn-ut-teal">Enter NET009 Classroom</a>
+                {{/hasnet009}}
             </article>
 
             <article class="ut-cert-track-card{{#hasaplus}} ut-cert-track-active{{/hasaplus}}">

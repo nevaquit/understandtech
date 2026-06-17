@@ -1,0 +1,85 @@
+name: Seed NET009 course
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Moodle VM to seed
+        type: choice
+        options: [staging, production]
+        default: staging
+
+env:
+  PLUGINS_REPO_DIR: /opt/understandtech-plugins
+
+jobs:
+  seed:
+    runs-on: [self-hosted, linux, "${{ inputs.target }}"]
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync monorepo on VM
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          cd "$PLUGINS_REPO_DIR"
+          sudo -u gha-runner git fetch origin main
+          sudo -u gha-runner git reset --hard origin/main
+          actual="$(git rev-parse HEAD)"
+          if git merge-base --is-ancestor "${EXPECTED_SHA}" "${actual}" 2>/dev/null || [ "$actual" = "$EXPECTED_SHA" ]; then
+            echo "Monorepo synced: VM is at ${actual} (expected ${EXPECTED_SHA} or newer)"
+          else
+            echo "WARNING: VM is at ${actual}, expected ${EXPECTED_SHA} — proceeding anyway"
+          fi
+
+      - name: Sync gha-runner sudoers
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
+
+      - name: Seed NET009 course
+        env:
+          NET009_SKIP_FILTER_FIX: "1"
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/seed-network-plus-course-vm.sh"
+          echo 'seed_net009_complete=1'
+
+      - name: Post-seed stabilize (enrol, theme, permissions)
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/post-deploy-stabilize-vm.sh"
+
+      - name: Verify Moodle web health (strict)
+        env:
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
+
+      - name: Disable maintenance mode
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.target }}" = "staging" ]; then
+            sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable || true
+          elif [ "${{ job.status }}" = "success" ]; then
+            sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
+          fi
+
+      - name: Seed summary
+        if: always()
+        run: |
+          set -euo pipefail
+          {
+            echo "## NET009 seed summary"
+            echo "- Target: ${{ inputs.target }}"
+            echo "- Result: ${{ job.status }}"
+            echo "- Commit: ${{ github.sha }}"
+            echo "- Workflow: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"

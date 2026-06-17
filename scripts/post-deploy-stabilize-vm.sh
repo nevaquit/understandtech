@@ -16,6 +16,11 @@ if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/c
   sudo -u www-data php "${REPO}/scripts/enroll-aplus-default-users.php"
 fi
 
+if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";global $DB;exit($DB->record_exists("course",["shortname"=>"NET009"])?0:1);' 2>/dev/null; then
+  echo "=== NET009 default enrolment ==="
+  sudo -u www-data php "${REPO}/scripts/enroll-net009-default-users.php"
+fi
+
 _wwwroot="$(sudo -u www-data php -r 'define("CLI_SCRIPT", true); require "/var/www/moodle/config.php"; echo $CFG->wwwroot;' 2>/dev/null || true)"
 if [[ "${_wwwroot}" == *staging* ]]; then
   echo "=== staging E2E test user (health gate login) ==="
@@ -40,6 +45,11 @@ sudo -u www-data php "${REPO}/scripts/fix-sec701-course-filters.php"
 if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";global $DB;exit($DB->record_exists("course",["shortname"=>"APLUS"])?0:1);' 2>/dev/null; then
   echo "=== APLUS page filter disable ==="
   sudo -u www-data php "${REPO}/scripts/fix-aplus-course-filters.php"
+fi
+
+if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";global $DB;exit($DB->record_exists("course",["shortname"=>"NET009"])?0:1);' 2>/dev/null; then
+  echo "=== NET009 page filter disable ==="
+  sudo -u www-data php "${REPO}/scripts/fix-net009-course-filters.php"
 fi
 
 # Redis flush + PHP-FPM restart recycle workers after theme/cache changes (purge_caches hangs on VM).

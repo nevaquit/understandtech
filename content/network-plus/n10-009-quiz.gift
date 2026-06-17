@@ -1,0 +1,675 @@
+::n10009_1_1_q1 [n10009_1_1] Explain concepts related to the Open Systems Interconnection (OSI) reference model ::
+Which statement best relates to 1.1?
+{
+=Layer 3 handles routing and logical addressing
+~TCP operates at Layer 4
+~Unrelated concept for 1.1
+~MAC addresses are Layer 2
+}
+
+::n10009_1_1_q2 [n10009_1_1] Explain concepts related to the Open Systems Interconnection (OSI) reference model ::
+Which statement best relates to 1.1?
+{
+=MAC addresses are Layer 2
+~Layer 3 handles routing and logical addressing
+=TCP operates at Layer 4
+~Unrelated concept for 1.1
+}
+
+::n10009_1_1_q3 [n10009_1_1] Explain concepts related to the Open Systems Interconnection (OSI) reference model ::
+Which statement best relates to 1.1?
+{
+=Unrelated concept for 1.1
+~TCP operates at Layer 4
+~Layer 3 handles routing and logical addressing
+=MAC addresses are Layer 2
+}
+
+::n10009_1_2_q1 [n10009_1_2] Compare and contrast networking appliances, applications, and functions ::
+Which statement best relates to 1.2?
+{
+=Unrelated concept for 1.2
+~CDN caches content closer to users
+~IDS detects; IPS can block inline
+=A load balancer distributes traffic across servers
+}
+
+::n10009_1_2_q2 [n10009_1_2] Compare and contrast networking appliances, applications, and functions ::
+Which statement best relates to 1.2?
+{
+=CDN caches content closer to users
+~A load balancer distributes traffic across servers
+=IDS detects; IPS can block inline
+~Unrelated concept for 1.2
+}
+
+::n10009_1_2_q3 [n10009_1_2] Compare and contrast networking appliances, applications, and functions ::
+Which statement best relates to 1.2?
+{
+=IDS detects; IPS can block inline
+~A load balancer distributes traffic across servers
+=CDN caches content closer to users
+~Unrelated concept for 1.2
+}
+
+::n10009_1_3_q1 [n10009_1_3] Summarize cloud concepts and connectivity options ::
+Which statement best relates to 1.3?
+{
+=NAT gateway enables outbound internet from private subnets
+~Hybrid cloud combines on-premises and public cloud
+~Unrelated concept for 1.3
+=IaaS provides virtualized compute and network resources
+}
+
+::n10009_1_3_q2 [n10009_1_3] Summarize cloud concepts and connectivity options ::
+Which statement best relates to 1.3?
+{
+=NAT gateway enables outbound internet from private subnets
+~IaaS provides virtualized compute and network resources
+~Unrelated concept for 1.3
+=Hybrid cloud combines on-premises and public cloud
+}
+
+::n10009_1_3_q3 [n10009_1_3] Summarize cloud concepts and connectivity options ::
+Which statement best relates to 1.3?
+{
+=NAT gateway enables outbound internet from private subnets
+~IaaS provides virtualized compute and network resources
+~Hybrid cloud combines on-premises and public cloud
+~Unrelated concept for 1.3
+}
+
+::n10009_1_4_q1 [n10009_1_4] Explain common networking ports, protocols, services, and traffic types ::
+Which statement best relates to 1.4?
+{
+=ICMP is used by ping and traceroute
+~HTTPS uses port 443
+=DNS uses UDP/TCP port 53
+~Unrelated concept for 1.4
+}
+
+::n10009_1_4_q2 [n10009_1_4] Explain common networking ports, protocols, services, and traffic types ::
+Which statement best relates to 1.4?
+{
+=HTTPS uses port 443
+~DNS uses UDP/TCP port 53
+~Unrelated concept for 1.4
+~ICMP is used by ping and traceroute
+}
+
+::n10009_1_4_q3 [n10009_1_4] Explain common networking ports, protocols, services, and traffic types ::
+Which statement best relates to 1.4?
+{
+=ICMP is used by ping and traceroute
+~DNS uses UDP/TCP port 53
+~HTTPS uses port 443
+~Unrelated concept for 1.4
+}
+
+::n10009_1_5_q1 [n10009_1_5] Compare and contrast transmission media and transceivers ::
+Which statement best relates to 1.5?
+{
+=RJ45 is used for twisted-pair Ethernet
+~Plenum-rated cable is required in air-handling spaces
+=Single-mode fiber supports longer distances than multimode
+~Unrelated concept for 1.5
+}
+
+::n10009_1_5_q2 [n10009_1_5] Compare and contrast transmission media and transceivers ::
+Which statement best relates to 1.5?
+{
+=RJ45 is used for twisted-pair Ethernet
+~Single-mode fiber supports longer distances than multimode
+~Plenum-rated cable is required in air-handling spaces
+~Unrelated concept for 1.5
+}
+
+::n10009_1_5_q3 [n10009_1_5] Compare and contrast transmission media and transceivers ::
+Which statement best relates to 1.5?
+{
+=Unrelated concept for 1.5
+~RJ45 is used for twisted-pair Ethernet
+~Single-mode fiber supports longer distances than multimode
+=Plenum-rated cable is required in air-handling spaces
+}
+
+::n10009_1_6_q1 [n10009_1_6] Compare and contrast network topologies, architectures, and types ::
+Which statement best relates to 1.6?
+{
+=Spine-leaf is common in modern data centers
+~RFC1918 defines private IPv4 ranges
+~Unrelated concept for 1.6
+~East-west traffic dominates in virtualized environments
+}
+
+::n10009_1_6_q2 [n10009_1_6] Compare and contrast network topologies, architectures, and types ::
+Which statement best relates to 1.6?
+{
+=RFC1918 defines private IPv4 ranges
+~Spine-leaf is common in modern data centers
+~East-west traffic dominates in virtualized environments
+~Unrelated concept for 1.6
+}
+
+::n10009_1_6_q3 [n10009_1_6] Compare and contrast network topologies, architectures, and types ::
+Which statement best relates to 1.6?
+{
+=Unrelated concept for 1.6
+~Spine-leaf is common in modern data centers
+=East-west traffic dominates in virtualized environments
+~RFC1918 defines private IPv4 ranges
+}
+
+::n10009_1_7_q1 [n10009_1_7] Given a scenario, use appropriate IPv4 network addressing ::
+Which statement best relates to 1.7?
+{
+=/24 provides 254 usable host addresses
+~CIDR replaces classful addressing
+~VLSM allows different subnet sizes within one network
+~Unrelated concept for 1.7
+}
+
+::n10009_1_7_q2 [n10009_1_7] Given a scenario, use appropriate IPv4 network addressing ::
+Which statement best relates to 1.7?
+{
+=/24 provides 254 usable host addresses
+~Unrelated concept for 1.7
+~VLSM allows different subnet sizes within one network
+=CIDR replaces classful addressing
+}
+
+::n10009_1_7_q3 [n10009_1_7] Given a scenario, use appropriate IPv4 network addressing ::
+Which statement best relates to 1.7?
+{
+=Unrelated concept for 1.7
+~/24 provides 254 usable host addresses
+=VLSM allows different subnet sizes within one network
+~CIDR replaces classful addressing
+}
+
+::n10009_1_8_q1 [n10009_1_8] Summarize evolving use cases for modern network environments ::
+Which statement best relates to 1.8?
+{
+=Unrelated concept for 1.8
+~NAT64 helps IPv6-only clients reach IPv4 resources
+~Zero trust assumes no implicit trust by location
+=SD-WAN abstracts WAN transport from routing policy
+}
+
+::n10009_1_8_q2 [n10009_1_8] Summarize evolving use cases for modern network environments ::
+Which statement best relates to 1.8?
+{
+=Zero trust assumes no implicit trust by location
+~Unrelated concept for 1.8
+~SD-WAN abstracts WAN transport from routing policy
+~NAT64 helps IPv6-only clients reach IPv4 resources
+}
+
+::n10009_1_8_q3 [n10009_1_8] Summarize evolving use cases for modern network environments ::
+Which statement best relates to 1.8?
+{
+=Unrelated concept for 1.8
+=NAT64 helps IPv6-only clients reach IPv4 resources
+~SD-WAN abstracts WAN transport from routing policy
+~Zero trust assumes no implicit trust by location
+}
+
+::n10009_2_1_q1 [n10009_2_1] Explain characteristics of routing technologies ::
+Which statement best relates to 2.1?
+{
+=Unrelated concept for 2.1
+~OSPF is a link-state IGP
+=Lower administrative distance is preferred
+~PAT maps many internal hosts to one public IP
+}
+
+::n10009_2_1_q2 [n10009_2_1] Explain characteristics of routing technologies ::
+Which statement best relates to 2.1?
+{
+=Unrelated concept for 2.1
+=PAT maps many internal hosts to one public IP
+~OSPF is a link-state IGP
+~Lower administrative distance is preferred
+}
+
+::n10009_2_1_q3 [n10009_2_1] Explain characteristics of routing technologies ::
+Which statement best relates to 2.1?
+{
+=OSPF is a link-state IGP
+~Lower administrative distance is preferred
+~PAT maps many internal hosts to one public IP
+~Unrelated concept for 2.1
+}
+
+::n10009_2_2_q1 [n10009_2_2] Given a scenario, configure switching technologies and features ::
+Which statement best relates to 2.2?
+{
+=Unrelated concept for 2.2
+~STP prevents Layer 2 loops
+~Native VLAN carries untagged traffic on a trunk
+=802.1Q adds a 4-byte tag to Ethernet frames
+}
+
+::n10009_2_2_q2 [n10009_2_2] Given a scenario, configure switching technologies and features ::
+Which statement best relates to 2.2?
+{
+=Unrelated concept for 2.2
+~STP prevents Layer 2 loops
+~802.1Q adds a 4-byte tag to Ethernet frames
+=Native VLAN carries untagged traffic on a trunk
+}
+
+::n10009_2_2_q3 [n10009_2_2] Given a scenario, configure switching technologies and features ::
+Which statement best relates to 2.2?
+{
+=802.1Q adds a 4-byte tag to Ethernet frames
+=STP prevents Layer 2 loops
+~Unrelated concept for 2.2
+~Native VLAN carries untagged traffic on a trunk
+}
+
+::n10009_2_3_q1 [n10009_2_3] Given a scenario, select and configure wireless devices and technologies ::
+Which statement best relates to 2.3?
+{
+=Directional antennas focus signal in one area
+~Enterprise Wi-Fi uses 802.1X authentication
+~Unrelated concept for 2.3
+=WPA3 improves security over WPA2
+}
+
+::n10009_2_3_q2 [n10009_2_3] Given a scenario, select and configure wireless devices and technologies ::
+Which statement best relates to 2.3?
+{
+=Directional antennas focus signal in one area
+~Unrelated concept for 2.3
+=Enterprise Wi-Fi uses 802.1X authentication
+~WPA3 improves security over WPA2
+}
+
+::n10009_2_3_q3 [n10009_2_3] Given a scenario, select and configure wireless devices and technologies ::
+Which statement best relates to 2.3?
+{
+=WPA3 improves security over WPA2
+~Unrelated concept for 2.3
+=Directional antennas focus signal in one area
+~Enterprise Wi-Fi uses 802.1X authentication
+}
+
+::n10009_2_4_q1 [n10009_2_4] Explain important factors of physical installations ::
+Which statement best relates to 2.4?
+{
+=MDF is the main distribution frame for a building
+~UPS provides battery backup during outages
+~Proper cooling prevents thermal shutdown of gear
+~Unrelated concept for 2.4
+}
+
+::n10009_2_4_q2 [n10009_2_4] Explain important factors of physical installations ::
+Which statement best relates to 2.4?
+{
+=MDF is the main distribution frame for a building
+~Proper cooling prevents thermal shutdown of gear
+=UPS provides battery backup during outages
+~Unrelated concept for 2.4
+}
+
+::n10009_2_4_q3 [n10009_2_4] Explain important factors of physical installations ::
+Which statement best relates to 2.4?
+{
+=Proper cooling prevents thermal shutdown of gear
+~Unrelated concept for 2.4
+~MDF is the main distribution frame for a building
+~UPS provides battery backup during outages
+}
+
+::n10009_3_1_q1 [n10009_3_1] Explain the purpose of organizational processes and procedures ::
+Which statement best relates to 3.1?
+{
+=IPAM tracks IP allocation and prevents conflicts
+~Golden configuration is the approved baseline
+~Unrelated concept for 3.1
+~Change management reduces outage risk from unapproved changes
+}
+
+::n10009_3_1_q2 [n10009_3_1] Explain the purpose of organizational processes and procedures ::
+Which statement best relates to 3.1?
+{
+=Unrelated concept for 3.1
+~Change management reduces outage risk from unapproved changes
+~IPAM tracks IP allocation and prevents conflicts
+=Golden configuration is the approved baseline
+}
+
+::n10009_3_1_q3 [n10009_3_1] Explain the purpose of organizational processes and procedures ::
+Which statement best relates to 3.1?
+{
+=Unrelated concept for 3.1
+~Golden configuration is the approved baseline
+=Change management reduces outage risk from unapproved changes
+~IPAM tracks IP allocation and prevents conflicts
+}
+
+::n10009_3_2_q1 [n10009_3_2] Given a scenario, use network monitoring technologies ::
+Which statement best relates to 3.2?
+{
+=Unrelated concept for 3.2
+~Port mirroring copies traffic to an analysis tool
+~SIEM aggregates logs for correlation
+=SNMPv3 adds encryption and authentication
+}
+
+::n10009_3_2_q2 [n10009_3_2] Given a scenario, use network monitoring technologies ::
+Which statement best relates to 3.2?
+{
+=SIEM aggregates logs for correlation
+~Unrelated concept for 3.2
+~SNMPv3 adds encryption and authentication
+~Port mirroring copies traffic to an analysis tool
+}
+
+::n10009_3_2_q3 [n10009_3_2] Given a scenario, use network monitoring technologies ::
+Which statement best relates to 3.2?
+{
+=SNMPv3 adds encryption and authentication
+=Port mirroring copies traffic to an analysis tool
+~SIEM aggregates logs for correlation
+~Unrelated concept for 3.2
+}
+
+::n10009_3_3_q1 [n10009_3_3] Explain disaster recovery (DR) concepts ::
+Which statement best relates to 3.3?
+{
+=RTO is maximum acceptable downtime
+~RPO is maximum acceptable data loss window
+~Hot site can take over quickly with minimal data loss
+~Unrelated concept for 3.3
+}
+
+::n10009_3_3_q2 [n10009_3_3] Explain disaster recovery (DR) concepts ::
+Which statement best relates to 3.3?
+{
+=Unrelated concept for 3.3
+~Hot site can take over quickly with minimal data loss
+~RTO is maximum acceptable downtime
+=RPO is maximum acceptable data loss window
+}
+
+::n10009_3_3_q3 [n10009_3_3] Explain disaster recovery (DR) concepts ::
+Which statement best relates to 3.3?
+{
+=RPO is maximum acceptable data loss window
+~Unrelated concept for 3.3
+=Hot site can take over quickly with minimal data loss
+~RTO is maximum acceptable downtime
+}
+
+::n10009_3_4_q1 [n10009_3_4] Given a scenario, implement IPv4 and IPv6 network services ::
+Which statement best relates to 3.4?
+{
+=Unrelated concept for 3.4
+~AAAA records map hostnames to IPv6
+~DNSSEC adds cryptographic validation to DNS
+=DHCP relay forwards requests across subnets
+}
+
+::n10009_3_4_q2 [n10009_3_4] Given a scenario, implement IPv4 and IPv6 network services ::
+Which statement best relates to 3.4?
+{
+=DNSSEC adds cryptographic validation to DNS
+~DHCP relay forwards requests across subnets
+=AAAA records map hostnames to IPv6
+~Unrelated concept for 3.4
+}
+
+::n10009_3_4_q3 [n10009_3_4] Given a scenario, implement IPv4 and IPv6 network services ::
+Which statement best relates to 3.4?
+{
+=Unrelated concept for 3.4
+~AAAA records map hostnames to IPv6
+~DHCP relay forwards requests across subnets
+=DNSSEC adds cryptographic validation to DNS
+}
+
+::n10009_3_5_q1 [n10009_3_5] Compare and contrast network access and management methods ::
+Which statement best relates to 3.5?
+{
+=Out-of-band management works when production network is down
+~Split tunnel sends only corporate traffic through VPN
+~Unrelated concept for 3.5
+~Jump hosts reduce direct exposure of core devices
+}
+
+::n10009_3_5_q2 [n10009_3_5] Compare and contrast network access and management methods ::
+Which statement best relates to 3.5?
+{
+=Unrelated concept for 3.5
+=Split tunnel sends only corporate traffic through VPN
+~Out-of-band management works when production network is down
+~Jump hosts reduce direct exposure of core devices
+}
+
+::n10009_3_5_q3 [n10009_3_5] Compare and contrast network access and management methods ::
+Which statement best relates to 3.5?
+{
+=Split tunnel sends only corporate traffic through VPN
+~Out-of-band management works when production network is down
+~Unrelated concept for 3.5
+=Jump hosts reduce direct exposure of core devices
+}
+
+::n10009_4_1_q1 [n10009_4_1] Explain the importance of basic network security concepts ::
+Which statement best relates to 4.1?
+{
+=MFA requires two or more verification factors
+~Unrelated concept for 4.1
+=CIA triad confidentiality, integrity, availability
+~Network segmentation limits lateral movement
+}
+
+::n10009_4_1_q2 [n10009_4_1] Explain the importance of basic network security concepts ::
+Which statement best relates to 4.1?
+{
+=MFA requires two or more verification factors
+~CIA triad confidentiality, integrity, availability
+~Network segmentation limits lateral movement
+~Unrelated concept for 4.1
+}
+
+::n10009_4_1_q3 [n10009_4_1] Explain the importance of basic network security concepts ::
+Which statement best relates to 4.1?
+{
+=Unrelated concept for 4.1
+~MFA requires two or more verification factors
+~CIA triad confidentiality, integrity, availability
+=Network segmentation limits lateral movement
+}
+
+::n10009_4_2_q1 [n10009_4_2] Summarize various types of attacks and their impact to the network ::
+Which statement best relates to 4.2?
+{
+=Unrelated concept for 4.2
+~On-path attacks intercept traffic between two parties
+~Evil twin mimics a legitimate wireless SSID
+=ARP spoofing maps attacker MAC to a legitimate IP
+}
+
+::n10009_4_2_q2 [n10009_4_2] Summarize various types of attacks and their impact to the network ::
+Which statement best relates to 4.2?
+{
+=Evil twin mimics a legitimate wireless SSID
+~ARP spoofing maps attacker MAC to a legitimate IP
+~On-path attacks intercept traffic between two parties
+~Unrelated concept for 4.2
+}
+
+::n10009_4_2_q3 [n10009_4_2] Summarize various types of attacks and their impact to the network ::
+Which statement best relates to 4.2?
+{
+=On-path attacks intercept traffic between two parties
+~ARP spoofing maps attacker MAC to a legitimate IP
+~Unrelated concept for 4.2
+~Evil twin mimics a legitimate wireless SSID
+}
+
+::n10009_4_3_q1 [n10009_4_3] Given a scenario, apply network security features, defense techniques, and solutions ::
+Which statement best relates to 4.3?
+{
+=Unrelated concept for 4.3
+~ACLs filter traffic by source, destination, and port
+~Screened subnet (DMZ) isolates public-facing services
+=802.1X controls port access based on identity
+}
+
+::n10009_4_3_q2 [n10009_4_3] Given a scenario, apply network security features, defense techniques, and solutions ::
+Which statement best relates to 4.3?
+{
+=Unrelated concept for 4.3
+=Screened subnet (DMZ) isolates public-facing services
+~802.1X controls port access based on identity
+~ACLs filter traffic by source, destination, and port
+}
+
+::n10009_4_3_q3 [n10009_4_3] Given a scenario, apply network security features, defense techniques, and solutions ::
+Which statement best relates to 4.3?
+{
+=802.1X controls port access based on identity
+=ACLs filter traffic by source, destination, and port
+~Screened subnet (DMZ) isolates public-facing services
+~Unrelated concept for 4.3
+}
+
+::n10009_5_1_q1 [n10009_5_1] Explain the troubleshooting methodology ::
+Which statement best relates to 5.1?
+{
+=Unrelated concept for 5.1
+~Escalate when theory fails after reasonable testing
+~Divide and conquer isolates the fault domain quickly
+=Document at every troubleshooting step
+}
+
+::n10009_5_1_q2 [n10009_5_1] Explain the troubleshooting methodology ::
+Which statement best relates to 5.1?
+{
+=Document at every troubleshooting step
+=Divide and conquer isolates the fault domain quickly
+~Escalate when theory fails after reasonable testing
+~Unrelated concept for 5.1
+}
+
+::n10009_5_1_q3 [n10009_5_1] Explain the troubleshooting methodology ::
+Which statement best relates to 5.1?
+{
+=Unrelated concept for 5.1
+=Escalate when theory fails after reasonable testing
+~Document at every troubleshooting step
+~Divide and conquer isolates the fault domain quickly
+}
+
+::n10009_5_2_q1 [n10009_5_2] Given a scenario, troubleshoot common cabling and physical interface issues ::
+Which statement best relates to 5.2?
+{
+=Attenuation is signal loss over distance
+=CRC errors often indicate physical layer problems
+~Unrelated concept for 5.2
+~PoE budget must cover total device draw on the switch
+}
+
+::n10009_5_2_q2 [n10009_5_2] Given a scenario, troubleshoot common cabling and physical interface issues ::
+Which statement best relates to 5.2?
+{
+=Attenuation is signal loss over distance
+~CRC errors often indicate physical layer problems
+~PoE budget must cover total device draw on the switch
+~Unrelated concept for 5.2
+}
+
+::n10009_5_2_q3 [n10009_5_2] Given a scenario, troubleshoot common cabling and physical interface issues ::
+Which statement best relates to 5.2?
+{
+=Unrelated concept for 5.2
+~Attenuation is signal loss over distance
+~CRC errors often indicate physical layer problems
+=PoE budget must cover total device draw on the switch
+}
+
+::n10009_5_3_q1 [n10009_5_3] Given a scenario, troubleshoot common issues with network services ::
+Which statement best relates to 5.3?
+{
+=Duplicate IP addresses cause intermittent connectivity
+~Unrelated concept for 5.3
+~Wrong default gateway breaks off-subnet traffic
+~STP loops can saturate a broadcast domain
+}
+
+::n10009_5_3_q2 [n10009_5_3] Given a scenario, troubleshoot common issues with network services ::
+Which statement best relates to 5.3?
+{
+=STP loops can saturate a broadcast domain
+~Duplicate IP addresses cause intermittent connectivity
+~Unrelated concept for 5.3
+=Wrong default gateway breaks off-subnet traffic
+}
+
+::n10009_5_3_q3 [n10009_5_3] Given a scenario, troubleshoot common issues with network services ::
+Which statement best relates to 5.3?
+{
+=STP loops can saturate a broadcast domain
+~Duplicate IP addresses cause intermittent connectivity
+~Wrong default gateway breaks off-subnet traffic
+~Unrelated concept for 5.3
+}
+
+::n10009_5_4_q1 [n10009_5_4] Given a scenario, troubleshoot common performance issues ::
+Which statement best relates to 5.4?
+{
+=Unrelated concept for 5.4
+=Jitter affects real-time traffic like VoIP
+~Channel overlap causes wireless interference
+~Bottlenecking limits end-to-end throughput
+}
+
+::n10009_5_4_q2 [n10009_5_4] Given a scenario, troubleshoot common performance issues ::
+Which statement best relates to 5.4?
+{
+=Unrelated concept for 5.4
+~Bottlenecking limits end-to-end throughput
+~Jitter affects real-time traffic like VoIP
+=Channel overlap causes wireless interference
+}
+
+::n10009_5_4_q3 [n10009_5_4] Given a scenario, troubleshoot common performance issues ::
+Which statement best relates to 5.4?
+{
+=Bottlenecking limits end-to-end throughput
+~Jitter affects real-time traffic like VoIP
+~Channel overlap causes wireless interference
+~Unrelated concept for 5.4
+}
+
+::n10009_5_5_q1 [n10009_5_5] Given a scenario, use the appropriate tool or protocol to solve networking issues ::
+Which statement best relates to 5.5?
+{
+=ping tests ICMP reachability
+~Unrelated concept for 5.5
+~traceroute shows hop-by-hop path
+~Cable testers verify wire map and continuity
+}
+
+::n10009_5_5_q2 [n10009_5_5] Given a scenario, use the appropriate tool or protocol to solve networking issues ::
+Which statement best relates to 5.5?
+{
+=Cable testers verify wire map and continuity
+~ping tests ICMP reachability
+~Unrelated concept for 5.5
+=traceroute shows hop-by-hop path
+}
+
+::n10009_5_5_q3 [n10009_5_5] Given a scenario, use the appropriate tool or protocol to solve networking issues ::
+Which statement best relates to 5.5?
+{
+=Unrelated concept for 5.5
+~traceroute shows hop-by-hop path
+~ping tests ICMP reachability
+=Cable testers verify wire map and continuity
+}
+
