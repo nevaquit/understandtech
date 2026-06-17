@@ -24,25 +24,32 @@ class study_plan {
             return;
         }
 
-        $weak = self::get_weakest_objectives($userid, $certificationid, 3);
+        $weak = self::get_weakest_objectives($userid, $certificationid, 5);
         if ($weak === []) {
             return;
         }
 
+        $misconceptions = self::misconception_map($userid, $certificationid);
         $activities = [];
         foreach ($weak as $objective) {
+            $shortname = $objective['shortname'];
+            $reason = $misconceptions[$shortname]
+                ?? self::reason_for_score((float) $objective['score']);
             $activities[] = [
-                'objective' => $objective['shortname'],
+                'objective' => $shortname,
                 'title' => $objective['fullname'],
-                'type' => 'review',
+                'type' => 'lesson_review',
                 'minutes' => 25,
+                'reason' => $reason,
+                'url' => course_link::lesson_url_for_objective($certificationid, $shortname),
+                'mastery_score' => round((float) $objective['score'], 1),
             ];
         }
 
         $planjson = json_encode([
             'generated_at' => time(),
             'activities' => $activities,
-            'summary' => 'Focus on weakest objectives weighted by exam blueprint.',
+            'summary' => get_string('studyplansummary', 'local_certmaster'),
         ]);
 
         $existing = $DB->get_record('certmaster_study_plans', [
@@ -66,6 +73,36 @@ class study_plan {
                 'timemodified' => $now,
             ]);
         }
+    }
+
+    /**
+     * @param int $userid
+     * @param int $certificationid
+     * @return array<string, string> objective shortname => reason
+     */
+    protected static function misconception_map(int $userid, int $certificationid): array {
+        $map = [];
+        foreach (api::get_dangerous_misconceptions($userid, $certificationid, 20) as $row) {
+            $obj = $row->objective ?? '';
+            if ($obj !== '' && !isset($map[$obj])) {
+                $map[$obj] = get_string('studyplanreasonmisconception', 'local_certmaster');
+            }
+        }
+        return $map;
+    }
+
+    /**
+     * @param float $score
+     * @return string
+     */
+    protected static function reason_for_score(float $score): string {
+        if ($score < 40) {
+            return get_string('studyplanreasonlow', 'local_certmaster');
+        }
+        if ($score < 60) {
+            return get_string('studyplanreasonbuilding', 'local_certmaster');
+        }
+        return get_string('studyplanreasonmaintain', 'local_certmaster');
     }
 
     /**

@@ -252,6 +252,63 @@ class api {
     }
 
     /**
+     * Return adaptive study plan for a learner, generating on first access.
+     *
+     * @param int $userid User id.
+     * @param int $certificationid Certification id.
+     * @param bool $regenerate When true, rebuild the plan from current mastery.
+     * @return array{generated_at: int, summary: string, activities: array, empty: bool}
+     */
+    public static function get_user_study_plan(int $userid, int $certificationid, bool $regenerate = false): array {
+        global $DB;
+
+        if (!$DB->get_manager()->table_exists('certmaster_study_plans')) {
+            return [
+                'generated_at' => 0,
+                'summary' => '',
+                'activities' => [],
+                'empty' => true,
+            ];
+        }
+
+        if ($regenerate) {
+            study_plan::generate_for_user($userid, $certificationid);
+        }
+
+        $record = $DB->get_record('certmaster_study_plans', [
+            'userid' => $userid,
+            'certificationid' => $certificationid,
+        ]);
+
+        if (!$record) {
+            study_plan::generate_for_user($userid, $certificationid);
+            $record = $DB->get_record('certmaster_study_plans', [
+                'userid' => $userid,
+                'certificationid' => $certificationid,
+            ]);
+        }
+
+        if (!$record) {
+            return [
+                'generated_at' => 0,
+                'summary' => '',
+                'activities' => [],
+                'empty' => true,
+            ];
+        }
+
+        $plan = json_decode($record->planjson, true) ?: [];
+        $activities = $plan['activities'] ?? [];
+
+        return [
+            'generated_at' => (int) ($plan['generated_at'] ?? $record->timemodified),
+            'summary' => (string) ($plan['summary'] ?? ''),
+            'activities' => $activities,
+            'empty' => $activities === [],
+        ];
+    }
+
+    /**
      * @param string $confidence
      * @return void
      */

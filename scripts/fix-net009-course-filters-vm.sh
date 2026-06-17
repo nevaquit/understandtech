@@ -23,9 +23,20 @@ global \$DB;
        JOIN {page} p ON p.id = cm.instance
       WHERE cm.course = ? AND cm.deletioninprogress = 0 AND p.name LIKE ?
       ORDER BY cm.id ASC',
-    ['page', \$courseid, 'N10009.1.2:%'],
+    ['page', \$courseid, 'N10-009 1.2:%'],
     IGNORE_MISSING
 );
+if (!\$cmid) {
+    \$cmid = \$DB->get_field_sql(
+        'SELECT cm.id FROM {course_modules} cm
+           JOIN {modules} m ON m.id = cm.module AND m.name = ?
+           JOIN {page} p ON p.id = cm.instance
+          WHERE cm.course = ? AND cm.deletioninprogress = 0 AND p.name LIKE ?
+          ORDER BY cm.id ASC',
+        ['page', \$courseid, 'N10009.1.2:%'],
+        IGNORE_MISSING
+    );
+}
 echo (int) (\$cmid ?: 0);
 ")"
 

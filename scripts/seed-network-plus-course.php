@@ -121,37 +121,8 @@ function network_plus_page_exists(int $courseid, int $sectionnum, string $name):
  * @return void
  */
 function network_plus_disable_page_module_filters(stdClass $course): void {
-    global $DB;
-
-    $modinfo = get_fast_modinfo($course);
-    $contexts = [context_course::instance((int) $course->id)];
-    foreach ($modinfo->get_cms() as $cm) {
-        if ($cm->deletioninprogress) {
-            continue;
-        }
-        $contexts[] = context_module::instance($cm->id);
-    }
-
-    $filternames = [];
-    foreach ($DB->get_records('filter_active') as $row) {
-        if ((int) $row->active === TEXTFILTER_DISABLED) {
-            continue;
-        }
-        $filternames[$row->filter] = true;
-    }
-    foreach ($contexts as $context) {
-        foreach (array_keys(filter_get_active_in_context($context)) as $filtername) {
-            $filternames[$filtername] = true;
-        }
-    }
-
-    foreach ($contexts as $context) {
-        foreach (array_keys($filternames) as $filtername) {
-            filter_set_local_state($filtername, $context->id, TEXTFILTER_OFF);
-        }
-    }
-    filter_manager::reset_caches();
-    rebuild_course_cache((int) $course->id, true);
+    require_once(__DIR__ . '/lib/moodle-cert-course-filters.php');
+    ut_disable_cert_course_text_filters($course, false);
 }
 
 /**

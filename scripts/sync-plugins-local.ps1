@@ -16,6 +16,7 @@ $PluginMap = @{
     "local_community"                   = "local/community"
     "local_integrations"                = "local/integrations"
     "block_examreadiness"               = "block/examreadiness"
+    "block_studyplan"                   = "block/studyplan"
     "block_portfolio"                   = "block/portfolio"
     "mod_ctfflag"                       = "mod/ctfflag"
     "qbehaviour_certmasterconfidence"   = "question/behaviour/certmasterconfidence"

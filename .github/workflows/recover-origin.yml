@@ -40,6 +40,9 @@ jobs:
           if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";global $DB;exit($DB->record_exists("course",["shortname"=>"NET009"])?0:1);' 2>/dev/null; then
             sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-net009-course-filters-vm.sh"
           fi
+          if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";global $DB;exit($DB->record_exists("course",["shortname"=>"APLUS"])?0:1);' 2>/dev/null; then
+            sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-aplus-course-filters-vm.sh"
+          fi
 
       - name: Diagnose course index drawer
         continue-on-error: true
@@ -51,6 +54,12 @@ jobs:
         run: |
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
+
+      - name: Verify cert course lesson pages
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-cert-course-pages.sh"
 
       - name: Verify page module CLI
         continue-on-error: true

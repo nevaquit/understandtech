@@ -36,6 +36,7 @@ declare -A EXPECT=(
   [local_integrations]="$MOODLE/local/integrations"
   [mod_ctfflag]="$MOODLE/mod/ctfflag"
   [block_examreadiness]="$MOODLE/blocks/examreadiness"
+  [block_studyplan]="$MOODLE/blocks/studyplan"
   [block_portfolio]="$MOODLE/blocks/portfolio"
   [qbehaviour_certmasterconfidence]="$MOODLE/question/behaviour/certmasterconfidence"
 )
@@ -56,7 +57,7 @@ global \$CFG, \$DB;
 \$components = [
     'theme_understandtech','local_certmaster','local_aitutor','local_aigrading',
     'local_gamification','local_community','local_integrations','mod_ctfflag',
-    'block_examreadiness','block_portfolio','qbehaviour_certmasterconfidence',
+    'block_examreadiness','block_studyplan','block_portfolio','qbehaviour_certmasterconfidence',
 ];
 echo \"=== config_plugins versions ===\n\";
 foreach (\$components as \$c) {

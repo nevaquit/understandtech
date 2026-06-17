@@ -1,0 +1,32 @@
+<div class="block-studyplan">
+    {{#empty}}
+        <p class="text-muted">{{#str}}emptyplan, block_studyplan{{/str}}</p>
+    {{/empty}}
+    {{^empty}}
+        <p class="small text-muted mb-2">{{summary}}</p>
+        {{#generated}}
+            <p class="small text-muted mb-3">{{#str}}generated_label, block_studyplan, {{generated}}{{/str}}</p>
+        {{/generated}}
+        <ol class="list-unstyled block-studyplan-activities mb-3">
+            {{#activities}}
+                <li class="block-studyplan-activity mb-3 pb-3 border-bottom">
+                    <div class="fw-semibold">{{title}}</div>
+                    <div class="small text-muted mb-1">{{objective}}</div>
+                    <div class="small mb-2">{{reason}}</div>
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <span class="badge bg-light text-dark">{{#str}}minutes_label, block_studyplan, {{minutes}}{{/str}}</span>
+                        {{#mastery_score}}
+                            <span class="badge bg-secondary">{{#str}}mastery_label, block_studyplan, {{mastery_score}}{{/str}}</span>
+                        {{/mastery_score}}
+                        {{#hasurl}}
+                            <a class="btn btn-sm btn-primary ms-auto" href="{{url}}">{{#str}}start_activity, block_studyplan{{/str}}</a>
+                        {{/hasurl}}
+                    </div>
+                </li>
+            {{/activities}}
+        </ol>
+        <a class="btn btn-sm btn-outline-secondary" href="{{regenerateurl}}" title="{{#str}}regenerate_help, block_studyplan{{/str}}">
+            {{#str}}regenerate, block_studyplan{{/str}}
+        </a>
+    {{/empty}}
+</div>

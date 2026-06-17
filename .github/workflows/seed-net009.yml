@@ -65,10 +65,10 @@ jobs:
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
 
-      - name: Verify NET009 lesson page renders
+      - name: Verify cert course lesson pages
         run: |
           set -euo pipefail
-          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-net009-web-health.sh"
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-cert-course-pages.sh"
 
       - name: Disable maintenance mode
         if: always()
