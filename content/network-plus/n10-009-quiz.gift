@@ -1,675 +1,1173 @@
-::n10009_1_1_q1 [n10009_1_1] Explain concepts related to the Open Systems Interconnection (OSI) reference model ::
-Which statement best relates to 1.1?
+// Generated from CyberKraft N10-009 Practice Exam Bank — rebuild via:
+// node scripts/build-network-plus-quiz-from-practice-bank.cjs
+
+::n10009_1_1_pb1 [n10009_1_1] A network engineer is analyzing a packet capture and notices that a device is se ::
+A network engineer is analyzing a packet capture and notices that a device is sending a broadcast frame with a destination MAC address of FF\:FF\:FF\:FF\:FF\:FF. At which layer of the OSI model does this communication primarily occur?
+{
+~Network Layer (Layer 3)
+=Data Link Layer (Layer 2)
+~Transport Layer (Layer 4)
+~Physical Layer (Layer 1)
+}
+
+::n10009_1_2_pb2 [n10009_1_2] A technician is subnetting the 192.168.10.0 network and needs to create at least ::
+A technician is subnetting the 192.168.10.0 network and needs to create at least 6 subnets while maximizing the number of usable hosts per subnet. Which subnet mask should the technician use?
+{
+=/27 (255.255.255.224)
+~/29 (255.255.255.248)
+~/28 (255.255.255.240)
+~/26 (255.255.255.192)
+}
+
+::n10009_4_3_pb3 [n10009_4_3] A security administrator needs to implement a solution that passively monitors n ::
+A security administrator needs to implement a solution that passively monitors network traffic for suspicious activity without blocking any traffic. Which of the following BEST meets this requirement?
+{
+~Intrusion Prevention System (IPS)
+~Next-Generation Firewall (NGFW)
+=Intrusion Detection System (IDS)
+~Web Application Firewall (WAF)
+}
+
+::n10009_2_1_pb4 [n10009_2_1] A network administrator is configuring inter-VLAN routing on a Cisco switch. The ::
+A network administrator is configuring inter-VLAN routing on a Cisco switch. The administrator wants to use a single physical interface on the router to route traffic between VLAN 10 and VLAN 20. Which configuration method should be used?
+{
+~Configure two separate physical interfaces, one for each VLAN
+=Configure a router-on-a-stick using subinterfaces with 802.1Q encapsulation
+~Configure a Layer 3 switch with SVIs for each VLAN
+~Configure static routes between the two VLANs on the router
+}
+
+::n10009_5_1_pb5 [n10009_5_1] A user reports they cannot access any websites by name, but they CAN access webs ::
+A user reports they cannot access any websites by name, but they CAN access websites by IP address (e.g., typing 8.8.8.8 in the browser works). Which of the following is the MOST likely cause?
+{
+~The default gateway is misconfigured
+=The DNS server is unreachable or misconfigured
+~The NIC driver is corrupted
+~The DHCP server has assigned a duplicate IP address
+}
+
+::n10009_3_2_pb6 [n10009_3_2] A company's network monitoring system uses SNMP to collect performance data from ::
+A company's network monitoring system uses SNMP to collect performance data from routers and switches. The security team requires that all SNMP communications be encrypted and authenticated. Which SNMP version should be implemented?
+{
+~SNMPv1
+~SNMPv2c
+=SNMPv3
+~SNMP with SSL/TLS wrapper
+}
+
+::n10009_1_7_pb7 [n10009_1_7] An administrator needs to configure a static IP address on a server. The server ::
+An administrator needs to configure a static IP address on a server. The server is on the 172.16.50.0/23 network. Which of the following represents a valid host address for this server?
+{
+~172.16.50.0
+~172.16.51.255
+=172.16.51.100
+~172.16.52.1
+}
+
+::n10009_4_1_pb8 [n10009_4_1] A company implements a policy requiring employees to use a combination of a pass ::
+A company implements a policy requiring employees to use a combination of a password and a fingerprint scan to access the corporate network. This is an example of which security concept?
+{
+~Single Sign-On (SSO)
+=Multi-Factor Authentication (MFA)
+~Role-Based Access Control (RBAC)
+~Mandatory Access Control (MAC)
+}
+
+::n10009_2_2_pb9 [n10009_2_2] A network engineer needs to prevent a broadcast storm caused by a switching loop ::
+A network engineer needs to prevent a broadcast storm caused by a switching loop in the network. Which protocol should be enabled on all switches to automatically block redundant paths while maintaining a loop-free topology?
+{
+~LACP (Link Aggregation Control Protocol)
+~VRRP (Virtual Router Redundancy Protocol)
+=STP (Spanning Tree Protocol)
+~OSPF (Open Shortest Path First)
+}
+
+::n10009_5_1_pb10 [n10009_5_1] A technician is troubleshooting a network issue using the CompTIA 7-step trouble ::
+A technician is troubleshooting a network issue using the CompTIA 7-step troubleshooting methodology. The technician has identified the problem and established a theory of probable cause. What is the NEXT step in the methodology?
+{
+~Establish a plan of action to resolve the problem
+=Test the theory to determine the cause
+~Document findings, actions, and outcomes
+~Implement the solution or escalate
+}
+
+::n10009_1_7_pb11 [n10009_1_7] Which of the following IPv6 address types is equivalent to the IPv4 private addr ::
+Which of the following IPv6 address types is equivalent to the IPv4 private address space (RFC 1918) and is used for communication within a local network only?
+{
+~Global Unicast Address (2000\:\:/3)
+~Link-Local Address (FE80\:\:/10)
+=Unique Local Address (FC00\:\:/7)
+~Multicast Address (FF00\:\:/8)
+}
+
+::n10009_3_3_pb12 [n10009_3_3] A company's disaster recovery plan specifies that after a major outage, all syst ::
+A company's disaster recovery plan specifies that after a major outage, all systems must be restored to full operation within 4 hours, and no more than 1 hour of data can be lost. Which terms describe these requirements respectively?
+{
+~MTBF and MTTR
+~RPO and RTO
+=RTO and RPO
+~SLA and RPO
+}
+
+::n10009_4_2_pb13 [n10009_4_2] An attacker sends a large number of SYN packets to a web server but never comple ::
+An attacker sends a large number of SYN packets to a web server but never completes the TCP three-way handshake. The server's connection table fills up and legitimate users cannot connect. This is an example of which type of attack?
+{
+~ARP Poisoning
+=SYN Flood (DoS)
+~Man-in-the-Middle (MitM)
+~DNS Amplification
+}
+
+::n10009_2_2_pb14 [n10009_2_2] A network administrator needs to configure a wireless network for a large wareho ::
+A network administrator needs to configure a wireless network for a large warehouse. The warehouse has many metal shelves that cause significant signal reflection. Which 802.11 feature would BEST help mitigate multipath interference in this environment?
+{
+~WPA3 encryption
+=MIMO (Multiple-Input Multiple-Output)
+~Wireless site survey
+~Channel bonding
+}
+
+::n10009_2_2_pb15 [n10009_2_2] SIMULATION (PBQ)\: A network administrator is deploying 40 IP cameras in a parkin ::
+SIMULATION (PBQ)\: A network administrator is deploying 40 IP cameras in a parking lot. Each camera requires 802.3at (PoE+) power delivery of 30W. The available switch has a total PoE budget of 740W. The cameras must be on VLAN 50. How many cameras can the switch power, and how should the uplink port be configured?
+{
+~The switch can power all 40 cameras (40 x 30W \= 1200W); uplink port should be set to Access VLAN 50
+=The switch can power 24 cameras (24 x 30W \= 720W); uplink port should be set to Trunk with VLAN
+~The switch can power all 40 cameras; uplink port should be set to Trunk with VLAN 50 Tagged
+~The switch can power 25 cameras (25 x 30W \= 750W); uplink port should be set to Access VLAN 50
+}
+
+::n10009_1_4_pb16 [n10009_1_4] A network engineer is reviewing the routing table of a router and sees multiple ::
+A network engineer is reviewing the routing table of a router and sees multiple routes to the same destination network learned from different routing protocols. The router selects the OSPF route over the RIP route. Which routing concept explains this behavior?
+{
+~Metric
+=Administrative Distance
+~Hop Count
+~Convergence Time
+}
+
+::n10009_3_5_pb17 [n10009_3_5] A network administrator wants to centrally manage and monitor all wireless acces ::
+A network administrator wants to centrally manage and monitor all wireless access points in a large enterprise. Which device should be deployed to provide centralized AP management, roaming support, and RF management?
+{
+~Wireless Access Point (WAP)
+=Wireless LAN Controller (WLC)
+~Network Access Control (NAC) server
+~RADIUS server
+}
+
+::n10009_4_1_pb18 [n10009_4_1] A network administrator implements a policy that automatically quarantines any d ::
+A network administrator implements a policy that automatically quarantines any device that connects to the network without the latest security patches installed. Which technology is being used?
+{
+~802.1X Port-Based Authentication
+=Network Access Control (NAC)
+~Intrusion Prevention System (IPS)
+~VLAN Segmentation
+}
+
+::n10009_1_4_pb19 [n10009_1_4] A technician is setting up a network and needs to connect two switches using a c ::
+A technician is setting up a network and needs to connect two switches using a cable that supports 10 Gbps over a maximum distance of 55 meters. Which cable type should be used?
+{
+~Cat5e
+=Cat6
+~Cat6a
+~Cat8
+}
+
+::n10009_3_2_pb20 [n10009_3_2] A network administrator is configuring a syslog server to receive log messages f ::
+A network administrator is configuring a syslog server to receive log messages from all network devices. The administrator wants to ensure that only critical system failures and emergency conditions are forwarded to the on-call team via pager. Which syslog severity levels should trigger the page?
+{
+=Levels 0 and 1 (Emergency and Alert)
+~Levels 5 and 6 (Notice and Informational)
+~Levels 3 and 4 (Error and Warning)
+~Level 7 (Debug)
+}
+
+::n10009_2_1_pb21 [n10009_2_1] A company wants to implement a routing protocol for their internal network that ::
+A company wants to implement a routing protocol for their internal network that uses bandwidth as its primary metric and supports both IPv4 and IPv6. Which protocol BEST meets these requirements?
+{
+~RIPv2
+=OSPF
+~BGP
+~RIPng
+}
+
+::n10009_5_3_pb22 [n10009_5_3] A technician uses a cable tester and discovers that the cable has a near-end cro ::
+A technician uses a cable tester and discovers that the cable has a near-end crosstalk (NEXT) reading that exceeds the acceptable threshold. Which of the following BEST describes the cause of this issue?
+{
+~The cable run exceeds the maximum distance specification
+~Electromagnetic interference from a nearby power cable
+=Untwisted wire pairs at the cable termination point
+~A break in the cable's outer jacket
+}
+
+::n10009_4_3_pb23 [n10009_4_3] A network administrator wants to implement a solution that authenticates users c ::
+A network administrator wants to implement a solution that authenticates users connecting to the wired network using their Active Directory credentials before granting access. Which of the following protocols and standards should be implemented?
+{
+~WPA2-PSK with RADIUS
+=802.1X with EAP-TLS and RADIUS
+~MAC address filtering with LDAP
+~TACACS+ with SSH
+}
+
+::n10009_1_4_pb24 [n10009_1_4] A network engineer is designing a network and needs to select a protocol that wi ::
+A network engineer is designing a network and needs to select a protocol that will allow multiple physical links between two switches to act as a single logical link for increased bandwidth and redundancy. Which protocol should be used?
+{
+~STP (Spanning Tree Protocol)
+=LACP (Link Aggregation Control Protocol)
+~VRRP (Virtual Router Redundancy Protocol)
+~HSRP (Hot Standby Router Protocol)
+}
+
+::n10009_3_4_pb25 [n10009_3_4] A company needs to implement a solution that provides redundancy for the default ::
+A company needs to implement a solution that provides redundancy for the default gateway used by end-user workstations. If the primary router fails, traffic should automatically be forwarded through the secondary router without any manual reconfiguration on the workstations. Which protocol provides this functionality?
+{
+~OSPF
+~BGP
+=HSRP
+~STP
+}
+
+::n10009_4_1_pb26 [n10009_4_1] A company's security policy requires that all network devices use a centralized ::
+A company's security policy requires that all network devices use a centralized system for administrator authentication, authorization, and accounting. The security team also requires command-by-command authorization for all CLI commands executed on network devices. Which protocol BEST meets these requirements?
+{
+~RADIUS
+=TACACS+
+~LDAP
+~Kerberos
+}
+
+::n10009_1_1_pb27 [n10009_1_1] Which of the following protocols operates at the Application layer of the OSI mo ::
+Which of the following protocols operates at the Application layer of the OSI model and is responsible for translating domain names to IP addresses?
+{
+~ARP
+~ICMP
+=DNS
+~DHCP
+}
+
+::n10009_5_3_pb28 [n10009_5_3] A network administrator runs the 'ipconfig /all' command on a Windows workstatio ::
+A network administrator runs the 'ipconfig /all' command on a Windows workstation and notices the IP address is 169.254.45.23. What does this indicate?
+{
+~The workstation has been assigned a static IP address
+~The workstation successfully received an IP address from the DHCP server
+=The workstation failed to contact the DHCP server and assigned itself an APIPA address
+~The workstation is configured for IPv6 only
+}
+
+::n10009_2_1_pb29 [n10009_2_1] A company is deploying a new SD-WAN solution to connect 50 branch offices to the ::
+A company is deploying a new SD-WAN solution to connect 50 branch offices to the headquarters. Which of the following is a PRIMARY advantage of SD-WAN over traditional WAN technologies?
+{
+~SD-WAN eliminates the need for any physical network hardware
+=SD-WAN provides centralized policy management and can use multiple WAN links (MPLS,
+~SD-WAN only works with fiber optic connections
+~SD-WAN replaces the need for firewalls at branch locations
+}
+
+::n10009_4_1_pb30 [n10009_4_1] A network administrator discovers that an attacker has been sending gratuitous A ::
+A network administrator discovers that an attacker has been sending gratuitous ARP replies to associate the attacker's MAC address with the IP address of the default gateway. Which attack is being described, and which technology would BEST mitigate it?
+{
+~DNS Spoofing; DNSSEC
+=ARP Poisoning; Dynamic ARP Inspection (DAI)
+~VLAN Hopping; Private VLANs
+~MAC Flooding; Port Security
+}
+
+::n10009_3_2_pb31 [n10009_3_2] A company performs daily incremental backups and weekly full backups. After a ra ::
+A company performs daily incremental backups and weekly full backups. After a ransomware attack on a Thursday, the IT team needs to restore all data. How many backup sets are needed to fully restore the system?
+{
+~One\: the most recent full backup
+~Two\: the most recent full backup and the most recent incremental backup
+=Four\: the most recent full backup and all incremental backups since the last full backup
+~Seven\: all daily backups from the past week
+}
+
+::n10009_1_2_pb32 [n10009_1_2] A network engineer needs to implement a solution that allows internal users to a ::
+A network engineer needs to implement a solution that allows internal users to access the internet while hiding the internal IP address space. The solution must also allow the company to use private IP addresses internally. Which technology should be implemented?
+{
+~VPN
+=NAT/PAT
+~Proxy Server
+~VLAN
+}
+
+::n10009_5_5_pb33 [n10009_5_5] A network administrator is troubleshooting slow network performance. Using a pro ::
+A network administrator is troubleshooting slow network performance. Using a protocol analyzer, the administrator notices a large number of TCP retransmissions between a client and a server. Which of the following is the MOST likely cause?
+{
+~A DNS resolution failure
+=Packet loss on the network path
+~A misconfigured VLAN
+~An incorrect subnet mask on the client
+}
+
+::n10009_4_1_pb34 [n10009_4_1] A company wants to implement a security zone that places public-facing servers ( ::
+A company wants to implement a security zone that places public-facing servers (web, email, DNS) in a network segment that is accessible from the internet but isolated from the internal corporate network. Which architecture should be implemented?
+{
+~Air gap
+=DMZ (Demilitarized Zone)
+~Zero Trust Network
+~VLAN trunking
+}
+
+::n10009_3_4_pb35 [n10009_3_4] A network administrator needs to implement a solution that automatically assigns ::
+A network administrator needs to implement a solution that automatically assigns IP addresses to clients and also provides them with the IP address of the DNS server and the default gateway. Which protocol handles this, and what is the correct sequence of messages?
+{
+~DNS; Query > Response
+=DHCP; DORA (Discover > Offer > Request > Acknowledge)
+~ARP; Request > Reply
+~BOOTP; Request > Reply
+}
+
+::n10009_1_1_pb36 [n10009_1_1] A network engineer is designing a data center network and needs to connect serve ::
+A network engineer is designing a data center network and needs to connect servers to a storage system that requires high-speed, low-latency block-level storage access over the existing Ethernet infrastructure. Which technology should be implemented?
+{
+~NFS (Network File System)
+=iSCSI (Internet Small Computer Systems Interface)
+~FTP (File Transfer Protocol)
+~SMB (Server Message Block)
+}
+
+::n10009_4_1_pb37 [n10009_4_1] An attacker connects a rogue switch to the network and sends DTP (Dynamic Trunki ::
+An attacker connects a rogue switch to the network and sends DTP (Dynamic Trunking Protocol) negotiation frames to a legitimate switch port. The attacker's goal is to gain access to all VLANs on the network. Which attack is being described?
+{
+~MAC Flooding
+~ARP Poisoning
+=VLAN Hopping
+~DNS Poisoning
+}
+
+::n10009_3_4_pb38 [n10009_3_4] A company's network team needs to implement a solution that provides a single, c ::
+A company's network team needs to implement a solution that provides a single, centralized view of network performance metrics, including bandwidth utilization, CPU usage, and interface errors across all devices. Which type of solution should be deployed?
+{
+~Syslog server
+=Network Management System (NMS) with SNMP
+~RADIUS server
+~Packet analyzer (Wireshark)
+}
+
+::n10009_2_3_pb39 [n10009_2_3] A network administrator is configuring a wireless network for a hospital. The ho ::
+A network administrator is configuring a wireless network for a hospital. The hospital requires the highest level of wireless security with enterprise authentication and the strongest available encryption. Which wireless security standard should be implemented?
+{
+~WEP (Wired Equivalent Privacy)
+~WPA (Wi-Fi Protected Access)
+~WPA2-Personal (PSK)
+=WPA3-Enterprise
+}
+
+::n10009_5_1_pb40 [n10009_5_1] A technician is troubleshooting a connectivity issue and uses the 'traceroute' c ::
+A technician is troubleshooting a connectivity issue and uses the 'traceroute' command. The output shows asterisks (*) at hops 5 through 10 but the destination is reached successfully. What do the asterisks indicate?
+{
+~The packets were dropped at those hops and the connection failed
+=Those routers are configured to not respond to ICMP TTL-exceeded messages
+~The route is asymmetric and packets are taking a different return path
+~The network is experiencing a routing loop at those hops
+}
+
+::n10009_1_3_pb41 [n10009_1_3] A company is deploying a new cloud-based application and needs to understand the ::
+A company is deploying a new cloud-based application and needs to understand the cloud service model. The cloud provider manages the operating system, middleware, and runtime environment, while the company only manages the application and data. Which cloud service model is being used?
+{
+~IaaS (Infrastructure as a Service)
+=PaaS (Platform as a Service)
+~SaaS (Software as a Service)
+~FaaS (Function as a Service)
+}
+
+::n10009_4_3_pb42 [n10009_4_3] A network administrator needs to implement a solution that inspects all outbound ::
+A network administrator needs to implement a solution that inspects all outbound web traffic, enforces acceptable use policies, and blocks access to malicious websites. The solution must be transparent to end users. Which technology should be deployed?
+{
+~Reverse Proxy
+=Forward Proxy with URL Filtering
+~IDS (Intrusion Detection System)
+~VPN Concentrator
+}
+
+::n10009_3_5_pb43 [n10009_3_5] A company is implementing a change management process. A network engineer submit ::
+A company is implementing a change management process. A network engineer submits a request to upgrade the firmware on all core switches during a maintenance window. Which document should be created FIRST before the change is approved?
+{
+~Post-implementation review
+=Change request (RFC) with rollback plan
+~Incident report
+~Network topology diagram
+}
+
+::n10009_1_2_pb44 [n10009_1_2] A network engineer is reviewing the OSI model and needs to identify which layer ::
+A network engineer is reviewing the OSI model and needs to identify which layer is responsible for establishing, managing, and terminating sessions between applications on different hosts. Which layer is this?
+{
+~Layer 4 - Transport
+=Layer 5 - Session
+~Layer 6 - Presentation
+~Layer 7 - Application
+}
+
+::n10009_5_3_pb45 [n10009_5_3] A network administrator is investigating reports of slow file transfers between ::
+A network administrator is investigating reports of slow file transfers between two servers on the same switch. The administrator checks the switch and finds that one server's port is showing a high number of 'late collisions.' What is the MOST likely cause?
+{
+~The server's NIC is failing
+=A duplex mismatch between the server and the switch port
+~The cable connecting the server is too long
+~The VLAN configuration is incorrect
+}
+
+::n10009_4_1_pb46 [n10009_4_1] A company's security policy requires that all employees use a hardware token tha ::
+A company's security policy requires that all employees use a hardware token that generates a new 6-digit code every 30 seconds to log into corporate systems. This is an example of which authentication factor type?
+{
+~Something you know
+=Something you have
+~Something you are
+~Somewhere you are
+}
+
+::n10009_2_2_pb47 [n10009_2_2] A network administrator needs to configure a switch port to carry traffic for mu ::
+A network administrator needs to configure a switch port to carry traffic for multiple VLANs simultaneously. The port connects to another switch. Which port type and configuration should be used?
+{
+~Access port configured with a single VLAN
+=Trunk port configured with 802.1Q encapsulation
+~Routed port with IP address configured
+~Mirror port for traffic analysis
+}
+
+::n10009_3_3_pb48 [n10009_3_3] A company is planning its disaster recovery strategy. The recovery team determin ::
+A company is planning its disaster recovery strategy. The recovery team determines that the organization can tolerate a maximum of 2 hours of downtime and can lose no more than 30 minutes of data. Which disaster recovery site type would BEST meet these requirements?
+{
+~Cold site
+~Warm site
+=Hot site
+~Mobile site
+}
+
+::n10009_1_4_pb49 [n10009_1_4] A network engineer is configuring a firewall and needs to create a rule that blo ::
+A network engineer is configuring a firewall and needs to create a rule that blocks all traffic by default and only allows explicitly permitted traffic. Which firewall rule concept is being applied?
+{
+~Stateful inspection
+=Implicit deny
+~Explicit permit
+~Deep packet inspection
+}
+
+::n10009_5_5_pb50 [n10009_5_5] A network administrator needs to test whether a specific TCP port (443) is open ::
+A network administrator needs to test whether a specific TCP port (443) is open on a remote server without using a web browser. Which command-line tool would BEST accomplish this?
+{
+~ping 192.168.1.100
+~traceroute 192.168.1.100
+=telnet 192.168.1.100 443
+~nslookup 192.168.1.100
+}
+
+::n10009_4_1_pb51 [n10009_4_1] A company wants to implement a Zero Trust security model for its network. Which ::
+A company wants to implement a Zero Trust security model for its network. Which of the following BEST describes a core principle of Zero Trust?
+{
+~Trust all devices within the corporate network perimeter
+=Never trust, always verify - authenticate and authorize every access request regardless of location
+~Use a single strong perimeter firewall to protect all internal resources
+~Allow all traffic between internal VLANs without inspection
+}
+
+::n10009_2_1_pb52 [n10009_2_1] A network engineer is configuring BGP on a router that connects the company's ne ::
+A network engineer is configuring BGP on a router that connects the company's network to two different ISPs for redundancy. The engineer wants to ensure that traffic from the internet prefers ISP-A for inbound connections. Which BGP attribute should be modified?
+{
+~LOCAL_PREF
+~AS-PATH
+=MED (Multi-Exit Discriminator)
+~WEIGHT
+}
+
+::n10009_3_2_pb53 [n10009_3_2] A network administrator is reviewing the network documentation and finds that th ::
+A network administrator is reviewing the network documentation and finds that the physical layout of the network (showing actual cable runs, rack locations, and device placement) is missing. Which type of diagram should be created?
+{
+~Logical network diagram
+=Physical network diagram
+~Network topology diagram
+~Wiring schematic
+}
+
+::n10009_1_4_pb54 [n10009_1_4] A network engineer is configuring a router and needs to create a default route t ::
+A network engineer is configuring a router and needs to create a default route that sends all traffic with no specific matching route to the ISP's router at 203.0.113.1. Which command represents the correct static default route?
+{
+~ip route 0.0.0.0 255.255.255.255 203.0.113.1
+=ip route 0.0.0.0 0.0.0.0 203.0.113.1
+~ip route 255.255.255.255 0.0.0.0 203.0.113.1
+~ip route 192.168.0.0 255.255.0.0 203.0.113.1
+}
+
+::n10009_4_1_pb55 [n10009_4_1] A company discovers that an employee has been sending sensitive corporate data t ::
+A company discovers that an employee has been sending sensitive corporate data to a personal email account. Which technology would have BEST prevented this data exfiltration?
+{
+~IDS (Intrusion Detection System)
+=DLP (Data Loss Prevention)
+~SIEM (Security Information and Event Management)
+~Firewall with ACL
+}
+
+::n10009_5_3_pb56 [n10009_5_3] A network administrator is troubleshooting an issue where users on VLAN 10 canno ::
+A network administrator is troubleshooting an issue where users on VLAN 10 cannot communicate with users on VLAN 20, but users within each VLAN can communicate with each other. What is the MOST likely cause?
 {
-=Layer 3 handles routing and logical addressing
-~TCP operates at Layer 4
-~Unrelated concept for 1.1
-~MAC addresses are Layer 2
+~STP has blocked a port on the switch
+=Inter-VLAN routing is not configured or is misconfigured
+~The DHCP server is not assigning addresses to VLAN 20
+~The switch has a MAC address table overflow
 }
 
-::n10009_1_1_q2 [n10009_1_1] Explain concepts related to the Open Systems Interconnection (OSI) reference model ::
-Which statement best relates to 1.1?
+::n10009_3_2_pb57 [n10009_3_2] A company's IT team is implementing a network monitoring solution and wants to r ::
+A company's IT team is implementing a network monitoring solution and wants to receive immediate notifications when a network device goes down. Which SNMP mechanism should be configured to provide real-time alerts without requiring the NMS to continuously poll the device?
 {
-=MAC addresses are Layer 2
-~Layer 3 handles routing and logical addressing
-=TCP operates at Layer 4
-~Unrelated concept for 1.1
+~SNMP GET
+~SNMP SET
+=SNMP TRAP
+~SNMP WALK
 }
 
-::n10009_1_1_q3 [n10009_1_1] Explain concepts related to the Open Systems Interconnection (OSI) reference model ::
-Which statement best relates to 1.1?
+::n10009_1_2_pb58 [n10009_1_2] A network administrator is configuring a router interface and assigns the IP add ::
+A network administrator is configuring a router interface and assigns the IP address 10.0.0.1/30 to the interface. How many usable host addresses are available in this subnet?
 {
-=Unrelated concept for 1.1
-~TCP operates at Layer 4
-~Layer 3 handles routing and logical addressing
-=MAC addresses are Layer 2
+=2
+~4
+~6
+~14
 }
 
-::n10009_1_2_q1 [n10009_1_2] Compare and contrast networking appliances, applications, and functions ::
-Which statement best relates to 1.2?
+::n10009_4_1_pb59 [n10009_4_1] A network administrator needs to harden a new network switch before deploying it ::
+A network administrator needs to harden a new network switch before deploying it. Which of the following is the MOST important initial hardening step?
 {
-=Unrelated concept for 1.2
-~CDN caches content closer to users
-~IDS detects; IPS can block inline
-=A load balancer distributes traffic across servers
+~Enable all switch ports
+=Change the default administrative credentials
+~Configure all ports as trunk ports
+~Enable Telnet for remote management
 }
 
-::n10009_1_2_q2 [n10009_1_2] Compare and contrast networking appliances, applications, and functions ::
-Which statement best relates to 1.2?
+::n10009_5_1_pb60 [n10009_5_1] A user reports that their laptop connects to the corporate Wi-Fi but cannot acce ::
+A user reports that their laptop connects to the corporate Wi-Fi but cannot access any internal resources or the internet. The user's laptop shows an IP address of 192.168.1.50, subnet mask 255.255.255.0, but no default gateway. What is the MOST likely cause?
 {
-=CDN caches content closer to users
-~A load balancer distributes traffic across servers
-=IDS detects; IPS can block inline
-~Unrelated concept for 1.2
+~The wireless access point is offline
+=The DHCP server is not providing a default gateway option
+~The laptop's wireless NIC is faulty
+~The DNS server is unreachable
 }
 
-::n10009_1_2_q3 [n10009_1_2] Compare and contrast networking appliances, applications, and functions ::
-Which statement best relates to 1.2?
+::n10009_3_2_pb61 [n10009_3_2] A company is implementing network documentation and needs to create a document t ::
+A company is implementing network documentation and needs to create a document that maps each physical port on a patch panel to its corresponding wall outlet, switch port, and connected device. Which document should be created?
 {
-=IDS detects; IPS can block inline
-~A load balancer distributes traffic across servers
-=CDN caches content closer to users
-~Unrelated concept for 1.2
+~Network topology diagram
+=Cable management documentation / port mapping
+~Network baseline report
+~Change management log
 }
 
-::n10009_1_3_q1 [n10009_1_3] Summarize cloud concepts and connectivity options ::
-Which statement best relates to 1.3?
+::n10009_1_7_pb62 [n10009_1_7] A network engineer is reviewing a network design and notices that the company us ::
+A network engineer is reviewing a network design and notices that the company uses the IP address range 172.31.0.0/16 for internal hosts. A junior engineer asks whether this is a valid private IP address range. What is the correct answer?
 {
-=NAT gateway enables outbound internet from private subnets
-~Hybrid cloud combines on-premises and public cloud
-~Unrelated concept for 1.3
-=IaaS provides virtualized compute and network resources
+~No, 172.31.0.0/16 is a public IP address range
+=Yes, 172.31.0.0/16 falls within the 172.16.0.0/12 private address range
+~No, only 172.16.0.0/16 is a valid private range in the 172.x.x.x space
+~Yes, but only if the company has registered it with IANA
 }
 
-::n10009_1_3_q2 [n10009_1_3] Summarize cloud concepts and connectivity options ::
-Which statement best relates to 1.3?
+::n10009_4_3_pb63 [n10009_4_3] A company needs to implement a solution that provides secure remote access for e ::
+A company needs to implement a solution that provides secure remote access for employees working from home. The solution must encrypt all traffic between the employee's device and the corporate network and must support split tunneling. Which technology should be used?
 {
-=NAT gateway enables outbound internet from private subnets
-~IaaS provides virtualized compute and network resources
-~Unrelated concept for 1.3
-=Hybrid cloud combines on-premises and public cloud
+~SSH tunneling
+~Site-to-site VPN
+=Client VPN (Remote Access VPN)
+~MPLS
 }
 
-::n10009_1_3_q3 [n10009_1_3] Summarize cloud concepts and connectivity options ::
-Which statement best relates to 1.3?
+::n10009_5_3_pb64 [n10009_5_3] A network administrator is troubleshooting a wireless connectivity issue. Users ::
+A network administrator is troubleshooting a wireless connectivity issue. Users report that they can connect to the Wi-Fi network but experience very slow speeds. The administrator notices that the 2.4 GHz band is heavily congested. Which action would MOST effectively improve wireless performance?
 {
-=NAT gateway enables outbound internet from private subnets
-~IaaS provides virtualized compute and network resources
-~Hybrid cloud combines on-premises and public cloud
-~Unrelated concept for 1.3
+~Increase the wireless transmit power to maximum
+=Migrate users to the 5 GHz band and configure non-overlapping channels
+~Change the wireless security from WPA2 to WEP
+~Reduce the SSID broadcast interval
 }
 
-::n10009_1_4_q1 [n10009_1_4] Explain common networking ports, protocols, services, and traffic types ::
-Which statement best relates to 1.4?
+::n10009_5_1_pb65 [n10009_5_1] SIMULATION (PBQ)\: A network administrator is troubleshooting a connectivity issu ::
+SIMULATION (PBQ)\: A network administrator is troubleshooting a connectivity issue. A workstation cannot reach the server at 10.10.20.5. The workstation has IP 10.10.10.100/24 and default gateway 10.10.10.1. The server has IP 10.10.20.5/24 and default gateway 10.10.20.1. The administrator pings 10.10.10.1 successfully but cannot ping 10.10.20.1. Using the 7-step troubleshooting methodology, what should the administrator check NEXT?
 {
-=ICMP is used by ping and traceroute
-~HTTPS uses port 443
-=DNS uses UDP/TCP port 53
-~Unrelated concept for 1.4
+~Check the DNS configuration on the workstation
+=Check the routing table and interface status on the router at 10.10.10.1
+~Replace the network cable on the workstation
+~Reinstall the NIC driver on the workstation
 }
 
-::n10009_1_4_q2 [n10009_1_4] Explain common networking ports, protocols, services, and traffic types ::
-Which statement best relates to 1.4?
+::n10009_1_2_pb66 [n10009_1_2] A network engineer is configuring a new router and needs to understand which pro ::
+A network engineer is configuring a new router and needs to understand which protocol is used to dynamically map IPv6 addresses to MAC addresses on a local network segment, replacing the ARP function used in IPv4.
 {
-=HTTPS uses port 443
-~DNS uses UDP/TCP port 53
-~Unrelated concept for 1.4
-~ICMP is used by ping and traceroute
+=ICMPv6 Neighbor Discovery Protocol (NDP)
+~DHCPv6
+~ARPv6
+~SLAAC
 }
 
-::n10009_1_4_q3 [n10009_1_4] Explain common networking ports, protocols, services, and traffic types ::
-Which statement best relates to 1.4?
+::n10009_4_1_pb67 [n10009_4_1] A penetration tester sends a specially crafted packet to a web server with the S ::
+A penetration tester sends a specially crafted packet to a web server with the SYN, FIN, and URG flags all set simultaneously. This is an unusual combination that does not occur in normal TCP communication. Which type of scan is being performed?
 {
-=ICMP is used by ping and traceroute
-~DNS uses UDP/TCP port 53
-~HTTPS uses port 443
-~Unrelated concept for 1.4
+~SYN scan
+=XMAS scan
+~NULL scan
+~ACK scan
 }
 
-::n10009_1_5_q1 [n10009_1_5] Compare and contrast transmission media and transceivers ::
-Which statement best relates to 1.5?
+::n10009_2_1_pb68 [n10009_2_1] A network administrator is configuring a new OSPF deployment and needs to ensure ::
+A network administrator is configuring a new OSPF deployment and needs to ensure that a specific router always becomes the Designated Router (DR) on a multi-access segment. Which OSPF parameter should be configured?
 {
-=RJ45 is used for twisted-pair Ethernet
-~Plenum-rated cable is required in air-handling spaces
-=Single-mode fiber supports longer distances than multimode
-~Unrelated concept for 1.5
+~OSPF cost
+~OSPF router ID
+=OSPF priority
+~OSPF hello interval
 }
 
-::n10009_1_5_q2 [n10009_1_5] Compare and contrast transmission media and transceivers ::
-Which statement best relates to 1.5?
+::n10009_3_5_pb69 [n10009_3_5] A company's network team is implementing a configuration management solution. Th ::
+A company's network team is implementing a configuration management solution. They want to track all changes to network device configurations and be able to roll back to a previous configuration if a change causes issues. Which practice BEST supports this requirement?
 {
-=RJ45 is used for twisted-pair Ethernet
-~Single-mode fiber supports longer distances than multimode
-~Plenum-rated cable is required in air-handling spaces
-~Unrelated concept for 1.5
+~Network performance baselining
+=Configuration version control with automated backups
+~SNMP polling
+~Syslog aggregation
 }
 
-::n10009_1_5_q3 [n10009_1_5] Compare and contrast transmission media and transceivers ::
-Which statement best relates to 1.5?
+::n10009_5_5_pb70 [n10009_5_5] A network administrator is troubleshooting a fiber optic connection between two ::
+A network administrator is troubleshooting a fiber optic connection between two switches. The link shows as down despite the cable appearing to be properly connected. Which tool should the administrator use to test the fiber optic cable for breaks, bends, and signal loss?
 {
-=Unrelated concept for 1.5
-~RJ45 is used for twisted-pair Ethernet
-~Single-mode fiber supports longer distances than multimode
-=Plenum-rated cable is required in air-handling spaces
+~Cable tester (TDR)
+=OTDR (Optical Time Domain Reflectometer)
+~Multimeter
+~Toner probe
 }
 
-::n10009_1_6_q1 [n10009_1_6] Compare and contrast network topologies, architectures, and types ::
-Which statement best relates to 1.6?
+::n10009_1_4_pb71 [n10009_1_4] A company is deploying a new application that requires multicast traffic to be d ::
+A company is deploying a new application that requires multicast traffic to be delivered to a group of servers. Which protocol is used by routers to manage multicast group membership and determine which interfaces should receive multicast traffic?
 {
-=Spine-leaf is common in modern data centers
-~RFC1918 defines private IPv4 ranges
-~Unrelated concept for 1.6
-~East-west traffic dominates in virtualized environments
+=IGMP (Internet Group Management Protocol)
+~OSPF (Open Shortest Path First)
+~BGP (Border Gateway Protocol)
+~ICMP (Internet Control Message Protocol)
 }
 
-::n10009_1_6_q2 [n10009_1_6] Compare and contrast network topologies, architectures, and types ::
-Which statement best relates to 1.6?
+::n10009_4_1_pb72 [n10009_4_1] A company is implementing a security policy that requires all network traffic be ::
+A company is implementing a security policy that requires all network traffic between internal segments to be inspected, even if the traffic originates from within the corporate network. This approach treats all network segments as untrusted. Which security framework is being implemented?
 {
-=RFC1918 defines private IPv4 ranges
-~Spine-leaf is common in modern data centers
-~East-west traffic dominates in virtualized environments
-~Unrelated concept for 1.6
+~Defense in Depth
+=Zero Trust Architecture
+~DMZ Architecture
+~Network Segmentation
 }
 
-::n10009_1_6_q3 [n10009_1_6] Compare and contrast network topologies, architectures, and types ::
-Which statement best relates to 1.6?
+::n10009_2_1_pb73 [n10009_2_1] A network engineer is designing a high-availability network for a financial inst ::
+A network engineer is designing a high-availability network for a financial institution. The design requires that if the primary uplink fails, traffic should automatically fail over to a secondary uplink within milliseconds. Which technology provides sub-second failover for Layer 3 routing?
 {
-=Unrelated concept for 1.6
-~Spine-leaf is common in modern data centers
-=East-west traffic dominates in virtualized environments
-~RFC1918 defines private IPv4 ranges
+~OSPF with default timers
+=BFD (Bidirectional Forwarding Detection) with OSPF
+~STP (Spanning Tree Protocol)
+~VRRP with default timers
 }
 
-::n10009_1_7_q1 [n10009_1_7] Given a scenario, use appropriate IPv4 network addressing ::
-Which statement best relates to 1.7?
+::n10009_3_4_pb74 [n10009_3_4] A network administrator needs to implement a solution that provides centralized ::
+A network administrator needs to implement a solution that provides centralized authentication for all network devices (routers, switches, firewalls) using Active Directory credentials. Which combination of protocols should be used?
 {
-=/24 provides 254 usable host addresses
-~CIDR replaces classful addressing
-~VLSM allows different subnet sizes within one network
-~Unrelated concept for 1.7
+~RADIUS with LDAP backend
+=TACACS+ with Active Directory integration
+~Kerberos with RADIUS
+~LDAP directly on network devices
 }
 
-::n10009_1_7_q2 [n10009_1_7] Given a scenario, use appropriate IPv4 network addressing ::
-Which statement best relates to 1.7?
+::n10009_1_2_pb75 [n10009_1_2] A network engineer is reviewing a network design and sees that the company uses ::
+A network engineer is reviewing a network design and sees that the company uses a /22 subnet for a large office. How many usable host addresses are available in a /22 subnet?
 {
-=/24 provides 254 usable host addresses
-~Unrelated concept for 1.7
-~VLSM allows different subnet sizes within one network
-=CIDR replaces classful addressing
+~510
+=1022
+~2046
+~4094
 }
 
-::n10009_1_7_q3 [n10009_1_7] Given a scenario, use appropriate IPv4 network addressing ::
-Which statement best relates to 1.7?
+::n10009_4_1_pb76 [n10009_4_1] A company is implementing physical security controls for its data center. Which ::
+A company is implementing physical security controls for its data center. Which of the following represents a 'something you have' physical access control?
 {
-=Unrelated concept for 1.7
-~/24 provides 254 usable host addresses
-=VLSM allows different subnet sizes within one network
-~CIDR replaces classful addressing
+~PIN pad entry
+~Retinal scanner
+=Smart card reader
+~Security guard verification
 }
 
-::n10009_1_8_q1 [n10009_1_8] Summarize evolving use cases for modern network environments ::
-Which statement best relates to 1.8?
+::n10009_2_3_pb77 [n10009_2_3] A company is deploying a new wireless network and the network architect specifie ::
+A company is deploying a new wireless network and the network architect specifies that the deployment must use the 802.11ax standard. A junior engineer asks what the marketing name for 802.11ax is. What is the correct answer?
 {
-=Unrelated concept for 1.8
-~NAT64 helps IPv6-only clients reach IPv4 resources
-~Zero trust assumes no implicit trust by location
-=SD-WAN abstracts WAN transport from routing policy
+~Wi-Fi 5
+=Wi-Fi 6
+~Wi-Fi 6E
+~Wi-Fi 7
 }
 
-::n10009_1_8_q2 [n10009_1_8] Summarize evolving use cases for modern network environments ::
-Which statement best relates to 1.8?
+::n10009_3_4_pb78 [n10009_3_4] A company experiences a major network outage. After restoring service, the netwo ::
+A company experiences a major network outage. After restoring service, the network team conducts a review meeting to analyze what happened, why it happened, and how to prevent it in the future. What is this process called?
 {
-=Zero trust assumes no implicit trust by location
-~Unrelated concept for 1.8
-~SD-WAN abstracts WAN transport from routing policy
-~NAT64 helps IPv6-only clients reach IPv4 resources
+~Change Advisory Board (CAB) meeting
+=Root Cause Analysis (RCA) / Post-Incident Review
+~Disaster Recovery Test
+~Business Impact Analysis (BIA)
 }
 
-::n10009_1_8_q3 [n10009_1_8] Summarize evolving use cases for modern network environments ::
-Which statement best relates to 1.8?
+::n10009_1_4_pb79 [n10009_1_4] A network engineer is configuring a switch and needs to understand which type of ::
+A network engineer is configuring a switch and needs to understand which type of address is used to send a frame to all devices on the local network segment simultaneously. Which address type should be used?
 {
-=Unrelated concept for 1.8
-=NAT64 helps IPv6-only clients reach IPv4 resources
-~SD-WAN abstracts WAN transport from routing policy
-~Zero trust assumes no implicit trust by location
+~Unicast MAC address
+~Multicast MAC address
+=Broadcast MAC address (FF\:FF\:FF\:FF\:FF\:FF)
+~Anycast address
 }
 
-::n10009_2_1_q1 [n10009_2_1] Explain characteristics of routing technologies ::
-Which statement best relates to 2.1?
+::n10009_4_1_pb80 [n10009_4_1] SIMULATION (PBQ)\: A company is reconfiguring access layer switches to implement ::
+SIMULATION (PBQ)\: A company is reconfiguring access layer switches to implement 802.1X port-based authentication. The network administrator needs to configure switch ports so that\: (1) Devices that fail 802.1X authentication are placed in a restricted VLAN with only internet access. (2) Devices that pass authentication are placed in VLAN 100. (3) IP phones should be placed in VLAN 200 regardless of authentication. Which port configuration correctly implements these requirements?
 {
-=Unrelated concept for 2.1
-~OSPF is a link-state IGP
-=Lower administrative distance is preferred
-~PAT maps many internal hosts to one public IP
+~Configure the port as an access port in VLAN 100 with no 802.1X settings
+=Configure 802.1X with auth-fail VLAN as the restricted VLAN, access VLAN 100, and voice VLAN 200
+~Configure the port as a trunk port carrying VLANs 100 and 200
+~Configure port security with maximum 2 MAC addresses and sticky learning
 }
 
-::n10009_2_1_q2 [n10009_2_1] Explain characteristics of routing technologies ::
-Which statement best relates to 2.1?
+::n10009_2_1_pb81 [n10009_2_1] A company needs to connect its headquarters in New York to its branch office in ::
+A company needs to connect its headquarters in New York to its branch office in London using a dedicated, private WAN connection with guaranteed bandwidth and low latency. Which WAN technology BEST meets these requirements?
 {
-=Unrelated concept for 2.1
-=PAT maps many internal hosts to one public IP
-~OSPF is a link-state IGP
-~Lower administrative distance is preferred
+~Broadband internet with VPN
+=MPLS (Multiprotocol Label Switching)
+~DSL (Digital Subscriber Line)
+~Satellite link
 }
 
-::n10009_2_1_q3 [n10009_2_1] Explain characteristics of routing technologies ::
-Which statement best relates to 2.1?
+::n10009_5_3_pb82 [n10009_5_3] A network administrator is troubleshooting an issue where a newly installed serv ::
+A network administrator is troubleshooting an issue where a newly installed server cannot communicate with any other devices on the network. The server has the correct IP address, subnet mask, and default gateway configured. The switch port shows as up/up. What should the administrator check NEXT?
 {
-=OSPF is a link-state IGP
-~Lower administrative distance is preferred
-~PAT maps many internal hosts to one public IP
-~Unrelated concept for 2.1
+=Check if the server's IP address is in the correct VLAN
+~Replace the network cable
+~Restart the DHCP server
+~Check the DNS configuration on the server
 }
 
-::n10009_2_2_q1 [n10009_2_2] Given a scenario, configure switching technologies and features ::
-Which statement best relates to 2.2?
+::n10009_4_1_pb83 [n10009_4_1] A company's security team discovers that an attacker has been intercepting and r ::
+A company's security team discovers that an attacker has been intercepting and recording encrypted HTTPS traffic. The attacker plans to decrypt the traffic in the future when computing power is sufficient. Which type of attack is this?
 {
-=Unrelated concept for 2.2
-~STP prevents Layer 2 loops
-~Native VLAN carries untagged traffic on a trunk
-=802.1Q adds a 4-byte tag to Ethernet frames
+~Man-in-the-Middle (MitM) attack
+=Harvest now, decrypt later (HNDL) attack
+~SSL stripping attack
+~Certificate spoofing
 }
 
-::n10009_2_2_q2 [n10009_2_2] Given a scenario, configure switching technologies and features ::
-Which statement best relates to 2.2?
+::n10009_1_4_pb84 [n10009_1_4] A network engineer is configuring QoS on a router to prioritize VoIP traffic. Th ::
+A network engineer is configuring QoS on a router to prioritize VoIP traffic. The engineer needs to mark VoIP packets at the IP header level for end-to-end QoS treatment. Which field in the IP header should be used?
 {
-=Unrelated concept for 2.2
-~STP prevents Layer 2 loops
-~802.1Q adds a 4-byte tag to Ethernet frames
-=Native VLAN carries untagged traffic on a trunk
+~TTL (Time to Live)
+=DSCP (Differentiated Services Code Point)
+~Protocol field
+~Fragment offset
 }
 
-::n10009_2_2_q3 [n10009_2_2] Given a scenario, configure switching technologies and features ::
-Which statement best relates to 2.2?
+::n10009_3_4_pb85 [n10009_3_4] A company wants to implement a solution that aggregates security events from mul ::
+A company wants to implement a solution that aggregates security events from multiple sources (firewalls, IDS, servers, applications) and correlates them to identify potential security incidents. Which technology should be deployed?
 {
-=802.1Q adds a 4-byte tag to Ethernet frames
-=STP prevents Layer 2 loops
-~Unrelated concept for 2.2
-~Native VLAN carries untagged traffic on a trunk
+~SNMP NMS
+~Syslog server
+=SIEM (Security Information and Event Management)
+~NetFlow analyzer
 }
 
-::n10009_2_3_q1 [n10009_2_3] Given a scenario, select and configure wireless devices and technologies ::
-Which statement best relates to 2.3?
+::n10009_2_2_pb86 [n10009_2_2] A network administrator is configuring a new switch and needs to ensure that a s ::
+A network administrator is configuring a new switch and needs to ensure that a specific server always receives the same IP address from the DHCP server based on its MAC address. Which DHCP feature should be configured?
 {
-=Directional antennas focus signal in one area
-~Enterprise Wi-Fi uses 802.1X authentication
-~Unrelated concept for 2.3
-=WPA3 improves security over WPA2
+~DHCP scope
+~DHCP exclusion range
+=DHCP reservation
+~DHCP relay agent
 }
 
-::n10009_2_3_q2 [n10009_2_3] Given a scenario, select and configure wireless devices and technologies ::
-Which statement best relates to 2.3?
+::n10009_5_5_pb87 [n10009_5_5] A network administrator runs 'show interfaces' on a Cisco switch and sees the fo ::
+A network administrator runs 'show interfaces' on a Cisco switch and sees the following for a port\: 'FastEthernet0/1 is up, line protocol is up, 0 input errors, 0 output errors, 1,847 giants.' What does the 'giants' counter indicate?
 {
-=Directional antennas focus signal in one area
-~Unrelated concept for 2.3
-=Enterprise Wi-Fi uses 802.1X authentication
-~WPA3 improves security over WPA2
+~Frames smaller than 64 bytes were received
+=Frames larger than the maximum allowed size (1518 bytes) were received
+~The interface experienced a duplex mismatch
+~The cable is too long and experiencing signal attenuation
 }
 
-::n10009_2_3_q3 [n10009_2_3] Given a scenario, select and configure wireless devices and technologies ::
-Which statement best relates to 2.3?
+::n10009_4_1_pb88 [n10009_4_1] A company is implementing a security policy for its wireless network. The securi ::
+A company is implementing a security policy for its wireless network. The security team wants to prevent unauthorized wireless access points from being connected to the network by employees. Which technology should be implemented?
 {
-=WPA3 improves security over WPA2
-~Unrelated concept for 2.3
-=Directional antennas focus signal in one area
-~Enterprise Wi-Fi uses 802.1X authentication
+~WPA3 encryption
+=Wireless Intrusion Prevention System (WIPS)
+~MAC address filtering
+~Hidden SSID
 }
 
-::n10009_2_4_q1 [n10009_2_4] Explain important factors of physical installations ::
-Which statement best relates to 2.4?
+::n10009_1_7_pb89 [n10009_1_7] A network engineer is designing an IPv6 addressing scheme. The engineer needs to ::
+A network engineer is designing an IPv6 addressing scheme. The engineer needs to assign an address to a router interface that will be automatically configured based on the interface's MAC address using the EUI-64 method. Which part of the IPv6 address is derived from the MAC address?
 {
-=MDF is the main distribution frame for a building
-~UPS provides battery backup during outages
-~Proper cooling prevents thermal shutdown of gear
-~Unrelated concept for 2.4
+~The first 64 bits (network prefix)
+=The last 64 bits (interface identifier)
+~The first 48 bits
+~The middle 32 bits
 }
 
-::n10009_2_4_q2 [n10009_2_4] Explain important factors of physical installations ::
-Which statement best relates to 2.4?
+::n10009_3_2_pb90 [n10009_3_2] A company is implementing a network monitoring solution and wants to capture det ::
+A company is implementing a network monitoring solution and wants to capture detailed information about network flows, including source/destination IP, ports, protocol, and bytes transferred, without capturing the actual packet payload. Which technology should be used?
 {
-=MDF is the main distribution frame for a building
-~Proper cooling prevents thermal shutdown of gear
-=UPS provides battery backup during outages
-~Unrelated concept for 2.4
+~Wireshark packet capture
+=NetFlow / IPFIX
+~SNMP polling
+~Syslog collection
 }
 
-::n10009_2_4_q3 [n10009_2_4] Explain important factors of physical installations ::
-Which statement best relates to 2.4?
+::n10009_4_1_pb91 [n10009_4_1] A network administrator is reviewing firewall logs and notices that an internal ::
+A network administrator is reviewing firewall logs and notices that an internal host is sending DNS queries to an external DNS server on port 53, but the responses contain unusually large TXT records. This could indicate which type of attack?
 {
-=Proper cooling prevents thermal shutdown of gear
-~Unrelated concept for 2.4
-~MDF is the main distribution frame for a building
-~UPS provides battery backup during outages
+~DNS amplification attack
+=DNS tunneling
+~DNS cache poisoning
+~DNS hijacking
 }
 
-::n10009_3_1_q1 [n10009_3_1] Explain the purpose of organizational processes and procedures ::
-Which statement best relates to 3.1?
+::n10009_2_2_pb92 [n10009_2_2] A company is deploying a new network and the architect specifies that the core l ::
+A company is deploying a new network and the architect specifies that the core layer should provide high-speed switching with no access control or QoS processing to maximize throughput. Which network design model is being referenced?
 {
-=IPAM tracks IP allocation and prevents conflicts
-~Golden configuration is the approved baseline
-~Unrelated concept for 3.1
-~Change management reduces outage risk from unapproved changes
+~Flat network design
+=Three-tier hierarchical design (Core, Distribution, Access)
+~Spine-leaf architecture
+~Software-defined networking (SDN)
 }
 
-::n10009_3_1_q2 [n10009_3_1] Explain the purpose of organizational processes and procedures ::
-Which statement best relates to 3.1?
+::n10009_5_3_pb93 [n10009_5_3] A network administrator is troubleshooting a VoIP quality issue. Users report th ::
+A network administrator is troubleshooting a VoIP quality issue. Users report that calls are choppy and words are being cut off. The administrator measures the network and finds that packet delay varies between 5ms and 150ms. Which network condition is causing this issue?
 {
-=Unrelated concept for 3.1
-~Change management reduces outage risk from unapproved changes
-~IPAM tracks IP allocation and prevents conflicts
-=Golden configuration is the approved baseline
+~High latency
+=Jitter
+~Packet loss
+~Bandwidth saturation
 }
 
-::n10009_3_1_q3 [n10009_3_1] Explain the purpose of organizational processes and procedures ::
-Which statement best relates to 3.1?
+::n10009_1_2_pb94 [n10009_1_2] A network engineer is configuring a firewall and needs to understand the differe ::
+A network engineer is configuring a firewall and needs to understand the difference between stateful and stateless packet filtering. Which of the following BEST describes stateful inspection?
 {
-=Unrelated concept for 3.1
-~Golden configuration is the approved baseline
-=Change management reduces outage risk from unapproved changes
-~IPAM tracks IP allocation and prevents conflicts
+~Examines each packet independently based only on source/destination IP and port
+=Tracks the state of active connections and allows return traffic automatically
+~Inspects the application layer payload of every packet
+~Filters packets based only on MAC addresses
 }
 
-::n10009_3_2_q1 [n10009_3_2] Given a scenario, use network monitoring technologies ::
-Which statement best relates to 3.2?
+::n10009_4_3_pb95 [n10009_4_3] A company's security team wants to implement a solution that provides visibility ::
+A company's security team wants to implement a solution that provides visibility into all encrypted HTTPS traffic passing through the corporate network for malware detection and DLP purposes. Which technology enables this?
 {
-=Unrelated concept for 3.2
-~Port mirroring copies traffic to an analysis tool
-~SIEM aggregates logs for correlation
-=SNMPv3 adds encryption and authentication
+=SSL/TLS inspection (SSL decryption)
+~IDS in passive mode
+~NetFlow analysis
+~DNSSEC
 }
 
-::n10009_3_2_q2 [n10009_3_2] Given a scenario, use network monitoring technologies ::
-Which statement best relates to 3.2?
+::n10009_3_2_pb96 [n10009_3_2] A company is implementing a network documentation strategy. The IT manager asks ::
+A company is implementing a network documentation strategy. The IT manager asks for a document that shows the normal performance levels of the network (bandwidth utilization, CPU usage, response times) that can be used as a reference point for troubleshooting. Which document is being requested?
 {
-=SIEM aggregates logs for correlation
-~Unrelated concept for 3.2
-~SNMPv3 adds encryption and authentication
-~Port mirroring copies traffic to an analysis tool
+~Network topology diagram
+=Network baseline report
+~Change management log
+~Disaster recovery plan
 }
 
-::n10009_3_2_q3 [n10009_3_2] Given a scenario, use network monitoring technologies ::
-Which statement best relates to 3.2?
+::n10009_1_4_pb97 [n10009_1_4] A network engineer is configuring a router and needs to implement a protocol tha ::
+A network engineer is configuring a router and needs to implement a protocol that allows the router to automatically discover the IPv6 prefix being used on a network segment and configure its own IPv6 address without a DHCPv6 server. Which mechanism should be used?
 {
-=SNMPv3 adds encryption and authentication
-=Port mirroring copies traffic to an analysis tool
-~SIEM aggregates logs for correlation
-~Unrelated concept for 3.2
+~DHCPv6 stateful
+=SLAAC (Stateless Address Autoconfiguration)
+~Static IPv6 assignment
+~EUI-64 with manual prefix
 }
 
-::n10009_3_3_q1 [n10009_3_3] Explain disaster recovery (DR) concepts ::
-Which statement best relates to 3.3?
+::n10009_4_1_pb98 [n10009_4_1] A network administrator discovers that an attacker has been sending forged DHCP ::
+A network administrator discovers that an attacker has been sending forged DHCP offers to clients, assigning them the attacker's IP address as the default gateway. Which attack is this, and what is the BEST mitigation?
 {
-=RTO is maximum acceptable downtime
-~RPO is maximum acceptable data loss window
-~Hot site can take over quickly with minimal data loss
-~Unrelated concept for 3.3
+~ARP Poisoning; Dynamic ARP Inspection
+~DHCP Starvation; DHCP Snooping
+=Rogue DHCP server; DHCP Snooping
+~IP Spoofing; Source Guard
 }
 
-::n10009_3_3_q2 [n10009_3_3] Explain disaster recovery (DR) concepts ::
-Which statement best relates to 3.3?
+::n10009_2_3_pb99 [n10009_2_3] A company is deploying a new network and needs to select a cable type for a 40 G ::
+A company is deploying a new network and needs to select a cable type for a 40 Gbps connection between two core switches in the same data center rack. The distance is only 5 meters. Which cable type is MOST appropriate?
 {
-=Unrelated concept for 3.3
-~Hot site can take over quickly with minimal data loss
-~RTO is maximum acceptable downtime
-=RPO is maximum acceptable data loss window
+~Cat6a UTP
+~Single-mode fiber (SMF)
+=Twinaxial (Twinax) direct attach copper (DAC) cable
+~Cat8 UTP
 }
 
-::n10009_3_3_q3 [n10009_3_3] Explain disaster recovery (DR) concepts ::
-Which statement best relates to 3.3?
+::n10009_5_3_pb100 [n10009_5_3] A network administrator is using Wireshark to capture traffic and notices that a ::
+A network administrator is using Wireshark to capture traffic and notices that a client is sending a large number of ARP requests for different IP addresses in rapid succession. What does this behavior indicate?
 {
-=RPO is maximum acceptable data loss window
-~Unrelated concept for 3.3
-=Hot site can take over quickly with minimal data loss
-~RTO is maximum acceptable downtime
+~The client is performing normal ARP cache refresh
+=The client may be performing a network scan or is infected with malware
+~The client's ARP cache has been cleared
+~The DHCP server is not responding
 }
 
-::n10009_3_4_q1 [n10009_3_4] Given a scenario, implement IPv4 and IPv6 network services ::
-Which statement best relates to 3.4?
+::n10009_4_1_pb101 [n10009_4_1] A company is implementing a physical security policy for its server room. The se ::
+A company is implementing a physical security policy for its server room. The security team wants to prevent unauthorized individuals from following authorized employees through a secured door. Which physical security control addresses this specific threat?
 {
-=Unrelated concept for 3.4
-~AAAA records map hostnames to IPv6
-~DNSSEC adds cryptographic validation to DNS
-=DHCP relay forwards requests across subnets
+~CCTV cameras
+~Biometric scanner
+=Mantrap (airlock)
+~Security guard
 }
 
-::n10009_3_4_q2 [n10009_3_4] Given a scenario, implement IPv4 and IPv6 network services ::
-Which statement best relates to 3.4?
+::n10009_3_5_pb102 [n10009_3_5] A network administrator needs to remotely manage a router that has no IP connect ::
+A network administrator needs to remotely manage a router that has no IP connectivity. The administrator is at the network operations center and the router is at a remote site. Which out-of-band management method should be used?
 {
-=DNSSEC adds cryptographic validation to DNS
-~DHCP relay forwards requests across subnets
-=AAAA records map hostnames to IPv6
-~Unrelated concept for 3.4
+~SSH over the management VLAN
+=Console server with dial-up or cellular connectivity
+~SNMP SET command
+~Web-based management interface
 }
 
-::n10009_3_4_q3 [n10009_3_4] Given a scenario, implement IPv4 and IPv6 network services ::
-Which statement best relates to 3.4?
+::n10009_1_2_pb103 [n10009_1_2] A network engineer is reviewing the OSI model and needs to identify which layer ::
+A network engineer is reviewing the OSI model and needs to identify which layer is responsible for data encryption, compression, and format translation to ensure that data is in a format the application layer can understand.
 {
-=Unrelated concept for 3.4
-~AAAA records map hostnames to IPv6
-~DHCP relay forwards requests across subnets
-=DNSSEC adds cryptographic validation to DNS
+~Layer 4 - Transport
+~Layer 5 - Session
+=Layer 6 - Presentation
+~Layer 7 - Application
 }
 
-::n10009_3_5_q1 [n10009_3_5] Compare and contrast network access and management methods ::
-Which statement best relates to 3.5?
+::n10009_4_1_pb104 [n10009_4_1] A company is implementing a comprehensive security policy. The security team wan ::
+A company is implementing a comprehensive security policy. The security team wants to ensure that users only have the minimum permissions necessary to perform their job functions. Which security principle is being applied?
 {
-=Out-of-band management works when production network is down
-~Split tunnel sends only corporate traffic through VPN
-~Unrelated concept for 3.5
-~Jump hosts reduce direct exposure of core devices
+~Separation of duties
+=Least privilege
+~Defense in depth
+~Need to know
 }
 
-::n10009_3_5_q2 [n10009_3_5] Compare and contrast network access and management methods ::
-Which statement best relates to 3.5?
+::n10009_5_5_pb105 [n10009_5_5] A network administrator is troubleshooting a connectivity issue between a workst ::
+A network administrator is troubleshooting a connectivity issue between a workstation and a server. The administrator successfully pings the server by IP address but cannot connect to the server's application (port 443). Which troubleshooting tool should be used NEXT to determine if the port is open?
 {
-=Unrelated concept for 3.5
-=Split tunnel sends only corporate traffic through VPN
-~Out-of-band management works when production network is down
-~Jump hosts reduce direct exposure of core devices
+~ping
+~traceroute
+=telnet [server-IP] 443
+~nslookup
 }
 
-::n10009_3_5_q3 [n10009_3_5] Compare and contrast network access and management methods ::
-Which statement best relates to 3.5?
+::n10009_1_2_pb106 [n10009_1_2] A company is implementing a network and needs to understand the difference betwe ::
+A company is implementing a network and needs to understand the difference between a collision domain and a broadcast domain. Which device separates collision domains but NOT broadcast domains?
 {
-=Split tunnel sends only corporate traffic through VPN
-~Out-of-band management works when production network is down
-~Unrelated concept for 3.5
-=Jump hosts reduce direct exposure of core devices
+~Hub
+=Switch
+~Router
+~Bridge
 }
 
-::n10009_4_1_q1 [n10009_4_1] Explain the importance of basic network security concepts ::
-Which statement best relates to 4.1?
+::n10009_4_1_pb107 [n10009_4_1] A company is deploying IoT devices (smart thermostats, security cameras, badge r ::
+A company is deploying IoT devices (smart thermostats, security cameras, badge readers) on its corporate network. The security team is concerned about the security posture of these devices. Which network security measure BEST protects the corporate network from compromised IoT devices?
 {
-=MFA requires two or more verification factors
-~Unrelated concept for 4.1
-=CIA triad confidentiality, integrity, availability
-~Network segmentation limits lateral movement
+~Install antivirus software on all IoT devices
+=Place IoT devices on a separate, isolated VLAN with restricted access
+~Assign IoT devices public IP addresses
+~Configure IoT devices to use WEP encryption
 }
 
-::n10009_4_1_q2 [n10009_4_1] Explain the importance of basic network security concepts ::
-Which statement best relates to 4.1?
+::n10009_3_3_pb108 [n10009_3_3] A company's network team is reviewing its disaster recovery plan. The team wants ::
+A company's network team is reviewing its disaster recovery plan. The team wants to test the DR plan without actually failing over to the DR site, to identify gaps and train staff. Which type of DR test should be performed?
 {
-=MFA requires two or more verification factors
-~CIA triad confidentiality, integrity, availability
-~Network segmentation limits lateral movement
-~Unrelated concept for 4.1
+~Full failover test
+=Tabletop exercise
+~Parallel test
+~Cutover test
 }
 
-::n10009_4_1_q3 [n10009_4_1] Explain the importance of basic network security concepts ::
-Which statement best relates to 4.1?
+::n10009_1_4_pb109 [n10009_1_4] A network engineer is troubleshooting a routing issue and runs 'show ip route' o ::
+A network engineer is troubleshooting a routing issue and runs 'show ip route' on a router. The output shows a route marked with 'D' for the 10.10.0.0/16 network. Which routing protocol installed this route?
 {
-=Unrelated concept for 4.1
-~MFA requires two or more verification factors
-~CIA triad confidentiality, integrity, availability
-=Network segmentation limits lateral movement
+~OSPF
+~BGP
+=EIGRP
+~RIP
 }
 
-::n10009_4_2_q1 [n10009_4_2] Summarize various types of attacks and their impact to the network ::
-Which statement best relates to 4.2?
+::n10009_4_1_pb110 [n10009_4_1] A company's security policy requires that all sensitive data stored on laptops b ::
+A company's security policy requires that all sensitive data stored on laptops be protected in case the laptop is lost or stolen. Which technology provides this protection?
 {
-=Unrelated concept for 4.2
-~On-path attacks intercept traffic between two parties
-~Evil twin mimics a legitimate wireless SSID
-=ARP spoofing maps attacker MAC to a legitimate IP
+~VPN
+=Full disk encryption (FDE)
+~Antivirus software
+~Host-based firewall
 }
 
-::n10009_4_2_q2 [n10009_4_2] Summarize various types of attacks and their impact to the network ::
-Which statement best relates to 4.2?
+::n10009_2_2_pb111 [n10009_2_2] A network administrator is configuring a new switch and wants to prevent a works ::
+A network administrator is configuring a new switch and wants to prevent a workstation from accessing the network if it is connected to an unauthorized switch port. The administrator wants to limit each access port to a single MAC address. Which feature should be configured?
 {
-=Evil twin mimics a legitimate wireless SSID
-~ARP spoofing maps attacker MAC to a legitimate IP
-~On-path attacks intercept traffic between two parties
-~Unrelated concept for 4.2
+~802.1X port authentication
+=Port security with maximum MAC addresses set to 1
+~DHCP snooping
+~Dynamic ARP inspection
 }
 
-::n10009_4_2_q3 [n10009_4_2] Summarize various types of attacks and their impact to the network ::
-Which statement best relates to 4.2?
+::n10009_5_3_pb112 [n10009_5_3] A network administrator is investigating a report that a specific server is unre ::
+A network administrator is investigating a report that a specific server is unreachable. The administrator runs 'ping 10.10.10.50' from a workstation and gets 'Request timed out.' The administrator then runs 'ping 10.10.10.50' from the router's interface and gets a response. What does this indicate?
 {
-=On-path attacks intercept traffic between two parties
-~ARP spoofing maps attacker MAC to a legitimate IP
-~Unrelated concept for 4.2
-~Evil twin mimics a legitimate wireless SSID
+~The server is offline
+=There is a routing or firewall issue between the workstation and the server
+~The server's DNS is misconfigured
+~The workstation has a faulty NIC
 }
 
-::n10009_4_3_q1 [n10009_4_3] Given a scenario, apply network security features, defense techniques, and solutions ::
-Which statement best relates to 4.3?
+::n10009_3_5_pb113 [n10009_3_5] A company is implementing a BYOD (Bring Your Own Device) policy. The IT team nee ::
+A company is implementing a BYOD (Bring Your Own Device) policy. The IT team needs to ensure that personal devices accessing the corporate network meet minimum security requirements (updated OS, antivirus installed) before being granted access. Which technology enforces this?
 {
-=Unrelated concept for 4.3
-~ACLs filter traffic by source, destination, and port
-~Screened subnet (DMZ) isolates public-facing services
-=802.1X controls port access based on identity
+~VPN with split tunneling
+=Mobile Device Management (MDM) with NAC integration
+~Guest VLAN
+~MAC address filtering
 }
 
-::n10009_4_3_q2 [n10009_4_3] Given a scenario, apply network security features, defense techniques, and solutions ::
-Which statement best relates to 4.3?
+::n10009_1_4_pb114 [n10009_1_4] A network engineer is reviewing a network design and needs to identify which typ ::
+A network engineer is reviewing a network design and needs to identify which type of network topology provides the highest level of redundancy, where every device is connected to every other device.
 {
-=Unrelated concept for 4.3
-=Screened subnet (DMZ) isolates public-facing services
-~802.1X controls port access based on identity
-~ACLs filter traffic by source, destination, and port
+~Star topology
+~Ring topology
+~Bus topology
+=Full mesh topology
 }
 
-::n10009_4_3_q3 [n10009_4_3] Given a scenario, apply network security features, defense techniques, and solutions ::
-Which statement best relates to 4.3?
+::n10009_4_1_pb115 [n10009_4_1] A company wants to implement email security to prevent phishing emails that spoo ::
+A company wants to implement email security to prevent phishing emails that spoof the company's domain from reaching employees. Which email authentication protocol validates that incoming emails claiming to be from the company's domain actually originated from authorized mail servers?
 {
-=802.1X controls port access based on identity
-=ACLs filter traffic by source, destination, and port
-~Screened subnet (DMZ) isolates public-facing services
-~Unrelated concept for 4.3
+~SMTP TLS
+=SPF (Sender Policy Framework)
+~S/MIME
+~PGP
 }
 
-::n10009_5_1_q1 [n10009_5_1] Explain the troubleshooting methodology ::
-Which statement best relates to 5.1?
+::n10009_2_1_pb116 [n10009_2_1] A company is implementing a new WAN connection and the service provider offers a ::
+A company is implementing a new WAN connection and the service provider offers a connection type where the company's traffic is carried over the provider's shared infrastructure using labels for forwarding decisions, providing guaranteed bandwidth and QoS. Which WAN technology is this?
 {
-=Unrelated concept for 5.1
-~Escalate when theory fails after reasonable testing
-~Divide and conquer isolates the fault domain quickly
-=Document at every troubleshooting step
+~Frame Relay
+~ATM (Asynchronous Transfer Mode)
+=MPLS (Multiprotocol Label Switching)
+~Metro Ethernet
 }
 
-::n10009_5_1_q2 [n10009_5_1] Explain the troubleshooting methodology ::
-Which statement best relates to 5.1?
+::n10009_5_3_pb117 [n10009_5_3] A network administrator is troubleshooting a wireless connectivity issue. A lapt ::
+A network administrator is troubleshooting a wireless connectivity issue. A laptop connects to the corporate Wi-Fi but immediately disconnects. The administrator checks the wireless controller logs and sees 'EAP authentication failure' for the laptop's MAC address. What is the MOST likely cause?
 {
-=Document at every troubleshooting step
-=Divide and conquer isolates the fault domain quickly
-~Escalate when theory fails after reasonable testing
-~Unrelated concept for 5.1
+~The wireless signal is too weak
+=The laptop's 802.1X credentials (certificate or username/password) are incorrect or expired
+~The DHCP server is not responding
+~The wireless channel is congested
 }
 
-::n10009_5_1_q3 [n10009_5_1] Explain the troubleshooting methodology ::
-Which statement best relates to 5.1?
+::n10009_4_3_pb118 [n10009_4_3] A company wants to implement a solution that monitors user and entity behavior o ::
+A company wants to implement a solution that monitors user and entity behavior on the network, using machine learning to establish baselines and detect anomalous activity that may indicate insider threats or compromised accounts. Which technology should be deployed?
 {
-=Unrelated concept for 5.1
-=Escalate when theory fails after reasonable testing
-~Document at every troubleshooting step
-~Divide and conquer isolates the fault domain quickly
+~IDS (Intrusion Detection System)
+=UEBA (User and Entity Behavior Analytics)
+~DLP (Data Loss Prevention)
+~SIEM (Security Information and Event Management)
 }
 
-::n10009_5_2_q1 [n10009_5_2] Given a scenario, troubleshoot common cabling and physical interface issues ::
-Which statement best relates to 5.2?
+::n10009_1_4_pb119 [n10009_1_4] A network engineer is configuring a new network and needs to implement a protoco ::
+A network engineer is configuring a new network and needs to implement a protocol that automatically assigns link-local IPv6 addresses to all interfaces and enables neighbor discovery without any manual configuration. Which protocol handles this automatically?
 {
-=Attenuation is signal loss over distance
-=CRC errors often indicate physical layer problems
-~Unrelated concept for 5.2
-~PoE budget must cover total device draw on the switch
+~DHCPv6
+=ICMPv6 NDP with SLAAC
+~OSPFv3
+~IPv6 static addressing
 }
 
-::n10009_5_2_q2 [n10009_5_2] Given a scenario, troubleshoot common cabling and physical interface issues ::
-Which statement best relates to 5.2?
+::n10009_3_4_pb120 [n10009_3_4] A company's IT team needs to implement a solution that automatically discovers a ::
+A company's IT team needs to implement a solution that automatically discovers all devices on the network, tracks IP address assignments, and prevents IP address conflicts. Which type of solution should be deployed?
 {
-=Attenuation is signal loss over distance
-~CRC errors often indicate physical layer problems
-~PoE budget must cover total device draw on the switch
-~Unrelated concept for 5.2
+~SNMP NMS
+=IPAM (IP Address Management)
+~DNS server
+~RADIUS server
 }
 
-::n10009_5_2_q3 [n10009_5_2] Given a scenario, troubleshoot common cabling and physical interface issues ::
-Which statement best relates to 5.2?
+::n10009_5_5_pb121 [n10009_5_5] A network administrator is investigating a performance issue on a WAN link. The ::
+A network administrator is investigating a performance issue on a WAN link. The administrator uses a network monitoring tool and observes that the link utilization is consistently at 95% during business hours. Which of the following is the BEST long-term solution?
 {
-=Unrelated concept for 5.2
-~Attenuation is signal loss over distance
-~CRC errors often indicate physical layer problems
-=PoE budget must cover total device draw on the switch
+~Implement QoS to prioritize critical traffic
+=Increase the WAN link bandwidth
+~Enable data compression on the WAN link
+~Implement traffic shaping to limit non-critical traffic
 }
 
-::n10009_5_3_q1 [n10009_5_3] Given a scenario, troubleshoot common issues with network services ::
-Which statement best relates to 5.3?
+::n10009_4_3_pb122 [n10009_4_3] A company is implementing a security policy that requires all remote access VPN ::
+A company is implementing a security policy that requires all remote access VPN connections to verify that the connecting device has an up-to-date antivirus solution and the latest OS patches before granting full network access. Which technology enforces this requirement?
 {
-=Duplicate IP addresses cause intermittent connectivity
-~Unrelated concept for 5.3
-~Wrong default gateway breaks off-subnet traffic
-~STP loops can saturate a broadcast domain
+~MFA (Multi-Factor Authentication)
+~VPN split tunneling
+=Endpoint posture assessment (NAC)
+~Certificate-based authentication
 }
 
-::n10009_5_3_q2 [n10009_5_3] Given a scenario, troubleshoot common issues with network services ::
-Which statement best relates to 5.3?
+::n10009_1_4_pb123 [n10009_1_4] A network engineer is configuring a router and needs to implement a protocol tha ::
+A network engineer is configuring a router and needs to implement a protocol that allows the router to automatically learn the MAC address of the next-hop router for a specific destination IP address. Which protocol handles this?
 {
-=STP loops can saturate a broadcast domain
-~Duplicate IP addresses cause intermittent connectivity
-~Unrelated concept for 5.3
-=Wrong default gateway breaks off-subnet traffic
+~OSPF
+=ARP (Address Resolution Protocol)
+~ICMP
+~DNS
 }
 
-::n10009_5_3_q3 [n10009_5_3] Given a scenario, troubleshoot common issues with network services ::
-Which statement best relates to 5.3?
+::n10009_3_2_pb124 [n10009_3_2] A company is implementing network monitoring and wants to receive alerts when in ::
+A company is implementing network monitoring and wants to receive alerts when interface utilization on any router exceeds 80%. Which SNMP mechanism should be configured to generate these alerts without requiring constant polling?
 {
-=STP loops can saturate a broadcast domain
-~Duplicate IP addresses cause intermittent connectivity
-~Wrong default gateway breaks off-subnet traffic
-~Unrelated concept for 5.3
+~SNMP GET with a 1-minute polling interval
+=SNMP TRAP with threshold-based triggers
+~SNMP SET to configure thresholds
+~SNMP WALK for periodic inventory
 }
 
-::n10009_5_4_q1 [n10009_5_4] Given a scenario, troubleshoot common performance issues ::
-Which statement best relates to 5.4?
+::n10009_4_1_pb125 [n10009_4_1] A company is implementing a security policy for its network infrastructure. The ::
+A company is implementing a security policy for its network infrastructure. The security team requires that all management traffic to network devices (SSH, SNMP, syslog) be carried on a dedicated, isolated network segment. Which concept is being implemented?
 {
-=Unrelated concept for 5.4
-=Jitter affects real-time traffic like VoIP
-~Channel overlap causes wireless interference
-~Bottlenecking limits end-to-end throughput
+~DMZ
+=Out-of-band management network
+~Guest VLAN
+~Honeypot
 }
 
-::n10009_5_4_q2 [n10009_5_4] Given a scenario, troubleshoot common performance issues ::
-Which statement best relates to 5.4?
+::n10009_2_1_pb126 [n10009_2_1] A company is deploying a new network and needs to implement a protocol that prov ::
+A company is deploying a new network and needs to implement a protocol that provides automatic failover for the default gateway used by workstations. The company uses a mix of Cisco and non-Cisco equipment. Which protocol should be used?
 {
-=Unrelated concept for 5.4
-~Bottlenecking limits end-to-end throughput
-~Jitter affects real-time traffic like VoIP
-=Channel overlap causes wireless interference
+~HSRP (Hot Standby Router Protocol)
+~GLBP (Gateway Load Balancing Protocol)
+=VRRP (Virtual Router Redundancy Protocol)
+~OSPF
 }
 
-::n10009_5_4_q3 [n10009_5_4] Given a scenario, troubleshoot common performance issues ::
-Which statement best relates to 5.4?
+::n10009_5_5_pb127 [n10009_5_5] A network administrator is troubleshooting a network issue and needs to identify ::
+A network administrator is troubleshooting a network issue and needs to identify all devices on the network, their IP addresses, MAC addresses, and open ports. Which tool provides this comprehensive network discovery information?
 {
-=Bottlenecking limits end-to-end throughput
-~Jitter affects real-time traffic like VoIP
-~Channel overlap causes wireless interference
-~Unrelated concept for 5.4
+~ping
+~traceroute
+=nmap
+~netstat
 }
 
-::n10009_5_5_q1 [n10009_5_5] Given a scenario, use the appropriate tool or protocol to solve networking issues ::
-Which statement best relates to 5.5?
+::n10009_3_2_pb128 [n10009_3_2] A company is implementing a high availability solution for its core network. The ::
+A company is implementing a high availability solution for its core network. The network architect specifies that the solution must have an MTBF of at least 50,000 hours and an MTTR of no more than 2 hours. What do these metrics measure?
 {
-=ping tests ICMP reachability
-~Unrelated concept for 5.5
-~traceroute shows hop-by-hop path
-~Cable testers verify wire map and continuity
+~MTBF \= time to restore after failure; MTTR \= time between failures
+=MTBF \= average time between failures; MTTR \= average time to repair/restore
+~MTBF \= maximum tolerable downtime; MTTR \= recovery point objective
+~MTBF \= mean time before failure; MTTR \= mean time to replace
 }
 
-::n10009_5_5_q2 [n10009_5_5] Given a scenario, use the appropriate tool or protocol to solve networking issues ::
-Which statement best relates to 5.5?
+::n10009_1_2_pb129 [n10009_1_2] A network engineer is designing a network for a new building. The engineer needs ::
+A network engineer is designing a network for a new building. The engineer needs to connect workstations to access layer switches using structured cabling. The maximum distance from the workstation to the patch panel in the IDF is 90 meters. The patch cords at each end are 3 meters each. What is the total channel length, and does it comply with TIA-568 standards?
 {
-=Cable testers verify wire map and continuity
-~ping tests ICMP reachability
-~Unrelated concept for 5.5
-=traceroute shows hop-by-hop path
+~96 meters total; does not comply (maximum is 90 meters)
+=96 meters total; complies (maximum channel length is 100 meters)
+~90 meters total; complies (maximum is 90 meters for horizontal runs)
+~93 meters total; does not comply (maximum is 90 meters)
 }
 
-::n10009_5_5_q3 [n10009_5_5] Given a scenario, use the appropriate tool or protocol to solve networking issues ::
-Which statement best relates to 5.5?
+::n10009_5_3_pb130 [n10009_5_3] SIMULATION (PBQ)\: A network administrator is troubleshooting a connectivity issu ::
+SIMULATION (PBQ)\: A network administrator is troubleshooting a connectivity issue. Users in the 192.168.10.0/24 subnet cannot reach the server farm in the 10.0.50.0/24 subnet. The administrator checks the core router and finds the following routing table entries\: C 192.168.10.0/24 via Gi0/0, C 10.0.0.0/8 via Gi0/1, S 0.0.0.0/0 via 203.0.113.1. Users can ping the router's Gi0/0 interface (192.168.10.1) but cannot reach 10.0.50.1. What is the MOST likely cause?
 {
-=Unrelated concept for 5.5
-~traceroute shows hop-by-hop path
-~ping tests ICMP reachability
-=Cable testers verify wire map and continuity
+~The default route is misconfigured
+=The route to 10.0.50.0/24 is covered by the 10.0.0.0/8 summary route, but an ACL may be blocking
+~The server farm is in a different VLAN and inter-VLAN routing is not configured
+~The DNS server is not resolving 10.0.50.1 correctly
 }
 

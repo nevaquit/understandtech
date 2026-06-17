@@ -873,7 +873,11 @@ foreach ($objectives as $objective) {
 $context = context_course::instance((int) $course->id);
 $qcat = network_plus_get_question_category((int) $context->id, 'Network+ N10-009');
 $giftbase = $repopath . '/content/network-plus/n10-009-quiz.gift';
+$giftextra = $repopath . '/content/network-plus/n10-009-quiz-extra.gift';
 network_plus_import_gift((int) $context->id, $qcat, $giftbase);
+if (is_readable($giftextra)) {
+    network_plus_import_gift((int) $context->id, $qcat, $giftextra);
+}
 
 $allquestionmap = network_plus_map_all_questions_by_objective((int) $qcat->id);
 $linked = network_plus_link_questions_to_objectives($allquestionmap);

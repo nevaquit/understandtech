@@ -1,22 +1,73 @@
 <div class="ut-lesson-content">
 <h3>Exam objective N10-009 2.2</h3>
 <p><strong>Given a scenario, configure switching technologies and features</strong></p>
-<p>This lesson aligns with the CompTIA Network+ N10-009 exam blueprint (Version 4.0). Focus on
-how the concept appears in enterprise and cloud networking scenarios.</p>
-<h4>Key topics</h4>
+<div class="ut-lesson-body">
+<h4>VLANs (Virtual Local Area Networks)</h4>
 <ul>
-<li>VLANs, VLAN database, SVI, native VLAN, voice VLAN</li>
-<li>802.1Q tagging, link aggregation, speed/duplex</li>
-<li>Spanning tree, MTU and jumbo frames</li>
+<li>VLAN: Logically segments a physical network into separate broadcast domains.</li>
+<li>Native VLAN: Untagged traffic on an 802.1Q trunk port. Default is VLAN 1 — change it for security.</li>
+<li>Voice VLAN: A separate VLAN for VoIP traffic to ensure QoS prioritization.</li>
+<li>802.1Q Tagging: IEEE standard for VLAN tagging on trunk ports.</li>
+<li>SVI (Switch Virtual Interface): A virtual interface on a Layer 3 switch used for inter-VLAN routing.</li>
+</ul>
+<h4>Spanning Tree Protocol (STP)</h4>
+<ul>
+<li>Purpose: Prevents Layer 2 loops in networks with redundant links by placing certain ports in a blocking state.</li>
+<li>Root Bridge: The switch with the lowest Bridge ID (priority + MAC address) becomes the root bridge.</li>
+<li>Port States: Blocking, Listening, Learning, Forwarding, Disabled.</li>
+<li>RSTP (Rapid STP): Converges much faster than classic STP (seconds vs. minutes).</li>
+</ul>
+<div class="highlight-box"><h4>Exam tip</h4><p>A symptom of a switching loop is a broadcast storm and extremely high CPU utilization on switches. STP is the solution. If STP is disabled and a loop exists, the network will flood with broadcast traffic until it collapses. Link Aggregation and MTU • LACP (Link Aggregation Control Protocol / 802.3ad): Combines multiple physical links into a single logical link for increased bandwidth and redundancy. • MTU (Maximum Transmission Unit): The largest packet size that can be transmitted. Standard Ethernet MTU = 1500 bytes. • Jumbo Frames: MTU greater than 1500 bytes (typically 9000 bytes). Used in storage networks (iSCSI, NFS) to reduce CPU overhead.</p></div>
+<h4 class="ut-visual-representation">Visual Representation: VLAN Trunking</h4>
+<div class="ut-lesson-diagram">
+<div class="diagram-title">802.1Q trunk between switch and router-on-a-stick</div>
+<div class="flow-diagram">
+<div class="flow-step"><strong>VLAN 10</strong><br>Subinterface .10</div>
+<div class="flow-arrow">↔</div>
+<div class="flow-step"><strong>Trunk</strong><br>802.1Q tags</div>
+<div class="flow-arrow">↔</div>
+<div class="flow-step"><strong>VLAN 20</strong><br>Subinterface .20</div>
+</div>
+</div>
+<div class="ut-lesson-supplement">
+<h4>Exam focus</h4>
+<p>Given a scenario, configure switching technologies and features</p>
+<ul>
+<li>VLAN: Logically segments a physical network into separate broadcast domains.</li>
+<li>Native VLAN: Untagged traffic on an 802.1Q trunk port. Default is VLAN 1 — change it for security.</li>
+<li>Voice VLAN: A separate VLAN for VoIP traffic to ensure QoS prioritization.</li>
+<li>802.1Q Tagging: IEEE standard for VLAN tagging on trunk ports.</li>
+<li>SVI (Switch Virtual Interface): A virtual interface on a Layer 3 switch used for inter-VLAN routing.</li>
+<li>Purpose: Prevents Layer 2 loops in networks with redundant links by placing certain ports in a blocking state.</li>
+<li>Root Bridge: The switch with the lowest Bridge ID (priority + MAC address) becomes the root bridge.</li>
+<li>Port States: Blocking, Listening, Learning, Forwarding, Disabled.</li>
+<li>RSTP (Rapid STP): Converges much faster than classic STP (seconds vs. minutes).</li>
+<li>A symptom of a switching loop is a broadcast storm and extremely high CPU utilization on switches. STP is the solution. If STP is disabled and a loop exists, the network will flood with broadcast traffic until it collapses. Link Aggregation and MTU • LACP (Link Aggregation Control Protocol / 802.3ad): Combines multiple physical links into a single logical link for increased bandwidth and redundancy. • MTU (Maximum Transmission Unit): The largest packet size that can be transmitted. Standard Ethernet MTU = 1500 bytes. • Jumbo Frames: MTU greater than 1500 bytes (typically 9000 bytes). Used in storage networks (iSCSI, NFS) to reduce CPU overhead.</li>
 </ul>
 
-<h4>Study approach</h4>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p><strong>Given a scenario, configure switching technologies and features</strong></p>
+<h4>VLANs (Virtual Local Area Networks)</h4>
 <ul>
-<li>Relate the objective to OSI layers, defense-in-depth, and documentation where applicable.</li>
-<li>Practice explaining trade-offs (performance vs security, cost, and availability).</li>
-<li>Complete the domain knowledge check quiz after this lesson.</li>
+<li>VLAN: Logically segments a physical network into separate broadcast domains.</li>
+<li>Native VLAN: Untagged traffic on an 802.1Q trunk port. Default is VLAN 1 — change it for security.</li>
+<li>Voice VLAN: A separate VLAN for VoIP traffic to ensure QoS prioritization.</li>
+<li>802.1Q Tagging: IEEE standard for VLAN tagging on trunk ports.</li>
+<li>SVI (Switch Virtual Interface): A virtual interface on a Layer 3 switch used for inter-VLAN routing.</li>
 </ul>
+<h4>Spanning Tree Protocol (STP)</h4>
+<ul>
+<li>Purpose: Prevents Layer 2 loops in networks with redundant links by placing certain ports in a blocking state.</li>
+<li>Root Bridge: The switch with the lowest Bridge ID (priority + MAC address) becomes the root bridge.</li>
+<li>Port States: Blocking, Listening, Learning, Forwarding, Disabled.</li>
+<li>RSTP (Rapid STP): Converges much faster than classic STP (seconds vs. minutes).</li>
+</ul>
+<div class="highlight-box"><h4>Exam tip</h4><p>A symptom of a switching loop is a broadcast storm and extremely high CPU utilization on switches. STP is the solution. If STP is disabled and a loop exists, the network will flood with broadcast traffic until it collapses. Link Aggregation and MTU • LACP (Link Aggregation Control Protocol / 802.3ad): Combines multiple physical links into a single logical link for increased bandwidth and redundancy. • MTU (Maximum Transmission Unit): The largest packet size that can be transmitted. Standard Ethernet MTU = 1500 bytes. • Jumbo Frames: MTU greater than 1500 bytes (typically 9000 bytes). Used in storage networks (iSCSI, NFS) to reduce CPU overhead.</p></div>
+</div>
+</div>
 <h4>Next steps</h4>
-<p>Use the AI tutor for scenario-based questions about this topic. The tutor will guide you
-Socratically without revealing assessment answers.</p>
+<p>Complete the domain knowledge check quiz after this lesson. Use the AI tutor for scenario-based
+questions — it guides you Socratically without revealing assessment answers.</p>
 </div>

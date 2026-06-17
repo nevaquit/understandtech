@@ -1,0 +1,270 @@
+::n10009_1_1_sg1 [n10009_1_1] Explain concepts related to the Open Systems Interconnection ::
+For N10-009 objective 1.1, which statement best applies to\: Explain concepts related to the Open Systems Interconnection (OSI) reference model?
+{
+=Memory Aid\: "Please Do Not Throw Sausage Pizza Away" (Physical → Application)
+~You WILL be asked to identify which OSI layer a protocol, device, or problem belongs to. Switches \= Layer 2. Routers \= Layer 3. Firewalls can operate at Layers 3, 4, or 7. Hubs \= Layer 1.
+~TCP is connection-oriented (3-way handshake\: SYN, SYN-ACK, ACK). UDP is connectionless and faster but unreliable. VoIP and streaming use UDP. File transfers use TCP.
+~You WILL be asked to identify which OSI layer a protocol, device, or problem belongs to. Switches \= Layer 2. Routers \= Layer 3. Firewalls can operate at Layers 3, 4, or 7. Hubs \= Layer 1.
+}
+
+::n10009_1_1_sg2 [n10009_1_1] Explain concepts related to the Open Systems Interconnection ::
+For N10-009 objective 1.1, which statement best applies to\: Explain concepts related to the Open Systems Interconnection (OSI) reference model?
+{
+=You WILL be asked to identify which OSI layer a protocol, device, or problem belongs to. Switches \= Layer 2. Routers \= Layer 3. Firewalls can operate at Layers 3, 4, or 7. Hubs \= Layer 1.
+~Memory Aid\: "Please Do Not Throw Sausage Pizza Away" (Physical → Application)
+~TCP is connection-oriented (3-way handshake\: SYN, SYN-ACK, ACK). UDP is connectionless and faster but unreliable. VoIP and streaming use UDP. File transfers use TCP.
+~Memory Aid\: "Please Do Not Throw Sausage Pizza Away" (Physical → Application)
+}
+
+::n10009_1_6_sg1 [n10009_1_6] Compare and contrast network topologies, architectures, and ::
+For N10-009 objective 1.6, which statement best applies to\: Compare and contrast network topologies, architectures, and types?
+{
+=Three-Tier Hierarchical Model\:
+~Core Layer\: High-speed backbone; connects distribution layers. No policy enforcement here.
+~Distribution Layer\: Aggregates access layer switches; applies routing, policies, and QoS.
+~Access Layer\: Where end devices (PCs, printers, phones) connect to the network.
+}
+
+::n10009_1_6_sg2 [n10009_1_6] Compare and contrast network topologies, architectures, and ::
+For N10-009 objective 1.6, which statement best applies to\: Compare and contrast network topologies, architectures, and types?
+{
+=Core Layer\: High-speed backbone; connects distribution layers. No policy enforcement here.
+~Three-Tier Hierarchical Model\:
+~Distribution Layer\: Aggregates access layer switches; applies routing, policies, and QoS.
+~Access Layer\: Where end devices (PCs, printers, phones) connect to the network.
+}
+
+::n10009_1_7_sg1 [n10009_1_7] Given a scenario, use appropriate IPv4 network addressing ::
+For N10-009 objective 1.7, which statement best applies to\: Given a scenario, use appropriate IPv4 network addressing?
+{
+=Loopback/Localhost\: 127.0.0.1 — tests the local network stack.
+~APIPA\: 169.254.x.x — automatically assigned when DHCP fails.
+~If a device has a 169.254.x.x address, it cannot reach the DHCP server. This is the first thing to check when a user reports "no internet connection." Verify the DHCP server is running and the physical connection is good. Subnetting Quick Reference (CIDR Cheat Sheet) CIDR Subnet Mask Network Bits Host Bits Total Addresses Usable Hosts /24 255.255.255.0 24 8 256 254 /25 255.255.255.128 25 7 128 126 /26 255.255.255.192 26 6 64 62 /27 255.255.255.224 27 5 32 30 /28 255.255.255.240 28 4 16 14 /29 255.255.255.248 29 3 8 6 /30 255.255.255.252 30 2 4 2 Formula\: Usable Hosts \= 2^(host bits) - 2
+~The Magic Number Method\: Subtract the last non-zero octet of the subnet mask from 256 to find the block size. For /26 (255.255.255.192)\: 256 - 192 \= 64. Subnets start at 0, 64, 128, 192. If a host has IP 192.168.1.75 with /26, it is in the 192.168.1.64 subnet (range .64-.127).
+}
+
+::n10009_1_7_sg2 [n10009_1_7] Given a scenario, use appropriate IPv4 network addressing ::
+For N10-009 objective 1.7, which statement best applies to\: Given a scenario, use appropriate IPv4 network addressing?
+{
+=APIPA\: 169.254.x.x — automatically assigned when DHCP fails.
+~Loopback/Localhost\: 127.0.0.1 — tests the local network stack.
+~If a device has a 169.254.x.x address, it cannot reach the DHCP server. This is the first thing to check when a user reports "no internet connection." Verify the DHCP server is running and the physical connection is good. Subnetting Quick Reference (CIDR Cheat Sheet) CIDR Subnet Mask Network Bits Host Bits Total Addresses Usable Hosts /24 255.255.255.0 24 8 256 254 /25 255.255.255.128 25 7 128 126 /26 255.255.255.192 26 6 64 62 /27 255.255.255.224 27 5 32 30 /28 255.255.255.240 28 4 16 14 /29 255.255.255.248 29 3 8 6 /30 255.255.255.252 30 2 4 2 Formula\: Usable Hosts \= 2^(host bits) - 2
+~The Magic Number Method\: Subtract the last non-zero octet of the subnet mask from 256 to find the block size. For /26 (255.255.255.192)\: 256 - 192 \= 64. Subnets start at 0, 64, 128, 192. If a host has IP 192.168.1.75 with /26, it is in the 192.168.1.64 subnet (range .64-.127).
+}
+
+::n10009_1_8_sg1 [n10009_1_8] Summarize evolving use cases for modern network environments ::
+For N10-009 objective 1.8, which statement best applies to\: Summarize evolving use cases for modern network environments?
+{
+=SDN (Software-Defined Networking)\: Separates the control plane (routing decisions) from the data plane (packet forwarding). Centralized controller manages the network programmatically.
+~SD-WAN\: Applies SDN principles to WAN connections; application-aware, transport-agnostic.
+~Zero Trust Architecture (ZTA)\: "Never trust, always verify." No user or device is trusted by default, even inside the network perimeter. Key principles\: least privilege, micro-segmentation.
+~SASE (Secure Access Service Edge)\: Combines network security (SWG, CASB, ZTNA) with WAN capabilities (SD-WAN) in a single cloud-delivered service.
+}
+
+::n10009_1_8_sg2 [n10009_1_8] Summarize evolving use cases for modern network environments ::
+For N10-009 objective 1.8, which statement best applies to\: Summarize evolving use cases for modern network environments?
+{
+=SD-WAN\: Applies SDN principles to WAN connections; application-aware, transport-agnostic.
+~SDN (Software-Defined Networking)\: Separates the control plane (routing decisions) from the data plane (packet forwarding). Centralized controller manages the network programmatically.
+~Zero Trust Architecture (ZTA)\: "Never trust, always verify." No user or device is trusted by default, even inside the network perimeter. Key principles\: least privilege, micro-segmentation.
+~SASE (Secure Access Service Edge)\: Combines network security (SWG, CASB, ZTNA) with WAN capabilities (SD-WAN) in a single cloud-delivered service.
+}
+
+::n10009_2_2_sg1 [n10009_2_2] Given a scenario, configure switching technologies and featu ::
+For N10-009 objective 2.2, which statement best applies to\: Given a scenario, configure switching technologies and features?
+{
+=VLAN\: Logically segments a physical network into separate broadcast domains.
+~Native VLAN\: Untagged traffic on an 802.1Q trunk port. Default is VLAN 1 — change it for security.
+~Voice VLAN\: A separate VLAN for VoIP traffic to ensure QoS prioritization.
+~802.1Q Tagging\: IEEE standard for VLAN tagging on trunk ports.
+}
+
+::n10009_2_2_sg2 [n10009_2_2] Given a scenario, configure switching technologies and featu ::
+For N10-009 objective 2.2, which statement best applies to\: Given a scenario, configure switching technologies and features?
+{
+=Native VLAN\: Untagged traffic on an 802.1Q trunk port. Default is VLAN 1 — change it for security.
+~VLAN\: Logically segments a physical network into separate broadcast domains.
+~Voice VLAN\: A separate VLAN for VoIP traffic to ensure QoS prioritization.
+~802.1Q Tagging\: IEEE standard for VLAN tagging on trunk ports.
+}
+
+::n10009_2_4_sg1 [n10009_2_4] Explain important factors of physical installations ::
+For N10-009 objective 2.4, which statement best applies to\: Explain important factors of physical installations?
+{
+=MDF (Main Distribution Frame)\: The central wiring hub for a building or campus; connects to the ISP and houses core networking equipment.
+~IDF (Intermediate Distribution Frame)\: Secondary wiring closets that connect to the MDF and serve a floor or section of a building.
+~UPS (Uninterruptible Power Supply)\: Provides battery backup to protect against power outages and surges.
+~PDU (Power Distribution Unit)\: Distributes power to multiple devices within a rack; may include monitoring capabilities.
+}
+
+::n10009_2_4_sg2 [n10009_2_4] Explain important factors of physical installations ::
+For N10-009 objective 2.4, which statement best applies to\: Explain important factors of physical installations?
+{
+=IDF (Intermediate Distribution Frame)\: Secondary wiring closets that connect to the MDF and serve a floor or section of a building.
+~MDF (Main Distribution Frame)\: The central wiring hub for a building or campus; connects to the ISP and houses core networking equipment.
+~UPS (Uninterruptible Power Supply)\: Provides battery backup to protect against power outages and surges.
+~PDU (Power Distribution Unit)\: Distributes power to multiple devices within a rack; may include monitoring capabilities.
+}
+
+::n10009_3_1_sg1 [n10009_3_1] Explain the purpose of organizational processes and procedur ::
+For N10-009 objective 3.1, which statement best applies to\: Explain the purpose of organizational processes and procedures?
+{
+=IPAM (IP Address Management)\: Tools and processes for planning, tracking, and managing IP address space to prevent conflicts.
+~SLA (Service-Level Agreement)\: A contract defining expected service levels, including uptime guarantees and response times.
+~EOL (End of Life)\: Vendor stops selling the product.
+~EOS (End of Support)\: Vendor stops providing updates and patches. Running EOS equipment is a major security risk.
+}
+
+::n10009_3_1_sg2 [n10009_3_1] Explain the purpose of organizational processes and procedur ::
+For N10-009 objective 3.1, which statement best applies to\: Explain the purpose of organizational processes and procedures?
+{
+=SLA (Service-Level Agreement)\: A contract defining expected service levels, including uptime guarantees and response times.
+~IPAM (IP Address Management)\: Tools and processes for planning, tracking, and managing IP address space to prevent conflicts.
+~EOL (End of Life)\: Vendor stops selling the product.
+~EOS (End of Support)\: Vendor stops providing updates and patches. Running EOS equipment is a major security risk.
+}
+
+::n10009_3_2_sg1 [n10009_3_2] Given a scenario, use network monitoring technologies ::
+For N10-009 objective 3.2, which statement best applies to\: Given a scenario, use network monitoring technologies?
+{
+=MIB (Management Information Base)\: A database of objects that can be managed via SNMP.
+~SNMP Trap\: An unsolicited alert sent from a managed device to the SNMP manager when a specific event occurs.
+~Community String\: A password-like string used for SNMPv1/v2c authentication (default\: "public" for read, "private" for write).
+~Always use SNMPv3 in production. SNMPv1 and v2c send community strings in cleartext, making them vulnerable to eavesdropping. Log Management and Other Monitoring Methods • Syslog\: Standard protocol for sending log messages from network devices to a central server (port 514 UDP). • SIEM (Security Information and Event Management)\: Aggregates, correlates, and analyzes log data from multiple sources to identify security threats. • NetFlow/sFlow\: Collects IP traffic information and monitors network flow data for traffic analysis. • Port Mirroring (SPAN)\: Copies traffic from one or more ports to a monitoring port for analysis. • Baseline Metrics\: Establishing normal performance levels to identify anomalies. • API Integration\: Using REST APIs to pull metrics directly from modern network devices and cloud services. • Availability Monitoring\: Checking if a device is up (e.g., via ping/ICMP). • Configuration Monitoring\: Alerting when a device configuration changes from the baseline.
+}
+
+::n10009_3_2_sg2 [n10009_3_2] Given a scenario, use network monitoring technologies ::
+For N10-009 objective 3.2, which statement best applies to\: Given a scenario, use network monitoring technologies?
+{
+=SNMP Trap\: An unsolicited alert sent from a managed device to the SNMP manager when a specific event occurs.
+~MIB (Management Information Base)\: A database of objects that can be managed via SNMP.
+~Community String\: A password-like string used for SNMPv1/v2c authentication (default\: "public" for read, "private" for write).
+~Always use SNMPv3 in production. SNMPv1 and v2c send community strings in cleartext, making them vulnerable to eavesdropping. Log Management and Other Monitoring Methods • Syslog\: Standard protocol for sending log messages from network devices to a central server (port 514 UDP). • SIEM (Security Information and Event Management)\: Aggregates, correlates, and analyzes log data from multiple sources to identify security threats. • NetFlow/sFlow\: Collects IP traffic information and monitors network flow data for traffic analysis. • Port Mirroring (SPAN)\: Copies traffic from one or more ports to a monitoring port for analysis. • Baseline Metrics\: Establishing normal performance levels to identify anomalies. • API Integration\: Using REST APIs to pull metrics directly from modern network devices and cloud services. • Availability Monitoring\: Checking if a device is up (e.g., via ping/ICMP). • Configuration Monitoring\: Alerting when a device configuration changes from the baseline.
+}
+
+::n10009_3_4_sg1 [n10009_3_4] Given a scenario, implement IPv4 and IPv6 network services ::
+For N10-009 objective 3.4, which statement best applies to\: Given a scenario, implement IPv4 and IPv6 network services?
+{
+=DORA Process\: Discover, Offer, Request, Acknowledge.
+~Scope\: The range of IP addresses a DHCP server can hand out.
+~Exclusions\: Specific IP addresses within the scope that the server is told NOT to hand out (reserved for static
+~Options\: Additional info given to clients (Default Gateway, DNS servers, domain name).
+}
+
+::n10009_3_4_sg2 [n10009_3_4] Given a scenario, implement IPv4 and IPv6 network services ::
+For N10-009 objective 3.4, which statement best applies to\: Given a scenario, implement IPv4 and IPv6 network services?
+{
+=Scope\: The range of IP addresses a DHCP server can hand out.
+~DORA Process\: Discover, Offer, Request, Acknowledge.
+~Exclusions\: Specific IP addresses within the scope that the server is told NOT to hand out (reserved for static
+~Options\: Additional info given to clients (Default Gateway, DNS servers, domain name).
+}
+
+::n10009_3_5_sg1 [n10009_3_5] Compare and contrast network access and management methods ::
+For N10-009 objective 3.5, which statement best applies to\: Compare and contrast network access and management methods?
+{
+=Split Tunnel\: Only corporate traffic goes through the VPN; internet traffic goes directly. More efficient but less secure.
+~Full Tunnel\: All traffic routes through the VPN. More secure but uses more corporate bandwidth.
+~Jump Box/Bastion Host\: A hardened server used as a single point of entry for managing devices in a secure network segment.
+~In-Band Management\: Network management traffic shares the same network as production traffic.
+}
+
+::n10009_3_5_sg2 [n10009_3_5] Compare and contrast network access and management methods ::
+For N10-009 objective 3.5, which statement best applies to\: Compare and contrast network access and management methods?
+{
+=Full Tunnel\: All traffic routes through the VPN. More secure but uses more corporate bandwidth.
+~Split Tunnel\: Only corporate traffic goes through the VPN; internet traffic goes directly. More efficient but less secure.
+~Jump Box/Bastion Host\: A hardened server used as a single point of entry for managing devices in a secure network segment.
+~In-Band Management\: Network management traffic shares the same network as production traffic.
+}
+
+::n10009_4_1_sg1 [n10009_4_1] Explain the importance of basic network security concepts ::
+For N10-009 objective 4.1, which statement best applies to\: Explain the importance of basic network security concepts?
+{
+=Risk\: The likelihood that a threat will exploit a vulnerability.
+~Vulnerability\: A weakness in a system or process.
+~Exploit\: A tool or technique used to take advantage of a vulnerability.
+~Threat\: Any potential danger to an asset.
+}
+
+::n10009_4_1_sg2 [n10009_4_1] Explain the importance of basic network security concepts ::
+For N10-009 objective 4.1, which statement best applies to\: Explain the importance of basic network security concepts?
+{
+=Vulnerability\: A weakness in a system or process.
+~Risk\: The likelihood that a threat will exploit a vulnerability.
+~Exploit\: A tool or technique used to take advantage of a vulnerability.
+~Threat\: Any potential danger to an asset.
+}
+
+::n10009_4_2_sg1 [n10009_4_2] Summarize various types of attacks and their impact to the n ::
+For N10-009 objective 4.2, which statement best applies to\: Summarize various types of attacks and their impact to the network?
+{
+=Ransomware\: Encrypts data and demands payment for the decryption key.
+~Trojan\: Malicious software disguised as legitimate software.
+~Worm\: Malware that spreads by exploiting vulnerabilities without user interaction.
+~Spyware\: Secretly monitors user activity and steals data.
+}
+
+::n10009_4_2_sg2 [n10009_4_2] Summarize various types of attacks and their impact to the n ::
+For N10-009 objective 4.2, which statement best applies to\: Summarize various types of attacks and their impact to the network?
+{
+=Trojan\: Malicious software disguised as legitimate software.
+~Ransomware\: Encrypts data and demands payment for the decryption key.
+~Worm\: Malware that spreads by exploiting vulnerabilities without user interaction.
+~Spyware\: Secretly monitors user activity and steals data.
+}
+
+::n10009_4_3_sg1 [n10009_4_3] Given a scenario, apply network security features, defense t ::
+For N10-009 objective 4.3, which statement best applies to\: Given a scenario, apply network security features, defense techniques, and solutions?
+{
+=Disable all unused ports and services.
+~Change all default usernames and passwords immediately.
+~Enable encrypted management protocols (SSH over Telnet, HTTPS over HTTP).
+~Apply the principle of least privilege to all accounts.
+}
+
+::n10009_4_3_sg2 [n10009_4_3] Given a scenario, apply network security features, defense t ::
+For N10-009 objective 4.3, which statement best applies to\: Given a scenario, apply network security features, defense techniques, and solutions?
+{
+=Change all default usernames and passwords immediately.
+~Disable all unused ports and services.
+~Enable encrypted management protocols (SSH over Telnet, HTTPS over HTTP).
+~Apply the principle of least privilege to all accounts.
+}
+
+::n10009_5_1_sg1 [n10009_5_1] Explain the troubleshooting methodology ::
+For N10-009 objective 5.1, which statement best applies to\: Explain the troubleshooting methodology?
+{
+=Identify the Problem Gather info; question users; identify symptoms; determine what changed; duplicate the problem
+~Establish a Theory of Probable Cause Question the obvious; consider OSI model (top-down, bottom-up, divide and conquer)
+~Test the Theory Confirm or deny the theory; if denied, establish a new theory or escalate
+~Document Everything Record findings, actions, outcomes, and lessons learned
+}
+
+::n10009_5_1_sg2 [n10009_5_1] Explain the troubleshooting methodology ::
+For N10-009 objective 5.1, which statement best applies to\: Explain the troubleshooting methodology?
+{
+=Establish a Theory of Probable Cause Question the obvious; consider OSI model (top-down, bottom-up, divide and conquer)
+~Identify the Problem Gather info; question users; identify symptoms; determine what changed; duplicate the problem
+~Test the Theory Confirm or deny the theory; if denied, establish a new theory or escalate
+~Document Everything Record findings, actions, outcomes, and lessons learned
+}
+
+::n10009_5_2_sg1 [n10009_5_2] Given a scenario, troubleshoot common cabling and physical i ::
+For N10-009 objective 5.2, which statement best applies to\: Given a scenario, troubleshoot common cabling and physical interface issues?
+{
+=Administratively Down\: Disabled by an administrator (shutdown command). Must be manually re-enabled.
+~Error-Disabled\: Automatically shut down by the switch due to a violation (e.g., port security, BPDU guard).
+~Error-Disabled\: Automatically shut down by the switch due to a violation (e.g., port security, BPDU guard).
+~Error-Disabled\: Automatically shut down by the switch due to a violation (e.g., port security, BPDU guard).
+}
+
+::n10009_5_2_sg2 [n10009_5_2] Given a scenario, troubleshoot common cabling and physical i ::
+For N10-009 objective 5.2, which statement best applies to\: Given a scenario, troubleshoot common cabling and physical interface issues?
+{
+=Error-Disabled\: Automatically shut down by the switch due to a violation (e.g., port security, BPDU guard).
+~Administratively Down\: Disabled by an administrator (shutdown command). Must be manually re-enabled.
+~Administratively Down\: Disabled by an administrator (shutdown command). Must be manually re-enabled.
+~Administratively Down\: Disabled by an administrator (shutdown command). Must be manually re-enabled.
+}
+

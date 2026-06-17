@@ -9,6 +9,10 @@ if [ -d "${REPO}/.git" ]; then
   sudo -u gha-runner git -C "$REPO" reset --hard origin/main
 fi
 
+if [ -f "${REPO}/scripts/upgrade-network-plus-lesson-visuals.php" ]; then
+  php "${REPO}/scripts/upgrade-network-plus-lesson-visuals.php" || true
+fi
+
 /usr/bin/pkill -f 'seed-network-plus-course.php' 2>/dev/null || true
 /usr/bin/pkill -f 'fix-net009-course-filters.php' 2>/dev/null || true
 /usr/bin/pkill -f 'enroll-net009-default-users.php' 2>/dev/null || true

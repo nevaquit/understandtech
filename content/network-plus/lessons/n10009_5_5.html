@@ -1,23 +1,63 @@
 <div class="ut-lesson-content">
 <h3>Exam objective N10-009 5.5</h3>
 <p><strong>Given a scenario, use the appropriate tool or protocol to solve networking issues</strong></p>
-<p>This lesson aligns with the CompTIA Network+ N10-009 exam blueprint (Version 4.0). Focus on
-how the concept appears in enterprise and cloud networking scenarios.</p>
-<h4>Key topics</h4>
+<div class="ut-lesson-body">
+<h4>Software Tools</h4>
+<p>Tool Function Key Use Case ping Tests reachability using ICMP echo &quot;Is the host alive?&quot; traceroute/tracert Traces the path to a destination &quot;Where is the connection failing?&quot; nslookup Queries DNS servers &quot;Is DNS resolving correctly?&quot; dig Advanced DNS query tool (Linux/Mac) Detailed DNS troubleshooting netstat Displays active connections and listening ports &quot;What ports is this machine listening on?&quot; ip/ifconfig/ipconfig Displays/configures network interface settings &quot;What is my IP address and gateway?&quot; arp Displays/modifies ARP cache &quot;What MAC address is associated with this IP?&quot; tcpdump Command-line packet capture Capture traffic for analysis Wireshark GUI packet analyzer Deep packet inspection Nmap Network scanner and port scanner Discover hosts and open ports</p>
+<h4>LLDP/CDP Link Layer / Cisco Discovery</h4>
+<h4>Protocol</h4>
+<h4>Identify directly connected neighbors</h4>
+<p>Protocol Analyzer Captures and decodes packets at multiple OSI layers</p>
+<h4>Deep inspection of traffic flows</h4>
+<p>Speed Tester Measures actual throughput of a connection</p>
+<h4>Verify ISP bandwidth; identify bottlenecks</h4>
+<p>IP Scanner Discovers all active hosts on a subnet</p>
+<h4>Network inventory and rogue device detection</h4>
+<h4>Hardware Tools</h4>
+<p>Tool Function Toner (Tone Generator and Probe) Traces a specific cable through a bundle or wall Cable Tester Verifies continuity, pinout, and wire map of a cable Wi-Fi Analyzer Measures signal strength, identifies channel overlap Taps (Test Access Points) Passive devices that copy network traffic for monitoring Visual Fault Locator Sends visible light through fiber to locate breaks or bends OTDR Measures fiber length and locates faults</p>
+<h4>Basic Networking Device Commands</h4>
+<p>Command Function show mac-address-table Displays the CAM table (MAC to port mappings) show route Displays the routing table show interface Displays interface status, errors, and statistics show config Displays the running configuration show arp Displays the ARP table show vlan Displays VLAN assignments show power Displays PoE status and power budget</p>
+<div class="key-concepts"><h4>Pro tip</h4><p>Troubleshooting Order: Start with ping to test basic connectivity. If ping fails, use traceroute to find where the path breaks. If the path is fine but a service is unreachable, use netstat or nmap to check if the service is listening. Use nslookup or dig if the issue is name resolution.</p></div>
+<h4 class="ut-visual-representation">Visual Representation: Troubleshooting Tools</h4>
+<div class="ut-lesson-diagram">
+<div class="diagram-title">Software vs hardware tools</div>
+<div class="concept-grid">
+<div class="concept-item"><h4>Layer 3 reachability</h4><p>ping, traceroute, pathping</p></div>
+<div class="concept-item"><h4>Name resolution</h4><p>nslookup, dig</p></div>
+<div class="concept-item"><h4>Capture &amp; analyze</h4><p>tcpdump, Wireshark (protocol analyzer)</p></div>
+<div class="concept-item"><h4>Physical layer</h4><p>cable tester, toner, VFL, Wi-Fi analyzer</p></div>
+</div>
+</div>
+<div class="ut-lesson-supplement">
+<h4>Exam focus</h4>
+<p>Given a scenario, use the appropriate tool or protocol to solve networking issues</p>
 <ul>
-<li>Software: protocol analyzer, ping, traceroute, nslookup, tcpdump, dig, netstat, ipconfig/ifconfig, arp, Nmap</li>
-<li>Discovery: LLDP/CDP; speed testers</li>
-<li>Hardware: toner, cable tester, taps, Wi-Fi analyzer, visual fault locator</li>
-<li>Device commands: show mac-address-table, route, interface, arp, vlan, power</li>
+<li>Troubleshooting Order: Start with ping to test basic connectivity. If ping fails, use traceroute to find where the path breaks. If the path is fine but a service is unreachable, use netstat or nmap to check if the service is listening. Use nslookup or dig if the issue is name resolution.</li>
 </ul>
 
-<h4>Study approach</h4>
-<ul>
-<li>Relate the objective to OSI layers, defense-in-depth, and documentation where applicable.</li>
-<li>Practice explaining trade-offs (performance vs security, cost, and availability).</li>
-<li>Complete the domain knowledge check quiz after this lesson.</li>
-</ul>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p><strong>Given a scenario, use the appropriate tool or protocol to solve networking issues</strong></p>
+<h4>Software Tools</h4>
+<p>Tool Function Key Use Case ping Tests reachability using ICMP echo &quot;Is the host alive?&quot; traceroute/tracert Traces the path to a destination &quot;Where is the connection failing?&quot; nslookup Queries DNS servers &quot;Is DNS resolving correctly?&quot; dig Advanced DNS query tool (Linux/Mac) Detailed DNS troubleshooting netstat Displays active connections and listening ports &quot;What ports is this machine listening on?&quot; ip/ifconfig/ipconfig Displays/configures network interface settings &quot;What is my IP address and gateway?&quot; arp Displays/modifies ARP cache &quot;What MAC address is associated with this IP?&quot; tcpdump Command-line packet capture Capture traffic for analysis Wireshark GUI packet analyzer Deep packet inspection Nmap Network scanner and port scanner Discover hosts and open ports</p>
+<h4>LLDP/CDP Link Layer / Cisco Discovery</h4>
+<h4>Protocol</h4>
+<h4>Identify directly connected neighbors</h4>
+<p>Protocol Analyzer Captures and decodes packets at multiple OSI layers</p>
+<h4>Deep inspection of traffic flows</h4>
+<p>Speed Tester Measures actual throughput of a connection</p>
+<h4>Verify ISP bandwidth; identify bottlenecks</h4>
+<p>IP Scanner Discovers all active hosts on a subnet</p>
+<h4>Network inventory and rogue device detection</h4>
+<h4>Hardware Tools</h4>
+<p>Tool Function Toner (Tone Generator and Probe) Traces a specific cable through a bundle or wall Cable Tester Verifies continuity, pinout, and wire map of a cable Wi-Fi Analyzer Measures signal strength, identifies channel overlap Taps (Test Access Points) Passive devices that copy network traffic for monitoring Visual Fault Locator Sends visible light through fiber to locate breaks or bends OTDR Measures fiber length and locates faults</p>
+<h4>Basic Networking Device Commands</h4>
+<p>Command Function show mac-address-table Displays the CAM table (MAC to port mappings) show route Displays the routing table show interface Displays interface status, errors, and statistics show config Displays the running configuration show arp Displays the ARP table show vlan Displays VLAN assignments show power Displays PoE status and power budget</p>
+<div class="key-concepts"><h4>Pro tip</h4><p>Troubleshooting Order: Start with ping to test basic connectivity. If ping fails, use traceroute to find where the path breaks. If the path is fine but a service is unreachable, use netstat or nmap to check if the service is listening. Use nslookup or dig if the issue is name resolution.</p></div>
+</div>
+</div>
 <h4>Next steps</h4>
-<p>Use the AI tutor for scenario-based questions about this topic. The tutor will guide you
-Socratically without revealing assessment answers.</p>
+<p>Complete the domain knowledge check quiz after this lesson. Use the AI tutor for scenario-based
+questions — it guides you Socratically without revealing assessment answers.</p>
 </div>

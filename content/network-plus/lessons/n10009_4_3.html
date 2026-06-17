@@ -1,22 +1,91 @@
 <div class="ut-lesson-content">
 <h3>Exam objective N10-009 4.3</h3>
 <p><strong>Given a scenario, apply network security features, defense techniques, and solutions</strong></p>
-<p>This lesson aligns with the CompTIA Network+ N10-009 exam blueprint (Version 4.0). Focus on
-how the concept appears in enterprise and cloud networking scenarios.</p>
-<h4>Key topics</h4>
+<div class="ut-lesson-body">
+<p>Device Hardening Checklist</p>
 <ul>
-<li>Device hardening: disable unused ports/services, change defaults</li>
-<li>NAC: port security, 802.1X, MAC filtering</li>
-<li>ACLs, URL/content filtering, trusted vs untrusted zones, screened subnet</li>
+<li>Disable all unused ports and services.</li>
+<li>Change all default usernames and passwords immediately.</li>
+<li>Enable encrypted management protocols (SSH over Telnet, HTTPS over HTTP).</li>
+<li>Apply the principle of least privilege to all accounts.</li>
+<li>Keep firmware and software patched and up to date.</li>
+<li>Enable logging and send logs to a centralized SIEM.</li>
+</ul>
+<h4>Network Access Control (NAC)</h4>
+<ul>
+<li>Port Security: Limits the number of MAC addresses on a switch port; can shut down the port if violated.</li>
+<li>802.1X: Port-based authentication using a RADIUS server. Involves a supplicant (client), authenticator (switch/AP), and authentication server (RADIUS).</li>
+<li>MAC Filtering: Allows or denies access based on a device's MAC address. Easily bypassed by MAC spoofing.</li>
+</ul>
+<h4>Access Control Lists (ACLs)</h4>
+<ul>
+<li>Standard ACL: Filters based on source IP address only.</li>
+<li>Extended ACL: Filters based on source/destination IP, protocol, and port number.</li>
+<li>Implicit Deny: All ACLs end with an implicit deny — if traffic is not explicitly permitted, it is blocked.</li>
+<li>URL Filtering: Blocking access to specific websites based on their domain name.</li>
+<li>Content Filtering: Inspecting the actual content of a web page or email and blocking it if it contains inappropriate or malicious material.</li>
+</ul>
+<h4>Network Segmentation</h4>
+<h4>Technique Description</h4>
+<h4>VLANs Logical segmentation at Layer 2</h4>
+<p>Screened Subnet (DMZ) A network segment between the internet and internal network for public-facing servers Trusted vs. Untrusted Zones Firewall zones defining trust levels (e.g., Inside, Outside, DMZ) IoT Segmentation Isolating IoT devices on a separate VLAN to limit attack surface SCADA/ICS/OT Industrial control systems must be strictly segmented from corporate IT network BYOD Bring Your Own Device: policies and segmentation to handle employee-owned devices securely</p>
+<div class="key-concepts"><h4>Pro tip</h4><p>DMZ (Demilitarized Zone): Place public-facing servers (web, email, DNS) in the DMZ. The DMZ is accessible from the internet but separated from the internal network by a firewall. If a DMZ server is compromised, the attacker cannot directly reach internal resources.</p></div>
+<div class="ut-lesson-supplement">
+<h4>Exam focus</h4>
+<p>Given a scenario, apply network security features, defense techniques, and solutions</p>
+<ul>
+<li>Disable all unused ports and services.</li>
+<li>Change all default usernames and passwords immediately.</li>
+<li>Enable encrypted management protocols (SSH over Telnet, HTTPS over HTTP).</li>
+<li>Apply the principle of least privilege to all accounts.</li>
+<li>Keep firmware and software patched and up to date.</li>
+<li>Enable logging and send logs to a centralized SIEM.</li>
+<li>Port Security: Limits the number of MAC addresses on a switch port; can shut down the port if violated.</li>
+<li>802.1X: Port-based authentication using a RADIUS server. Involves a supplicant (client), authenticator (switch/AP), and authentication server (RADIUS).</li>
+<li>MAC Filtering: Allows or denies access based on a device's MAC address. Easily bypassed by MAC spoofing.</li>
+<li>Standard ACL: Filters based on source IP address only.</li>
+<li>Extended ACL: Filters based on source/destination IP, protocol, and port number.</li>
+<li>Implicit Deny: All ACLs end with an implicit deny — if traffic is not explicitly permitted, it is blocked.</li>
+<li>URL Filtering: Blocking access to specific websites based on their domain name.</li>
+<li>Content Filtering: Inspecting the actual content of a web page or email and blocking it if it contains inappropriate or malicious material.</li>
+<li>DMZ (Demilitarized Zone): Place public-facing servers (web, email, DNS) in the DMZ. The DMZ is accessible from the internet but separated from the internal network by a firewall. If a DMZ server is compromised, the attacker cannot directly reach internal resources.</li>
 </ul>
 
-<h4>Study approach</h4>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p><strong>Given a scenario, apply network security features, defense techniques, and solutions</strong></p>
+<p>Device Hardening Checklist</p>
 <ul>
-<li>Relate the objective to OSI layers, defense-in-depth, and documentation where applicable.</li>
-<li>Practice explaining trade-offs (performance vs security, cost, and availability).</li>
-<li>Complete the domain knowledge check quiz after this lesson.</li>
+<li>Disable all unused ports and services.</li>
+<li>Change all default usernames and passwords immediately.</li>
+<li>Enable encrypted management protocols (SSH over Telnet, HTTPS over HTTP).</li>
+<li>Apply the principle of least privilege to all accounts.</li>
+<li>Keep firmware and software patched and up to date.</li>
+<li>Enable logging and send logs to a centralized SIEM.</li>
 </ul>
+<h4>Network Access Control (NAC)</h4>
+<ul>
+<li>Port Security: Limits the number of MAC addresses on a switch port; can shut down the port if violated.</li>
+<li>802.1X: Port-based authentication using a RADIUS server. Involves a supplicant (client), authenticator (switch/AP), and authentication server (RADIUS).</li>
+<li>MAC Filtering: Allows or denies access based on a device's MAC address. Easily bypassed by MAC spoofing.</li>
+</ul>
+<h4>Access Control Lists (ACLs)</h4>
+<ul>
+<li>Standard ACL: Filters based on source IP address only.</li>
+<li>Extended ACL: Filters based on source/destination IP, protocol, and port number.</li>
+<li>Implicit Deny: All ACLs end with an implicit deny — if traffic is not explicitly permitted, it is blocked.</li>
+<li>URL Filtering: Blocking access to specific websites based on their domain name.</li>
+<li>Content Filtering: Inspecting the actual content of a web page or email and blocking it if it contains inappropriate or malicious material.</li>
+</ul>
+<h4>Network Segmentation</h4>
+<h4>Technique Description</h4>
+<h4>VLANs Logical segmentation at Layer 2</h4>
+<p>Screened Subnet (DMZ) A network segment between the internet and internal network for public-facing servers Trusted vs. Untrusted Zones Firewall zones defining trust levels (e.g., Inside, Outside, DMZ) IoT Segmentation Isolating IoT devices on a separate VLAN to limit attack surface SCADA/ICS/OT Industrial control systems must be strictly segmented from corporate IT network BYOD Bring Your Own Device: policies and segmentation to handle employee-owned devices securely</p>
+<div class="key-concepts"><h4>Pro tip</h4><p>DMZ (Demilitarized Zone): Place public-facing servers (web, email, DNS) in the DMZ. The DMZ is accessible from the internet but separated from the internal network by a firewall. If a DMZ server is compromised, the attacker cannot directly reach internal resources.</p></div>
+</div>
+</div>
 <h4>Next steps</h4>
-<p>Use the AI tutor for scenario-based questions about this topic. The tutor will guide you
-Socratically without revealing assessment answers.</p>
+<p>Complete the domain knowledge check quiz after this lesson. Use the AI tutor for scenario-based
+questions — it guides you Socratically without revealing assessment answers.</p>
 </div>

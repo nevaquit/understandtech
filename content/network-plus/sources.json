@@ -2,15 +2,29 @@
   "n10_009": {
     "cyberkraft_folder": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA Network+",
     "orange_study_guide_pdf": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA Network+/The_Orange_Study_Guide_Network_Plus_v1.0_FINAL.pdf",
-    "practice_exam_bank_pdf": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA Network+/N10-009_Network_Plus_Practice_Exam_Bank.pdf",
+    "practice_exam_bank_pdf": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA Network+/N10-009_Network_Plus_Practice_Exam_Bank_April2026.pdf",
+    "book_pdf": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA Network+/N10-009_ CompTIA Network+ Book PDF Download - Mar 2026.pdf",
     "exam_objectives_pdf": "%USERPROFILE%/OneDrive/Ebooks/Comptia/Network+/Certmaster Network/CompTIA-Network-plus-N10-009-Exam-Objectives-4-0.pdf",
     "poe_cat_standards_html": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA Network+/poe_cat_standards.html",
     "professor_messer_notes": "%USERPROFILE%/OneDrive/Documents/_2026/CyberKraft Training/CompTIA Network+/professor-messer-comptia-n10-008-network-plus-course-notes-v104.pdf"
   },
+  "extract_scripts": {
+    "lessons": "node scripts/extract-network-plus-lessons.mjs",
+    "diagrams": "node scripts/generate-network-plus-diagrams.mjs",
+    "supplements": "node scripts/extract-network-plus-supplements.mjs",
+    "course_notes": "node scripts/extract-network-plus-course-notes.mjs",
+    "quiz_base": "node scripts/build-network-plus-quiz-from-practice-bank.cjs",
+    "quiz_extra": "node scripts/generate-network-plus-quiz-gift.mjs",
+    "regenerate": "node scripts/build-network-plus-content.mjs"
+  },
   "repo_artifacts": {
     "objectives_csv": "content/network-plus/n10-009-objectives.csv",
     "lessons_dir": "content/network-plus/lessons",
-    "quiz_gift": "content/network-plus/n10-009-quiz.gift"
-  },
-  "regenerate": "node scripts/build-network-plus-content.mjs"
+    "diagrams_dir": "content/network-plus/diagrams",
+    "supplements_dir": "content/network-plus/supplements",
+    "course_notes_dir": "content/network-plus/course-notes",
+    "quiz_gift": "content/network-plus/n10-009-quiz.gift",
+    "quiz_extra_gift": "content/network-plus/n10-009-quiz-extra.gift",
+    "quiz_manifest": "content/network-plus/n10-009-quiz.manifest.json"
+  }
 }

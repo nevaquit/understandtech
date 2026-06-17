@@ -1,0 +1,22 @@
+<div class="ut-lesson-supplement">
+<h4>Exam focus</h4>
+<p>Given a scenario, apply network security features, defense techniques, and solutions</p>
+<ul>
+<li>Disable all unused ports and services.</li>
+<li>Change all default usernames and passwords immediately.</li>
+<li>Enable encrypted management protocols (SSH over Telnet, HTTPS over HTTP).</li>
+<li>Apply the principle of least privilege to all accounts.</li>
+<li>Keep firmware and software patched and up to date.</li>
+<li>Enable logging and send logs to a centralized SIEM.</li>
+<li>Port Security: Limits the number of MAC addresses on a switch port; can shut down the port if violated.</li>
+<li>802.1X: Port-based authentication using a RADIUS server. Involves a supplicant (client), authenticator (switch/AP), and authentication server (RADIUS).</li>
+<li>MAC Filtering: Allows or denies access based on a device's MAC address. Easily bypassed by MAC spoofing.</li>
+<li>Standard ACL: Filters based on source IP address only.</li>
+<li>Extended ACL: Filters based on source/destination IP, protocol, and port number.</li>
+<li>Implicit Deny: All ACLs end with an implicit deny — if traffic is not explicitly permitted, it is blocked.</li>
+<li>URL Filtering: Blocking access to specific websites based on their domain name.</li>
+<li>Content Filtering: Inspecting the actual content of a web page or email and blocking it if it contains inappropriate or malicious material.</li>
+<li>DMZ (Demilitarized Zone): Place public-facing servers (web, email, DNS) in the DMZ. The DMZ is accessible from the internet but separated from the internal network by a firewall. If a DMZ server is compromised, the attacker cannot directly reach internal resources.</li>
+</ul>
+
+</div>

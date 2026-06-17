@@ -1,23 +1,86 @@
 <div class="ut-lesson-content">
 <h3>Exam objective N10-009 1.6</h3>
 <p><strong>Compare and contrast network topologies, architectures, and types</strong></p>
-<p>This lesson aligns with the CompTIA Network+ N10-009 exam blueprint (Version 4.0). Focus on
-how the concept appears in enterprise and cloud networking scenarios.</p>
-<h4>Key topics</h4>
+<div class="ut-lesson-body">
+<table class="ut-lesson-table">
+<thead><tr><th>Topology</th><th>Description</th><th>Pros</th><th>Cons</th></tr></thead>
+<tbody>
+<tr><td>Star</td><td>All devices connect to a central switch</td><td>Easy to manage; fault isolation</td><td>Single point of failure at switch</td></tr>
+<tr><td>Mesh</td><td>Every device connects to every other device</td><td>High redundancy</td><td>Expensive; complex wiring</td></tr>
+<tr><td>Bus</td><td>All devices on a single cable</td><td>Simple; inexpensive</td><td>Single point of failure; collisions</td></tr>
+<tr><td>Ring</td><td>Devices connected in a circular path</td><td>Predictable performance</td><td>Failure of one device breaks the ring</td></tr>
+<tr><td>Hybrid</td><td>Combination of topologies</td><td>Flexible</td><td>Complex to manage</td></tr>
+</tbody>
+</table>
+<h4>Enterprise Network Architectures</h4>
 <ul>
-<li>Topologies: mesh, hybrid, star/hub-spoke, spine-leaf, point-to-point</li>
-<li>Three-tier: core, distribution, access; collapsed core</li>
-<li>Traffic flows: north-south (client-server) vs east-west (server-server)</li>
-<li>Public vs private addressing: APIPA, RFC1918, loopback</li>
+<li>Three-Tier Hierarchical Model:</li>
+<li>Core Layer: High-speed backbone; connects distribution layers. No policy enforcement here.</li>
+<li>Distribution Layer: Aggregates access layer switches; applies routing, policies, and QoS.</li>
+<li>Access Layer: Where end devices (PCs, printers, phones) connect to the network.</li>
+<li>Spine-and-Leaf: Two-tier data center architecture. Every leaf connects to every spine. Provides predictable, low-latency east-west traffic flow.</li>
+<li>Collapsed Core: Core and distribution layers combined. Used in smaller networks.</li>
+<li>Traffic Flows:</li>
+<li>North-South: Traffic between internal network and external internet (client to server).</li>
+<li>East-West: Traffic between servers within the same data center (server to server). Spine-and-leaf is optimized for this.</li>
+</ul>
+<div class="key-concepts"><h4>Pro tip</h4><p>The shift from three-tier to spine-and-leaf was driven by the explosion of east-west traffic in virtualized data centers. Knowing this context helps answer scenario questions about modern data center design.</p></div>
+<h4 class="ut-visual-representation">Visual Representation: Enterprise Architectures</h4>
+<div class="ut-lesson-diagram">
+<div class="diagram-title">Three-tier vs spine-leaf traffic patterns</div>
+<div class="concept-grid">
+<div class="concept-item"><h4>Three-tier</h4><p>Core → Distribution → Access. Classic campus design.</p></div>
+<div class="concept-item"><h4>Spine-leaf</h4><p>Every leaf connects to every spine. Optimized for east-west traffic.</p></div>
+<div class="concept-item"><h4>North-south</h4><p>Client ↔ internet / data center edge.</p></div>
+<div class="concept-item"><h4>East-west</h4><p>Server ↔ server inside the data center.</p></div>
+</div>
+</div>
+<div class="ut-lesson-supplement">
+<h4>Exam focus</h4>
+<p>Compare and contrast network topologies, architectures, and types</p>
+<ul>
+<li>Three-Tier Hierarchical Model:</li>
+<li>Core Layer: High-speed backbone; connects distribution layers. No policy enforcement here.</li>
+<li>Distribution Layer: Aggregates access layer switches; applies routing, policies, and QoS.</li>
+<li>Access Layer: Where end devices (PCs, printers, phones) connect to the network.</li>
+<li>Spine-and-Leaf: Two-tier data center architecture. Every leaf connects to every spine. Provides predictable, low-latency east-west traffic flow.</li>
+<li>Collapsed Core: Core and distribution layers combined. Used in smaller networks.</li>
+<li>Traffic Flows:</li>
+<li>North-South: Traffic between internal network and external internet (client to server).</li>
+<li>East-West: Traffic between servers within the same data center (server to server). Spine-and-leaf is optimized for this.</li>
+<li>The shift from three-tier to spine-and-leaf was driven by the explosion of east-west traffic in virtualized data centers. Knowing this context helps answer scenario questions about modern data center design.</li>
 </ul>
 
-<h4>Study approach</h4>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p><strong>Compare and contrast network topologies, architectures, and types</strong></p>
+<table class="ut-lesson-table">
+<thead><tr><th>Topology</th><th>Description</th><th>Pros</th><th>Cons</th></tr></thead>
+<tbody>
+<tr><td>Star</td><td>All devices connect to a central switch</td><td>Easy to manage; fault isolation</td><td>Single point of failure at switch</td></tr>
+<tr><td>Mesh</td><td>Every device connects to every other device</td><td>High redundancy</td><td>Expensive; complex wiring</td></tr>
+<tr><td>Bus</td><td>All devices on a single cable</td><td>Simple; inexpensive</td><td>Single point of failure; collisions</td></tr>
+<tr><td>Ring</td><td>Devices connected in a circular path</td><td>Predictable performance</td><td>Failure of one device breaks the ring</td></tr>
+<tr><td>Hybrid</td><td>Combination of topologies</td><td>Flexible</td><td>Complex to manage</td></tr>
+</tbody>
+</table>
+<h4>Enterprise Network Architectures</h4>
 <ul>
-<li>Relate the objective to OSI layers, defense-in-depth, and documentation where applicable.</li>
-<li>Practice explaining trade-offs (performance vs security, cost, and availability).</li>
-<li>Complete the domain knowledge check quiz after this lesson.</li>
+<li>Three-Tier Hierarchical Model:</li>
+<li>Core Layer: High-speed backbone; connects distribution layers. No policy enforcement here.</li>
+<li>Distribution Layer: Aggregates access layer switches; applies routing, policies, and QoS.</li>
+<li>Access Layer: Where end devices (PCs, printers, phones) connect to the network.</li>
+<li>Spine-and-Leaf: Two-tier data center architecture. Every leaf connects to every spine. Provides predictable, low-latency east-west traffic flow.</li>
+<li>Collapsed Core: Core and distribution layers combined. Used in smaller networks.</li>
+<li>Traffic Flows:</li>
+<li>North-South: Traffic between internal network and external internet (client to server).</li>
+<li>East-West: Traffic between servers within the same data center (server to server). Spine-and-leaf is optimized for this.</li>
 </ul>
+<div class="key-concepts"><h4>Pro tip</h4><p>The shift from three-tier to spine-and-leaf was driven by the explosion of east-west traffic in virtualized data centers. Knowing this context helps answer scenario questions about modern data center design.</p></div>
+</div>
+</div>
 <h4>Next steps</h4>
-<p>Use the AI tutor for scenario-based questions about this topic. The tutor will guide you
-Socratically without revealing assessment answers.</p>
+<p>Complete the domain knowledge check quiz after this lesson. Use the AI tutor for scenario-based
+questions — it guides you Socratically without revealing assessment answers.</p>
 </div>
