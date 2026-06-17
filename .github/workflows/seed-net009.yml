@@ -42,12 +42,15 @@ jobs:
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
 
       - name: Seed NET009 course
-        env:
-          NET009_SKIP_FILTER_FIX: "1"
         run: |
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/seed-network-plus-course-vm.sh"
           echo 'seed_net009_complete=1'
+
+      - name: Fix NET009 page filters and recycle PHP-FPM
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-net009-course-filters-vm.sh"
 
       - name: Post-seed stabilize (enrol, theme, permissions)
         continue-on-error: true
@@ -61,6 +64,11 @@ jobs:
         run: |
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-moodle-web-health.sh"
+
+      - name: Verify NET009 lesson page renders
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-net009-web-health.sh"
 
       - name: Disable maintenance mode
         if: always()

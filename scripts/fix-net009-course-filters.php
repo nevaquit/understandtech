@@ -2,6 +2,10 @@
 /**
  * Disable Moodle text filters for all NET009 contexts (course + every module).
  *
+ * Prevents filter MUC DB errors on large lesson HTML (mod/page view).
+ *
+ * Run on VM: sudo -u www-data php /opt/understandtech-plugins/scripts/fix-net009-course-filters.php
+ *
  * @package    understandtech
  */
 
@@ -26,6 +30,7 @@ $modinfo = get_fast_modinfo($course);
 
 echo "=== disable filters NET009 course={$courseid} ===\n";
 
+/** @var context[] $contexts */
 $contexts = [context_course::instance($courseid)];
 foreach ($modinfo->get_cms() as $cm) {
     if ($cm->deletioninprogress) {
@@ -34,9 +39,22 @@ foreach ($modinfo->get_cms() as $cm) {
     $contexts[] = context_module::instance($cm->id);
 }
 
-$disabled = 0;
+$filternames = [];
+foreach ($DB->get_records('filter_active') as $row) {
+    if ((int) $row->active === TEXTFILTER_DISABLED) {
+        continue;
+    }
+    $filternames[$row->filter] = true;
+}
 foreach ($contexts as $context) {
     foreach (array_keys(filter_get_active_in_context($context)) as $filtername) {
+        $filternames[$filtername] = true;
+    }
+}
+
+$disabled = 0;
+foreach ($contexts as $context) {
+    foreach (array_keys($filternames) as $filtername) {
         filter_set_local_state($filtername, $context->id, TEXTFILTER_OFF);
         $disabled++;
     }
@@ -44,4 +62,8 @@ foreach ($contexts as $context) {
 
 filter_manager::reset_caches();
 rebuild_course_cache($courseid, true);
-echo "filters_disabled={$disabled}\n";
+purge_all_caches();
+
+echo 'contexts=' . count($contexts) . " filter_disables={$disabled}\n";
+echo "filter_cache_reset=1 course_cache_rebuilt=1\n";
+echo "=== complete ===\n";

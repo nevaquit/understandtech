@@ -37,6 +37,9 @@ jobs:
           set -euo pipefail
           export SEC701_COURSE_ID=3
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-sec701-course-filters-vm.sh"
+          if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";global $DB;exit($DB->record_exists("course",["shortname"=>"NET009"])?0:1);' 2>/dev/null; then
+            sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-net009-course-filters-vm.sh"
+          fi
 
       - name: Diagnose course index drawer
         continue-on-error: true

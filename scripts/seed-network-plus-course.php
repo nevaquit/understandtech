@@ -121,6 +121,8 @@ function network_plus_page_exists(int $courseid, int $sectionnum, string $name):
  * @return void
  */
 function network_plus_disable_page_module_filters(stdClass $course): void {
+    global $DB;
+
     $modinfo = get_fast_modinfo($course);
     $contexts = [context_course::instance((int) $course->id)];
     foreach ($modinfo->get_cms() as $cm) {
@@ -129,15 +131,27 @@ function network_plus_disable_page_module_filters(stdClass $course): void {
         }
         $contexts[] = context_module::instance($cm->id);
     }
-    foreach ($contexts as $context) {
-        if ($context->contextlevel !== CONTEXT_COURSE && $context->contextlevel !== CONTEXT_MODULE) {
+
+    $filternames = [];
+    foreach ($DB->get_records('filter_active') as $row) {
+        if ((int) $row->active === TEXTFILTER_DISABLED) {
             continue;
         }
+        $filternames[$row->filter] = true;
+    }
+    foreach ($contexts as $context) {
         foreach (array_keys(filter_get_active_in_context($context)) as $filtername) {
+            $filternames[$filtername] = true;
+        }
+    }
+
+    foreach ($contexts as $context) {
+        foreach (array_keys($filternames) as $filtername) {
             filter_set_local_state($filtername, $context->id, TEXTFILTER_OFF);
         }
     }
     filter_manager::reset_caches();
+    rebuild_course_cache((int) $course->id, true);
 }
 
 /**
