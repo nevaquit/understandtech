@@ -79,3 +79,4 @@ public function fetch_user_mastery_metrics(int $userid, int $objectiveid): ?stdC
 
 - Broad Moodle 4.5 plugin patterns: personal `moodle-development` skill
 - Platform architecture: `.cursor/skills/understandtech-platform/` in this repo
+- Enterprise LMS + AI orchestration: `lms-workflow`, `lms-enterprise-ai-master-skill`

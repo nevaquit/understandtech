@@ -35,6 +35,7 @@ Re-verified on the Windows dev machine: `php`, `composer`, `docker`, `wrangler`,
 - [ ] Bicep extension installed
 - [x] Workspace `.cursorrules` configured (Phase 1)
 - [x] Project skill at `.cursor/skills/understandtech-platform/`
+- [x] LMS orchestration skills at `.cursor/skills/lms-workflow/` and `.cursor/skills/lms-enterprise-ai-master-skill/`
 
 ## Account prerequisites (manual)
 

@@ -78,4 +78,18 @@ AI-augmented certification training platform on Moodle 4.5 LTS with Cloudflare e
 
 - Architecture deep-dive: [architecture.md](architecture.md)
 - Playbook quick reference: [playbook-phases.md](playbook-phases.md)
+- Enterprise LMS + AI orchestration: `/lms-workflow`, `/lms-enterprise-ai-master-skill`
 - Moodle development: use personal skill `/moodle-development` for plugin patterns
+
+## Skill stack (load together)
+
+| Skill | When |
+|-------|------|
+| `/understandtech-platform` | Every task in this repo (default) |
+| `/lms-workflow` | EdTech, LMS schemas, SCORM/xAPI/LTI, multi-tenant, learning analytics |
+| `/lms-enterprise-ai-master-skill` | Deep enterprise LMS + AI patterns (grading queues, PII, event streaming) |
+| `ai-intelligent-systems` | AI tutor, RAG, prompts, AI Gateway |
+| `edge-serverless-orchestration` | Cloudflare Workers, SSE, Stream JWTs |
+| `moodle-core-php-engineering` | Custom Moodle plugin PHP |
+| `iac-async-cloud-devops` | Bicep, Nginx, PgBouncer, CI/CD |
+| `mathematical-ui-design-engineering` | Theme SCSS, charts, gamification UX |

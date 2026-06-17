@@ -173,6 +173,7 @@ Deep reference: [gateway-failover.md](gateway-failover.md)
 ## Related skills
 
 - Edge/SSE/Worker patterns: `edge-serverless-orchestration`
+- Enterprise LMS + AI orchestration: `lms-workflow`, `lms-enterprise-ai-master-skill`
 - Moodle PHP (client only): `moodle-core-php-engineering`, `moodle-development`
 - Platform architecture: `.cursor/skills/understandtech-platform/`
 - Playbook Phase 4: `docs/playbook.md` §4.2

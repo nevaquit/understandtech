@@ -318,3 +318,4 @@ ss -tlnp | grep -E ':443|:22'   # no unexpected listeners
 - **Edge / AI offload:** `edge-serverless-orchestration` — Cloudflare Worker, Stream JWTs
 - **Moodle plugins / CLI:** `moodle-core-php-engineering` — upgrade.php, plugin structure
 - **AI Gateway:** `ai-intelligent-systems` — tutor routes, no direct LLM from PHP
+- **Enterprise LMS + AI:** `lms-workflow`, `lms-enterprise-ai-master-skill` — SCORM/xAPI/LTI, multi-tenant, grading queues

@@ -171,6 +171,7 @@ Route: `ai.understandtech.app/*` per `wrangler.jsonc`.
 ## Related skills & docs
 
 - Platform architecture: `.cursor/skills/understandtech-platform/`
+- Enterprise LMS + AI orchestration: `lms-workflow`, `lms-enterprise-ai-master-skill`
 - Moodle PHP (never calls LLM directly): `moodle-core-php-engineering` or `moodle-development`
 - Playbook Phase 4: `docs/playbook.md`
 - Deep patterns: [sse-streaming.md](sse-streaming.md), [stream-jwt-signing.md](stream-jwt-signing.md)

@@ -31,6 +31,12 @@
       "skillPath": ".agents/skills/markdown-to-pdf/SKILL.md",
       "computedHash": "592d0880bddd64812994a575285be618221975fa84b4c922940f168dd8f197dc"
     },
+    "microsoft-foundry": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "skillPath": "skills/microsoft-foundry/SKILL.md",
+      "computedHash": "2c6cd2662ae2171cdb0c2b377f38415479c1deb9b40fd3f31c086b20cba41d1a"
+    },
     "moodle-plugin": {
       "source": "Af1ah/moodle-plugin-skills",
       "sourceType": "github",

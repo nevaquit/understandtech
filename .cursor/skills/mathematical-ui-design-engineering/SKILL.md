@@ -258,6 +258,7 @@ PHP for observers and XP grants: see **moodle-core-php-engineering** skill.
 
 - PHP, forms, observers, `$DB`: **moodle-core-php-engineering** (`.cursor/skills/moodle-core-php-engineering/`)
 - Broad Moodle plugin patterns: personal **moodle-development** skill
+- Enterprise LMS + AI orchestration: **lms-workflow**, **lms-enterprise-ai-master-skill**
 - Premium layout/a11y bar: personal **premium-web-development** skill (when elevating visual polish)
 - Platform architecture: `.cursor/skills/understandtech-platform/`
 - Pedagogy + XP economy: `docs/white-paper.md` §2.1–2.2
