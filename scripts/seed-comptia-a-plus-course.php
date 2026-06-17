@@ -330,13 +330,22 @@ function aplus_import_gift(int $contextid, stdClass $category, string $giftpath)
         return 0;
     }
 
-    $before = count(aplus_category_question_ids((int) $category->id));
-    if ($before >= 9) {
-        echo "gift_skip_existing total={$before}\n";
-        return $before;
+    $expected = aplus_gift_expected_count($giftpath);
+    $tagged = aplus_count_tagged_questions((int) $category->id);
+    $total = count(aplus_category_question_ids((int) $category->id));
+    if (getenv('APLUS_FORCE_GIFT') === '1') {
+        echo "gift_force_import expected={$expected} tagged={$tagged} total={$total}\n";
+    } else if ($tagged >= $expected && $expected > 9) {
+        echo "gift_skip_existing tagged={$tagged} expected={$expected} total={$total}\n";
+        return $total;
+    } else if ($tagged >= 9 && $expected <= 9) {
+        echo "gift_skip_existing tagged={$tagged} expected={$expected} total={$total}\n";
+        return $total;
     }
 
     $context = context::instance_by_id($contextid);
+    $before = count(aplus_category_question_ids((int) $category->id));
+
     $qformat = new qformat_gift();
     $qformat->setCategory($category);
     $qformat->setContexts([$context]);
@@ -348,11 +357,48 @@ function aplus_import_gift(int $contextid, stdClass $category, string $giftpath)
     }
 
     $after = count(aplus_category_question_ids((int) $category->id));
-    echo "gift_imported path={$giftpath} added=" . ($after - $before) . " total={$after}\n";
+    echo "gift_imported path={$giftpath} added=" . ($after - $before) . " total={$after} expected={$expected}\n";
     return $after;
 }
 
 /**
+ * Count ap110* tagged questions in the course question category.
+ *
+ * @param int $categoryid
+ * @return int
+ */
+function aplus_count_tagged_questions(int $categoryid): int {
+    global $DB;
+    $count = 0;
+    foreach (aplus_category_question_ids($categoryid) as $qid) {
+        $name = (string) $DB->get_field('question', 'name', ['id' => $qid]);
+        if (preg_match('/\b(ap110[12]_\d+_\d+)\b/', $name)) {
+            $count++;
+        }
+    }
+    return $count;
+}
+
+/**
+ * Count ::ap110_* questions declared in a GIFT file.
+ *
+ * @param string $giftpath
+ * @return int
+ */
+function aplus_gift_expected_count(string $giftpath): int {
+    if (!is_readable($giftpath)) {
+        return 9;
+    }
+    $content = file_get_contents($giftpath);
+    if ($content === false) {
+        return 9;
+    }
+    return preg_match_all('/::[^:\n]*ap110[12]_\d+_\d+/m', $content) ?: 9;
+}
+
+/**
+ * Apply Moodle 4.5 quiz form defaults (matches mod_quiz_generator / SEC701 seed).
+ *
  * @param stdClass $quiz
  * @return stdClass
  */
@@ -361,12 +407,62 @@ function aplus_quiz_apply_defaults(stdClass $quiz): stdClass {
         'timeopen' => 0,
         'timeclose' => 0,
         'preferredbehaviour' => 'deferredfeedback',
+        'canredoquestions' => 0,
         'attempts' => 0,
+        'attemptonlast' => 0,
         'grademethod' => QUIZ_GRADEHIGHEST,
+        'decimalpoints' => 2,
+        'questiondecimalpoints' => -1,
+        'attemptduring' => 1,
+        'correctnessduring' => 1,
+        'maxmarksduring' => 1,
+        'marksduring' => 1,
+        'specificfeedbackduring' => 1,
+        'generalfeedbackduring' => 1,
+        'rightanswerduring' => 1,
+        'overallfeedbackduring' => 0,
+        'attemptimmediately' => 1,
+        'correctnessimmediately' => 1,
+        'maxmarksimmediately' => 1,
+        'marksimmediately' => 1,
+        'specificfeedbackimmediately' => 1,
+        'generalfeedbackimmediately' => 1,
+        'rightanswerimmediately' => 1,
+        'overallfeedbackimmediately' => 1,
+        'attemptopen' => 1,
+        'correctnessopen' => 1,
+        'maxmarksopen' => 1,
+        'marksopen' => 1,
+        'specificfeedbackopen' => 1,
+        'generalfeedbackopen' => 1,
+        'rightansweropen' => 1,
+        'overallfeedbackopen' => 1,
+        'attemptclosed' => 1,
+        'correctnessclosed' => 1,
+        'maxmarksclosed' => 1,
+        'marksclosed' => 1,
+        'specificfeedbackclosed' => 1,
+        'generalfeedbackclosed' => 1,
+        'rightanswerclosed' => 1,
+        'overallfeedbackclosed' => 1,
+        'questionsperpage' => 1,
+        'navmethod' => QUIZ_NAVMETHOD_FREE,
+        'shuffleanswers' => 1,
+        'sumgrades' => 0,
         'grade' => 100,
         'timelimit' => 0,
-        'questionsperpage' => 1,
-        'shuffleanswers' => 1,
+        'overduehandling' => 'autosubmit',
+        'graceperiod' => 0,
+        'quizpassword' => '',
+        'subnet' => '',
+        'browsersecurity' => '',
+        'delay1' => 0,
+        'delay2' => 0,
+        'showuserpicture' => 0,
+        'showblocks' => 0,
+        'completionattemptsexhausted' => 0,
+        'completionpass' => 0,
+        'allowofflineattempts' => 0,
         'visibleoncoursepage' => 1,
     ];
     foreach ($defaults as $key => $value) {
@@ -429,7 +525,9 @@ function aplus_add_quiz(stdClass $course, int $sectionnum, string $quizname, arr
     try {
         $cm = add_moduleinfo($quiz, $course);
     } catch (Throwable $e) {
-        echo "quiz_create_failed name={$quizname} error=" . $e->getMessage() . "\n";
+        $debug = property_exists($e, 'debuginfo') ? (string) $e->debuginfo : '';
+        echo "quiz_create_failed name={$quizname} error=" . $e->getMessage()
+            . ($debug !== '' ? " debug={$debug}" : '') . "\n";
         return;
     }
 
@@ -492,7 +590,27 @@ function aplus_sync_quiz(stdClass $course, int $sectionnum, string $quizname, ar
         return;
     }
 
-    echo "quiz_exists name={$quizname}\n";
+    $cm = get_coursemodule_from_instance('quiz', (int) $quizrecord->id, (int) $course->id, false, MUST_EXIST);
+    $quizrecord->cmid = $cm->id;
+
+    $added = 0;
+    foreach ($questionids as $qid) {
+        try {
+            if (quiz_add_quiz_question($qid, $quizrecord, 0) === false) {
+                continue;
+            }
+            $added++;
+        } catch (Throwable $e) {
+            echo "quiz_sync_failed name={$quizname} qid={$qid} error=" . $e->getMessage() . "\n";
+            break;
+        }
+    }
+
+    if ($added > 0) {
+        quiz_update_sumgrades($quizrecord);
+    }
+    echo "quiz_synced id={$quizrecord->id} name={$quizname} added={$added} total="
+        . count($questionids) . "\n";
 }
 
 /**
