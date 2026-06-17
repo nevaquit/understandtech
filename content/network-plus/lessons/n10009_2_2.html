@@ -17,7 +17,13 @@
 <li>Port States: Blocking, Listening, Learning, Forwarding, Disabled.</li>
 <li>RSTP (Rapid STP): Converges much faster than classic STP (seconds vs. minutes).</li>
 </ul>
-<div class="highlight-box"><h4>Exam tip</h4><p>A symptom of a switching loop is a broadcast storm and extremely high CPU utilization on switches. STP is the solution. If STP is disabled and a loop exists, the network will flood with broadcast traffic until it collapses. Link Aggregation and MTU • LACP (Link Aggregation Control Protocol / 802.3ad): Combines multiple physical links into a single logical link for increased bandwidth and redundancy. • MTU (Maximum Transmission Unit): The largest packet size that can be transmitted. Standard Ethernet MTU = 1500 bytes. • Jumbo Frames: MTU greater than 1500 bytes (typically 9000 bytes). Used in storage networks (iSCSI, NFS) to reduce CPU overhead.</p></div>
+<h4>Link Aggregation and MTU</h4>
+<p>= 1500 bytes.</p>
+<ul>
+<li>LACP (Link Aggregation Control Protocol / 802.3ad): Combines multiple physical links into a single logical link for increased bandwidth and redundancy.</li>
+<li>MTU (Maximum Transmission Unit): The largest packet size that can be transmitted. Standard Ethernet MTU</li>
+<li>Jumbo Frames: MTU greater than 1500 bytes (typically 9000 bytes). Used in storage networks (iSCSI, NFS) to reduce CPU overhead.</li>
+</ul>
 <h4 class="ut-visual-representation">Visual Representation: VLAN Trunking</h4>
 <div class="ut-lesson-diagram">
 <div class="diagram-title">802.1Q trunk between switch and router-on-a-stick</div>
@@ -33,38 +39,21 @@
 <h4>Exam focus</h4>
 <p>Given a scenario, configure switching technologies and features</p>
 <ul>
-<li>VLAN: Logically segments a physical network into separate broadcast domains.</li>
-<li>Native VLAN: Untagged traffic on an 802.1Q trunk port. Default is VLAN 1 — change it for security.</li>
-<li>Voice VLAN: A separate VLAN for VoIP traffic to ensure QoS prioritization.</li>
-<li>802.1Q Tagging: IEEE standard for VLAN tagging on trunk ports.</li>
-<li>SVI (Switch Virtual Interface): A virtual interface on a Layer 3 switch used for inter-VLAN routing.</li>
-<li>Purpose: Prevents Layer 2 loops in networks with redundant links by placing certain ports in a blocking state.</li>
-<li>Root Bridge: The switch with the lowest Bridge ID (priority + MAC address) becomes the root bridge.</li>
-<li>Port States: Blocking, Listening, Learning, Forwarding, Disabled.</li>
-<li>RSTP (Rapid STP): Converges much faster than classic STP (seconds vs. minutes).</li>
-<li>A symptom of a switching loop is a broadcast storm and extremely high CPU utilization on switches. STP is the solution. If STP is disabled and a loop exists, the network will flood with broadcast traffic until it collapses. Link Aggregation and MTU • LACP (Link Aggregation Control Protocol / 802.3ad): Combines multiple physical links into a single logical link for increased bandwidth and redundancy. • MTU (Maximum Transmission Unit): The largest packet size that can be transmitted. Standard Ethernet MTU = 1500 bytes. • Jumbo Frames: MTU greater than 1500 bytes (typically 9000 bytes). Used in storage networks (iSCSI, NFS) to reduce CPU overhead.</li>
+<li>802.1Q tags VLAN ID on trunk links; native VLAN carries untagged frames.</li>
+<li>STP prevents Layer 2 loops; know root bridge election.</li>
+<li>SVI provides Layer 3 gateway for a VLAN on a multilayer switch.</li>
+<li>Link aggregation bundles ports for bandwidth and redundancy.</li>
 </ul>
-
 </div>
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Given a scenario, configure switching technologies and features</strong></p>
-<h4>VLANs (Virtual Local Area Networks)</h4>
+<h5>Inter-VLAN routing options</h5>
 <ul>
-<li>VLAN: Logically segments a physical network into separate broadcast domains.</li>
-<li>Native VLAN: Untagged traffic on an 802.1Q trunk port. Default is VLAN 1 — change it for security.</li>
-<li>Voice VLAN: A separate VLAN for VoIP traffic to ensure QoS prioritization.</li>
-<li>802.1Q Tagging: IEEE standard for VLAN tagging on trunk ports.</li>
-<li>SVI (Switch Virtual Interface): A virtual interface on a Layer 3 switch used for inter-VLAN routing.</li>
+<li>Router-on-a-stick: one trunk to a router with subinterfaces</li>
+<li>Layer 3 switch SVIs: preferred in modern campus designs</li>
+<li>Verify VLAN membership when hosts cannot reach their gateway</li>
 </ul>
-<h4>Spanning Tree Protocol (STP)</h4>
-<ul>
-<li>Purpose: Prevents Layer 2 loops in networks with redundant links by placing certain ports in a blocking state.</li>
-<li>Root Bridge: The switch with the lowest Bridge ID (priority + MAC address) becomes the root bridge.</li>
-<li>Port States: Blocking, Listening, Learning, Forwarding, Disabled.</li>
-<li>RSTP (Rapid STP): Converges much faster than classic STP (seconds vs. minutes).</li>
-</ul>
-<div class="highlight-box"><h4>Exam tip</h4><p>A symptom of a switching loop is a broadcast storm and extremely high CPU utilization on switches. STP is the solution. If STP is disabled and a loop exists, the network will flood with broadcast traffic until it collapses. Link Aggregation and MTU • LACP (Link Aggregation Control Protocol / 802.3ad): Combines multiple physical links into a single logical link for increased bandwidth and redundancy. • MTU (Maximum Transmission Unit): The largest packet size that can be transmitted. Standard Ethernet MTU = 1500 bytes. • Jumbo Frames: MTU greater than 1500 bytes (typically 9000 bytes). Used in storage networks (iSCSI, NFS) to reduce CPU overhead.</p></div>
 </div>
 </div>
 <h4>Next steps</h4>

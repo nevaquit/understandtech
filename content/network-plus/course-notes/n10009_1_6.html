@@ -1,27 +1,6 @@
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Compare and contrast network topologies, architectures, and types</strong></p>
-<table class="ut-lesson-table">
-<thead><tr><th>Topology</th><th>Description</th><th>Pros</th><th>Cons</th></tr></thead>
-<tbody>
-<tr><td>Star</td><td>All devices connect to a central switch</td><td>Easy to manage; fault isolation</td><td>Single point of failure at switch</td></tr>
-<tr><td>Mesh</td><td>Every device connects to every other device</td><td>High redundancy</td><td>Expensive; complex wiring</td></tr>
-<tr><td>Bus</td><td>All devices on a single cable</td><td>Simple; inexpensive</td><td>Single point of failure; collisions</td></tr>
-<tr><td>Ring</td><td>Devices connected in a circular path</td><td>Predictable performance</td><td>Failure of one device breaks the ring</td></tr>
-<tr><td>Hybrid</td><td>Combination of topologies</td><td>Flexible</td><td>Complex to manage</td></tr>
-</tbody>
-</table>
-<h4>Enterprise Network Architectures</h4>
-<ul>
-<li>Three-Tier Hierarchical Model:</li>
-<li>Core Layer: High-speed backbone; connects distribution layers. No policy enforcement here.</li>
-<li>Distribution Layer: Aggregates access layer switches; applies routing, policies, and QoS.</li>
-<li>Access Layer: Where end devices (PCs, printers, phones) connect to the network.</li>
-<li>Spine-and-Leaf: Two-tier data center architecture. Every leaf connects to every spine. Provides predictable, low-latency east-west traffic flow.</li>
-<li>Collapsed Core: Core and distribution layers combined. Used in smaller networks.</li>
-<li>Traffic Flows:</li>
-<li>North-South: Traffic between internal network and external internet (client to server).</li>
-<li>East-West: Traffic between servers within the same data center (server to server). Spine-and-leaf is optimized for this.</li>
-</ul>
-<div class="key-concepts"><h4>Pro tip</h4><p>The shift from three-tier to spine-and-leaf was driven by the explosion of east-west traffic in virtualized data centers. Knowing this context helps answer scenario questions about modern data center design.</p></div>
+<h5>Architecture trade-offs</h5>
+<p>Collapsed core designs reduce cost for small sites but concentrate failure domains. Spine-leaf adds predictable latency for virtualization clusters at the expense of more inter-switch links.</p>
 </div>

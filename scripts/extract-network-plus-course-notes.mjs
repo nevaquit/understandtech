@@ -1,48 +1,38 @@
 #!/usr/bin/env node
 /**
- * Extract Network+ course notes (Detailed coverage) from Orange Study Guide sections.
+ * Build Network+ course notes (Detailed coverage) from unique enrichment prose.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadObjectivesCsvFile } from './lib/network-plus-objectives.mjs';
-import {
-  contentDir,
-  escapeHtml,
-  loadOrangeText,
-  orangeLinesToHtml,
-  splitOrangeSections,
-} from './lib/network-plus-orange-sections.mjs';
+import { contentDir, ensurePoeSnippet } from './lib/network-plus-orange-sections.mjs';
+import { buildDepthHtml } from './lib/network-plus-enrichment.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const csvPath = path.join(contentDir, 'n10-009-objectives.csv');
 const outDir = path.join(contentDir, 'course-notes');
 
-async function main() {
-  const raw = await loadOrangeText(process.argv[2]);
-  const sections = splitOrangeSections(raw);
+function main() {
+  ensurePoeSnippet();
   const objectives = loadObjectivesCsvFile(csvPath);
 
   fs.mkdirSync(outDir, { recursive: true });
   let written = 0;
 
   for (const obj of objectives) {
-    const lines = sections.get(obj.shortname);
-    if (!lines?.length) {
+    let html = buildDepthHtml(obj.shortname, obj.fullname);
+    if (!html) {
       continue;
     }
-    const body = orangeLinesToHtml(lines);
-    if (!body) {
-      continue;
+    if (obj.shortname === 'n10009_1_5') {
+      const poePath = path.join(contentDir, 'snippets', 'poe_cat_standards.frag.html');
+      if (fs.existsSync(poePath)) {
+        const poe = fs.readFileSync(poePath, 'utf8')
+          .replace('ut-lesson-supplement', 'ut-lesson-depth ut-poe-reference');
+        html = html.replace('</div>\n', `\n${poe}\n</div>\n`);
+      }
     }
-    const html = [
-      '<div class="ut-lesson-depth">',
-      '<h4>Detailed coverage</h4>',
-      `<p><strong>${escapeHtml(obj.fullname)}</strong></p>`,
-      body,
-      '</div>',
-      '',
-    ].join('\n');
     fs.writeFileSync(path.join(outDir, `${obj.shortname}.html`), html);
     written += 1;
   }
@@ -51,7 +41,4 @@ async function main() {
   console.log(`course_notes_dir=${outDir}`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+main();

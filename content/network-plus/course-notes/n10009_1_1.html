@@ -1,20 +1,13 @@
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Explain concepts related to the Open Systems Interconnection (OSI) reference model</strong></p>
-<p>The OSI model is a seven-layer conceptual framework that standardizes network communication. Every protocol, device, and troubleshooting step maps to one of these layers.</p>
-<table class="ut-lesson-table">
-<thead><tr><th>Layer</th><th>#</th><th>Name</th><th>PDU</th><th>Key protocols / devices</th></tr></thead>
-<tbody>
-<tr><td>Application</td><td>7</td><td>Application</td><td>Data</td><td>HTTP, HTTPS, FTP, DNS, SMTP, SNMP, SSH</td></tr>
-<tr><td>Presentation</td><td>6</td><td>Presentation</td><td>Data</td><td>SSL/TLS, JPEG, ASCII, MPEG</td></tr>
-<tr><td>Session</td><td>5</td><td>Session</td><td>Data</td><td>NetBIOS, PPTP, RPC</td></tr>
-<tr><td>Transport</td><td>4</td><td>Transport</td><td>Segment/Datagram</td><td>TCP, UDP</td></tr>
-<tr><td>Network</td><td>3</td><td>Network</td><td>Packet</td><td>IPv4, IPv6, ICMP, IPsec, Routers</td></tr>
-<tr><td>Data Link</td><td>2</td><td>Data Link</td><td>Frame</td><td>Ethernet, MAC, Switches, Bridges</td></tr>
-<tr><td>Physical</td><td>1</td><td>Physical</td><td>Bit</td><td>Cables, Hubs, Repeaters, NICs</td></tr>
-</tbody>
-</table>
-<p><strong>Memory Aid: &quot;Please Do Not Throw Sausage Pizza Away&quot; (Physical → Application)</strong></p>
-<div class="highlight-box"><h4>Exam tip</h4><p>You WILL be asked to identify which OSI layer a protocol, device, or problem belongs to. Switches = Layer 2. Routers = Layer 3. Firewalls can operate at Layers 3, 4, or 7. Hubs = Layer 1.</p></div>
-<div class="highlight-box"><h4>Exam tip</h4><p>TCP is connection-oriented (3-way handshake: SYN, SYN-ACK, ACK). UDP is connectionless and faster but unreliable. VoIP and streaming use UDP. File transfers use TCP.</p></div>
+<h5>Using the model in troubleshooting</h5>
+<p>Technicians map symptoms to layers so tests stay focused. Physical issues show up as link lights and CRC errors; routing problems appear once packets leave the local subnet.</p>
+<ul>
+<li>Bottom-up: start at cabling and NIC link state</li>
+<li>Top-down: start at the application or DNS name resolution</li>
+<li>Divide and conquer: test the middle (default gateway) first in mixed symptoms</li>
+</ul>
+<h5>Encapsulation flow</h5>
+<p>Each layer adds its own header (and sometimes trailer) as data moves down the stack. On receipt, the peer strips headers upward until the application can read the payload.</p>
 </div>

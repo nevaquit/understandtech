@@ -21,15 +21,41 @@
 <tr><td>Multimode (MMF)</td><td>50-62.5 micron</td><td>Up to 2 km</td><td>Short-distance, within buildings</td></tr>
 </tbody>
 </table>
-<div class="highlight-box"><h4>Exam tip</h4><p>Single-mode = Long distance. Multimode = Short distance. Single-mode uses a laser light source and yellow jacket. Multimode uses an LED and orange or aqua jacket. Connector Types Connector Type Common Use RJ45 Copper Ethernet (8P8C) — most common network connector RJ11 Copper Telephone (6P2C) LC Fiber Small form factor; most common in data centers SC Fiber Square connector; &quot;Subscriber Connector&quot; Connector Type Common Use ST Fiber Bayonet-style twist-lock; older installations MPO Fiber Multi-fiber push-on; used for high-density connections F-Type Coaxial Cable TV and broadband internet BNC Coaxial Older networking; video surveillance</p></div>
+<table class="ut-lesson-table">
+<thead><tr><th>Connector</th><th>Common use</th></tr></thead>
+<tbody>
+<tr><td>RJ45 Copper</td><td>Ethernet (8P8C) — most common network connector</td></tr>
+<tr><td>RJ11 Copper</td><td>Telephone (6P2C)</td></tr>
+<tr><td>LC Fiber</td><td>Small form factor; most common in data centers</td></tr>
+<tr><td>SC Fiber</td><td>Square connector; &quot;Subscriber Connector&quot;</td></tr>
+</tbody>
+</table>
+<table class="ut-lesson-table">
+<thead><tr><th>Connector</th><th>Common use</th></tr></thead>
+<tbody>
+<tr><td>ST Fiber</td><td>Bayonet-style twist-lock; older installations</td></tr>
+<tr><td>MPO Fiber</td><td>Multi-fiber push-on; used for high-density connections</td></tr>
+<tr><td>F-Type Coaxial</td><td>Cable TV and broadband internet</td></tr>
+<tr><td>BNC Coaxial</td><td>Older networking; video surveillance</td></tr>
+</tbody>
+</table>
 <div class="ut-lesson-supplement">
 <h4>Exam focus</h4>
 <p>Compare and contrast transmission media and transceivers</p>
 <ul>
-<li>Single-mode = Long distance. Multimode = Short distance. Single-mode uses a laser light source and yellow jacket. Multimode uses an LED and orange or aqua jacket. Connector Types Connector Type Common Use RJ45 Copper Ethernet (8P8C) — most common network connector RJ11 Copper Telephone (6P2C) LC Fiber Small form factor; most common in data centers SC Fiber Square connector; &quot;Subscriber Connector&quot; Connector Type Common Use ST Fiber Bayonet-style twist-lock; older installations MPO Fiber Multi-fiber push-on; used for high-density connections F-Type Coaxial Cable TV and broadband internet BNC Coaxial Older networking; video surveillance</li>
+<li>Single-mode fiber for distance; multimode for short campus runs.</li>
+<li>Cat6a supports 10G at full 100 m; Cat8 is data-center short reach.</li>
+<li>PoE budgets must cover total device draw on the switch.</li>
+<li>Match transceiver form factor (SFP, QSFP) to switch and fiber type.</li>
 </ul>
+</div>
+<div class="ut-lesson-depth">
+<h4>Detailed coverage</h4>
+<p><strong>Compare and contrast transmission media and transceivers</strong></p>
+<h5>Copper vs fiber decisions</h5>
+<p>Copper is cost-effective inside buildings; fiber resists EMI and spans longer distances between IDFs or to ISP handoff. Always verify plenum rating in air-handling spaces.</p>
 
-<div class="ut-lesson-supplement">
+<div class="ut-lesson-depth ut-poe-reference">
 <h4>PoE × CAT cable standards reference</h4>
 <!-- Legend -->
 <div class="legend">
@@ -224,31 +250,6 @@
   </div>
 </div>
 </div>
-
-</div>
-<div class="ut-lesson-depth">
-<h4>Detailed coverage</h4>
-<p><strong>Compare and contrast transmission media and transceivers</strong></p>
-<h4>Copper Cabling Standards</h4>
-<table class="ut-lesson-table">
-<thead><tr><th>Cable</th><th>Max speed</th><th>Max distance</th><th>Notes</th></tr></thead>
-<tbody>
-<tr><td>Cat5e</td><td>1 Gbps</td><td>100 m</td><td>Minimum for Gigabit Ethernet</td></tr>
-<tr><td>Cat6</td><td>10 Gbps</td><td>55 m</td><td>Reduced distance at 10G speeds</td></tr>
-<tr><td>Cat6a</td><td>10 Gbps</td><td>100 m</td><td>Augmented Cat6; full 10G over full distance</td></tr>
-<tr><td>Cat7</td><td>10 Gbps</td><td>100 m</td><td>Shielded; not an official TIA standard</td></tr>
-<tr><td>Cat8</td><td>40 Gbps</td><td>30 m</td><td>Data center use only</td></tr>
-</tbody>
-</table>
-<h4>Fiber Optic Cabling</h4>
-<table class="ut-lesson-table">
-<thead><tr><th>Type</th><th>Core size</th><th>Max distance</th><th>Use case</th></tr></thead>
-<tbody>
-<tr><td>Single-mode (SMF)</td><td>8-10 micron</td><td>Up to 100 km</td><td>Long-distance, WAN, ISP backbones</td></tr>
-<tr><td>Multimode (MMF)</td><td>50-62.5 micron</td><td>Up to 2 km</td><td>Short-distance, within buildings</td></tr>
-</tbody>
-</table>
-<div class="highlight-box"><h4>Exam tip</h4><p>Single-mode = Long distance. Multimode = Short distance. Single-mode uses a laser light source and yellow jacket. Multimode uses an LED and orange or aqua jacket. Connector Types Connector Type Common Use RJ45 Copper Ethernet (8P8C) — most common network connector RJ11 Copper Telephone (6P2C) LC Fiber Small form factor; most common in data centers SC Fiber Square connector; &quot;Subscriber Connector&quot; Connector Type Common Use ST Fiber Bayonet-style twist-lock; older installations MPO Fiber Multi-fiber push-on; used for high-density connections F-Type Coaxial Cable TV and broadband internet BNC Coaxial Older networking; video surveillance</p></div>
 </div>
 </div>
 <h4>Next steps</h4>

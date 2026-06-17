@@ -270,6 +270,42 @@ function network_plus_count_tagged_questions(int $categoryid): int {
 }
 
 /**
+ * Count study-guide (_sg) questions already in the bank.
+ *
+ * @param int $categoryid
+ * @return int
+ */
+function network_plus_count_study_guide_questions(int $categoryid): int {
+    global $DB;
+    $count = 0;
+    foreach (network_plus_category_question_ids($categoryid) as $qid) {
+        $name = (string) $DB->get_field('question', 'name', ['id' => $qid]);
+        if (preg_match('/\b(n10009_\d+_\d+_sg\d+)\b/', $name)) {
+            $count++;
+        }
+    }
+    return $count;
+}
+
+/**
+ * Count practice-bank questions (n10009 tags without _sg suffix).
+ *
+ * @param int $categoryid
+ * @return int
+ */
+function network_plus_count_practice_bank_questions(int $categoryid): int {
+    global $DB;
+    $count = 0;
+    foreach (network_plus_category_question_ids($categoryid) as $qid) {
+        $name = (string) $DB->get_field('question', 'name', ['id' => $qid]);
+        if (preg_match('/\b(n10009_\d+_\d+)\b/', $name) && !preg_match('/_sg\d+\b/', $name)) {
+            $count++;
+        }
+    }
+    return $count;
+}
+
+/**
  * Count ::n10009_* questions declared in a GIFT file.
  *
  * @param string $giftpath
@@ -290,9 +326,10 @@ function network_plus_gift_expected_count(string $giftpath): int {
  * @param int $contextid
  * @param stdClass $category
  * @param string $giftpath
+ * @param bool $studyguide True for n10-009-quiz-extra.gift (_sg questions)
  * @return int Number of questions in category after import
  */
-function network_plus_import_gift(int $contextid, stdClass $category, string $giftpath): int {
+function network_plus_import_gift(int $contextid, stdClass $category, string $giftpath, bool $studyguide = false): int {
     global $DB;
 
     if (!is_readable($giftpath)) {
@@ -301,16 +338,20 @@ function network_plus_import_gift(int $contextid, stdClass $category, string $gi
     }
 
     $expected = network_plus_gift_expected_count($giftpath);
-    $tagged = network_plus_count_tagged_questions((int) $category->id);
-    if ($tagged >= 28 && $expected <= 28) {
-        echo "gift_skip_existing tagged={$tagged} expected={$expected} total="
-            . count(network_plus_category_question_ids((int) $category->id)) . "\n";
-        return count(network_plus_category_question_ids((int) $category->id));
-    }
-    if ($expected > 28 && $tagged >= ($expected + 28)) {
-        echo "gift_skip_existing tagged={$tagged} expected_extra={$expected} total="
-            . count(network_plus_category_question_ids((int) $category->id)) . "\n";
-        return count(network_plus_category_question_ids((int) $category->id));
+    if ($studyguide) {
+        $tagged = network_plus_count_study_guide_questions((int) $category->id);
+        if ($tagged >= $expected) {
+            echo "gift_skip_existing sg_tagged={$tagged} expected={$expected} total="
+                . count(network_plus_category_question_ids((int) $category->id)) . "\n";
+            return count(network_plus_category_question_ids((int) $category->id));
+        }
+    } else {
+        $tagged = network_plus_count_practice_bank_questions((int) $category->id);
+        if ($tagged >= $expected) {
+            echo "gift_skip_existing pb_tagged={$tagged} expected={$expected} total="
+                . count(network_plus_category_question_ids((int) $category->id)) . "\n";
+            return count(network_plus_category_question_ids((int) $category->id));
+        }
     }
 
     $context = context::instance_by_id($contextid);
@@ -876,7 +917,7 @@ $giftbase = $repopath . '/content/network-plus/n10-009-quiz.gift';
 $giftextra = $repopath . '/content/network-plus/n10-009-quiz-extra.gift';
 network_plus_import_gift((int) $context->id, $qcat, $giftbase);
 if (is_readable($giftextra)) {
-    network_plus_import_gift((int) $context->id, $qcat, $giftextra);
+    network_plus_import_gift((int) $context->id, $qcat, $giftextra, true);
 }
 
 $allquestionmap = network_plus_map_all_questions_by_objective((int) $qcat->id);

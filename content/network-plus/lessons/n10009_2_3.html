@@ -2,25 +2,59 @@
 <h3>Exam objective N10-009 2.3</h3>
 <p><strong>Given a scenario, select and configure wireless devices and technologies</strong></p>
 <div class="ut-lesson-body">
-<p>802.11 Wireless Standards</p>
-<h4>Standard Frequency Max Speed Key Feature</h4>
-<p>802.11a 5 GHz 54 Mbps First 5 GHz standard 802.11b 2.4 GHz 11 Mbps First widely adopted standard 802.11g 2.4 GHz 54 Mbps Backward compatible with 802.11b 802.11n (Wi-Fi 4) 2.4 / 5 GHz 600 Mbps MIMO introduced 802.11ac (Wi-Fi 5) 5 GHz 3.5 Gbps MU-MIMO; beamforming 802.11ax (Wi-Fi 6) 2.4 / 5 / 6 GHz 9.6 Gbps OFDMA; improved dense environments</p>
-<div class="highlight-box"><h4>Exam tip</h4><p>The 2.4 GHz band has only 3 non-overlapping channels (1, 6, 11). The 5 GHz band has many more non-overlapping channels, making it less susceptible to interference. Wi-Fi 6 (802.11ax) adds the 6 GHz band. Wireless Encryption Protocol Security Level Notes WEP Broken Never use — easily cracked in minutes WPA Weak Uses TKIP — deprecated WPA2 Strong Uses AES/CCMP — current standard WPA3 Strongest SAE replaces PSK; provides forward secrecy Wireless Authentication • PSK (Pre-Shared Key): A single password shared by all users. Suitable for home and small office. • Enterprise (802.1X): Uses a RADIUS server for individual user authentication. Required for corporate environments. AP Deployment • Autonomous AP: Self-contained; configured individually. Good for small deployments. • Lightweight AP (LWAP): Managed centrally by a Wireless LAN Controller (WLC). Required for large enterprise deployments.</p></div>
+<table class="ut-lesson-table">
+<thead><tr><th>Standard</th><th>Frequency</th><th>Max speed</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>802.11a</td><td>5 GHz</td><td>54 Mbps</td><td>First 5 GHz standard</td></tr>
+<tr><td>802.11b</td><td>2.4 GHz</td><td>11 Mbps</td><td>First widely adopted standard</td></tr>
+<tr><td>802.11g</td><td>2.4 GHz</td><td>54 Mbps</td><td>Backward compatible with 802.11b</td></tr>
+<tr><td>802.11n (Wi-Fi 4)</td><td>2.4 / 5 GHz</td><td>600 Mbps</td><td>MIMO introduced</td></tr>
+<tr><td>802.11ac (Wi-Fi 5)</td><td>5 GHz</td><td>3.5 Gbps</td><td>MU-MIMO; beamforming</td></tr>
+<tr><td>802.11ax (Wi-Fi 6)</td><td>2.4 / 5 / 6 GHz</td><td>9.6 Gbps</td><td>OFDMA; improved dense environments</td></tr>
+</tbody>
+</table>
+<h4>Wireless Encryption</h4>
+<table class="ut-lesson-table">
+<thead><tr><th>Protocol</th><th>Security level</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>WEP</td><td>Broken</td><td>Never use — easily cracked in minutes</td></tr>
+<tr><td>WPA</td><td>Weak</td><td>Uses TKIP — deprecated</td></tr>
+<tr><td>WPA2</td><td>Strong</td><td>Uses AES/CCMP — current standard</td></tr>
+<tr><td>WPA3</td><td>Strongest</td><td>SAE replaces PSK; provides forward secrecy</td></tr>
+</tbody>
+</table>
+<h4>Wireless Authentication</h4>
+<ul>
+<li>PSK (Pre-Shared Key): A single password shared by all users. Suitable for home and small office.</li>
+<li>Enterprise (802.1X): Uses a RADIUS server for individual user authentication. Required for corporate environments.</li>
+</ul>
+<h4>AP Deployment</h4>
+<ul>
+<li>Autonomous AP: Self-contained; configured individually. Good for small deployments.</li>
+<li>Lightweight AP (LWAP): Managed centrally by a Wireless LAN Controller (WLC). Required for large enterprise deployments.</li>
+</ul>
 <div class="ut-lesson-supplement">
 <h4>Exam focus</h4>
 <p>Given a scenario, select and configure wireless devices and technologies</p>
 <ul>
-<li>The 2.4 GHz band has only 3 non-overlapping channels (1, 6, 11). The 5 GHz band has many more non-overlapping channels, making it less susceptible to interference. Wi-Fi 6 (802.11ax) adds the 6 GHz band. Wireless Encryption Protocol Security Level Notes WEP Broken Never use — easily cracked in minutes WPA Weak Uses TKIP — deprecated WPA2 Strong Uses AES/CCMP — current standard WPA3 Strongest SAE replaces PSK; provides forward secrecy Wireless Authentication • PSK (Pre-Shared Key): A single password shared by all users. Suitable for home and small office. • Enterprise (802.1X): Uses a RADIUS server for individual user authentication. Required for corporate environments. AP Deployment • Autonomous AP: Self-contained; configured individually. Good for small deployments. • Lightweight AP (LWAP): Managed centrally by a Wireless LAN Controller (WLC). Required for large enterprise deployments.</li>
+<li>2.4 GHz: channels 1, 6, 11 non-overlapping; 5 GHz offers more channels.</li>
+<li>WPA3 preferred over WPA2; never deploy WEP.</li>
+<li>Enterprise WLAN uses 802.1X with RADIUS; PSK for small sites.</li>
+<li>WLC manages lightweight APs; autonomous APs for small deployments.</li>
 </ul>
-
 </div>
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Given a scenario, select and configure wireless devices and technologies</strong></p>
-<p>802.11 Wireless Standards</p>
-<h4>Standard Frequency Max Speed Key Feature</h4>
-<p>802.11a 5 GHz 54 Mbps First 5 GHz standard 802.11b 2.4 GHz 11 Mbps First widely adopted standard 802.11g 2.4 GHz 54 Mbps Backward compatible with 802.11b 802.11n (Wi-Fi 4) 2.4 / 5 GHz 600 Mbps MIMO introduced 802.11ac (Wi-Fi 5) 5 GHz 3.5 Gbps MU-MIMO; beamforming 802.11ax (Wi-Fi 6) 2.4 / 5 / 6 GHz 9.6 Gbps OFDMA; improved dense environments</p>
-<div class="highlight-box"><h4>Exam tip</h4><p>The 2.4 GHz band has only 3 non-overlapping channels (1, 6, 11). The 5 GHz band has many more non-overlapping channels, making it less susceptible to interference. Wi-Fi 6 (802.11ax) adds the 6 GHz band. Wireless Encryption Protocol Security Level Notes WEP Broken Never use — easily cracked in minutes WPA Weak Uses TKIP — deprecated WPA2 Strong Uses AES/CCMP — current standard WPA3 Strongest SAE replaces PSK; provides forward secrecy Wireless Authentication • PSK (Pre-Shared Key): A single password shared by all users. Suitable for home and small office. • Enterprise (802.1X): Uses a RADIUS server for individual user authentication. Required for corporate environments. AP Deployment • Autonomous AP: Self-contained; configured individually. Good for small deployments. • Lightweight AP (LWAP): Managed centrally by a Wireless LAN Controller (WLC). Required for large enterprise deployments.</p></div>
+<h5>RF planning checklist</h5>
+<ul>
+<li>Survey coverage and interference sources before AP placement</li>
+<li>Match channel width to density (narrower in crowded halls)</li>
+<li>Enable band steering to move capable clients to 5/6 GHz</li>
+<li>Validate roaming when VoIP or scanners move between APs</li>
+</ul>
+<h5>Security posture</h5>
+<p>Separate guest SSIDs with client isolation and captive portal policies. Management interfaces should not be reachable from untrusted VLANs.</p>
 </div>
 </div>
 <h4>Next steps</h4>

@@ -1,15 +1,12 @@
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Explain common networking ports, protocols, services, and traffic types</strong></p>
-<p>The following are the most critical ports for the exam. See Appendix B for the complete Port Cheat Sheet.</p>
-<table class="ut-lesson-table">
-<thead><tr><th>Port</th><th>Protocol</th><th>Notes</th></tr></thead>
-<tbody>
-<tr><td>22</td><td>SSH</td><td>Replaces Telnet (23). Always use SSH for secure remote access.</td></tr>
-<tr><td>53</td><td>DNS</td><td>Uses both UDP (queries) and TCP (zone transfers).</td></tr>
-<tr><td>80</td><td>HTTP</td><td>Unencrypted web traffic.</td></tr>
-<tr><td>443</td><td>HTTPS</td><td>Encrypted web traffic (TLS).</td></tr>
-<tr><td>3389</td><td>RDP</td><td>Remote Desktop Protocol. High-value attack target — restrict access.</td></tr>
-</tbody>
-</table>
+<h5>Traffic types in modern networks</h5>
+<p>Unicast is one-to-one delivery. Multicast conserves bandwidth for streaming to groups. Broadcast reaches all hosts on a subnet but is limited in IPv6. Anycast routes to the nearest instance of a service—common for DNS and CDN edges.</p>
+<h5>Protocol selection scenarios</h5>
+<ul>
+<li>File transfer and web sessions typically rely on TCP</li>
+<li>Real-time voice and video tolerate UDP loss with codecs</li>
+<li>ICMP supports diagnostics but is often filtered at the edge</li>
+</ul>
 </div>

@@ -21,7 +21,6 @@
 <tr><td>IaaS</td><td>OS,</td><td>Apps,</td><td>Data Virtualization, Hardware AWS EC2, Azure VMs</td></tr>
 </tbody>
 </table>
-<div class="highlight-box"><h4>Exam tip</h4><p>Know the difference between SaaS, PaaS, and IaaS. If the customer only manages their application and data, it is PaaS. If they manage the OS too, it is IaaS.</p></div>
 <h4 class="ut-visual-representation">Visual Representation: Cloud Service Models</h4>
 <div class="ut-lesson-diagram">
 <div class="diagram-title">SaaS vs PaaS vs IaaS responsibility split</div>
@@ -35,33 +34,17 @@
 <h4>Exam focus</h4>
 <p>Summarize cloud concepts and connectivity options</p>
 <ul>
-<li>Know the difference between SaaS, PaaS, and IaaS. If the customer only manages their application and data, it is PaaS. If they manage the OS too, it is IaaS.</li>
+<li>SaaS = provider runs everything except your data/config.</li>
+<li>PaaS = you bring applications; provider supplies runtime.</li>
+<li>IaaS = you manage OS and above; provider supplies VMs and network.</li>
+<li>Hybrid links on-premises VLANs to cloud VPCs via VPN or dedicated links.</li>
 </ul>
-
 </div>
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Summarize cloud concepts and connectivity options</strong></p>
-<h4>Deployment Models</h4>
-<table class="ut-lesson-table">
-<thead><tr><th>Model</th><th>Description</th><th>Example</th></tr></thead>
-<tbody>
-<tr><td>Public Cloud</td><td>Services</td><td>available to anyone over the internet AWS, Azure, Google Cloud</td></tr>
-<tr><td>Private Cloud</td><td>Dedicated</td><td>infrastructure for a single organization On-premises VMware</td></tr>
-<tr><td>Hybrid Cloud</td><td>Combination</td><td>of public and private cloud Corp data on-prem, apps in AWS</td></tr>
-<tr><td>Community Cloud</td><td>Shared</td><td>by organizations with common interests Government agencies</td></tr>
-</tbody>
-</table>
-<h4>Service Models</h4>
-<table class="ut-lesson-table">
-<thead><tr><th>Model</th><th>You manage</th><th>Provider manages</th><th>Example</th></tr></thead>
-<tbody>
-<tr><td>SaaS</td><td>Nothing</td><td>Everything</td><td>Microsoft 365, Salesforce</td></tr>
-<tr><td>PaaS</td><td>Applications,</td><td>Data</td><td>OS, Runtime, Infrastructure Google App Engine</td></tr>
-<tr><td>IaaS</td><td>OS,</td><td>Apps,</td><td>Data Virtualization, Hardware AWS EC2, Azure VMs</td></tr>
-</tbody>
-</table>
-<div class="highlight-box"><h4>Exam tip</h4><p>Know the difference between SaaS, PaaS, and IaaS. If the customer only manages their application and data, it is PaaS. If they manage the OS too, it is IaaS.</p></div>
+<h5>Cloud connectivity patterns</h5>
+<p>Private subnets in a VPC reach the internet through a NAT gateway while public subnets use an internet gateway. Site-to-site VPN extends corporate address space into the cloud control plane.</p>
 </div>
 </div>
 <h4>Next steps</h4>

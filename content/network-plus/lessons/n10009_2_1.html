@@ -22,7 +22,18 @@
 <h4>EIGRP (Internal) 90</h4>
 <h4>OSPF 110</h4>
 <h4>RIP 120</h4>
-<div class="highlight-box"><h4>Exam tip</h4><p>If two routes have the same AD, the router uses the metric to choose. If both AD and metric are equal, the router will load-balance across both paths. Address Translation • NAT (Network Address Translation): Translates private IP addresses to a public IP address. • PAT (Port Address Translation): Maps multiple private IPs to a single public IP using different port numbers. Also called &quot;NAT Overload.&quot; This is what your home router does. First Hop Redundancy Protocol (FHRP) Provides a virtual default gateway shared between multiple routers, ensuring clients can still reach the internet if one router fails. • HSRP (Hot Standby Router Protocol): Cisco proprietary. • VRRP (Virtual Router Redundancy Protocol): Open standard.</p></div>
+<h4>Address Translation</h4>
+<p>Also called &quot;NAT Overload.&quot; This is what your home router does.</p>
+<ul>
+<li>NAT (Network Address Translation): Translates private IP addresses to a public IP address.</li>
+<li>PAT (Port Address Translation): Maps multiple private IPs to a single public IP using different port numbers.</li>
+</ul>
+<h4>First Hop Redundancy Protocol (FHRP)</h4>
+<p>Provides a virtual default gateway shared between multiple routers, ensuring clients can still reach the internet if one router fails.</p>
+<ul>
+<li>HSRP (Hot Standby Router Protocol): Cisco proprietary.</li>
+<li>VRRP (Virtual Router Redundancy Protocol): Open standard.</li>
+</ul>
 <h4 class="ut-visual-representation">Visual Representation: Route Selection</h4>
 <div class="ut-lesson-diagram">
 <div class="diagram-title">Administrative distance (lower = preferred)</div>
@@ -39,34 +50,17 @@
 <h4>Exam focus</h4>
 <p>Explain characteristics of routing technologies</p>
 <ul>
-<li>If two routes have the same AD, the router uses the metric to choose. If both AD and metric are equal, the router will load-balance across both paths. Address Translation • NAT (Network Address Translation): Translates private IP addresses to a public IP address. • PAT (Port Address Translation): Maps multiple private IPs to a single public IP using different port numbers. Also called &quot;NAT Overload.&quot; This is what your home router does. First Hop Redundancy Protocol (FHRP) Provides a virtual default gateway shared between multiple routers, ensuring clients can still reach the internet if one router fails. • HSRP (Hot Standby Router Protocol): Cisco proprietary. • VRRP (Virtual Router Redundancy Protocol): Open standard.</li>
+<li>Lower administrative distance wins when protocols disagree.</li>
+<li>Static routes for stub networks; dynamic for large topologies.</li>
+<li>PAT overloads many internal hosts onto one public IP.</li>
+<li>FHRP provides a virtual default gateway for hosts.</li>
 </ul>
-
 </div>
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Explain characteristics of routing technologies</strong></p>
-<h4>Static vs. Dynamic Routing</h4>
-<h4>Feature Static Routing Dynamic Routing</h4>
-<p>Configuration Manual by admin Automatic via protocol</p>
-<h4>Scalability Poor (large networks) Excellent</h4>
-<h4>Overhead None Uses bandwidth and CPU</h4>
-<p>Use Case Small networks, stub routes Large, complex networks</p>
-<h4>Dynamic Routing Protocols</h4>
-<h4>Protocol Type Algorithm Metric Use Case</h4>
-<p>RIP Distance-vector Bellman-Ford Hop count (max 15) Small, legacy networks OSPF Link-state Dijkstra (SPF) Cost (bandwidth) Large enterprise networks</p>
-<h4>EIGRP Advanced distance-vector</h4>
-<h4>DUAL Bandwidth + Delay Cisco environments</h4>
-<p>BGP Path-vector Best Path AS Path, Policy Internet routing (ISPs) Administrative Distance (AD) — Route Selection Priority When a router has multiple routes to the same destination, it uses Administrative Distance to choose the best one.</p>
-<h4>Lower AD = more trusted source.</h4>
-<h4>Route Source Administrative Distance</h4>
-<h4>Directly Connected 0</h4>
-<h4>Static Route 1</h4>
-<h4>BGP (External) 20</h4>
-<h4>EIGRP (Internal) 90</h4>
-<h4>OSPF 110</h4>
-<h4>RIP 120</h4>
-<div class="highlight-box"><h4>Exam tip</h4><p>If two routes have the same AD, the router uses the metric to choose. If both AD and metric are equal, the router will load-balance across both paths. Address Translation • NAT (Network Address Translation): Translates private IP addresses to a public IP address. • PAT (Port Address Translation): Maps multiple private IPs to a single public IP using different port numbers. Also called &quot;NAT Overload.&quot; This is what your home router does. First Hop Redundancy Protocol (FHRP) Provides a virtual default gateway shared between multiple routers, ensuring clients can still reach the internet if one router fails. • HSRP (Hot Standby Router Protocol): Cisco proprietary. • VRRP (Virtual Router Redundancy Protocol): Open standard.</p></div>
+<h5>Route selection in practice</h5>
+<p>When two routes share the same AD, the router compares metric (hop count, cost, or bandwidth). Floating static routes can back up dynamic protocols if configured with higher AD.</p>
 </div>
 </div>
 <h4>Next steps</h4>

@@ -82,7 +82,7 @@ export function repairSectionLines(lines) {
       }
       continue;
     }
-    if (/^(\d+)\s+/.test(line) && !/^(\d+)\.(\d+)\s/.test(line)) {
+    if (/^(\d+)\s+/.test(line) && !/^(\d+)\.(\d+)\s/.test(line) && !/^\d+ EXAM TIP/.test(line)) {
       let buf = line;
       i += 1;
       while (
@@ -103,6 +103,63 @@ export function repairSectionLines(lines) {
     i += 1;
   }
   out = out.filter((l) => l !== 'Action Key Activities' && l !== 'Cause' && l !== 'Escalate' && l !== 'Functionality');
+  return out.flatMap(explodeMashedWirelessLine);
+}
+
+/**
+ * Split PDF repair artifacts where EXAM TIP and wireless subsections merge into one line.
+ * @param {string} line
+ * @returns {string[]}
+ */
+function explodeMashedWirelessLine(line) {
+  if (!/^\d+ EXAM TIP/.test(line) || !line.includes('Wireless Encryption')) {
+    return [line];
+  }
+  /** @type {string[]} */
+  const out = [];
+  const examMatch = line.match(/^(\d+) EXAM TIP\s+/);
+  if (!examMatch) {
+    return [line];
+  }
+  out.push(`${examMatch[1]} EXAM TIP`);
+  let rest = line.slice(examMatch[0].length);
+
+  const encIdx = rest.indexOf('Wireless Encryption');
+  if (encIdx > 0) {
+    out.push(rest.slice(0, encIdx).trim());
+    rest = rest.slice(encIdx);
+  }
+
+  rest = rest.replace(/^Wireless Encryption\s+Protocol Security Level Notes\s*/, '');
+  out.push('Wireless Encryption');
+  out.push('Protocol Security Level Notes');
+
+  const authIdx = rest.indexOf('Wireless Authentication');
+  const encText = authIdx >= 0 ? rest.slice(0, authIdx).trim() : rest;
+  const encRows = encText.split(/\s+(?=WEP\s|WPA2?\s|WPA3\s)/);
+  for (const row of encRows) {
+    if (row.trim()) {
+      out.push(row.trim());
+    }
+  }
+
+  if (authIdx >= 0) {
+    rest = rest.slice(authIdx);
+    out.push('Wireless Authentication');
+    const apIdx = rest.indexOf('AP Deployment');
+    const authText = apIdx >= 0 ? rest.slice('Wireless Authentication'.length, apIdx) : rest.slice('Wireless Authentication'.length);
+    for (const bullet of authText.split(/•/).map((b) => b.trim()).filter(Boolean)) {
+      out.push(`• ${bullet}`);
+    }
+    if (apIdx >= 0) {
+      out.push('AP Deployment');
+      const apText = rest.slice(apIdx + 'AP Deployment'.length);
+      for (const bullet of apText.split(/•/).map((b) => b.trim()).filter(Boolean)) {
+        out.push(`• ${bullet}`);
+      }
+    }
+  }
+
   return out;
 }
 
@@ -312,6 +369,24 @@ const TABLE_TYPES = {
       return m ? [m[1], m[2], m[3]] : null;
     },
   },
+  wifiStandard: {
+    header: ['Standard', 'Frequency', 'Max speed', 'Notes'],
+    testHeader: /^Standard Frequency Max Speed Key Feature$/i,
+    parseRow(line) {
+      const m = line.match(
+        /^(802\.11[\w()-]+(?:\s*\([^)]+\))?)\s+([\d./\s]+GHz)\s+([\d.]+\s*[GMK]?bps)\s+(.+)$/i
+      );
+      return m ? [m[1], m[2].replace(/\s+/g, ' ').trim(), m[3], m[4]] : null;
+    },
+  },
+  wirelessEnc: {
+    header: ['Protocol', 'Security level', 'Notes'],
+    testHeader: /^Protocol Security Level Notes$/i,
+    parseRow(line) {
+      const m = line.match(/^(WEP|WPA2?|WPA3)\s+(\S+)\s+(.+)$/i);
+      return m ? [m[1], m[2], m[3]] : null;
+    },
+  },
   cloudModel: {
     header: ['Model', 'Description', 'Example'],
     testHeader: /^Model Description Example$/i,
@@ -438,9 +513,11 @@ function structuredTableToHtml(tableType, rows) {
  */
 /**
  * @param {string[]} lines
+ * @param {{ stripCallouts?: boolean }} [options]
  * @returns {string}
  */
-export function orangeLinesToHtml(lines) {
+export function orangeLinesToHtml(lines, options = {}) {
+  const { stripCallouts = false } = options;
   const merged = mergeWrappedLines(lines);
   const out = [];
   /** @type {string[]} */
@@ -477,11 +554,13 @@ export function orangeLinesToHtml(lines) {
     if (!callout) {
       return;
     }
-    const cls = callout.type === 'pro' ? 'key-concepts' : 'highlight-box';
-    const label = callout.type === 'pro' ? 'Pro tip' : 'Exam tip';
-    out.push(
-      `<div class="${cls}"><h4>${label}</h4><p>${escapeHtml(callout.lines.join(' '))}</p></div>`
-    );
+    if (!stripCallouts) {
+      const cls = callout.type === 'pro' ? 'key-concepts' : 'highlight-box';
+      const label = callout.type === 'pro' ? 'Pro tip' : 'Exam tip';
+      out.push(
+        `<div class="${cls}"><h4>${label}</h4><p>${escapeHtml(callout.lines.join(' '))}</p></div>`
+      );
+    }
     callout = null;
   };
   const flushAll = () => {
@@ -514,13 +593,50 @@ export function orangeLinesToHtml(lines) {
       continue;
     }
     if (callout) {
-      callout.lines.push(line);
-      continue;
+      const endsCallout =
+        isSubheading(line) ||
+        detectTableType(line) ||
+        /^802\.11/.test(line) ||
+        /^(WEP|WPA2?|WPA3)\s+/.test(line) ||
+        /^[•]/.test(line) ||
+        /^n /.test(line);
+      if (endsCallout) {
+        flushCallout();
+      } else {
+        callout.lines.push(line);
+        continue;
+      }
     }
 
     if (line.startsWith('Memory Aid:')) {
       flushAll();
-      out.push(`<p><strong>${escapeHtml(line)}</strong></p>`);
+      if (!stripCallouts) {
+        out.push(`<p><strong>${escapeHtml(line)}</strong></p>`);
+      }
+      continue;
+    }
+
+    if (/^802\.11/.test(line) && !tableType) {
+      flushPara();
+      flushUl();
+      flushTable();
+      tableType = 'wifiStandard';
+      const row = parseStructuredRow(line, tableType);
+      if (row) {
+        tableRows.push(row);
+      }
+      continue;
+    }
+
+    if (/^(WEP|WPA2?|WPA3)\s+/.test(line) && !tableType) {
+      flushPara();
+      flushUl();
+      flushTable();
+      tableType = 'wirelessEnc';
+      const row = parseStructuredRow(line, tableType);
+      if (row) {
+        tableRows.push(row);
+      }
       continue;
     }
 

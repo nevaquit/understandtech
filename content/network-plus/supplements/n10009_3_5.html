@@ -2,13 +2,9 @@
 <h4>Exam focus</h4>
 <p>Compare and contrast network access and management methods</p>
 <ul>
-<li>Split Tunnel: Only corporate traffic goes through the VPN; internet traffic goes directly. More efficient but less secure.</li>
-<li>Full Tunnel: All traffic routes through the VPN. More secure but uses more corporate bandwidth.</li>
-<li>Jump Box/Bastion Host: A hardened server used as a single point of entry for managing devices in a secure network segment.</li>
-<li>In-Band Management: Network management traffic shares the same network as production traffic.</li>
-<li>Out-of-Band (OOB) Management: Dedicated management network, separate from production. Used when the primary network is down.</li>
-<li>GUI (Graphical User Interface): Managing devices via a web browser (HTTPS). Easier but sometimes less powerful than CLI.</li>
-<li>NTS (Network Time Security): Adds cryptographic security to NTP to prevent time-spoofing attacks.</li>
+<li>Split tunnel sends only corporate traffic through VPN.</li>
+<li>Full tunnel forces all Internet via corporate security stack.</li>
+<li>Out-of-band management uses dedicated management VLAN or serial.</li>
+<li>Jump hosts reduce direct exposure of core device CLIs.</li>
 </ul>
-
 </div>

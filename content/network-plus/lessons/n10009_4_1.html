@@ -18,7 +18,18 @@
 <h4>Identity and Access Management (IAM)</h4>
 <h4>Technology Function</h4>
 <p>MFA Requires two or more verification factors (something you know, have, or are) SSO (Single Sign-On) One set of credentials grants access to multiple applications RADIUS Centralized AAA (Authentication, Authorization, Accounting) for network access LDAP Protocol for accessing and maintaining directory services (e.g., Active Directory) SAML XML-based standard for exchanging authentication data between identity provider and service provider TACACS+ Cisco's AAA protocol; separates authentication, authorization, and accounting; encrypts entire payload</p>
-<div class="key-concepts"><h4>Pro tip</h4><p>RADIUS vs. TACACS+: RADIUS is an open standard and encrypts only the password. TACACS+ is Cisco proprietary and encrypts the entire payload. TACACS+ is preferred for device administration (routers, switches). RADIUS is preferred for network access (VPN, 802.1X). Access Control Concepts • Role-Based Access Control (RBAC): Assigning permissions based on a user's job function rather than individually. • Least Privilege: Giving users only the minimum permissions necessary to do their job. • Time-based Authentication: Restricting access to specific hours (e.g., 9 AM to 5 PM). Physical Security • Cameras: Provide surveillance and deterrence. • Locks: Prevent unauthorized physical access to equipment rooms and racks. • Geofencing: Creating a virtual geographic boundary that triggers an action when a device enters or exits.</p></div>
+<h4>Access Control Concepts</h4>
+<ul>
+<li>Role-Based Access Control (RBAC): Assigning permissions based on a user's job function rather than individually.</li>
+<li>Least Privilege: Giving users only the minimum permissions necessary to do their job.</li>
+<li>Time-based Authentication: Restricting access to specific hours (e.g., 9 AM to 5 PM).</li>
+</ul>
+<h4>Physical Security</h4>
+<ul>
+<li>Cameras: Provide surveillance and deterrence.</li>
+<li>Locks: Prevent unauthorized physical access to equipment rooms and racks.</li>
+<li>Geofencing: Creating a virtual geographic boundary that triggers an action when a device enters or exits.</li>
+</ul>
 <h4 class="ut-visual-representation">Visual Representation: Defense in Depth</h4>
 <div class="ut-lesson-diagram">
 <div class="diagram-title">Layered network security controls</div>
@@ -36,34 +47,21 @@
 <h4>Exam focus</h4>
 <p>Explain the importance of basic network security concepts</p>
 <ul>
-<li>Risk: The likelihood that a threat will exploit a vulnerability.</li>
-<li>Vulnerability: A weakness in a system or process.</li>
-<li>Exploit: A tool or technique used to take advantage of a vulnerability.</li>
-<li>Threat: Any potential danger to an asset.</li>
-<li>RADIUS vs. TACACS+: RADIUS is an open standard and encrypts only the password. TACACS+ is Cisco proprietary and encrypts the entire payload. TACACS+ is preferred for device administration (routers, switches). RADIUS is preferred for network access (VPN, 802.1X). Access Control Concepts • Role-Based Access Control (RBAC): Assigning permissions based on a user's job function rather than individually. • Least Privilege: Giving users only the minimum permissions necessary to do their job. • Time-based Authentication: Restricting access to specific hours (e.g., 9 AM to 5 PM). Physical Security • Cameras: Provide surveillance and deterrence. • Locks: Prevent unauthorized physical access to equipment rooms and racks. • Geofencing: Creating a virtual geographic boundary that triggers an action when a device enters or exits.</li>
+<li>CIA triad guides control selection for confidentiality, integrity, availability.</li>
+<li>MFA and SSO reduce password reuse risk.</li>
+<li>Segmentation limits lateral movement after compromise.</li>
+<li>Certificates and PKI underpin TLS and 802.1X.</li>
 </ul>
-
 </div>
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Explain the importance of basic network security concepts</strong></p>
-<h4>Common Security Terminology</h4>
+<h5>Defense in depth</h5>
 <ul>
-<li>Risk: The likelihood that a threat will exploit a vulnerability.</li>
-<li>Vulnerability: A weakness in a system or process.</li>
-<li>Exploit: A tool or technique used to take advantage of a vulnerability.</li>
-<li>Threat: Any potential danger to an asset.</li>
+<li>Perimeter filtering plus internal micro-segmentation</li>
+<li>Least privilege for admin and service accounts</li>
+<li>Physical controls complement logical policies</li>
 </ul>
-<h4>The CIA Triad</h4>
-<h4>Principle Definition Implementation</h4>
-<p>Confidentiality Data is only accessible to authorized parties</p>
-<h4>Encryption, access controls, MFA</h4>
-<p>Integrity Data is not altered or tampered with Hashing (MD5, SHA), digital signatures Availability Data and services are accessible when needed</p>
-<h4>Redundancy, backups, DDoS protection</h4>
-<h4>Identity and Access Management (IAM)</h4>
-<h4>Technology Function</h4>
-<p>MFA Requires two or more verification factors (something you know, have, or are) SSO (Single Sign-On) One set of credentials grants access to multiple applications RADIUS Centralized AAA (Authentication, Authorization, Accounting) for network access LDAP Protocol for accessing and maintaining directory services (e.g., Active Directory) SAML XML-based standard for exchanging authentication data between identity provider and service provider TACACS+ Cisco's AAA protocol; separates authentication, authorization, and accounting; encrypts entire payload</p>
-<div class="key-concepts"><h4>Pro tip</h4><p>RADIUS vs. TACACS+: RADIUS is an open standard and encrypts only the password. TACACS+ is Cisco proprietary and encrypts the entire payload. TACACS+ is preferred for device administration (routers, switches). RADIUS is preferred for network access (VPN, 802.1X). Access Control Concepts • Role-Based Access Control (RBAC): Assigning permissions based on a user's job function rather than individually. • Least Privilege: Giving users only the minimum permissions necessary to do their job. • Time-based Authentication: Restricting access to specific hours (e.g., 9 AM to 5 PM). Physical Security • Cameras: Provide surveillance and deterrence. • Locks: Prevent unauthorized physical access to equipment rooms and racks. • Geofencing: Creating a virtual geographic boundary that triggers an action when a device enters or exits.</p></div>
 </div>
 </div>
 <h4>Next steps</h4>

@@ -17,8 +17,20 @@
 <li>Loopback/Localhost: 127.0.0.1 — tests the local network stack.</li>
 <li>APIPA: 169.254.x.x — automatically assigned when DHCP fails.</li>
 </ul>
-<div class="highlight-box"><h4>Exam tip</h4><p>If a device has a 169.254.x.x address, it cannot reach the DHCP server. This is the first thing to check when a user reports &quot;no internet connection.&quot; Verify the DHCP server is running and the physical connection is good. Subnetting Quick Reference (CIDR Cheat Sheet) CIDR Subnet Mask Network Bits Host Bits Total Addresses Usable Hosts /24 255.255.255.0 24 8 256 254 /25 255.255.255.128 25 7 128 126 /26 255.255.255.192 26 6 64 62 /27 255.255.255.224 27 5 32 30 /28 255.255.255.240 28 4 16 14 /29 255.255.255.248 29 3 8 6 /30 255.255.255.252 30 2 4 2 Formula: Usable Hosts = 2^(host bits) - 2</p></div>
-<div class="key-concepts"><h4>Pro tip</h4><p>The Magic Number Method: Subtract the last non-zero octet of the subnet mask from 256 to find the block size. For /26 (255.255.255.192): 256 - 192 = 64. Subnets start at 0, 64, 128, 192. If a host has IP 192.168.1.75 with /26, it is in the 192.168.1.64 subnet (range .64-.127).</p></div>
+<h4>Subnetting Quick Reference (CIDR Cheat Sheet)</h4>
+<table class="ut-lesson-table">
+<thead><tr><th>CIDR</th><th>Subnet mask</th><th>Network bits</th><th>Host bits</th><th>Total addresses</th><th>Usable hosts</th></tr></thead>
+<tbody>
+<tr><td>/24</td><td>255.255.255.0</td><td>24</td><td>8</td><td>256</td><td>254</td></tr>
+<tr><td>/25</td><td>255.255.255.128</td><td>25</td><td>7</td><td>128</td><td>126</td></tr>
+<tr><td>/26</td><td>255.255.255.192</td><td>26</td><td>6</td><td>64</td><td>62</td></tr>
+<tr><td>/27</td><td>255.255.255.224</td><td>27</td><td>5</td><td>32</td><td>30</td></tr>
+<tr><td>/28</td><td>255.255.255.240</td><td>28</td><td>4</td><td>16</td><td>14</td></tr>
+<tr><td>/29</td><td>255.255.255.248</td><td>29</td><td>3</td><td>8</td><td>6</td></tr>
+<tr><td>/30</td><td>255.255.255.252</td><td>30</td><td>2</td><td>4</td><td>2</td></tr>
+</tbody>
+</table>
+<p>Formula: Usable Hosts = 2^(host bits) - 2</p>
 <h4 class="ut-visual-representation">Visual Representation: IPv4 Subnetting</h4>
 <div class="ut-lesson-diagram">
 <div class="diagram-title">CIDR block sizes (common exam values)</div>
@@ -34,33 +46,22 @@
 <h4>Exam focus</h4>
 <p>Given a scenario, use appropriate IPv4 network addressing</p>
 <ul>
-<li>Loopback/Localhost: 127.0.0.1 — tests the local network stack.</li>
-<li>APIPA: 169.254.x.x — automatically assigned when DHCP fails.</li>
-<li>If a device has a 169.254.x.x address, it cannot reach the DHCP server. This is the first thing to check when a user reports &quot;no internet connection.&quot; Verify the DHCP server is running and the physical connection is good. Subnetting Quick Reference (CIDR Cheat Sheet) CIDR Subnet Mask Network Bits Host Bits Total Addresses Usable Hosts /24 255.255.255.0 24 8 256 254 /25 255.255.255.128 25 7 128 126 /26 255.255.255.192 26 6 64 62 /27 255.255.255.224 27 5 32 30 /28 255.255.255.240 28 4 16 14 /29 255.255.255.248 29 3 8 6 /30 255.255.255.252 30 2 4 2 Formula: Usable Hosts = 2^(host bits) - 2</li>
-<li>The Magic Number Method: Subtract the last non-zero octet of the subnet mask from 256 to find the block size. For /26 (255.255.255.192): 256 - 192 = 64. Subnets start at 0, 64, 128, 192. If a host has IP 192.168.1.75 with /26, it is in the 192.168.1.64 subnet (range .64-.127).</li>
+<li>Usable hosts = 2^host_bits − 2 for standard subnets.</li>
+<li>APIPA 169.254.x.x indicates DHCP failure.</li>
+<li>Private ranges: 10/8, 172.16–31/12, 192.168/16.</li>
+<li>VLSM allows different mask lengths within one routing domain.</li>
 </ul>
-
 </div>
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Given a scenario, use appropriate IPv4 network addressing</strong></p>
-<h4>IP Address Classes</h4>
-<table class="ut-lesson-table">
-<thead><tr><th>Class</th><th>First octet</th><th>Default mask</th><th>Private range</th></tr></thead>
-<tbody>
-<tr><td>A</td><td>1-126</td><td>255.0.0.0</td><td>(/8) 10.0.0.0 – 10.255.255.255</td></tr>
-<tr><td>B</td><td>128-191</td><td>255.255.0.0</td><td>(/16) 172.16.0.0 – 172.31.255.255</td></tr>
-<tr><td>C</td><td>192-223</td><td>255.255.255.0</td><td>(/24) 192.168.0.0 – 192.168.255.255</td></tr>
-<tr><td>D</td><td>224-239</td><td>N/A</td><td>Multicast (no private range)</td></tr>
-<tr><td>E</td><td>240-255</td><td>N/A</td><td>Experimental/Reserved</td></tr>
-</tbody>
-</table>
+<h5>Subnetting workflow</h5>
 <ul>
-<li>Loopback/Localhost: 127.0.0.1 — tests the local network stack.</li>
-<li>APIPA: 169.254.x.x — automatically assigned when DHCP fails.</li>
+<li>Confirm required host count and subnet count</li>
+<li>Choose mask; list network/broadcast for each subnet</li>
+<li>Reserve gateway and infrastructure addresses first</li>
+<li>Document allocations in IPAM to prevent overlap</li>
 </ul>
-<div class="highlight-box"><h4>Exam tip</h4><p>If a device has a 169.254.x.x address, it cannot reach the DHCP server. This is the first thing to check when a user reports &quot;no internet connection.&quot; Verify the DHCP server is running and the physical connection is good. Subnetting Quick Reference (CIDR Cheat Sheet) CIDR Subnet Mask Network Bits Host Bits Total Addresses Usable Hosts /24 255.255.255.0 24 8 256 254 /25 255.255.255.128 25 7 128 126 /26 255.255.255.192 26 6 64 62 /27 255.255.255.224 27 5 32 30 /28 255.255.255.240 28 4 16 14 /29 255.255.255.248 29 3 8 6 /30 255.255.255.252 30 2 4 2 Formula: Usable Hosts = 2^(host bits) - 2</p></div>
-<div class="key-concepts"><h4>Pro tip</h4><p>The Magic Number Method: Subtract the last non-zero octet of the subnet mask from 256 to find the block size. For /26 (255.255.255.192): 256 - 192 = 64. Subnets start at 0, 64, 128, 192. If a host has IP 192.168.1.75 with /26, it is in the 192.168.1.64 subnet (range .64-.127).</p></div>
 </div>
 </div>
 <h4>Next steps</h4>

@@ -94,5 +94,6 @@ runNode('extract-network-plus-course-notes.mjs');
 runNode('extract-network-plus-lessons.mjs');
 runNode('build-network-plus-quiz-from-practice-bank.cjs');
 runNode('generate-network-plus-quiz-gift.mjs');
+runNode('verify-network-plus-dedup.mjs');
 
 console.log('network-plus content build complete');

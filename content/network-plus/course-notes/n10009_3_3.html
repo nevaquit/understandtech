@@ -1,16 +1,6 @@
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Explain disaster recovery (DR) concepts</strong></p>
-<h4>Critical DR Metrics</h4>
-<p>Metric Definition Key Question</p>
-<h4>RPO (Recovery Point</h4>
-<h4>Objective)</h4>
-<p>Maximum acceptable data loss (measured in time) &quot;How much data can we afford to lose?&quot; Metric Definition Key Question</p>
-<h4>RTO (Recovery Time</h4>
-<h4>Objective)</h4>
-<p>Maximum acceptable downtime &quot;How fast must we be back online?&quot; MTTR (Mean Time to Repair) Average time to repair a failed component &quot;How long does it take to fix?&quot;</p>
-<h4>MTBF (Mean Time Between</h4>
-<h4>Failures)</h4>
-<p>Average time between failures &quot;How reliable is the system?&quot;</p>
-<div class="highlight-box"><h4>Exam tip</h4><p>RPO is about data loss; RTO is about downtime. A lower RPO requires more frequent backups. A lower RTO requires more redundant infrastructure (like a hot site). DR Site Types Site Type Equipment Data Cost Recovery Time Cold Site None (empty facility) None (restore from backup) Low Days to weeks Warm Site Some equipment pre-staged Periodic backups Medium Hours to days Hot Site Fully operational Real-time or near-real-time sync High Minutes to hours DR Testing Methods • Tabletop Exercises: Discussion-based walkthrough of the DR plan with key personnel. No systems are actually failed over. • Validation Tests: Actually failing over systems to verify the DR plan works technically. High Availability (HA) Approaches • Active-Active: Both nodes handle traffic simultaneously. If one fails, the other absorbs the load. Higher performance. • Active-Passive: One node handles traffic; the other is on standby. Simpler but less efficient.</p></div>
+<h5>Measuring resilience</h5>
+<p>MTBF and MTTR inform hardware refresh and staffing. Test restores regularly—an untested backup is only a hope, not a plan.</p>
 </div>

@@ -45,7 +45,7 @@ async function main() {
   let written = 0;
   for (const obj of objectives) {
     const lines = sections.get(obj.shortname);
-    let body = lines ? orangeLinesToHtml(lines) : '';
+    let body = lines ? orangeLinesToHtml(lines, { stripCallouts: true }) : '';
     if (!body) {
       body = '<p><em>Study guide section pending — review the Orange Study Guide PDF for this objective.</em></p>';
     }

@@ -1,24 +1,202 @@
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Compare and contrast transmission media and transceivers</strong></p>
-<h4>Copper Cabling Standards</h4>
-<table class="ut-lesson-table">
-<thead><tr><th>Cable</th><th>Max speed</th><th>Max distance</th><th>Notes</th></tr></thead>
-<tbody>
-<tr><td>Cat5e</td><td>1 Gbps</td><td>100 m</td><td>Minimum for Gigabit Ethernet</td></tr>
-<tr><td>Cat6</td><td>10 Gbps</td><td>55 m</td><td>Reduced distance at 10G speeds</td></tr>
-<tr><td>Cat6a</td><td>10 Gbps</td><td>100 m</td><td>Augmented Cat6; full 10G over full distance</td></tr>
-<tr><td>Cat7</td><td>10 Gbps</td><td>100 m</td><td>Shielded; not an official TIA standard</td></tr>
-<tr><td>Cat8</td><td>40 Gbps</td><td>30 m</td><td>Data center use only</td></tr>
-</tbody>
+<h5>Copper vs fiber decisions</h5>
+<p>Copper is cost-effective inside buildings; fiber resists EMI and spans longer distances between IDFs or to ISP handoff. Always verify plenum rating in air-handling spaces.</p>
+
+<div class="ut-lesson-depth ut-poe-reference">
+<h4>PoE × CAT cable standards reference</h4>
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" ></div> Fully Supported</div>
+  <div class="legend-item"><div class="legend-dot" ></div> Conditionally Supported</div>
+  <div class="legend-item"><div class="legend-dot" ></div> Not Supported</div>
+</div>
+
+<!-- Main Table -->
+<div class="table-wrapper">
+<table>
+  <colgroup>
+    <col class="c-cat">
+    <col class="c-speed">
+    <col class="c-dist">
+    <col class="c-poe"><col class="c-poew">
+    <col class="c-poe"><col class="c-poew">
+    <col class="c-poe"><col class="c-poew">
+    <col class="c-poe"><col class="c-poew">
+  </colgroup>
+  <thead>
+    <tr class="group-row">
+      <th class="left" colspan="3">Cable</th>
+      <th colspan="2">PoE · 802.3af</th>
+      <th colspan="2">PoE+ · 802.3at</th>
+      <th colspan="2">PoE++ Type 3 · 802.3bt</th>
+      <th colspan="2">PoE++ Type 4 · 802.3bt</th>
+    </tr>
+    <tr class="col-row">
+      <th class="left">CAT<small>Category</small></th>
+      <th>Speed<small>Max</small></th>
+      <th>Dist.<small>meters</small></th>
+      <th>Supp.<small>—</small></th>
+      <th>PSE W<small>output</small></th>
+      <th>Supp.<small>—</small></th>
+      <th>PSE W<small>output</small></th>
+      <th>Supp.<small>—</small></th>
+      <th>PSE W<small>output</small></th>
+      <th>Supp.<small>—</small></th>
+      <th>PSE W<small>output</small></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr class="section-label"><td colspan="11">▸ Legacy</td></tr>
+
+    <tr>
+      <td class="cat-col">CAT 3<span class="sub">10BASE-T</span></td>
+      <td class="info">10 Mbps</td>
+      <td class="info">100 m</td>
+      <td><span class="chip chip-partial">PART</span><span class="pval">15.4 W</span></td>
+      <td></td>
+      <td><span class="chip chip-no">NO</span><span class="pval na">—</span></td>
+      <td></td>
+      <td><span class="chip chip-no">NO</span><span class="pval na">—</span></td>
+      <td></td>
+      <td><span class="chip chip-no">NO</span><span class="pval na">—</span></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td class="cat-col">CAT 5<span class="sub">100BASE-TX</span></td>
+      <td class="info">100 Mbps</td>
+      <td class="info">100 m</td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">15.4 W</span></td>
+      <td></td>
+      <td><span class="chip chip-partial">PART</span><span class="pval">30 W</span></td>
+      <td></td>
+      <td><span class="chip chip-no">NO</span><span class="pval na">—</span></td>
+      <td></td>
+      <td><span class="chip chip-no">NO</span><span class="pval na">—</span></td>
+      <td></td>
+    </tr>
+
+    <tr class="section-label"><td colspan="11">▸ Common Deployment</td></tr>
+
+    <tr>
+      <td class="cat-col">CAT 5e<span class="sub">1000BASE-T</span></td>
+      <td class="info">1 Gbps</td>
+      <td class="info">100 m</td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">15.4 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">30 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">60 W</span></td>
+      <td></td>
+      <td><span class="chip chip-no">NO</span><span class="pval na">—</span></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td class="cat-col">CAT 6<span class="sub">1000BASE-T</span></td>
+      <td class="info">1 Gbps</td>
+      <td class="info">100 m</td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">15.4 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">30 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">60 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">100 W</span></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td class="cat-col">CAT 6a<span class="sub">10GBASE-T</span></td>
+      <td class="info">10 Gbps</td>
+      <td class="info">100 m</td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">15.4 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">30 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">60 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">100 W</span></td>
+      <td></td>
+    </tr>
+
+    <tr class="section-label"><td colspan="11">▸ High-Performance / Enterprise</td></tr>
+
+    <tr>
+      <td class="cat-col">CAT 7<span class="sub">10GBASE-T</span></td>
+      <td class="info">10 Gbps</td>
+      <td class="info">100 m</td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">15.4 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">30 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">60 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">100 W</span></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td class="cat-col">CAT 7a<span class="sub">40GBASE-T</span></td>
+      <td class="info">40 Gbps</td>
+      <td class="info">50 m</td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">15.4 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">30 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">60 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">100 W</span></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td class="cat-col">CAT 8<span class="sub">40GBASE-T</span></td>
+      <td class="info">40 Gbps</td>
+      <td class="info">30 m</td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">15.4 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval">30 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">60 W</span></td>
+      <td></td>
+      <td><span class="chip chip-yes">YES</span><span class="pval high">100 W</span></td>
+      <td></td>
+    </tr>
+
+  </tbody>
 </table>
-<h4>Fiber Optic Cabling</h4>
-<table class="ut-lesson-table">
-<thead><tr><th>Type</th><th>Core size</th><th>Max distance</th><th>Use case</th></tr></thead>
-<tbody>
-<tr><td>Single-mode (SMF)</td><td>8-10 micron</td><td>Up to 100 km</td><td>Long-distance, WAN, ISP backbones</td></tr>
-<tr><td>Multimode (MMF)</td><td>50-62.5 micron</td><td>Up to 2 km</td><td>Short-distance, within buildings</td></tr>
-</tbody>
-</table>
-<div class="highlight-box"><h4>Exam tip</h4><p>Single-mode = Long distance. Multimode = Short distance. Single-mode uses a laser light source and yellow jacket. Multimode uses an LED and orange or aqua jacket. Connector Types Connector Type Common Use RJ45 Copper Ethernet (8P8C) — most common network connector RJ11 Copper Telephone (6P2C) LC Fiber Small form factor; most common in data centers SC Fiber Square connector; &quot;Subscriber Connector&quot; Connector Type Common Use ST Fiber Bayonet-style twist-lock; older installations MPO Fiber Multi-fiber push-on; used for high-density connections F-Type Coaxial Cable TV and broadband internet BNC Coaxial Older networking; video surveillance</p></div>
+</div>
+
+<!-- Metrics bar -->
+<div class="metrics-bar">
+  <div class="metric-card">
+    <div class="label">PoE · 802.3af</div>
+    <div class="value">15.4 W <span>PSE / 12.95 W PD</span></div>
+  </div>
+  <div class="metric-card">
+    <div class="label">PoE+ · 802.3at</div>
+    <div class="value">30 W <span>PSE / 25.5 W PD</span></div>
+  </div>
+  <div class="metric-card">
+    <div class="label">PoE++ Type 3 · 802.3bt</div>
+    <div class="value">60 W <span>PSE / 51 W PD</span></div>
+  </div>
+  <div class="metric-card">
+    <div class="label">PoE++ Type 4 · 802.3bt</div>
+    <div class="value">100 W <span>PSE / 71.3 W PD</span></div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Pairs Used · af / at</div>
+    <div class="value">2 pairs <span>(4 wires)</span></div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Pairs Used · Type 3 / 4</div>
+    <div class="value">4 pairs <span>(all 8 wires)</span></div>
+  </div>
+</div>
+</div>
 </div>

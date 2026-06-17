@@ -25,33 +25,21 @@
 <h4>Exam focus</h4>
 <p>Given a scenario, troubleshoot common cabling and physical interface issues</p>
 <ul>
-<li>Administratively Down: Disabled by an administrator (shutdown command). Must be manually re-enabled.</li>
-<li>Error-Disabled: Automatically shut down by the switch due to a violation (e.g., port security, BPDU guard).</li>
+<li>CRC errors often indicate bad cables, duplex mismatch, or damaged NICs.</li>
+<li>Verify PoE class and total switch budget for powered devices.</li>
+<li>SM vs MM fiber mismatch prevents link entirely.</li>
+<li>Interface counters (runts, giants) point to MTU or duplex issues.</li>
 </ul>
-
 </div>
 <div class="ut-lesson-depth">
 <h4>Detailed coverage</h4>
 <p><strong>Given a scenario, troubleshoot common cabling and physical interface issues</strong></p>
-<h4>Common Cable Problems</h4>
-<h4>Issue Cause Solution</h4>
-<p>Attenuation Signal loss over distance Use appropriate cable length; add repeater/switch</p>
-<h4>Crosstalk Interference between adjacent wire pairs</h4>
-<p>Use properly shielded cable; maintain bend radius</p>
-<h4>EMI/RFI External electromagnetic interference</h4>
-<p>Use shielded cable (STP); route away from interference sources</p>
-<h4>Issue Cause Solution</h4>
-<p>Improper Termination Incorrect pinout or poor crimp Re-terminate; verify T568A or T568B standard TX/RX Transposed Transmit and receive wires swapped Use crossover cable or verify auto-MDIX is enabled</p>
-<h4>Interface Counter Errors</h4>
-<h4>Counter Meaning Likely Cause</h4>
-<p>Runts Frames smaller than 64 bytes Collision; duplex mismatch Giants Frames larger than 1518 bytes Jumbo frames not configured; MTU mismatch CRC Errors Cyclic Redundancy Check failures Physical layer problem; bad cable or NIC Drops Frames dropped due to buffer overflow</p>
-<h4>Congestion; speed mismatch</h4>
-<p>Port Status</p>
+<h5>Layer 1 verification</h5>
 <ul>
-<li>Administratively Down: Disabled by an administrator (shutdown command). Must be manually re-enabled.</li>
-<li>Error-Disabled: Automatically shut down by the switch due to a violation (e.g., port security, BPDU guard).</li>
+<li>Re-terminate suspect pairs; test with certifier when available</li>
+<li>Confirm auto-negotiation result or force consistent speed/duplex</li>
+<li>Compare SFP wavelength and fiber type on both ends</li>
 </ul>
-<h4>Requires manual intervention to re-enable.</h4>
 </div>
 </div>
 <h4>Next steps</h4>
