@@ -5,7 +5,7 @@ This repository follows the understandtech.app v2.0 platform architecture.
 - Read `.cursorrules` before making changes
 - Read `docs/white-paper.md` for architecture
 - Read `docs/playbook.md` for build phases and Cursor prompts
-- Use project skills `/understandtech-platform`, `/understandtech-cert-research-content`, and `/understandtech-cert-content` in Agent chat — **for net-new certification content, always run `/understandtech-cert-research-content` before `/understandtech-cert-content`** (gap memo + citations + artifact plan before generating lessons, GIFT, practice exams, or labs)
+- Use project skills `/understandtech-platform`, `/understandtech-cert-research-content`, `/understandtech-cert-content`, and `/understandtech-interactive-labs` in Agent chat — **for net-new certification content, always run `/understandtech-cert-research-content` before `/understandtech-cert-content`** (gap memo + citations + artifact plan before generating lessons, GIFT, practice exams, or labs); **for rich hands-on labs, run research first, then `/understandtech-interactive-labs`**
 - Use `/lms-workflow` (or `/lms-enterprise-ai-master-skill`) for LMS and AI orchestration tasks
 - For general engineering workflows (spec, TDD, review, ship), use `/addyosmani-agent-skills` ([addyosmani/agent-skills](https://github.com/addyosmani/agent-skills))
 - For vibe-coding patterns, harness engineering, and tool catalogs, use `/taskade-awesome-vibe-coding` ([taskade/awesome-vibe-coding](https://github.com/taskade/awesome-vibe-coding))

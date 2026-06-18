@@ -95,9 +95,11 @@ From research memo, produce an **artifact plan** before files:
 | Exam-focus sub-lesson | `lessons/<code>_exam.html` | Traps, distractors, “what they test” |
 | Objective MCQs | `*-quiz.gift` / `*-quiz-extra.gift` | `::sy701_X_Y Title::` in name |
 | Practice exam bank | `practice-exam-{1,2,3}.gift` | `::pe1_q001::` namespace |
-| Lab scenario | seed intro HTML only | `mod_ctfflag` — no flag values |
+| Lab scenario | `content/<track>/labs/<slug>.html` | `mod_ctfflag` intro only — no flag values |
 
-Use [prompt-templates.md](reference/prompt-templates.md) for structured research and generation prompts.
+For **lab relevance decisions, modality choice, flag derivation, and rich interactivity**, defer to `/understandtech-interactive-labs` after this skill's research steps 1–3 (gap memo must include lab relevance per domain).
+
+Use [prompt-templates.md](reference/prompt-templates.md) for structured research and generation prompts. Lab-specific prompts: [prompt-templates-labs.md](../understandtech-interactive-labs/reference/prompt-templates-labs.md).
 
 ### Step 4 — Generate content
 
@@ -162,5 +164,6 @@ Then continue with `/understandtech-cert-content` steps 4–7: seed script updat
 |-------|------|
 | `/understandtech-cert-research-content` | Research + net-new generation |
 | `/understandtech-cert-content` | Formats, seeds, launch targets |
+| `/understandtech-interactive-labs` | Lab design, HTML, interactivity, seed patterns (after research gate) |
 | `/understandtech-platform` | Architecture, AI tutor guardrails |
 | `/moodle-development` | Seed PHP changes |

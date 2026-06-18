@@ -167,6 +167,8 @@ Details: [reference/practice-exams-and-labs.md](reference/practice-exams-and-lab
 
 White paper Phase 1: **3 Security+ labs** (Sentinel/IR themed; start with CTF flags).
 
+**Rich lab design** (scenario structure, interactivity, flag derivation, hints, domain mapping) — defer to `/understandtech-interactive-labs` after the research gate. This step covers seed orchestration only.
+
 Each lab activity:
 
 - Module: `mod_ctfflag`
@@ -241,6 +243,7 @@ Post-seed: `post-deploy-stabilize-vm.sh` disables page text filters (prevents DB
 |-------|------|
 | `/understandtech-cert-content` | This workflow |
 | `/understandtech-cert-research-content` | Research + net-new lesson/GIFT/lab generation |
+| `/understandtech-interactive-labs` | Rich lab design, HTML, interactivity — after research gate |
 | `/understandtech-platform` | Architecture, constraints |
 | `/moodle-development` | Seed PHP, mod_page, mod_quiz APIs |
 | `behat-automation-skill` | Browser tests after major content drops |

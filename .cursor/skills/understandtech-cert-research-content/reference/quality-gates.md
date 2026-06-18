@@ -58,3 +58,4 @@ ls content/security-plus/lessons/*.html | wc -l
 - [ ] Knowledge Check quizzes populate per domain
 - [ ] Practice exam has expected question count and time limit
 - [ ] Lab activity loads; flag regex accepts format (test with known derived value on staging)
+- [ ] Lab relevance documented; lab quality gates from `/understandtech-interactive-labs` passed

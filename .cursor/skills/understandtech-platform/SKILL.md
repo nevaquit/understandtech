@@ -95,3 +95,4 @@ AI-augmented certification training platform on Moodle 4.5 LTS with Cloudflare e
 | `mathematical-ui-design-engineering` | Theme SCSS, charts, gamification UX |
 | `/understandtech-cert-research-content` | **Run first** for net-new cert content (research + generation) |
 | `/understandtech-cert-content` | Formats, seeds, verification — after research gate for net-new work |
+| `/understandtech-interactive-labs` | Rich hands-on lab design — after research gate, before/at lab seed |
