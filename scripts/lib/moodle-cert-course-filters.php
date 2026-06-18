@@ -67,8 +67,11 @@ function ut_disable_cert_course_text_filters(stdClass $course, bool $purgeall = 
     }
 
     filter_manager::reset_caches();
-    rebuild_course_cache((int) $course->id, true);
-    if ($purgeall && function_exists('purge_all_caches')) {
+    global $CFG;
+    if (strpos((string) ($CFG->wwwroot ?? ''), 'staging') === false) {
+        rebuild_course_cache((int) $course->id, true);
+    }
+    if ($purgeall && strpos((string) ($CFG->wwwroot ?? ''), 'staging') === false && function_exists('purge_all_caches')) {
         purge_all_caches();
     }
 
