@@ -10,6 +10,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
+
 require_once($CFG->libdir . '/filterlib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 
