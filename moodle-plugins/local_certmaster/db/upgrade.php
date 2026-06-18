@@ -106,6 +106,10 @@ function xmldb_local_certmaster_upgrade(int $oldversion): bool {
         upgrade_plugin_savepoint(true, 2026061600, 'local', 'certmaster');
     }
 
+    if ($oldversion < 2026061800) {
+        upgrade_plugin_savepoint(true, 2026061800, 'local', 'certmaster');
+    }
+
     return true;
 }
 

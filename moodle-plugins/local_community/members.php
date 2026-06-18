@@ -6,6 +6,7 @@ require(__DIR__ . '/../../config.php');
 require_login();
 
 $context = context_system::instance();
+require_capability('local/community:viewmembers', $context);
 $PAGE->set_context($context);
 $PAGE->set_url(new moodle_url('/local/community/members.php'));
 $PAGE->set_pagelayout('standard');

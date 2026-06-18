@@ -140,6 +140,36 @@ foreach (glob($amdpattern) as $srcfile) {
     }
 }
 
+// --- 4. Privacy provider signatures (Moodle 4.5 plugin\provider) ---
+$privacypattern = $plugindir . '/*/classes/privacy/provider.php';
+foreach (glob($privacypattern) ?: [] as $privacyfile) {
+    $content = file_get_contents($privacyfile);
+    if ($content === false) {
+        continue;
+    }
+    if (!preg_match('/\\\\core_privacy\\\\local\\\\request\\\\plugin\\\\provider/', $content)) {
+        continue;
+    }
+    $relpath = str_replace($root . DIRECTORY_SEPARATOR, '', $privacyfile);
+    if (preg_match(
+        '/function\s+get_contexts_for_userid\s*\(\s*\\\\?core_privacy\\\\local\\\\request\\\\contextlist/',
+        $content
+    )) {
+        report_error(
+            "Invalid privacy get_contexts_for_userid signature in {$relpath} — first parameter must be int \$userid",
+        );
+        continue;
+    }
+    if (!preg_match(
+        '/function\s+get_contexts_for_userid\s*\(\s*int\s+\$userid\s*\)/',
+        $content
+    )) {
+        report_error(
+            "Invalid privacy get_contexts_for_userid signature in {$relpath} — expected (int \$userid)",
+        );
+    }
+}
+
 if (!empty($errors)) {
     fwrite(STDERR, "\nvalidate_moodle_plugin_api_failed count=" . count($errors) . "\n");
     exit(1);

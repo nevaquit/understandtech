@@ -4,7 +4,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_studyplan';
-$plugin->version   = 2026061600;
+$plugin->version   = 2026061700;
 $plugin->requires  = 2024100700;
 $plugin->dependencies = [
     'local_certmaster' => 2026061601,

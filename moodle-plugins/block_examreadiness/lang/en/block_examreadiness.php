@@ -19,3 +19,4 @@ $string['radar_aria'] = 'Domain mastery radar chart';
 $string['radar_summary'] = 'Domain mastery scores';
 $string['domain'] = 'Domain';
 $string['score'] = 'Score';
+$string['privacy:metadata'] = 'The exam readiness block displays mastery data from CertMaster and does not store additional personal data.';

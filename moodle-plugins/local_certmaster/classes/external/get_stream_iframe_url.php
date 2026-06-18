@@ -18,23 +18,33 @@ class get_stream_iframe_url extends \external_api {
     public static function execute_parameters(): \external_function_parameters {
         return new \external_function_parameters([
             'videoid' => new \external_value(PARAM_ALPHANUMEXT, 'Cloudflare Stream video UID'),
+            'courseid' => new \external_value(PARAM_INT, 'Course id containing the video (0 for admin preview)', VALUE_DEFAULT, 0),
         ]);
     }
 
     /**
      * @param string $videoid
+     * @param int $courseid
      * @return array
      */
-    public static function execute(string $videoid): array {
-        self::validate_parameters(self::execute_parameters(), [
+    public static function execute(string $videoid, int $courseid = 0): array {
+        global $USER;
+
+        $params = self::validate_parameters(self::execute_parameters(), [
             'videoid' => $videoid,
+            'courseid' => $courseid,
         ]);
 
         $context = \context_system::instance();
         self::validate_context($context);
-        require_capability('local/certmaster:viewstream', $context);
 
-        $url = \local_certmaster\stream_helper::sign_iframe_url($videoid);
+        \local_certmaster\stream_access::assert_user_can_sign(
+            (int) $USER->id,
+            $params['videoid'],
+            (int) $params['courseid']
+        );
+
+        $url = \local_certmaster\stream_helper::sign_iframe_url($params['videoid']);
 
         return [
             'iframesrc' => $url,

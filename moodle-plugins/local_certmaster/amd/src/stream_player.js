@@ -5,9 +5,10 @@ define(['core/ajax'], function(Ajax) {
 
     /**
      * @param {string} videoid Stream UID (server-side only; not stored in DOM).
+     * @param {number} courseid Course id for refresh authorization (0 for admin preview).
      * @return {boolean}
      */
-    const init = (videoid) => {
+    const init = (videoid, courseid = 0) => {
         const root = document.querySelector('.local-certmaster-stream-player');
         const iframe = root?.querySelector('.local-certmaster-stream-iframe');
         if (!root || !iframe || !videoid) {
@@ -17,7 +18,7 @@ define(['core/ajax'], function(Ajax) {
         const refresh = () => {
             Ajax.call([{
                 methodname: 'local_certmaster_get_stream_iframe_url',
-                args: {videoid: videoid},
+                args: {videoid: videoid, courseid: courseid || 0},
             }])[0].then((result) => {
                 if (result?.iframesrc) {
                     iframe.src = result.iframesrc;

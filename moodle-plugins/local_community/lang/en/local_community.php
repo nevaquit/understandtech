@@ -11,4 +11,5 @@ $string['members'] = 'Members';
 $string['feedempty'] = 'No community posts yet. Join a course forum to get started.';
 $string['certtracks'] = 'Certification tracks';
 $string['memberlist'] = 'Members';
+$string['nopermission'] = 'You do not have permission to view the member directory.';
 $string['privacy:metadata'] = 'The community hub aggregates public forum activity and does not store additional personal data.';

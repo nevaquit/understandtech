@@ -11,3 +11,4 @@ $string['confidence_guessing'] = 'Guessing';
 $string['confidence_unsure'] = 'Unsure';
 $string['confidence_confident'] = 'Confident';
 $string['confidence_certain'] = 'Certain';
+$string['privacy:metadata'] = 'Confidence ratings are stored by CertMaster; this behaviour does not store additional personal data.';
