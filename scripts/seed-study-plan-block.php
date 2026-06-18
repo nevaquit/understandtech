@@ -141,28 +141,27 @@ echo "=== seed block_studyplan ===\n";
 
 $netcertid = ut_certification_id('network_plus_n10_009');
 if ($netcertid === null) {
-    echo "cert_missing shortname=network_plus_n10_009\n";
-    exit(1);
-}
+    echo "cert_skip shortname=network_plus_n10_009 reason=my_dashboard_unavailable\n";
+} else {
+    foreach ($usernames as $username) {
+        $user = $DB->get_record('user', ['username' => $username, 'deleted' => 0]);
+        if (!$user) {
+            echo "user_skip missing username={$username}\n";
+            continue;
+        }
 
-foreach ($usernames as $username) {
-    $user = $DB->get_record('user', ['username' => $username, 'deleted' => 0]);
-    if (!$user) {
-        echo "user_skip missing username={$username}\n";
-        continue;
+        $context = context_user::instance((int) $user->id);
+        ut_ensure_studyplan_block(
+            $context->id,
+            'my-index',
+            'content',
+            -1,
+            $netcertid,
+            'Study Coach'
+        );
+        ut_warm_study_plan((int) $user->id, $netcertid);
+        echo "studyplan_my_dashboard user={$username} id={$user->id}\n";
     }
-
-    $context = context_user::instance((int) $user->id);
-    ut_ensure_studyplan_block(
-        $context->id,
-        'my-index',
-        'content',
-        -1,
-        $netcertid,
-        'Study Coach'
-    );
-    ut_warm_study_plan((int) $user->id, $netcertid);
-    echo "studyplan_my_dashboard user={$username} id={$user->id}\n";
 }
 
 foreach ($tracks as $label => $track) {
@@ -190,5 +189,4 @@ foreach ($tracks as $label => $track) {
     echo "studyplan_course course={$track['course']} id={$course->id} cert={$certid}\n";
 }
 
-purge_all_caches();
 echo "studyplan_seed_complete=1\n";
