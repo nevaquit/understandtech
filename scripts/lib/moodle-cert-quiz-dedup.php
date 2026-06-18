@@ -197,23 +197,39 @@ function ut_unique_question_ids_by_name(array $questionids): array {
 }
 
 /**
+ * Remove all questions from a quiz using Moodle 4.5 structure API.
+ *
+ * @param stdClass $quizrecord
+ * @param int $courseid
+ * @return int Slots removed
+ */
+function ut_clear_quiz_slots(stdClass $quizrecord, int $courseid): int {
+    $cm = get_coursemodule_from_instance('quiz', (int) $quizrecord->id, $courseid, false, MUST_EXIST);
+    $quizobj = \mod_quiz\quiz_settings::create((int) $quizrecord->id, (int) $cm->id);
+    $structure = $quizobj->get_structure();
+
+    $removed = 0;
+    while ($structure->get_question_count() > 0) {
+        $structure->remove_slot($structure->get_question_count());
+        $removed++;
+        $structure = $quizobj->get_structure();
+    }
+
+    return $removed;
+}
+
+/**
  * Replace quiz slots with a deduplicated question set (idempotent).
  *
  * @param stdClass $quizrecord Quiz row with cmid set
  * @param int[] $targetquestionids
+ * @param int $courseid
  * @return array{removed: int, added: int, total: int}
  */
-function ut_rebuild_knowledge_check_quiz(stdClass $quizrecord, array $targetquestionids): array {
-    global $DB;
-
+function ut_rebuild_knowledge_check_quiz(stdClass $quizrecord, array $targetquestionids, int $courseid): array {
     $targetquestionids = ut_unique_question_ids_by_name($targetquestionids);
 
-    $removed = 0;
-    $slots = $DB->get_records('quiz_slots', ['quizid' => $quizrecord->id], 'slot DESC');
-    foreach ($slots as $slot) {
-        quiz_delete_slot((int) $quizrecord->id, (int) $slot->slot, false);
-        $removed++;
-    }
+    $removed = ut_clear_quiz_slots($quizrecord, $courseid);
 
     $added = 0;
     foreach ($targetquestionids as $qid) {
@@ -273,56 +289,38 @@ function ut_sync_knowledge_check_quiz(
     $cm = get_coursemodule_from_instance('quiz', (int) $quizrecord->id, (int) $course->id, false, MUST_EXIST);
     $quizrecord->cmid = $cm->id;
 
-    $stats = ut_rebuild_knowledge_check_quiz($quizrecord, $questionids);
+    $stats = ut_rebuild_knowledge_check_quiz($quizrecord, $questionids, (int) $course->id);
     echo "quiz_reconciled id={$quizrecord->id} name={$quizname} removed={$stats['removed']}"
         . " added={$stats['added']} total={$stats['total']}\n";
 }
 
 /**
  * @param int $quizid
+ * @param int $courseid
  * @return int Duplicate slots removed
  */
-function ut_remove_duplicate_quiz_slots(int $quizid): int {
+function ut_remove_duplicate_quiz_slots(int $quizid, int $courseid): int {
     global $DB;
 
-    $slots = $DB->get_records_sql(
-        "SELECT qs.id, qs.slot, q.id AS questionid, q.name
-           FROM {quiz_slots} qs
-           JOIN {question_references} qr ON qr.itemid = qs.id AND qr.component = 'mod_quiz'
-           JOIN {question_bank_entries} qbe ON qbe.id = qr.questionbankentryid
-           JOIN {question_versions} qv ON qv.questionbankentryid = qbe.id AND qv.version = qr.version
-           JOIN {question} q ON q.id = qv.questionid
-          WHERE qs.quizid = :quizid
-       ORDER BY qs.slot ASC",
-        ['quizid' => $quizid]
-    );
-
-    if ($slots === []) {
-        $slots = $DB->get_records_sql(
-            "SELECT qs.id, qs.slot, q.id AS questionid, q.name
-               FROM {quiz_slots} qs
-               JOIN {question} q ON q.id = qs.questionid
-              WHERE qs.quizid = :quizid
-           ORDER BY qs.slot ASC",
-            ['quizid' => $quizid]
-        );
-    }
+    $quiz = $DB->get_record('quiz', ['id' => $quizid], '*', MUST_EXIST);
+    $cm = get_coursemodule_from_instance('quiz', $quizid, $courseid, false, MUST_EXIST);
+    $quizobj = \mod_quiz\quiz_settings::create((int) $quiz->id, (int) $cm->id);
+    $structure = $quizobj->get_structure();
 
     $seennames = [];
     $removed = 0;
-    $slotrecords = array_reverse(array_values($slots));
-    foreach ($slotrecords as $slot) {
-        $name = (string) $slot->name;
+    foreach ($structure->get_questions() as $questiondata) {
+        $name = ut_quiz_question_name((int) $questiondata->questionid);
         if (!isset($seennames[$name])) {
             $seennames[$name] = true;
             continue;
         }
-        quiz_delete_slot($quizid, (int) $slot->slot, false);
+        $structure->remove_slot((int) $questiondata->slot);
         $removed++;
+        $structure = $quizobj->get_structure();
     }
 
     if ($removed > 0) {
-        $quiz = $DB->get_record('quiz', ['id' => $quizid], '*', MUST_EXIST);
         quiz_update_sumgrades($quiz);
     }
 
@@ -452,7 +450,7 @@ function ut_add_knowledge_check_quiz(
 
     $quizrecord = $DB->get_record('quiz', ['id' => $cm->instance], '*', MUST_EXIST);
     $quizrecord->cmid = $cm->coursemodule;
-    $stats = ut_rebuild_knowledge_check_quiz($quizrecord, $questionids);
+    $stats = ut_rebuild_knowledge_check_quiz($quizrecord, $questionids, (int) $course->id);
 
     $quizrecord = $DB->get_record('quiz', ['id' => $quizrecord->id], '*', MUST_EXIST);
     $quizrecord->preferredbehaviour = $targetbehaviour;
