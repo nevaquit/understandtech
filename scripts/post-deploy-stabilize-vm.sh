@@ -57,6 +57,9 @@ if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/c
   sudo -u www-data php "${REPO}/scripts/seed-study-plan-block.php"
 fi
 
+echo "=== Knowledge check deduplication (all cert courses) ==="
+sudo -u www-data php "${REPO}/scripts/cleanup-cert-knowledge-checks.php" all
+
 # Redis flush + PHP-FPM restart recycle workers after theme/cache changes (purge_caches hangs on VM).
 bash "${REPO}/scripts/restart-php-fpm-vm.sh"
 

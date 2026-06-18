@@ -554,48 +554,8 @@ function aplus_add_quiz(stdClass $course, int $sectionnum, string $quizname, arr
  * @return void
  */
 function aplus_sync_quiz(stdClass $course, int $sectionnum, string $quizname, array $questionids): void {
-    global $DB;
-
-    if (!$questionids) {
-        echo "quiz_skip_empty name={$quizname}\n";
-        return;
-    }
-
-    $quizrecord = $DB->get_record_sql(
-        "SELECT q.*
-           FROM {quiz} q
-           JOIN {course_modules} cm ON cm.instance = q.id
-           JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
-          WHERE cm.course = :courseid AND q.name = :name",
-        ['courseid' => $course->id, 'name' => $quizname]
-    );
-
-    if (!$quizrecord) {
-        aplus_add_quiz($course, $sectionnum, $quizname, $questionids);
-        return;
-    }
-
-    $cm = get_coursemodule_from_instance('quiz', (int) $quizrecord->id, (int) $course->id, false, MUST_EXIST);
-    $quizrecord->cmid = $cm->id;
-
-    $added = 0;
-    foreach ($questionids as $qid) {
-        try {
-            if (quiz_add_quiz_question($qid, $quizrecord, 0) === false) {
-                continue;
-            }
-            $added++;
-        } catch (Throwable $e) {
-            echo "quiz_sync_failed name={$quizname} qid={$qid} error=" . $e->getMessage() . "\n";
-            break;
-        }
-    }
-
-    if ($added > 0) {
-        quiz_update_sumgrades($quizrecord);
-    }
-    echo "quiz_synced id={$quizrecord->id} name={$quizname} added={$added} total="
-        . count($questionids) . "\n";
+    require_once(__DIR__ . '/lib/moodle-cert-quiz-dedup.php');
+    ut_sync_knowledge_check_quiz($course, $sectionnum, $quizname, $questionids, 'aplus_add_quiz');
 }
 
 /**
@@ -872,12 +832,27 @@ $qcat = aplus_get_question_category((int) $context->id, 'CompTIA A+ certificatio
 $giftpath = $repopath . '/content/a-plus/aplus-quiz.gift';
 aplus_import_gift((int) $context->id, $qcat, $giftpath);
 
+require_once(__DIR__ . '/lib/moodle-cert-quiz-dedup.php');
+ut_dedupe_question_bank_category((int) $qcat->id);
+
 $allquestionmap = aplus_map_all_questions_by_objective((int) $qcat->id);
 $linked = aplus_link_questions_to_objectives($allquestionmap);
 echo "question_objective_links={$linked}\n";
 
-$sectionquestions = aplus_map_questions_by_section((int) $qcat->id);
-foreach ($sectionquestions as $sectionnum => $qids) {
+for ($sectionnum = 1; $sectionnum <= 9; $sectionnum++) {
+    $num = $sectionnum;
+    $qids = ut_curate_knowledge_check_questions(
+        $allquestionmap,
+        static function (string $obj) use ($num): bool {
+            if ($num <= 5 && preg_match('/^ap1101_' . $num . '_/', $obj)) {
+                return true;
+            }
+            if ($num > 5 && preg_match('/^ap1102_' . ($num - 5) . '_/', $obj)) {
+                return true;
+            }
+            return false;
+        }
+    );
     if (!$qids) {
         continue;
     }

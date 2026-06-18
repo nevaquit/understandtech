@@ -611,48 +611,8 @@ function security_plus_add_quiz(stdClass $course, int $sectionnum, string $quizn
  * @return void
  */
 function security_plus_sync_quiz(stdClass $course, int $sectionnum, string $quizname, array $questionids): void {
-    global $DB;
-
-    if (!$questionids) {
-        echo "quiz_skip_empty name={$quizname}\n";
-        return;
-    }
-
-    $quizrecord = $DB->get_record_sql(
-        "SELECT q.*
-           FROM {quiz} q
-           JOIN {course_modules} cm ON cm.instance = q.id
-           JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
-          WHERE cm.course = :courseid AND q.name = :name",
-        ['courseid' => $course->id, 'name' => $quizname]
-    );
-
-    if (!$quizrecord) {
-        security_plus_add_quiz($course, $sectionnum, $quizname, $questionids);
-        return;
-    }
-
-    $cm = get_coursemodule_from_instance('quiz', (int) $quizrecord->id, (int) $course->id, false, MUST_EXIST);
-    $quizrecord->cmid = $cm->id;
-
-    $added = 0;
-    foreach ($questionids as $qid) {
-        try {
-            if (quiz_add_quiz_question($qid, $quizrecord, 0) === false) {
-                continue;
-            }
-            $added++;
-        } catch (Throwable $e) {
-            echo "quiz_sync_failed name={$quizname} qid={$qid} error=" . $e->getMessage() . "\n";
-            break;
-        }
-    }
-
-    if ($added > 0) {
-        quiz_update_sumgrades($quizrecord);
-    }
-    echo "quiz_synced id={$quizrecord->id} name={$quizname} added={$added} total="
-        . count($questionids) . "\n";
+    require_once(__DIR__ . '/lib/moodle-cert-quiz-dedup.php');
+    ut_sync_knowledge_check_quiz($course, $sectionnum, $quizname, $questionids, 'security_plus_add_quiz');
 }
 
 /**
@@ -831,12 +791,21 @@ if (is_readable($giftextra)) {
     security_plus_import_gift((int) $context->id, $qcat, $giftextra);
 }
 
+require_once(__DIR__ . '/lib/moodle-cert-quiz-dedup.php');
+ut_dedupe_question_bank_category((int) $qcat->id);
+
 $allquestionmap = security_plus_map_all_questions_by_objective((int) $qcat->id);
 $linked = security_plus_link_questions_to_objectives($allquestionmap);
 echo "question_objective_links={$linked}\n";
 
-$domainquestions = security_plus_map_questions_by_domain((int) $qcat->id);
-foreach ($domainquestions as $domainnum => $qids) {
+for ($domainnum = 1; $domainnum <= 5; $domainnum++) {
+    $num = $domainnum;
+    $qids = ut_curate_knowledge_check_questions(
+        $allquestionmap,
+        static function (string $obj) use ($num): bool {
+            return (bool) preg_match('/^sy701_' . $num . '_/', $obj);
+        }
+    );
     if (!$qids) {
         continue;
     }
