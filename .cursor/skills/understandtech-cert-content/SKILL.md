@@ -34,12 +34,12 @@ For **net-new** lessons, questions, and labs from blueprint research, start with
 
 ## Launch targets (white paper Phase 1 — SEC701)
 
-| Asset | Phase 1 target | Current baseline | Gap |
-|-------|----------------|------------------|-----|
-| Lesson pages | 80–100 | 28 (1 per objective) | ~52–72 pages |
-| Question bank | ~400 | ~84 GIFT items | ~316 questions |
-| Full-length practice exams | 3 | 0 | 3 timed quizzes |
-| Hands-on labs (`mod_ctfflag`) | 3 | 0 seeded | 3 lab activities |
+| Asset | Phase 1 target | Current (repo) |
+|-------|----------------|----------------|
+| Lesson pages | 80–100 | 84 (28 core + 56 sub-lessons) |
+| Question bank | ~400 | 400 (28+56+316 launch GIFT) |
+| Full-length practice exams | 3 | 3 (practice-exam-1..3.gift) |
+| Hands-on labs | 3 | 3 (HTML + seed) |
 
 NET009 and APLUS have separate Phase 2 targets — see [reference/launch-targets.md](reference/launch-targets.md).
 

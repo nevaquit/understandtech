@@ -6,11 +6,11 @@ Aligned to `docs/white-paper.md` §5 Phase 1–2 and current repo inventory (202
 
 | Metric | White paper | Current | Milestone A (beta) | Milestone B (launch) |
 |--------|-------------|---------|--------------------|-----------------------|
-| Lesson pages | 80–100 | 28 | 56 (2 per objective) | 84–100 (3+ per objective) |
-| Question bank | ~400 | ~84 | 200 | 400 |
+| Lesson pages | 80–100 | **84** (28 core + 56 sub) | 56 (2 per objective) | 84–100 (3+ per objective) |
+| Question bank | ~400 | **400** | 200 | 400 |
 | Domain Knowledge Checks | 5 (1 per domain) | 5 | 5 | 5 |
-| Full-length practice exams | 3 × ~90 Q | 0 | 1 | 3 |
-| Labs (`mod_ctfflag`) | 3 | 0 | 1 | 3 |
+| Full-length practice exams | 3 × ~90 Q | **3** (gift files) | 1 | 3 |
+| Labs (`mod_ctfflag`) | 3 | **3** (HTML + seed) | 1 | 3 |
 | Stream videos in lessons | Core IP on Stream | Signing only | 10 lessons | All core lessons |
 
 **Course:** `SEC701` · **Cert shortname:** `security_plus_sy0_701` · **Objective prefix:** `sy701_`

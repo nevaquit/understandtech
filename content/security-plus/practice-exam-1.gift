@@ -1,0 +1,629 @@
+::pe1_q001 sy701_1_3_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 1.3?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::pe1_q002 sy701_1_1_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 1.1?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::pe1_q003 sy701_1_2 confidentiality 2::For SY0-701 objective 1.2, which item best matches: Summarize fundamental security concepts?{
+=Confidentiality
+~Measures
+~Integrity
+~Availability
+}
+
+::pe1_q004 sy701_1_2 CIA triad::Which principle ensures that data has not been altered without authorization?{
+=Integrity
+~Confidentiality
+~Availability
+~Non-repudiation
+}
+
+::pe1_q005 sy701_1_1_launch_09 launch 9::Which NIST CSF function most closely maps to 1.1?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::pe1_q006 sy701_1_1_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 1.1?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::pe1_q007 sy701_1_3 approval_process 2::For SY0-701 objective 1.3, which item best matches: Explain the importance of change management processes and the impact to security?{
+=Approval Process
+~Ownership
+~Stakeholders
+~Impact Analysis
+}
+
+::pe1_q008 sy701_1_4_launch_12 launch 12::Which communication is appropriate when coordinating 1.4 across teams?{
+=Clear escalation paths defined in incident and change procedures
+~Silent configuration changes during peak hours
+~Disabling alerts to reduce ticket volume
+~Sharing live credentials in ticket comments
+}
+
+::pe1_q009 sy701_1_4 public_key 2::For SY0-701 objective 1.4, which item best matches: Explain the importance of using appropriate cryptographic solutions?{
+=Public Key
+~Private Key
+~Key Escrow
+~Certificates
+}
+
+::pe1_q010 sy701_1_2_launch_04 launch 4::Which metric would best validate success for objective 1.2?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::pe1_q011 sy701_1_1_launch_08 launch 8::Which role is typically accountable for outcomes described in 1.1?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::pe1_q012 sy701_2_4_launch_09 launch 9::Which NIST CSF function most closely maps to 2.4?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::pe1_q013 sy701_2_2 short_message_service_sm 3::For SY0-701 objective 2.2, which item best matches: Explain common threat vectors and attack surfaces?{
+=Short Message Service (SMS)
+~Email
+~Instant Messaging (IM)
+~Image-based
+}
+
+::pe1_q014 sy701_2_5_launch_03 launch 3::During an audit finding for "Explain the purpose of mitigation techniques used to secure ...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::pe1_q015 sy701_2_1_launch_03 launch 3::During an audit finding for "Compare and contrast common threat actors and motivations...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::pe1_q016 sy701_2_1 Threat actors::Which motivation is most commonly associated with organized crime threat actors?{
+=Financial gain
+~Political hacktivism
+~Nation-state espionage only
+~Accidental insider mistakes
+}
+
+::pe1_q017 sy701_2_1 unskilled_attacker_scrip 3::For SY0-701 objective 2.1, which item best matches: Compare and contrast common threat actors and motivations?{
+=Unskilled Attacker (Script Kiddie)
+~Nation-state
+~Hacktivist
+~Insider Threat
+}
+
+::pe1_q018 sy701_2_4_launch_11 launch 11::Which documentation practice supports auditability for 2.4?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::pe1_q019 sy701_2_2_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 2.2?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::pe1_q020 sy701_2_1 nation_state 2::For SY0-701 objective 2.1, which item best matches: Compare and contrast common threat actors and motivations?{
+=Nation-state
+~Unskilled Attacker (Script Kiddie)
+~Hacktivist
+~Insider Threat
+}
+
+::pe1_q021 sy701_2_3_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 2.3?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::pe1_q022 sy701_2_5 Mitigation::Applying least privilege primarily reduces what risk?{
+=Unauthorized access to resources beyond job requirements
+~Network latency on encrypted links
+~Certificate revocation delays
+~Backup storage costs
+}
+
+::pe1_q023 sy701_2_5_launch_09 launch 9::Which NIST CSF function most closely maps to 2.5?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::pe1_q024 sy701_2_3 Vulnerabilities::A buffer overflow is best categorized as which type of vulnerability?{
+=Application
+~Physical
+~Policy
+~Environmental
+}
+
+::pe1_q025 sy701_2_3_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 2.3?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::pe1_q026 sy701_2_1_launch_08 launch 8::Which role is typically accountable for outcomes described in 2.1?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::pe1_q027 sy701_2_1_launch_07 launch 7::Which data source best supports decisions required by objective 2.1?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::pe1_q028 sy701_2_5_launch_02 launch 2::A stakeholder asks how objective 2.5 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::pe1_q029 sy701_2_4_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 2.4?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::pe1_q030 sy701_2_3_launch_09 launch 9::Which NIST CSF function most closely maps to 2.3?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::pe1_q031 sy701_2_4 trojan 3::For SY0-701 objective 2.4, which item best matches: Given a scenario, analyze indicators of malicious activity?{
+=Trojan
+~Ransomware
+~Worm
+~Spyware
+}
+
+::pe1_q032 sy701_3_1_launch_09 launch 9::Which NIST CSF function most closely maps to 3.1?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::pe1_q033 sy701_3_4_launch_11 launch 11::Which documentation practice supports auditability for 3.4?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::pe1_q034 sy701_3_1 Architecture models::Which model shifts infrastructure management to a cloud provider while the customer configures security controls for workloads?{
+=Shared responsibility in cloud computing
+~Air-gapped on-premises only
+~Fully decentralized peer-to-peer
+~Single-tenant mainframe only
+}
+
+::pe1_q035 sy701_3_3_launch_03 launch 3::During an audit finding for "Compare and contrast concepts and strategies to protect data...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::pe1_q036 sy701_3_4_launch_03 launch 3::During an audit finding for "Explain the importance of resilience and recovery in securit...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::pe1_q037 sy701_3_2_launch_07 launch 7::Which data source best supports decisions required by objective 3.2?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::pe1_q038 sy701_3_1_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 3.1?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::pe1_q039 sy701_3_1_launch_11 launch 11::Which documentation practice supports auditability for 3.1?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::pe1_q040 sy701_3_3_launch_08 launch 8::Which role is typically accountable for outcomes described in 3.3?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::pe1_q041 sy701_3_3_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 3.3?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::pe1_q042 sy701_3_1_launch_02 launch 2::A stakeholder asks how objective 3.1 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::pe1_q043 sy701_3_1_launch_08 launch 8::Which role is typically accountable for outcomes described in 3.1?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::pe1_q044 sy701_3_4 Resilience::A warm site typically provides what compared to a hot site?{
+=Partially configured infrastructure with longer recovery time
+~No data replication capability
+~Only offsite tape backups with no network
+~Immediate failover with zero RTO
+}
+
+::pe1_q045 sy701_3_3_launch_01 launch 1::Which response best aligns with SY0-701 objective 3.3 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::pe1_q046 sy701_3_4_launch_01 launch 1::Which response best aligns with SY0-701 objective 3.4 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::pe1_q047 sy701_3_3 regulated 2::For SY0-701 objective 3.3, which item best matches: Compare and contrast concepts and strategies to protect data?{
+=Regulated
+~Trade Secret
+~Intellectual Property
+~Legal Information
+}
+
+::pe1_q048 sy701_4_1 deploy 3::For SY0-701 objective 4.1, which item best matches: Given a scenario, apply common security techniques to computing resources?{
+=Deploy
+~Establish
+~Maintain
+~Mobile Devices
+}
+
+::pe1_q049 sy701_4_6_launch_02 launch 2::A stakeholder asks how objective 4.6 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::pe1_q050 sy701_4_5_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.5?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::pe1_q051 sy701_4_3 application_security_ 3::For SY0-701 objective 4.3, which item best matches: Explain various activities associated with vulnerability management?{
+=Application Security:
+~Vulnerability Scan
+~Static analysis (SAST)
+~Dynamic analysis (DAST)
+}
+
+::pe1_q052 sy701_4_8 detection 3::For SY0-701 objective 4.8, which item best matches: Explain appropriate incident response activities?{
+=Detection
+~Preparation
+~Analysis
+~Containment
+}
+
+::pe1_q053 sy701_4_9_launch_10 launch 10::Which scenario best requires applying 4.9?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::pe1_q054 sy701_4_6_launch_07 launch 7::Which data source best supports decisions required by objective 4.6?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::pe1_q055 sy701_4_4_launch_02 launch 2::A stakeholder asks how objective 4.4 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::pe1_q056 sy701_4_6 permission_assignments_a 3::For SY0-701 objective 4.6, which item best matches: Given a scenario, implement and maintain identity and access management?{
+=Permission Assignments and Implications
+~Provisioning/De-provisioning User Accounts
+~Identity Proofing
+~Federation
+}
+
+::pe1_q057 sy701_4_4_launch_11 launch 11::Which documentation practice supports auditability for 4.4?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::pe1_q058 sy701_4_7_launch_11 launch 11::Which documentation practice supports auditability for 4.7?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::pe1_q059 sy701_4_7_launch_10 launch 10::Which scenario best requires applying 4.7?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::pe1_q060 sy701_4_8_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.8?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::pe1_q061 sy701_4_1_launch_11 launch 11::Which documentation practice supports auditability for 4.1?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::pe1_q062 sy701_4_3_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.3?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::pe1_q063 sy701_4_9 application_logs 3::For SY0-701 objective 4.9, which item best matches: Given a scenario, use data sources to support an investigation?{
+=Application Logs
+~Firewall Logs
+~Endpoint Logs
+~OS-specific Security Logs
+}
+
+::pe1_q064 sy701_4_2_launch_09 launch 9::Which NIST CSF function most closely maps to 4.2?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::pe1_q065 sy701_4_2_launch_02 launch 2::A stakeholder asks how objective 4.2 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::pe1_q066 sy701_4_2_launch_03 launch 3::During an audit finding for "Explain the security implications of proper hardware, softwa...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::pe1_q067 sy701_4_3_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.3 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::pe1_q068 sy701_4_1_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.1?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::pe1_q069 sy701_4_2 acquisition_procurement_ 2::For SY0-701 objective 4.2, which item best matches: Explain the security implications of proper hardware, software, and data asset management?{
+=Acquisition/Procurement Process
+~Assignment/Accounting:
+~Ownership
+~Classification
+}
+
+::pe1_q070 sy701_4_9 firewall_logs 2::For SY0-701 objective 4.9, which item best matches: Given a scenario, use data sources to support an investigation?{
+=Firewall Logs
+~Application Logs
+~Endpoint Logs
+~OS-specific Security Logs
+}
+
+::pe1_q071 sy701_4_4 Monitoring::A SIEM is primarily used to what?{
+=Aggregate and correlate security events for analysis and alerting
+~Encrypt data at rest on endpoints
+~Replace identity and access management
+~Issue digital certificates
+}
+
+::pe1_q072 sy701_4_4 applications 3::For SY0-701 objective 4.4, which item best matches: Explain security alerting and monitoring concepts and tools?{
+=Applications
+~Systems
+~Infrastructure
+~Log Aggregation
+}
+
+::pe1_q073 sy701_5_3_launch_11 launch 11::Which documentation practice supports auditability for 5.3?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::pe1_q074 sy701_5_2_launch_10 launch 10::Which scenario best requires applying 5.2?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::pe1_q075 sy701_5_3 vendor_assessment 2::For SY0-701 objective 5.3, which item best matches: Explain the processes associated with third-party risk assessment and management?{
+=Vendor Assessment
+~Penetration testing
+~Right-to-audit clause
+~Evidence of internal audits
+}
+
+::pe1_q076 sy701_5_6_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 5.6?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::pe1_q077 sy701_5_6_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 5.6?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::pe1_q078 sy701_5_5_launch_09 launch 9::Which NIST CSF function most closely maps to 5.5?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::pe1_q079 sy701_5_2 risk_assessment 3::For SY0-701 objective 5.2, which item best matches: Explain elements of the risk management process?{
+=Risk Assessment
+~Risk Identification
+~Ad hoc
+~Recurring
+}
+
+::pe1_q080 sy701_5_5_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 5.5?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::pe1_q081 sy701_5_4_launch_10 launch 10::Which scenario best requires applying 5.4?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::pe1_q082 sy701_5_6_launch_09 launch 9::Which NIST CSF function most closely maps to 5.6?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::pe1_q083 sy701_5_6_launch_02 launch 2::A stakeholder asks how objective 5.6 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::pe1_q084 sy701_5_1_launch_07 launch 7::Which data source best supports decisions required by objective 5.1?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::pe1_q085 sy701_5_2_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 5.2?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::pe1_q086 sy701_5_1_launch_09 launch 9::Which NIST CSF function most closely maps to 5.1?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::pe1_q087 sy701_5_3_launch_08 launch 8::Which role is typically accountable for outcomes described in 5.3?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::pe1_q088 sy701_5_1_launch_04 launch 4::Which metric would best validate success for objective 5.1?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::pe1_q089 sy701_5_3 penetration_testing 3::For SY0-701 objective 5.3, which item best matches: Explain the processes associated with third-party risk assessment and management?{
+=Penetration testing
+~Vendor Assessment
+~Right-to-audit clause
+~Evidence of internal audits
+}
+
+::pe1_q090 sy701_5_5_launch_03 launch 3::During an audit finding for "Explain types and purposes of audits and assessments...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}

@@ -1,0 +1,34 @@
+<div class="ut-lab-content">
+<h3>Scenario: Firewall rule review</h3>
+<p>You are reviewing a proposed rule change on the edge firewall before change-window deployment.
+A developer requested broad access for a new API integration.</p>
+
+<h4>Change ticket CHG-8842</h4>
+<table>
+<thead><tr><th>Field</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Requested rule name</td><td>API-INTEGRATION-TEMP</td></tr>
+<tr><td>Source</td><td>ANY</td></tr>
+<tr><td>Destination</td><td>10.20.30.40 (prod API server)</td></tr>
+<tr><td>Service</td><td>TCP/8443</td></tr>
+<tr><td>Action</td><td>ALLOW</td></tr>
+<tr><td>Rule set ID (CMDB)</td><td>RS-EDGE-9912</td></tr>
+</tbody>
+</table>
+
+<h4>Policy baseline excerpt</h4>
+<ul>
+<li>Deny-by-default on inbound Internet → DMZ</li>
+<li>Source must be explicit CIDR or approved object group</li>
+<li>Temporary rules expire in 72 hours with review</li>
+</ul>
+
+<h4>Your tasks</h4>
+<ol>
+<li>Identify the policy violations in the proposed rule.</li>
+<li>Recommend a least-privilege alternative (describe in your notes; not graded here).</li>
+<li>Submit the lab flag using the rule set ID from CMDB in the format <code>UT{RS-EDGE-9912}</code>.</li>
+</ol>
+
+<p><em>Do not share flags in course forums. The AI tutor will not validate flag values for you.</em></p>
+</div>

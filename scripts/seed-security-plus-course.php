@@ -86,6 +86,39 @@ function security_plus_load_lesson_html(string $repopath, string $code, string $
 }
 
 /**
+ * Load sub-lesson HTML (_scenario or _exam suffix).
+ *
+ * @param string $repopath
+ * @param string $code e.g. sy701_1_1_scenario
+ * @param string $title
+ * @return string
+ */
+function security_plus_load_sublesson_html(string $repopath, string $code, string $title): string {
+    $path = $repopath . '/content/security-plus/lessons/' . $code . '.html';
+    if (is_readable($path)) {
+        $html = file_get_contents($path);
+        if ($html !== false && trim($html) !== '') {
+            return $html;
+        }
+    }
+    return security_plus_lesson_html($code, $title);
+}
+
+/**
+ * Build Moodle page title for a sub-lesson.
+ *
+ * @param string $objectiveshortname e.g. sy701_1_1
+ * @param string $suffix _scenario or _exam
+ * @param string $fullname Objective full name
+ * @return string
+ */
+function security_plus_sublesson_pagename(string $objectiveshortname, string $suffix, string $fullname): string {
+    $code = strtoupper(str_replace('sy701_', 'SY0-701 ', str_replace('_', '.', $objectiveshortname)));
+    $label = $suffix === '_scenario' ? 'Scenario Study' : 'Exam Focus';
+    return "{$code} — {$label}: {$fullname}";
+}
+
+/**
  * @param int $courseid
  * @param int $sectionnum
  * @param string $name
@@ -949,7 +982,8 @@ if (!$course) {
     $newcourse->format = 'topics';
     $newcourse->visible = 1;
     $newcourse->summary = '<p>Official CompTIA Security+ SY0-701 blueprint-aligned track. '
-        . 'Five domains, 28 exam objectives, lesson pages, and confidence-rated knowledge checks.</p>';
+        . 'Five domains, 28 exam objectives, core + scenario + exam-focus lessons, '
+        . 'confidence-rated knowledge checks, three practice exams, and hands-on labs.</p>';
     $newcourse->summaryformat = FORMAT_HTML;
     $course = create_course($newcourse);
     echo "course_created id={$course->id}\n";
@@ -1020,6 +1054,17 @@ foreach ($objectives as $objective) {
     security_plus_upsert_page($course, $sectionnum, $pagename, $html);
 }
 
+foreach ($objectives as $objective) {
+    $sectionnum = $domainsection[$objective->domainshort] ?? 1;
+    foreach (['_scenario', '_exam'] as $suffix) {
+        $code = $objective->shortname . $suffix;
+        $pagename = security_plus_sublesson_pagename($objective->shortname, $suffix, $objective->fullname);
+        $html = security_plus_load_sublesson_html($repopath, $code, $objective->fullname);
+        security_plus_upsert_page($course, $sectionnum, $pagename, $html);
+    }
+}
+echo 'sublessons_seeded=' . (count($objectives) * 2) . "\n";
+
 $context = context_course::instance((int) $course->id);
 $qcat = security_plus_get_question_category((int) $context->id, 'Security+ SY0-701');
 $giftbase = $repopath . '/content/security-plus/sy0-701-quiz.gift';
@@ -1027,6 +1072,10 @@ $giftextra = $repopath . '/content/security-plus/sy0-701-quiz-extra.gift';
 security_plus_import_gift((int) $context->id, $qcat, $giftbase);
 if (is_readable($giftextra)) {
     security_plus_import_gift((int) $context->id, $qcat, $giftextra);
+}
+$giftlaunch = $repopath . '/content/security-plus/sy0-701-quiz-launch.gift';
+if (is_readable($giftlaunch)) {
+    security_plus_import_gift_unconditional((int) $context->id, $qcat, $giftlaunch);
 }
 
 require_once(__DIR__ . '/lib/moodle-cert-quiz-dedup.php');
@@ -1090,6 +1139,28 @@ if ($pequestionids) {
     echo "practice_exam_1_skipped reason=no_questions\n";
 }
 
+for ($examnum = 2; $examnum <= 3; $examnum++) {
+    $pename = "Practice Exam {$examnum}";
+    $pecatname = "Practice Exam {$examnum}";
+    $pegiftpath = $repopath . '/content/security-plus/practice-exam-' . $examnum . '.gift';
+    $peprefix = 'pe' . $examnum . '_q';
+    if (is_readable($pegiftpath)) {
+        $pecat = security_plus_get_question_category((int) $context->id, $pecatname);
+        security_plus_import_gift_unconditional((int) $context->id, $pecat, $pegiftpath);
+        $peids = ut_practice_exam_category_question_ids((int) $pecat->id, $peprefix);
+    } else {
+        $peids = ut_select_practice_exam_questions((int) $qcat->id, 90);
+    }
+    echo "practice_exam_{$examnum}_pool=" . count($peids) . "\n";
+    if ($peids) {
+        try {
+            security_plus_sync_practice_exam($course, 6, $pename, $peids, 5400);
+        } catch (Throwable $e) {
+            echo "practice_exam_{$examnum}_failed error=" . $e->getMessage() . "\n";
+        }
+    }
+}
+
 $lab1intro = security_plus_load_lab_intro(
     $repopath,
     'lab-1-siem-triage',
@@ -1106,6 +1177,42 @@ try {
     );
 } catch (Throwable $e) {
     echo 'ctfflag_lab1_failed error=' . $e->getMessage() . "\n";
+}
+
+$lab2intro = security_plus_load_lab_intro(
+    $repopath,
+    'lab-2-phishing-analysis',
+    '<p>Phishing analysis lab.</p>'
+);
+try {
+    security_plus_upsert_ctfflag(
+        $course,
+        7,
+        'Lab 2: Phishing email analysis',
+        $lab2intro,
+        'UT\\{UT-PHISH-2026-Q2-7F3A\\}',
+        100
+    );
+} catch (Throwable $e) {
+    echo 'ctfflag_lab2_failed error=' . $e->getMessage() . "\n";
+}
+
+$lab3intro = security_plus_load_lab_intro(
+    $repopath,
+    'lab-3-firewall-rule-review',
+    '<p>Firewall rule review lab.</p>'
+);
+try {
+    security_plus_upsert_ctfflag(
+        $course,
+        7,
+        'Lab 3: Firewall rule review',
+        $lab3intro,
+        'UT\\{RS-EDGE-9912\\}',
+        100
+    );
+} catch (Throwable $e) {
+    echo 'ctfflag_lab3_failed error=' . $e->getMessage() . "\n";
 }
 
 $enrol = enrol_get_plugin('manual');

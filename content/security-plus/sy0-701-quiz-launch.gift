@@ -1,0 +1,2211 @@
+::sy701_1_1_launch_01 launch 1::Which response best aligns with SY0-701 objective 1.1 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_1_1_launch_02 launch 2::A stakeholder asks how objective 1.1 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_1_1_launch_03 launch 3::During an audit finding for "Compare and contrast various types of security controls...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_1_1_launch_04 launch 4::Which metric would best validate success for objective 1.1?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_1_1_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 1.1?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_1_1_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 1.1?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_1_1_launch_07 launch 7::Which data source best supports decisions required by objective 1.1?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_1_1_launch_08 launch 8::Which role is typically accountable for outcomes described in 1.1?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_1_1_launch_09 launch 9::Which NIST CSF function most closely maps to 1.1?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_1_1_launch_10 launch 10::Which scenario best requires applying 1.1?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_1_1_launch_11 launch 11::Which documentation practice supports auditability for 1.1?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_1_1_launch_12 launch 12::Which communication is appropriate when coordinating 1.1 across teams?{
+=Clear escalation paths defined in incident and change procedures
+~Silent configuration changes during peak hours
+~Disabling alerts to reduce ticket volume
+~Sharing live credentials in ticket comments
+}
+
+::sy701_1_2_launch_01 launch 1::Which response best aligns with SY0-701 objective 1.2 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_1_2_launch_02 launch 2::A stakeholder asks how objective 1.2 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_1_2_launch_03 launch 3::During an audit finding for "Summarize fundamental security concepts...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_1_2_launch_04 launch 4::Which metric would best validate success for objective 1.2?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_1_2_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 1.2?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_1_2_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 1.2?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_1_2_launch_07 launch 7::Which data source best supports decisions required by objective 1.2?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_1_2_launch_08 launch 8::Which role is typically accountable for outcomes described in 1.2?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_1_2_launch_09 launch 9::Which NIST CSF function most closely maps to 1.2?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_1_2_launch_10 launch 10::Which scenario best requires applying 1.2?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_1_2_launch_11 launch 11::Which documentation practice supports auditability for 1.2?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_1_2_launch_12 launch 12::Which communication is appropriate when coordinating 1.2 across teams?{
+=Clear escalation paths defined in incident and change procedures
+~Silent configuration changes during peak hours
+~Disabling alerts to reduce ticket volume
+~Sharing live credentials in ticket comments
+}
+
+::sy701_1_3_launch_01 launch 1::Which response best aligns with SY0-701 objective 1.3 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_1_3_launch_02 launch 2::A stakeholder asks how objective 1.3 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_1_3_launch_03 launch 3::During an audit finding for "Explain the importance of change management processes and th...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_1_3_launch_04 launch 4::Which metric would best validate success for objective 1.3?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_1_3_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 1.3?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_1_3_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 1.3?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_1_3_launch_07 launch 7::Which data source best supports decisions required by objective 1.3?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_1_3_launch_08 launch 8::Which role is typically accountable for outcomes described in 1.3?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_1_3_launch_09 launch 9::Which NIST CSF function most closely maps to 1.3?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_1_3_launch_10 launch 10::Which scenario best requires applying 1.3?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_1_3_launch_11 launch 11::Which documentation practice supports auditability for 1.3?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_1_3_launch_12 launch 12::Which communication is appropriate when coordinating 1.3 across teams?{
+=Clear escalation paths defined in incident and change procedures
+~Silent configuration changes during peak hours
+~Disabling alerts to reduce ticket volume
+~Sharing live credentials in ticket comments
+}
+
+::sy701_1_4_launch_01 launch 1::Which response best aligns with SY0-701 objective 1.4 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_1_4_launch_02 launch 2::A stakeholder asks how objective 1.4 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_1_4_launch_03 launch 3::During an audit finding for "Explain the importance of using appropriate cryptographic so...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_1_4_launch_04 launch 4::Which metric would best validate success for objective 1.4?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_1_4_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 1.4?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_1_4_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 1.4?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_1_4_launch_07 launch 7::Which data source best supports decisions required by objective 1.4?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_1_4_launch_08 launch 8::Which role is typically accountable for outcomes described in 1.4?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_1_4_launch_09 launch 9::Which NIST CSF function most closely maps to 1.4?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_1_4_launch_10 launch 10::Which scenario best requires applying 1.4?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_1_4_launch_11 launch 11::Which documentation practice supports auditability for 1.4?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_1_4_launch_12 launch 12::Which communication is appropriate when coordinating 1.4 across teams?{
+=Clear escalation paths defined in incident and change procedures
+~Silent configuration changes during peak hours
+~Disabling alerts to reduce ticket volume
+~Sharing live credentials in ticket comments
+}
+
+::sy701_2_1_launch_01 launch 1::Which response best aligns with SY0-701 objective 2.1 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_2_1_launch_02 launch 2::A stakeholder asks how objective 2.1 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_2_1_launch_03 launch 3::During an audit finding for "Compare and contrast common threat actors and motivations...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_2_1_launch_04 launch 4::Which metric would best validate success for objective 2.1?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_2_1_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 2.1?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_2_1_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 2.1?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_2_1_launch_07 launch 7::Which data source best supports decisions required by objective 2.1?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_2_1_launch_08 launch 8::Which role is typically accountable for outcomes described in 2.1?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_2_1_launch_09 launch 9::Which NIST CSF function most closely maps to 2.1?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_2_1_launch_10 launch 10::Which scenario best requires applying 2.1?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_2_1_launch_11 launch 11::Which documentation practice supports auditability for 2.1?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_2_1_launch_12 launch 12::Which communication is appropriate when coordinating 2.1 across teams?{
+=Clear escalation paths defined in incident and change procedures
+~Silent configuration changes during peak hours
+~Disabling alerts to reduce ticket volume
+~Sharing live credentials in ticket comments
+}
+
+::sy701_2_2_launch_01 launch 1::Which response best aligns with SY0-701 objective 2.2 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_2_2_launch_02 launch 2::A stakeholder asks how objective 2.2 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_2_2_launch_03 launch 3::During an audit finding for "Explain common threat vectors and attack surfaces...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_2_2_launch_04 launch 4::Which metric would best validate success for objective 2.2?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_2_2_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 2.2?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_2_2_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 2.2?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_2_2_launch_07 launch 7::Which data source best supports decisions required by objective 2.2?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_2_2_launch_08 launch 8::Which role is typically accountable for outcomes described in 2.2?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_2_2_launch_09 launch 9::Which NIST CSF function most closely maps to 2.2?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_2_2_launch_10 launch 10::Which scenario best requires applying 2.2?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_2_2_launch_11 launch 11::Which documentation practice supports auditability for 2.2?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_2_2_launch_12 launch 12::Which communication is appropriate when coordinating 2.2 across teams?{
+=Clear escalation paths defined in incident and change procedures
+~Silent configuration changes during peak hours
+~Disabling alerts to reduce ticket volume
+~Sharing live credentials in ticket comments
+}
+
+::sy701_2_3_launch_01 launch 1::Which response best aligns with SY0-701 objective 2.3 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_2_3_launch_02 launch 2::A stakeholder asks how objective 2.3 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_2_3_launch_03 launch 3::During an audit finding for "Explain various types of vulnerabilities...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_2_3_launch_04 launch 4::Which metric would best validate success for objective 2.3?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_2_3_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 2.3?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_2_3_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 2.3?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_2_3_launch_07 launch 7::Which data source best supports decisions required by objective 2.3?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_2_3_launch_08 launch 8::Which role is typically accountable for outcomes described in 2.3?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_2_3_launch_09 launch 9::Which NIST CSF function most closely maps to 2.3?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_2_3_launch_10 launch 10::Which scenario best requires applying 2.3?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_2_3_launch_11 launch 11::Which documentation practice supports auditability for 2.3?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_2_3_launch_12 launch 12::Which communication is appropriate when coordinating 2.3 across teams?{
+=Clear escalation paths defined in incident and change procedures
+~Silent configuration changes during peak hours
+~Disabling alerts to reduce ticket volume
+~Sharing live credentials in ticket comments
+}
+
+::sy701_2_4_launch_01 launch 1::Which response best aligns with SY0-701 objective 2.4 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_2_4_launch_02 launch 2::A stakeholder asks how objective 2.4 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_2_4_launch_03 launch 3::During an audit finding for "Given a scenario, analyze indicators of malicious activity...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_2_4_launch_04 launch 4::Which metric would best validate success for objective 2.4?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_2_4_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 2.4?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_2_4_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 2.4?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_2_4_launch_07 launch 7::Which data source best supports decisions required by objective 2.4?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_2_4_launch_08 launch 8::Which role is typically accountable for outcomes described in 2.4?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_2_4_launch_09 launch 9::Which NIST CSF function most closely maps to 2.4?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_2_4_launch_10 launch 10::Which scenario best requires applying 2.4?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_2_4_launch_11 launch 11::Which documentation practice supports auditability for 2.4?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_2_4_launch_12 launch 12::Which communication is appropriate when coordinating 2.4 across teams?{
+=Clear escalation paths defined in incident and change procedures
+~Silent configuration changes during peak hours
+~Disabling alerts to reduce ticket volume
+~Sharing live credentials in ticket comments
+}
+
+::sy701_2_5_launch_01 launch 1::Which response best aligns with SY0-701 objective 2.5 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_2_5_launch_02 launch 2::A stakeholder asks how objective 2.5 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_2_5_launch_03 launch 3::During an audit finding for "Explain the purpose of mitigation techniques used to secure ...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_2_5_launch_04 launch 4::Which metric would best validate success for objective 2.5?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_2_5_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 2.5?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_2_5_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 2.5?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_2_5_launch_07 launch 7::Which data source best supports decisions required by objective 2.5?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_2_5_launch_08 launch 8::Which role is typically accountable for outcomes described in 2.5?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_2_5_launch_09 launch 9::Which NIST CSF function most closely maps to 2.5?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_2_5_launch_10 launch 10::Which scenario best requires applying 2.5?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_2_5_launch_11 launch 11::Which documentation practice supports auditability for 2.5?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_3_1_launch_01 launch 1::Which response best aligns with SY0-701 objective 3.1 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_3_1_launch_02 launch 2::A stakeholder asks how objective 3.1 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_3_1_launch_03 launch 3::During an audit finding for "Compare and contrast security implications of different arch...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_3_1_launch_04 launch 4::Which metric would best validate success for objective 3.1?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_3_1_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 3.1?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_3_1_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 3.1?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_3_1_launch_07 launch 7::Which data source best supports decisions required by objective 3.1?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_3_1_launch_08 launch 8::Which role is typically accountable for outcomes described in 3.1?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_3_1_launch_09 launch 9::Which NIST CSF function most closely maps to 3.1?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_3_1_launch_10 launch 10::Which scenario best requires applying 3.1?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_3_1_launch_11 launch 11::Which documentation practice supports auditability for 3.1?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_3_2_launch_01 launch 1::Which response best aligns with SY0-701 objective 3.2 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_3_2_launch_02 launch 2::A stakeholder asks how objective 3.2 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_3_2_launch_03 launch 3::During an audit finding for "Given a scenario, apply security principles to secure enterp...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_3_2_launch_04 launch 4::Which metric would best validate success for objective 3.2?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_3_2_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 3.2?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_3_2_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 3.2?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_3_2_launch_07 launch 7::Which data source best supports decisions required by objective 3.2?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_3_2_launch_08 launch 8::Which role is typically accountable for outcomes described in 3.2?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_3_2_launch_09 launch 9::Which NIST CSF function most closely maps to 3.2?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_3_2_launch_10 launch 10::Which scenario best requires applying 3.2?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_3_2_launch_11 launch 11::Which documentation practice supports auditability for 3.2?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_3_3_launch_01 launch 1::Which response best aligns with SY0-701 objective 3.3 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_3_3_launch_02 launch 2::A stakeholder asks how objective 3.3 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_3_3_launch_03 launch 3::During an audit finding for "Compare and contrast concepts and strategies to protect data...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_3_3_launch_04 launch 4::Which metric would best validate success for objective 3.3?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_3_3_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 3.3?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_3_3_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 3.3?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_3_3_launch_07 launch 7::Which data source best supports decisions required by objective 3.3?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_3_3_launch_08 launch 8::Which role is typically accountable for outcomes described in 3.3?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_3_3_launch_09 launch 9::Which NIST CSF function most closely maps to 3.3?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_3_3_launch_10 launch 10::Which scenario best requires applying 3.3?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_3_3_launch_11 launch 11::Which documentation practice supports auditability for 3.3?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_3_4_launch_01 launch 1::Which response best aligns with SY0-701 objective 3.4 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_3_4_launch_02 launch 2::A stakeholder asks how objective 3.4 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_3_4_launch_03 launch 3::During an audit finding for "Explain the importance of resilience and recovery in securit...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_3_4_launch_04 launch 4::Which metric would best validate success for objective 3.4?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_3_4_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 3.4?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_3_4_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 3.4?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_3_4_launch_07 launch 7::Which data source best supports decisions required by objective 3.4?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_3_4_launch_08 launch 8::Which role is typically accountable for outcomes described in 3.4?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_3_4_launch_09 launch 9::Which NIST CSF function most closely maps to 3.4?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_3_4_launch_10 launch 10::Which scenario best requires applying 3.4?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_3_4_launch_11 launch 11::Which documentation practice supports auditability for 3.4?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_4_1_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.1 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_4_1_launch_02 launch 2::A stakeholder asks how objective 4.1 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_4_1_launch_03 launch 3::During an audit finding for "Given a scenario, apply common security techniques to comput...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_4_1_launch_04 launch 4::Which metric would best validate success for objective 4.1?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_4_1_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.1?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_4_1_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.1?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_4_1_launch_07 launch 7::Which data source best supports decisions required by objective 4.1?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_4_1_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.1?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_4_1_launch_09 launch 9::Which NIST CSF function most closely maps to 4.1?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_4_1_launch_10 launch 10::Which scenario best requires applying 4.1?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_4_1_launch_11 launch 11::Which documentation practice supports auditability for 4.1?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_4_2_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.2 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_4_2_launch_02 launch 2::A stakeholder asks how objective 4.2 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_4_2_launch_03 launch 3::During an audit finding for "Explain the security implications of proper hardware, softwa...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_4_2_launch_04 launch 4::Which metric would best validate success for objective 4.2?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_4_2_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.2?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_4_2_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.2?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_4_2_launch_07 launch 7::Which data source best supports decisions required by objective 4.2?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_4_2_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.2?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_4_2_launch_09 launch 9::Which NIST CSF function most closely maps to 4.2?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_4_2_launch_10 launch 10::Which scenario best requires applying 4.2?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_4_2_launch_11 launch 11::Which documentation practice supports auditability for 4.2?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_4_3_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.3 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_4_3_launch_02 launch 2::A stakeholder asks how objective 4.3 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_4_3_launch_03 launch 3::During an audit finding for "Explain various activities associated with vulnerability man...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_4_3_launch_04 launch 4::Which metric would best validate success for objective 4.3?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_4_3_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.3?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_4_3_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.3?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_4_3_launch_07 launch 7::Which data source best supports decisions required by objective 4.3?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_4_3_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.3?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_4_3_launch_09 launch 9::Which NIST CSF function most closely maps to 4.3?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_4_3_launch_10 launch 10::Which scenario best requires applying 4.3?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_4_3_launch_11 launch 11::Which documentation practice supports auditability for 4.3?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_4_4_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.4 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_4_4_launch_02 launch 2::A stakeholder asks how objective 4.4 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_4_4_launch_03 launch 3::During an audit finding for "Explain security alerting and monitoring concepts and tools...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_4_4_launch_04 launch 4::Which metric would best validate success for objective 4.4?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_4_4_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.4?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_4_4_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.4?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_4_4_launch_07 launch 7::Which data source best supports decisions required by objective 4.4?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_4_4_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.4?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_4_4_launch_09 launch 9::Which NIST CSF function most closely maps to 4.4?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_4_4_launch_10 launch 10::Which scenario best requires applying 4.4?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_4_4_launch_11 launch 11::Which documentation practice supports auditability for 4.4?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_4_5_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.5 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_4_5_launch_02 launch 2::A stakeholder asks how objective 4.5 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_4_5_launch_03 launch 3::During an audit finding for "Given a scenario, modify enterprise capabilities to enhance ...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_4_5_launch_04 launch 4::Which metric would best validate success for objective 4.5?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_4_5_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.5?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_4_5_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.5?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_4_5_launch_07 launch 7::Which data source best supports decisions required by objective 4.5?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_4_5_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.5?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_4_5_launch_09 launch 9::Which NIST CSF function most closely maps to 4.5?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_4_5_launch_10 launch 10::Which scenario best requires applying 4.5?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_4_5_launch_11 launch 11::Which documentation practice supports auditability for 4.5?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_4_6_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.6 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_4_6_launch_02 launch 2::A stakeholder asks how objective 4.6 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_4_6_launch_03 launch 3::During an audit finding for "Given a scenario, implement and maintain identity and access...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_4_6_launch_04 launch 4::Which metric would best validate success for objective 4.6?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_4_6_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.6?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_4_6_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.6?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_4_6_launch_07 launch 7::Which data source best supports decisions required by objective 4.6?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_4_6_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.6?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_4_6_launch_09 launch 9::Which NIST CSF function most closely maps to 4.6?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_4_6_launch_10 launch 10::Which scenario best requires applying 4.6?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_4_6_launch_11 launch 11::Which documentation practice supports auditability for 4.6?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_4_7_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.7 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_4_7_launch_02 launch 2::A stakeholder asks how objective 4.7 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_4_7_launch_03 launch 3::During an audit finding for "Explain the importance of automation and orchestration relat...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_4_7_launch_04 launch 4::Which metric would best validate success for objective 4.7?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_4_7_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.7?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_4_7_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.7?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_4_7_launch_07 launch 7::Which data source best supports decisions required by objective 4.7?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_4_7_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.7?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_4_7_launch_09 launch 9::Which NIST CSF function most closely maps to 4.7?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_4_7_launch_10 launch 10::Which scenario best requires applying 4.7?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_4_7_launch_11 launch 11::Which documentation practice supports auditability for 4.7?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_4_8_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.8 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_4_8_launch_02 launch 2::A stakeholder asks how objective 4.8 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_4_8_launch_03 launch 3::During an audit finding for "Explain appropriate incident response activities...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_4_8_launch_04 launch 4::Which metric would best validate success for objective 4.8?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_4_8_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.8?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_4_8_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.8?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_4_8_launch_07 launch 7::Which data source best supports decisions required by objective 4.8?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_4_8_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.8?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_4_8_launch_09 launch 9::Which NIST CSF function most closely maps to 4.8?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_4_8_launch_10 launch 10::Which scenario best requires applying 4.8?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_4_8_launch_11 launch 11::Which documentation practice supports auditability for 4.8?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_4_9_launch_01 launch 1::Which response best aligns with SY0-701 objective 4.9 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_4_9_launch_02 launch 2::A stakeholder asks how objective 4.9 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_4_9_launch_03 launch 3::During an audit finding for "Given a scenario, use data sources to support an investigati...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_4_9_launch_04 launch 4::Which metric would best validate success for objective 4.9?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_4_9_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 4.9?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_4_9_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 4.9?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_4_9_launch_07 launch 7::Which data source best supports decisions required by objective 4.9?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_4_9_launch_08 launch 8::Which role is typically accountable for outcomes described in 4.9?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_4_9_launch_09 launch 9::Which NIST CSF function most closely maps to 4.9?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_4_9_launch_10 launch 10::Which scenario best requires applying 4.9?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_4_9_launch_11 launch 11::Which documentation practice supports auditability for 4.9?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_5_1_launch_01 launch 1::Which response best aligns with SY0-701 objective 5.1 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_5_1_launch_02 launch 2::A stakeholder asks how objective 5.1 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_5_1_launch_03 launch 3::During an audit finding for "Summarize elements of effective security governance...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_5_1_launch_04 launch 4::Which metric would best validate success for objective 5.1?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_5_1_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 5.1?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_5_1_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 5.1?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_5_1_launch_07 launch 7::Which data source best supports decisions required by objective 5.1?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_5_1_launch_08 launch 8::Which role is typically accountable for outcomes described in 5.1?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_5_1_launch_09 launch 9::Which NIST CSF function most closely maps to 5.1?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_5_1_launch_10 launch 10::Which scenario best requires applying 5.1?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_5_1_launch_11 launch 11::Which documentation practice supports auditability for 5.1?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_5_2_launch_01 launch 1::Which response best aligns with SY0-701 objective 5.2 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_5_2_launch_02 launch 2::A stakeholder asks how objective 5.2 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_5_2_launch_03 launch 3::During an audit finding for "Explain elements of the risk management process...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_5_2_launch_04 launch 4::Which metric would best validate success for objective 5.2?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_5_2_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 5.2?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_5_2_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 5.2?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_5_2_launch_07 launch 7::Which data source best supports decisions required by objective 5.2?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_5_2_launch_08 launch 8::Which role is typically accountable for outcomes described in 5.2?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_5_2_launch_09 launch 9::Which NIST CSF function most closely maps to 5.2?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_5_2_launch_10 launch 10::Which scenario best requires applying 5.2?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_5_2_launch_11 launch 11::Which documentation practice supports auditability for 5.2?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_5_3_launch_01 launch 1::Which response best aligns with SY0-701 objective 5.3 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_5_3_launch_02 launch 2::A stakeholder asks how objective 5.3 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_5_3_launch_03 launch 3::During an audit finding for "Explain the processes associated with third-party risk asses...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_5_3_launch_04 launch 4::Which metric would best validate success for objective 5.3?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_5_3_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 5.3?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_5_3_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 5.3?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_5_3_launch_07 launch 7::Which data source best supports decisions required by objective 5.3?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_5_3_launch_08 launch 8::Which role is typically accountable for outcomes described in 5.3?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_5_3_launch_09 launch 9::Which NIST CSF function most closely maps to 5.3?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_5_3_launch_10 launch 10::Which scenario best requires applying 5.3?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_5_3_launch_11 launch 11::Which documentation practice supports auditability for 5.3?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_5_4_launch_01 launch 1::Which response best aligns with SY0-701 objective 5.4 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_5_4_launch_02 launch 2::A stakeholder asks how objective 5.4 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_5_4_launch_03 launch 3::During an audit finding for "Summarize elements of effective security compliance...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_5_4_launch_04 launch 4::Which metric would best validate success for objective 5.4?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_5_4_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 5.4?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_5_4_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 5.4?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_5_4_launch_07 launch 7::Which data source best supports decisions required by objective 5.4?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_5_4_launch_08 launch 8::Which role is typically accountable for outcomes described in 5.4?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_5_4_launch_09 launch 9::Which NIST CSF function most closely maps to 5.4?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_5_4_launch_10 launch 10::Which scenario best requires applying 5.4?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_5_4_launch_11 launch 11::Which documentation practice supports auditability for 5.4?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_5_5_launch_01 launch 1::Which response best aligns with SY0-701 objective 5.5 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_5_5_launch_02 launch 2::A stakeholder asks how objective 5.5 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_5_5_launch_03 launch 3::During an audit finding for "Explain types and purposes of audits and assessments...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_5_5_launch_04 launch 4::Which metric would best validate success for objective 5.5?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_5_5_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 5.5?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_5_5_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 5.5?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_5_5_launch_07 launch 7::Which data source best supports decisions required by objective 5.5?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_5_5_launch_08 launch 8::Which role is typically accountable for outcomes described in 5.5?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_5_5_launch_09 launch 9::Which NIST CSF function most closely maps to 5.5?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_5_5_launch_10 launch 10::Which scenario best requires applying 5.5?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_5_5_launch_11 launch 11::Which documentation practice supports auditability for 5.5?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}
+
+::sy701_5_6_launch_01 launch 1::Which response best aligns with SY0-701 objective 5.6 when prioritizing risk in a hybrid environment?{
+=Apply the principle described in the objective before selecting a tool
+~Deploy the newest commercial product regardless of integration cost
+~Disable logging temporarily to improve performance
+~Transfer all accountability to the cloud provider under shared responsibility
+}
+
+::sy701_5_6_launch_02 launch 2::A stakeholder asks how objective 5.6 relates to defense-in-depth. What is the best explanation?{
+=It adds a layer that supports confidentiality, integrity, or availability
+~It replaces the need for physical controls entirely
+~It applies only to on-premises data centers
+~It eliminates the need for user awareness training
+}
+
+::sy701_5_6_launch_03 launch 3::During an audit finding for "Given a scenario, implement security awareness practices...", which evidence best demonstrates alignment?{
+=Documented procedure mapped to the objective with measurable outcomes
+~Verbal assurance from a single engineer
+~Marketing brochure describing security features
+~Unverified screenshot without chain of custody
+}
+
+::sy701_5_6_launch_04 launch 4::Which metric would best validate success for objective 5.6?{
+=A KPI tied to reduced risk or improved control effectiveness
+~Number of security tools purchased this quarter
+~Total blocked emails regardless of false positives
+~Count of policy documents without employee attestation
+}
+
+::sy701_5_6_launch_05 launch 5::Which trade-off is most relevant when implementing controls for 5.6?{
+=Balancing security improvement with usability and operational cost
+~Maximizing obscurity as the primary control strategy
+~Removing multi-factor authentication for executive accounts
+~Avoiding change management to deploy fixes faster
+}
+
+::sy701_5_6_launch_06 launch 6::Which activity belongs in the corrective phase for issues tied to 5.6?{
+=Remediate root cause and verify control effectiveness after an event
+~Install deterrent signage only
+~Archive logs without analysis
+~Disable accounts proactively before investigation
+}
+
+::sy701_5_6_launch_07 launch 7::Which data source best supports decisions required by objective 5.6?{
+=Authoritative configuration and telemetry correlated to the asset
+~Anonymous social media posts
+~Unauthenticated third-party forum advice
+~Outdated network diagram with no owner
+}
+
+::sy701_5_6_launch_08 launch 8::Which role is typically accountable for outcomes described in 5.6?{
+=The role defined in policy with documented responsibilities
+~Any user with local administrator rights
+~External penetration testers permanently
+~Vendors without contractual security clauses
+}
+
+::sy701_5_6_launch_09 launch 9::Which NIST CSF function most closely maps to 5.6?{
+=The function that matches identify, protect, detect, respond, or recover context
+~Only the recover function for every objective
+~Functions are not applicable to enterprise security
+~A single function eliminates the need for governance
+}
+
+::sy701_5_6_launch_10 launch 10::Which scenario best requires applying 5.6?{
+=A realistic enterprise condition described in the objective verb phrase
+~A consumer mobile game outage unrelated to security
+~Replacing keyboards for aesthetic reasons
+~Publishing press releases about a product launch
+}
+
+::sy701_5_6_launch_11 launch 11::Which documentation practice supports auditability for 5.6?{
+=Version-controlled records with approval and retention rules
+~Ephemeral chat messages as the sole record
+~Shared passwords stored in plain text
+~Ad-hoc changes without rollback plans
+}

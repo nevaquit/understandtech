@@ -122,12 +122,10 @@ Run [quality-gates.md](reference/quality-gates.md) checklist before commit. Non-
 ### Step 6 — Build and hand off
 
 ```bash
-# Expand objective question banks
-node scripts/generate-security-plus-quiz-gift.mjs
-node scripts/generate-network-plus-quiz-gift.mjs
-
-# Assemble practice exam 1 from objective banks (SEC701)
-php scripts/build-practice-exam-1-gift.php
+# Expand SEC701 to launch scale (after gap memo exists)
+node scripts/generate-security-plus-launch-content.mjs
+node scripts/build-practice-exams-gift.mjs all
+# On VM: php scripts/build-practice-exams-gift.php all
 ```
 
 Then continue with `/understandtech-cert-content` steps 4–7: seed script updates, staging seed, `verify-cert-course-pages.sh`.
