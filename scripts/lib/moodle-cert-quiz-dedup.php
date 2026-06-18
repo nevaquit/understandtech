@@ -197,6 +197,29 @@ function ut_unique_question_ids_by_name(array $questionids): array {
 }
 
 /**
+ * Delete all attempts on a knowledge-check quiz so structure can be rebuilt.
+ *
+ * @param stdClass $quizrecord
+ * @return int Attempts deleted
+ */
+function ut_reset_knowledge_check_attempts(stdClass $quizrecord): int {
+    global $DB;
+
+    if (!str_contains((string) $quizrecord->name, 'Knowledge Check')) {
+        return 0;
+    }
+
+    $count = (int) $DB->count_records('quiz_attempts', ['quiz' => $quizrecord->id]);
+    if ($count === 0) {
+        return 0;
+    }
+
+    quiz_delete_all_attempts($quizrecord);
+    echo "quiz_attempts_deleted name={$quizrecord->name} id={$quizrecord->id} count={$count}\n";
+    return $count;
+}
+
+/**
  * Remove all questions from a quiz using Moodle 4.5 structure API.
  *
  * @param stdClass $quizrecord
@@ -229,7 +252,18 @@ function ut_clear_quiz_slots(stdClass $quizrecord, int $courseid): int {
 function ut_rebuild_knowledge_check_quiz(stdClass $quizrecord, array $targetquestionids, int $courseid): array {
     $targetquestionids = ut_unique_question_ids_by_name($targetquestionids);
 
-    $removed = ut_clear_quiz_slots($quizrecord, $courseid);
+    try {
+        ut_reset_knowledge_check_attempts($quizrecord);
+        $removed = ut_clear_quiz_slots($quizrecord, $courseid);
+    } catch (Throwable $e) {
+        echo "quiz_rebuild_failed name={$quizrecord->name} id={$quizrecord->id} error="
+            . $e->getMessage() . "\n";
+        return [
+            'removed' => 0,
+            'added' => 0,
+            'total' => count($targetquestionids),
+        ];
+    }
 
     $added = 0;
     foreach ($targetquestionids as $qid) {
