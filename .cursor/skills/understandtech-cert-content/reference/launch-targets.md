@@ -26,8 +26,10 @@ Aligned to `docs/white-paper.md` §5 Phase 1–2 and current repo inventory (202
 | NET009 questions | ~400 | **400** |
 | NET009 practice exams | 3 × 90 Q | **3** (gift files) |
 | NET009 labs | 3 | **3** (HTML + seed) |
-| APLUS lessons | 80–100 per core | 57 combined |
-| APLUS questions | ~400 per core | ~912 (flashcard-heavy) |
+| APLUS lessons | 80–100 per core | **171** (57 core + 114 sub) |
+| APLUS questions | ~400 per core | **912** (existing bank; no launch GIFT) |
+| APLUS practice exams | 3 × 90 Q | **3** (gift files) |
+| APLUS labs | 3 | **3** (HTML + seed) |
 
 **Courses:** `NET009` (`network_plus_n10_009`), `APLUS` (`comptia_a_plus`)
 

@@ -15,7 +15,7 @@ env:
 jobs:
   seed:
     runs-on: [self-hosted, linux, "${{ inputs.target }}"]
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -58,6 +58,11 @@ jobs:
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/post-deploy-stabilize-vm.sh"
 
+      - name: Seed Study Coach block
+        run: |
+          set -euo pipefail
+          sudo -u www-data php "${PLUGINS_REPO_DIR}/scripts/seed-study-plan-block.php"
+
       - name: Verify Moodle web health (strict)
         env:
           STAGING_URL: ${{ secrets.STAGING_URL }}
@@ -69,6 +74,11 @@ jobs:
         run: |
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-cert-course-pages.sh"
+
+      - name: Verify APLUS launch-scale counts
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-aplus-launch-scale.sh"
 
       - name: Disable maintenance mode
         if: always()

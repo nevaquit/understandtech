@@ -1,0 +1,630 @@
+::pe1_q001 ap1101_1_1_fc0672 AirDrop::Which statement best describes AirDrop?{
+=iOS feature for simple file sharing via Bluetooth.
+~Installer package whose authenticity and integrity cannot be verified.
+~ou are performing a wiring job, but the company wants to purchase the media and components from wants to purchase the m…
+~rue or false? Both 4G and 5G cellular can be used for fixed access broadband as well as in mobile for fixed access broa…
+}
+
+::pe1_q002 ap1101_1_3_fc0603 Port triggering::Which statement best describes Port triggering?{
+=Mechanism to configure access through a firewall for applications that require more than one port. Basically, when the firewall detects activity on outbound port A destined for a given external IP address, it opens inbo…
+~Remote-initiated wipe of a mobile device that removes corporate apps and data only.
+~ou received a user complaint about a laptop being extremely hot to the touch. What actions should you extremely hot to…
+~AN) AN) Network scope that uses close-range wireless technologies (usually based on Bluetooth or NFC) to establish comm…
+}
+
+::pe1_q003 ap1101_1_1_fc0405 Compatibility concerns::Which statement best describes Compatibility concerns?{
+=Considerations that must be made when using an app in an environment with multiple device and OS platforms.
+~Type of digital camera used to stream and record video. There are many types, from devices built into laptops to standa…
+~OS for some models of the Apple iPad tablet.
+~Cloud app that uses mobile device location service to identify its current position on a map and enable security featur…
+}
+
+::pe1_q004 ap1101_1_1_fc0394 Chrome OS::Which statement best describes Chrome OS?{
+=Proprietary OS developed by Google to run on specific laptop (chromebooks) and PC (chromeboxes) hardware.
+~Proprietary connector and interface used by Apple iPhone and iPad devices.
+~A simple device used to extend the range of ports (for example, USB, DVI, HDMI, Thunderbolt, network, and so on) availa…
+~i-Fi Protected Access (WP i-Fi Protected Access (WPA) A) Standards for authenticating and encrypting access to Wi-Fi ne…
+}
+
+::pe1_q005 ap1101_1_1_fc0254 touch pen::Which statement best describes touch pen?{
+=Input device that can be used with a compatible digitizer/track pad/drawing tablet for natural input, such as handwriting and sketching.
+~A simple device used to extend the range of ports (for example, USB, DVI, HDMI, Thunderbolt, network, and so on) availa…
+~Touch-enabled mouse and trackpad hardware for Apple computers.
+~Android feature for simple file sharing via Bluetooth.
+}
+
+::pe1_q006 ap1101_1_3_fc0275 location service::Which statement best describes location service?{
+=Feature of mobile computing that identifies or estimates the device's geographical position using GPS and/or network data.
+~Where a threat actor exploits an unlocked and unattended desktop or mobile device to gain unauthorized access.
+~An analysis of events that can provide insight into how to improve response and support processes in the future.
+~ou are writing guidance for departmental managers to request new software installs. Y to request new software installs.…
+}
+
+::pe1_q007 ap1101_2_1_fc0153 Internet Protocol (IP)::Which statement best describes Internet Protocol (IP)?{
+=Network (Internet) layer protocol in the TCP/IP suite providing packet addressing and routing for all higher- level protocols in the suite.
+~Infrastructure of hosts and services with which attackers direct, distribute, and control malware over botnets.
+~ou are explaining your plan to use the 5 GHz band predominantly for an open plan office network. The predominantly for…
+~rue or false? A valid IPv6 configuration requires a prefix. prefix. True. In IPv6, while there is no separate entity ca…
+}
+
+::pe1_q008 ap1101_2_2_fc0094 twisted pair cable::Which statement best describes twisted pair cable?{
+=Network cable construction with insulated copper wires twisted about each other. A pair of color-coded wires transmits a balanced electrical signal. The twisting of the wire pairs at different rates acts to reduce inter…
+~Feature of cloud service models that allows customers to track and pay for precise compute, storage, and network resour…
+~Before installing an OS, it is vital to check that all the PC components have been tested for compatibility with the OS…
+~Group of network hosts that shares resources in a peer-to-peer fashion. No one computer provides a centralized director…
+}
+
+::pe1_q009 ap1101_2_4_fc0208 Internet of Things (IoT)::Which statement best describes Internet of Things (IoT)?{
+=Devices that can report state and configuration data and be remotely managed over IP networks.
+~Category of network type and products that are used to implement small-scale LANs and off-the-shelf Internet connection…
+~Subdivision of frequency bands used by Wi-Fi products into smaller channels to allow multiple networks to operate at th…
+~ISP offering Internet access over ground-based Line of Sight (LoS) microwave transmitters.
+}
+
+::pe1_q010 ap1101_2_2_fc0562 evil twin::Which statement best describes evil twin?{
+=Wireless access point that deceives users into believing that it is a legitimate network access point.
+~rue or false? Only a single network name can be configured on a single access point. configured on a single access poin…
+~ou are developing a script to ensure that the M\: drive is mapped consistently to the same network folder on is mapped c…
+~Category of network type and products that are used to implement small-scale LANs and off-the-shelf Internet connection…
+}
+
+::pe1_q011 ap1101_2_3_fc0170 fully qualified domain name (FQDN)::Which statement best describes fully qualified domain name (FQDN)?{
+=Unique label specified in a DNS hierarchy to identify a particular host within a subdomain within a top-level domain.
+~ou are explaining your plan to use the 5 GHz band predominantly for an open plan office network. The predominantly for…
+~rue or false? A valid IPv6 configuration requires a prefix. prefix. True. In IPv6, while there is no separate entity ca…
+~AN) AN) Network scope that spans a large geographical area, incorporating more than one site and often a mix of differe…
+}
+
+::pe1_q012 ap1101_2_5_fc0149 firewall::Which statement best describes firewall?{
+=Software or hardware device that protects a network segment or individual host by filtering packets to an access control list.
+~Rules designed to enforce best-practice password selection, such as minimum length and use of multiple character types.
+~A sandbox is a computing environment that is isolated from a host system to guarantee that the environment runs in a co…
+~,, what is the dif what is the difference between a supervisor password ference between a supervisor password and a use…
+}
+
+::pe1_q013 ap1101_2_7_fc0143 satellite::Which statement best describes satellite?{
+=System of microwave transmissions where orbital satellites relay signals between terrestrial receivers or other orbital satellites. Satellite internet connectivity is enabled through a reception antenna connected to the…
+~Considerations for installation location for PC and network devices to ensure reliable and secure operation.
+~Software that allows clients to view and control the desktop over a network or the Internet.
+~ferent user wants to configure a multiplayer ferent user wants to configure a multiplayer game server by using the DMZ…
+}
+
+::pe1_q014 ap1101_2_2_fc0120 frequency bands::Which statement best describes frequency bands?{
+=Portion of the microwave radio-frequency spectrum in which wireless products operate, such as 2.4 GHz band or 5 GHz band.
+~Server that mediates the communications between a client and another server. It can filter and often modify communicati…
+~An attack that uses multiple compromised hosts (a botnet) to overwhelm a service with request or response traffic.
+~Computing environment that is isolated from a host system to guarantee that the environment runs in a controlled, secur…
+}
+
+::pe1_q015 ap1101_2_3_fc0200 proxy server::Which statement best describes proxy server?{
+=Server that mediates the communications between a client and another server. It can filter and often modify communications as well as provide caching services to improve performance.
+~Legacy expansion bus standard allowing for the connection of internal and external devices. Each device on a SCSI bus m…
+~Twisted-pair termination pinouts defined in the ANSI/TIA/EIA 568 Commercial Building Telecommunications Standards.
+~Ground-based microwave transmission that supports long distances over precisely aligned directional antennas. These pro…
+}
+
+::pe1_q016 ap1101_2_1_fc0823 YYou are explaining your plan to use th…::Which statement best describes YYou are explaining your plan to use the 5 GHz band?{
+=ou are explaining your plan to use the 5 GHz band predominantly for an open plan office network. The predominantly for an open plan office network. The business owner has heard that this is shorter range, so business ow…
+~Striping with parity-redundant drive configuration supporting a flexible number of devices and better than 50% capacity…
+~Tool used to terminate solid twisted-pair copper cable to an insulation displacement connector block.
+~Unit for representing the increase in power gained by the directional design of a wireless antenna.
+}
+
+::pe1_q017 ap1101_3_4_fc0074 Self-Monitoring, Analysis, and Reportin…::Which statement best describes Self-Monitoring, Analysis, and Reporting T?{
+=echnology echnology (SMAR (SMART) T) Technology designed to alert the user to an error condition in a mass-storage device before the disk becomes unusable.
+~As part of a touch screen assembly, the digitizer is a touch-sensitive layer placed on top of the display panel. The di…
+~Roller, corona wire, or belt assembly on a laser print device that applies a charge to the media (paper) so that it att…
+~Windows Settings pages for using and configuring attached hardware.
+}
+
+::pe1_q018 ap1101_3_2_fc0063 Basic Input/Output System (BIOS)::Which statement best describes Basic Input/Output System (BIOS)?{
+=Legacy 32-bit firmware type that initializes hardware and provides a system setup interface for configuring boot devices and other hardware settings.
+~Screw down connector used with coaxial cable.
+~, and black (CMYK) , and black (CMYK) Subtractive color model used by print devices. CMYK printing involves use of half…
+~Type of printer that uses a heated print head and specially treated paper to form the image. Most direct thermal printe…
+}
+
+::pe1_q019 ap1101_3_7_fc0306 Print bed::Which statement best describes Print bed?{
+=3-D print device component on which output is deposited.
+~Windows feature for creating a single storage resource from multiple devices. Data can be protected against device fail…
+~Sturdy vertical post installed to control road traffic or designed to prevent ram-raiding and vehicle-ramming attacks.
+~Displaying terms of use or other restrictions before use of a computer or app is allowed.
+}
+
+::pe1_q020 ap1101_3_4_fc0830 TTrue or false? A TPM provides secure r…::Which statement best describes TTrue or false? A TPM provides secure removable?{
+=rue or false? A TPM provides secure removable storage so that encryption keys can be used with storage so that encryption keys can be used with dif different computers. ferent computers. False. A trusted platform module…
+~Striping drive configuration that provides no redundancy against device failure.
+~rusted platform module (TPM) Specification for secure hardware-based storage of encryption keys, hashed passwords, and…
+~Small form factor push-pull fiber optic connector; available in simplex and duplex versions.
+}
+
+::pe1_q021 ap1101_3_7_fc0330 Devices settings::Which statement best describes Devices settings?{
+=Windows Settings pages for using and configuring attached hardware.
+~Malicious code inserted into the boot sector code or partition table of a storage device that attempts to execute when…
+~ou receive a support call from a lecturer. A projector . A projector is only displaying a very dim image. Which is only…
+~ou are planning to install a network of wireless access points with power supplied over data cabling. access points wit…
+}
+
+::pe1_q022 ap1101_3_1_fc0294 toner::Which statement best describes toner?{
+=Specially formulated compound to impart dye to paper through an electrographic process (used by laser printers and photocopiers). The key properties of toner are the colorant (dye), ability to fuse (wax or plastic), and…
+~Print device component used to automate document production, such as hole punching or stapling print jobs.
+~Sector on a mass storage device that holds information about partitions and the OS boot loader. 423 globally unique ide…
+~Browser mode in which all session data and cache is discarded and tracking protection features are enabled by default.
+}
+
+::pe1_q023 ap1101_3_1_fc0324 Recycle Bin::Which statement best describes Recycle Bin?{
+=When files are deleted from a local hard disk, they are stored in the Recycle Bin. They can be recovered from here if so desired.
+~Biometric camera-based scanner that uses unique features of a palm shown by visible and infrared light.
+~ge (ESD) ge (ESD) Metal and plastic surfaces can allow a charge to build up. This can discharge if a potential differen…
+~rue or false? To enable printer sharing via W o enable printer sharing via Windows, indows, the print device must be co…
+}
+
+::pe1_q024 ap1101_3_4_fc0712 sanitization::Which statement best describes sanitization?{
+=Process of thoroughly and completely removing data from a storage medium so that file remnants cannot be recovered.
+~iruses Malicious code inserted into an executable file image. The malicious code is executed when the file is run and c…
+~ou receive a support call from a lecturer. A projector . A projector is only displaying a very dim image. Which is only…
+~ou are planning to install a network of wireless access points with power supplied over data cabling. access points wit…
+}
+
+::pe1_q025 ap1101_3_8_fc0580 public key::Which statement best describes public key?{
+=During asymmetric encryption, this key is freely distributed and can be used to perform the reverse encryption or decryption operation of the linked private key in the pair.
+~Adapter card designed to record video from a source such as a TV tuner or games console.
+~Specifications use multiple storage devices to protect against data loss in the event of device failure.
+~Feature of UEFI that prevents unauthorized processes from executing during the boot operation.
+}
+
+::pe1_q026 ap1101_3_7_fc0902 YYou are supporting a user who has inst…::Which statement best describes YYou are supporting a user who has installed a vendor?{
+=ou are supporting a user who has installed a vendor keyboard driver keyboard driver. The keyboard no longer functions . The keyboard no longer functions correctly correctly. Under W . Under Windows 10, what are the step…
+~Version of a 35 mm film camera where the film is replaced by light-sensitive diodes and electronic storage media (typic…
+~Assembly in a laser print device that fixes toner to media. This is typically a combination of a heat and pressure roll…
+~Control Panel app for using and configuring attached hardware.
+}
+
+::pe1_q027 ap1101_3_5_fc0706 open-source::Which statement best describes open-source?{
+=Licensing model that grants permissive rights to end-users, such as to install, use, modify, and distribute a software product and its source code, as long as redistribution permits the same rights.
+~Sturdy vertical post installed to control road traffic or designed to prevent ram-raiding and vehicle-ramming attacks.
+~ge (ESD) ge (ESD) Metal and plastic surfaces can allow a charge to build up. This can discharge if a potential differen…
+~rue or false? To enable printer sharing via W o enable printer sharing via Windows, indows, the print device must be co…
+}
+
+::pe1_q028 ap1101_4_1_fc0894 YYou are specifying a computer for use…::Which statement best describes YYou are specifying a computer for use as a software?{
+=ou are specifying a computer for use as a software development workstation. This will be required to run development workstation. This will be required to run multiple virtual machines (VMs). Can any multiple virtual ma…
+~irtualization Computing environment where multiple independent operating systems can be installed to a single hardware…
+~Software that allows users to configure virtual meeting rooms, with options for voice, video, instant messaging, and sc…
+~Mobile/cloud computing office-productivity and data-storage suite operated by Apple and closely integrated with macOS a…
+}
+
+::pe1_q029 ap1101_4_2_fc0232 Community::Which statement best describes Community?{
+=Cloud that is deployed for shared use by cooperating tenants.
+~Cloud that is deployed for use by a single entity.
+~Computing architecture where on-demand resources provisioned with the attributes of high availability, scalability, and…
+~Guest operating system installed on a host computer using virtualization software (a hypervisor).
+}
+
+::pe1_q030 ap1101_4_2_fc0238 VVirtual desktop infrastructure (VDI)::Which statement best describes VVirtual desktop infrastructure (VDI)?{
+=irtual desktop infrastructure (VDI) A virtualization implementation that separates the personal computing environment from a user's physical computer.
+~Mobile/cloud computing office-productivity and data-storage suite operated by Apple and closely integrated with macOS a…
+~Classifying the provision of cloud services and the limit of the cloud service provider's responsibility as software, p…
+~Cloud that is deployed for use by a single entity.
+}
+
+::pe1_q031 ap1101_4_1_fc0577 symmetric encryption::Which statement best describes symmetric encryption?{
+=Two-way encryption scheme in which encryption and decryption are both performed by the same key. Also known as shared-key encryption.
+~Classifying the provision of cloud services and the limit of the cloud service provider's responsibility as software, p…
+~Cloud that is deployed for use by a single entity.
+~Computing architecture where on-demand resources provisioned with the attributes of high availability, scalability, and…
+}
+
+::pe1_q032 ap1101_4_2_fc0268 Google W::Which statement best describes Google W?{
+=orkspace orkspace Mobile/cloud computing office productivity and data storage suite operated by Google.
+~Attack against a virtualization platform where malware running in a VM is able to interact directly with the hypervisor…
+~irtualization Computing environment where multiple independent operating systems can be installed to a single hardware…
+~ou need to provision a virtualization workstation to run four guest OSs simultaneously run four guest OSs simultaneousl…
+}
+
+::pe1_q033 ap1101_5_5_fc0926 YYou are troubleshooting a print proble…::Which statement best describes YYou are troubleshooting a print problem, which turned?{
+=ou are troubleshooting a print problem, which turned out to be caused by user error out to be caused by user error. The user is not . The user is not confident that the problem is solved and wants more confident that th…
+~our company has recently closed a foreign branch office, and you are repurposing some PCs that were office, and you are…
+~ou are dealing with a support request and think that you have identified the probable cause of the reported you have id…
+~ou are trying to troubleshoot a problem over the phone and need to get advice from your manager phone and need to get a…
+}
+
+::pe1_q034 ap1101_5_3_fc1042 YYour company has recently closed a for…::Which statement best describes YYour company has recently closed a foreign branch?{
+=our company has recently closed a foreign branch office, and you are repurposing some PCs that were office, and you are repurposing some PCs that were shipped from the old location. What feature of the shipped from the…
+~Control Panel app related to configuring power button/lid events and power-saving modes.
+~Variation in the time it takes for a signal to reach the recipient. Jitter manifests itself as an inconsistent rate of…
+~, replacement, , replacement, or upgrade, what should you do next? or upgrade, what should you do next? You should test…
+}
+
+::pe1_q035 ap1101_5_1_fc0338 Power Options::Which statement best describes Power Options?{
+=Control Panel app related to configuring power button/lid events and power-saving modes.
+~ou are dealing with a support request and think that you have identified the probable cause of the reported you have id…
+~rue or false? Updates are not necessary for iOS devices because the OS is closed source. devices because the OS is clos…
+~Any method by which cryptographic keys are transferred among users, thus enabling the use of a cryptographic algorithm.
+}
+
+::pe1_q036 ap1101_5_4_fc0751 fuse::Which statement best describes fuse?{
+=Circuit breaker designed to protect the device and users of the device from faulty wiring or supply of power (overcurrent protection).
+~Variation in the time it takes for a signal to reach the recipient. Jitter manifests itself as an inconsistent rate of…
+~, replacement, , replacement, or upgrade, what should you do next? or upgrade, what should you do next? You should test…
+~ou are troubleshooting an issue with a wireless adapter adapter. When you open Device Manager . When you open Device Ma…
+}
+
+::pe1_q037 ap1101_5_the_comptia_6_step_troubleshooting_metho_fc0419 image deployment::Which statement best describes image deployment?{
+=Deployment method where the target disk is written with an image of the new OS.
+~ou are troubleshooting an issue with a wireless adapter adapter. When you open Device Manager . When you open Device Ma…
+~ou have been servicing a computer, but when you , but when you have finished you find that it will not turn on. There h…
+~Circuit breaker designed to protect the device and users of the device from faulty wiring or supply of power (overcurre…
+}
+
+::pe1_q038 ap1101_5_1_fc0249 inverter::Which statement best describes inverter?{
+=Fluorescent lamp backlights require AC power. An inverter component converts DC power from the motherboard to AC. The inverter can fail separately to the backlight.
+~.msc) .msc) Console related to managing digital certificates for the current user and trusted root certification author…
+~Specific display technology used to implement modern flat-panel LCD displays.
+~ou are assisting a user whose application is in the state shown in the exhibit. How would you state shown in the exhibi…
+}
+
+::pe1_q039 ap1101_5_1_fc0864 YYou have been servicing a computer::Which statement best describes YYou have been servicing a computer?{
+=ou have been servicing a computer, but when you , but when you have finished you find that it will not turn on. There have finished you find that it will not turn on. There was no power problem before, and you have veri…
+~.msc) .msc) Console related to managing digital certificates for the current user and trusted root certification author…
+~Fluorescent lamp backlights require AC power. An inverter component converts DC power from the motherboard to AC. The i…
+~Time taken for a signal to reach the recipient, measured in milliseconds. Latency is a particular problem for two-way a…
+}
+
+::pe1_q040 ap1101_5_4_fc0946 YYou are troubleshooting an issue with…::Which statement best describes YYou are troubleshooting an issue with a wireless?{
+=ou are troubleshooting an issue with a wireless adapter adapter. When you open Device Manager . When you open Device Manager, you find , you find the device's icon is shown with a down arrow the device's icon is shown w…
+~Control Panel applet related to configuration of Microsoft Outlook email accounts and storage files.
+~Specific display technology used to implement modern flat-panel LCD displays.
+~ou are assisting a user whose application is in the state shown in the exhibit. How would you state shown in the exhibi…
+}
+
+::pe1_q041 ap1101_5_3_fc0244 thin film transistor (TFT)::Which statement best describes thin film transistor (TFT)?{
+=Specific display technology used to implement modern flat-panel LCD displays.
+~Time taken for a signal to reach the recipient, measured in milliseconds. Latency is a particular problem for two-way a…
+~our company has recently closed a foreign branch office, and you are repurposing some PCs that were office, and you are…
+~ou are dealing with a support request and think that you have identified the probable cause of the reported you have id…
+}
+
+::pe1_q042 ap1101_5_5_fc0784 YYou are trying to troubleshoot a probl…::Which statement best describes YYou are trying to troubleshoot a problem over the?{
+=ou are trying to troubleshoot a problem over the phone and need to get advice from your manager phone and need to get advice from your manager.. How should you handle this with the customer? How should you handle this w…
+~Time taken for a signal to reach the recipient, measured in milliseconds. Latency is a particular problem for two-way a…
+~our company has recently closed a foreign branch office, and you are repurposing some PCs that were office, and you are…
+~ou are dealing with a support request and think that you have identified the probable cause of the reported you have id…
+}
+
+::pe1_q043 ap1101_5_1_fc0213 Latency::Which statement best describes Latency?{
+=Time taken for a signal to reach the recipient, measured in milliseconds. Latency is a particular problem for two-way applications, such as VoIP (telephone) and online conferencing.
+~Circuit breaker designed to protect the device and users of the device from faulty wiring or supply of power (overcurre…
+~Deployment method where the target disk is written with an image of the new OS.
+~Control Panel app related to configuring power button/lid events and power-saving modes.
+}
+
+::pe1_q044 ap1101_5_1_fc0357 Certificate Manager console (certmgr::Which statement best describes Certificate Manager console (certmgr?{
+=.msc) .msc) Console related to managing digital certificates for the current user and trusted root certification authority certificates.
+~ou are troubleshooting a print problem, which turned out to be caused by user error out to be caused by user error. The…
+~ou are trying to troubleshoot a problem over the phone and need to get advice from your manager phone and need to get a…
+~macOS utility related to desktop and input/output device accessibility configuration.
+}
+
+::pe1_q045 ap1101_5_the_comptia_6_step_troubleshooting_metho_fc0582 Key exchange::Which statement best describes Key exchange?{
+=Any method by which cryptographic keys are transferred among users, thus enabling the use of a cryptographic algorithm.
+~, what , what happens to the files and subfolders by default? happens to the files and subfolders by default? They inhe…
+~ou are troubleshooting a print problem, which turned out to be caused by user error out to be caused by user error. The…
+~ou are trying to troubleshoot a problem over the phone and need to get advice from your manager phone and need to get a…
+}
+
+::pe1_q046 ap1102_1_10_fc0535 .APP::Which statement best describes .APP?{
+=Default extension for a macOS app subdirectory when installed to the Applications folder.
+~ou are attempting to run a command but receive the message “The requested operation requires message “The requested ope…
+~Disk or network adapter device from which an operating system can be loaded.
+~Cloud storage service operated by Microsoft and closely integrated with Windows.
+}
+
+::pe1_q047 ap1102_1_8_fc0427 potential impacts::Which statement best describes potential impacts?{
+=Considerations that should be made when planning the installation or upgrade of new apps.
+~UNIX is a family of more than 20 related operating systems that are produced by various companies. It can run on a wide…
+~indows Recovery Environment (W indows Recovery Environment (WinRE) inRE) Windows troubleshooting feature that installs…
+~Command-line tools to apply and analyze group policies. Group policies are a means of configuring registry settings.
+}
+
+::pe1_q048 ap1102_1_2_fc0195 terminal emulator::Which statement best describes terminal emulator?{
+=Software that reproduces text input and output for a given command shell or OS.
+~Two-part tool used to identify one cable within a bundle by applying an audible signal.
+~indows Defender Firewall indows Defender Firewall Built-in, host-based filtering of network connections.
+~Command-line tool used to navigate the directory structure.
+}
+
+::pe1_q049 ap1102_1_2_fc0507 su::Which statement best describes su?{
+=This command allows any account listed in the /etc/sudoers file to run specified commands with superuser privilege level.
+~Type of threat actor who is assigned privileges on the system that cause an intentional or unintentional incident.
+~ou are setting up an ADSL router/modem for a client; unfortunately client; unfortunately, the contents of the box have…
+~indows user is trying to join a video conference indows user is trying to join a video conference and cannot hear any s…
+}
+
+::pe1_q050 ap1102_1_6_fc0486 NTFS permissions::Which statement best describes NTFS permissions?{
+=ACL that mediates local and network access to a file system object under Windows when the volume is formatted with NTFS.
+~Package manager for installing, maintaining, inventorying, and removing software from the Red Hat family of Linux distr…
+~macOS indicator that a process is busy and is not able to accept input.
+~TT Extension for the batch file format that is used to execute a series of Windows CMD shell commands.
+}
+
+::pe1_q051 ap1102_1_2_fc0479 gpupdate::Which statement best describes gpupdate?{
+=Command-line tools to apply and analyze group policies. Group policies are a means of configuring registry settings.
+~This command allows any account listed in the /etc/sudoers file to run specified commands with superuser privilege leve…
+~ault ault macOS disk encryption product.
+~Windows support feature allowing remote screen-sharing over the Internet.
+}
+
+::pe1_q052 ap1102_1_2_fc0515 ps command::Which statement best describes ps command?{
+=Linux command for retrieving process information.
+~Software agent that collects system data and logs for analysis by a monitoring system to provide early detection of thr…
+~2 GB system RAM. Is an 8 GB workstation sufficient to meet this requirement? to meet this requirement? No. The host OS…
+~System-memory controller configuration that provides two data pathways between the memory modules and a compatible CPU.
+}
+
+::pe1_q053 ap1102_1_1_fc0031 liquid-based cooling system::Which statement best describes liquid-based cooling system?{
+=Cooling system that uses system of pipes, water blocks, and pumps to transfer heat away from components.
+~Windows interface for executing commands.
+~Command-line tool for copying files.
+~T32 32-bit file system used principally for system partitions and removable media.
+}
+
+::pe1_q054 ap1102_1_1_fc0358 Group Policy Editor (gpedit.msc)::Which statement best describes Group Policy Editor (gpedit.msc)?{
+=Console related to configuring detailed user and system registry settings via policies.
+~indows, what is the dif indows, what is the difference between the boot ference between the boot partition and the syst…
+~Two-part tool used to identify one cable within a bundle by applying an audible signal.
+~Control Panel applet allowing management of Windows Features and third-party software.
+}
+
+::pe1_q055 ap1102_1_1_fc0227 High availability (HA)::Which statement best describes High availability (HA)?{
+=Metric that defines how closely systems approach the goal of providing data availability 100% of the time while maintaining a high level of system performance.
+~File system object used to organize other file system objects into containers.
+~Proprietary OS designed by Apple for their range of iMac computers, Mac workstations, and MacBook portables.
+~Formats for provisioning application installation files, such as via optical discs, downloads, and image files.
+}
+
+::pe1_q056 ap1102_1_1_fc0066 USB permissions::Which statement best describes USB permissions?{
+=Feature of system setup allowing USB ports to be disabled.
+~Standard Linux file system that includes journaling and has since been replaced with ext4.
+~Windows feature to attempt system recovery by reinstalling Windows from source.
+~File system access-control-concept where child objects are automatically assigned the same permissions as their parent…
+}
+
+::pe1_q057 ap1102_1_1_fc0432 Roll Back Driver::Which statement best describes Roll Back Driver?{
+=Windows troubleshooting feature that allows removal of an update or reversion to a previous driver version.
+~Default file system for macOS-based computers and laptops.
+~Microsoft status screen that indicates an error from which the system cannot recover (also called a stop error). Blue s…
+~System component providing a command interpreter by which the user can use a kernel interface and operate the OS.
+}
+
+::pe1_q058 ap1102_1_2_fc0506 df and du commands::Which statement best describes df and du commands?{
+=Command-line tools used to report storage usage in Linux.
+~System whose configuration is different from its secure baseline.
+~ou are auditing a file system for the presence of any unauthorized W unauthorized Windows shell script files. Which thr…
+~indows, what is the dif indows, what is the difference between the boot ference between the boot partition and the syst…
+}
+
+::pe1_q059 ap1102_1_7_fc0426 distribution method::Which statement best describes distribution method?{
+=Formats for provisioning application installation files, such as via optical discs, downloads, and image files.
+~Proprietary OS designed by Apple for their range of iMac computers, Mac workstations, and MacBook portables.
+~Considerations that should be made when planning the installation or upgrade of new apps.
+~Network directory service for Microsoft Windows domain networks that facilitates authentication and authorization of us…
+}
+
+::pe1_q060 ap1102_2_3_fc0201 unified threat management (UTM)::Which statement best describes unified threat management (UTM)?{
+=All-in-one security appliances and agents that combine the functions of a firewall, malware scanner, intrusion detection, vulnerability scanner, data-loss prevention, content filtering, and so on.
+~Malicious script hosted on the attacker's site or coded in a link injected onto a trusted site designed to compromise c…
+~Security mechanism that locks the desktop after a period of inactivity and requires user to authenticate to resume.
+~Security copy of production data made to removable media, typically according to a regular schedule. Different backup t…
+}
+
+::pe1_q061 ap1102_2_3_fc0713 standard formatting::Which statement best describes standard formatting?{
+=Using a vendor tool to delete the file system and/or partition table on storage media before recycling or repurposing. This method carries the greatest risk of leaving persistent data remnants.
+~Using persuasion, manipulation, or intimidation to make the victim violate a security policy. The goal of social engine…
+~Message digest encrypted using the sender's private key that is appended to a message to authenticate the sender and pr…
+~Information about new viruses and other malware used to update antivirus scanners.
+}
+
+::pe1_q062 ap1102_2_3_fc0715 low level format::Which statement best describes low level format?{
+=Using a vendor tool to fully erase storage media before recycling or repurposing, minimizing the risk of leaving persistent data remnants.
+~Social engineering tactic where a team will communicate, whether directly or indirectly, a lie or half-truth in order t…
+~Symmetric 128-, 192-, or 256-bit block cipher used for bulk encryption in modern security standards, such as WPA2, WPA3…
+~Identification and authentication information presented in the X.509 format and issued by a Certificate Authority (CA)…
+}
+
+::pe1_q063 ap1102_2_3_fc0846 TTrue or false? Running the fans contin…::Which statement best describes TTrue or false? Running the fans continually at?{
+=rue or false? Running the fans continually at maximum speed is the best way to prevent maximum speed is the best way to prevent overheating. overheating. False. This is likely to damage the fans and draw more dust into…
+~indows Settings indows Settings Touch-enabled interface for managing user and system settings in Windows.
+~Access control feature that allows permissions to be allocated to multiple users more efficiently.
+~Specific method by which malware code infects a target host, often via some vulnerability in a software process.
+}
+
+::pe1_q064 ap1102_2_2_fc0471 Fingerprint scanner::Which statement best describes Fingerprint scanner?{
+=Biometric authentication device that can produce a template signature of a user's fingerprint and then subsequently compare the template to the digit submitted for authentication.
+~Protocol framework allowing network devices to autoconfigure services, such as allowing a games console to request appr…
+~Class of malware that modifies system files, often at the kernel level, to conceal its presence.
+~Method of sanitizing a drive using the ATA command set.
+}
+
+::pe1_q065 ap1102_2_4_fc0567 on-path::Which statement best describes on-path?{
+=Attack where the threat actor makes an independent connection between two victims and is able to read and possibly modify traffic.
+~On a Windows domain, a way to deploy per-user and per-computer settings such as password policy, account restrictions,…
+~ailgating Social engineering technique to gain access to a building by following someone who is unaware of their presen…
+~Security measure performed on email and Internet traffic to identify and block suspicious, malicious and/or inappropria…
+}
+
+::pe1_q066 ap1102_2_1_fc0541 confidentiality::Which statement best describes confidentiality?{
+=, integrity , integrity, and availability (CIA triad) , and availability (CIA triad) Three principles of security control and management. Also known as the information security triad. Also referred to in reverse order a…
+~A) A) Strong authentication mechanism that requires a user to submit two different types of credential, such as a finge…
+~Basic principle of security stating that something should be allocated the minimum necessary rights, privileges, or inf…
+~Specific method by which malware code infects a target host, often via some vulnerability in a software process.
+}
+
+::pe1_q067 ap1102_2_2_fc0473 Single sign-On (SSO)::Which statement best describes Single sign-On (SSO)?{
+=Authentication technology that enables a user to authenticate once and receive authorizations for multiple services.
+~Hand-held or walkthrough metal detector designed to detect concealed weapons.
+~Malware that hijacks computer resources to create cryptocurrency.
+~Validation from an outsourcing provider of recycling/repurposing services that media has been destroyed or sanitized to…
+}
+
+::pe1_q068 ap1102_2_7_fc0420 boot method::Which statement best describes boot method?{
+=Device used to start the setup program and hold source files for installing or upgrading an OS.
+~Windows Settings pages related to game mode settings and Xbox integration.
+~Configuring a network share to hold user profile data. The data is copied to and from the share at logon and logoff.
+~ishing Social engineering attack where the threat actor extracts information while speaking over the phone or leveragin…
+}
+
+::pe1_q069 ap1102_2_4_fc0571 password::Which statement best describes password?{
+=Any attack where the attacker tries to gain unauthorized access to and use of passwords.
+~, integrity , integrity, and availability (CIA triad) , and availability (CIA triad) Three principles of security contr…
+~Potential for an entity to exercise a vulnerability (that is, to breach security).
+~Authentication mechanism that allows a user to present a smartcard to operate an entry system.
+}
+
+::pe1_q070 ap1102_2_10_fc0574 cross-site scripting (XSS)::Which statement best describes cross-site scripting (XSS)?{
+=Malicious script hosted on the attacker's site or coded in a link injected onto a trusted site designed to compromise clients browsing the trusted site, circumventing the browser's security model of trusted zones.
+~Weakness that could be triggered accidentally or exploited intentionally to cause a security breach.
+~Attack where the threat actor makes an independent connection between two victims and is able to read and possibly modi…
+~ideo surveillance Physical security control that uses cameras and recording devices to visually monitor the activity in…
+}
+
+::pe1_q071 ap1102_3_2_fc0709 Computer Security Incident Response T::Which statement best describes Computer Security Incident Response T?{
+=eam (CSIR eam (CSIRT) T) Team with responsibility for incident response. The CSIRT must have expertise across a number of business domains (IT, HR, legal, and marketing, for instance).
+~ou think you have discovered the solution to a problem in a product Knowledge Base, and the problem in a product Knowle…
+~Searchable database of product FAQs (Frequently Asked Questions), advice, and known troubleshooting issues. The Microso…
+~Software that records information about a PC and its users, often installed without the user's consent.
+}
+
+::pe1_q072 ap1102_3_2_fc0710 Digital forensics::Which statement best describes Digital forensics?{
+=Process of gathering and submitting computer evidence to trial. Digital evidence is latent, meaning that it must be interpreted. This means that great care must be taken to prove that the evidence has not been tampered…
+~Application protocol used for requesting files from Windows servers and delivering them to clients. SMB allows machines…
+~ype 2 hypervisor? ype 2 hypervisor? Hypervisor software that must be installed as an application running on a host OS.…
+~Software that illegally copies or imitates a commercial product or brand.
+}
+
+::pe1_q073 ap1102_3_1_fc0649 Spyware::Which statement best describes Spyware?{
+=Software that records information about a PC and its users, often installed without the user's consent.
+~Application protocol used for requesting files from Windows servers and delivering them to clients. SMB allows machines…
+~ype 2 hypervisor? ype 2 hypervisor? Hypervisor software that must be installed as an application running on a host OS.…
+~eam (CSIR eam (CSIRT) T) Team with responsibility for incident response. The CSIRT must have expertise across a number…
+}
+
+::pe1_q074 ap1102_3_1_fc0678 bootleg app::Which statement best describes bootleg app?{
+=Software that illegally copies or imitates a commercial product or brand.
+~Attack that injects a database query into the input data directed at a server by accessing the client side of the appli…
+~Troubleshooting boot options that allow use of tools such as safe mode and recovery discs.
+~Feature of mobile computing that provides a managed interface for installing third-party software apps.
+}
+
+::pe1_q075 ap1102_3_1_fc1045 YYou think you have discovered the solu…::Which statement best describes YYou think you have discovered the solution to a?{
+=ou think you have discovered the solution to a problem in a product Knowledge Base, and the problem in a product Knowledge Base, and the solution involves installing a software patch. What solution involves installing a…
+~Troubleshooting startup mode that loads a limited selection of drivers and services.
+~Software delivery model where the code runs on a server and is streamed to a client.
+~, a user called the help desk saying , a user called the help desk saying that his computer is running slowly and freez…
+}
+
+::pe1_q076 ap1102_3_2_fc0367 Startup::Which statement best describes Startup?{
+=Apps and scripts set to run when the computer starts or when the user signs in. Startup items can be configured as shortcuts, registry entries, or Task Scheduler triggers.
+~Feature of mobile computing that provides a managed interface for installing third-party software apps.
+~Application protocol used for requesting files from Windows servers and delivering them to clients. SMB allows machines…
+~ype 2 hypervisor? ype 2 hypervisor? Hypervisor software that must be installed as an application running on a host OS.…
+}
+
+::pe1_q077 ap1102_3_2_fc0744 knowledge base (KB)::Which statement best describes knowledge base (KB)?{
+=Searchable database of product FAQs (Frequently Asked Questions), advice, and known troubleshooting issues. The Microsoft KB is found at support.microsoft.com.
+~Software that illegally copies or imitates a commercial product or brand.
+~Process of determining what additional software may be installed on a client or server beyond its baseline to prevent t…
+~Any application server computer that has joined a domain but does not maintain a copy of the Active Directory database.
+}
+
+::pe1_q078 ap1102_3_1_fc0181 Server Message Block (SMB)::Which statement best describes Server Message Block (SMB)?{
+=Application protocol used for requesting files from Windows servers and delivering them to clients. SMB allows machines to share files and printers, thus making them available for other machines to use. SMB client softw…
+~, a user called the help desk saying , a user called the help desk saying that his computer is running slowly and freez…
+~Process of gathering and submitting computer evidence to trial. Digital evidence is latent, meaning that it must be int…
+~Software that records information about a PC and its users, often installed without the user's consent.
+}
+
+::pe1_q079 ap1102_3_1_fc0428 Safe Mode::Which statement best describes Safe Mode?{
+=Troubleshooting startup mode that loads a limited selection of drivers and services.
+~Feature of mobile computing that provides a managed interface for installing third-party software apps.
+~Application protocol used for requesting files from Windows servers and delivering them to clients. SMB allows machines…
+~ype 2 hypervisor? ype 2 hypervisor? Hypervisor software that must be installed as an application running on a host OS.…
+}
+
+::pe1_q080 ap1102_3_2_fc0476 member server::Which statement best describes member server?{
+=Any application server computer that has joined a domain but does not maintain a copy of the Active Directory database.
+~rojans Malicious software program hidden within an innocuous-seeming piece of software. Usually, the Trojan is used to…
+~Attack that injects a database query into the input data directed at a server by accessing the client side of the appli…
+~Troubleshooting startup mode that loads a limited selection of drivers and services.
+}
+
+::pe1_q081 ap1102_4_8_fc1019 YYou are developing a script to scan se…::Which statement best describes YYou are developing a script to scan server hosts to?{
+=ou are developing a script to scan server hosts to discover which ports are open and to identify which discover which ports are open and to identify which server software is operating the port. What server software is o…
+~Standard for two-way radio communications over very short (around four inches) distances, facilitating contactless paym…
+~Secure entry system with two gateways, only one of which is open at any one time.
+~In scripting and programming, control statement that executes code repeatedly based on a condition.
+}
+
+::pe1_q082 ap1102_4_5_fc0280 unbox::Which statement best describes unbox?{
+=Operational procedure for ensuring that a new device is installed safely to an optimum environment.
+~A knowledge base (KB) is a reference to assist with installing, configuring, and troubleshooting hardware and software.…
+~ou are developing a script to scan server hosts to discover which ports are open and to identify which discover which p…
+~AATT 64-bit version of the FAT file system with support for larger partition and file sizes.
+}
+
+::pe1_q083 ap1102_4_1_fc0062 escalate::Which statement best describes escalate?{
+=In the context of support procedures, incident response, and breach-reporting, escalation is the process of involving expert and senior staff to assist in problem management.
+~ou are documenting workstation backup and recovery methods and want to include the 3-2-1 recovery methods and want to i…
+~Carrier technology to implement broadband Internet access for subscribers by transferring data over voice- grade teleph…
+~Biometric scanner based on analysis of the unique pattern of blood vessels at the back of the eye.
+}
+
+::pe1_q084 ap1102_4_1_fc0933 YYou are assisting with the development…::Which statement best describes YYou are assisting with the development of end-user?{
+=ou are assisting with the development of end-user security awareness documentation. What is the security awareness documentation. What is the dif difference between tailgating and shoulder surfing? ference between tailg…
+~Job type in which all selected files, regardless of prior state, are backed up.
+~Documentation of best practice and work instructions to use to perform a common administrative task.
+~ou are updating a deployment checklist for installing new workstation PCs. What are the principal new workstation PCs.…
+}
+
+::pe1_q085 ap1102_4_1_fc1004 YYou are updating a support knowledge b…::Which statement best describes YYou are updating a support knowledge base article to?{
+=ou are updating a support knowledge base article to help technicians identify port flapping. How can port help technicians identify port flapping. How can port flapping be identified? flapping be identified? Use the swi…
+~our organization is donating workstations to a local ganization is donating workstations to a local college. The workst…
+~inX menu inX menu Start button shortcut menu with quick access to principal configuration and management utilities.
+~Job type that combines incremental backup jobs to synthesize a full backup job. Synthetic full backups have the advanta…
+}
+
+::pe1_q086 ap1102_4_1_fc0206 operational technology (OT)::Which statement best describes operational technology (OT)?{
+=Communications network designed to implement an industrial control system rather than data networking.
+~A knowledge base (KB) is a reference to assist with installing, configuring, and troubleshooting hardware and software.…
+~ou are developing a script to scan server hosts to discover which ports are open and to identify which discover which p…
+~AATT 64-bit version of the FAT file system with support for larger partition and file sizes.
+}
+
+::pe1_q087 ap1102_4_1_fc0727 .PS1::Which statement best describes .PS1?{
+=Extension for the PowerShell script format.
+~Communication technique to ensure that you capture all the information that the other person is "transmitting," includi…
+~ou are updating a support knowledge base article to help technicians identify port flapping. How can port help technici…
+~Operational procedure for ensuring that a new device is installed safely to an optimum environment.
+}
+
+::pe1_q088 ap1102_4_3_fc0692 backup chain::Which statement best describes backup chain?{
+=Sequence of jobs starting with a full backup and followed by either incremental or differential backups to implement a media rotation scheme.
+~Collection of access control entries (ACEs) that determines which subjects (user accounts, host IP addresses, and so on…
+~Data found on a computer system that is not permitted by policy or that is not compliant with relevant legislation or r…
+~Policy that governs employees' use of company equipment and Internet services. ISPs may also apply AUPs to their custom…
+}
+
+::pe1_q089 ap1102_4_9_fc1016 YYou are updating a procedure that list…::Which statement best describes YYou are updating a procedure that lists security?{
+=ou are updating a procedure that lists security considerations for remote access technologies. One of considerations for remote access technologies. One of the precautions is to check that remote access ports the precau…
+~Type of system firmware providing support for 64-bit CPU operation at boot, full GUI and mouse operation at boot, and b…
+~Protection of computer systems and digital information resources from unauthorized access, attack, theft, or data damag…
+~Extension for a Linux shell script file format. The shebang in the first line of the script identifies the shell type (…
+}
+
+::pe1_q090 ap1102_4_1_fc0819 YYou are working on the training docume…::Which statement best describes YYou are working on the training documentation for?{
+=ou are working on the training documentation for help-desk agents. What should you include for help-desk agents. What should you include for dealing with difficult situations? dealing with difficult situations? Do not a…
+~Copyright protection technologies for digital media. DRM solutions usually try to restrict the number of devices allowe…
+~Communication technique to ensure that you capture all the information that the other person is "transmitting," includi…
+~our organization is donating workstations to a local ganization is donating workstations to a local college. The workst…
+}
+

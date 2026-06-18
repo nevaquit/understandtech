@@ -23,6 +23,10 @@ require_once($CFG->dirroot . '/question/format.php');
 require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->libdir . '/questionlib.php');
 require_once($CFG->libdir . '/filterlib.php');
+require_once(__DIR__ . '/lib/moodle-cert-practice-exam.php');
+
+$admin = get_admin();
+\core\session\manager::set_user($admin);
 
 /**
  * @param string $code Objective shortname e.g. ap1101_1_1
@@ -62,6 +66,39 @@ function aplus_load_lesson_html(string $repopath, string $code, string $title): 
         }
     }
     return aplus_lesson_html($code, $title);
+}
+
+/**
+ * Load sub-lesson HTML (_scenario or _exam suffix).
+ *
+ * @param string $repopath
+ * @param string $code e.g. ap1101_1_1_scenario
+ * @param string $title
+ * @return string
+ */
+function aplus_load_sublesson_html(string $repopath, string $code, string $title): string {
+    $path = $repopath . '/content/a-plus/lessons/' . $code . '.html';
+    if (is_readable($path)) {
+        $html = file_get_contents($path);
+        if ($html !== false && trim($html) !== '') {
+            return $html;
+        }
+    }
+    return aplus_lesson_html($code, $title);
+}
+
+/**
+ * Build Moodle page title for a sub-lesson.
+ *
+ * @param string $objectiveshortname e.g. ap1101_1_1
+ * @param string $suffix _scenario or _exam
+ * @param string $fullname Objective full name
+ * @return string
+ */
+function aplus_sublesson_pagename(string $objectiveshortname, string $suffix, string $fullname): string {
+    $prefix = aplus_page_title_prefix($objectiveshortname);
+    $label = $suffix === '_scenario' ? 'Scenario Study' : 'Exam Focus';
+    return "{$prefix} — {$label}: {$fullname}";
 }
 
 /**
@@ -207,28 +244,98 @@ function aplus_page_title_prefix(string $shortname): string {
 /**
  * @param int $contextid
  * @param string $categoryname
- * @return stdClass
+ * @param string|null $idnumber
+ * @param int|null $parentid
+ * @return stdClass|null
  */
-function aplus_get_question_category(int $contextid, string $categoryname): stdClass {
+function aplus_find_question_category(
+    int $contextid,
+    string $categoryname,
+    ?string $idnumber = null,
+    ?int $parentid = null
+): ?stdClass {
     global $DB;
 
-    $existing = $DB->get_record('question_categories', ['contextid' => $contextid, 'name' => $categoryname]);
+    $conditions = ['contextid' => $contextid, 'name' => $categoryname];
+    if ($parentid !== null) {
+        $conditions['parent'] = $parentid;
+    }
+    $existing = $DB->get_record('question_categories', $conditions, '*', IGNORE_MULTIPLE);
+    if ($existing) {
+        return $existing;
+    }
+
+    if ($idnumber !== null && $idnumber !== '') {
+        $existing = $DB->get_record(
+            'question_categories',
+            ['contextid' => $contextid, 'idnumber' => $idnumber],
+            '*',
+            IGNORE_MULTIPLE
+        );
+        if ($existing) {
+            return $existing;
+        }
+    }
+
+    return null;
+}
+
+/**
+ * @param int $contextid
+ * @param string $categoryname
+ * @param string $idnumber
+ * @return stdClass
+ */
+function aplus_get_question_category(int $contextid, string $categoryname, string $idnumber = 'aplus-main'): stdClass {
+    global $DB;
+
+    $existing = aplus_find_question_category($contextid, $categoryname, $idnumber);
     if ($existing) {
         return $existing;
     }
 
     $parent = question_get_top_category($contextid, true);
-    $record = new stdClass();
-    $record->name = $categoryname;
-    $record->contextid = $contextid;
-    $record->info = 'CompTIA A+ certification objective-aligned questions';
-    $record->infoformat = FORMAT_HTML;
-    $record->stamp = make_unique_id_code();
-    $record->parent = $parent->id;
-    $record->sortorder = 999;
-    $record->idnumber = '';
-    $record->id = $DB->insert_record('question_categories', $record);
-    return $record;
+    $manager = new \core_question\category_manager();
+    $categoryid = $manager->add_category(
+        "{$parent->id},{$contextid}",
+        $categoryname,
+        'CompTIA A+ certification objective-aligned questions',
+        FORMAT_HTML,
+        $idnumber
+    );
+    return $DB->get_record('question_categories', ['id' => $categoryid], '*', MUST_EXIST);
+}
+
+/**
+ * Child question category under an existing parent (practice exam banks).
+ *
+ * @param stdClass $parentcategory
+ * @param string $categoryname
+ * @param string $idnumber
+ * @return stdClass
+ */
+function aplus_get_child_question_category(stdClass $parentcategory, string $categoryname, string $idnumber): stdClass {
+    global $DB;
+
+    $existing = aplus_find_question_category(
+        (int) $parentcategory->contextid,
+        $categoryname,
+        $idnumber,
+        (int) $parentcategory->id
+    );
+    if ($existing) {
+        return $existing;
+    }
+
+    $manager = new \core_question\category_manager();
+    $categoryid = $manager->add_category(
+        "{$parentcategory->id},{$parentcategory->contextid}",
+        $categoryname,
+        'CompTIA A+ practice exam bank',
+        FORMAT_HTML,
+        $idnumber
+    );
+    return $DB->get_record('question_categories', ['id' => $categoryid], '*', MUST_EXIST);
 }
 
 /**
@@ -304,6 +411,27 @@ function aplus_map_questions_by_section(int $categoryid): array {
 }
 
 /**
+ * @param int $categoryid
+ * @return array<int,int[]> Map PE domain number (1–9) => question ids
+ */
+function aplus_map_questions_by_domain(int $categoryid): array {
+    $all = aplus_map_all_questions_by_objective($categoryid);
+    $domains = array_fill(1, 9, []);
+    foreach ($all as $objshort => $qids) {
+        if (preg_match('/^ap1101_(\d+)_/', $objshort, $m)) {
+            $domains[(int) $m[1]] = array_merge($domains[(int) $m[1]], $qids);
+        } else if (preg_match('/^ap1102_(\d+)_/', $objshort, $m)) {
+            $domains[5 + (int) $m[1]] = array_merge($domains[5 + (int) $m[1]], $qids);
+        }
+    }
+    foreach ($domains as $num => $qids) {
+        $domains[$num] = array_values(array_unique($qids));
+        sort($domains[$num]);
+    }
+    return $domains;
+}
+
+/**
  * @param int $contextid
  * @param stdClass $category
  * @param string $giftpath
@@ -343,6 +471,54 @@ function aplus_import_gift(int $contextid, stdClass $category, string $giftpath)
 
     $after = count(aplus_category_question_ids((int) $category->id));
     echo "gift_imported path={$giftpath} added=" . ($after - $before) . " total={$after} expected={$expected}\n";
+    return $after;
+}
+
+/**
+ * Import GIFT without skip-if-complete guard (practice exams).
+ *
+ * @param int $contextid
+ * @param stdClass $category
+ * @param string $giftpath
+ * @param string|null $skipprefix
+ * @param int $skiptarget
+ * @return int
+ */
+function aplus_import_gift_unconditional(
+    int $contextid,
+    stdClass $category,
+    string $giftpath,
+    ?string $skipprefix = null,
+    int $skiptarget = 90
+): int {
+    if (!is_readable($giftpath)) {
+        echo "gift_missing path={$giftpath}\n";
+        return count(aplus_category_question_ids((int) $category->id));
+    }
+
+    if ($skipprefix !== null && function_exists('ut_practice_exam_category_question_ids')) {
+        $existing = ut_practice_exam_category_question_ids((int) $category->id, $skipprefix);
+        if (count($existing) >= $skiptarget) {
+            echo "gift_skip path={$giftpath} reason=sufficient_existing count=" . count($existing) . "\n";
+            return count(aplus_category_question_ids((int) $category->id));
+        }
+    }
+
+    $context = context::instance_by_id($contextid);
+    $before = count(aplus_category_question_ids((int) $category->id));
+
+    $qformat = new qformat_gift();
+    $qformat->setCategory($category);
+    $qformat->setContexts([$context]);
+    $qformat->setFilename($giftpath);
+    $qformat->setStoponerror(false);
+    if (!$qformat->importprocess()) {
+        echo "gift_import_failed path={$giftpath}\n";
+        return $before;
+    }
+
+    $after = count(aplus_category_question_ids((int) $category->id));
+    echo "gift_imported path={$giftpath} added=" . ($after - $before) . " total={$after}\n";
     return $after;
 }
 
@@ -559,6 +735,200 @@ function aplus_sync_quiz(stdClass $course, int $sectionnum, string $quizname, ar
 }
 
 /**
+ * Apply practice exam timing and intro to an existing quiz.
+ *
+ * @param stdClass $course
+ * @param string $quizname
+ * @param int $timelimitsecs
+ * @return void
+ */
+function aplus_apply_practice_exam_settings(stdClass $course, string $quizname, int $timelimitsecs = 5400): void {
+    global $DB;
+
+    $quizrecord = $DB->get_record_sql(
+        "SELECT q.*
+           FROM {quiz} q
+           JOIN {course_modules} cm ON cm.instance = q.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
+          WHERE cm.course = :courseid AND q.name = :name",
+        ['courseid' => $course->id, 'name' => $quizname]
+    );
+    if (!$quizrecord) {
+        echo "practice_exam_settings_missing name={$quizname}\n";
+        return;
+    }
+
+    $quizrecord->intro = '<p>Full-length CompTIA A+ practice exam. 90 questions, 90-minute time limit. '
+        . 'Rate your confidence after each question. Covers Core 1 (220-1101) and Core 2 (220-1102) blueprint weights.</p>';
+    $quizrecord->introformat = FORMAT_HTML;
+    $quizrecord->timelimit = $timelimitsecs;
+    $quizrecord->attempts = 2;
+    $DB->update_record('quiz', $quizrecord);
+    echo "practice_exam_settings_applied id={$quizrecord->id} name={$quizname} timelimit={$timelimitsecs}\n";
+}
+
+/**
+ * Create a timed full-length practice exam quiz.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $quizname
+ * @param int[] $questionids
+ * @param int $timelimitsecs
+ * @return void
+ */
+function aplus_add_practice_exam(
+    stdClass $course,
+    int $sectionnum,
+    string $quizname,
+    array $questionids,
+    int $timelimitsecs = 5400
+): void {
+    aplus_add_quiz($course, $sectionnum, $quizname, $questionids);
+    aplus_apply_practice_exam_settings($course, $quizname, $timelimitsecs);
+}
+
+/**
+ * Reconcile a practice exam quiz to the target question set.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $quizname
+ * @param int[] $questionids
+ * @param int $timelimitsecs
+ * @return void
+ */
+function aplus_sync_practice_exam(
+    stdClass $course,
+    int $sectionnum,
+    string $quizname,
+    array $questionids,
+    int $timelimitsecs = 5400
+): void {
+    require_once(__DIR__ . '/lib/moodle-cert-quiz-dedup.php');
+    ut_sync_knowledge_check_quiz(
+        $course,
+        $sectionnum,
+        $quizname,
+        $questionids,
+        static function (stdClass $c, int $sec, string $name, array $ids) use ($timelimitsecs): void {
+            aplus_add_practice_exam($c, $sec, $name, $ids, $timelimitsecs);
+        }
+    );
+    aplus_apply_practice_exam_settings($course, $quizname, $timelimitsecs);
+}
+
+/**
+ * Load lab intro HTML from repo content when present.
+ *
+ * @param string $repopath
+ * @param string $slug
+ * @param string $fallback
+ * @return string
+ */
+function aplus_load_lab_intro(string $repopath, string $slug, string $fallback): string {
+    $path = $repopath . '/content/a-plus/labs/' . $slug . '.html';
+    if (is_readable($path)) {
+        $html = file_get_contents($path);
+        if ($html !== false && trim($html) !== '') {
+            return $html;
+        }
+    }
+    return $fallback;
+}
+
+/**
+ * Find ctfflag course module by activity name.
+ *
+ * @param int $courseid
+ * @param string $name
+ * @return stdClass|null
+ */
+function aplus_find_ctfflag(int $courseid, string $name): ?stdClass {
+    global $DB;
+
+    return $DB->get_record_sql(
+        "SELECT cf.*
+           FROM {ctfflag} cf
+           JOIN {course_modules} cm ON cm.instance = cf.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'ctfflag'
+          WHERE cm.course = :courseid AND cf.name = :name",
+        ['courseid' => $courseid, 'name' => $name]
+    ) ?: null;
+}
+
+/**
+ * Create or update a mod_ctfflag lab activity.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $name
+ * @param string $intro
+ * @param string $regex
+ * @param int $xpaward
+ * @return void
+ */
+function aplus_upsert_ctfflag(
+    stdClass $course,
+    int $sectionnum,
+    string $name,
+    string $intro,
+    string $regex,
+    int $xpaward = 100
+): void {
+    global $DB, $CFG;
+
+    if (!array_key_exists('ctfflag', core_component::get_plugin_list('mod'))) {
+        echo "ctfflag_skip plugin_missing name={$name}\n";
+        return;
+    }
+
+    require_once($CFG->dirroot . '/mod/ctfflag/lib.php');
+
+    $existing = aplus_find_ctfflag((int) $course->id, $name);
+    if ($existing) {
+        $changed = false;
+        if ((string) $existing->intro !== $intro) {
+            $existing->intro = $intro;
+            $existing->introformat = FORMAT_HTML;
+            $changed = true;
+        }
+        if ((string) $existing->expected_flag_regex !== $regex) {
+            $existing->expected_flag_regex = $regex;
+            $changed = true;
+        }
+        if ((int) $existing->xp_award !== $xpaward) {
+            $existing->xp_award = $xpaward;
+            $changed = true;
+        }
+        if ($changed) {
+            $existing->instance = $existing->id;
+            ctfflag_update_instance($existing);
+            echo "ctfflag_updated id={$existing->id} name={$name}\n";
+        } else {
+            echo "ctfflag_unchanged id={$existing->id} name={$name}\n";
+        }
+        return;
+    }
+
+    $module = new stdClass();
+    $module->course = $course->id;
+    $module->name = $name;
+    $module->intro = $intro;
+    $module->introformat = FORMAT_HTML;
+    $module->expected_flag_regex = $regex;
+    $module->xp_award = $xpaward;
+    $module->module = $DB->get_field('modules', 'id', ['name' => 'ctfflag']);
+    $module->modulename = 'ctfflag';
+    $module->section = $sectionnum;
+    $module->visible = 1;
+    $module->cmidnumber = '';
+
+    $cm = add_moduleinfo($module, $course);
+    echo "ctfflag_created id={$cm->instance} name={$name} section={$sectionnum}\n";
+}
+
+/**
  * @param array<string,int[]> $questionmap
  * @return int
  */
@@ -764,7 +1134,8 @@ if (!$course) {
     $newcourse->format = 'topics';
     $newcourse->visible = 1;
     $newcourse->summary = '<p>CompTIA A+ certification track covering Core 1 (220-1101) and Core 2 (220-1102). '
-        . 'Nine blueprint domains, CyberKraft study guide lessons, and CertMaster readiness tracking.</p>';
+        . 'Nine blueprint domains, core + scenario + exam-focus lessons, confidence-rated knowledge checks, '
+        . 'three practice exams, and hands-on labs.</p>';
     $newcourse->summaryformat = FORMAT_HTML;
     $course = create_course($newcourse);
     echo "course_created id={$course->id}\n";
@@ -773,16 +1144,14 @@ if (!$course) {
     echo "course_exists id={$course->id}\n";
 }
 
-$sectioncount = 9;
+$sectioncount = 11;
 course_create_sections_if_missing($course, $sectioncount);
 for ($i = 1; $i <= $sectioncount; $i++) {
     if (!$DB->record_exists('course_sections', ['course' => $course->id, 'section' => $i])) {
         course_create_section($course, $i);
     }
 }
-if ($courseisnew) {
-    rebuild_course_cache((int) $course->id, true);
-}
+rebuild_course_cache((int) $course->id, true);
 
 $sectionnames = [
     1 => 'Core 1 · Domain 1: Mobile Devices (13%)',
@@ -794,6 +1163,8 @@ $sectionnames = [
     7 => 'Core 2 · Domain 2: Security (25%)',
     8 => 'Core 2 · Domain 3: Software Troubleshooting (22%)',
     9 => 'Core 2 · Domain 4: Operational Procedures (22%)',
+    10 => 'Practice Exams',
+    11 => 'Hands-on Labs',
 ];
 foreach ($sectionnames as $num => $label) {
     $section = $DB->get_record('course_sections', ['course' => $course->id, 'section' => $num], '*', MUST_EXIST);
@@ -814,21 +1185,26 @@ $domainsection = [
     'operational_procedures' => 9,
 ];
 
-$expectedpages = count($objectives);
-$pagecount = aplus_count_lesson_pages((int) $course->id);
-if ($pagecount >= $expectedpages && getenv('APLUS_FORCE_PAGES') !== '1') {
-    echo "pages_skip_existing count={$pagecount} expected={$expectedpages}\n";
-} else {
-    foreach ($objectives as $objective) {
-        $sectionnum = $domainsection[$objective->domainshort] ?? 1;
-        $pagename = aplus_page_title_prefix($objective->shortname) . ': ' . $objective->fullname;
-        $html = aplus_load_lesson_html($repopath, $objective->shortname, $objective->fullname);
+foreach ($objectives as $objective) {
+    $sectionnum = $domainsection[$objective->domainshort] ?? 1;
+    $pagename = aplus_page_title_prefix($objective->shortname) . ': ' . $objective->fullname;
+    $html = aplus_load_lesson_html($repopath, $objective->shortname, $objective->fullname);
+    aplus_upsert_page($course, $sectionnum, $pagename, $html);
+}
+
+foreach ($objectives as $objective) {
+    $sectionnum = $domainsection[$objective->domainshort] ?? 1;
+    foreach (['_scenario', '_exam'] as $suffix) {
+        $code = $objective->shortname . $suffix;
+        $pagename = aplus_sublesson_pagename($objective->shortname, $suffix, $objective->fullname);
+        $html = aplus_load_sublesson_html($repopath, $code, $objective->fullname);
         aplus_upsert_page($course, $sectionnum, $pagename, $html);
     }
 }
+echo 'sublessons_seeded=' . (count($objectives) * 2) . "\n";
 
 $context = context_course::instance((int) $course->id);
-$qcat = aplus_get_question_category((int) $context->id, 'CompTIA A+ certification');
+$qcat = aplus_get_question_category((int) $context->id, 'CompTIA A+ certification', 'aplus-main');
 $giftpath = $repopath . '/content/a-plus/aplus-quiz.gift';
 aplus_import_gift((int) $context->id, $qcat, $giftpath);
 
@@ -864,9 +1240,102 @@ for ($sectionnum = 1; $sectionnum <= 9; $sectionnum++) {
     );
 }
 
+echo "practice_exam_block_start\n";
+$pegift = $repopath . '/content/a-plus/practice-exam-1.gift';
+if (is_readable($pegift)) {
+    try {
+        $pecategory = aplus_get_child_question_category($qcat, 'Practice Exam 1 Bank', 'aplus-pe1-bank');
+        echo "practice_exam_category_id={$pecategory->id}\n";
+        aplus_import_gift_unconditional((int) $context->id, $pecategory, $pegift, 'pe1_q');
+        $pequestionids = ut_practice_exam_category_question_ids((int) $pecategory->id, 'pe1_q');
+    } catch (Throwable $e) {
+        echo 'practice_exam_1_category_failed error=' . $e->getMessage() . ' class=' . get_class($e) . "\n";
+        $pequestionids = ut_select_practice_exam_questions_aplus((int) $qcat->id, 90);
+    }
+} else {
+    $pequestionids = ut_select_practice_exam_questions_aplus((int) $qcat->id, 90);
+}
+echo 'practice_exam_1_pool=' . count($pequestionids) . "\n";
+if ($pequestionids) {
+    try {
+        aplus_sync_practice_exam($course, 10, 'Practice Exam 1', $pequestionids, 5400);
+        echo 'practice_exam_1_questions=' . count($pequestionids) . "\n";
+    } catch (Throwable $e) {
+        echo 'practice_exam_1_failed error=' . $e->getMessage() . "\n";
+    }
+}
+
+for ($examnum = 2; $examnum <= 3; $examnum++) {
+    $pename = "Practice Exam {$examnum}";
+    $pegiftpath = $repopath . '/content/a-plus/practice-exam-' . $examnum . '.gift';
+    $peprefix = 'pe' . $examnum . '_q';
+    if (is_readable($pegiftpath)) {
+        try {
+            $pecat = aplus_get_child_question_category($qcat, "Practice Exam {$examnum} Bank", "aplus-pe{$examnum}-bank");
+            aplus_import_gift_unconditional((int) $context->id, $pecat, $pegiftpath, $peprefix);
+            $peids = ut_practice_exam_category_question_ids((int) $pecat->id, $peprefix);
+        } catch (Throwable $e) {
+            echo "practice_exam_{$examnum}_category_failed error=" . $e->getMessage()
+                . ' class=' . get_class($e) . "\n";
+            $peids = ut_select_practice_exam_questions_aplus((int) $qcat->id, 90);
+        }
+    } else {
+        $peids = ut_select_practice_exam_questions_aplus((int) $qcat->id, 90);
+    }
+    echo "practice_exam_{$examnum}_pool=" . count($peids) . "\n";
+    if ($peids) {
+        try {
+            aplus_sync_practice_exam($course, 10, $pename, $peids, 5400);
+        } catch (Throwable $e) {
+            echo "practice_exam_{$examnum}_failed error=" . $e->getMessage() . "\n";
+        }
+    }
+}
+
+echo "labs_block_start\n";
+try {
+    aplus_upsert_ctfflag(
+        $course,
+        11,
+        'Lab 1: RAM and storage upgrade planning',
+        aplus_load_lab_intro($repopath, 'lab-1-ram-storage-upgrade', '<p>RAM and storage upgrade planning lab.</p>'),
+        'UT\\{4E8B2A1F\\}',
+        100
+    );
+} catch (Throwable $e) {
+    echo 'ctfflag_lab1_failed error=' . $e->getMessage() . "\n";
+}
+
+try {
+    aplus_upsert_ctfflag(
+        $course,
+        11,
+        'Lab 2: Windows boot troubleshooting',
+        aplus_load_lab_intro($repopath, 'lab-2-windows-boot-troubleshooting', '<p>Windows boot troubleshooting lab.</p>'),
+        'UT\\{9C3D7E02\\}',
+        100
+    );
+} catch (Throwable $e) {
+    echo 'ctfflag_lab2_failed error=' . $e->getMessage() . "\n";
+}
+
+try {
+    aplus_upsert_ctfflag(
+        $course,
+        11,
+        'Lab 3: Network connectivity diagnosis',
+        aplus_load_lab_intro($repopath, 'lab-3-network-connectivity', '<p>Network connectivity diagnosis lab.</p>'),
+        'UT\\{2A6F1B9D\\}',
+        100
+    );
+} catch (Throwable $e) {
+    echo 'ctfflag_lab3_failed error=' . $e->getMessage() . "\n";
+}
+
 aplus_enable_enrolment($course);
 
-echo "page_filters_deferred=fix-aplus-course-filters.php\n";
+aplus_disable_page_module_filters($course);
+echo "page_filters_disabled=1\n";
 
 $enrollscript = $repopath . '/scripts/enroll-aplus-default-users.php';
 if (is_readable($enrollscript)) {
@@ -879,6 +1348,9 @@ if (is_readable($enrollscript)) {
 } else {
     echo "enroll_script_missing path={$enrollscript}\n";
 }
+
+@file_put_contents('/tmp/ut-aplus-course-id-gha', (string) $course->id);
+echo "course_id_file_written id={$course->id}\n";
 
 echo "COURSE_PATH=/course/view.php?id={$course->id}\n";
 echo "=== seed complete ===\n";

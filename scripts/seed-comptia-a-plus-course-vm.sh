@@ -16,7 +16,7 @@ fi
 sleep 2
 echo 'stale_aplus_seed_cleared=1'
 
-sudo -u www-data timeout 480 php "${REPO}/scripts/seed-comptia-a-plus-course.php"
+sudo -u www-data timeout 900 php "${REPO}/scripts/seed-comptia-a-plus-course.php"
 if [ "${APLUS_SKIP_FILTER_FIX:-0}" != "1" ]; then
   sudo -u www-data timeout 120 php "${REPO}/scripts/fix-aplus-course-filters.php"
 else

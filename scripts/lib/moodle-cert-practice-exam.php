@@ -193,3 +193,81 @@ function ut_select_practice_exam_questions_net009(int $categoryid, int $targetco
 
     return array_slice($selected, 0, $targetcount);
 }
+
+/**
+ * Blueprint-weighted question counts for a 90-question A+ practice exam (Core 1 + Core 2 combined).
+ *
+ * @return array<int,int> Domain number => target count
+ */
+function ut_practice_exam_domain_targets_aplus(): array {
+    return [
+        1 => 6,
+        2 => 10,
+        3 => 11,
+        4 => 5,
+        5 => 13,
+        6 => 14,
+        7 => 11,
+        8 => 10,
+        9 => 10,
+    ];
+}
+
+/**
+ * Select practice exam question ids from an A+ objective bank.
+ *
+ * @param int $categoryid Question category id
+ * @param int $targetcount Target slot count (default 90)
+ * @return int[]
+ */
+function ut_select_practice_exam_questions_aplus(int $categoryid, int $targetcount = 90): array {
+    if (!function_exists('aplus_map_questions_by_domain')) {
+        return [];
+    }
+
+    $domains = aplus_map_questions_by_domain($categoryid);
+    $targets = ut_practice_exam_domain_targets_aplus();
+    $selected = [];
+    $unused = [];
+
+    foreach ($targets as $domainnum => $need) {
+        $pool = $domains[$domainnum] ?? [];
+        shuffle($pool);
+        $take = array_slice($pool, 0, min($need, count($pool)));
+        $selected = array_merge($selected, $take);
+        if (count($pool) > count($take)) {
+            $unused = array_merge($unused, array_slice($pool, count($take)));
+        }
+    }
+
+    $selected = array_values(array_unique($selected));
+    shuffle($unused);
+
+    foreach ($unused as $qid) {
+        if (count($selected) >= $targetcount) {
+            break;
+        }
+        if (!in_array($qid, $selected, true)) {
+            $selected[] = $qid;
+        }
+    }
+
+    if (count($selected) < $targetcount) {
+        $fallback = $domains[5] ?? [];
+        if ($fallback === []) {
+            foreach ($domains as $pool) {
+                if (count($pool) > count($fallback)) {
+                    $fallback = $pool;
+                }
+            }
+        }
+        shuffle($fallback);
+        $idx = 0;
+        while (count($selected) < $targetcount && $fallback !== []) {
+            $selected[] = (int) $fallback[$idx % count($fallback)];
+            $idx++;
+        }
+    }
+
+    return array_slice($selected, 0, $targetcount);
+}
