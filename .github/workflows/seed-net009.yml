@@ -44,7 +44,7 @@ jobs:
       - name: Seed NET009 course
         run: |
           set -euo pipefail
-          rm -f /tmp/ut-net009-course-id-gha
+          sudo rm -f /tmp/ut-net009-course-id-gha
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/seed-network-plus-course-vm.sh"
           echo 'seed_net009_complete=1'
 
