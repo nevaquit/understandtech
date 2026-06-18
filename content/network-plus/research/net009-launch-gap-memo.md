@@ -57,7 +57,7 @@ Files: `practice-exam-{1,2,3}.gift` via `build-network-plus-practice-exams-gift.
 - [x] `build-network-plus-practice-exams-gift.mjs` → PE1–PE3
 - [x] Lab 1–3 HTML + seed
 - [x] Seed sub-lesson loop + PE + launch GIFT import
-- [ ] Staging seed + verify (`verify-net009-launch-scale.sh`)
+- [x] Staging seed + verify (`verify-net009-launch-scale.sh`) — [run 27785118420](https://github.com/nevaquit/understandtech/actions/runs/27785118420): course_id=5, pages=75, quizzes=8, ctfflags=3, PE slots=90×3
 
 ## Citation block
 
