@@ -13,7 +13,15 @@ if [ -z "${SEC701_COURSE_ID:-}" ] && [ -f /var/www/moodle/config.php ]; then
 fi
 export SEC701_COURSE_ID="${SEC701_COURSE_ID:-3}"
 
-readarray -t COUNTS < <(sudo -u www-data env SEC701_COURSE_ID="${SEC701_COURSE_ID}" php -r "
+ut_www_data_php() {
+  if [ "$(id -u)" -eq 0 ]; then
+    runuser -u www-data -- env SEC701_COURSE_ID="${SEC701_COURSE_ID}" php "$@"
+  else
+    sudo -u www-data env SEC701_COURSE_ID="${SEC701_COURSE_ID}" php "$@"
+  fi
+}
+
+readarray -t COUNTS < <(ut_www_data_php -r "
 define('CLI_SCRIPT', true);
 require '/var/www/moodle/config.php';
 global \$DB;
