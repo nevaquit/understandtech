@@ -20,7 +20,7 @@ if ($courseid <= 0) {
 
 $course = get_course($courseid);
 echo "=== disable filters SEC701 course={$courseid} ===\n";
-$stats = ut_disable_cert_course_text_filters($course, true);
+$stats = ut_disable_cert_course_text_filters($course, false);
 echo 'contexts=' . $stats['contexts'] . ' filter_disables=' . $stats['filter_disables'] . "\n";
 echo "filter_cache_reset=1 course_cache_rebuilt=1\n";
 echo "=== complete ===\n";

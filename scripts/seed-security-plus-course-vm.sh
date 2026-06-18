@@ -81,8 +81,6 @@ fi
 
 ut_log "seed_security_plus_course_php"
 ut_www_data_php "${REPO}/scripts/seed-security-plus-course.php"
-ut_log "fix_sec701_course_filters_php"
-ut_www_data_php "${REPO}/scripts/fix-sec701-course-filters.php"
 echo 'seed_purge_caches_deferred=1'
 ut_log "seed_security_plus_complete"
 echo 'seed_security_plus_complete=1'
