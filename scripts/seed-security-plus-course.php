@@ -269,7 +269,7 @@ function security_plus_add_page(stdClass $course, int $sectionnum, string $name,
 function security_plus_get_question_category(int $contextid, string $categoryname): stdClass {
     global $DB;
 
-    $existing = $DB->get_record('question_categories', ['contextid' => $contextid, 'name' => $categoryname]);
+    $existing = $DB->get_record('question_categories', ['contextid' => $contextid, 'name' => $categoryname], '*', IGNORE_MULTIPLE);
     if ($existing) {
         return $existing;
     }
@@ -282,6 +282,38 @@ function security_plus_get_question_category(int $contextid, string $categorynam
     $record->infoformat = FORMAT_HTML;
     $record->stamp = make_unique_id_code();
     $record->parent = $parent->id;
+    $record->sortorder = 999;
+    $record->idnumber = '';
+    $record->id = $DB->insert_record('question_categories', $record);
+    return $record;
+}
+
+/**
+ * Child question category under an existing parent (practice exam banks).
+ *
+ * @param stdClass $parentcategory
+ * @param string $categoryname
+ * @return stdClass
+ */
+function security_plus_get_child_question_category(stdClass $parentcategory, string $categoryname): stdClass {
+    global $DB;
+
+    $existing = $DB->get_record('question_categories', [
+        'contextid' => $parentcategory->contextid,
+        'parent' => $parentcategory->id,
+        'name' => $categoryname,
+    ], '*', IGNORE_MULTIPLE);
+    if ($existing) {
+        return $existing;
+    }
+
+    $record = new stdClass();
+    $record->name = $categoryname;
+    $record->contextid = $parentcategory->contextid;
+    $record->info = 'Security+ SY0-701 practice exam bank';
+    $record->infoformat = FORMAT_HTML;
+    $record->stamp = make_unique_id_code();
+    $record->parent = $parentcategory->id;
     $record->sortorder = 999;
     $record->idnumber = '';
     $record->id = $DB->insert_record('question_categories', $record);
@@ -1107,10 +1139,15 @@ for ($domainnum = 1; $domainnum <= 5; $domainnum++) {
 echo "practice_exam_block_start\n";
 $pegift = $repopath . '/content/security-plus/practice-exam-1.gift';
 if (is_readable($pegift)) {
-    $pecategory = security_plus_get_question_category((int) $context->id, 'Practice Exam 1');
-    echo "practice_exam_category_id={$pecategory->id}\n";
-    security_plus_import_gift_unconditional((int) $context->id, $pecategory, $pegift);
-    $pequestionids = ut_practice_exam_category_question_ids((int) $pecategory->id, 'pe1_q');
+    try {
+        $pecategory = security_plus_get_child_question_category($qcat, 'Practice Exam 1 Bank');
+        echo "practice_exam_category_id={$pecategory->id}\n";
+        security_plus_import_gift_unconditional((int) $context->id, $pecategory, $pegift);
+        $pequestionids = ut_practice_exam_category_question_ids((int) $pecategory->id, 'pe1_q');
+    } catch (Throwable $e) {
+        echo 'practice_exam_1_category_failed error=' . $e->getMessage() . "\n";
+        $pequestionids = ut_select_practice_exam_questions((int) $qcat->id, 90);
+    }
 } else {
     $pequestionids = ut_select_practice_exam_questions((int) $qcat->id, 90);
 }
@@ -1145,9 +1182,14 @@ for ($examnum = 2; $examnum <= 3; $examnum++) {
     $pegiftpath = $repopath . '/content/security-plus/practice-exam-' . $examnum . '.gift';
     $peprefix = 'pe' . $examnum . '_q';
     if (is_readable($pegiftpath)) {
-        $pecat = security_plus_get_question_category((int) $context->id, $pecatname);
-        security_plus_import_gift_unconditional((int) $context->id, $pecat, $pegiftpath);
-        $peids = ut_practice_exam_category_question_ids((int) $pecat->id, $peprefix);
+        try {
+            $pecat = security_plus_get_child_question_category($qcat, "Practice Exam {$examnum} Bank");
+            security_plus_import_gift_unconditional((int) $context->id, $pecat, $pegiftpath);
+            $peids = ut_practice_exam_category_question_ids((int) $pecat->id, $peprefix);
+        } catch (Throwable $e) {
+            echo "practice_exam_{$examnum}_category_failed error=" . $e->getMessage() . "\n";
+            $peids = ut_select_practice_exam_questions((int) $qcat->id, 90);
+        }
     } else {
         $peids = ut_select_practice_exam_questions((int) $qcat->id, 90);
     }
