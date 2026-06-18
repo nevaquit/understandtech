@@ -1,0 +1,25 @@
+<div class="ut-lab-content">
+<h3>Scenario: SIEM alert triage</h3>
+<p>You are a Tier 1 SOC analyst reviewing overnight alerts in your SIEM. One high-severity
+event requires immediate triage before escalation.</p>
+
+<h4>Alert summary</h4>
+<ul>
+<li><strong>Rule:</strong> UT-SIEM-0042 — Suspicious outbound connection after email attachment</li>
+<li><strong>Host:</strong> FIN-WS-118 (Windows 11, finance department)</li>
+<li><strong>User:</strong> jrivera@contoso.example</li>
+<li><strong>Process:</strong> <code>invoice_Q2.exe</code> spawned from Outlook</li>
+<li><strong>Destination:</strong> 185.220.101.45:443 (Tor exit node list match)</li>
+<li><strong>File hash (SHA-256):</strong> <code>a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456</code></li>
+</ul>
+
+<h4>Your tasks</h4>
+<ol>
+<li>Identify the indicator of compromise (IOC) type most relevant for blocking at the perimeter.</li>
+<li>Determine whether this activity matches a common initial access pattern.</li>
+<li>Submit the lab flag using the first eight hexadecimal characters of the malicious file hash,
+prefixed with <code>UT{</code> and suffixed with <code>}</code>.</li>
+</ol>
+
+<p><em>Do not share flags in course forums. The AI tutor will not validate flag values for you.</em></p>
+</div>

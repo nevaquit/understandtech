@@ -93,3 +93,4 @@ AI-augmented certification training platform on Moodle 4.5 LTS with Cloudflare e
 | `moodle-core-php-engineering` | Custom Moodle plugin PHP |
 | `iac-async-cloud-devops` | Bicep, Nginx, PgBouncer, CI/CD |
 | `mathematical-ui-design-engineering` | Theme SCSS, charts, gamification UX |
+| `/understandtech-cert-content` | Launch-scale lessons, GIFT banks, practice exams, labs |

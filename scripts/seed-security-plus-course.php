@@ -23,6 +23,7 @@ require_once($CFG->dirroot . '/question/format.php');
 require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->dirroot . '/lib/questionlib.php');
 require_once($CFG->libdir . '/filterlib.php');
+require_once(__DIR__ . '/lib/moodle-cert-practice-exam.php');
 
 /**
  * Build fallback lesson HTML when no CyberKraft content file exists.
@@ -616,6 +617,304 @@ function security_plus_sync_quiz(stdClass $course, int $sectionnum, string $quiz
 }
 
 /**
+ * Import a GIFT file into a question category (always attempts import).
+ *
+ * @param int $contextid
+ * @param stdClass $category
+ * @param string $giftpath
+ * @return int Questions in category after import
+ */
+function security_plus_import_gift_unconditional(int $contextid, stdClass $category, string $giftpath): int {
+    global $DB;
+
+    if (!is_readable($giftpath)) {
+        echo "gift_missing path={$giftpath}\n";
+        return count(security_plus_category_question_ids((int) $category->id));
+    }
+
+    $context = context::instance_by_id($contextid);
+    $before = count(security_plus_category_question_ids((int) $category->id));
+
+    $qformat = new qformat_gift();
+    $qformat->setCategory($category);
+    $qformat->setContexts([$context]);
+    $qformat->setFilename($giftpath);
+    $qformat->setStoponerror(false);
+    if (!$qformat->importprocess()) {
+        echo "gift_import_failed path={$giftpath}\n";
+        return $before;
+    }
+
+    $after = count(security_plus_category_question_ids((int) $category->id));
+    echo "gift_imported path={$giftpath} added=" . ($after - $before) . " total={$after}\n";
+    return $after;
+}
+
+/**
+ * Create a timed full-length practice exam quiz.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $quizname
+ * @param int[] $questionids
+ * @param int $timelimitsecs Time limit in seconds (default 90 minutes)
+ * @return void
+ */
+function security_plus_add_practice_exam(
+    stdClass $course,
+    int $sectionnum,
+    string $quizname,
+    array $questionids,
+    int $timelimitsecs = 5400
+): void {
+    global $DB;
+
+    if (!$questionids) {
+        echo "practice_exam_skip_empty name={$quizname}\n";
+        return;
+    }
+
+    $exists = $DB->record_exists_sql(
+        "SELECT q.id
+           FROM {quiz} q
+           JOIN {course_modules} cm ON cm.instance = q.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
+          WHERE cm.course = :courseid AND q.name = :name",
+        ['courseid' => $course->id, 'name' => $quizname]
+    );
+    if ($exists) {
+        echo "practice_exam_exists name={$quizname}\n";
+        return;
+    }
+
+    $targetbehaviour = 'deferredfeedback';
+    if (array_key_exists('certmasterconfidence', core_component::get_plugin_list('qbehaviour'))) {
+        try {
+            question_engine::get_behaviour_type('certmasterconfidence');
+            $targetbehaviour = 'certmasterconfidence';
+        } catch (Throwable $e) {
+            echo "practice_exam_warn behaviour_unavailable fallback=deferredfeedback name={$quizname}\n";
+        }
+    }
+
+    $quiz = security_plus_quiz_apply_defaults(new stdClass());
+    $quiz->course = $course->id;
+    $quiz->name = $quizname;
+    $quiz->intro = '<p>Full-length Security+ SY0-701 practice exam. 90 questions, 90-minute time limit. '
+        . 'Rate your confidence after each question. Passing score: 83% (750/900 equivalent).</p>';
+    $quiz->introformat = FORMAT_HTML;
+    $quiz->module = $DB->get_field('modules', 'id', ['name' => 'quiz']);
+    $quiz->modulename = 'quiz';
+    $quiz->section = $sectionnum;
+    $quiz->visible = 1;
+    $quiz->cmidnumber = '';
+    $quiz->timelimit = $timelimitsecs;
+    $quiz->attempts = 2;
+    $quiz->gradepass = 83;
+    $quiz->completionpass = 1;
+
+    try {
+        $cm = add_moduleinfo($quiz, $course);
+    } catch (Throwable $e) {
+        echo "practice_exam_create_failed name={$quizname} error=" . $e->getMessage() . "\n";
+        return;
+    }
+
+    $quizrecord = $DB->get_record('quiz', ['id' => $cm->instance], '*', MUST_EXIST);
+    $quizrecord->cmid = $cm->coursemodule;
+
+    $added = 0;
+    foreach ($questionids as $qid) {
+        try {
+            if (quiz_add_quiz_question($qid, $quizrecord, 0) === false) {
+                continue;
+            }
+            $added++;
+        } catch (Throwable $e) {
+            echo "practice_exam_question_failed quiz={$quizname} qid={$qid} error=" . $e->getMessage() . "\n";
+            break;
+        }
+    }
+
+    if ($added === 0) {
+        echo "practice_exam_no_questions name={$quizname} deleting_empty=1\n";
+        course_delete_module($cm->coursemodule);
+        return;
+    }
+
+    $quizrecord = $DB->get_record('quiz', ['id' => $quizrecord->id], '*', MUST_EXIST);
+    $quizrecord->preferredbehaviour = $targetbehaviour;
+    $DB->update_record('quiz', $quizrecord);
+    quiz_update_sumgrades($quizrecord);
+
+    echo "practice_exam_created id={$quizrecord->id} name={$quizname} questions={$added}"
+        . " timelimit={$timelimitsecs} behaviour={$targetbehaviour}\n";
+}
+
+/**
+ * Reconcile a practice exam quiz to the target question set.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $quizname
+ * @param int[] $questionids
+ * @param int $timelimitsecs
+ * @return void
+ */
+function security_plus_sync_practice_exam(
+    stdClass $course,
+    int $sectionnum,
+    string $quizname,
+    array $questionids,
+    int $timelimitsecs = 5400
+): void {
+    require_once(__DIR__ . '/lib/moodle-cert-quiz-dedup.php');
+    ut_sync_knowledge_check_quiz(
+        $course,
+        $sectionnum,
+        $quizname,
+        $questionids,
+        static function (stdClass $c, int $sec, string $name, array $ids) use ($timelimitsecs): void {
+            security_plus_add_practice_exam($c, $sec, $name, $ids, $timelimitsecs);
+        }
+    );
+
+    global $DB;
+    $quizrecord = $DB->get_record_sql(
+        "SELECT q.*
+           FROM {quiz} q
+           JOIN {course_modules} cm ON cm.instance = q.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
+          WHERE cm.course = :courseid AND q.name = :name",
+        ['courseid' => $course->id, 'name' => $quizname]
+    );
+    if ($quizrecord && (int) $quizrecord->timelimit !== $timelimitsecs) {
+        $quizrecord->timelimit = $timelimitsecs;
+        $quizrecord->attempts = 2;
+        $quizrecord->gradepass = 83;
+        $DB->update_record('quiz', $quizrecord);
+        echo "practice_exam_settings_updated name={$quizname} timelimit={$timelimitsecs}\n";
+    }
+}
+
+/**
+ * Load lab intro HTML from repo content when present.
+ *
+ * @param string $repopath
+ * @param string $slug Lab file slug e.g. lab-1-siem-triage
+ * @param string $fallback Fallback HTML
+ * @return string
+ */
+function security_plus_load_lab_intro(string $repopath, string $slug, string $fallback): string {
+    $path = $repopath . '/content/security-plus/labs/' . $slug . '.html';
+    if (is_readable($path)) {
+        $html = file_get_contents($path);
+        if ($html !== false && trim($html) !== '') {
+            return $html;
+        }
+    }
+    return $fallback;
+}
+
+/**
+ * Find ctfflag course module by activity name.
+ *
+ * @param int $courseid
+ * @param string $name
+ * @return stdClass|null ctfflag instance row
+ */
+function security_plus_find_ctfflag(int $courseid, string $name): ?stdClass {
+    global $DB;
+
+    $record = $DB->get_record_sql(
+        "SELECT cf.*
+           FROM {ctfflag} cf
+           JOIN {course_modules} cm ON cm.instance = cf.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'ctfflag'
+          WHERE cm.course = :courseid AND cf.name = :name",
+        ['courseid' => $courseid, 'name' => $name]
+    );
+    return $record ?: null;
+}
+
+/**
+ * Create or update a mod_ctfflag lab activity.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $name
+ * @param string $intro HTML intro (must not contain flag value)
+ * @param string $regex Expected flag regex
+ * @param int $xpaward XP points on success
+ * @return void
+ */
+function security_plus_upsert_ctfflag(
+    stdClass $course,
+    int $sectionnum,
+    string $name,
+    string $intro,
+    string $regex,
+    int $xpaward = 100
+): void {
+    global $DB, $CFG;
+
+    if (!array_key_exists('ctfflag', core_component::get_plugin_list('mod'))) {
+        echo "ctfflag_skip plugin_missing name={$name}\n";
+        return;
+    }
+
+    require_once($CFG->dirroot . '/mod/ctfflag/lib.php');
+
+    $existing = security_plus_find_ctfflag((int) $course->id, $name);
+    if ($existing) {
+        $changed = false;
+        if ((string) $existing->intro !== $intro) {
+            $existing->intro = $intro;
+            $existing->introformat = FORMAT_HTML;
+            $changed = true;
+        }
+        if ((string) $existing->expected_flag_regex !== $regex) {
+            $existing->expected_flag_regex = $regex;
+            $changed = true;
+        }
+        if ((int) $existing->xp_award !== $xpaward) {
+            $existing->xp_award = $xpaward;
+            $changed = true;
+        }
+        if ($changed) {
+            $existing->instance = $existing->id;
+            ctfflag_update_instance($existing);
+            echo "ctfflag_updated id={$existing->id} name={$name}\n";
+        } else {
+            echo "ctfflag_unchanged id={$existing->id} name={$name}\n";
+        }
+        return;
+    }
+
+    $module = new stdClass();
+    $module->course = $course->id;
+    $module->name = $name;
+    $module->intro = $intro;
+    $module->introformat = FORMAT_HTML;
+    $module->expected_flag_regex = $regex;
+    $module->xp_award = $xpaward;
+    $module->completion_required = 1;
+    $module->module = $DB->get_field('modules', 'id', ['name' => 'ctfflag']);
+    $module->modulename = 'ctfflag';
+    $module->section = $sectionnum;
+    $module->visible = 1;
+    $module->cmidnumber = '';
+    $module->completion = COMPLETION_TRACKING_AUTOMATIC;
+
+    try {
+        $cm = add_moduleinfo($module, $course);
+        echo "ctfflag_created id={$cm->instance} name={$name} section={$sectionnum}\n";
+    } catch (Throwable $e) {
+        echo "ctfflag_create_failed name={$name} error=" . $e->getMessage() . "\n";
+    }
+}
+
+/**
  * @param array<string,int|int[]> $questionmap
  * @return int Mappings created
  */
@@ -721,8 +1020,8 @@ if (!$course) {
     echo "course_exists id={$course->id}\n";
 }
 
-course_create_sections_if_missing($course, 5);
-for ($i = 1; $i <= 5; $i++) {
+course_create_sections_if_missing($course, 7);
+for ($i = 1; $i <= 7; $i++) {
     if (!$DB->record_exists('course_sections', ['course' => $course->id, 'section' => $i])) {
         course_create_section($course, $i);
     }
@@ -735,6 +1034,8 @@ $sectionnames = [
     3 => 'Domain 3: Security Architecture (18%)',
     4 => 'Domain 4: Security Operations (28%)',
     5 => 'Domain 5: Security Program Management and Oversight (20%)',
+    6 => 'Practice Exams',
+    7 => 'Hands-on Labs',
 ];
 foreach ($sectionnames as $num => $label) {
     $section = $DB->get_record('course_sections', ['course' => $course->id, 'section' => $num], '*', MUST_EXIST);
@@ -816,6 +1117,41 @@ for ($domainnum = 1; $domainnum <= 5; $domainnum++) {
         $qids
     );
 }
+
+$pecategory = security_plus_get_question_category((int) $context->id, 'Practice Exam 1');
+$pegift = $repopath . '/content/security-plus/practice-exam-1.gift';
+if (is_readable($pegift)) {
+    security_plus_import_gift_unconditional((int) $context->id, $pecategory, $pegift);
+    $pequestionids = ut_practice_exam_category_question_ids((int) $pecategory->id, 'pe1_q');
+} else {
+    $pequestionids = ut_select_practice_exam_questions((int) $qcat->id, 90);
+}
+if ($pequestionids) {
+    security_plus_sync_practice_exam(
+        $course,
+        6,
+        'Practice Exam 1',
+        $pequestionids,
+        5400
+    );
+    echo 'practice_exam_1_questions=' . count($pequestionids) . "\n";
+} else {
+    echo "practice_exam_1_skipped reason=no_questions\n";
+}
+
+$lab1intro = security_plus_load_lab_intro(
+    $repopath,
+    'lab-1-siem-triage',
+    '<p>SIEM alert triage lab — see course materials for the scenario.</p>'
+);
+security_plus_upsert_ctfflag(
+    $course,
+    7,
+    'Lab 1: SIEM alert triage',
+    $lab1intro,
+    'UT\\{[A-Fa-f0-9]{8}\\}',
+    100
+);
 
 $enrol = enrol_get_plugin('manual');
 if ($enrol) {
