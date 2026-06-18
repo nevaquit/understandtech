@@ -651,7 +651,7 @@ function security_plus_import_gift_unconditional(int $contextid, stdClass $categ
 }
 
 /**
- * Create a timed full-length practice exam quiz.
+ * Create a timed full-length practice exam quiz (uses proven add_quiz path, then updates settings).
  *
  * @param stdClass $course
  * @param int $sectionnum
@@ -667,86 +667,41 @@ function security_plus_add_practice_exam(
     array $questionids,
     int $timelimitsecs = 5400
 ): void {
+    security_plus_add_quiz($course, $sectionnum, $quizname, $questionids);
+    security_plus_apply_practice_exam_settings($course, $quizname, $timelimitsecs);
+}
+
+/**
+ * Apply practice exam timing and intro to an existing quiz.
+ *
+ * @param stdClass $course
+ * @param string $quizname
+ * @param int $timelimitsecs
+ * @return void
+ */
+function security_plus_apply_practice_exam_settings(stdClass $course, string $quizname, int $timelimitsecs = 5400): void {
     global $DB;
 
-    if (!$questionids) {
-        echo "practice_exam_skip_empty name={$quizname}\n";
-        return;
-    }
-
-    $exists = $DB->record_exists_sql(
-        "SELECT q.id
+    $quizrecord = $DB->get_record_sql(
+        "SELECT q.*
            FROM {quiz} q
            JOIN {course_modules} cm ON cm.instance = q.id
            JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
           WHERE cm.course = :courseid AND q.name = :name",
         ['courseid' => $course->id, 'name' => $quizname]
     );
-    if ($exists) {
-        echo "practice_exam_exists name={$quizname}\n";
+    if (!$quizrecord) {
+        echo "practice_exam_settings_missing name={$quizname}\n";
         return;
     }
 
-    $targetbehaviour = 'deferredfeedback';
-    if (array_key_exists('certmasterconfidence', core_component::get_plugin_list('qbehaviour'))) {
-        try {
-            question_engine::get_behaviour_type('certmasterconfidence');
-            $targetbehaviour = 'certmasterconfidence';
-        } catch (Throwable $e) {
-            echo "practice_exam_warn behaviour_unavailable fallback=deferredfeedback name={$quizname}\n";
-        }
-    }
-
-    $quiz = security_plus_quiz_apply_defaults(new stdClass());
-    $quiz->course = $course->id;
-    $quiz->name = $quizname;
-    $quiz->intro = '<p>Full-length Security+ SY0-701 practice exam. 90 questions, 90-minute time limit. '
-        . 'Rate your confidence after each question. Passing score: 83% (750/900 equivalent).</p>';
-    $quiz->introformat = FORMAT_HTML;
-    $quiz->module = $DB->get_field('modules', 'id', ['name' => 'quiz']);
-    $quiz->modulename = 'quiz';
-    $quiz->section = $sectionnum;
-    $quiz->visible = 1;
-    $quiz->cmidnumber = '';
-    $quiz->timelimit = $timelimitsecs;
-    $quiz->attempts = 2;
-
-    try {
-        $cm = add_moduleinfo($quiz, $course);
-    } catch (Throwable $e) {
-        echo "practice_exam_create_failed name={$quizname} error=" . $e->getMessage() . "\n";
-        return;
-    }
-
-    $quizrecord = $DB->get_record('quiz', ['id' => $cm->instance], '*', MUST_EXIST);
-    $quizrecord->cmid = $cm->coursemodule;
-
-    $added = 0;
-    foreach ($questionids as $qid) {
-        try {
-            if (quiz_add_quiz_question($qid, $quizrecord, 0) === false) {
-                continue;
-            }
-            $added++;
-        } catch (Throwable $e) {
-            echo "practice_exam_question_failed quiz={$quizname} qid={$qid} error=" . $e->getMessage() . "\n";
-            break;
-        }
-    }
-
-    if ($added === 0) {
-        echo "practice_exam_no_questions name={$quizname} deleting_empty=1\n";
-        course_delete_module($cm->coursemodule);
-        return;
-    }
-
-    $quizrecord = $DB->get_record('quiz', ['id' => $quizrecord->id], '*', MUST_EXIST);
-    $quizrecord->preferredbehaviour = $targetbehaviour;
+    $quizrecord->intro = '<p>Full-length Security+ SY0-701 practice exam. 90 questions, 90-minute time limit. '
+        . 'Rate your confidence after each question. Target passing score: 83% (750/900 equivalent).</p>';
+    $quizrecord->introformat = FORMAT_HTML;
+    $quizrecord->timelimit = $timelimitsecs;
+    $quizrecord->attempts = 2;
     $DB->update_record('quiz', $quizrecord);
-    quiz_update_sumgrades($quizrecord);
-
-    echo "practice_exam_created id={$quizrecord->id} name={$quizname} questions={$added}"
-        . " timelimit={$timelimitsecs} behaviour={$targetbehaviour}\n";
+    echo "practice_exam_settings_applied id={$quizrecord->id} name={$quizname} timelimit={$timelimitsecs}\n";
 }
 
 /**
@@ -776,22 +731,7 @@ function security_plus_sync_practice_exam(
             security_plus_add_practice_exam($c, $sec, $name, $ids, $timelimitsecs);
         }
     );
-
-    global $DB;
-    $quizrecord = $DB->get_record_sql(
-        "SELECT q.*
-           FROM {quiz} q
-           JOIN {course_modules} cm ON cm.instance = q.id
-           JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
-          WHERE cm.course = :courseid AND q.name = :name",
-        ['courseid' => $course->id, 'name' => $quizname]
-    );
-    if ($quizrecord && (int) $quizrecord->timelimit !== $timelimitsecs) {
-        $quizrecord->timelimit = $timelimitsecs;
-        $quizrecord->attempts = 2;
-        $DB->update_record('quiz', $quizrecord);
-        echo "practice_exam_settings_updated name={$quizname} timelimit={$timelimitsecs}\n";
-    }
+    security_plus_apply_practice_exam_settings($course, $quizname, $timelimitsecs);
 }
 
 /**
@@ -1123,15 +1063,27 @@ if (is_readable($pegift)) {
 } else {
     $pequestionids = ut_select_practice_exam_questions((int) $qcat->id, 90);
 }
+echo 'practice_exam_1_pool=' . count($pequestionids) . "\n";
+for ($labsection = 6; $labsection <= 7; $labsection++) {
+    if (!$DB->record_exists('course_sections', ['course' => $course->id, 'section' => $labsection])) {
+        course_create_section($course, $labsection);
+        echo "section_created num={$labsection}\n";
+    }
+}
+rebuild_course_cache((int) $course->id, true);
 if ($pequestionids) {
-    security_plus_sync_practice_exam(
-        $course,
-        6,
-        'Practice Exam 1',
-        $pequestionids,
-        5400
-    );
-    echo 'practice_exam_1_questions=' . count($pequestionids) . "\n";
+    try {
+        security_plus_sync_practice_exam(
+            $course,
+            6,
+            'Practice Exam 1',
+            $pequestionids,
+            5400
+        );
+        echo 'practice_exam_1_questions=' . count($pequestionids) . "\n";
+    } catch (Throwable $e) {
+        echo 'practice_exam_1_failed error=' . $e->getMessage() . "\n";
+    }
 } else {
     echo "practice_exam_1_skipped reason=no_questions\n";
 }
@@ -1141,14 +1093,18 @@ $lab1intro = security_plus_load_lab_intro(
     'lab-1-siem-triage',
     '<p>SIEM alert triage lab — see course materials for the scenario.</p>'
 );
-security_plus_upsert_ctfflag(
-    $course,
-    7,
-    'Lab 1: SIEM alert triage',
-    $lab1intro,
-    'UT\\{[A-Fa-f0-9]{8}\\}',
-    100
-);
+try {
+    security_plus_upsert_ctfflag(
+        $course,
+        7,
+        'Lab 1: SIEM alert triage',
+        $lab1intro,
+        'UT\\{[A-Fa-f0-9]{8}\\}',
+        100
+    );
+} catch (Throwable $e) {
+    echo 'ctfflag_lab1_failed error=' . $e->getMessage() . "\n";
+}
 
 $enrol = enrol_get_plugin('manual');
 if ($enrol) {

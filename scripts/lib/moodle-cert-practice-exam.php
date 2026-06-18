@@ -98,13 +98,13 @@ function ut_practice_exam_category_question_ids(int $categoryid, string $prefix)
     foreach ($DB->get_records_sql(
         "SELECT q.id, q.name
            FROM {question} q
-           JOIN {question_versions} qv ON qv.questionbankentryid = q.questionbankentryid
+           JOIN {question_versions} qv ON qv.questionid = q.id
            JOIN {question_bank_entries} qbe ON qbe.id = qv.questionbankentryid
           WHERE qbe.questioncategoryid = :catid
-            AND q.parent = 0
+            AND qv.status = :status
             AND q.name LIKE :pattern
        ORDER BY q.name ASC",
-        ['catid' => $categoryid, 'pattern' => $prefix . '%']
+        ['catid' => $categoryid, 'status' => 'ready', 'pattern' => $prefix . '%']
     ) as $row) {
         $ids[] = (int) $row->id;
     }
