@@ -710,8 +710,6 @@ function security_plus_add_practice_exam(
     $quiz->cmidnumber = '';
     $quiz->timelimit = $timelimitsecs;
     $quiz->attempts = 2;
-    $quiz->gradepass = 83;
-    $quiz->completionpass = 1;
 
     try {
         $cm = add_moduleinfo($quiz, $course);
@@ -791,7 +789,6 @@ function security_plus_sync_practice_exam(
     if ($quizrecord && (int) $quizrecord->timelimit !== $timelimitsecs) {
         $quizrecord->timelimit = $timelimitsecs;
         $quizrecord->attempts = 2;
-        $quizrecord->gradepass = 83;
         $DB->update_record('quiz', $quizrecord);
         echo "practice_exam_settings_updated name={$quizname} timelimit={$timelimitsecs}\n";
     }
