@@ -41,5 +41,5 @@ if [ "${SKIP_CLEANUP:-0}" != "1" ]; then
 fi
 sudo -u www-data php "${REPO}/scripts/seed-security-plus-course.php"
 sudo -u www-data php "${REPO}/scripts/fix-sec701-course-filters.php"
-sudo -u www-data php /var/www/moodle/admin/cli/purge_caches.php
+echo 'seed_purge_caches_deferred=1'
 echo 'seed_security_plus_complete=1'
