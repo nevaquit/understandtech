@@ -20,7 +20,11 @@ paths:
 
 Build **lessons**, **question banks**, **practice exams**, and **labs** for understandtech.app certification tracks, then seed Moodle and verify on VM.
 
+**Net-new content from research:** use `/understandtech-cert-research-content` first (blueprint research, gap analysis, AI-assisted generation); return here for formats, seeds, and verification.
+
 **Always load with:** `/understandtech-platform` (architecture constraints) and `/moodle-development` or `moodle-core-php-engineering` (when editing seed PHP).
+
+For **net-new** lessons, questions, and labs from blueprint research, start with `/understandtech-cert-research-content` before using this skill for seed and validation.
 
 ## Launch targets (white paper Phase 1 — SEC701)
 
@@ -223,6 +227,7 @@ Post-seed: `post-deploy-stabilize-vm.sh` disables page text filters (prevents DB
 | Skill | When |
 |-------|------|
 | `/understandtech-cert-content` | This workflow |
+| `/understandtech-cert-research-content` | Research + net-new lesson/GIFT/lab generation |
 | `/understandtech-platform` | Architecture, constraints |
 | `/moodle-development` | Seed PHP, mod_page, mod_quiz APIs |
 | `behat-automation-skill` | Browser tests after major content drops |
