@@ -25,6 +25,9 @@ require_once($CFG->dirroot . '/lib/questionlib.php');
 require_once($CFG->libdir . '/filterlib.php');
 require_once(__DIR__ . '/lib/moodle-cert-practice-exam.php');
 
+$admin = get_admin();
+\core\session\manager::set_user($admin);
+
 /**
  * Build fallback lesson HTML when no CyberKraft content file exists.
  *
@@ -262,30 +265,70 @@ function security_plus_add_page(stdClass $course, int $sectionnum, string $name,
 }
 
 /**
+ * Find an existing question category by name and optional idnumber.
+ *
  * @param int $contextid
  * @param string $categoryname
- * @return stdClass
+ * @param string|null $idnumber
+ * @param int|null $parentid
+ * @return stdClass|null
  */
-function security_plus_get_question_category(int $contextid, string $categoryname): stdClass {
+function security_plus_find_question_category(
+    int $contextid,
+    string $categoryname,
+    ?string $idnumber = null,
+    ?int $parentid = null
+): ?stdClass {
     global $DB;
 
-    $existing = $DB->get_record('question_categories', ['contextid' => $contextid, 'name' => $categoryname], '*', IGNORE_MULTIPLE);
+    $conditions = ['contextid' => $contextid, 'name' => $categoryname];
+    if ($parentid !== null) {
+        $conditions['parent'] = $parentid;
+    }
+    $existing = $DB->get_record('question_categories', $conditions, '*', IGNORE_MULTIPLE);
+    if ($existing) {
+        return $existing;
+    }
+
+    if ($idnumber !== null && $idnumber !== '') {
+        $existing = $DB->get_record(
+            'question_categories',
+            ['contextid' => $contextid, 'idnumber' => $idnumber],
+            '*',
+            IGNORE_MULTIPLE
+        );
+        if ($existing) {
+            return $existing;
+        }
+    }
+
+    return null;
+}
+
+/**
+ * @param int $contextid
+ * @param string $categoryname
+ * @param string $idnumber Stable idnumber for idempotent lookup (PostgreSQL rejects duplicate '').
+ * @return stdClass
+ */
+function security_plus_get_question_category(int $contextid, string $categoryname, string $idnumber = 'sec701-main'): stdClass {
+    global $DB;
+
+    $existing = security_plus_find_question_category($contextid, $categoryname, $idnumber);
     if ($existing) {
         return $existing;
     }
 
     $parent = question_get_top_category($contextid, true);
-    $record = new stdClass();
-    $record->name = $categoryname;
-    $record->contextid = $contextid;
-    $record->info = 'Security+ SY0-701 objective-aligned questions';
-    $record->infoformat = FORMAT_HTML;
-    $record->stamp = make_unique_id_code();
-    $record->parent = $parent->id;
-    $record->sortorder = 999;
-    $record->idnumber = '';
-    $record->id = $DB->insert_record('question_categories', $record);
-    return $record;
+    $manager = new \core_question\category_manager();
+    $categoryid = $manager->add_category(
+        "{$parent->id},{$contextid}",
+        $categoryname,
+        'Security+ SY0-701 objective-aligned questions',
+        FORMAT_HTML,
+        $idnumber
+    );
+    return $DB->get_record('question_categories', ['id' => $categoryid], '*', MUST_EXIST);
 }
 
 /**
@@ -293,31 +336,31 @@ function security_plus_get_question_category(int $contextid, string $categorynam
  *
  * @param stdClass $parentcategory
  * @param string $categoryname
+ * @param string $idnumber Stable idnumber for idempotent lookup.
  * @return stdClass
  */
-function security_plus_get_child_question_category(stdClass $parentcategory, string $categoryname): stdClass {
+function security_plus_get_child_question_category(stdClass $parentcategory, string $categoryname, string $idnumber): stdClass {
     global $DB;
 
-    $existing = $DB->get_record('question_categories', [
-        'contextid' => $parentcategory->contextid,
-        'parent' => $parentcategory->id,
-        'name' => $categoryname,
-    ], '*', IGNORE_MULTIPLE);
+    $existing = security_plus_find_question_category(
+        (int) $parentcategory->contextid,
+        $categoryname,
+        $idnumber,
+        (int) $parentcategory->id
+    );
     if ($existing) {
         return $existing;
     }
 
-    $record = new stdClass();
-    $record->name = $categoryname;
-    $record->contextid = $parentcategory->contextid;
-    $record->info = 'Security+ SY0-701 practice exam bank';
-    $record->infoformat = FORMAT_HTML;
-    $record->stamp = make_unique_id_code();
-    $record->parent = $parentcategory->id;
-    $record->sortorder = 999;
-    $record->idnumber = '';
-    $record->id = $DB->insert_record('question_categories', $record);
-    return $record;
+    $manager = new \core_question\category_manager();
+    $categoryid = $manager->add_category(
+        "{$parentcategory->id},{$parentcategory->contextid}",
+        $categoryname,
+        'Security+ SY0-701 practice exam bank',
+        FORMAT_HTML,
+        $idnumber
+    );
+    return $DB->get_record('question_categories', ['id' => $categoryid], '*', MUST_EXIST);
 }
 
 function security_plus_count_tagged_questions(int $categoryid): int {
@@ -1140,12 +1183,12 @@ echo "practice_exam_block_start\n";
 $pegift = $repopath . '/content/security-plus/practice-exam-1.gift';
 if (is_readable($pegift)) {
     try {
-        $pecategory = security_plus_get_child_question_category($qcat, 'Practice Exam 1 Bank');
+        $pecategory = security_plus_get_child_question_category($qcat, 'Practice Exam 1 Bank', 'sec701-pe1-bank');
         echo "practice_exam_category_id={$pecategory->id}\n";
         security_plus_import_gift_unconditional((int) $context->id, $pecategory, $pegift);
         $pequestionids = ut_practice_exam_category_question_ids((int) $pecategory->id, 'pe1_q');
     } catch (Throwable $e) {
-        echo 'practice_exam_1_category_failed error=' . $e->getMessage() . "\n";
+        echo 'practice_exam_1_category_failed error=' . $e->getMessage() . ' class=' . get_class($e) . "\n";
         $pequestionids = ut_select_practice_exam_questions((int) $qcat->id, 90);
     }
 } else {
@@ -1183,11 +1226,16 @@ for ($examnum = 2; $examnum <= 3; $examnum++) {
     $peprefix = 'pe' . $examnum . '_q';
     if (is_readable($pegiftpath)) {
         try {
-            $pecat = security_plus_get_child_question_category($qcat, "Practice Exam {$examnum} Bank");
+            $pecat = security_plus_get_child_question_category(
+                $qcat,
+                "Practice Exam {$examnum} Bank",
+                "sec701-pe{$examnum}-bank"
+            );
             security_plus_import_gift_unconditional((int) $context->id, $pecat, $pegiftpath);
             $peids = ut_practice_exam_category_question_ids((int) $pecat->id, $peprefix);
         } catch (Throwable $e) {
-            echo "practice_exam_{$examnum}_category_failed error=" . $e->getMessage() . "\n";
+            echo "practice_exam_{$examnum}_category_failed error=" . $e->getMessage()
+                . ' class=' . get_class($e) . "\n";
             $peids = ut_select_practice_exam_questions((int) $qcat->id, 90);
         }
     } else {
