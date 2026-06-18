@@ -16,6 +16,24 @@ paths:
 
 # Research-Backed Certification Content Generation
 
+## Prerequisite gate — MUST run first
+
+**This skill is the mandatory first step for all net-new certification content.** Agents must **NOT** auto-generate or write any of the following until research checklist steps 1–3 are complete:
+
+- Lesson HTML (`content/<track>/lessons/*.html`)
+- GIFT question banks (`*-quiz.gift`, `*-quiz-extra.gift`)
+- Practice exam banks (`practice-exam-*.gift`)
+- Lab scenario HTML (`content/<track>/labs/*.html`)
+- Build/generate scripts (`generate-*-quiz*`, `build-practice-exam-*`)
+
+**Steps 1–3 must be done before generation:**
+
+1. **Scope** — track, domain/objective, gap vs launch-targets
+2. **Research phase** — blueprint, authoritative sources, **gap memo with citations** ([research-sources.md](reference/research-sources.md))
+3. **Artifact plan** — lesson list, question plan, lab scenario outline ([prompt-templates.md](reference/prompt-templates.md))
+
+If the gap memo (template in research-sources.md) and artifact plan are not documented in chat or a work note, **stop** and complete research — do not proceed to step 4 or invoke generation scripts.
+
 **Research first, generate second, validate before commit.** This skill covers the upstream research and AI-assisted authoring workflow. For repo layout, GIFT conventions, seed scripts, and launch targets, defer to `/understandtech-cert-content`.
 
 **Always load with:** `/understandtech-cert-content` (formats + seed) and `/understandtech-platform` (architecture constraints).

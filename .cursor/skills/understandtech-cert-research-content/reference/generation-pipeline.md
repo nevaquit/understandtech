@@ -1,5 +1,9 @@
 # Generation Pipeline
 
+## Gate — do not enter until research is complete
+
+**Do not enter this pipeline until a gap memo exists** per [research-sources.md](research-sources.md) (`## Gap memo: [TRACK]`, dated citations, planned artifacts). Complete `/understandtech-cert-research-content` checklist steps 1–3 (scope, research phase, artifact plan) before creating or modifying lesson HTML, GIFT, practice exams, labs, or running `generate-*-quiz*` / `build-practice-exam-*` scripts.
+
 Order of operations after research memo and artifact plan are approved.
 
 ## 1. Lessons

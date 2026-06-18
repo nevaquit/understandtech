@@ -18,6 +18,12 @@ paths:
 
 # Certification Content at Launch Scale
 
+## Hard rule — research before net-new generation
+
+**Net-new** lesson HTML, GIFT banks, practice exams, and lab scenarios **require `/understandtech-cert-research-content` completed first** (gap memo + citations + artifact plan). Do not auto-generate content or run build scripts until that research gate passes.
+
+**Exception:** editing existing repo files, re-seeding unchanged content, or running extract scripts on already-approved source material — no new research gate.
+
 Build **lessons**, **question banks**, **practice exams**, and **labs** for understandtech.app certification tracks, then seed Moodle and verify on VM.
 
 **Net-new content from research:** use `/understandtech-cert-research-content` first (blueprint research, gap analysis, AI-assisted generation); return here for formats, seeds, and verification.
@@ -43,6 +49,7 @@ Copy this checklist and track progress:
 
 ```
 Cert content task:
+- [ ] 0. Research complete (/understandtech-cert-research-content) — gap memo + citations + artifact plan (required for net-new only)
 - [ ] 1. Confirm track + gap (launch-targets.md)
 - [ ] 2. Author/update repo content under content/<track>/
 - [ ] 3. Validate formats (content-formats.md)
@@ -120,12 +127,14 @@ Files per track:
 | `<exam>-quiz.gift` | Base: 1 MCQ per objective (required) |
 | `<exam>-quiz-extra.gift` | Expansion: 2+ MCQs per objective |
 
-Generate extra questions:
+Generate extra questions (**blocked until research gate passes** — see step 0):
 
 ```bash
 node scripts/generate-security-plus-quiz-gift.mjs
 node scripts/generate-network-plus-quiz-gift.mjs
 ```
+
+**Verify research complete before running:** confirm a gap memo exists per [research-sources.md](../understandtech-cert-research-content/reference/research-sources.md) (heading `## Gap memo: [TRACK]`, dated citations, planned artifacts checklist). If missing, run `/understandtech-cert-research-content` steps 1–3 first.
 
 **Target:** ~14 questions per objective × 28 objectives ≈ 392 (round to 400).
 
@@ -149,6 +158,8 @@ Implementation pattern:
 2. Extend seed script: import GIFT → create quiz with `security_plus_sync_quiz()` pattern → set `timelimit`, `grade`, shuffle, one attempt policy.
 3. Add section 6+ to course (`course_create_sections_if_missing`).
 4. Run `scripts/cleanup-cert-knowledge-checks.php` only on **Knowledge Check** quizzes — not practice exams.
+
+**Build script gate:** `php scripts/build-practice-exam-*-gift.php` requires the same research gate as step 0 (gap memo in research-sources template). Do not run until `/understandtech-cert-research-content` steps 1–3 are complete.
 
 Details: [reference/practice-exams-and-labs.md](reference/practice-exams-and-labs.md).
 
@@ -208,6 +219,8 @@ Post-seed: `post-deploy-stabilize-vm.sh` disables page text filters (prevents DB
 
 | Do not | Do instead |
 |--------|------------|
+| Generate net-new lessons/GIFT/labs without research | Complete `/understandtech-cert-research-content` steps 1–3 first |
+| Run `generate-*-quiz` or `build-practice-exam-*` without gap memo | Verify gap memo per research-sources.md template |
 | Commit Moodle core or course DB dumps | Content in `content/` + seed PHP |
 | Hand-edit production Moodle pages | Change repo + re-seed |
 | Strip `sy701_*` tags from GIFT names | Keep tags for objective linking |
