@@ -1056,10 +1056,10 @@ for ($domainnum = 1; $domainnum <= 5; $domainnum++) {
 }
 
 echo "practice_exam_block_start\n";
-$pecategory = security_plus_get_question_category((int) $context->id, 'Practice Exam 1');
-echo "practice_exam_category_id={$pecategory->id}\n";
 $pegift = $repopath . '/content/security-plus/practice-exam-1.gift';
 if (is_readable($pegift)) {
+    $pecategory = security_plus_get_question_category((int) $context->id, 'Practice Exam 1');
+    echo "practice_exam_category_id={$pecategory->id}\n";
     security_plus_import_gift_unconditional((int) $context->id, $pecategory, $pegift);
     $pequestionids = ut_practice_exam_category_question_ids((int) $pecategory->id, 'pe1_q');
 } else {
