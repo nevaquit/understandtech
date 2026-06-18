@@ -64,7 +64,7 @@ PE bank idnumbers: `aplus-pe1-bank`, `aplus-pe2-bank`, `aplus-pe3-bank`.
 - [x] `build-aplus-practice-exams-gift.mjs` → PE1–PE3 from existing bank
 - [x] Lab 1–3 HTML + seed
 - [x] Seed sub-lesson loop + PE + labs (sections 10–11)
-- [ ] Staging seed + verify (`verify-aplus-launch-scale.sh`)
+- [x] Production seed + verify — [run 27786541717](https://github.com/nevaquit/understandtech/actions/runs/27786541717): course_id resolved by shortname, pages=171, quizzes=12, ctfflags=3, PE slots=90×3
 
 ## Citation block
 
