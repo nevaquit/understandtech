@@ -49,8 +49,8 @@ Each: 90 questions, blueprint-weighted, `peN_qNNN` namespace.
 | Lab | Status | Objectives |
 |-----|--------|------------|
 | Lab 1: SIEM triage | Seeded | sy701_4_4, sy701_4_9 |
-| Lab 2: Phishing analysis | **Generate** | sy701_2_2, sy701_2_4 |
-| Lab 3: Firewall rule review | **Generate** | sy701_3_2 |
+| Lab 2: Phishing analysis | Seeded | sy701_2_2, sy701_2_4 |
+| Lab 3: Firewall rule review | Seeded | sy701_3_2 |
 
 ## Artifact plan this sprint
 
@@ -59,7 +59,7 @@ Each: 90 questions, blueprint-weighted, `peN_qNNN` namespace.
 - [x] `build-practice-exams-gift.mjs` → PE1, PE2, PE3
 - [x] Lab 2–3 HTML + seed
 - [x] Seed sub-lesson loop + PE2/PE3 + launch GIFT import
-- [ ] Staging seed + verify
+- [ ] Staging seed + verify (workflow + `verify-sec701-launch-scale.sh`; pending run)
 
 ## Citation block
 

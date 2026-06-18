@@ -19,7 +19,7 @@ env:
 jobs:
   seed:
     runs-on: [self-hosted, linux, "${{ inputs.target }}"]
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -84,6 +84,13 @@ jobs:
         run: |
           set -euo pipefail
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-cert-course-pages.sh"
+
+      - name: Verify SEC701 launch-scale counts
+        env:
+          SEC701_COURSE_ID: ${{ inputs.target == 'staging' && '2' || '3' }}
+        run: |
+          set -euo pipefail
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-sec701-launch-scale.sh"
 
       - name: Disable maintenance mode
         if: success()
