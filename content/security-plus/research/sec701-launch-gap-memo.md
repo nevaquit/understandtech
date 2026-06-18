@@ -59,7 +59,7 @@ Each: 90 questions, blueprint-weighted, `peN_qNNN` namespace.
 - [x] `build-practice-exams-gift.mjs` → PE1, PE2, PE3
 - [x] Lab 2–3 HTML + seed
 - [x] Seed sub-lesson loop + PE2/PE3 + launch GIFT import
-- [ ] Staging seed + verify (workflow + `verify-sec701-launch-scale.sh`; pending run)
+- [x] Staging seed + verify (workflow run [27781255284](https://github.com/nevaquit/understandtech/actions/runs/27781255284); `verify_sec701_launch_scale_ok=1` — course_id=2, pages=84, quizzes=8, ctfflags=3, PE slots 90/90/90)
 
 ## Citation block
 
