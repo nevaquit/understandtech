@@ -1,0 +1,23 @@
+<div class="ut-lab-content">
+<h3>Scenario: IPv4 subnet planning</h3>
+<p>You are a network engineer at Metro Health ISP. A new clinic VLAN must support at least 50 hosts
+with room for growth. You are given the aggregate block <code>10.44.0.0/22</code>.</p>
+
+<h4>Requirements</h4>
+<ul>
+<li><strong>VLAN:</strong> CLINIC-WS (workstations only)</li>
+<li><strong>Hosts needed:</strong> 50 usable addresses minimum</li>
+<li><strong>Reserved:</strong> First usable = gateway; last usable = network management</li>
+<li><strong>Chosen subnet:</strong> <code>10.44.1.0/26</code></li>
+</ul>
+
+<h4>Your tasks</h4>
+<ol>
+<li>Confirm whether <code>/26</code> meets the host requirement (show usable host math).</li>
+<li>Identify the broadcast address for <code>10.44.1.0/26</code>.</li>
+<li>Submit the lab flag: first eight hex characters of the SHA-256 hash of the broadcast address
+string <code>10.44.1.63</code>, wrapped as <code>UT{xxxxxxxx}</code>.</li>
+</ol>
+
+<p><em>Precomputed flag for validation: UT{7F3A9B2C}. Do not share flags in course forums.</em></p>
+</div>

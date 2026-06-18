@@ -1,0 +1,1679 @@
+::n10009_1_1_launch_01 launch 1::Which response best aligns with N10-009 objective 1.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_1_launch_02 launch 2::A technician troubleshooting objective 1.1 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_1_1_launch_03 launch 3::During change control for "Explain concepts related to the Open Systems Interconne...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_1_1_launch_04 launch 4::Which metric would best validate success for objective 1.1?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_1_1_launch_05 launch 5::Which tool is most appropriate when applying 1.1 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_1_1_launch_06 launch 6::Which IPv4 concept is most relevant to objective 1.1?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_1_1_launch_07 launch 7::Which wireless factor most affects designs tied to 1.1?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_1_1_launch_08 launch 8::Which security control best supports objective 1.1 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_1_1_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.1?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_1_1_launch_10 launch 10::Which response best aligns with N10-009 objective 1.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_2_launch_01 launch 1::Which response best aligns with N10-009 objective 1.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_2_launch_02 launch 2::A technician troubleshooting objective 1.2 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_1_2_launch_03 launch 3::During change control for "Compare and contrast networking appliances, application...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_1_2_launch_04 launch 4::Which metric would best validate success for objective 1.2?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_1_2_launch_05 launch 5::Which tool is most appropriate when applying 1.2 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_1_2_launch_06 launch 6::Which IPv4 concept is most relevant to objective 1.2?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_1_2_launch_07 launch 7::Which wireless factor most affects designs tied to 1.2?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_1_2_launch_08 launch 8::Which security control best supports objective 1.2 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_1_2_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.2?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_1_2_launch_10 launch 10::Which response best aligns with N10-009 objective 1.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_3_launch_01 launch 1::Which response best aligns with N10-009 objective 1.3 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_3_launch_02 launch 2::A technician troubleshooting objective 1.3 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_1_3_launch_03 launch 3::During change control for "Summarize cloud concepts and connectivity options...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_1_3_launch_04 launch 4::Which metric would best validate success for objective 1.3?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_1_3_launch_05 launch 5::Which tool is most appropriate when applying 1.3 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_1_3_launch_06 launch 6::Which IPv4 concept is most relevant to objective 1.3?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_1_3_launch_07 launch 7::Which wireless factor most affects designs tied to 1.3?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_1_3_launch_08 launch 8::Which security control best supports objective 1.3 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_1_3_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.3?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_1_3_launch_10 launch 10::Which response best aligns with N10-009 objective 1.3 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_4_launch_01 launch 1::Which response best aligns with N10-009 objective 1.4 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_4_launch_02 launch 2::A technician troubleshooting objective 1.4 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_1_4_launch_03 launch 3::During change control for "Explain common networking ports, protocols, services, a...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_1_4_launch_04 launch 4::Which metric would best validate success for objective 1.4?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_1_4_launch_05 launch 5::Which tool is most appropriate when applying 1.4 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_1_4_launch_06 launch 6::Which IPv4 concept is most relevant to objective 1.4?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_1_4_launch_07 launch 7::Which wireless factor most affects designs tied to 1.4?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_1_4_launch_08 launch 8::Which security control best supports objective 1.4 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_1_4_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.4?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_1_4_launch_10 launch 10::Which response best aligns with N10-009 objective 1.4 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_5_launch_01 launch 1::Which response best aligns with N10-009 objective 1.5 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_5_launch_02 launch 2::A technician troubleshooting objective 1.5 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_1_5_launch_03 launch 3::During change control for "Compare and contrast transmission media and transceiver...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_1_5_launch_04 launch 4::Which metric would best validate success for objective 1.5?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_1_5_launch_05 launch 5::Which tool is most appropriate when applying 1.5 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_1_5_launch_06 launch 6::Which IPv4 concept is most relevant to objective 1.5?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_1_5_launch_07 launch 7::Which wireless factor most affects designs tied to 1.5?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_1_5_launch_08 launch 8::Which security control best supports objective 1.5 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_1_5_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.5?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_1_5_launch_10 launch 10::Which response best aligns with N10-009 objective 1.5 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_6_launch_01 launch 1::Which response best aligns with N10-009 objective 1.6 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_6_launch_02 launch 2::A technician troubleshooting objective 1.6 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_1_6_launch_03 launch 3::During change control for "Compare and contrast network topologies, architectures,...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_1_6_launch_04 launch 4::Which metric would best validate success for objective 1.6?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_1_6_launch_05 launch 5::Which tool is most appropriate when applying 1.6 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_1_6_launch_06 launch 6::Which IPv4 concept is most relevant to objective 1.6?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_1_6_launch_07 launch 7::Which wireless factor most affects designs tied to 1.6?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_1_6_launch_08 launch 8::Which security control best supports objective 1.6 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_1_6_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.6?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_1_6_launch_10 launch 10::Which response best aligns with N10-009 objective 1.6 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_7_launch_01 launch 1::Which response best aligns with N10-009 objective 1.7 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_7_launch_02 launch 2::A technician troubleshooting objective 1.7 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_1_7_launch_03 launch 3::During change control for "Given a scenario, use appropriate IPv4 network addressi...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_1_7_launch_04 launch 4::Which metric would best validate success for objective 1.7?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_1_7_launch_05 launch 5::Which tool is most appropriate when applying 1.7 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_1_7_launch_06 launch 6::Which IPv4 concept is most relevant to objective 1.7?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_1_7_launch_07 launch 7::Which wireless factor most affects designs tied to 1.7?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_1_7_launch_08 launch 8::Which security control best supports objective 1.7 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_1_7_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.7?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_1_7_launch_10 launch 10::Which response best aligns with N10-009 objective 1.7 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_8_launch_01 launch 1::Which response best aligns with N10-009 objective 1.8 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_1_8_launch_02 launch 2::A technician troubleshooting objective 1.8 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_1_8_launch_03 launch 3::During change control for "Summarize evolving use cases for modern network environ...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_1_8_launch_04 launch 4::Which metric would best validate success for objective 1.8?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_1_8_launch_05 launch 5::Which tool is most appropriate when applying 1.8 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_1_8_launch_06 launch 6::Which IPv4 concept is most relevant to objective 1.8?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_1_8_launch_07 launch 7::Which wireless factor most affects designs tied to 1.8?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_1_8_launch_08 launch 8::Which security control best supports objective 1.8 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_1_8_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.8?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_1_8_launch_10 launch 10::Which response best aligns with N10-009 objective 1.8 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_2_1_launch_01 launch 1::Which response best aligns with N10-009 objective 2.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_2_1_launch_02 launch 2::A technician troubleshooting objective 2.1 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_2_1_launch_03 launch 3::During change control for "Explain characteristics of routing technologies...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_2_1_launch_04 launch 4::Which metric would best validate success for objective 2.1?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_2_1_launch_05 launch 5::Which tool is most appropriate when applying 2.1 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_2_1_launch_06 launch 6::Which IPv4 concept is most relevant to objective 2.1?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_2_1_launch_07 launch 7::Which wireless factor most affects designs tied to 2.1?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_2_1_launch_08 launch 8::Which security control best supports objective 2.1 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_2_1_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 2.1?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_2_1_launch_10 launch 10::Which response best aligns with N10-009 objective 2.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_2_2_launch_01 launch 1::Which response best aligns with N10-009 objective 2.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_2_2_launch_02 launch 2::A technician troubleshooting objective 2.2 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_2_2_launch_03 launch 3::During change control for "Given a scenario, configure switching technologies and ...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_2_2_launch_04 launch 4::Which metric would best validate success for objective 2.2?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_2_2_launch_05 launch 5::Which tool is most appropriate when applying 2.2 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_2_2_launch_06 launch 6::Which IPv4 concept is most relevant to objective 2.2?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_2_2_launch_07 launch 7::Which wireless factor most affects designs tied to 2.2?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_2_2_launch_08 launch 8::Which security control best supports objective 2.2 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_2_2_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 2.2?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_2_2_launch_10 launch 10::Which response best aligns with N10-009 objective 2.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_2_3_launch_01 launch 1::Which response best aligns with N10-009 objective 2.3 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_2_3_launch_02 launch 2::A technician troubleshooting objective 2.3 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_2_3_launch_03 launch 3::During change control for "Given a scenario, select and configure wireless devices...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_2_3_launch_04 launch 4::Which metric would best validate success for objective 2.3?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_2_3_launch_05 launch 5::Which tool is most appropriate when applying 2.3 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_2_3_launch_06 launch 6::Which IPv4 concept is most relevant to objective 2.3?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_2_3_launch_07 launch 7::Which wireless factor most affects designs tied to 2.3?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_2_3_launch_08 launch 8::Which security control best supports objective 2.3 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_2_3_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 2.3?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_2_3_launch_10 launch 10::Which response best aligns with N10-009 objective 2.3 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_2_4_launch_01 launch 1::Which response best aligns with N10-009 objective 2.4 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_2_4_launch_02 launch 2::A technician troubleshooting objective 2.4 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_2_4_launch_03 launch 3::During change control for "Explain important factors of physical installations...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_2_4_launch_04 launch 4::Which metric would best validate success for objective 2.4?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_2_4_launch_05 launch 5::Which tool is most appropriate when applying 2.4 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_2_4_launch_06 launch 6::Which IPv4 concept is most relevant to objective 2.4?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_2_4_launch_07 launch 7::Which wireless factor most affects designs tied to 2.4?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_2_4_launch_08 launch 8::Which security control best supports objective 2.4 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_2_4_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 2.4?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_2_4_launch_10 launch 10::Which response best aligns with N10-009 objective 2.4 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_3_1_launch_01 launch 1::Which response best aligns with N10-009 objective 3.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_3_1_launch_02 launch 2::A technician troubleshooting objective 3.1 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_3_1_launch_03 launch 3::During change control for "Explain the purpose of organizational processes and pro...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_3_1_launch_04 launch 4::Which metric would best validate success for objective 3.1?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_3_1_launch_05 launch 5::Which tool is most appropriate when applying 3.1 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_3_1_launch_06 launch 6::Which IPv4 concept is most relevant to objective 3.1?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_3_1_launch_07 launch 7::Which wireless factor most affects designs tied to 3.1?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_3_1_launch_08 launch 8::Which security control best supports objective 3.1 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_3_1_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 3.1?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_3_1_launch_10 launch 10::Which response best aligns with N10-009 objective 3.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_3_2_launch_01 launch 1::Which response best aligns with N10-009 objective 3.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_3_2_launch_02 launch 2::A technician troubleshooting objective 3.2 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_3_2_launch_03 launch 3::During change control for "Given a scenario, use network monitoring technologies...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_3_2_launch_04 launch 4::Which metric would best validate success for objective 3.2?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_3_2_launch_05 launch 5::Which tool is most appropriate when applying 3.2 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_3_2_launch_06 launch 6::Which IPv4 concept is most relevant to objective 3.2?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_3_2_launch_07 launch 7::Which wireless factor most affects designs tied to 3.2?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_3_2_launch_08 launch 8::Which security control best supports objective 3.2 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_3_2_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 3.2?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_3_2_launch_10 launch 10::Which response best aligns with N10-009 objective 3.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_3_3_launch_01 launch 1::Which response best aligns with N10-009 objective 3.3 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_3_3_launch_02 launch 2::A technician troubleshooting objective 3.3 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_3_3_launch_03 launch 3::During change control for "Explain disaster recovery (DR) concepts...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_3_3_launch_04 launch 4::Which metric would best validate success for objective 3.3?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_3_3_launch_05 launch 5::Which tool is most appropriate when applying 3.3 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_3_3_launch_06 launch 6::Which IPv4 concept is most relevant to objective 3.3?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_3_3_launch_07 launch 7::Which wireless factor most affects designs tied to 3.3?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_3_3_launch_08 launch 8::Which security control best supports objective 3.3 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_3_3_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 3.3?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_3_3_launch_10 launch 10::Which response best aligns with N10-009 objective 3.3 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_3_4_launch_01 launch 1::Which response best aligns with N10-009 objective 3.4 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_3_4_launch_02 launch 2::A technician troubleshooting objective 3.4 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_3_4_launch_03 launch 3::During change control for "Given a scenario, implement IPv4 and IPv6 network servi...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_3_4_launch_04 launch 4::Which metric would best validate success for objective 3.4?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_3_4_launch_05 launch 5::Which tool is most appropriate when applying 3.4 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_3_4_launch_06 launch 6::Which IPv4 concept is most relevant to objective 3.4?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_3_4_launch_07 launch 7::Which wireless factor most affects designs tied to 3.4?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_3_4_launch_08 launch 8::Which security control best supports objective 3.4 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_3_4_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 3.4?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_3_5_launch_01 launch 1::Which response best aligns with N10-009 objective 3.5 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_3_5_launch_02 launch 2::A technician troubleshooting objective 3.5 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_3_5_launch_03 launch 3::During change control for "Compare and contrast network access and management meth...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_3_5_launch_04 launch 4::Which metric would best validate success for objective 3.5?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_3_5_launch_05 launch 5::Which tool is most appropriate when applying 3.5 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_3_5_launch_06 launch 6::Which IPv4 concept is most relevant to objective 3.5?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_3_5_launch_07 launch 7::Which wireless factor most affects designs tied to 3.5?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_3_5_launch_08 launch 8::Which security control best supports objective 3.5 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_3_5_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 3.5?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_4_1_launch_01 launch 1::Which response best aligns with N10-009 objective 4.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_4_1_launch_02 launch 2::A technician troubleshooting objective 4.1 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_4_1_launch_03 launch 3::During change control for "Explain the importance of basic network security concep...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_4_1_launch_04 launch 4::Which metric would best validate success for objective 4.1?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_4_1_launch_05 launch 5::Which tool is most appropriate when applying 4.1 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_4_1_launch_06 launch 6::Which IPv4 concept is most relevant to objective 4.1?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_4_1_launch_07 launch 7::Which wireless factor most affects designs tied to 4.1?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_4_1_launch_08 launch 8::Which security control best supports objective 4.1 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_4_1_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 4.1?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_4_2_launch_01 launch 1::Which response best aligns with N10-009 objective 4.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_4_2_launch_02 launch 2::A technician troubleshooting objective 4.2 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_4_2_launch_03 launch 3::During change control for "Summarize various types of attacks and their impact to ...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_4_2_launch_04 launch 4::Which metric would best validate success for objective 4.2?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_4_2_launch_05 launch 5::Which tool is most appropriate when applying 4.2 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_4_2_launch_06 launch 6::Which IPv4 concept is most relevant to objective 4.2?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_4_2_launch_07 launch 7::Which wireless factor most affects designs tied to 4.2?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_4_2_launch_08 launch 8::Which security control best supports objective 4.2 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_4_2_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 4.2?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_4_3_launch_01 launch 1::Which response best aligns with N10-009 objective 4.3 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_4_3_launch_02 launch 2::A technician troubleshooting objective 4.3 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_4_3_launch_03 launch 3::During change control for "Given a scenario, apply network security features, defe...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_4_3_launch_04 launch 4::Which metric would best validate success for objective 4.3?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_4_3_launch_05 launch 5::Which tool is most appropriate when applying 4.3 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_4_3_launch_06 launch 6::Which IPv4 concept is most relevant to objective 4.3?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_4_3_launch_07 launch 7::Which wireless factor most affects designs tied to 4.3?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_4_3_launch_08 launch 8::Which security control best supports objective 4.3 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_4_3_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 4.3?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_5_1_launch_01 launch 1::Which response best aligns with N10-009 objective 5.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_5_1_launch_02 launch 2::A technician troubleshooting objective 5.1 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_5_1_launch_03 launch 3::During change control for "Explain the troubleshooting methodology...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_5_1_launch_04 launch 4::Which metric would best validate success for objective 5.1?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_5_1_launch_05 launch 5::Which tool is most appropriate when applying 5.1 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_5_1_launch_06 launch 6::Which IPv4 concept is most relevant to objective 5.1?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_5_1_launch_07 launch 7::Which wireless factor most affects designs tied to 5.1?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_5_1_launch_08 launch 8::Which security control best supports objective 5.1 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_5_1_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 5.1?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_5_2_launch_01 launch 1::Which response best aligns with N10-009 objective 5.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_5_2_launch_02 launch 2::A technician troubleshooting objective 5.2 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_5_2_launch_03 launch 3::During change control for "Given a scenario, troubleshoot common cabling and physi...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_5_2_launch_04 launch 4::Which metric would best validate success for objective 5.2?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_5_2_launch_05 launch 5::Which tool is most appropriate when applying 5.2 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_5_2_launch_06 launch 6::Which IPv4 concept is most relevant to objective 5.2?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_5_2_launch_07 launch 7::Which wireless factor most affects designs tied to 5.2?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_5_2_launch_08 launch 8::Which security control best supports objective 5.2 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_5_2_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 5.2?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_5_3_launch_01 launch 1::Which response best aligns with N10-009 objective 5.3 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_5_3_launch_02 launch 2::A technician troubleshooting objective 5.3 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_5_3_launch_03 launch 3::During change control for "Given a scenario, troubleshoot common issues with netwo...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_5_3_launch_04 launch 4::Which metric would best validate success for objective 5.3?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_5_3_launch_05 launch 5::Which tool is most appropriate when applying 5.3 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_5_3_launch_06 launch 6::Which IPv4 concept is most relevant to objective 5.3?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_5_3_launch_07 launch 7::Which wireless factor most affects designs tied to 5.3?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_5_3_launch_08 launch 8::Which security control best supports objective 5.3 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_5_3_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 5.3?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_5_4_launch_01 launch 1::Which response best aligns with N10-009 objective 5.4 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_5_4_launch_02 launch 2::A technician troubleshooting objective 5.4 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_5_4_launch_03 launch 3::During change control for "Given a scenario, troubleshoot common performance issue...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_5_4_launch_04 launch 4::Which metric would best validate success for objective 5.4?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_5_4_launch_05 launch 5::Which tool is most appropriate when applying 5.4 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_5_4_launch_06 launch 6::Which IPv4 concept is most relevant to objective 5.4?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_5_4_launch_07 launch 7::Which wireless factor most affects designs tied to 5.4?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_5_4_launch_08 launch 8::Which security control best supports objective 5.4 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_5_4_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 5.4?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::n10009_5_5_launch_01 launch 1::Which response best aligns with N10-009 objective 5.5 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::n10009_5_5_launch_02 launch 2::A technician troubleshooting objective 5.5 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::n10009_5_5_launch_03 launch 3::During change control for "Given a scenario, use the appropriate tool or protocol ...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::n10009_5_5_launch_04 launch 4::Which metric would best validate success for objective 5.5?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::n10009_5_5_launch_05 launch 5::Which tool is most appropriate when applying 5.5 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::n10009_5_5_launch_06 launch 6::Which IPv4 concept is most relevant to objective 5.5?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::n10009_5_5_launch_07 launch 7::Which wireless factor most affects designs tied to 5.5?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::n10009_5_5_launch_08 launch 8::Which security control best supports objective 5.5 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::n10009_5_5_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 5.5?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}

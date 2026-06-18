@@ -1,0 +1,700 @@
+::pe1_q001 n10009_1_6_launch_04 launch 4::Which metric would best validate success for objective 1.6?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::pe1_q002 n10009_1_7_launch_01 launch 1::Which response best aligns with N10-009 objective 1.7 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q003 n10009_1_7_launch_04 launch 4::Which metric would best validate success for objective 1.7?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::pe1_q004 n10009_1_2_pb2 [n10009_1_2] A technician is subnetting the 192.168.10.0 network and needs to create at least ::
+A technician is subnetting the 192.168.10.0 network and needs to create at least 6 subnets while maximizing the number of usable hosts per subnet. Which subnet mask should the technician use?
+{
+=/27 (255.255.255.224)
+~/29 (255.255.255.248)
+~/28 (255.255.255.240)
+~/26 (255.255.255.192)
+}
+
+::pe1_q005 n10009_1_8_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.8?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::pe1_q006 n10009_1_6_launch_03 launch 3::During change control for "Compare and contrast network topologies, architectures,...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::pe1_q007 n10009_1_1_launch_02 launch 2::A technician troubleshooting objective 1.1 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::pe1_q008 n10009_1_2_launch_01 launch 1::Which response best aligns with N10-009 objective 1.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q009 n10009_1_5_launch_07 launch 7::Which wireless factor most affects designs tied to 1.5?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::pe1_q010 n10009_1_4_pb54 [n10009_1_4] A network engineer is configuring a router and needs to create a default route t ::
+A network engineer is configuring a router and needs to create a default route that sends all traffic with no specific matching route to the ISP's router at 203.0.113.1. Which command represents the correct static default route?
+{
+~ip route 0.0.0.0 255.255.255.255 203.0.113.1
+=ip route 0.0.0.0 0.0.0.0 203.0.113.1
+~ip route 255.255.255.255 0.0.0.0 203.0.113.1
+~ip route 192.168.0.0 255.255.0.0 203.0.113.1
+}
+
+::pe1_q011 n10009_1_8_launch_08 launch 8::Which security control best supports objective 1.8 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::pe1_q012 n10009_1_4_launch_05 launch 5::Which tool is most appropriate when applying 1.4 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::pe1_q013 n10009_1_5_launch_10 launch 10::Which response best aligns with N10-009 objective 1.5 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q014 n10009_1_8_sg1 [n10009_1_8] Summarize evolving use cases for modern network environments ::
+For N10-009 objective 1.8, which statement best applies to\: Summarize evolving use cases for modern network environments?
+{
+=SDN (Software-Defined Networking)\: Separates the control plane (routing decisions) from the data plane (packet forwarding). Centralized controller manages the network programmatically.
+~SD-WAN\: Applies SDN principles to WAN connections; application-aware, transport-agnostic.
+~Zero Trust Architecture (ZTA)\: "Never trust, always verify." No user or device is trusted by default, even inside the network perimeter. Key principles\: least privilege, micro-segmentation.
+~SASE (Secure Access Service Edge)\: Combines network security (SWG, CASB, ZTNA) with WAN capabilities (SD-WAN) in a single cloud-delivered service.
+}
+
+::pe1_q015 n10009_1_6_launch_10 launch 10::Which response best aligns with N10-009 objective 1.6 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q016 n10009_1_6_launch_05 launch 5::Which tool is most appropriate when applying 1.6 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::pe1_q017 n10009_1_4_pb97 [n10009_1_4] A network engineer is configuring a router and needs to implement a protocol tha ::
+A network engineer is configuring a router and needs to implement a protocol that allows the router to automatically discover the IPv6 prefix being used on a network segment and configure its own IPv6 address without a DHCPv6 server. Which mechanism should be used?
+{
+~DHCPv6 stateful
+=SLAAC (Stateless Address Autoconfiguration)
+~Static IPv6 assignment
+~EUI-64 with manual prefix
+}
+
+::pe1_q018 n10009_1_5_launch_03 launch 3::During change control for "Compare and contrast transmission media and transceiver...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::pe1_q019 n10009_1_7_launch_10 launch 10::Which response best aligns with N10-009 objective 1.7 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q020 n10009_1_3_launch_04 launch 4::Which metric would best validate success for objective 1.3?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::pe1_q021 n10009_1_4_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 1.4?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::pe1_q022 n10009_2_1_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 2.1?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::pe1_q023 n10009_2_1_pb21 [n10009_2_1] A company wants to implement a routing protocol for their internal network that ::
+A company wants to implement a routing protocol for their internal network that uses bandwidth as its primary metric and supports both IPv4 and IPv6. Which protocol BEST meets these requirements?
+{
+~RIPv2
+=OSPF
+~BGP
+~RIPng
+}
+
+::pe1_q024 n10009_2_2_launch_10 launch 10::Which response best aligns with N10-009 objective 2.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q025 n10009_2_1_launch_01 launch 1::Which response best aligns with N10-009 objective 2.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q026 n10009_2_3_launch_07 launch 7::Which wireless factor most affects designs tied to 2.3?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::pe1_q027 n10009_2_2_launch_04 launch 4::Which metric would best validate success for objective 2.2?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::pe1_q028 n10009_2_1_pb29 [n10009_2_1] A company is deploying a new SD-WAN solution to connect 50 branch offices to the ::
+A company is deploying a new SD-WAN solution to connect 50 branch offices to the headquarters. Which of the following is a PRIMARY advantage of SD-WAN over traditional WAN technologies?
+{
+~SD-WAN eliminates the need for any physical network hardware
+=SD-WAN provides centralized policy management and can use multiple WAN links (MPLS,
+~SD-WAN only works with fiber optic connections
+~SD-WAN replaces the need for firewalls at branch locations
+}
+
+::pe1_q029 n10009_2_3_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 2.3?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::pe1_q030 n10009_2_2_launch_02 launch 2::A technician troubleshooting objective 2.2 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::pe1_q031 n10009_2_3_launch_06 launch 6::Which IPv4 concept is most relevant to objective 2.3?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::pe1_q032 n10009_2_1_launch_06 launch 6::Which IPv4 concept is most relevant to objective 2.1?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::pe1_q033 n10009_2_2_launch_01 launch 1::Which response best aligns with N10-009 objective 2.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q034 n10009_2_1_pb116 [n10009_2_1] A company is implementing a new WAN connection and the service provider offers a ::
+A company is implementing a new WAN connection and the service provider offers a connection type where the company's traffic is carried over the provider's shared infrastructure using labels for forwarding decisions, providing guaranteed bandwidth and QoS. Which WAN technology is this?
+{
+~Frame Relay
+~ATM (Asynchronous Transfer Mode)
+=MPLS (Multiprotocol Label Switching)
+~Metro Ethernet
+}
+
+::pe1_q035 n10009_2_3_pb99 [n10009_2_3] A company is deploying a new network and needs to select a cable type for a 40 G ::
+A company is deploying a new network and needs to select a cable type for a 40 Gbps connection between two core switches in the same data center rack. The distance is only 5 meters. Which cable type is MOST appropriate?
+{
+~Cat6a UTP
+~Single-mode fiber (SMF)
+=Twinaxial (Twinax) direct attach copper (DAC) cable
+~Cat8 UTP
+}
+
+::pe1_q036 n10009_2_4_launch_01 launch 1::Which response best aligns with N10-009 objective 2.4 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q037 n10009_2_1_launch_08 launch 8::Which security control best supports objective 2.1 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::pe1_q038 n10009_2_1_launch_02 launch 2::A technician troubleshooting objective 2.1 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::pe1_q039 n10009_2_3_launch_05 launch 5::Which tool is most appropriate when applying 2.3 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::pe1_q040 n10009_3_2_sg2 [n10009_3_2] Given a scenario, use network monitoring technologies ::
+For N10-009 objective 3.2, which statement best applies to\: Given a scenario, use network monitoring technologies?
+{
+=SNMP Trap\: An unsolicited alert sent from a managed device to the SNMP manager when a specific event occurs.
+~MIB (Management Information Base)\: A database of objects that can be managed via SNMP.
+~Community String\: A password-like string used for SNMPv1/v2c authentication (default\: "public" for read, "private" for write).
+~Always use SNMPv3 in production. SNMPv1 and v2c send community strings in cleartext, making them vulnerable to eavesdropping. Log Management and Other Monitoring Methods • Syslog\: Standard protocol for sending log messages from network devices to a central server (port 514 UDP). • SIEM (Security Information and Event Management)\: Aggregates, correlates, and analyzes log data from multiple sources to identify security threats. • NetFlow/sFlow\: Collects IP traffic information and monitors network flow data for traffic analysis. • Port Mirroring (SPAN)\: Copies traffic from one or more ports to a monitoring port for analysis. • Baseline Metrics\: Establishing normal performance levels to identify anomalies. • API Integration\: Using REST APIs to pull metrics directly from modern network devices and cloud services. • Availability Monitoring\: Checking if a device is up (e.g., via ping/ICMP). • Configuration Monitoring\: Alerting when a device configuration changes from the baseline.
+}
+
+::pe1_q041 n10009_3_4_launch_03 launch 3::During change control for "Given a scenario, implement IPv4 and IPv6 network servi...", which documentation best demonstrates alignment?{
+=Approved runbook with rollback steps and verification metrics
+~Verbal agreement in a stand-up meeting only
+~Screenshot of a social media networking tip
+~Unlabeled cable map without VLAN identifiers
+}
+
+::pe1_q042 n10009_3_4_launch_08 launch 8::Which security control best supports objective 3.4 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::pe1_q043 n10009_3_5_pb43 [n10009_3_5] A company is implementing a change management process. A network engineer submit ::
+A company is implementing a change management process. A network engineer submits a request to upgrade the firmware on all core switches during a maintenance window. Which document should be created FIRST before the change is approved?
+{
+~Post-implementation review
+=Change request (RFC) with rollback plan
+~Incident report
+~Network topology diagram
+}
+
+::pe1_q044 n10009_3_5_launch_01 launch 1::Which response best aligns with N10-009 objective 3.5 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q045 n10009_3_1_launch_10 launch 10::Which response best aligns with N10-009 objective 3.1 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q046 n10009_3_4_pb78 [n10009_3_4] A company experiences a major network outage. After restoring service, the netwo ::
+A company experiences a major network outage. After restoring service, the network team conducts a review meeting to analyze what happened, why it happened, and how to prevent it in the future. What is this process called?
+{
+~Change Advisory Board (CAB) meeting
+=Root Cause Analysis (RCA) / Post-Incident Review
+~Disaster Recovery Test
+~Business Impact Analysis (BIA)
+}
+
+::pe1_q047 n10009_3_3_pb108 [n10009_3_3] A company's network team is reviewing its disaster recovery plan. The team wants ::
+A company's network team is reviewing its disaster recovery plan. The team wants to test the DR plan without actually failing over to the DR site, to identify gaps and train staff. Which type of DR test should be performed?
+{
+~Full failover test
+=Tabletop exercise
+~Parallel test
+~Cutover test
+}
+
+::pe1_q048 n10009_3_1_launch_07 launch 7::Which wireless factor most affects designs tied to 3.1?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::pe1_q049 n10009_3_3_launch_04 launch 4::Which metric would best validate success for objective 3.3?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::pe1_q050 n10009_3_1_launch_02 launch 2::A technician troubleshooting objective 3.1 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::pe1_q051 n10009_3_2_launch_01 launch 1::Which response best aligns with N10-009 objective 3.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q052 n10009_3_2_launch_10 launch 10::Which response best aligns with N10-009 objective 3.2 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q053 n10009_3_2_launch_06 launch 6::Which IPv4 concept is most relevant to objective 3.2?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+
+::pe1_q054 n10009_3_1_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 3.1?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::pe1_q055 n10009_3_2_pb61 [n10009_3_2] A company is implementing network documentation and needs to create a document t ::
+A company is implementing network documentation and needs to create a document that maps each physical port on a patch panel to its corresponding wall outlet, switch port, and connected device. Which document should be created?
+{
+~Network topology diagram
+=Cable management documentation / port mapping
+~Network baseline report
+~Change management log
+}
+
+::pe1_q056 n10009_3_4_pb85 [n10009_3_4] A company wants to implement a solution that aggregates security events from mul ::
+A company wants to implement a solution that aggregates security events from multiple sources (firewalls, IDS, servers, applications) and correlates them to identify potential security incidents. Which technology should be deployed?
+{
+~SNMP NMS
+~Syslog server
+=SIEM (Security Information and Event Management)
+~NetFlow analyzer
+}
+
+::pe1_q057 n10009_4_3_launch_07 launch 7::Which wireless factor most affects designs tied to 4.3?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::pe1_q058 n10009_4_2_sg1 [n10009_4_2] Summarize various types of attacks and their impact to the n ::
+For N10-009 objective 4.2, which statement best applies to\: Summarize various types of attacks and their impact to the network?
+{
+=Ransomware\: Encrypts data and demands payment for the decryption key.
+~Trojan\: Malicious software disguised as legitimate software.
+~Worm\: Malware that spreads by exploiting vulnerabilities without user interaction.
+~Spyware\: Secretly monitors user activity and steals data.
+}
+
+::pe1_q059 n10009_4_2_pb13 [n10009_4_2] An attacker sends a large number of SYN packets to a web server but never comple ::
+An attacker sends a large number of SYN packets to a web server but never completes the TCP three-way handshake. The server's connection table fills up and legitimate users cannot connect. This is an example of which type of attack?
+{
+~ARP Poisoning
+=SYN Flood (DoS)
+~Man-in-the-Middle (MitM)
+~DNS Amplification
+}
+
+::pe1_q060 n10009_4_1_pb37 [n10009_4_1] An attacker connects a rogue switch to the network and sends DTP (Dynamic Trunki ::
+An attacker connects a rogue switch to the network and sends DTP (Dynamic Trunking Protocol) negotiation frames to a legitimate switch port. The attacker's goal is to gain access to all VLANs on the network. Which attack is being described?
+{
+~MAC Flooding
+~ARP Poisoning
+=VLAN Hopping
+~DNS Poisoning
+}
+
+::pe1_q061 n10009_4_1_sg1 [n10009_4_1] Explain the importance of basic network security concepts ::
+For N10-009 objective 4.1, which statement best applies to\: Explain the importance of basic network security concepts?
+{
+=Risk\: The likelihood that a threat will exploit a vulnerability.
+~Vulnerability\: A weakness in a system or process.
+~Exploit\: A tool or technique used to take advantage of a vulnerability.
+~Threat\: Any potential danger to an asset.
+}
+
+::pe1_q062 n10009_4_1_pb110 [n10009_4_1] A company's security policy requires that all sensitive data stored on laptops b ::
+A company's security policy requires that all sensitive data stored on laptops be protected in case the laptop is lost or stolen. Which technology provides this protection?
+{
+~VPN
+=Full disk encryption (FDE)
+~Antivirus software
+~Host-based firewall
+}
+
+::pe1_q063 n10009_4_3_launch_05 launch 5::Which tool is most appropriate when applying 4.3 in operations?{
+=The tool that matches the layer and symptom described in the stem
+~A cable toner when the issue is BGP route propagation
+~iperf when the issue is a mislabeled patch panel
+~nslookup when the issue is a down fiber transceiver
+}
+
+::pe1_q064 n10009_4_3_launch_04 launch 4::Which metric would best validate success for objective 4.3?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::pe1_q065 n10009_4_1_pb101 [n10009_4_1] A company is implementing a physical security policy for its server room. The se ::
+A company is implementing a physical security policy for its server room. The security team wants to prevent unauthorized individuals from following authorized employees through a secured door. Which physical security control addresses this specific threat?
+{
+~CCTV cameras
+~Biometric scanner
+=Mantrap (airlock)
+~Security guard
+}
+
+::pe1_q066 n10009_4_1_pb8 [n10009_4_1] A company implements a policy requiring employees to use a combination of a pass ::
+A company implements a policy requiring employees to use a combination of a password and a fingerprint scan to access the corporate network. This is an example of which security concept?
+{
+~Single Sign-On (SSO)
+=Multi-Factor Authentication (MFA)
+~Role-Based Access Control (RBAC)
+~Mandatory Access Control (MAC)
+}
+
+::pe1_q067 n10009_4_1_pb88 [n10009_4_1] A company is implementing a security policy for its wireless network. The securi ::
+A company is implementing a security policy for its wireless network. The security team wants to prevent unauthorized wireless access points from being connected to the network by employees. Which technology should be implemented?
+{
+~WPA3 encryption
+=Wireless Intrusion Prevention System (WIPS)
+~MAC address filtering
+~Hidden SSID
+}
+
+::pe1_q068 n10009_4_1_sg2 [n10009_4_1] Explain the importance of basic network security concepts ::
+For N10-009 objective 4.1, which statement best applies to\: Explain the importance of basic network security concepts?
+{
+=Vulnerability\: A weakness in a system or process.
+~Risk\: The likelihood that a threat will exploit a vulnerability.
+~Exploit\: A tool or technique used to take advantage of a vulnerability.
+~Threat\: Any potential danger to an asset.
+}
+
+::pe1_q069 n10009_4_1_pb18 [n10009_4_1] A network administrator implements a policy that automatically quarantines any d ::
+A network administrator implements a policy that automatically quarantines any device that connects to the network without the latest security patches installed. Which technology is being used?
+{
+~802.1X Port-Based Authentication
+=Network Access Control (NAC)
+~Intrusion Prevention System (IPS)
+~VLAN Segmentation
+}
+
+::pe1_q070 n10009_5_3_pb82 [n10009_5_3] A network administrator is troubleshooting an issue where a newly installed serv ::
+A network administrator is troubleshooting an issue where a newly installed server cannot communicate with any other devices on the network. The server has the correct IP address, subnet mask, and default gateway configured. The switch port shows as up/up. What should the administrator check NEXT?
+{
+=Check if the server's IP address is in the correct VLAN
+~Replace the network cable
+~Restart the DHCP server
+~Check the DNS configuration on the server
+}
+
+::pe1_q071 n10009_5_5_launch_02 launch 2::A technician troubleshooting objective 5.5 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::pe1_q072 n10009_5_3_pb22 [n10009_5_3] A technician uses a cable tester and discovers that the cable has a near-end cro ::
+A technician uses a cable tester and discovers that the cable has a near-end crosstalk (NEXT) reading that exceeds the acceptable threshold. Which of the following BEST describes the cause of this issue?
+{
+~The cable run exceeds the maximum distance specification
+~Electromagnetic interference from a nearby power cable
+=Untwisted wire pairs at the cable termination point
+~A break in the cable's outer jacket
+}
+
+::pe1_q073 n10009_5_5_launch_04 launch 4::Which metric would best validate success for objective 5.5?{
+=A KPI tied to availability, latency, or error rate improvement
+~Number of unused switch ports purchased
+~Total cable length in the building regardless of faults
+~Count of vendor datasheets downloaded
+}
+
+::pe1_q074 n10009_5_2_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 5.2?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::pe1_q075 n10009_5_3_pb93 [n10009_5_3] A network administrator is troubleshooting a VoIP quality issue. Users report th ::
+A network administrator is troubleshooting a VoIP quality issue. Users report that calls are choppy and words are being cut off. The administrator measures the network and finds that packet delay varies between 5ms and 150ms. Which network condition is causing this issue?
+{
+~High latency
+=Jitter
+~Packet loss
+~Bandwidth saturation
+}
+
+::pe1_q076 n10009_5_5_pb105 [n10009_5_5] A network administrator is troubleshooting a connectivity issue between a workst ::
+A network administrator is troubleshooting a connectivity issue between a workstation and a server. The administrator successfully pings the server by IP address but cannot connect to the server's application (port 443). Which troubleshooting tool should be used NEXT to determine if the port is open?
+{
+~ping
+~traceroute
+=telnet [server-IP] 443
+~nslookup
+}
+
+::pe1_q077 n10009_5_4_launch_02 launch 2::A technician troubleshooting objective 5.4 should start at which OSI layer when symptoms suggest a physical issue?{
+=Layer 1 — verify media, link lights, and interface errors first
+~Layer 7 — inspect application payloads before checking cables
+~Layer 4 — adjust TCP window size before link tests
+~Skip physical checks when ping fails intermittently
+}
+
+::pe1_q078 n10009_5_1_launch_08 launch 8::Which security control best supports objective 5.1 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::pe1_q079 n10009_5_1_pb60 [n10009_5_1] A user reports that their laptop connects to the corporate Wi-Fi but cannot acce ::
+A user reports that their laptop connects to the corporate Wi-Fi but cannot access any internal resources or the internet. The user's laptop shows an IP address of 192.168.1.50, subnet mask 255.255.255.0, but no default gateway. What is the MOST likely cause?
+{
+~The wireless access point is offline
+=The DHCP server is not providing a default gateway option
+~The laptop's wireless NIC is faulty
+~The DNS server is unreachable
+}
+
+::pe1_q080 n10009_5_3_launch_07 launch 7::Which wireless factor most affects designs tied to 5.3?{
+=Channel planning, power levels, and interference sources
+~STP root bridge placement on access switches only
+~SMTP relay configuration on wireless controllers
+~FTP passive mode for all guest SSIDs
+}
+
+::pe1_q081 n10009_5_5_launch_01 launch 1::Which response best aligns with N10-009 objective 5.5 in a hybrid WAN design?{
+=Apply the principle described in the objective before selecting a vendor feature
+~Enable all switch ports to trunk mode by default
+~Disable STP to maximize throughput during migration
+~Use NAT only at the ISP edge without documenting exceptions
+}
+
+::pe1_q082 n10009_5_2_sg2 [n10009_5_2] Given a scenario, troubleshoot common cabling and physical i ::
+For N10-009 objective 5.2, which statement best applies to\: Given a scenario, troubleshoot common cabling and physical interface issues?
+{
+=Error-Disabled\: Automatically shut down by the switch due to a violation (e.g., port security, BPDU guard).
+~Administratively Down\: Disabled by an administrator (shutdown command). Must be manually re-enabled.
+~Administratively Down\: Disabled by an administrator (shutdown command). Must be manually re-enabled.
+~Administratively Down\: Disabled by an administrator (shutdown command). Must be manually re-enabled.
+}
+
+::pe1_q083 n10009_5_3_pb64 [n10009_5_3] A network administrator is troubleshooting a wireless connectivity issue. Users ::
+A network administrator is troubleshooting a wireless connectivity issue. Users report that they can connect to the Wi-Fi network but experience very slow speeds. The administrator notices that the 2.4 GHz band is heavily congested. Which action would MOST effectively improve wireless performance?
+{
+~Increase the wireless transmit power to maximum
+=Migrate users to the 5 GHz band and configure non-overlapping channels
+~Change the wireless security from WPA2 to WEP
+~Reduce the SSID broadcast interval
+}
+
+::pe1_q084 n10009_5_1_sg2 [n10009_5_1] Explain the troubleshooting methodology ::
+For N10-009 objective 5.1, which statement best applies to\: Explain the troubleshooting methodology?
+{
+=Establish a Theory of Probable Cause Question the obvious; consider OSI model (top-down, bottom-up, divide and conquer)
+~Identify the Problem Gather info; question users; identify symptoms; determine what changed; duplicate the problem
+~Test the Theory Confirm or deny the theory; if denied, establish a new theory or escalate
+~Document Everything Record findings, actions, outcomes, and lessons learned
+}
+
+::pe1_q085 n10009_5_4_launch_09 launch 9::Which troubleshooting step follows the CompTIA methodology for 5.4?{
+=Establish theory, test, escalate with documented results
+~Replace all hardware before gathering symptoms
+~Reboot every device simultaneously without baselines
+~Close the ticket when ping succeeds once
+}
+
+::pe1_q086 n10009_5_5_pb70 [n10009_5_5] A network administrator is troubleshooting a fiber optic connection between two ::
+A network administrator is troubleshooting a fiber optic connection between two switches. The link shows as down despite the cable appearing to be properly connected. Which tool should the administrator use to test the fiber optic cable for breaks, bends, and signal loss?
+{
+~Cable tester (TDR)
+=OTDR (Optical Time Domain Reflectometer)
+~Multimeter
+~Toner probe
+}
+
+::pe1_q087 n10009_5_2_launch_08 launch 8::Which security control best supports objective 5.2 on the network edge?{
+=Defense in depth with ACLs, segmentation, and monitoring
+~Security through obscurity using nonstandard ports only
+~Disabling logging to reduce SIEM storage costs
+~Publishing internal IP schemes on the public website
+}
+
+::pe1_q088 n10009_5_1_pb40 [n10009_5_1] A technician is troubleshooting a connectivity issue and uses the 'traceroute' c ::
+A technician is troubleshooting a connectivity issue and uses the 'traceroute' command. The output shows asterisks (*) at hops 5 through 10 but the destination is reached successfully. What do the asterisks indicate?
+{
+~The packets were dropped at those hops and the connection failed
+=Those routers are configured to not respond to ICMP TTL-exceeded messages
+~The route is asymmetric and packets are taking a different return path
+~The network is experiencing a routing loop at those hops
+}
+
+::pe1_q089 n10009_5_3_pb112 [n10009_5_3] A network administrator is investigating a report that a specific server is unre ::
+A network administrator is investigating a report that a specific server is unreachable. The administrator runs 'ping 10.10.10.50' from a workstation and gets 'Request timed out.' The administrator then runs 'ping 10.10.10.50' from the router's interface and gets a response. What does this indicate?
+{
+~The server is offline
+=There is a routing or firewall issue between the workstation and the server
+~The server's DNS is misconfigured
+~The workstation has a faulty NIC
+}
+
+::pe1_q090 n10009_5_1_launch_06 launch 6::Which IPv4 concept is most relevant to objective 5.1?{
+=Correct subnet mask or prefix length for the required host count
+~Using /8 for every VLAN regardless of size
+~Assigning duplicate default gateways on the same segment
+~Disabling ARP to improve security on all subnets
+}
+

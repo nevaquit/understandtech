@@ -19,11 +19,13 @@ Aligned to `docs/white-paper.md` §5 Phase 1–2 and current repo inventory (202
 
 ## Phase 2 — Network+ and A+ (NET009, APLUS)
 
-| Metric | White paper | Current (approx) |
-|--------|-------------|------------------|
+| Metric | White paper | Current (repo) |
+|--------|-------------|----------------|
 | SEC701 | (maintain) | baseline above |
-| NET009 lessons | 80–100 | 26 |
-| NET009 questions | ~400 | ~160 |
+| NET009 lessons | 80–100 | **75** (25 core + 50 sub) |
+| NET009 questions | ~400 | **400** |
+| NET009 practice exams | 3 × 90 Q | **3** (gift files) |
+| NET009 labs | 3 | **3** (HTML + seed) |
 | APLUS lessons | 80–100 per core | 57 combined |
 | APLUS questions | ~400 per core | ~912 (flashcard-heavy) |
 

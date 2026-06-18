@@ -1,0 +1,22 @@
+<div class="ut-lab-content">
+<h3>Scenario: Firewall ACL rule review</h3>
+<p>Harbor Finance Group is auditing edge firewall rules before a PCI assessment. Review the excerpt
+below and identify the rule that violates least-privilege for outbound web traffic.</p>
+
+<h4>ACL excerpt (EDGE-OUT)</h4>
+<pre>
+10 permit tcp any any eq 443
+20 permit tcp any any eq 80
+30 permit ip any any
+40 deny ip any any log
+</pre>
+
+<h4>Your tasks</h4>
+<ol>
+<li>Identify which rule is overly permissive before the final deny.</li>
+<li>Recommend the corrective action (specific rule number to change).</li>
+<li>Submit the lab flag <code>UT{ACL-RULE-30}</code> referencing the problematic rule.</li>
+</ol>
+
+<p><em>Do not share flags in course forums. The AI tutor will not validate flag values for you.</em></p>
+</div>

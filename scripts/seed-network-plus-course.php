@@ -23,6 +23,10 @@ require_once($CFG->dirroot . '/question/format.php');
 require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->dirroot . '/lib/questionlib.php');
 require_once($CFG->libdir . '/filterlib.php');
+require_once(__DIR__ . '/lib/moodle-cert-practice-exam.php');
+
+$admin = get_admin();
+\core\session\manager::set_user($admin);
 
 /**
  * Build fallback lesson HTML when no CyberKraft content file exists.
@@ -70,6 +74,39 @@ function network_plus_load_lesson_html(string $repopath, string $code, string $t
         }
     }
     return network_plus_lesson_html($code, $title);
+}
+
+/**
+ * Load sub-lesson HTML (_scenario or _exam suffix).
+ *
+ * @param string $repopath
+ * @param string $code e.g. n10009_1_1_scenario
+ * @param string $title
+ * @return string
+ */
+function network_plus_load_sublesson_html(string $repopath, string $code, string $title): string {
+    $path = $repopath . '/content/network-plus/lessons/' . $code . '.html';
+    if (is_readable($path)) {
+        $html = file_get_contents($path);
+        if ($html !== false && trim($html) !== '') {
+            return $html;
+        }
+    }
+    return network_plus_lesson_html($code, $title);
+}
+
+/**
+ * Build Moodle page title for a sub-lesson.
+ *
+ * @param string $objectiveshortname e.g. n10009_1_1
+ * @param string $suffix _scenario or _exam
+ * @param string $fullname Objective full name
+ * @return string
+ */
+function network_plus_sublesson_pagename(string $objectiveshortname, string $suffix, string $fullname): string {
+    $code = strtoupper(str_replace('n10009_', 'N10-009 ', str_replace('_', '.', $objectiveshortname)));
+    $label = $suffix === '_scenario' ? 'Scenario Study' : 'Exam Focus';
+    return "{$code} — {$label}: {$fullname}";
 }
 
 /**
@@ -220,26 +257,94 @@ function network_plus_add_page(stdClass $course, int $sectionnum, string $name, 
  * @param string $categoryname
  * @return stdClass
  */
-function network_plus_get_question_category(int $contextid, string $categoryname): stdClass {
+function network_plus_find_question_category(
+    int $contextid,
+    string $categoryname,
+    ?string $idnumber = null,
+    ?int $parentid = null
+): ?stdClass {
     global $DB;
 
-    $existing = $DB->get_record('question_categories', ['contextid' => $contextid, 'name' => $categoryname]);
+    $conditions = ['contextid' => $contextid, 'name' => $categoryname];
+    if ($parentid !== null) {
+        $conditions['parent'] = $parentid;
+    }
+    $existing = $DB->get_record('question_categories', $conditions, '*', IGNORE_MULTIPLE);
+    if ($existing) {
+        return $existing;
+    }
+
+    if ($idnumber !== null && $idnumber !== '') {
+        $existing = $DB->get_record(
+            'question_categories',
+            ['contextid' => $contextid, 'idnumber' => $idnumber],
+            '*',
+            IGNORE_MULTIPLE
+        );
+        if ($existing) {
+            return $existing;
+        }
+    }
+
+    return null;
+}
+
+/**
+ * @param int $contextid
+ * @param string $categoryname
+ * @param string $idnumber
+ * @return stdClass
+ */
+function network_plus_get_question_category(int $contextid, string $categoryname, string $idnumber = 'net009-main'): stdClass {
+    global $DB;
+
+    $existing = network_plus_find_question_category($contextid, $categoryname, $idnumber);
     if ($existing) {
         return $existing;
     }
 
     $parent = question_get_top_category($contextid, true);
-    $record = new stdClass();
-    $record->name = $categoryname;
-    $record->contextid = $contextid;
-    $record->info = 'Network+ N10-009 objective-aligned questions';
-    $record->infoformat = FORMAT_HTML;
-    $record->stamp = make_unique_id_code();
-    $record->parent = $parent->id;
-    $record->sortorder = 999;
-    $record->idnumber = '';
-    $record->id = $DB->insert_record('question_categories', $record);
-    return $record;
+    $manager = new \core_question\category_manager();
+    $categoryid = $manager->add_category(
+        "{$parent->id},{$contextid}",
+        $categoryname,
+        'Network+ N10-009 objective-aligned questions',
+        FORMAT_HTML,
+        $idnumber
+    );
+    return $DB->get_record('question_categories', ['id' => $categoryid], '*', MUST_EXIST);
+}
+
+/**
+ * Child question category under an existing parent (practice exam banks).
+ *
+ * @param stdClass $parentcategory
+ * @param string $categoryname
+ * @param string $idnumber
+ * @return stdClass
+ */
+function network_plus_get_child_question_category(stdClass $parentcategory, string $categoryname, string $idnumber): stdClass {
+    global $DB;
+
+    $existing = network_plus_find_question_category(
+        (int) $parentcategory->contextid,
+        $categoryname,
+        $idnumber,
+        (int) $parentcategory->id
+    );
+    if ($existing) {
+        return $existing;
+    }
+
+    $manager = new \core_question\category_manager();
+    $categoryid = $manager->add_category(
+        "{$parentcategory->id},{$parentcategory->contextid}",
+        $categoryname,
+        'Network+ N10-009 practice exam bank',
+        FORMAT_HTML,
+        $idnumber
+    );
+    return $DB->get_record('question_categories', ['id' => $categoryid], '*', MUST_EXIST);
 }
 
 function network_plus_count_tagged_questions(int $categoryid): int {
@@ -355,6 +460,252 @@ function network_plus_import_gift(int $contextid, stdClass $category, string $gi
     $after = count(network_plus_category_question_ids((int) $category->id));
     echo "gift_imported path={$giftpath} added=" . ($after - $before) . " total={$after}\n";
     return $after;
+}
+
+/**
+ * Import GIFT without skip-if-complete guard (launch pool / practice exams).
+ *
+ * @param int $contextid
+ * @param stdClass $category
+ * @param string $giftpath
+ * @param string|null $skipprefix
+ * @param int $skiptarget
+ * @return int
+ */
+function network_plus_import_gift_unconditional(
+    int $contextid,
+    stdClass $category,
+    string $giftpath,
+    ?string $skipprefix = null,
+    int $skiptarget = 90
+): int {
+    if (!is_readable($giftpath)) {
+        echo "gift_missing path={$giftpath}\n";
+        return count(network_plus_category_question_ids((int) $category->id));
+    }
+
+    if ($skipprefix !== null && function_exists('ut_practice_exam_category_question_ids')) {
+        $existing = ut_practice_exam_category_question_ids((int) $category->id, $skipprefix);
+        if (count($existing) >= $skiptarget) {
+            echo "gift_skip path={$giftpath} reason=sufficient_existing count=" . count($existing) . "\n";
+            return count(network_plus_category_question_ids((int) $category->id));
+        }
+    }
+
+    $context = context::instance_by_id($contextid);
+    $before = count(network_plus_category_question_ids((int) $category->id));
+
+    $qformat = new qformat_gift();
+    $qformat->setCategory($category);
+    $qformat->setContexts([$context]);
+    $qformat->setFilename($giftpath);
+    $qformat->setStoponerror(false);
+    if (!$qformat->importprocess()) {
+        echo "gift_import_failed path={$giftpath}\n";
+        return $before;
+    }
+
+    $after = count(network_plus_category_question_ids((int) $category->id));
+    echo "gift_imported path={$giftpath} added=" . ($after - $before) . " total={$after}\n";
+    return $after;
+}
+
+/**
+ * Apply practice exam timing and intro to an existing quiz.
+ *
+ * @param stdClass $course
+ * @param string $quizname
+ * @param int $timelimitsecs
+ * @return void
+ */
+function network_plus_apply_practice_exam_settings(stdClass $course, string $quizname, int $timelimitsecs = 5400): void {
+    global $DB;
+
+    $quizrecord = $DB->get_record_sql(
+        "SELECT q.*
+           FROM {quiz} q
+           JOIN {course_modules} cm ON cm.instance = q.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'quiz'
+          WHERE cm.course = :courseid AND q.name = :name",
+        ['courseid' => $course->id, 'name' => $quizname]
+    );
+    if (!$quizrecord) {
+        echo "practice_exam_settings_missing name={$quizname}\n";
+        return;
+    }
+
+    $quizrecord->intro = '<p>Full-length Network+ N10-009 practice exam. 90 questions, 90-minute time limit. '
+        . 'Rate your confidence after each question. Target passing score: 83% (720/900 equivalent).</p>';
+    $quizrecord->introformat = FORMAT_HTML;
+    $quizrecord->timelimit = $timelimitsecs;
+    $quizrecord->attempts = 2;
+    $DB->update_record('quiz', $quizrecord);
+    echo "practice_exam_settings_applied id={$quizrecord->id} name={$quizname} timelimit={$timelimitsecs}\n";
+}
+
+/**
+ * Create a timed full-length practice exam quiz.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $quizname
+ * @param int[] $questionids
+ * @param int $timelimitsecs
+ * @return void
+ */
+function network_plus_add_practice_exam(
+    stdClass $course,
+    int $sectionnum,
+    string $quizname,
+    array $questionids,
+    int $timelimitsecs = 5400
+): void {
+    network_plus_add_quiz($course, $sectionnum, $quizname, $questionids);
+    network_plus_apply_practice_exam_settings($course, $quizname, $timelimitsecs);
+}
+
+/**
+ * Reconcile a practice exam quiz to the target question set.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $quizname
+ * @param int[] $questionids
+ * @param int $timelimitsecs
+ * @return void
+ */
+function network_plus_sync_practice_exam(
+    stdClass $course,
+    int $sectionnum,
+    string $quizname,
+    array $questionids,
+    int $timelimitsecs = 5400
+): void {
+    require_once(__DIR__ . '/lib/moodle-cert-quiz-dedup.php');
+    ut_sync_knowledge_check_quiz(
+        $course,
+        $sectionnum,
+        $quizname,
+        $questionids,
+        static function (stdClass $c, int $sec, string $name, array $ids) use ($timelimitsecs): void {
+            network_plus_add_practice_exam($c, $sec, $name, $ids, $timelimitsecs);
+        }
+    );
+    network_plus_apply_practice_exam_settings($course, $quizname, $timelimitsecs);
+}
+
+/**
+ * Load lab intro HTML from repo content when present.
+ *
+ * @param string $repopath
+ * @param string $slug
+ * @param string $fallback
+ * @return string
+ */
+function network_plus_load_lab_intro(string $repopath, string $slug, string $fallback): string {
+    $path = $repopath . '/content/network-plus/labs/' . $slug . '.html';
+    if (is_readable($path)) {
+        $html = file_get_contents($path);
+        if ($html !== false && trim($html) !== '') {
+            return $html;
+        }
+    }
+    return $fallback;
+}
+
+/**
+ * Find ctfflag course module by activity name.
+ *
+ * @param int $courseid
+ * @param string $name
+ * @return stdClass|null
+ */
+function network_plus_find_ctfflag(int $courseid, string $name): ?stdClass {
+    global $DB;
+
+    return $DB->get_record_sql(
+        "SELECT cf.*
+           FROM {ctfflag} cf
+           JOIN {course_modules} cm ON cm.instance = cf.id
+           JOIN {modules} m ON m.id = cm.module AND m.name = 'ctfflag'
+          WHERE cm.course = :courseid AND cf.name = :name",
+        ['courseid' => $courseid, 'name' => $name]
+    ) ?: null;
+}
+
+/**
+ * Create or update a mod_ctfflag lab activity.
+ *
+ * @param stdClass $course
+ * @param int $sectionnum
+ * @param string $name
+ * @param string $intro
+ * @param string $regex
+ * @param int $xpaward
+ * @return void
+ */
+function network_plus_upsert_ctfflag(
+    stdClass $course,
+    int $sectionnum,
+    string $name,
+    string $intro,
+    string $regex,
+    int $xpaward = 100
+): void {
+    global $DB, $CFG;
+
+    if (!array_key_exists('ctfflag', core_component::get_plugin_list('mod'))) {
+        echo "ctfflag_skip plugin_missing name={$name}\n";
+        return;
+    }
+
+    require_once($CFG->dirroot . '/mod/ctfflag/lib.php');
+
+    $existing = network_plus_find_ctfflag((int) $course->id, $name);
+    if ($existing) {
+        $changed = false;
+        if ((string) $existing->intro !== $intro) {
+            $existing->intro = $intro;
+            $existing->introformat = FORMAT_HTML;
+            $changed = true;
+        }
+        if ((string) $existing->expected_flag_regex !== $regex) {
+            $existing->expected_flag_regex = $regex;
+            $changed = true;
+        }
+        if ((int) $existing->xp_award !== $xpaward) {
+            $existing->xp_award = $xpaward;
+            $changed = true;
+        }
+        if ($changed) {
+            $existing->instance = $existing->id;
+            ctfflag_update_instance($existing);
+            echo "ctfflag_updated id={$existing->id} name={$name}\n";
+        } else {
+            echo "ctfflag_unchanged id={$existing->id} name={$name}\n";
+        }
+        return;
+    }
+
+    $module = new stdClass();
+    $module->course = $course->id;
+    $module->name = $name;
+    $module->intro = $intro;
+    $module->introformat = FORMAT_HTML;
+    $module->expected_flag_regex = $regex;
+    $module->xp_award = $xpaward;
+    $module->module = $DB->get_field('modules', 'id', ['name' => 'ctfflag']);
+    $module->modulename = 'ctfflag';
+    $module->section = $sectionnum;
+    $module->visible = 1;
+    $module->cmidnumber = '';
+
+    try {
+        $cm = add_moduleinfo($module, $course);
+        echo "ctfflag_created id={$cm->instance} name={$name} section={$sectionnum}\n";
+    } catch (Throwable $e) {
+        echo "ctfflag_create_failed name={$name} error=" . $e->getMessage() . "\n";
+    }
 }
 
 /**
@@ -787,7 +1138,8 @@ if (!$course) {
     $newcourse->format = 'topics';
     $newcourse->visible = 1;
     $newcourse->summary = '<p>Official CompTIA Network+ N10-009 blueprint-aligned track. '
-        . 'Five domains, 25 exam objectives, lesson pages, and confidence-rated knowledge checks.</p>';
+        . 'Five domains, 25 exam objectives, core + scenario + exam-focus lessons, '
+        . 'confidence-rated knowledge checks, three practice exams, and hands-on labs.</p>';
     $newcourse->summaryformat = FORMAT_HTML;
     $course = create_course($newcourse);
     echo "course_created id={$course->id}\n";
@@ -795,8 +1147,8 @@ if (!$course) {
     echo "course_exists id={$course->id}\n";
 }
 
-course_create_sections_if_missing($course, 5);
-for ($i = 1; $i <= 5; $i++) {
+course_create_sections_if_missing($course, 7);
+for ($i = 1; $i <= 7; $i++) {
     if (!$DB->record_exists('course_sections', ['course' => $course->id, 'section' => $i])) {
         course_create_section($course, $i);
     }
@@ -809,6 +1161,8 @@ $sectionnames = [
     3 => 'Domain 3: Network Operations (19%)',
     4 => 'Domain 4: Network Security (14%)',
     5 => 'Domain 5: Network Troubleshooting (24%)',
+    6 => 'Practice Exams',
+    7 => 'Hands-on Labs',
 ];
 foreach ($sectionnames as $num => $label) {
     $section = $DB->get_record('course_sections', ['course' => $course->id, 'section' => $num], '*', MUST_EXIST);
@@ -856,6 +1210,17 @@ foreach ($objectives as $objective) {
     network_plus_upsert_page($course, $sectionnum, $pagename, $html);
 }
 
+foreach ($objectives as $objective) {
+    $sectionnum = $domainsection[$objective->domainshort] ?? 1;
+    foreach (['_scenario', '_exam'] as $suffix) {
+        $code = $objective->shortname . $suffix;
+        $pagename = network_plus_sublesson_pagename($objective->shortname, $suffix, $objective->fullname);
+        $html = network_plus_load_sublesson_html($repopath, $code, $objective->fullname);
+        network_plus_upsert_page($course, $sectionnum, $pagename, $html);
+    }
+}
+echo 'sublessons_seeded=' . (count($objectives) * 2) . "\n";
+
 $context = context_course::instance((int) $course->id);
 $qcat = network_plus_get_question_category((int) $context->id, 'Network+ N10-009');
 $giftbase = $repopath . '/content/network-plus/n10-009-quiz.gift';
@@ -863,6 +1228,10 @@ $giftextra = $repopath . '/content/network-plus/n10-009-quiz-extra.gift';
 network_plus_import_gift((int) $context->id, $qcat, $giftbase);
 if (is_readable($giftextra)) {
     network_plus_import_gift((int) $context->id, $qcat, $giftextra, true);
+}
+$giftlaunch = $repopath . '/content/network-plus/n10-009-quiz-launch.gift';
+if (is_readable($giftlaunch)) {
+    network_plus_import_gift_unconditional((int) $context->id, $qcat, $giftlaunch);
 }
 
 require_once(__DIR__ . '/lib/moodle-cert-quiz-dedup.php');
@@ -891,6 +1260,98 @@ for ($domainnum = 1; $domainnum <= 5; $domainnum++) {
     );
 }
 
+echo "practice_exam_block_start\n";
+$pegift = $repopath . '/content/network-plus/practice-exam-1.gift';
+if (is_readable($pegift)) {
+    try {
+        $pecategory = network_plus_get_child_question_category($qcat, 'Practice Exam 1 Bank', 'net009-pe1-bank');
+        echo "practice_exam_category_id={$pecategory->id}\n";
+        network_plus_import_gift_unconditional((int) $context->id, $pecategory, $pegift, 'pe1_q');
+        $pequestionids = ut_practice_exam_category_question_ids((int) $pecategory->id, 'pe1_q');
+    } catch (Throwable $e) {
+        echo 'practice_exam_1_category_failed error=' . $e->getMessage() . ' class=' . get_class($e) . "\n";
+        $pequestionids = ut_select_practice_exam_questions_net009((int) $qcat->id, 90);
+    }
+} else {
+    $pequestionids = ut_select_practice_exam_questions_net009((int) $qcat->id, 90);
+}
+echo 'practice_exam_1_pool=' . count($pequestionids) . "\n";
+if ($pequestionids) {
+    try {
+        network_plus_sync_practice_exam($course, 6, 'Practice Exam 1', $pequestionids, 5400);
+        echo 'practice_exam_1_questions=' . count($pequestionids) . "\n";
+    } catch (Throwable $e) {
+        echo 'practice_exam_1_failed error=' . $e->getMessage() . "\n";
+    }
+}
+
+for ($examnum = 2; $examnum <= 3; $examnum++) {
+    $pename = "Practice Exam {$examnum}";
+    $pegiftpath = $repopath . '/content/network-plus/practice-exam-' . $examnum . '.gift';
+    $peprefix = 'pe' . $examnum . '_q';
+    if (is_readable($pegiftpath)) {
+        try {
+            $pecat = network_plus_get_child_question_category($qcat, "Practice Exam {$examnum} Bank", "net009-pe{$examnum}-bank");
+            network_plus_import_gift_unconditional((int) $context->id, $pecat, $pegiftpath, $peprefix);
+            $peids = ut_practice_exam_category_question_ids((int) $pecat->id, $peprefix);
+        } catch (Throwable $e) {
+            echo "practice_exam_{$examnum}_category_failed error=" . $e->getMessage()
+                . ' class=' . get_class($e) . "\n";
+            $peids = ut_select_practice_exam_questions_net009((int) $qcat->id, 90);
+        }
+    } else {
+        $peids = ut_select_practice_exam_questions_net009((int) $qcat->id, 90);
+    }
+    echo "practice_exam_{$examnum}_pool=" . count($peids) . "\n";
+    if ($peids) {
+        try {
+            network_plus_sync_practice_exam($course, 6, $pename, $peids, 5400);
+        } catch (Throwable $e) {
+            echo "practice_exam_{$examnum}_failed error=" . $e->getMessage() . "\n";
+        }
+    }
+}
+
+echo "labs_block_start\n";
+try {
+    network_plus_upsert_ctfflag(
+        $course,
+        7,
+        'Lab 1: IPv4 subnet planning',
+        network_plus_load_lab_intro($repopath, 'lab-1-ipv4-subnetting', '<p>IPv4 subnet planning lab.</p>'),
+        'UT\\{7F3A9B2C\\}',
+        100
+    );
+} catch (Throwable $e) {
+    echo 'ctfflag_lab1_failed error=' . $e->getMessage() . "\n";
+}
+
+try {
+    network_plus_upsert_ctfflag(
+        $course,
+        7,
+        'Lab 2: VLAN troubleshooting',
+        network_plus_load_lab_intro($repopath, 'lab-2-vlan-troubleshooting', '<p>VLAN troubleshooting lab.</p>'),
+        'UT\\{UT-VLAN-120-FIX\\}',
+        100
+    );
+} catch (Throwable $e) {
+    echo 'ctfflag_lab2_failed error=' . $e->getMessage() . "\n";
+}
+
+try {
+    network_plus_upsert_ctfflag(
+        $course,
+        7,
+        'Lab 3: ACL rule review',
+        network_plus_load_lab_intro($repopath, 'lab-3-acl-review', '<p>ACL rule review lab.</p>'),
+        'UT\\{ACL-RULE-30\\}',
+        100
+    );
+} catch (Throwable $e) {
+    echo 'ctfflag_lab3_failed error=' . $e->getMessage() . "\n";
+}
+
 $enrol = enrol_get_plugin('manual');
 if ($enrol) {
     $instances = enrol_get_instances($course->id, true);
@@ -908,21 +1369,7 @@ if ($enrol) {
 }
 
 network_plus_disable_page_module_filters($course);
-rebuild_course_cache((int) $course->id, true);
-filter_manager::reset_caches();
 echo "page_filters_disabled=1\n";
-
-$enrollscript = $repopath . '/scripts/enroll-net009-default-users.php';
-if (is_readable($enrollscript)) {
-    echo "--- default enrolments ---\n";
-    passthru(PHP_BINARY . ' ' . escapeshellarg($enrollscript), $enrollstatus);
-    if ($enrollstatus !== 0) {
-        fwrite(STDERR, "enroll_net009_failed exit={$enrollstatus}\n");
-        exit($enrollstatus);
-    }
-} else {
-    echo "enroll_script_missing path={$enrollscript}\n";
-}
 
 echo "COURSE_PATH=/course/view.php?id={$course->id}\n";
 echo "=== seed complete ===\n";

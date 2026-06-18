@@ -1,0 +1,22 @@
+<div class="ut-lab-content">
+<h3>Scenario: VLAN troubleshooting</h3>
+<p>Pacific Retail Co-op reports that POS terminals on VLAN 120 cannot reach the payment gateway,
+while corporate PCs on VLAN 10 work normally. You have switch output from the access layer.</p>
+
+<h4>Evidence</h4>
+<ul>
+<li><strong>Symptom:</strong> VLAN 120 hosts get DHCP but default gateway unreachable</li>
+<li><strong>Trunk:</strong> Gi1/0/48 allowed VLANs show <code>10,120</code> on Store-A-SW2</li>
+<li><strong>Uplink:</strong> Distribution switch missing VLAN 120 SVI</li>
+<li><strong>Fix ticket:</strong> Create SVI 120 with gateway <code>192.168.120.1/24</code></li>
+</ul>
+
+<h4>Your tasks</h4>
+<ol>
+<li>State whether the issue is Layer 2 trunking or Layer 3 routing.</li>
+<li>Identify the missing component on the distribution switch.</li>
+<li>Submit the lab flag <code>UT{UT-VLAN-120-FIX}</code> after verifying inter-VLAN routing design.</li>
+</ol>
+
+<p><em>Do not share flags in course forums. The AI tutor will not validate flag values for you.</em></p>
+</div>
