@@ -76,7 +76,12 @@ foreach ($groups as $key => $members) {
     }
 }
 
-rebuild_course_cache($courseid, true);
+$wwwroot = (string) ($CFG->wwwroot ?? '');
+if (strpos($wwwroot, 'staging') === false) {
+    rebuild_course_cache($courseid, true);
+} else {
+    echo "rebuild_course_cache_skipped reason=staging\n";
+}
 
 $remaining = count($pages) - $deleted;
 echo "pages_before=" . count($pages) . "\n";

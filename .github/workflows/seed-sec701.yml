@@ -9,7 +9,11 @@ on:
         options: [staging, production]
         default: staging
       skip_cleanup:
-        description: Skip duplicate page/question cleanup before seeding
+        description: Skip duplicate page/question cleanup before seeding (staging defaults to skip)
+        type: boolean
+        default: false
+      verify_only:
+        description: Skip seed; run post-seed verify steps only
         type: boolean
         default: false
 
@@ -47,25 +51,37 @@ jobs:
 
       - name: Seed SEC701 course
         id: seed
+        if: ${{ !inputs.verify_only }}
         env:
-          SKIP_CLEANUP: ${{ inputs.skip_cleanup && '1' || '0' }}
+          TARGET: ${{ inputs.target }}
+          SKIP_CLEANUP_INPUT: ${{ inputs.skip_cleanup && '1' || '0' }}
           SEC701_COURSE_ID: ${{ inputs.target == 'staging' && '2' || '3' }}
         run: |
           set -euo pipefail
+          SKIP_CLEANUP="${SKIP_CLEANUP_INPUT}"
+          if [ "${TARGET}" = "staging" ] && [ "${SKIP_CLEANUP}" != "1" ]; then
+            SKIP_CLEANUP=1
+            echo "skip_cleanup_auto=1 reason=staging_default"
+          fi
+          echo "${SEC701_COURSE_ID}" > /tmp/ut-sec701-course-id-gha
           if [ "${SKIP_CLEANUP}" = "1" ]; then
             echo 1 > /tmp/ut-seed-skip-cleanup-gha
           else
             rm -f /tmp/ut-seed-skip-cleanup-gha
           fi
+          echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] seed_vm_sh_start course_id=${SEC701_COURSE_ID} skip_cleanup=${SKIP_CLEANUP}"
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/seed-security-plus-course-vm.sh"
-          rm -f /tmp/ut-seed-skip-cleanup-gha
+          rm -f /tmp/ut-seed-skip-cleanup-gha /tmp/ut-sec701-course-id-gha
           echo 'seed_security_plus_complete=1'
 
       - name: Fix SEC701 page filters and recycle PHP-FPM
+        env:
+          SEC701_COURSE_ID: ${{ inputs.target == 'staging' && '2' || '3' }}
         run: |
           set -euo pipefail
-          export SEC701_COURSE_ID=${{ inputs.target == 'staging' && '2' || '3' }}
+          echo "${SEC701_COURSE_ID}" > /tmp/ut-sec701-course-id-gha
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/fix-sec701-course-filters-vm.sh"
+          rm -f /tmp/ut-sec701-course-id-gha
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/restart-php-fpm-vm.sh"
 
       - name: Post-seed stabilize (enrol, theme, permissions)
@@ -90,7 +106,9 @@ jobs:
           SEC701_COURSE_ID: ${{ inputs.target == 'staging' && '2' || '3' }}
         run: |
           set -euo pipefail
+          echo "${SEC701_COURSE_ID}" > /tmp/ut-sec701-course-id-gha
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-sec701-launch-scale.sh"
+          rm -f /tmp/ut-sec701-course-id-gha
 
       - name: Disable maintenance mode
         if: success()
@@ -105,8 +123,9 @@ jobs:
           {
             echo "## SEC701 seed summary"
             echo "- Target: ${{ inputs.target }}"
+            echo "- Verify only: ${{ inputs.verify_only }}"
             echo "- Result: ${{ job.status }}"
             echo "- Commit: ${{ github.sha }}"
-            echo "- Skip cleanup: ${{ inputs.skip_cleanup }}"
+            echo "- Skip cleanup: ${{ inputs.skip_cleanup }} (staging auto-skips unless forced via re-run with cleanup)"
             echo "- Workflow: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           } >> "$GITHUB_STEP_SUMMARY"

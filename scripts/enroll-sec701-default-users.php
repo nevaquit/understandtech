@@ -158,7 +158,12 @@ foreach ($usernames as $username) {
     $verifiedusers[] = $user;
 }
 
-purge_all_caches();
+// purge_all_caches() hangs on staging VM; post-deploy uses PHP-FPM restart instead.
+if (strpos((string) $CFG->wwwroot, 'staging') === false) {
+    purge_all_caches();
+} else {
+    echo "purge_caches_skipped reason=staging\n";
+}
 
 $failed = 0;
 foreach ($verifiedusers as $user) {

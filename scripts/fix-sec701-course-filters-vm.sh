@@ -3,6 +3,9 @@ set -euo pipefail
 
 REPO="${REPO:-/opt/understandtech-plugins}"
 
+if [ -f /tmp/ut-sec701-course-id-gha ]; then
+  SEC701_COURSE_ID="$(tr -d '[:space:]' < /tmp/ut-sec701-course-id-gha)"
+fi
 if [ -z "${SEC701_COURSE_ID:-}" ] && [ -f /var/www/moodle/config.php ]; then
   _wwwroot="$(/usr/bin/php -r 'define("CLI_SCRIPT", true); require "/var/www/moodle/config.php"; echo $CFG->wwwroot;' 2>/dev/null || true)"
   if [[ "$_wwwroot" == *staging* ]]; then
