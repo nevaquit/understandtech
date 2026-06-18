@@ -1371,5 +1371,8 @@ if ($enrol) {
 network_plus_disable_page_module_filters($course);
 echo "page_filters_disabled=1\n";
 
+@file_put_contents('/tmp/ut-net009-course-id-gha', (string) $course->id);
+echo "course_id_file_written id={$course->id}\n";
+
 echo "COURSE_PATH=/course/view.php?id={$course->id}\n";
 echo "=== seed complete ===\n";

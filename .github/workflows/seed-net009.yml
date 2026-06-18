@@ -42,11 +42,9 @@ jobs:
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
 
       - name: Seed NET009 course
-        env:
-          NET009_COURSE_ID: ${{ inputs.target == 'staging' && '2' || '3' }}
         run: |
           set -euo pipefail
-          echo "${NET009_COURSE_ID}" > /tmp/ut-net009-course-id-gha
+          rm -f /tmp/ut-net009-course-id-gha
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/seed-network-plus-course-vm.sh"
           echo 'seed_net009_complete=1'
 
@@ -79,11 +77,8 @@ jobs:
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-cert-course-pages.sh"
 
       - name: Verify NET009 launch-scale counts
-        env:
-          NET009_COURSE_ID: ${{ inputs.target == 'staging' && '2' || '3' }}
         run: |
           set -euo pipefail
-          echo "${NET009_COURSE_ID}" > /tmp/ut-net009-course-id-gha
           sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/verify-net009-launch-scale.sh"
 
       - name: Disable maintenance mode

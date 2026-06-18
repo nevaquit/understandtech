@@ -26,11 +26,12 @@ define('CLI_SCRIPT', true);
 require '/var/www/moodle/config.php';
 global \$DB;
 
-\$courseid = (int) getenv('NET009_COURSE_ID');
-if (!\$DB->record_exists('course', ['id' => \$courseid, 'shortname' => 'NET009'])) {
-    fwrite(STDERR, \"verify_net009_launch_scale_failed reason=course_missing id={\$courseid}\n\");
+\$course = \$DB->get_record('course', ['shortname' => 'NET009']);
+if (!\$course) {
+    fwrite(STDERR, \"verify_net009_launch_scale_failed reason=course_missing shortname=NET009\n\");
     exit(1);
 }
+\$courseid = (int) \$course->id;
 
 \$pages = (int) \$DB->count_records_sql(
     \"SELECT COUNT(*) FROM {page} p
