@@ -52,6 +52,11 @@ if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/c
   sudo -u www-data php "${REPO}/scripts/fix-net009-course-filters.php"
 fi
 
+echo "=== Study Coach block (block_studyplan) ==="
+if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";exit(is_dir($CFG->dirroot."/blocks/studyplan")?0:1);' 2>/dev/null; then
+  sudo -u www-data php "${REPO}/scripts/seed-study-plan-block.php"
+fi
+
 # Redis flush + PHP-FPM restart recycle workers after theme/cache changes (purge_caches hangs on VM).
 bash "${REPO}/scripts/restart-php-fpm-vm.sh"
 
