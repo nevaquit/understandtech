@@ -95,6 +95,7 @@ function ut_practice_exam_category_question_ids(int $categoryid, string $prefix)
     global $DB;
 
     $ids = [];
+    $seen = [];
     foreach ($DB->get_records_sql(
         "SELECT q.id, q.name
            FROM {question} q
@@ -106,7 +107,15 @@ function ut_practice_exam_category_question_ids(int $categoryid, string $prefix)
        ORDER BY q.name ASC",
         ['catid' => $categoryid, 'status' => 'ready', 'pattern' => $prefix . '%']
     ) as $row) {
+        $name = (string) $row->name;
+        if (isset($seen[$name])) {
+            continue;
+        }
+        $seen[$name] = true;
         $ids[] = (int) $row->id;
+        if (count($ids) >= 90) {
+            break;
+        }
     }
     return $ids;
 }

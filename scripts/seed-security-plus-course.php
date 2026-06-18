@@ -732,12 +732,26 @@ function security_plus_sync_quiz(stdClass $course, int $sectionnum, string $quiz
  * @param string $giftpath
  * @return int Questions in category after import
  */
-function security_plus_import_gift_unconditional(int $contextid, stdClass $category, string $giftpath): int {
+function security_plus_import_gift_unconditional(
+    int $contextid,
+    stdClass $category,
+    string $giftpath,
+    ?string $skipprefix = null,
+    int $skiptarget = 90
+): int {
     global $DB;
 
     if (!is_readable($giftpath)) {
         echo "gift_missing path={$giftpath}\n";
         return count(security_plus_category_question_ids((int) $category->id));
+    }
+
+    if ($skipprefix !== null && function_exists('ut_practice_exam_category_question_ids')) {
+        $existing = ut_practice_exam_category_question_ids((int) $category->id, $skipprefix);
+        if (count($existing) >= $skiptarget) {
+            echo "gift_skip path={$giftpath} reason=sufficient_existing count=" . count($existing) . "\n";
+            return count(security_plus_category_question_ids((int) $category->id));
+        }
     }
 
     $context = context::instance_by_id($contextid);
@@ -1185,7 +1199,7 @@ if (is_readable($pegift)) {
     try {
         $pecategory = security_plus_get_child_question_category($qcat, 'Practice Exam 1 Bank', 'sec701-pe1-bank');
         echo "practice_exam_category_id={$pecategory->id}\n";
-        security_plus_import_gift_unconditional((int) $context->id, $pecategory, $pegift);
+        security_plus_import_gift_unconditional((int) $context->id, $pecategory, $pegift, 'pe1_q');
         $pequestionids = ut_practice_exam_category_question_ids((int) $pecategory->id, 'pe1_q');
     } catch (Throwable $e) {
         echo 'practice_exam_1_category_failed error=' . $e->getMessage() . ' class=' . get_class($e) . "\n";
@@ -1231,7 +1245,7 @@ for ($examnum = 2; $examnum <= 3; $examnum++) {
                 "Practice Exam {$examnum} Bank",
                 "sec701-pe{$examnum}-bank"
             );
-            security_plus_import_gift_unconditional((int) $context->id, $pecat, $pegiftpath);
+            security_plus_import_gift_unconditional((int) $context->id, $pecat, $pegiftpath, $peprefix);
             $peids = ut_practice_exam_category_question_ids((int) $pecat->id, $peprefix);
         } catch (Throwable $e) {
             echo "practice_exam_{$examnum}_category_failed error=" . $e->getMessage()
@@ -1251,6 +1265,7 @@ for ($examnum = 2; $examnum <= 3; $examnum++) {
     }
 }
 
+echo "labs_block_start\n";
 $lab1intro = security_plus_load_lab_intro(
     $repopath,
     'lab-1-siem-triage',
@@ -1322,21 +1337,7 @@ if ($enrol) {
 }
 
 security_plus_disable_page_module_filters($course);
-rebuild_course_cache((int) $course->id, true);
-filter_manager::reset_caches();
 echo "page_filters_disabled=1\n";
-
-$enrollscript = $repopath . '/scripts/enroll-sec701-default-users.php';
-if (is_readable($enrollscript)) {
-    echo "--- default enrolments ---\n";
-    passthru(PHP_BINARY . ' ' . escapeshellarg($enrollscript), $enrollstatus);
-    if ($enrollstatus !== 0) {
-        fwrite(STDERR, "enroll_sec701_failed exit={$enrollstatus}\n");
-        exit($enrollstatus);
-    }
-} else {
-    echo "enroll_script_missing path={$enrollscript}\n";
-}
 
 echo "COURSE_PATH=/course/view.php?id={$course->id}\n";
 echo "=== seed complete ===\n";

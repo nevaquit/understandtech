@@ -19,7 +19,7 @@ env:
 jobs:
   seed:
     runs-on: [self-hosted, linux, "${{ inputs.target }}"]
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - name: Checkout
         uses: actions/checkout@v4
