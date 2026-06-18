@@ -11,6 +11,9 @@ if [ -z "${SEC701_COURSE_ID:-}" ] && [ -f /var/www/moodle/config.php ]; then
   fi
 fi
 export SEC701_COURSE_ID="${SEC701_COURSE_ID:-3}"
+ut_www_data_php() {
+  sudo -u www-data env SEC701_COURSE_ID="${SEC701_COURSE_ID}" php "$@"
+}
 if [ -f /tmp/ut-seed-skip-cleanup-gha ]; then
   export SKIP_CLEANUP=1
 fi
@@ -36,10 +39,10 @@ if [ -f "${REPO}/scripts/inline-lesson-visuals.php" ]; then
   php "${REPO}/scripts/inline-lesson-visuals.php" || true
 fi
 if [ "${SKIP_CLEANUP:-0}" != "1" ]; then
-  sudo -u www-data php "${REPO}/scripts/cleanup-sec701-duplicate-pages.php"
-  sudo -u www-data php "${REPO}/scripts/cleanup-sec701-duplicate-questions.php"
+  ut_www_data_php "${REPO}/scripts/cleanup-sec701-duplicate-pages.php"
+  ut_www_data_php "${REPO}/scripts/cleanup-sec701-duplicate-questions.php"
 fi
-sudo -u www-data php "${REPO}/scripts/seed-security-plus-course.php"
-sudo -u www-data php "${REPO}/scripts/fix-sec701-course-filters.php"
+ut_www_data_php "${REPO}/scripts/seed-security-plus-course.php"
+ut_www_data_php "${REPO}/scripts/fix-sec701-course-filters.php"
 echo 'seed_purge_caches_deferred=1'
 echo 'seed_security_plus_complete=1'

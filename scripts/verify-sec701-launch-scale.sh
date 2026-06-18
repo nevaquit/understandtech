@@ -10,7 +10,7 @@ if [ -z "${SEC701_COURSE_ID:-}" ] && [ -f /var/www/moodle/config.php ]; then
 fi
 export SEC701_COURSE_ID="${SEC701_COURSE_ID:-3}"
 
-readarray -t COUNTS < <(sudo -u www-data php -r "
+readarray -t COUNTS < <(sudo -u www-data env SEC701_COURSE_ID="${SEC701_COURSE_ID}" php -r "
 define('CLI_SCRIPT', true);
 require '/var/www/moodle/config.php';
 global \$DB;
