@@ -32,11 +32,11 @@ $string['loginwelcomemessage'] = 'Sign in to continue your learning journey.';
 
 // ── Brand colour settings ─────────────────────────────────────────────────────
 $string['brand_navy']          = 'Brand Navy';
-$string['brand_navy_desc']     = 'Primary background and navigation colour. Default: #0B1F3A.';
+$string['brand_navy_desc']     = 'Primary canvas and navigation colour. Default: #0B1F3A (trust anchor).';
 $string['brand_gold']          = 'Brand Gold';
-$string['brand_gold_desc']     = 'Accent, CTA, and highlight colour. Default: #C9A227.';
+$string['brand_gold_desc']     = 'Primary enrollment and submit CTA colour. Default: #C9A227 (~7.4:1 contrast on navy).';
 $string['brand_teal']          = 'Brand Teal';
-$string['brand_teal_desc']     = 'Secondary accent and interactive element colour. Default: #1A8A7D.';
+$string['brand_teal_desc']     = 'Progress bars, readiness signals, and link accent. Default: #1A8A7D.';
 
 // ── Logo & layout settings ────────────────────────────────────────────────────
 $string['custom_logo']         = 'Custom Logo';

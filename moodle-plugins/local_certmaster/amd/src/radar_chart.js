@@ -4,6 +4,8 @@ define(['jquery', 'core/chartjs', 'core/ajax'], function($, ChartJS, Ajax) {
         navy: '#0B1F3A',
         gold: '#C9A227',
         teal: '#1A8A7D',
+        success: '#2DD4A0',
+        tealLight: '#22B5A5',
     };
 
     const POLL_INTERVAL_MS = 45000;

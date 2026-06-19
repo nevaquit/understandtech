@@ -51,7 +51,7 @@
 }
 
 .ut-confidence-option input:checked + .ut-confidence-label {
-    color: #1A8A7D;
+    color: var(--ut-teal-light, #22B5A5);
     font-weight: 600;
 }
 

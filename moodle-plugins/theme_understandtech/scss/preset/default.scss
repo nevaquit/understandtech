@@ -1,10 +1,11 @@
 // =============================================================================
-// UnderstandTech Theme — Main SCSS Preset (Inlined for Moodle scssphp compatibility)
+// UnderstandTech Theme � Main SCSS Preset (Inlined for Moodle scssphp compatibility)
 // All partials are inlined here because Moodle's scssphp compiler does not
 // resolve relative @import paths to subdirectories.
 //
 // Design tokens are also injected via lib.php pre_scss() as SCSS variables
 // before this file is compiled, so $ut-* variables are always available.
+// Regenerate: scripts/rebuild-theme-preset.ps1 (partials -> default.scss)
 // =============================================================================
 
 
@@ -25,35 +26,73 @@
   --ut-fluid-14: #{"clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem)"};
   --ut-fluid-15: #{"clamp(12rem, 40cqw, 20rem)"};
   --ut-fluid-16: #{"clamp(14rem, 45cqw, 24rem)"};
-}
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Design Tokens
-// ─────────────────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------------------
+// Design Tokens (from partials)
+// -----------------------------------------------------------------------------
 
 // =============================================================================
-// UnderstandTech Design Tokens
-// Injected into Boost SCSS compilation via lib.php pre_scss()
+// UnderstandTech Design Tokens — conversion-focused LMS palette
+// Single SCSS source of truth; admin brand colours injected via lib.php pre_scss()
+// Semantic roles: docs/DESIGN.md
 // =============================================================================
 
-// ── Brand Palette ─────────────────────────────────────────────────────────────
+// ── Brand anchors (recognition) ───────────────────────────────────────────────
 $ut-navy-deep:   #071529 !default;
 $ut-navy:        #0B1F3A !default;
-$ut-navy-mid:    #112847 !default;
+$ut-navy-mid:    #0C1E35 !default;
 $ut-surface:     #0F2035 !default;
+$ut-surface-elevated: #152B45 !default;
+$ut-surface-hover:    #1A3554 !default;
 $ut-gold:        #C9A227 !default;
 $ut-gold-light:  #E8C547 !default;
+$ut-gold-hover:  #D4B23A !default;
 $ut-teal:        #1A8A7D !default;
 $ut-teal-light:  #22B5A5 !default;
+$ut-teal-dark:   #157A6E !default;
 $ut-white:       #FFFFFF !default;
-$ut-text-muted:  rgba(255, 255, 255, 0.65) !default;
+
+// ── Semantic colours (WCAG AA on dark surfaces) ───────────────────────────────
+$ut-success:     #2DD4A0 !default;
+$ut-success-bg:  rgba(45, 212, 160, 0.12) !default;
+$ut-warning:     #F5B731 !default;
+$ut-warning-bg:  rgba(245, 183, 49, 0.12) !default;
+$ut-error:       #F07178 !default;
+$ut-error-bg:    rgba(240, 113, 120, 0.12) !default;
+$ut-info:        #5CB8FF !default;
+$ut-info-bg:     rgba(92, 184, 255, 0.12) !default;
+
+// ── Text hierarchy ────────────────────────────────────────────────────────────
+$ut-text-primary:   rgba(255, 255, 255, 0.94) !default;
+$ut-text-secondary: rgba(255, 255, 255, 0.72) !default;
+$ut-text-muted:     rgba(255, 255, 255, 0.55) !default;
+$ut-text-disabled:  rgba(255, 255, 255, 0.38) !default;
+
+// ── Borders (gold-tinted, low opacity) ────────────────────────────────────────
+$ut-border-subtle:  rgba(201, 162, 39, 0.12) !default;
+$ut-border-default: rgba(201, 162, 39, 0.18) !default;
+$ut-border-strong:  rgba(201, 162, 39, 0.32) !default;
+$ut-border-focus:   rgba(201, 162, 39, 0.55) !default;
+
+// ── Action / CTA hierarchy ────────────────────────────────────────────────────
+$ut-action:         $ut-gold !default;
+$ut-action-hover:   $ut-gold-hover !default;
+$ut-action-on:      $ut-navy !default;
+$ut-action-secondary: $ut-teal !default;
+$ut-action-secondary-hover: $ut-teal-light !default;
+$ut-focus-ring:     $ut-gold !default;
+
+// Legacy aliases (post.scss, older partials)
+$ut-brand-navy:  $ut-navy !default;
+$ut-brand-gold:  $ut-gold !default;
+$ut-brand-teal:  $ut-teal !default;
 
 // ── Typography ────────────────────────────────────────────────────────────────
 $ut-font-heading:  'Rajdhani', 'Segoe UI', sans-serif !default;
 $ut-font-body:     'Source Serif 4', Georgia, serif !default;
 $ut-font-mono:     'Share Tech Mono', 'Courier New', monospace !default;
 
-// ── Spacing Scale ─────────────────────────────────────────────────────────────
+// ── Spacing scale (8px base) ──────────────────────────────────────────────────
 $ut-space-xs:    0.25rem !default;
 $ut-space-sm:    0.5rem  !default;
 $ut-space-md:    1rem    !default;
@@ -62,90 +101,93 @@ $ut-space-xl:    2.5rem  !default;
 $ut-space-2xl:   4rem    !default;
 $ut-space-3xl:   6rem    !default;
 
-// ── Border Radius ─────────────────────────────────────────────────────────────
+// ── Border radius ─────────────────────────────────────────────────────────────
 $ut-radius-sm:   0.375rem !default;
 $ut-radius-md:   0.75rem  !default;
 $ut-radius-lg:   1.25rem  !default;
 $ut-radius-pill: 999px    !default;
 
-// ── Shadows ───────────────────────────────────────────────────────────────────
-$ut-shadow-sm:  0 2px 8px  rgba($ut-navy, 0.25) !default;
-$ut-shadow-md:  0 4px 20px rgba($ut-navy, 0.35) !default;
-$ut-shadow-lg:  0 8px 40px rgba($ut-navy, 0.45) !default;
-$ut-shadow-gold: 0 0 0 3px rgba($ut-gold, 0.4)  !default;
+// ── Shadows (surface colour shifts, not heavy drop shadows) ───────────────────
+$ut-shadow-sm:  0 2px 8px  rgba($ut-navy-deep, 0.35) !default;
+$ut-shadow-md:  0 4px 20px rgba($ut-navy-deep, 0.45) !default;
+$ut-shadow-lg:  0 8px 40px rgba($ut-navy-deep, 0.55) !default;
+$ut-shadow-gold: 0 0 0 3px rgba($ut-gold, 0.45) !default;
+$ut-shadow-focus: 0 0 0 3px rgba($ut-gold, 0.35) !default;
 
 // ── Transitions ───────────────────────────────────────────────────────────────
 $ut-transition-fast:   0.15s ease !default;
 $ut-transition-normal: 0.25s ease !default;
 $ut-transition-slow:   0.4s  ease !default;
 
-// ── Z-index Scale ─────────────────────────────────────────────────────────────
+// ── Z-index ───────────────────────────────────────────────────────────────────
 $ut-z-nav:     1000 !default;
 $ut-z-modal:   1050 !default;
 $ut-z-toast:   1100 !default;
 
-// ── Boost Variable Overrides ──────────────────────────────────────────────────
-// These override Bootstrap/Boost defaults before compilation
-$primary:               $ut-teal    !default;
-$secondary:             $ut-gold    !default;
-$body-bg:               $ut-navy    !default;
-$body-color:            $ut-white   !default;
+// ── Boost / Bootstrap overrides ─────────────────────────────────────────────────
+// Primary = gold CTA (highest contrast on navy canvas for enrollment/submit).
+// Secondary = teal (progress, continue learning — does not compete with CTAs).
+$primary:               $ut-gold !default;
+$secondary:             $ut-teal !default;
+$success:               $ut-success !default;
+$warning:               $ut-warning !default;
+$danger:                $ut-error !default;
+$info:                  $ut-info !default;
+$body-bg:               $ut-navy-deep !default;
+$body-color:            $ut-text-primary !default;
 $headings-font-family:  $ut-font-heading !default;
-$headings-font-weight:  700         !default;
-$headings-color:        $ut-white   !default;
+$headings-font-weight:  700 !default;
+$headings-color:        $ut-white !default;
 $font-family-base:      $ut-font-body !default;
-$font-size-base:        1rem        !default;
-$line-height-base:      1.65        !default;
+$font-size-base:        1rem !default;
+$line-height-base:      1.65 !default;
 $card-border-radius:    $ut-radius-md !default;
 $card-bg:               $ut-surface !default;
-$card-border-color:     rgba($ut-gold, 0.15) !default;
+$card-border-color:     $ut-border-default !default;
 $link-color:            $ut-teal-light !default;
-$link-hover-color:      $ut-gold    !default;
-$navbar-dark-color:     rgba($ut-white, 0.85) !default;
-$navbar-dark-hover-color: $ut-gold  !default;
+$link-hover-color:      $ut-gold !default;
+$navbar-dark-color:     $ut-text-secondary !default;
+$navbar-dark-hover-color: $ut-gold !default;
 $navbar-dark-active-color: $ut-gold !default;
-$navbar-dark-bg:        $ut-navy    !default;
+$navbar-dark-bg:        $ut-navy-deep !default;
 $input-bg:              $ut-navy-mid !default;
-$input-color:           $ut-white   !default;
-$input-border-color:    rgba($ut-gold, 0.3) !default;
+$input-color:           $ut-text-primary !default;
+$input-border-color:    $ut-border-strong !default;
 $input-focus-border-color: $ut-gold !default;
 $input-focus-box-shadow: $ut-shadow-gold !default;
 $input-placeholder-color: $ut-text-muted !default;
 $btn-border-radius:     $ut-radius-sm !default;
 $btn-font-family:       $ut-font-heading !default;
-$btn-font-weight:       600         !default;
-$btn-letter-spacing:    0.08em      !default;
-$table-color:           $ut-white   !default;
+$btn-font-weight:       600 !default;
+$btn-letter-spacing:    0.08em !default;
+$table-color:           $ut-text-primary !default;
 $table-bg:              transparent !default;
-$table-border-color:    rgba($ut-gold, 0.15) !default;
-$modal-content-bg:      $ut-surface !default;
-$modal-content-color:   $ut-white   !default;
-$dropdown-bg:           $ut-surface !default;
-$dropdown-color:        $ut-white   !default;
-$dropdown-link-color:   $ut-white   !default;
-$dropdown-link-hover-bg: rgba($ut-gold, 0.12) !default;
+$table-border-color:    $ut-border-default !default;
+$modal-content-bg:      $ut-surface-elevated !default;
+$modal-content-color:   $ut-text-primary !default;
+$dropdown-bg:           $ut-surface-elevated !default;
+$dropdown-color:        $ut-text-primary !default;
+$dropdown-link-color:   $ut-text-primary !default;
+$dropdown-link-hover-bg: rgba($ut-gold, 0.1) !default;
 $dropdown-link-hover-color: $ut-gold !default;
 $pagination-bg:         $ut-surface !default;
-$pagination-color:      $ut-white   !default;
-$pagination-border-color: rgba($ut-gold, 0.2) !default;
-$pagination-hover-bg:   rgba($ut-gold, 0.12) !default;
-$pagination-active-bg:  $ut-gold    !default;
-$pagination-active-color: $ut-navy  !default;
-$alert-bg-level:        -10         !default;
-$alert-border-level:    -9          !default;
-$alert-color-level:     6           !default;
+$pagination-color:      $ut-text-primary !default;
+$pagination-border-color: $ut-border-default !default;
+$pagination-hover-bg:   rgba($ut-gold, 0.1) !default;
+$pagination-active-bg:  $ut-gold !default;
+$pagination-active-color: $ut-navy !default;
+$alert-bg-level:        -10 !default;
+$alert-border-level:    -9 !default;
+$alert-color-level:     6 !default;
 $breadcrumb-bg:         transparent !default;
 $breadcrumb-divider-color: $ut-text-muted !default;
-$breadcrumb-active-color: $ut-gold  !default;
-$progress-bg:           rgba($ut-navy-mid, 0.5) !default;
-$progress-bar-bg:       $ut-teal    !default;
-$tooltip-bg:            $ut-navy-deep !default;
-$tooltip-color:         $ut-white   !default;
-$badge-font-weight:     600         !default;
+$breadcrumb-active-color: $ut-gold !default;
+$progress-bg:           rgba($ut-navy-mid, 0.65) !default;
+$progress-bar-bg:       $ut-teal !default;
+$tooltip-bg:            $ut-surface-elevated !default;
+$tooltip-color:         $ut-text-primary !default;
+$badge-font-weight:     600 !default;
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Accessibility
-// ─────────────────────────────────────────────────────────────────────────────
 
 // =============================================================================
 // UnderstandTech Accessibility Overrides
@@ -153,6 +195,7 @@ $badge-font-weight:     600         !default;
 // =============================================================================
 
 // ── 1. Skip-to-content link ───────────────────────────────────────────────────
+// Shared by theme templates (.ut-skip-link) and Moodle core (.sr-only-focusable).
 @mixin ut-skip-link-styles {
     position: absolute;
     top: -100%;
@@ -194,7 +237,7 @@ a.sr-only-focusable[href="#maincontent"] {
 }
 
 *:focus-visible {
-    outline: 3px solid $ut-gold;
+    outline: 3px solid $ut-focus-ring;
     outline-offset: 3px;
     border-radius: $ut-radius-sm;
 }
@@ -293,21 +336,20 @@ a:focus-visible {
 // surface tokens when the OS is in dark mode to prevent navy-on-navy text
 @media (prefers-color-scheme: dark) {
     :root {
-        --ut-surface-elevated: #1a2f4a;
-        --ut-border-subtle: rgba(201, 162, 39, 0.2);
+        --ut-surface-elevated: #{$ut-surface-elevated};
+        --ut-border-subtle: #{$ut-border-subtle};
     }
 
     .card,
     .block,
     .ut-surface {
-        background-color: var(--ut-surface-elevated, #1a2f4a);
-        border-color: var(--ut-border-subtle, rgba(201, 162, 39, 0.2));
+        background-color: var(--ut-surface-elevated, #{$ut-surface-elevated});
+        border-color: var(--ut-border-subtle, #{$ut-border-subtle});
     }
 
-    // Ensure muted text is still readable against dark surfaces
     .text-muted,
     .ut-text-muted {
-        color: rgba(255, 255, 255, 0.75) !important;
+        color: var(--ut-text-muted, #{$ut-text-muted}) !important;
     }
 }
 
@@ -339,9 +381,6 @@ a:focus-visible {
     }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Navigation
-// ─────────────────────────────────────────────────────────────────────────────
 
 // =============================================================================
 // UnderstandTech Navigation
@@ -447,6 +486,20 @@ a:focus-visible {
 }
 
 // ── CTA Button in Nav ─────────────────────────────────────────────────────────
+.ut-user-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: $ut-teal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: $ut-white;
+    border: 2px solid rgba($ut-gold, 0.4);
+}
+
 .ut-nav-cta {
     font-family: $ut-font-heading;
     font-weight: 700;
@@ -610,9 +663,600 @@ a:focus-visible {
     }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Components
-// ─────────────────────────────────────────────────────────────────────────────
+
+// =============================================================================
+// UnderstandTech Layout
+// Page-level layout: hero, sections, dashboard, login, footer
+// =============================================================================
+
+// ── Global Page Shell ─────────────────────────────────────────────────────────
+body {
+    font-family: $ut-font-body;
+    background-color: $ut-navy;
+    color: $ut-white;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#page-wrapper,
+#page {
+    background: $ut-navy;
+}
+
+// ── Typography ────────────────────────────────────────────────────────────────
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: $ut-font-heading;
+    font-weight: 700;
+    line-height: 1.15;
+    color: $ut-white;
+}
+
+.ut-eyebrow {
+    font-family: $ut-font-heading;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $ut-gold;
+    display: block;
+    margin-bottom: $ut-space-md;
+}
+
+.ut-accent { color: $ut-gold; }
+.ut-accent-teal { color: $ut-teal-light; }
+.ut-text-muted { color: $ut-text-muted; }
+
+// ── Container ─────────────────────────────────────────────────────────────────
+.ut-container {
+    width: 100%;
+    max-width: 75rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 4vw, 2rem);
+    padding-right: clamp(1rem, 4vw, 2rem);
+}
+
+// ── Sections ─────────────────────────────────────────────────────────────────
+.ut-section {
+    padding: clamp(3rem, 8vw, 6rem) 0;
+}
+
+.ut-section-sm {
+    padding: clamp(2rem, 5vw, 3.5rem) 0;
+}
+
+.ut-section-dark {
+    background: $ut-navy-deep;
+}
+
+.ut-section-surface {
+    background: $ut-surface;
+}
+
+.ut-section-header {
+    text-align: center;
+    max-width: 52rem;
+    margin: 0 auto clamp(2.5rem, 6vw, 4rem);
+
+    h2 {
+        font-size: clamp(1.75rem, 1.25rem + 2.5vw, 3rem);
+        margin-bottom: $ut-space-md;
+    }
+
+    p {
+        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+        color: $ut-text-muted;
+        max-width: 48ch;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+// ── Hero ─────────────────────────────────────────────────────────────────────
+.ut-hero {
+    position: relative;
+    min-height: calc(100vh - 4rem);
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba($ut-teal, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba($ut-gold, 0.06) 0%, transparent 50%),
+        linear-gradient(160deg, $ut-navy-deep 0%, $ut-navy 100%);
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba($ut-gold, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba($ut-gold, 0.03) 1px, transparent 1px);
+        background-size: 4rem 4rem;
+        pointer-events: none;
+    }
+}
+
+.ut-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+    padding: clamp(3rem, 8vw, 6rem) 0;
+
+    @media (max-width: 991.98px) {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+.ut-hero-content {
+    h1 {
+        font-size: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+        line-height: 1.05;
+        margin-bottom: $ut-space-lg;
+    }
+
+    p {
+        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+        color: $ut-text-muted;
+        max-width: 44ch;
+        margin-bottom: $ut-space-xl;
+        line-height: 1.65;
+
+        @media (max-width: 991.98px) {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+
+.ut-hero-cta-group {
+    display: flex;
+    gap: $ut-space-md;
+    flex-wrap: wrap;
+
+    @media (max-width: 991.98px) {
+        justify-content: center;
+    }
+}
+
+.ut-hero-trust {
+    display: flex;
+    gap: $ut-space-lg;
+    margin-top: $ut-space-xl;
+    flex-wrap: wrap;
+
+    @media (max-width: 991.98px) {
+        justify-content: center;
+    }
+
+    .ut-trust-item {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-family: $ut-font-heading;
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        color: $ut-text-muted;
+
+        &::before {
+            content: '✓';
+            color: $ut-teal-light;
+            font-weight: 700;
+        }
+    }
+}
+
+// ── Dashboard Widget ─────────────────────────────────────────────────────────
+.ut-dashboard-widget {
+    background: rgba($ut-surface, 0.9);
+    border: 1px solid rgba($ut-gold, 0.2);
+    border-radius: $ut-radius-lg;
+    padding: $ut-space-lg;
+    backdrop-filter: blur(8px);
+    box-shadow: $ut-shadow-lg;
+
+    .ut-widget-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: $ut-space-lg;
+        font-family: $ut-font-heading;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: $ut-text-muted;
+    }
+
+    .ut-live-badge {
+        background: rgba($ut-teal, 0.15);
+        color: $ut-teal-light;
+        border: 1px solid rgba($ut-teal, 0.3);
+        padding: 0.2rem 0.5rem;
+        border-radius: $ut-radius-pill;
+        font-size: 0.625rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .ut-progress-row {
+        margin-bottom: $ut-space-md;
+
+        .ut-progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-family: $ut-font-heading;
+            font-size: 0.8125rem;
+            color: rgba($ut-white, 0.85);
+            margin-bottom: 0.375rem;
+        }
+
+        .ut-progress-pct {
+            color: $ut-gold;
+            font-weight: 700;
+        }
+    }
+
+    .ut-widget-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: $ut-space-lg;
+        padding-top: $ut-space-md;
+        border-top: 1px solid rgba($ut-gold, 0.1);
+
+        .ut-widget-stat {
+            .ut-widget-stat-label {
+                font-family: $ut-font-heading;
+                font-size: 0.625rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: $ut-text-muted;
+                display: block;
+            }
+
+            .ut-widget-stat-value {
+                font-family: $ut-font-heading;
+                font-weight: 700;
+                font-size: 1.125rem;
+                color: $ut-gold;
+            }
+        }
+    }
+}
+
+// ── Dashboard Grid ────────────────────────────────────────────────────────────
+.ut-dashboard-cards {
+    container-type: inline-size;
+    container-name: dashboard;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(14rem, 40cqw, 20rem), 1fr));
+    gap: $ut-space-md;
+
+    .card {
+        border: none;
+        border-top: 3px solid $ut-teal;
+        background: $ut-surface;
+        transition: transform $ut-transition-fast;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+
+    .card-title {
+        color: $ut-white;
+        font-family: $ut-font-heading;
+        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+    }
+}
+
+// ── Login Page ────────────────────────────────────────────────────────────────
+#page-login-index {
+    background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba($ut-teal, 0.08) 0%, transparent 60%),
+        linear-gradient(160deg, $ut-navy-deep 0%, $ut-navy 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    #page {
+        background: transparent;
+        min-height: 100vh;
+        width: 100%;
+    }
+
+    #region-main-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: $ut-space-xl $ut-space-md;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 28rem;
+        background: $ut-surface;
+        border: 1px solid rgba($ut-gold, 0.2);
+        border-top: 4px solid $ut-gold;
+        border-radius: $ut-radius-lg;
+        padding: $ut-space-2xl;
+        box-shadow: $ut-shadow-lg;
+    }
+
+    .ut-login-logo {
+        text-align: center;
+        margin-bottom: $ut-space-xl;
+
+        img, svg {
+            height: 3rem;
+            width: auto;
+        }
+    }
+
+    .ut-login-heading {
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-align: center;
+        color: $ut-white;
+        margin-bottom: $ut-space-xs;
+    }
+
+    .ut-login-subheading {
+        text-align: center;
+        color: $ut-text-muted;
+        font-size: 0.875rem;
+        margin-bottom: $ut-space-xl;
+    }
+
+    .form-control {
+        background: rgba($ut-navy-mid, 0.8);
+        border-color: rgba($ut-gold, 0.25);
+        color: $ut-white;
+        border-radius: $ut-radius-sm;
+
+        &::placeholder {
+            color: $ut-text-muted;
+        }
+
+        &:focus {
+            background: $ut-navy-mid;
+            border-color: $ut-gold;
+            box-shadow: $ut-shadow-gold;
+            color: $ut-white;
+        }
+    }
+
+    .btn-primary {
+        background: $ut-gold;
+        border-color: $ut-gold;
+        color: $ut-navy;
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        width: 100%;
+        padding: 0.75rem;
+
+        &:hover {
+            background: $ut-gold-light;
+            border-color: $ut-gold-light;
+            color: $ut-navy;
+        }
+    }
+
+    .ut-login-links {
+        text-align: center;
+        margin-top: $ut-space-lg;
+
+        a {
+            color: $ut-teal-light;
+            font-size: 0.875rem;
+            text-decoration: none;
+
+            &:hover {
+                color: $ut-gold;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────────
+#page-footer,
+.ut-footer {
+    background: $ut-navy-deep;
+    border-top: 1px solid rgba($ut-gold, 0.12);
+    padding: clamp(2.5rem, 6vw, 4rem) 0 $ut-space-xl;
+    color: $ut-text-muted;
+    font-size: 0.875rem;
+
+    .ut-footer-grid {
+        display: grid;
+        grid-template-columns: 2fr repeat(3, 1fr);
+        gap: $ut-space-2xl;
+        margin-bottom: $ut-space-2xl;
+
+        @media (max-width: 767.98px) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 479.98px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .ut-footer-brand {
+        .ut-footer-logo {
+            font-family: $ut-font-heading;
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: $ut-white;
+            margin-bottom: $ut-space-md;
+            display: block;
+
+            span { color: $ut-gold; }
+        }
+
+        p {
+            line-height: 1.65;
+            max-width: 28ch;
+        }
+    }
+
+    .ut-footer-col-title {
+        font-family: $ut-font-heading;
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: $ut-white;
+        margin-bottom: $ut-space-md;
+    }
+
+    .ut-footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin-bottom: $ut-space-sm;
+        }
+
+        a {
+            color: $ut-text-muted;
+            text-decoration: none;
+            transition: color $ut-transition-fast;
+
+            &:hover {
+                color: $ut-gold;
+            }
+        }
+    }
+
+    .ut-footer-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: $ut-space-lg;
+        border-top: 1px solid rgba($ut-gold, 0.08);
+        flex-wrap: wrap;
+        gap: $ut-space-md;
+        font-size: 0.8125rem;
+
+        .ut-footer-legal {
+            display: flex;
+            gap: $ut-space-lg;
+
+            a {
+                color: $ut-text-muted;
+                text-decoration: none;
+
+                &:hover {
+                    color: $ut-gold;
+                }
+            }
+        }
+    }
+}
+
+// ── Moodle Skool Layout ───────────────────────────────────────────────────────
+.ut-skool-enabled .ut-skool-layout {
+    .ut-lesson-grid {
+        display: grid;
+        grid-template-columns: 1fr 20rem;
+        gap: $ut-space-lg;
+        container-type: inline-size;
+        container-name: lesson;
+
+        @media (max-width: 991.98px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .ut-lesson-content {
+        background: $ut-surface;
+        border-radius: $ut-radius-md;
+        border: 1px solid rgba($ut-gold, 0.1);
+        padding: $ut-space-xl;
+    }
+
+    .ut-lesson-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: $ut-space-md;
+    }
+
+    .ut-lesson-nav {
+        background: $ut-surface;
+        border: 1px solid rgba($ut-gold, 0.1);
+        border-radius: $ut-radius-md;
+        padding: $ut-space-md;
+    }
+}
+
+@container lesson (max-width: 48rem) {
+    .ut-skool-enabled .ut-skool-layout .ut-lesson-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ── Community Feed ────────────────────────────────────────────────────────────
+.ut-community-feed {
+    .ut-feed-item {
+        border-left: 3px solid $ut-gold;
+        padding-left: $ut-space-md;
+        margin-bottom: $ut-space-md;
+        padding-bottom: $ut-space-md;
+        border-bottom: 1px solid rgba($ut-gold, 0.06);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+// ── Exam Readiness Block ──────────────────────────────────────────────────────
+.block-examreadiness {
+    container-type: inline-size;
+    container-name: readiness;
+
+    .block-examreadiness-score .display-6 {
+        font-family: $ut-font-heading;
+        color: $ut-gold;
+        font-size: clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem);
+    }
+
+    .block-examreadiness-radar {
+        width: 100%;
+        max-height: clamp(12rem, 40cqw, 20rem);
+    }
+
+    .block-examreadiness-misconceptions li {
+        padding: $ut-space-sm 0;
+        border-bottom: 1px solid rgba($ut-gold, 0.06);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+@container readiness (min-width: 20rem) {
+    .block-examreadiness-radar {
+        max-height: clamp(14rem, 45cqw, 24rem);
+    }
+}
+
 
 // =============================================================================
 // UnderstandTech Components
@@ -692,34 +1336,87 @@ a:focus-visible {
     }
 }
 
-// Boost .btn-primary override
+// Boost .btn-primary — gold enrollment / submit CTA (highest contrast on navy).
 .btn-primary {
-    background-color: $ut-teal;
-    border-color: $ut-teal;
+    background-color: $ut-action;
+    border-color: $ut-action;
+    color: $ut-action-on;
     font-family: $ut-font-heading;
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
 
     &:hover,
-    &:focus {
-        background-color: $ut-teal-light;
-        border-color: $ut-teal-light;
+    &:focus,
+    &:active {
+        background-color: $ut-action-hover;
+        border-color: $ut-action-hover;
+        color: $ut-action-on;
+        box-shadow: 0 4px 16px rgba($ut-gold, 0.3);
     }
 }
 
+// Secondary — teal for continue/progress actions (does not compete with gold CTAs).
 .btn-secondary {
-    background-color: $ut-gold;
-    border-color: $ut-gold;
-    color: $ut-navy;
+    background-color: $ut-action-secondary;
+    border-color: $ut-action-secondary;
+    color: $ut-white;
     font-family: $ut-font-heading;
     font-weight: 600;
     letter-spacing: 0.06em;
 
     &:hover,
-    &:focus {
-        background-color: $ut-gold-light;
-        border-color: $ut-gold-light;
-        color: $ut-navy;
+    &:focus,
+    &:active {
+        background-color: $ut-action-secondary-hover;
+        border-color: $ut-action-secondary-hover;
+        color: $ut-white;
+    }
+}
+
+// Moodle / Bootstrap badge utilities used by blocks (exam readiness, study plan).
+.badge.bg-teal,
+.bg-teal.badge {
+    background-color: rgba($ut-teal, 0.22) !important;
+    color: $ut-teal-light !important;
+    border: 1px solid rgba($ut-teal, 0.4);
+}
+
+.badge.bg-navy,
+.bg-navy.badge {
+    background-color: rgba($ut-navy-mid, 0.85) !important;
+    color: $ut-text-secondary !important;
+    border: 1px solid $ut-border-default;
+}
+
+.badge.bg-primary {
+    background-color: rgba($ut-teal, 0.2) !important;
+    color: $ut-teal-light !important;
+    border: 1px solid rgba($ut-teal, 0.35);
+}
+
+.badge.bg-secondary {
+    background-color: rgba($ut-gold, 0.15) !important;
+    color: $ut-gold-light !important;
+    border: 1px solid rgba($ut-gold, 0.35);
+}
+
+.badge.bg-light.text-dark {
+    background-color: rgba($ut-surface-hover, 0.9) !important;
+    color: $ut-text-secondary !important;
+    border: 1px solid $ut-border-subtle;
+}
+
+// Study plan block — readiness/progress emphasis.
+.block-studyplan {
+    .block-studyplan-activity {
+        border-bottom-color: $ut-border-subtle !important;
+    }
+
+    .block-studyplan-activity .fw-semibold {
+        color: $ut-text-primary;
+        font-family: $ut-font-heading;
     }
 }
 
@@ -768,7 +1465,7 @@ a:focus-visible {
     .ut-card-title {
         font-family: $ut-font-heading;
         font-weight: 700;
-        font-size: var(--ut-fluid-1);
+        font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
         color: $ut-white;
         margin-bottom: $ut-space-sm;
     }
@@ -830,7 +1527,7 @@ a:focus-visible {
     .ut-cert-title {
         font-family: $ut-font-heading;
         font-weight: 700;
-        font-size: var(--ut-fluid-2);
+        font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
         color: $ut-navy;
         margin-bottom: $ut-space-sm;
     }
@@ -1004,7 +1701,7 @@ a:focus-visible {
         display: block;
         font-family: $ut-font-heading;
         font-weight: 700;
-        font-size: var(--ut-fluid-3);
+        font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
         color: $ut-gold;
         line-height: 1;
         margin-bottom: 0.25rem;
@@ -1121,572 +1818,9 @@ code.hljs {
     padding: 0.2em 0.4em;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Layout
-// ─────────────────────────────────────────────────────────────────────────────
 
-// =============================================================================
-// UnderstandTech Layout
-// Page-level layout: hero, sections, dashboard, login, footer
-// =============================================================================
 
-// ── Global Page Shell ─────────────────────────────────────────────────────────
-body {
-    font-family: $ut-font-body;
-    background-color: $ut-navy;
-    color: $ut-white;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-#page-wrapper,
-#page {
-    background: $ut-navy;
-}
-
-// ── Typography ────────────────────────────────────────────────────────────────
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: $ut-font-heading;
-    font-weight: 700;
-    line-height: 1.15;
-    color: $ut-white;
-}
-
-.ut-eyebrow {
-    font-family: $ut-font-heading;
-    font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: $ut-gold;
-    display: block;
-    margin-bottom: $ut-space-md;
-}
-
-.ut-accent { color: $ut-gold; }
-.ut-accent-teal { color: $ut-teal-light; }
-.ut-text-muted { color: $ut-text-muted; }
-
-// ── Container ─────────────────────────────────────────────────────────────────
-.ut-container {
-    width: 100%;
-    max-width: 75rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--ut-fluid-4);
-    padding-right: var(--ut-fluid-4);
-}
-
-// ── Sections ─────────────────────────────────────────────────────────────────
-.ut-section {
-    padding: var(--ut-fluid-5) 0;
-}
-
-.ut-section-sm {
-    padding: var(--ut-fluid-6) 0;
-}
-
-.ut-section-dark {
-    background: $ut-navy-deep;
-}
-
-.ut-section-surface {
-    background: $ut-surface;
-}
-
-.ut-section-header {
-    text-align: center;
-    max-width: 52rem;
-    margin: 0 auto var(--ut-fluid-7);
-
-    h2 {
-        font-size: var(--ut-fluid-8);
-        margin-bottom: $ut-space-md;
-    }
-
-    p {
-        font-size: var(--ut-fluid-9);
-        color: $ut-text-muted;
-        max-width: 48ch;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-// ── Hero ─────────────────────────────────────────────────────────────────────
-.ut-hero {
-    position: relative;
-    min-height: calc(100vh - 4rem);
-    display: flex;
-    align-items: center;
-    background:
-        radial-gradient(ellipse 80% 60% at 70% 50%, rgba($ut-teal, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 20% 80%, rgba($ut-gold, 0.06) 0%, transparent 50%),
-        linear-gradient(160deg, $ut-navy-deep 0%, $ut-navy 100%);
-    overflow: hidden;
-
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image:
-            linear-gradient(rgba($ut-gold, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba($ut-gold, 0.03) 1px, transparent 1px);
-        background-size: 4rem 4rem;
-        pointer-events: none;
-    }
-}
-
-.ut-hero-inner {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--ut-fluid-10);
-    align-items: center;
-    padding: var(--ut-fluid-5) 0;
-
-    @media (max-width: 991.98px) {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-}
-
-.ut-hero-content {
-    h1 {
-        font-size: var(--ut-fluid-11);
-        line-height: 1.05;
-        margin-bottom: $ut-space-lg;
-    }
-
-    p {
-        font-size: var(--ut-fluid-12);
-        color: $ut-text-muted;
-        max-width: 44ch;
-        margin-bottom: $ut-space-xl;
-        line-height: 1.65;
-
-        @media (max-width: 991.98px) {
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-}
-
-.ut-hero-cta-group {
-    display: flex;
-    gap: $ut-space-md;
-    flex-wrap: wrap;
-
-    @media (max-width: 991.98px) {
-        justify-content: center;
-    }
-}
-
-.ut-hero-trust {
-    display: flex;
-    gap: $ut-space-lg;
-    margin-top: $ut-space-xl;
-    flex-wrap: wrap;
-
-    @media (max-width: 991.98px) {
-        justify-content: center;
-    }
-
-    .ut-trust-item {
-        display: flex;
-        align-items: center;
-        gap: 0.375rem;
-        font-family: $ut-font-heading;
-        font-size: 0.75rem;
-        letter-spacing: 0.06em;
-        color: $ut-text-muted;
-
-        &::before {
-            content: '✓';
-            color: $ut-teal-light;
-            font-weight: 700;
-        }
-    }
-}
-
-// ── Dashboard Widget ─────────────────────────────────────────────────────────
-.ut-dashboard-widget {
-    background: rgba($ut-surface, 0.9);
-    border: 1px solid rgba($ut-gold, 0.2);
-    border-radius: $ut-radius-lg;
-    padding: $ut-space-lg;
-    backdrop-filter: blur(8px);
-    box-shadow: $ut-shadow-lg;
-
-    .ut-widget-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: $ut-space-lg;
-        font-family: $ut-font-heading;
-        font-size: 0.75rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: $ut-text-muted;
-    }
-
-    .ut-live-badge {
-        background: rgba($ut-teal, 0.15);
-        color: $ut-teal-light;
-        border: 1px solid rgba($ut-teal, 0.3);
-        padding: 0.2rem 0.5rem;
-        border-radius: $ut-radius-pill;
-        font-size: 0.625rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        font-weight: 700;
-    }
-
-    .ut-progress-row {
-        margin-bottom: $ut-space-md;
-
-        .ut-progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-family: $ut-font-heading;
-            font-size: 0.8125rem;
-            color: rgba($ut-white, 0.85);
-            margin-bottom: 0.375rem;
-        }
-
-        .ut-progress-pct {
-            color: $ut-gold;
-            font-weight: 700;
-        }
-    }
-
-    .ut-widget-footer {
-        display: flex;
-        justify-content: space-between;
-        margin-top: $ut-space-lg;
-        padding-top: $ut-space-md;
-        border-top: 1px solid rgba($ut-gold, 0.1);
-
-        .ut-widget-stat {
-            .ut-widget-stat-label {
-                font-family: $ut-font-heading;
-                font-size: 0.625rem;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: $ut-text-muted;
-                display: block;
-            }
-
-            .ut-widget-stat-value {
-                font-family: $ut-font-heading;
-                font-weight: 700;
-                font-size: 1.125rem;
-                color: $ut-gold;
-            }
-        }
-    }
-}
-
-// ── Dashboard Grid ────────────────────────────────────────────────────────────
-.ut-dashboard-cards {
-    container-type: inline-size;
-    container-name: dashboard;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(var(--ut-fluid-13), 1fr));
-    gap: $ut-space-md;
-
-    .card {
-        border: none;
-        border-top: 3px solid $ut-teal;
-        background: $ut-surface;
-        transition: transform $ut-transition-fast;
-
-        &:hover {
-            transform: translateY(-2px);
-        }
-    }
-
-    .card-title {
-        color: $ut-white;
-        font-family: $ut-font-heading;
-        font-size: var(--ut-fluid-12);
-    }
-}
-
-// ── Login Page ────────────────────────────────────────────────────────────────
-#page-login-index {
-    background:
-        radial-gradient(ellipse 80% 60% at 70% 50%, rgba($ut-teal, 0.08) 0%, transparent 60%),
-        linear-gradient(160deg, $ut-navy-deep 0%, $ut-navy 100%);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    #page {
-        background: transparent;
-        min-height: 100vh;
-        width: 100%;
-    }
-
-    #region-main-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: $ut-space-xl $ut-space-md;
-    }
-
-    .login-container {
-        width: 100%;
-        max-width: 28rem;
-        background: $ut-surface;
-        border: 1px solid rgba($ut-gold, 0.2);
-        border-top: 4px solid $ut-gold;
-        border-radius: $ut-radius-lg;
-        padding: $ut-space-2xl;
-        box-shadow: $ut-shadow-lg;
-    }
-
-    .ut-login-logo {
-        text-align: center;
-        margin-bottom: $ut-space-xl;
-
-        img, svg {
-            height: 3rem;
-            width: auto;
-        }
-    }
-
-    .ut-login-heading {
-        font-family: $ut-font-heading;
-        font-weight: 700;
-        font-size: 1.5rem;
-        text-align: center;
-        color: $ut-white;
-        margin-bottom: $ut-space-xs;
-    }
-
-    .ut-login-subheading {
-        text-align: center;
-        color: $ut-text-muted;
-        font-size: 0.875rem;
-        margin-bottom: $ut-space-xl;
-    }
-
-    .form-control {
-        background: rgba($ut-navy-mid, 0.8);
-        border-color: rgba($ut-gold, 0.25);
-        color: $ut-white;
-        border-radius: $ut-radius-sm;
-
-        &::placeholder {
-            color: $ut-text-muted;
-        }
-
-        &:focus {
-            background: $ut-navy-mid;
-            border-color: $ut-gold;
-            box-shadow: $ut-shadow-gold;
-            color: $ut-white;
-        }
-    }
-
-    .btn-primary {
-        background: $ut-gold;
-        border-color: $ut-gold;
-        color: $ut-navy;
-        font-family: $ut-font-heading;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        width: 100%;
-        padding: 0.75rem;
-
-        &:hover {
-            background: $ut-gold-light;
-            border-color: $ut-gold-light;
-            color: $ut-navy;
-        }
-    }
-
-    .ut-login-links {
-        text-align: center;
-        margin-top: $ut-space-lg;
-
-        a {
-            color: $ut-teal-light;
-            font-size: 0.875rem;
-            text-decoration: none;
-
-            &:hover {
-                color: $ut-gold;
-                text-decoration: underline;
-            }
-        }
-    }
-}
-
-// ── Footer ────────────────────────────────────────────────────────────────────
-#page-footer,
-.ut-footer {
-    background: $ut-navy-deep;
-    border-top: 1px solid rgba($ut-gold, 0.12);
-    padding: var(--ut-fluid-7) 0 $ut-space-xl;
-    color: $ut-text-muted;
-    font-size: 0.875rem;
-
-    .ut-footer-grid {
-        display: grid;
-        grid-template-columns: 2fr repeat(3, 1fr);
-        gap: $ut-space-2xl;
-        margin-bottom: $ut-space-2xl;
-
-        @media (max-width: 767.98px) {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        @media (max-width: 479.98px) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .ut-footer-brand {
-        .ut-footer-logo {
-            font-family: $ut-font-heading;
-            font-weight: 700;
-            font-size: 1.125rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: $ut-white;
-            margin-bottom: $ut-space-md;
-            display: block;
-
-            span { color: $ut-gold; }
-        }
-
-        p {
-            line-height: 1.65;
-            max-width: 28ch;
-        }
-    }
-
-    .ut-footer-col-title {
-        font-family: $ut-font-heading;
-        font-weight: 700;
-        font-size: 0.75rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: $ut-white;
-        margin-bottom: $ut-space-md;
-    }
-
-    .ut-footer-links {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-
-        li {
-            margin-bottom: $ut-space-sm;
-        }
-
-        a {
-            color: $ut-text-muted;
-            text-decoration: none;
-            transition: color $ut-transition-fast;
-
-            &:hover {
-                color: $ut-gold;
-            }
-        }
-    }
-
-    .ut-footer-bottom {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: $ut-space-lg;
-        border-top: 1px solid rgba($ut-gold, 0.08);
-        flex-wrap: wrap;
-        gap: $ut-space-md;
-        font-size: 0.8125rem;
-
-        .ut-footer-legal {
-            display: flex;
-            gap: $ut-space-lg;
-
-            a {
-                color: $ut-text-muted;
-                text-decoration: none;
-
-                &:hover {
-                    color: $ut-gold;
-                }
-            }
-        }
-    }
-}
-
-// ── Moodle Skool Layout ───────────────────────────────────────────────────────
-.ut-skool-enabled .ut-skool-layout {
-    .ut-lesson-grid {
-        display: grid;
-        grid-template-columns: 1fr 20rem;
-        gap: $ut-space-lg;
-        container-type: inline-size;
-        container-name: lesson;
-
-        @media (max-width: 991.98px) {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .ut-lesson-content {
-        background: $ut-surface;
-        border-radius: $ut-radius-md;
-        border: 1px solid rgba($ut-gold, 0.1);
-        padding: $ut-space-xl;
-    }
-
-    .ut-lesson-sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: $ut-space-md;
-    }
-
-    .ut-lesson-nav {
-        background: $ut-surface;
-        border: 1px solid rgba($ut-gold, 0.1);
-        border-radius: $ut-radius-md;
-        padding: $ut-space-md;
-    }
-}
-
-@container lesson (max-width: 48rem) {
-    .ut-skool-enabled .ut-skool-layout .ut-lesson-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-// ── Community Feed ────────────────────────────────────────────────────────────
-.ut-community-feed {
-    .ut-feed-item {
-        border-left: 3px solid $ut-gold;
-        padding-left: $ut-space-md;
-        margin-bottom: $ut-space-md;
-        padding-bottom: $ut-space-md;
-        border-bottom: 1px solid rgba($ut-gold, 0.06);
-
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-}
-
-// ── Exam Readiness Block ──────────────────────────────────────────────────────
+// -- Exam Readiness Block ------------------------------------------------------
 .block-examreadiness {
     container-type: inline-size;
     container-name: readiness;
@@ -1704,7 +1838,7 @@ h1, h2, h3, h4, h5, h6,
 
     .block-examreadiness-misconceptions li {
         padding: $ut-space-sm 0;
-        border-bottom: 1px solid rgba($ut-gold, 0.06);
+        border-bottom: 1px solid $ut-border-subtle;
 
         &:last-child {
             border-bottom: none;

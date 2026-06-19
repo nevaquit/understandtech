@@ -6,8 +6,8 @@ body.ut-theme .tox-edit-area__iframe,
 body.ut-theme .tox .tox-edit-area iframe,
 body.ut-theme .form-control[data-fieldtype="editor"],
 body.ut-theme .form-control[data-fieldtype="editor"] iframe {
-    background: var(--ut-navy-mid, #112847) !important;
-    color: rgba(255, 255, 255, 0.92) !important;
+    background: var(--ut-navy-mid, #0C1E35) !important;
+    color: var(--ut-lesson-prose, rgba(255, 255, 255, 0.92)) !important;
 }
 
 body.ut-theme .editor_atto_content,
@@ -33,7 +33,7 @@ body.ut-theme .mce-content-body h4,
 body.ut-theme .mce-content-body h5,
 body.ut-theme .mce-content-body h6 {
     font-family: "Rajdhani", "Segoe UI", system-ui, sans-serif;
-    color: #fff;
+    color: var(--ut-text-primary, #fff);
     font-weight: 700;
     letter-spacing: 0.03em;
 }
@@ -110,5 +110,5 @@ body.ut-theme .mce-content-body ol {
 body.ut-theme .editor_atto_content ::selection,
 body.ut-theme .mce-content-body ::selection {
     background: rgba(26, 138, 125, 0.45);
-    color: #fff;
+    color: var(--ut-text-primary, #fff);
 }

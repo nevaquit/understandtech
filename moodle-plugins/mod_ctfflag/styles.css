@@ -5,26 +5,31 @@
 .ut-ctfflag-form {
     max-width: 36rem;
     padding: clamp(1rem, 0.75rem + 1vw, 1.5rem);
-    border: 1px solid rgba(11, 31, 58, 0.12);
+    border: 1px solid var(--ut-border-default, rgba(201, 162, 39, 0.18));
     border-radius: 0.5rem;
-    background: rgba(11, 31, 58, 0.03);
+    background: var(--ut-surface, #0F2035);
 }
 
 .ut-ctfflag-form .form-control {
-    font-family: "Share Tech Mono", ui-monospace, monospace;
+    font-family: var(--ut-font-mono, "Share Tech Mono", ui-monospace, monospace);
+    background: var(--ut-navy-mid, #0C1E35);
+    color: var(--ut-text-primary, rgba(255, 255, 255, 0.94));
+    border-color: var(--ut-border-strong, rgba(201, 162, 39, 0.32));
 }
 
 .ut-ctfflag-form .btn-primary {
-    background-color: #1A8A7D;
-    border-color: #1A8A7D;
+    background-color: var(--ut-action, #C9A227);
+    border-color: var(--ut-action, #C9A227);
+    color: var(--ut-action-on, #0B1F3A);
 }
 
 .ut-ctfflag-form .btn-primary:hover {
-    background-color: #157a6e;
-    border-color: #157a6e;
+    background-color: var(--ut-action-hover, #D4B23A);
+    border-color: var(--ut-action-hover, #D4B23A);
+    color: var(--ut-action-on, #0B1F3A);
 }
 
 .ut-ctfflag-complete {
-    color: #0B1F3A;
+    color: var(--ut-success, #2DD4A0);
     font-weight: 600;
 }

@@ -102,6 +102,20 @@
 }
 
 // ── CTA Button in Nav ─────────────────────────────────────────────────────────
+.ut-user-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: $ut-teal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: $ut-white;
+    border: 2px solid rgba($ut-gold, 0.4);
+}
+
 .ut-nav-cta {
     font-family: $ut-font-heading;
     font-weight: 700;

@@ -4,11 +4,15 @@ Boost child theme for [understandtech.app](https://understandtech.app) — Skool
 
 ## Brand palette (defaults)
 
-| Token | Hex |
-|-------|-----|
-| Navy | `#0B1F3A` |
-| Gold | `#C9A227` |
-| Teal | `#1A8A7D` |
+| Role | Token | Default |
+|------|-------|---------|
+| Canvas | `--ut-navy-deep` | `#071529` |
+| Brand navy | `--ut-navy` | `#0B1F3A` |
+| Primary CTA | `--ut-action` | `#C9A227` |
+| Progress / links | `--ut-teal` | `#1A8A7D` |
+| Success | `--ut-success` | `#2DD4A0` |
+
+Full specification: `docs/DESIGN.md`.
 
 Typography: Rajdhani (headings), Source Serif 4 (body), Share Tech Mono (code) via Google Fonts.
 

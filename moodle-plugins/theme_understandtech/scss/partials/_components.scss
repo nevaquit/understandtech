@@ -76,34 +76,87 @@
     }
 }
 
-// Boost .btn-primary override
+// Boost .btn-primary — gold enrollment / submit CTA (highest contrast on navy).
 .btn-primary {
-    background-color: $ut-teal;
-    border-color: $ut-teal;
+    background-color: $ut-action;
+    border-color: $ut-action;
+    color: $ut-action-on;
     font-family: $ut-font-heading;
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
 
     &:hover,
-    &:focus {
-        background-color: $ut-teal-light;
-        border-color: $ut-teal-light;
+    &:focus,
+    &:active {
+        background-color: $ut-action-hover;
+        border-color: $ut-action-hover;
+        color: $ut-action-on;
+        box-shadow: 0 4px 16px rgba($ut-gold, 0.3);
     }
 }
 
+// Secondary — teal for continue/progress actions (does not compete with gold CTAs).
 .btn-secondary {
-    background-color: $ut-gold;
-    border-color: $ut-gold;
-    color: $ut-navy;
+    background-color: $ut-action-secondary;
+    border-color: $ut-action-secondary;
+    color: $ut-white;
     font-family: $ut-font-heading;
     font-weight: 600;
     letter-spacing: 0.06em;
 
     &:hover,
-    &:focus {
-        background-color: $ut-gold-light;
-        border-color: $ut-gold-light;
-        color: $ut-navy;
+    &:focus,
+    &:active {
+        background-color: $ut-action-secondary-hover;
+        border-color: $ut-action-secondary-hover;
+        color: $ut-white;
+    }
+}
+
+// Moodle / Bootstrap badge utilities used by blocks (exam readiness, study plan).
+.badge.bg-teal,
+.bg-teal.badge {
+    background-color: rgba($ut-teal, 0.22) !important;
+    color: $ut-teal-light !important;
+    border: 1px solid rgba($ut-teal, 0.4);
+}
+
+.badge.bg-navy,
+.bg-navy.badge {
+    background-color: rgba($ut-navy-mid, 0.85) !important;
+    color: $ut-text-secondary !important;
+    border: 1px solid $ut-border-default;
+}
+
+.badge.bg-primary {
+    background-color: rgba($ut-teal, 0.2) !important;
+    color: $ut-teal-light !important;
+    border: 1px solid rgba($ut-teal, 0.35);
+}
+
+.badge.bg-secondary {
+    background-color: rgba($ut-gold, 0.15) !important;
+    color: $ut-gold-light !important;
+    border: 1px solid rgba($ut-gold, 0.35);
+}
+
+.badge.bg-light.text-dark {
+    background-color: rgba($ut-surface-hover, 0.9) !important;
+    color: $ut-text-secondary !important;
+    border: 1px solid $ut-border-subtle;
+}
+
+// Study plan block — readiness/progress emphasis.
+.block-studyplan {
+    .block-studyplan-activity {
+        border-bottom-color: $ut-border-subtle !important;
+    }
+
+    .block-studyplan-activity .fw-semibold {
+        color: $ut-text-primary;
+        font-family: $ut-font-heading;
     }
 }
 

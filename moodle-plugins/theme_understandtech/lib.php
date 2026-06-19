@@ -36,27 +36,13 @@ function theme_understandtech_get_pre_scss(theme_config $theme): string {
     $gold = preg_match('/^#[0-9A-Fa-f]{3,6}$/', $gold) ? $gold : '#C9A227';
     $teal = preg_match('/^#[0-9A-Fa-f]{3,6}$/', $teal) ? $teal : '#1A8A7D';
 
-    // Derived tokens
-    $navyDeep = theme_understandtech_darken_hex($navy, 0.3);
-    $navyMid  = theme_understandtech_lighten_hex($navy, 0.05);
-    $surface  = theme_understandtech_lighten_hex($navy, 0.08);
-    $goldLight = theme_understandtech_lighten_hex($gold, 0.15);
-    $tealLight = theme_understandtech_lighten_hex($teal, 0.15);
+    // Derived tokens via shared palette builder.
+    $derived = theme_understandtech_derive_palette($navy, $gold, $teal);
 
     $scss  = "// === UnderstandTech Admin-Configurable Brand Tokens ===\n";
-    $scss .= "\$ut-navy:        {$navy};\n";
-    $scss .= "\$ut-navy-deep:   {$navyDeep};\n";
-    $scss .= "\$ut-navy-mid:    {$navyMid};\n";
-    $scss .= "\$ut-surface:     {$surface};\n";
-    $scss .= "\$ut-gold:        {$gold};\n";
-    $scss .= "\$ut-gold-light:  {$goldLight};\n";
-    $scss .= "\$ut-teal:        {$teal};\n";
-    $scss .= "\$ut-teal-light:  {$tealLight};\n";
-
-    // Legacy aliases used by older partial code
-    $scss .= "\$ut-brand-navy:  {$navy};\n";
-    $scss .= "\$ut-brand-gold:  {$gold};\n";
-    $scss .= "\$ut-brand-teal:  {$teal};\n";
+    foreach ($derived['scss'] as $var => $value) {
+        $scss .= "\${$var}: {$value};\n";
+    }
 
     if (!empty($theme->settings->rawscsspre)) {
         $scss .= $theme->settings->rawscsspre;
@@ -220,29 +206,8 @@ function theme_understandtech_process_css(string $css, theme_config $theme): str
     $gold = preg_match('/^#[0-9A-Fa-f]{3,6}$/', $gold) ? $gold : '#C9A227';
     $teal = preg_match('/^#[0-9A-Fa-f]{3,6}$/', $teal) ? $teal : '#1A8A7D';
 
-    $navydeep = theme_understandtech_darken_hex($navy, 0.3);
-    $navymid = theme_understandtech_lighten_hex($navy, 0.05);
-    $surface = theme_understandtech_lighten_hex($navy, 0.08);
-    $surfaceelevated = theme_understandtech_lighten_hex($navy, 0.06);
-    $goldlight = theme_understandtech_lighten_hex($gold, 0.15);
-    $teallight = theme_understandtech_lighten_hex($teal, 0.15);
-
-    $vars = ":root{"
-        . "--ut-navy:{$navy};"
-        . "--ut-navy-deep:{$navydeep};"
-        . "--ut-navy-mid:{$navymid};"
-        . "--ut-surface:{$surface};"
-        . "--ut-surface-elevated:{$surfaceelevated};"
-        . "--ut-gold:{$gold};"
-        . "--ut-gold-light:{$goldlight};"
-        . "--ut-teal:{$teal};"
-        . "--ut-teal-light:{$teallight};"
-        . "--ut-text:rgba(255,255,255,0.94);"
-        . "--ut-text-muted:rgba(255,255,255,0.72);"
-        . "--ut-text-subtle:rgba(255,255,255,0.55);"
-        . "--ut-border:rgba(201,162,39,0.18);"
-        . "--ut-border-strong:rgba(201,162,39,0.32);"
-        . "}\n";
+    $derived = theme_understandtech_derive_palette($navy, $gold, $teal);
+    $vars = theme_understandtech_build_css_root($derived['css']);
 
     return $vars . $css;
 }
@@ -286,6 +251,141 @@ function theme_understandtech_pluginfile(
 }
 
 // ── Colour Utility Functions ──────────────────────────────────────────────────
+
+/**
+ * Derive the full UnderstandTech palette from admin brand anchors.
+ *
+ * @param string $navy Brand navy hex.
+ * @param string $gold Brand gold hex.
+ * @param string $teal Brand teal hex.
+ * @return array{scss: array<string, string>, css: array<string, string>}
+ */
+function theme_understandtech_derive_palette(string $navy, string $gold, string $teal): array {
+    $navydeep = theme_understandtech_darken_hex($navy, 0.3);
+    $navymid = theme_understandtech_darken_hex($navy, 0.08);
+    $surface = theme_understandtech_lighten_hex($navy, 0.06);
+    $surfaceelevated = theme_understandtech_lighten_hex($navy, 0.12);
+    $surfacehover = theme_understandtech_lighten_hex($navy, 0.18);
+    $goldlight = theme_understandtech_lighten_hex($gold, 0.15);
+    $goldhover = theme_understandtech_lighten_hex($gold, 0.08);
+    $teallight = theme_understandtech_lighten_hex($teal, 0.15);
+    $tealdark = theme_understandtech_darken_hex($teal, 0.08);
+
+    [$gr, $gg, $gb] = theme_understandtech_hex_to_rgb($gold);
+    [$nr, $ng, $nb] = theme_understandtech_hex_to_rgb($navy);
+
+    $scss = [
+        'ut-navy' => $navy,
+        'ut-navy-deep' => $navydeep,
+        'ut-navy-mid' => $navymid,
+        'ut-surface' => $surface,
+        'ut-surface-elevated' => $surfaceelevated,
+        'ut-surface-hover' => $surfacehover,
+        'ut-gold' => $gold,
+        'ut-gold-light' => $goldlight,
+        'ut-gold-hover' => $goldhover,
+        'ut-teal' => $teal,
+        'ut-teal-light' => $teallight,
+        'ut-teal-dark' => $tealdark,
+        'ut-success' => '#2DD4A0',
+        'ut-warning' => '#F5B731',
+        'ut-error' => '#F07178',
+        'ut-info' => '#5CB8FF',
+        'ut-text-primary' => 'rgba(255, 255, 255, 0.94)',
+        'ut-text-secondary' => 'rgba(255, 255, 255, 0.72)',
+        'ut-text-muted' => 'rgba(255, 255, 255, 0.55)',
+        'ut-border-subtle' => "rgba({$gr}, {$gg}, {$gb}, 0.12)",
+        'ut-border-default' => "rgba({$gr}, {$gg}, {$gb}, 0.18)",
+        'ut-border-strong' => "rgba({$gr}, {$gg}, {$gb}, 0.32)",
+        'ut-action' => $gold,
+        'ut-action-hover' => $goldhover,
+        'ut-action-on' => $navy,
+        'ut-action-secondary' => $teal,
+        'ut-action-secondary-hover' => $teallight,
+        'ut-focus-ring' => $gold,
+        'ut-brand-navy' => $navy,
+        'ut-brand-gold' => $gold,
+        'ut-brand-teal' => $teal,
+        'primary' => $gold,
+        'secondary' => $teal,
+        'body-bg' => $navydeep,
+        'link-color' => $teallight,
+        'link-hover-color' => $gold,
+        'progress-bar-bg' => $teal,
+    ];
+
+    $css = [
+        '--ut-navy' => $navy,
+        '--ut-navy-deep' => $navydeep,
+        '--ut-navy-mid' => $navymid,
+        '--ut-surface' => $surface,
+        '--ut-surface-elevated' => $surfaceelevated,
+        '--ut-surface-hover' => $surfacehover,
+        '--ut-gold' => $gold,
+        '--ut-gold-light' => $goldlight,
+        '--ut-gold-hover' => $goldhover,
+        '--ut-teal' => $teal,
+        '--ut-teal-light' => $teallight,
+        '--ut-teal-dark' => $tealdark,
+        '--ut-success' => '#2DD4A0',
+        '--ut-warning' => '#F5B731',
+        '--ut-error' => '#F07178',
+        '--ut-info' => '#5CB8FF',
+        '--ut-success-bg' => 'rgba(45, 212, 160, 0.12)',
+        '--ut-warning-bg' => 'rgba(245, 183, 49, 0.12)',
+        '--ut-error-bg' => 'rgba(240, 113, 120, 0.12)',
+        '--ut-info-bg' => 'rgba(92, 184, 255, 0.12)',
+        '--ut-text' => 'rgba(255, 255, 255, 0.94)',
+        '--ut-text-primary' => 'rgba(255, 255, 255, 0.94)',
+        '--ut-text-secondary' => 'rgba(255, 255, 255, 0.72)',
+        '--ut-text-muted' => 'rgba(255, 255, 255, 0.55)',
+        '--ut-text-subtle' => 'rgba(255, 255, 255, 0.55)',
+        '--ut-text-disabled' => 'rgba(255, 255, 255, 0.38)',
+        '--ut-border' => "rgba({$gr}, {$gg}, {$gb}, 0.18)",
+        '--ut-border-subtle' => "rgba({$gr}, {$gg}, {$gb}, 0.12)",
+        '--ut-border-default' => "rgba({$gr}, {$gg}, {$gb}, 0.18)",
+        '--ut-border-strong' => "rgba({$gr}, {$gg}, {$gb}, 0.32)",
+        '--ut-border-focus' => "rgba({$gr}, {$gg}, {$gb}, 0.55)",
+        '--ut-action' => $gold,
+        '--ut-action-hover' => $goldhover,
+        '--ut-action-on' => $navy,
+        '--ut-action-secondary' => $teal,
+        '--ut-action-secondary-hover' => $teallight,
+        '--ut-focus-ring' => $gold,
+        '--ut-progress' => $teal,
+        '--ut-link' => $teallight,
+        '--ut-link-hover' => $gold,
+        '--ut-lesson-outer' => $navy,
+        '--ut-lesson-surface' => $surface,
+        '--ut-lesson-prose' => 'rgba(255, 255, 255, 0.92)',
+        '--ut-lesson-muted' => 'rgba(255, 255, 255, 0.72)',
+        '--ut-lesson-card' => "rgba({$nr}, {$ng}, {$nb}, 0.92)",
+        '--ut-lesson-border' => "rgba({$gr}, {$gg}, {$gb}, 0.22)",
+        '--ut-font-heading' => '"Rajdhani", "Segoe UI", system-ui, sans-serif',
+        '--ut-font-body' => '"Source Serif 4", Georgia, "Times New Roman", serif',
+        '--ut-font-mono' => '"Share Tech Mono", Consolas, "Courier New", monospace',
+        '--ut-radius-sm' => '0.375rem',
+        '--ut-radius-md' => '0.75rem',
+        '--ut-radius-lg' => '1.25rem',
+        '--ut-content-max' => '75rem',
+    ];
+
+    return ['scss' => $scss, 'css' => $css];
+}
+
+/**
+ * Build a :root CSS custom property block from a token map.
+ *
+ * @param array<string, string> $tokens CSS variable name => value (without -- prefix).
+ * @return string CSS :root block.
+ */
+function theme_understandtech_build_css_root(array $tokens): string {
+    $parts = [];
+    foreach ($tokens as $name => $value) {
+        $parts[] = "--{$name}:{$value}";
+    }
+    return ':root{' . implode(';', $parts) . ";}\n";
+}
 
 /**
  * Darken a hex colour by a given ratio (0–1).

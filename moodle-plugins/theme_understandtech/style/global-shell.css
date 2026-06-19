@@ -2,26 +2,65 @@
  * Loaded on every page via $THEME->sheets. Plain CSS for reliable deploy. */
 
 :root {
+    /* Brand anchors */
     --ut-navy-deep: #071529;
     --ut-navy: #0B1F3A;
-    --ut-navy-mid: #112847;
-    --ut-surface: #0f2447;
-    --ut-surface-elevated: #0F2035;
+    --ut-navy-mid: #0C1E35;
+    --ut-surface: #0F2035;
+    --ut-surface-elevated: #152B45;
+    --ut-surface-hover: #1A3554;
     --ut-gold: #C9A227;
     --ut-gold-light: #E8C547;
+    --ut-gold-hover: #D4B23A;
     --ut-teal: #1A8A7D;
     --ut-teal-light: #22B5A5;
+    --ut-teal-dark: #157A6E;
+    /* Semantic */
+    --ut-success: #2DD4A0;
+    --ut-warning: #F5B731;
+    --ut-error: #F07178;
+    --ut-info: #5CB8FF;
+    --ut-success-bg: rgba(45, 212, 160, 0.12);
+    --ut-warning-bg: rgba(245, 183, 49, 0.12);
+    --ut-error-bg: rgba(240, 113, 120, 0.12);
+    --ut-info-bg: rgba(92, 184, 255, 0.12);
+    /* Text hierarchy */
     --ut-text: rgba(255, 255, 255, 0.94);
-    --ut-text-muted: rgba(255, 255, 255, 0.72);
+    --ut-text-primary: rgba(255, 255, 255, 0.94);
+    --ut-text-secondary: rgba(255, 255, 255, 0.72);
+    --ut-text-muted: rgba(255, 255, 255, 0.55);
     --ut-text-subtle: rgba(255, 255, 255, 0.55);
+    --ut-text-disabled: rgba(255, 255, 255, 0.38);
+    /* Borders */
     --ut-border: rgba(201, 162, 39, 0.18);
+    --ut-border-subtle: rgba(201, 162, 39, 0.12);
+    --ut-border-default: rgba(201, 162, 39, 0.18);
     --ut-border-strong: rgba(201, 162, 39, 0.32);
+    --ut-border-focus: rgba(201, 162, 39, 0.55);
+    /* CTA / action hierarchy */
+    --ut-action: #C9A227;
+    --ut-action-hover: #D4B23A;
+    --ut-action-on: #0B1F3A;
+    --ut-action-secondary: #1A8A7D;
+    --ut-action-secondary-hover: #22B5A5;
+    --ut-focus-ring: #C9A227;
+    --ut-progress: #1A8A7D;
+    --ut-link: #22B5A5;
+    --ut-link-hover: #C9A227;
+    /* Lesson content */
+    --ut-lesson-outer: #0B1F3A;
+    --ut-lesson-surface: #0F2035;
+    --ut-lesson-prose: rgba(255, 255, 255, 0.92);
+    --ut-lesson-muted: rgba(255, 255, 255, 0.72);
+    --ut-lesson-card: rgba(11, 31, 58, 0.92);
+    --ut-lesson-border: rgba(201, 162, 39, 0.22);
+    /* Typography & layout */
     --ut-font-heading: "Rajdhani", "Segoe UI", system-ui, sans-serif;
     --ut-font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
     --ut-font-mono: "Share Tech Mono", Consolas, "Courier New", monospace;
     --ut-radius-sm: 0.375rem;
     --ut-radius-md: 0.75rem;
-    --ut-radius-lg: 1rem;
+    --ut-radius-lg: 1.25rem;
     --ut-content-max: 75rem;
 }
 
@@ -528,36 +567,54 @@ body.ut-theme .form-label {
     letter-spacing: 0.03em;
 }
 
+body.ut-theme .ut-user-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--ut-teal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--ut-text-primary);
+    border: 2px solid var(--ut-border-strong);
+}
+
 /* ── Buttons ────────────────────────────────────────────────────────────────── */
 body.ut-theme .btn-primary {
-    background: var(--ut-teal);
-    border-color: var(--ut-teal);
-    color: #fff;
+    background: var(--ut-action);
+    border-color: var(--ut-action);
+    color: var(--ut-action-on);
     font-family: var(--ut-font-heading);
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
 }
 
 body.ut-theme .btn-primary:hover,
 body.ut-theme .btn-primary:focus {
-    background: var(--ut-teal-light);
-    border-color: var(--ut-teal-light);
-    color: #fff;
+    background: var(--ut-action-hover);
+    border-color: var(--ut-action-hover);
+    color: var(--ut-action-on);
+    box-shadow: 0 4px 16px rgba(201, 162, 39, 0.3);
 }
 
 body.ut-theme .btn-secondary {
-    background: var(--ut-gold);
-    border-color: var(--ut-gold);
-    color: var(--ut-navy);
+    background: var(--ut-action-secondary);
+    border-color: var(--ut-action-secondary);
+    color: #fff;
     font-family: var(--ut-font-heading);
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: 0.06em;
 }
 
 body.ut-theme .btn-secondary:hover,
 body.ut-theme .btn-secondary:focus {
-    background: var(--ut-gold-light);
-    border-color: var(--ut-gold-light);
-    color: var(--ut-navy);
+    background: var(--ut-action-secondary-hover);
+    border-color: var(--ut-action-secondary-hover);
+    color: #fff;
 }
 
 body.ut-theme .btn-outline-secondary {
@@ -689,26 +746,74 @@ body.ut-theme .alert {
 }
 
 body.ut-theme .alert-info {
-    background: rgba(26, 138, 125, 0.15);
-    border-color: rgba(26, 138, 125, 0.35);
-    color: #fff;
+    background: var(--ut-info-bg);
+    border-color: rgba(92, 184, 255, 0.35);
+    color: var(--ut-text-primary);
 }
 
 body.ut-theme .alert-warning {
-    background: rgba(201, 162, 39, 0.12);
-    border-color: rgba(201, 162, 39, 0.35);
-    color: #fff;
+    background: var(--ut-warning-bg);
+    border-color: rgba(245, 183, 49, 0.35);
+    color: var(--ut-text-primary);
 }
 
 body.ut-theme .alert-danger {
-    background: rgba(180, 50, 50, 0.15);
-    border-color: rgba(220, 80, 80, 0.35);
-    color: #fff;
+    background: var(--ut-error-bg);
+    border-color: rgba(240, 113, 120, 0.35);
+    color: var(--ut-text-primary);
+}
+
+body.ut-theme .alert-success {
+    background: var(--ut-success-bg);
+    border-color: rgba(45, 212, 160, 0.35);
+    color: var(--ut-text-primary);
 }
 
 body.ut-theme .badge {
     font-family: var(--ut-font-heading);
     letter-spacing: 0.04em;
+}
+
+body.ut-theme .badge.bg-teal,
+body.ut-theme .bg-teal.badge {
+    background-color: rgba(26, 138, 125, 0.22) !important;
+    color: var(--ut-teal-light) !important;
+    border: 1px solid rgba(26, 138, 125, 0.4);
+}
+
+body.ut-theme .badge.bg-navy,
+body.ut-theme .bg-navy.badge {
+    background-color: rgba(12, 30, 53, 0.85) !important;
+    color: var(--ut-text-secondary) !important;
+    border: 1px solid var(--ut-border-default);
+}
+
+body.ut-theme .badge.bg-primary {
+    background-color: rgba(26, 138, 125, 0.2) !important;
+    color: var(--ut-teal-light) !important;
+    border: 1px solid rgba(26, 138, 125, 0.35);
+}
+
+body.ut-theme .badge.bg-secondary {
+    background-color: rgba(201, 162, 39, 0.15) !important;
+    color: var(--ut-gold-light) !important;
+    border: 1px solid rgba(201, 162, 39, 0.35);
+}
+
+body.ut-theme .badge.bg-light.text-dark {
+    background-color: rgba(26, 53, 84, 0.9) !important;
+    color: var(--ut-text-secondary) !important;
+    border: 1px solid var(--ut-border-subtle);
+}
+
+body.ut-theme .block-examreadiness .display-6 {
+    color: var(--ut-action);
+    font-family: var(--ut-font-heading);
+}
+
+body.ut-theme .block-studyplan .fw-semibold {
+    color: var(--ut-text-primary);
+    font-family: var(--ut-font-heading);
 }
 
 /* ── Boost drawer content panel (white card shell) ─────────────────────────── */

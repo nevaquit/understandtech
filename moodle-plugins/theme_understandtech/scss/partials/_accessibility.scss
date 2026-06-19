@@ -46,7 +46,7 @@ a.sr-only-focusable[href="#maincontent"] {
 }
 
 *:focus-visible {
-    outline: 3px solid $ut-gold;
+    outline: 3px solid $ut-focus-ring;
     outline-offset: 3px;
     border-radius: $ut-radius-sm;
 }
@@ -145,21 +145,20 @@ a:focus-visible {
 // surface tokens when the OS is in dark mode to prevent navy-on-navy text
 @media (prefers-color-scheme: dark) {
     :root {
-        --ut-surface-elevated: #1a2f4a;
-        --ut-border-subtle: rgba(201, 162, 39, 0.2);
+        --ut-surface-elevated: #{$ut-surface-elevated};
+        --ut-border-subtle: #{$ut-border-subtle};
     }
 
     .card,
     .block,
     .ut-surface {
-        background-color: var(--ut-surface-elevated, #1a2f4a);
-        border-color: var(--ut-border-subtle, rgba(201, 162, 39, 0.2));
+        background-color: var(--ut-surface-elevated, #{$ut-surface-elevated});
+        border-color: var(--ut-border-subtle, #{$ut-border-subtle});
     }
 
-    // Ensure muted text is still readable against dark surfaces
     .text-muted,
     .ut-text-muted {
-        color: rgba(255, 255, 255, 0.75) !important;
+        color: var(--ut-text-muted, #{$ut-text-muted}) !important;
     }
 }
 

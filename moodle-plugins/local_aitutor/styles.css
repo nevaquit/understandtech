@@ -1,18 +1,19 @@
-// AI Tutor fixed sidebar — brand-aligned, fluid width, loading/error states.
+// AI Tutor fixed sidebar — dark-first, token-aligned with theme_understandtech.
 .local-aitutor-sidebar {
     position: fixed;
     right: 0;
     top: clamp(4rem, 3.5rem + 1vw, 5.5rem);
     width: clamp(16rem, 18rem + 2vw, 22rem);
     max-height: min(70vh, 32rem);
-    background: #fff;
-    border: 1px solid rgba(11, 31, 58, 0.15);
+    background: var(--ut-surface-elevated, #152B45);
+    border: 1px solid var(--ut-border-default, rgba(201, 162, 39, 0.18));
     border-radius: 0.5rem 0 0 0.5rem;
-    box-shadow: -4px 12px 24px rgba(11, 31, 58, 0.12);
+    box-shadow: -4px 12px 24px rgba(7, 21, 41, 0.45);
     z-index: 1040;
     display: flex;
     flex-direction: column;
     transition: width 0.2s ease;
+    color: var(--ut-text-primary, rgba(255, 255, 255, 0.94));
 }
 
 .local-aitutor-sidebar.collapsed {
@@ -35,7 +36,7 @@
     height: 0.5rem;
     margin-left: 0.25rem;
     border-radius: 50%;
-    background: #1a8a7d;
+    background: var(--ut-teal, #1A8A7D);
     animation: local-aitutor-pulse 0.9s ease-in-out infinite;
 }
 
@@ -66,14 +67,16 @@
 
 .local-aitutor-message--user {
     align-self: flex-end;
-    background: rgba(26, 138, 125, 0.12);
-    color: #0b1f3a;
+    background: rgba(26, 138, 125, 0.18);
+    color: var(--ut-text-primary, rgba(255, 255, 255, 0.94));
+    border: 1px solid rgba(26, 138, 125, 0.35);
 }
 
 .local-aitutor-message--assistant {
     align-self: flex-start;
-    background: rgba(11, 31, 58, 0.06);
-    color: #0b1f3a;
+    background: var(--ut-surface, #0F2035);
+    color: var(--ut-text-secondary, rgba(255, 255, 255, 0.72));
+    border: 1px solid var(--ut-border-subtle, rgba(201, 162, 39, 0.12));
 }
 
 .local-aitutor-message--streaming {
@@ -85,16 +88,18 @@
     justify-content: space-between;
     align-items: center;
     padding: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem) 1rem;
-    background: #0b1f3a;
-    color: #fff;
-    font-family: Rajdhani, 'Segoe UI', sans-serif;
+    background: var(--ut-navy, #0B1F3A);
+    color: var(--ut-text-primary, #fff);
+    font-family: var(--ut-font-heading, Rajdhani, 'Segoe UI', sans-serif);
     font-weight: 600;
     letter-spacing: 0.02em;
+    border-bottom: 1px solid var(--ut-border-default, rgba(201, 162, 39, 0.18));
 }
 
 .local-aitutor-toggle {
-    color: #0b1f3a;
+    color: var(--ut-gold, #C9A227);
     border: none;
+    background: transparent;
 }
 
 .local-aitutor-body {
@@ -105,23 +110,30 @@
 
 .local-aitutor-input {
     font-size: 0.9rem;
-    border-color: rgba(11, 31, 58, 0.2);
+    background: var(--ut-navy-mid, #0C1E35);
+    color: var(--ut-text-primary, rgba(255, 255, 255, 0.94));
+    border-color: var(--ut-border-strong, rgba(201, 162, 39, 0.32));
+}
 
-    &:focus {
-        border-color: #1a8a7d;
-        box-shadow: 0 0 0 0.15rem rgba(26, 138, 125, 0.25);
-    }
+.local-aitutor-input:focus {
+    border-color: var(--ut-focus-ring, #C9A227);
+    box-shadow: var(--ut-shadow-gold, 0 0 0 3px rgba(201, 162, 39, 0.35));
 }
 
 .local-aitutor-send {
-    background-color: #1a8a7d;
-    border-color: #1a8a7d;
+    background-color: var(--ut-action, #C9A227);
+    border-color: var(--ut-action, #C9A227);
+    color: var(--ut-action-on, #0B1F3A);
+    font-family: var(--ut-font-heading, Rajdhani, sans-serif);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
 
-    &:hover,
-    &:focus {
-        background-color: #157a6e;
-        border-color: #157a6e;
-    }
+.local-aitutor-send:hover,
+.local-aitutor-send:focus {
+    background-color: var(--ut-action-hover, #D4B23A);
+    border-color: var(--ut-action-hover, #D4B23A);
+    color: var(--ut-action-on, #0B1F3A);
 }
 
 body:has(#local-aitutor-sidebar) #page.drawers .main-inner {

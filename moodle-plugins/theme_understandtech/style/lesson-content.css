@@ -4,10 +4,10 @@
 .path-mod-page,
 #page-mod-page-view,
 .ut-lesson-page {
-    --ut-lesson-outer: #0B1F3A;
-    --ut-lesson-surface: #0f2447;
-    --ut-lesson-card: rgba(15, 36, 71, 0.98);
-    --ut-lesson-border: rgba(201, 162, 39, 0.28);
+    --ut-lesson-outer: var(--ut-navy, #0B1F3A);
+    --ut-lesson-surface: var(--ut-surface, #0F2035);
+    --ut-lesson-card: rgba(11, 31, 58, 0.92);
+    --ut-lesson-border: rgba(201, 162, 39, 0.22);
     --ut-lesson-glow: rgba(26, 138, 125, 0.12);
 }
 
@@ -63,13 +63,13 @@
 .path-mod-page #page-header .breadcrumb .breadcrumb-item a:hover,
 #page-mod-page-view #page-header .breadcrumb .breadcrumb-item a:hover,
 .ut-lesson-page #page-header .breadcrumb .breadcrumb-item a:hover {
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
 }
 
 .path-mod-page #page-header .breadcrumb .breadcrumb-item.active,
 #page-mod-page-view #page-header .breadcrumb .breadcrumb-item.active,
 .ut-lesson-page #page-header .breadcrumb .breadcrumb-item.active {
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
 }
 
 .path-mod-page #page-header .breadcrumb .breadcrumb-item + .breadcrumb-item::before,
@@ -122,7 +122,7 @@ body.ut-lesson-page:has(.ut-lesson-content) .activity-header {
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #22B5A5;
+    color: var(--ut-teal-light, #22B5A5);
     margin: 0;
 }
 
@@ -163,7 +163,7 @@ body.ut-lesson-page:has(.ut-lesson-content) .activity-header {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #C9A227 0%, #1A8A7D 100%);
+    background: linear-gradient(90deg, var(--ut-gold, #C9A227) 0%, var(--ut-teal, #1A8A7D) 100%);
     pointer-events: none;
 }
 
@@ -257,7 +257,7 @@ body.ut-lesson-page #page.drawers #region-main-box {
 body.path-mod-page .drawer.drawer-left,
 body.ut-lesson-page .drawer.drawer-left,
 body.ut-incourse .drawer.drawer-left {
-    background: #071426 !important;
+    background: var(--ut-navy-deep, #071529) !important;
     border-right: 1px solid rgba(201, 162, 39, 0.15) !important;
     color: rgba(255, 255, 255, 0.85);
 }
@@ -265,14 +265,14 @@ body.ut-incourse .drawer.drawer-left {
 body.path-mod-page .drawer.drawer-left .drawerheader,
 body.ut-lesson-page .drawer.drawer-left .drawerheader,
 body.ut-incourse .drawer.drawer-left .drawerheader {
-    background: #071426 !important;
+    background: var(--ut-navy-deep, #071529) !important;
     border-bottom: 1px solid rgba(201, 162, 39, 0.12) !important;
 }
 
 body.path-mod-page .drawer.drawer-left .drawercontent,
 body.ut-lesson-page .drawer.drawer-left .drawercontent,
 body.ut-incourse .drawer.drawer-left .drawercontent {
-    background: #071426 !important;
+    background: var(--ut-navy-deep, #071529) !important;
 }
 
 .path-mod-page:not(.hasblocks) [data-region="blocks-content"],
@@ -320,7 +320,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
     font-family: "Rajdhani", "Segoe UI", sans-serif;
     font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.75rem);
     font-weight: 700;
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     margin: 0 0 0.5rem;
@@ -344,18 +344,18 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 .ut-lesson-content .ut-lesson-body > h4 {
     font-family: "Rajdhani", "Segoe UI", sans-serif;
     font-size: 1.125rem;
-    color: #22B5A5;
+    color: var(--ut-teal-light, #22B5A5);
     margin: 1.5rem 0 0.5rem;
     letter-spacing: 0.03em;
 }
 
 .ut-lesson-content .ut-lesson-body > h4.ut-visual-representation {
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
     font-size: 1.2rem;
     font-weight: 700;
     margin-top: 1.75rem;
     padding-left: 0.75rem;
-    border-left: 3px solid #1A8A7D;
+    border-left: 3px solid var(--ut-teal, #1A8A7D);
 }
 
 .ut-lesson-content .ut-lesson-body > p {
@@ -384,7 +384,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 
 .ut-lesson-content .ut-lesson-body > ul li::marker,
 .ut-lesson-content .ut-lesson-body > ol li::marker {
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
 }
 
 .ut-lesson-content .ut-lesson-body table {
@@ -402,7 +402,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 
 .ut-lesson-content .ut-lesson-body th {
     font-family: "Rajdhani", "Segoe UI", sans-serif;
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
     background: rgba(11, 31, 58, 0.55);
 }
 
@@ -417,7 +417,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 .ut-lesson-content .ut-lesson-diagram .cia-element {
     background: rgba(11, 31, 58, 0.65);
     border: 1px solid rgba(201, 162, 39, 0.18);
-    border-top: 3px solid #C9A227;
+    border-top: 3px solid var(--ut-gold, #C9A227);
     border-radius: 0.5rem;
     padding: 1.125rem;
     text-align: center;
@@ -427,7 +427,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
     font-family: "Rajdhani", "Segoe UI", sans-serif;
     font-weight: 700;
     font-size: 1.05rem;
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
     margin: 1rem 0 0.5rem;
 }
 
@@ -465,7 +465,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 .ut-lesson-content .ut-lesson-diagram .control-card,
 .ut-lesson-content .ut-lesson-diagram .concept-item {
     background: rgba(11, 31, 58, 0.55);
-    border-left: 4px solid #C9A227;
+    border-left: 4px solid var(--ut-gold, #C9A227);
     border-radius: 0.5rem;
     padding: 1.125rem;
 }
@@ -488,7 +488,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 
 .ut-lesson-content .ut-lesson-diagram .flow-step {
     flex: 1 1 9rem;
-    background: #0B1F3A;
+    background: var(--ut-navy, #0B1F3A);
     color: #fff;
     padding: 1rem;
     border-radius: 0.375rem;
@@ -499,7 +499,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 
 .ut-lesson-content .ut-lesson-diagram .flow-arrow {
     align-self: center;
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
     font-weight: 700;
     font-size: 1.25rem;
 }
@@ -545,7 +545,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 .ut-lesson-content .ut-lesson-diagram .control-card strong {
     display: block;
     font-family: "Rajdhani", "Segoe UI", sans-serif;
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
     font-size: 1rem;
     margin-bottom: 0.35rem;
 }
@@ -573,17 +573,17 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 }
 
 .ut-lesson-content .key-concepts {
-    border-left: 4px solid #1A8A7D;
+    border-left: 4px solid var(--ut-teal, #1A8A7D);
 }
 
 .ut-lesson-content .highlight-box {
-    border-left: 4px solid #C9A227;
+    border-left: 4px solid var(--ut-gold, #C9A227);
 }
 
 .ut-lesson-content .key-concepts > h4,
 .ut-lesson-content .highlight-box > h4 {
     font-family: "Rajdhani", "Segoe UI", sans-serif;
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
     font-size: 1rem;
     margin: 0 0 0.75rem;
 }
@@ -603,7 +603,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 .ut-lesson-content .malware-card {
     background: rgba(11, 31, 58, 0.55);
     border: 1px solid rgba(26, 138, 125, 0.35);
-    border-top: 3px solid #1A8A7D;
+    border-top: 3px solid var(--ut-teal, #1A8A7D);
     border-radius: 0.5rem;
     padding: 1.125rem;
 }
@@ -636,11 +636,11 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 }
 
 .ut-lesson-content .ut-lesson-supplement {
-    border-left: 4px solid #C9A227;
+    border-left: 4px solid var(--ut-gold, #C9A227);
 }
 
 .ut-lesson-content .ut-lesson-depth {
-    border-left: 4px solid #1A8A7D;
+    border-left: 4px solid var(--ut-teal, #1A8A7D);
 }
 
 .ut-lesson-content .ut-lesson-supplement > h4 {
@@ -649,7 +649,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
     margin: 0 0 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--ut-lesson-border);
@@ -661,7 +661,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #22B5A5;
+    color: var(--ut-teal-light, #22B5A5);
     margin: 0 0 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--ut-lesson-border);
@@ -670,7 +670,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 .ut-lesson-content .ut-lesson-supplement h5,
 .ut-lesson-content .ut-lesson-depth h5 {
     font-family: "Rajdhani", "Segoe UI", sans-serif;
-    color: #22B5A5;
+    color: var(--ut-teal-light, #22B5A5);
     font-size: 1rem;
     margin: 1.5rem 0 0.5rem;
 }
@@ -704,7 +704,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 
 .ut-lesson-content > h4:last-of-type {
     font-family: "Rajdhani", "Segoe UI", sans-serif;
-    color: #22B5A5;
+    color: var(--ut-teal-light, #22B5A5);
     margin-top: 2.5rem;
     margin-bottom: 0.5rem;
 }
@@ -722,7 +722,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 /* Course index drawer — polished nav on lesson and incourse pages */
 .ut-lesson-page [data-region="drawer"],
 .ut-incourse [data-region="drawer"] {
-    background: #071426;
+    background: var(--ut-navy-deep, #071529);
 }
 
 .ut-lesson-page .courseindex,
@@ -732,7 +732,7 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 
 .ut-lesson-page .courseindex .courseindex-section-title,
 .ut-incourse .courseindex .courseindex-section-title {
-    color: #C9A227;
+    color: var(--ut-gold, #C9A227);
     font-size: 0.6875rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -763,6 +763,6 @@ body.ut-incourse .drawer.drawer-left .drawercontent {
 .ut-incourse .courseindex-item a.active,
 .ut-lesson-page .courseindex-item.pageitem a,
 .ut-incourse .courseindex-item.pageitem a {
-    color: #C9A227 !important;
+    color: var(--ut-gold, #C9A227) !important;
     background: transparent !important;
 }
