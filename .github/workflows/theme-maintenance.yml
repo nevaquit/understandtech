@@ -28,6 +28,9 @@ jobs:
           cd "$PLUGINS_REPO_DIR"
           sudo -u gha-runner git fetch origin main
           sudo -u gha-runner git reset --hard origin/main
+      - name: Sync gha-runner sudoers
+        run: sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
+
       - name: Theme upgrade and purge caches
         run: sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/theme-upgrade-purge-vm.sh"
       - name: Verify theme version
@@ -57,6 +60,9 @@ jobs:
           cd "$PLUGINS_REPO_DIR"
           sudo -u gha-runner git fetch origin main
           sudo -u gha-runner git reset --hard origin/main
+      - name: Sync gha-runner sudoers
+        run: sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
+
       - name: Theme upgrade and purge caches
         run: sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/theme-upgrade-purge-vm.sh"
       - name: Verify theme version
