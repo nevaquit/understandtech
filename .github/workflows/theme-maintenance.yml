@@ -1,0 +1,74 @@
+name: Theme upgrade and purge caches
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Runner target
+        type: choice
+        options:
+          - production
+          - staging
+        default: production
+
+env:
+  PLUGINS_REPO_DIR: /opt/understandtech-plugins
+
+jobs:
+  maintain-production:
+    if: inputs.target == 'production'
+    name: Theme upgrade (production)
+    runs-on: [self-hosted, linux, production]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync monorepo on VM
+        run: |
+          set -euo pipefail
+          cd "$PLUGINS_REPO_DIR"
+          sudo -u gha-runner git fetch origin main
+          sudo -u gha-runner git reset --hard origin/main
+      - name: Theme upgrade and purge caches
+        run: sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/theme-upgrade-purge-vm.sh"
+      - name: Verify theme version
+        run: |
+          set -euo pipefail
+          sudo -u www-data php -r '
+          define("CLI_SCRIPT", true);
+          require "/var/www/moodle/config.php";
+          $theme = theme_config::load("understandtech");
+          echo "theme=understandtech version=" . $theme->version . " release=" . ($theme->release ?? "?") . PHP_EOL;
+          echo "site_theme=" . get_config("core", "theme") . PHP_EOL;
+          '
+      - name: Disable maintenance mode
+        if: success()
+        run: sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
+
+  maintain-staging:
+    if: inputs.target == 'staging'
+    name: Theme upgrade (staging)
+    runs-on: [self-hosted, linux, staging]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync monorepo on VM
+        run: |
+          set -euo pipefail
+          cd "$PLUGINS_REPO_DIR"
+          sudo -u gha-runner git fetch origin main
+          sudo -u gha-runner git reset --hard origin/main
+      - name: Theme upgrade and purge caches
+        run: sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/theme-upgrade-purge-vm.sh"
+      - name: Verify theme version
+        run: |
+          set -euo pipefail
+          sudo -u www-data php -r '
+          define("CLI_SCRIPT", true);
+          require "/var/www/moodle/config.php";
+          $theme = theme_config::load("understandtech");
+          echo "theme=understandtech version=" . $theme->version . " release=" . ($theme->release ?? "?") . PHP_EOL;
+          echo "site_theme=" . get_config("core", "theme") . PHP_EOL;
+          '
+      - name: Disable maintenance mode
+        if: success()
+        run: sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
