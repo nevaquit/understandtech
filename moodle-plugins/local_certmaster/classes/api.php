@@ -64,7 +64,8 @@ class api {
      *
      * @param int $userid User id.
      * @param int $certificationid Certification id.
-     * @return array{overall_readiness: float, radar: array, domains: array, dangerous_misconceptions: array}
+     * @return array{overall_readiness: float, predictive_readiness: float, pass_probability: float|null,
+     *               prediction_model: string, radar: array, domains: array, dangerous_misconceptions: array}
      */
     public static function get_user_readiness(int $userid, int $certificationid): array {
         global $DB;
@@ -105,8 +106,13 @@ class api {
 
         $overall = $weighttotal > 0 ? $weightedsum / $weighttotal : self::DEFAULT_MASTERY;
 
+        $prediction = readiness_predictor::predict($userid, $certificationid, round($overall, 2));
+
         return [
             'overall_readiness' => round($overall, 2),
+            'predictive_readiness' => $prediction['predictive_readiness'],
+            'pass_probability' => $prediction['pass_probability'],
+            'prediction_model' => $prediction['model'],
             'radar' => $radar,
             'domains' => $domainresults,
             'dangerous_misconceptions' => self::get_dangerous_misconceptions($userid, $certificationid),

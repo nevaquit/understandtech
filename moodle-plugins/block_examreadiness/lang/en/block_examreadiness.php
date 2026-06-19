@@ -19,4 +19,6 @@ $string['radar_aria'] = 'Domain mastery radar chart';
 $string['radar_summary'] = 'Domain mastery scores';
 $string['domain'] = 'Domain';
 $string['score'] = 'Score';
+$string['pass_probability_label'] = 'Pass probability: {$a}%';
+$string['prediction_model_label'] = 'Cohort-adjusted prediction';
 $string['privacy:metadata'] = 'The exam readiness block displays mastery data from CertMaster and does not store additional personal data.';

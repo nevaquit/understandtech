@@ -18,4 +18,7 @@ $string['mastery_label'] = 'Mastery: {$a}%';
 $string['start_activity'] = 'Start';
 $string['regenerate'] = 'Regenerate plan';
 $string['regenerate_help'] = 'Rebuild priorities from your latest quiz confidence and mastery scores.';
+$string['activitytype_lesson_review'] = 'Lesson review';
+$string['activitytype_practice_quiz'] = 'Practice quiz';
+$string['activitytype_lab'] = 'Hands-on lab';
 $string['privacy:metadata'] = 'The Study Coach block displays study plan data from CertMaster and does not store additional personal data.';

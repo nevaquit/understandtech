@@ -51,6 +51,11 @@ class block_studyplan extends block_base {
 
         $activities = [];
         foreach ($plan['activities'] as $activity) {
+            $type = (string) ($activity['type'] ?? 'lesson_review');
+            $typekey = 'activitytype_' . $type;
+            $typelabel = get_string_manager()->string_exists($typekey, 'block_studyplan')
+                ? get_string($typekey, 'block_studyplan')
+                : ucfirst(str_replace('_', ' ', $type));
             $activities[] = [
                 'title' => $activity['title'] ?? '',
                 'objective' => $activity['objective'] ?? '',
@@ -59,6 +64,8 @@ class block_studyplan extends block_base {
                 'url' => $activity['url'] ?? '',
                 'mastery_score' => $activity['mastery_score'] ?? null,
                 'hasurl' => !empty($activity['url']),
+                'type' => $type,
+                'type_label' => $typelabel,
             ];
         }
 

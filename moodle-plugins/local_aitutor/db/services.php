@@ -40,4 +40,13 @@ $functions = [
         'ajax' => true,
         'capabilities' => 'local/aitutor:use',
     ],
+    'local_aitutor_generate_content' => [
+        'classname' => 'local_aitutor\external\generate_content',
+        'methodname' => 'execute',
+        'classpath' => '',
+        'description' => 'Generate instructor-reviewed content draft',
+        'type' => 'write',
+        'ajax' => true,
+        'capabilities' => 'local/aitutor:managecontent',
+    ],
 ];

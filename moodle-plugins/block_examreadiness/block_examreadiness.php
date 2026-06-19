@@ -35,6 +35,7 @@ class block_examreadiness extends block_base {
 
         $data = \local_certmaster\api::get_user_readiness($USER->id, $certid);
         $misconceptions = array_slice($data['dangerous_misconceptions'], 0, 3);
+        $cohortadjusted = ($data['prediction_model'] ?? '') === \local_certmaster\readiness_predictor::MODEL_COHORT_ADJUSTED;
 
         if (!empty($data['radar'])) {
             $PAGE->requires->js_call_amd('local_certmaster/radar_chart', 'init', ['.block-examreadiness-radar']);
@@ -54,6 +55,9 @@ class block_examreadiness extends block_base {
             'radardomains' => $radardomains,
             'misconceptions' => $misconceptions,
             'empty' => empty($data['radar']),
+            'cohortadjusted' => $cohortadjusted,
+            'passprobability' => $data['pass_probability'] ?? null,
+            'predictionmodel' => $data['prediction_model'] ?? '',
         ]);
 
         return $this->content;

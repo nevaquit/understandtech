@@ -45,6 +45,32 @@ describe('AI Gateway Worker', () => {
 		expect(response.status).toBe(401);
 	});
 
+	it('POST /study-plan without JWT returns 401', async () => {
+		const request = new IncomingRequest('https://ai.understandtech.app/study-plan', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ weak_objectives: [{ shortname: 'obj1', fullname: 'Obj 1', score: 40 }] }),
+		});
+		const ctx = createExecutionContext();
+		const response = await worker.fetch(request, env, ctx);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(401);
+	});
+
+	it('POST /content without JWT returns 401', async () => {
+		const request = new IncomingRequest('https://ai.understandtech.app/content', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ draft_type: 'lesson_summary', source_excerpt: 'Sample lesson text.' }),
+		});
+		const ctx = createExecutionContext();
+		const response = await worker.fetch(request, env, ctx);
+		await waitOnExecutionContext(ctx);
+
+		expect(response.status).toBe(401);
+	});
+
 	it('unknown route returns 404', async () => {
 		const request = new IncomingRequest('https://ai.understandtech.app/unknown');
 		const ctx = createExecutionContext();

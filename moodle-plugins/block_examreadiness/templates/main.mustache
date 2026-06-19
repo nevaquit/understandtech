@@ -6,6 +6,14 @@
         <div class="block-examreadiness-score">
             <div class="display-6 mb-2">{{readiness}}%</div>
             <div class="small text-muted mb-3">{{#str}}readiness_label, block_examreadiness{{/str}}</div>
+            {{#cohortadjusted}}
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    {{#passprobability}}
+                        <span class="badge bg-teal">{{#str}}pass_probability_label, block_examreadiness, {{passprobability}}{{/str}}</span>
+                    {{/passprobability}}
+                    <span class="badge bg-navy">{{#str}}prediction_model_label, block_examreadiness{{/str}}</span>
+                </div>
+            {{/cohortadjusted}}
         </div>
         <figure class="block-examreadiness-chart mb-0">
             <canvas class="block-examreadiness-radar" data-radar="{{radar}}" data-certificationid="{{certificationid}}" height="200"

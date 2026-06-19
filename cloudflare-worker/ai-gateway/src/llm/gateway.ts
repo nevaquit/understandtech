@@ -70,3 +70,15 @@ export async function completeGrade(
 	const content = await completeOpenAi(env, systemPrompt, userContent, signal);
 	return { provider: 'openai', content };
 }
+
+/**
+ * Structured JSON completion with Anthropic primary and OpenAI fallback (grade/study-plan/content).
+ */
+export async function completeStructuredJson(
+	env: Env,
+	systemPrompt: string,
+	userContent: string,
+	signal: AbortSignal,
+): Promise<{ provider: LlmProvider; content: string }> {
+	return completeGrade(env, systemPrompt, userContent, signal);
+}

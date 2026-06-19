@@ -20,6 +20,16 @@ class course_link {
     ];
 
     /**
+     * Resolve Moodle course shortname for a certification shortname.
+     *
+     * @param string $certshortname
+     * @return string|null
+     */
+    public static function course_shortname_for_cert(string $certshortname): ?string {
+        return self::CERT_TO_COURSE[$certshortname] ?? null;
+    }
+
+    /**
      * Build candidate page title prefixes for an objective shortname.
      *
      * @param string $objectiveshortname

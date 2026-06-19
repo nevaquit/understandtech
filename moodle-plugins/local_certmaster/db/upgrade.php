@@ -110,6 +110,25 @@ function xmldb_local_certmaster_upgrade(int $oldversion): bool {
         upgrade_plugin_savepoint(true, 2026061800, 'local', 'certmaster');
     }
 
+    if ($oldversion < 2026061900) {
+        $table = new xmldb_table('certmaster_exam_outcomes');
+        if (!$dbman->table_exists($table)) {
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+            $table->add_field('certificationid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+            $table->add_field('passed', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('readiness_at_exam', XMLDB_TYPE_NUMBER, '10, 2', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('lesson_completion_pct', XMLDB_TYPE_NUMBER, '10, 2', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+            $table->add_index('cert_idx', XMLDB_INDEX_NOTUNIQUE, ['certificationid']);
+            $table->add_index('user_cert', XMLDB_INDEX_NOTUNIQUE, ['userid', 'certificationid']);
+            $dbman->create_table($table);
+        }
+
+        upgrade_plugin_savepoint(true, 2026061900, 'local', 'certmaster');
+    }
+
     return true;
 }
 

@@ -46,10 +46,13 @@ class study_plan {
             ];
         }
 
+        $summary = get_string('studyplansummary', 'local_certmaster');
+        $activities = self::enrich_with_llm($userid, $certificationid, $weak, $misconceptions, $activities, $summary);
+
         $planjson = json_encode([
             'generated_at' => time(),
             'activities' => $activities,
-            'summary' => get_string('studyplansummary', 'local_certmaster'),
+            'summary' => $summary,
         ]);
 
         $existing = $DB->get_record('certmaster_study_plans', [
@@ -131,5 +134,106 @@ class study_plan {
             ];
         }
         return $out;
+    }
+
+    /**
+     * Merge LLM enrichment from Worker when configured; fallback to deterministic plan on failure.
+     *
+     * @param int $userid
+     * @param int $certificationid
+     * @param array $weak
+     * @param array<string, string> $misconceptions
+     * @param array $activities Deterministic activities with URLs.
+     * @param string $summary Summary string (updated by reference).
+     * @return array Enriched activities.
+     */
+    protected static function enrich_with_llm(
+        int $userid,
+        int $certificationid,
+        array $weak,
+        array $misconceptions,
+        array $activities,
+        string &$summary
+    ): array {
+        if (!class_exists('\local_aitutor\worker_client')
+            || !\local_aitutor\worker_client::is_configured()) {
+            return $activities;
+        }
+
+        global $DB;
+
+        $cert = $DB->get_record('certmaster_certifications', ['id' => $certificationid], 'shortname', IGNORE_MISSING);
+        if (!$cert) {
+            return $activities;
+        }
+
+        $courseshort = course_link::course_shortname_for_cert($cert->shortname);
+        if ($courseshort === null) {
+            return $activities;
+        }
+
+        $courseid = (int) $DB->get_field('course', 'id', ['shortname' => $courseshort], IGNORE_MISSING);
+        if ($courseid <= 0) {
+            return $activities;
+        }
+
+        try {
+            $context = \context_course::instance($courseid);
+            $skeleton = array_map(static function (array $activity): array {
+                return [
+                    'objective' => $activity['objective'],
+                    'title' => $activity['title'],
+                    'type' => $activity['type'],
+                    'minutes' => $activity['minutes'],
+                    'reason' => $activity['reason'],
+                    'mastery_score' => $activity['mastery_score'],
+                ];
+            }, $activities);
+
+            $response = \local_aitutor\worker_client::study_plan(
+                $userid,
+                $context,
+                $weak,
+                $misconceptions,
+                $skeleton
+            );
+
+            if (!empty($response->summary)) {
+                $summary = (string) $response->summary;
+            }
+
+            if (empty($response->activities) || !is_array($response->activities)) {
+                return $activities;
+            }
+
+            $byobjective = [];
+            foreach ($activities as $activity) {
+                $byobjective[$activity['objective']] = $activity;
+            }
+
+            $merged = [];
+            foreach ($response->activities as $llmactivity) {
+                $obj = is_object($llmactivity) ? (array) $llmactivity : $llmactivity;
+                $objective = (string) ($obj['objective'] ?? '');
+                if ($objective === '' || !isset($byobjective[$objective])) {
+                    continue;
+                }
+                $base = $byobjective[$objective];
+                $merged[] = [
+                    'objective' => $objective,
+                    'title' => (string) ($obj['title'] ?? $base['title']),
+                    'type' => (string) ($obj['type'] ?? $base['type']),
+                    'minutes' => (int) ($obj['minutes'] ?? $base['minutes']),
+                    'reason' => (string) ($obj['reason'] ?? $base['reason']),
+                    'url' => $base['url'],
+                    'mastery_score' => $base['mastery_score'],
+                ];
+            }
+
+            return $merged !== [] ? $merged : $activities;
+        } catch (\Throwable $e) {
+            debugging('Study plan LLM enrichment skipped: ' . $e->getMessage(), DEBUG_DEVELOPER);
+            return $activities;
+        }
     }
 }

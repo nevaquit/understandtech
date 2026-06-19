@@ -51,10 +51,17 @@ class get_user_readiness extends \external_api {
             ];
         }, $data['radar']);
 
-        return [
+        $result = [
             'overall_readiness' => $data['overall_readiness'],
+            'predictive_readiness' => $data['predictive_readiness'],
+            'prediction_model' => $data['prediction_model'],
             'radar' => $radar,
         ];
+        if ($data['pass_probability'] !== null) {
+            $result['pass_probability'] = $data['pass_probability'];
+        }
+
+        return $result;
     }
 
     /**
@@ -63,6 +70,9 @@ class get_user_readiness extends \external_api {
     public static function execute_returns(): \external_single_structure {
         return new \external_single_structure([
             'overall_readiness' => new \external_value(PARAM_FLOAT, 'Weighted readiness percentage'),
+            'predictive_readiness' => new \external_value(PARAM_FLOAT, 'Cohort-adjusted readiness', VALUE_OPTIONAL),
+            'pass_probability' => new \external_value(PARAM_FLOAT, 'Estimated pass probability', VALUE_OPTIONAL),
+            'prediction_model' => new \external_value(PARAM_ALPHA, 'Prediction model identifier', VALUE_OPTIONAL),
             'radar' => new \external_multiple_structure(
                 new \external_single_structure([
                     'domain' => new \external_value(PARAM_ALPHANUMEXT, 'Domain short name'),

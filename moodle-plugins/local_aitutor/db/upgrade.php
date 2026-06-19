@@ -64,5 +64,29 @@ function xmldb_local_aitutor_upgrade(int $oldversion): bool {
         upgrade_plugin_savepoint(true, 2026060803, 'local', 'aitutor');
     }
 
+    if ($oldversion < 2026061900) {
+        $table = new xmldb_table('aitutor_content_drafts');
+        if (!$dbman->table_exists($table)) {
+            $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+            $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+            $table->add_field('cmid', XMLDB_TYPE_INTEGER, '10', null, null, null);
+            $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+            $table->add_field('draft_type', XMLDB_TYPE_CHAR, '32', null, XMLDB_NOTNULL);
+            $table->add_field('source_excerpt', XMLDB_TYPE_TEXT, null, null, null, null);
+            $table->add_field('draft_json', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL);
+            $table->add_field('status', XMLDB_TYPE_CHAR, '16', null, XMLDB_NOTNULL, null, 'draft');
+            $table->add_field('provider', XMLDB_TYPE_CHAR, '32', null, null, null);
+            $table->add_field('prompt_version', XMLDB_TYPE_CHAR, '16', null, null, null);
+            $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+            $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+            $table->add_index('course_status', XMLDB_INDEX_NOTUNIQUE, ['courseid', 'status']);
+            $table->add_index('user_idx', XMLDB_INDEX_NOTUNIQUE, ['userid']);
+            $dbman->create_table($table);
+        }
+
+        upgrade_plugin_savepoint(true, 2026061900, 'local', 'aitutor');
+    }
+
     return true;
 }
