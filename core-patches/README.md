@@ -2,4 +2,8 @@
 
 Optional Moodle core patches applied during deploy when `apply-patches.sh` is executable.
 
-No patches are currently required for understandtech.app v1.0.0. Add unified diffs here and list them in `apply-patches.sh` when core modifications are unavoidable.
+| Patch | Purpose |
+|-------|---------|
+| `mod-page-skip-filters-cert-courses.patch` | Skip `format_text` filters on SEC701/NET009/APLUS lesson HTML — prevents intermittent "Error reading from database" on large `mod_page` bodies when filter MUC/DB lookups fail |
+
+Applied automatically by `apply-patches.sh` during deploy.

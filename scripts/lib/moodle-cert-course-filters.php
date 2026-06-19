@@ -12,6 +12,23 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 
+/**
+ * Moodle course shortnames for launch-scale certification tracks.
+ *
+ * @return string[]
+ */
+function ut_cert_course_shortnames(): array {
+    return ['SEC701', 'NET009', 'APLUS'];
+}
+
+/**
+ * @param stdClass $course Moodle course record with shortname.
+ * @return bool
+ */
+function ut_is_cert_course(stdClass $course): bool {
+    return in_array($course->shortname, ut_cert_course_shortnames(), true);
+}
+
 require_once($CFG->libdir . '/filterlib.php');
 require_once($CFG->dirroot . '/course/lib.php');
 

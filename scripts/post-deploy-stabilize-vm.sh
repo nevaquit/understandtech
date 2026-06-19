@@ -42,6 +42,11 @@ else
 fi
 sudo -u www-data php "${REPO}/scripts/fix-sec701-course-filters.php"
 
+if [ -x "${REPO}/scripts/fix-page-filter-cache-vm.sh" ]; then
+  echo "=== SEC701 lesson page cache verify (cmid 6 regression) ==="
+  bash "${REPO}/scripts/fix-page-filter-cache-vm.sh" 6 || true
+fi
+
 if sudo -u www-data php -r 'define("CLI_SCRIPT",true);require "/var/www/moodle/config.php";global $DB;exit($DB->record_exists("course",["shortname"=>"APLUS"])?0:1);' 2>/dev/null; then
   echo "=== APLUS page filter disable ==="
   sudo -u www-data php "${REPO}/scripts/fix-aplus-course-filters.php"

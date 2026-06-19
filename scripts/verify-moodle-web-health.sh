@@ -278,28 +278,63 @@ echo (int) (\$cmid ?: 0);
   fi
   PAGE_CMID="${PAGE_CMID:-4}"
 
-  echo "=== mod_page view id=${PAGE_CMID} ==="
-  if ! fetch_url_follow_same_host "$PAGE" "${PROD}${WWW}/mod/page/view.php?id=${PAGE_CMID}"; then
+  verify_mod_page_view() {
+    local cmid="$1"
+    local label="$2"
+    local pagefile="${TMPDIR:-/tmp}/page-${cmid}.html"
+
+    echo "=== mod_page view ${label} id=${cmid} ==="
+    if ! fetch_url_follow_same_host "$pagefile" "${PROD}${WWW}/mod/page/view.php?id=${cmid}"; then
+      return 1
+    fi
+    assert_no_fatal_html "auth_page_${cmid}" "$pagefile"
+
+    if grep -qi 'Error reading from database' "$pagefile"; then
+      echo "page_db_error cmid=${cmid} label=${label}"
+      return 1
+    fi
+
+    if ! grep -q 'ut-lesson-content' "$pagefile"; then
+      echo "page_lesson_content_missing cmid=${cmid} label=${label}"
+      return 1
+    fi
+
+    if grep -qiE '<title>Error \|' "$pagefile"; then
+      echo "page_error_title cmid=${cmid} label=${label}"
+      return 1
+    fi
+
+    echo "page_lesson_content_ok=1 cmid=${cmid} label=${label}"
+    return 0
+  }
+
+  if ! verify_mod_page_view "${PAGE_CMID}" "first_page"; then
     return 1
   fi
-  assert_no_fatal_html "auth_page" "$PAGE"
 
-  if grep -qi 'Error reading from database' "$PAGE"; then
-    echo "page_db_error cmid=${PAGE_CMID}"
-    return 1
+  if command -v sudo >/dev/null 2>&1 && [ -f /var/www/moodle/config.php ]; then
+    REGRESSION_CMID="$(sudo -u www-data php -r "
+define('CLI_SCRIPT', true);
+require '/var/www/moodle/config.php';
+global \$DB;
+\$cmid = \$DB->get_field_sql(
+    'SELECT cm.id FROM {course_modules} cm
+       JOIN {modules} m ON m.id = cm.module AND m.name = ?
+       JOIN {page} p ON p.id = cm.instance
+      WHERE cm.course = ? AND cm.deletioninprogress = 0
+        AND (p.name LIKE ? OR p.name LIKE ?)
+      ORDER BY cm.id ASC',
+    ['page', ${COURSE_ID}, 'SY701.1.4:%', 'SY0-701 1.4:%'],
+    IGNORE_MISSING
+);
+echo (int) (\$cmid ?: 0);
+" 2>/dev/null || true)"
+    if [ -n "${REGRESSION_CMID}" ] && [ "${REGRESSION_CMID}" -gt 0 ] && [ "${REGRESSION_CMID}" != "${PAGE_CMID}" ]; then
+      if ! verify_mod_page_view "${REGRESSION_CMID}" "sy701_1_4"; then
+        return 1
+      fi
+    fi
   fi
-
-  if ! grep -q 'ut-lesson-content' "$PAGE"; then
-    echo "page_lesson_content_missing cmid=${PAGE_CMID}"
-    return 1
-  fi
-
-  if grep -qiE '<title>Error \|' "$PAGE"; then
-    echo "page_error_title cmid=${PAGE_CMID}"
-    return 1
-  fi
-
-  echo "page_lesson_content_ok=1 cmid=${PAGE_CMID}"
 
   echo "verify_moodle_web_health_ok=1"
   return 0

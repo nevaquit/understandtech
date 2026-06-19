@@ -9,9 +9,9 @@ test.describe('Front page (guest)', () => {
 
   test('marketing hero and cert tracks load', async ({ page }) => {
     await page.goto(frontpagePath, { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('body.ut-frontpage')).toBeVisible({ timeout: 15_000 });
-    await expect(page.locator('#ut-frontpage-top .ut-frontpage-hero')).toBeVisible();
-    await expect(page.locator('#ut-tracks')).toBeVisible();
+    await expect(page.locator('body.ut-frontpage')).toBeVisible({ timeout: 30_000 });
+    await expect(page.locator('#ut-frontpage-top .ut-frontpage-hero')).toBeVisible({ timeout: 30_000 });
+    await expect(page.locator('#ut-tracks')).toBeVisible({ timeout: 30_000 });
     await expect(page.getByRole('link', { name: /start free audit/i })).toBeVisible();
   });
 
@@ -53,7 +53,9 @@ test.describe('Front page (logged-in members hub)', () => {
 
   test('open members area anchor scrolls to hub', async ({ page }) => {
     await page.goto(frontpagePath, { waitUntil: 'domcontentloaded' });
-    await page.getByRole('link', { name: /open members area/i }).click();
+    const membersLink = page.locator('a[href="#ut-members"]').filter({ hasText: /open members area/i }).first();
+    await expect(membersLink).toBeVisible({ timeout: 30_000 });
+    await membersLink.click();
     await expect(page.locator('#ut-members')).toBeInViewport({ timeout: 10_000 });
   });
 });

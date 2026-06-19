@@ -1,0 +1,12 @@
+--- a/mod/page/view.php
++++ b/mod/page/view.php
+@@ -71,6 +71,9 @@
+ $formatoptions = new stdClass;
+ $formatoptions->noclean = true;
+ $formatoptions->overflowdiv = true;
+ $formatoptions->context = $context;
++if (in_array($course->shortname, ['SEC701', 'NET009', 'APLUS'], true)) {
++    $formatoptions->filter = false;
++}
+ $content = format_text($content, $page->contentformat, $formatoptions);
+ echo $OUTPUT->box($content, "generalbox center clearfix");
