@@ -21,7 +21,16 @@ fi
 for patch in "${patches[@]}"; do
   echo "core-patches: applying $(basename "$patch")"
   # -N: skip hunks already applied (non-interactive deploys must not prompt).
-  patch -p1 -N -d "$MOODLE_DIR" < "$patch"
+  if patch -p1 -N -d "$MOODLE_DIR" < "$patch"; then
+    continue
+  fi
+  # patch exits 1 when -N skips an already-applied hunk; verify via reverse dry-run.
+  if patch -p1 -R --dry-run -d "$MOODLE_DIR" < "$patch" >/dev/null 2>&1; then
+    echo "core-patches: $(basename "$patch") already applied — skipping"
+    continue
+  fi
+  echo "core-patches: failed to apply $(basename "$patch")" >&2
+  exit 1
 done
 
 echo "core-patches: done"
