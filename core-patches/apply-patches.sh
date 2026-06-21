@@ -20,7 +20,8 @@ fi
 
 for patch in "${patches[@]}"; do
   echo "core-patches: applying $(basename "$patch")"
-  patch -p1 -d "$MOODLE_DIR" < "$patch"
+  # -N: skip hunks already applied (non-interactive deploys must not prompt).
+  patch -p1 -N -d "$MOODLE_DIR" < "$patch"
 done
 
 echo "core-patches: done"
