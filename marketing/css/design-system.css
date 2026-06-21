@@ -189,7 +189,36 @@ input, textarea, select { font: inherit; }
   align-items: center;
   gap: 0.75rem;
   flex-shrink: 0;
+  color: var(--ut-navy);
+  text-decoration: none;
 }
+
+.ut-nav-brand:hover .ut-brand-primary,
+.ut-nav-brand:focus-visible .ut-brand-primary {
+  color: var(--ut-navy);
+}
+
+.ut-brand-wordmark {
+  font-family: var(--ut-font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.ut-brand-primary { color: var(--ut-navy); }
+.ut-brand-tech { color: var(--ut-ocw-red); }
+
+/* Legacy alias — keep nav/footer wordmarks readable on light surfaces */
+.ut-nav-brand-name {
+  font-family: var(--ut-font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ut-navy);
+  letter-spacing: 0.01em;
+}
+
+.ut-nav-brand-name span { color: var(--ut-ocw-red); }
 
 .ut-nav-brand-mark {
   width: 2rem; height: 2rem;
@@ -200,16 +229,6 @@ input, textarea, select { font: inherit; }
 }
 
 .ut-nav-brand-mark svg { width: 1.2rem; height: 1.2rem; }
-
-.ut-nav-brand-name {
-  font-family: var(--ut-font-head);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--ut-navy);
-  letter-spacing: 0.01em;
-}
-
-.ut-nav-brand-name span { color: var(--ut-ocw-red); }
 
 .ut-nav-links {
   display: flex;
@@ -815,6 +834,21 @@ code {
   max-width: 28ch;
 }
 
+.ut-footer-brand-link,
+.ut-footer-brand-link:hover,
+.ut-footer-brand-link:focus-visible {
+  color: var(--ut-navy);
+  text-decoration: none;
+}
+
+.ut-footer-brand .ut-brand-primary {
+  color: var(--ut-navy);
+}
+
+.ut-footer-brand .ut-brand-tech {
+  color: var(--ut-ocw-red);
+}
+
 .ut-footer-col h4 {
   font-family: var(--ut-font-head);
   font-size: 0.85rem;
@@ -949,7 +983,7 @@ code {
 
 .dark-section p,
 .dark-section li,
-.dark-section span:not(.badge):not(.ut-eyebrow):not(.ut-eyebrow-gold):not(.ut-section-pill) {
+.dark-section span:not(.badge):not(.ut-eyebrow):not(.ut-eyebrow-gold):not(.ut-section-pill):not(.ut-brand-primary):not(.ut-brand-tech) {
   color: rgba(255,255,255,0.88);
 }
 

@@ -13,6 +13,10 @@ const ROOT      = isSubPage ? '../'  : '/';
 const PAGES     = isSubPage ? ''     : 'pages/';
 const LOGIN_URL = '/learn/login/index.php?wantsurl=%2Flearn%2Fmy%2F';
 
+function brandWordmark() {
+  return `<span class="ut-brand-wordmark"><span class="ut-brand-primary">Understand</span><span class="ut-brand-tech">Tech</span></span>`;
+}
+
 function buildNav() {
   return `
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -25,7 +29,7 @@ function buildNav() {
         <path d="M2 12l10 5 10-5"/>
       </svg>
     </div>
-    <span class="ut-nav-brand-name">Understand<span>Tech</span></span>
+    ${brandWordmark()}
   </a>
 
   <button class="ut-nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
@@ -59,7 +63,7 @@ function buildFooter() {
   <div class="ut-container">
     <div class="ut-footer-grid">
       <div class="ut-footer-brand">
-        <a href="${ROOT}" class="ut-nav-brand" style="display:inline-flex;margin-bottom:1rem;" aria-label="UnderstandTech home">
+        <a href="${ROOT}" class="ut-nav-brand ut-footer-brand-link" style="display:inline-flex;margin-bottom:1rem;" aria-label="UnderstandTech home">
           <div class="ut-nav-brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="#0B1F3A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -67,7 +71,7 @@ function buildFooter() {
               <path d="M2 12l10 5 10-5"/>
             </svg>
           </div>
-          <span class="ut-nav-brand-name">Understand<span>Tech</span></span>
+          ${brandWordmark()}
         </a>
         <p>The AI-powered certification platform that turns complex technology into mastery — one adaptive lesson at a time. A Veteran Owned Small Business (VOSB).</p>
       </div>
