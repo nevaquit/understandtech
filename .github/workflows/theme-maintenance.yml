@@ -36,8 +36,8 @@ jobs:
       - name: Verify deployed CSS tokens
         run: |
           set -euo pipefail
-          grep -qF '--ut-action' /var/www/moodle/theme/understandtech/style/global-shell.css
-          grep -qF 'var(--ut-action)' /var/www/moodle/theme/understandtech/style/global-shell.css
+          grep -qF -- '--ut-action' /var/www/moodle/theme/understandtech/style/global-shell.css
+          grep -qF -- 'var(--ut-action)' /var/www/moodle/theme/understandtech/style/global-shell.css
           echo "global_shell_conversion_tokens_ok=1"
           if grep -q 'formatoptions->filter = false' /var/www/moodle/mod/page/view.php; then
             echo "mod_page_filter_patch_ok=1"
@@ -70,8 +70,8 @@ jobs:
       - name: Verify deployed CSS tokens
         run: |
           set -euo pipefail
-          grep -qF '--ut-action' /var/www/moodle/theme/understandtech/style/global-shell.css
-          grep -qF 'var(--ut-action)' /var/www/moodle/theme/understandtech/style/global-shell.css
+          grep -qF -- '--ut-action' /var/www/moodle/theme/understandtech/style/global-shell.css
+          grep -qF -- 'var(--ut-action)' /var/www/moodle/theme/understandtech/style/global-shell.css
           echo "global_shell_conversion_tokens_ok=1"
           if grep -q 'formatoptions->filter = false' /var/www/moodle/mod/page/view.php; then
             echo "mod_page_filter_patch_ok=1"
