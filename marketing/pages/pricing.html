@@ -5,7 +5,7 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="UnderstandTech Pricing — Transparent plans for individuals, teams, and enterprises. Start free for 14 days.">
-  <meta name="theme-color" content="#0B1F3A">
+  <meta name="theme-color" content="#ffffff">
   <meta property="og:title" content="Pricing — UnderstandTech">
   <meta property="og:description" content="UnderstandTech Pricing — Transparent plans for individuals, teams, and enterprises. Start free for 14 days.">
   <meta property="og:url" content="https://understandtech.app/pages/pricing.html">
@@ -24,25 +24,26 @@
         href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap"></noscript>
 
-  <link rel="stylesheet" href="../css/design-system.css?v=20260608">
+  <link rel="stylesheet" href="../css/design-system.css?v=20260621">
   <style>
     .pricing-hero {
-      background: linear-gradient(160deg, var(--ut-navy-deep) 0%, var(--ut-navy) 100%);
+      background: var(--ut-bg);
+      border-bottom: 1px solid var(--ut-border);
       padding: calc(var(--ut-nav-h) + var(--ut-space-lg)) 0 var(--ut-space-lg);
       text-align: center;
     }
 
-    .pricing-hero h1 { font-size: var(--ut-text-3xl); color: #fff; margin-bottom: var(--ut-space-md); }
-    .pricing-hero h1 .accent { color: var(--ut-gold); }
-    .pricing-hero p { font-size: var(--ut-text-lg); color: rgba(255,255,255,0.7); max-width: 55ch; margin: 0 auto var(--ut-space-xl); }
+    .pricing-hero h1 { font-size: var(--ut-text-3xl); color: var(--ut-navy); margin-bottom: var(--ut-space-md); }
+    .pricing-hero h1 .accent { color: var(--ut-ocw-red); }
+    .pricing-hero p { font-size: var(--ut-text-lg); color: var(--ut-text-muted); max-width: 55ch; margin: 0 auto var(--ut-space-xl); }
 
     /* Toggle */
     .billing-toggle {
       display: inline-flex;
       align-items: center;
       gap: 0.75rem;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--ut-surface-2);
+      border: 1px solid var(--ut-border);
       border-radius: 9999px;
       padding: 0.35rem;
     }
@@ -52,7 +53,7 @@
       font-size: 0.85rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.82);
+      color: var(--ut-text-muted);
       padding: 0.35rem 0.75rem;
       cursor: pointer;
       border-radius: 9999px;
@@ -103,9 +104,9 @@
     .pricing-card:hover { transform: translateY(-4px); box-shadow: var(--ut-shadow-xl); }
 
     .pricing-card.featured {
-      background: var(--ut-navy);
-      border-color: var(--ut-gold);
-      box-shadow: 0 0 0 1px var(--ut-gold), var(--ut-shadow-xl);
+      background: var(--ut-bg);
+      border: 2px solid var(--ut-ocw-red);
+      box-shadow: var(--ut-shadow-lg);
       transform: scale(1.03);
     }
 
@@ -138,7 +139,7 @@
       margin-bottom: 0.5rem;
     }
 
-    .pricing-card.featured .pricing-tier { color: #4dd9cc; }
+    .pricing-card.featured .pricing-tier { color: var(--ut-ocw-red); }
 
     .pricing-name {
       font-family: var(--ut-font-head);
@@ -148,16 +149,12 @@
       margin-bottom: 0.5rem;
     }
 
-    .pricing-card.featured .pricing-name { color: #fff; }
-
     .pricing-desc {
       font-size: 0.9rem;
       color: var(--ut-text-muted);
       line-height: 1.55;
       margin-bottom: var(--ut-space-lg);
     }
-
-    .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.85); }
 
     .pricing-price {
       display: flex;
@@ -173,8 +170,6 @@
       color: var(--ut-text-muted);
     }
 
-    .pricing-card.featured .price-currency { color: rgba(255,255,255,0.85); }
-
     .price-amount {
       font-family: var(--ut-font-head);
       font-size: 3rem;
@@ -183,7 +178,7 @@
       color: var(--ut-text);
     }
 
-    .pricing-card.featured .price-amount { color: #fff; }
+    .pricing-card.featured .price-amount { color: var(--ut-ocw-red); }
 
     .price-period {
       font-family: var(--ut-font-head);
@@ -191,8 +186,6 @@
       font-weight: 600;
       color: var(--ut-text-muted);
     }
-
-    .pricing-card.featured .price-period { color: rgba(255,255,255,0.85); }
 
     .pricing-features {
       list-style: none;
@@ -212,16 +205,16 @@
       line-height: 1.45;
     }
 
-    .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.88); }
-
     .pricing-features li svg {
       color: var(--ut-teal);
       flex-shrink: 0;
       margin-top: 0.1rem;
     }
 
-    .pricing-features li.muted svg { color: rgba(255,255,255,0.2); }
+    .pricing-features li.muted svg { color: var(--ut-border); }
     .pricing-features li.muted { opacity: 0.65; }
+
+    .pricing-card.featured .pricing-features li svg { color: var(--ut-gold); }
 
     /* Comparison Table */
     .comparison-table {
@@ -251,8 +244,9 @@
     .comparison-table thead th:last-child  { border-radius: 0 var(--ut-radius-sm) 0 0; }
 
     .comparison-table thead th.featured-col {
-      background: var(--ut-navy);
-      color: var(--ut-gold);
+      background: var(--ut-surface-2);
+      color: var(--ut-ocw-red);
+      border-bottom: 2px solid var(--ut-ocw-red);
     }
 
     .comparison-table tbody tr:hover td { background: var(--ut-surface-2); }
@@ -260,7 +254,7 @@
     .comparison-table td:not(:first-child) { text-align: center; }
 
     .check-yes { color: var(--ut-teal); }
-    .check-no  { color: rgba(255,255,255,0.25); }
+    .check-no  { color: var(--ut-text-muted); opacity: 0.45; }
 
     /* FAQ */
     .faq-grid {
@@ -593,12 +587,12 @@
     <!-- ═══ CTA ══════════════════════════════════════════════════════ -->
     <section class="ut-section" style="background:var(--ut-surface-2);">
       <div class="ut-container">
-        <div style="background:linear-gradient(135deg,var(--ut-navy) 0%,#0f2a4a 100%);border-radius:var(--ut-radius-xl);padding:var(--ut-space-2xl);text-align:center;border:1px solid rgba(201,162,39,0.2);" class="reveal">
+        <div class="cta-banner reveal">
           <span class="ut-eyebrow ut-eyebrow-gold">Zero Risk. Infinite Upside.</span>
-          <h2 style="font-size:var(--ut-text-3xl);color:#fff;margin-bottom:var(--ut-space-md);">Don't let another promotion pass you by.</h2>
-          <p style="color:rgba(255,255,255,0.7);font-size:var(--ut-text-lg);max-width:50ch;margin:0 auto var(--ut-space-xl);">Join 8,500+ professionals who have already upgraded their careers. Start your 14-day free trial today. No credit card required. Cancel anytime.</p>
+          <h2>Don't let another promotion pass you by.</h2>
+          <p>Join 8,500+ professionals who have already upgraded their careers. Start your 14-day free trial today. No credit card required. Cancel anytime.</p>
           <a href="/learn/login/index.php?wantsurl=%2Flearn%2Fmy%2F" class="btn btn-gold btn-lg">Claim Your Free 14-Day Trial</a>
-          <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;margin-top:1rem;">Takes 30 seconds. Instant access.</p>
+          <p style="font-size:0.8rem;margin-top:1rem;color:var(--ut-text-muted);">Takes 30 seconds. Instant access.</p>
         </div>
       </div>
     </section>

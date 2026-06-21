@@ -5,7 +5,7 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="UnderstandTech Gamification — XP, streaks, leaderboards, and achievement badges that make daily learning genuinely compelling.">
-  <meta name="theme-color" content="#0B1F3A">
+  <meta name="theme-color" content="#ffffff">
   <meta property="og:title" content="Gamification — UnderstandTech">
   <meta property="og:description" content="UnderstandTech Gamification — XP, streaks, leaderboards, and achievement badges that make daily learning genuinely compelling.">
   <meta property="og:url" content="https://understandtech.app/pages/gamification.html">
@@ -24,25 +24,8 @@
         href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap"></noscript>
 
-  <link rel="stylesheet" href="../css/design-system.css?v=20260608">
+  <link rel="stylesheet" href="../css/design-system.css?v=20260621">
   <style>
-    .page-hero {
-      background: linear-gradient(160deg, var(--ut-navy-deep) 0%, #0a1f0e 50%, var(--ut-navy) 100%);
-      padding: calc(var(--ut-nav-h) + var(--ut-space-2xl)) 0 var(--ut-space-2xl);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .page-hero::before {
-      content: '';
-      position: absolute;
-      top: 0; right: -10%;
-      width: 55%;
-      height: 100%;
-      background: radial-gradient(ellipse 70% 80% at 70% 50%, rgba(26,138,125,0.2) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
     .page-hero-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -55,19 +38,13 @@
       .gamify-visual { display: none; }
     }
 
-    .page-hero h1 { font-size: var(--ut-text-3xl); color: #fff; line-height: 1.1; margin-bottom: var(--ut-space-md); }
-    .page-hero h1 .accent { color: var(--ut-gold); }
-    .page-hero-lead { font-size: var(--ut-text-lg); color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 52ch; margin-bottom: var(--ut-space-xl); }
-
     /* Profile Card */
     .profile-card {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--ut-surface);
+      border: 1px solid var(--ut-border);
       border-radius: var(--ut-radius-lg);
       padding: var(--ut-space-lg);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+      box-shadow: var(--ut-shadow-lg);
     }
 
     .profile-header {
@@ -76,7 +53,7 @@
       gap: 1rem;
       margin-bottom: var(--ut-space-lg);
       padding-bottom: var(--ut-space-md);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid var(--ut-border);
     }
 
     .profile-avatar {
@@ -95,7 +72,7 @@
       font-family: var(--ut-font-head);
       font-weight: 700;
       font-size: 1.1rem;
-      color: #fff;
+      color: var(--ut-text);
       display: block;
     }
 
@@ -127,7 +104,7 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.82);
+      color: var(--ut-text-muted);
     }
 
     .xp-section {
@@ -142,7 +119,7 @@
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.82);
+      color: var(--ut-text-muted);
       margin-bottom: 0.4rem;
     }
 
@@ -163,8 +140,8 @@
       position: relative;
     }
 
-    .badge-icon-earned { background: rgba(201,162,39,0.2); border: 1px solid rgba(201,162,39,0.3); }
-    .badge-icon-locked { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); opacity: 0.65; }
+    .badge-icon-earned { background: var(--ut-gold-dim); border: 1px solid rgba(201,162,39,0.3); }
+    .badge-icon-locked { background: var(--ut-surface-2); border: 1px solid var(--ut-border); opacity: 0.65; }
 
     .streak-row {
       display: flex;
@@ -182,14 +159,14 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.82);
+      color: var(--ut-text-muted);
     }
 
     .streak-value {
       font-family: var(--ut-font-head);
       font-size: 1.4rem;
       font-weight: 700;
-      color: #4dd9cc;
+      color: var(--ut-teal);
     }
 
     /* Leaderboard */
@@ -202,11 +179,12 @@
     }
 
     .leaderboard-header {
-      background: var(--ut-navy);
+      background: var(--ut-surface-2);
       padding: 1rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid var(--ut-border);
     }
 
     .leaderboard-title {
@@ -215,14 +193,14 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--ut-gold);
+      color: var(--ut-ocw-red);
     }
 
     .leaderboard-period {
       font-family: var(--ut-font-head);
       font-size: 0.75rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.82);
+      color: var(--ut-text-muted);
     }
 
     .leaderboard-row {
@@ -310,15 +288,6 @@
 
     .achievement-card h4 { font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--ut-text); }
     .achievement-card p  { font-size: 0.82rem; color: var(--ut-text-muted); line-height: 1.5; }
-
-    /* Dark mode overrides for gamification page */
-    @media (prefers-color-scheme: dark) {
-      .lb-name { color: #e2e8f0 !important; }
-      .achievement-card h4 { color: #e2e8f0 !important; }
-      .achievement-card p { color: #94a3b8 !important; }
-      .leaderboard-header { background: #0f1e35 !important; }
-      .lb-avatar { background: #1a3a5c !important; }
-    }
   </style>
 </head>
 <body>
@@ -551,10 +520,10 @@
     <!-- ═══ CTA ══════════════════════════════════════════════════════ -->
     <section class="ut-section">
       <div class="ut-container">
-        <div class="cta-banner reveal" style="background:linear-gradient(135deg,var(--ut-navy) 0%,#0a1f0e 100%);border-radius:var(--ut-radius-xl);padding:var(--ut-space-2xl);text-align:center;border:1px solid rgba(26,138,125,0.25);">
-          <span class="ut-eyebrow" style="color:var(--ut-teal);">Start Your Streak</span>
-          <h2 style="font-size:var(--ut-text-3xl);color:#fff;margin-bottom:var(--ut-space-md);">Day one starts today</h2>
-          <p style="color:rgba(255,255,255,0.7);font-size:var(--ut-text-lg);max-width:50ch;margin:0 auto var(--ut-space-xl);">Every expert started with a single lesson. Start yours now — free for 14 days, no credit card required.</p>
+        <div class="cta-banner reveal">
+          <span class="ut-eyebrow">Start Your Streak</span>
+          <h2>Day one starts today</h2>
+          <p>Every expert started with a single lesson. Start yours now — free for 14 days, no credit card required.</p>
           <a href="/learn/login/index.php?wantsurl=%2Flearn%2Fmy%2F" class="btn btn-gold btn-lg">Start Free Trial</a>
         </div>
       </div>

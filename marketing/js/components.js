@@ -67,7 +67,7 @@ function buildFooter() {
               <path d="M2 12l10 5 10-5"/>
             </svg>
           </div>
-          <span class="ut-nav-brand-name" style="color:#fff">Understand<span>Tech</span></span>
+          <span class="ut-nav-brand-name">Understand<span>Tech</span></span>
         </a>
         <p>The AI-powered certification platform that turns complex technology into mastery — one adaptive lesson at a time. A Veteran Owned Small Business (VOSB).</p>
       </div>

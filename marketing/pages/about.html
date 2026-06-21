@@ -5,7 +5,7 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="About UnderstandTech — Our mission, our team, and the philosophy behind the platform that turns technology confusion into genuine mastery.">
-  <meta name="theme-color" content="#0B1F3A">
+  <meta name="theme-color" content="#ffffff">
   <meta property="og:title" content="About — UnderstandTech">
   <meta property="og:description" content="About UnderstandTech — Our mission, our team, and the philosophy behind the platform that turns technology confusion into genuine mastery.">
   <meta property="og:url" content="https://understandtech.app/pages/about.html">
@@ -24,27 +24,19 @@
         href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap"></noscript>
 
-  <link rel="stylesheet" href="../css/design-system.css?v=20260608">
+  <link rel="stylesheet" href="../css/design-system.css?v=20260621">
   <style>
     .about-hero {
-      background: linear-gradient(160deg, var(--ut-navy-deep) 0%, var(--ut-navy) 100%);
+      background: var(--ut-bg);
+      border-bottom: 1px solid var(--ut-border);
       padding: calc(var(--ut-nav-h) + var(--ut-space-2xl)) 0 var(--ut-space-2xl);
       text-align: center;
       position: relative;
-      overflow: hidden;
     }
 
-    .about-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(26,138,125,0.15) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .about-hero h1 { font-size: var(--ut-text-3xl); color: #fff; margin-bottom: var(--ut-space-md); position: relative; }
-    .about-hero h1 .accent { color: var(--ut-gold); }
-    .about-hero-lead { font-size: var(--ut-text-lg); color: rgba(255,255,255,0.75); max-width: 60ch; margin: 0 auto; line-height: 1.7; position: relative; }
+    .about-hero h1 { font-size: var(--ut-text-3xl); color: var(--ut-navy); margin-bottom: var(--ut-space-md); position: relative; }
+    .about-hero h1 .accent { color: var(--ut-ocw-red); }
+    .about-hero-lead { font-size: var(--ut-text-lg); color: var(--ut-text-muted); max-width: 60ch; margin: 0 auto; line-height: 1.7; position: relative; }
 
     /* Mission Section */
     .mission-grid {
@@ -100,7 +92,7 @@
       font-family: var(--ut-font-head);
       font-size: 3rem;
       font-weight: 700;
-      color: rgba(255,255,255,0.06);
+      color: rgba(11,31,58,0.06);
       line-height: 1;
       margin-bottom: -0.5rem;
     }
@@ -233,7 +225,7 @@
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-            color: rgba(255,255,255,0.45);
+            color: var(--ut-text-muted);
       transition: color var(--ut-duration-sm) var(--ut-ease);
     }
     .press-item:hover { color: var(--ut-text); }
@@ -468,10 +460,10 @@
     <!-- ═══ CTA ══════════════════════════════════════════════════════ -->
     <section class="ut-section">
       <div class="ut-container">
-        <div style="background:linear-gradient(135deg,var(--ut-navy) 0%,#0f2a4a 100%);border-radius:var(--ut-radius-xl);padding:var(--ut-space-2xl);text-align:center;border:1px solid rgba(201,162,39,0.2);" class="reveal">
+        <div class="cta-banner reveal">
           <span class="ut-eyebrow ut-eyebrow-gold">Join Us</span>
-          <h2 style="font-size:var(--ut-text-3xl);color:#fff;margin-bottom:var(--ut-space-md);">Be part of the next chapter</h2>
-          <p style="color:rgba(255,255,255,0.7);font-size:var(--ut-text-lg);max-width:52ch;margin:0 auto var(--ut-space-xl);">Whether you're a learner, an enterprise, or a potential team member — we'd love to have you involved in building the future of technology education.</p>
+          <h2>Be part of the next chapter</h2>
+          <p>Whether you're a learner, an enterprise, or a potential team member — we'd love to have you involved in building the future of technology education.</p>
           <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
             <a href="../pages/pricing.html" class="btn btn-gold btn-lg">Start Learning Free</a>
             <a href="mailto:careers@understandtech.app?subject=Career%20Inquiry" class="btn btn-outline btn-lg">View Open Roles</a>

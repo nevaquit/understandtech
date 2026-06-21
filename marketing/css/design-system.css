@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
-   UnderstandTech Design System — v2.0
-   Brand tokens sourced from theme_understandtech/lib.php
-   All design repairs from Architecture & Design Review applied
+   UnderstandTech Design System — v3.0 (Marketing)
+   MIT OCW-inspired: white-forward, high readability, minimal chrome.
+   Brand accents (navy, gold, teal) used sparingly on light surfaces.
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ─── Custom Properties (Design Tokens) ─────────────────────────── */
@@ -9,33 +9,36 @@
   /* Brand Colors */
   --ut-navy:        #0B1F3A;
   --ut-navy-deep:   #071528;
-  --ut-navy-mid:    #132038;
+  --ut-navy-mid:    #1a3358;
   --ut-gold:        #C9A227;
   --ut-gold-light:  #E8C547;
-  --ut-gold-dim:    rgba(201,162,39,0.15);
+  --ut-gold-dim:    rgba(201,162,39,0.12);
   --ut-teal:        #1A8A7D;
   --ut-teal-dark:   #157a6e;
-  --ut-teal-dim:    rgba(26,138,125,0.12);
+  --ut-teal-dim:    rgba(26,138,125,0.10);
   --ut-purple:      #8B5CF6;
   --ut-purple-light: #C4B5FD;
-  --ut-purple-dim:  rgba(139,92,246,0.24);
+  --ut-purple-dim:  rgba(139,92,246,0.12);
 
-  /* Semantic Surfaces — Dark-first design */
-  --ut-bg:          #0a1628;
-  --ut-surface:     #0f1e35;
-  --ut-surface-2:   #132038;
-  --ut-text:        #e2e8f0;
-  --ut-text-muted:  #94a3b8;
-  --ut-border:      rgba(255,255,255,0.08);
-  --ut-border-med:  rgba(255,255,255,0.14);
-  --ut-shadow-sm:   0 1px 4px rgba(0,0,0,0.3);
-  --ut-shadow-md:   0 4px 16px rgba(0,0,0,0.4);
-  --ut-shadow-lg:   0 8px 32px rgba(0,0,0,0.5);
+  /* MIT OCW-inspired accent (primary links & CTAs) */
+  --ut-ocw-red:     #A31F34;
+  --ut-ocw-red-dark: #750014;
+  --ut-link:        var(--ut-ocw-red);
+  --ut-link-hover:  var(--ut-ocw-red-dark);
 
-  /* Typography */
-  --ut-font-head:   'Rajdhani', 'Segoe UI', sans-serif;
-  --ut-font-body:   'Source Serif 4', Georgia, serif;
-  --ut-font-mono:   'Share Tech Mono', ui-monospace, monospace;
+  /* Semantic Surfaces — Light-first (OCW-style readability) */
+  --ut-bg:          #ffffff;
+  --ut-surface:     #ffffff;
+  --ut-surface-2:   #f5f5f5;
+  --ut-text:        #212121;
+  --ut-text-muted:  #666666;
+  --ut-border:      #e0e0e0;
+  --ut-border-med:  #dadce0;
+
+  /* Typography — clean sans (OCW-like) */
+  --ut-font-head:   'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
+  --ut-font-body:   'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
+  --ut-font-mono:   ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
 
   /* Fluid Spacing (mirrors theme_understandtech clamp values) */
   --ut-space-xs:    clamp(0.25rem, 0.2rem + 0.25vw, 0.375rem);
@@ -86,104 +89,6 @@
   --ut-content-max: min(100%, 1100px);
 }
 
-/* ─── Dark Mode override (already dark-first, just ensure consistency) ── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Variables already set to dark defaults above — no changes needed */
-  }
-
-  /* ── Override inline style="color:var(--ut-navy)" everywhere ──────
-     Inline styles have higher specificity than class rules, so we use
-     attribute selectors with !important to ensure dark-mode legibility.
-     These selectors ONLY match elements with the exact inline strings.
-  ── */
-  [style*="color:var(--ut-navy)"],
-  [style*="color: var(--ut-navy)"] {
-    color: #e2e8f0 !important;
-  }
-
-  [style*="color:var(--ut-text-muted)"],
-  [style*="color: var(--ut-text-muted)"] {
-    color: #94a3b8 !important;
-  }
-
-  /* ── Headings default to navy in light mode — flip to light ──────── */
-  h1, h2, h3, h4, h5, h6 {
-    color: #e2e8f0;
-  }
-
-  /* ── Preserve intentionally white/gold/teal text ─────────────────── */
-  .hero h1, .page-hero h1 { color: #ffffff !important; }
-  .cta-banner h2 { color: #ffffff !important; }
-  .cta-banner p { color: rgba(255,255,255,0.82) !important; }
-
-  /* ── Cards on dark surface ────────────────────────────────────────── */
-  .ut-card h3 { color: #e2e8f0 !important; }
-  .ut-card p  { color: #94a3b8 !important; }
-
-  /* ── Step cards ───────────────────────────────────────────────────── */
-  .step-card h3 { color: #e2e8f0 !important; }
-  .step-card p  { color: #94a3b8 !important; }
-
-  /* ── Capability / feature detail items ───────────────────────────── */
-  .capability-item h4 { color: #e2e8f0 !important; }
-  .capability-item p  { color: #94a3b8 !important; }
-
-  /* ── Certification track cards ────────────────────────────────────── */
-  .track-card h3 { color: #e2e8f0 !important; }
-  .track-card p  { color: #94a3b8 !important; }
-
-  /* ── About page: values, team, timeline, press ────────────────────── */
-  .value-card h3, .team-card h3, .timeline-item h3,
-  .press-item, .mission-quote { color: #e2e8f0 !important; }
-  .value-card p, .team-card p, .timeline-item p { color: #94a3b8 !important; }
-
-  /* ── Gamification: leaderboard, achievements ─────────────────────── */
-  .lb-name  { color: #e2e8f0 !important; }
-  .lb-score { color: #94a3b8 !important; }
-  .achievement-card h4 { color: #e2e8f0 !important; }
-  .achievement-card p  { color: #94a3b8 !important; }
-
-  /* ── Pricing cards ────────────────────────────────────────────────── */
-  .ut-pricing-card h3 { color: #e2e8f0 !important; }
-  .ut-pricing-card p  { color: #94a3b8 !important; }
-  .ut-price { color: #e2e8f0 !important; }
-
-  /* ── Stats ────────────────────────────────────────────────────────── */
-  .ut-stat-value { color: #e2e8f0 !important; }
-  .ut-stat-label { color: #94a3b8 !important; }
-
-  /* ── Testimonials ─────────────────────────────────────────────────── */
-  .ut-testimonial-text { color: #cbd5e1 !important; }
-  .ut-author-name { color: #e2e8f0 !important; }
-  .ut-author-role { color: #94a3b8 !important; }
-
-  /* ── FAQ ──────────────────────────────────────────────────────────── */
-  .ut-faq-trigger { color: #e2e8f0 !important; }
-  .ut-faq-body p  { color: #94a3b8 !important; }
-
-  /* ── Section labels ───────────────────────────────────────────────── */
-  .ut-section-label h2 { color: #e2e8f0 !important; }
-
-  /* ── Code blocks ──────────────────────────────────────────────────── */
-  code {
-    background: rgba(255,255,255,0.08) !important;
-    color: #93c5fd !important;
-  }
-
-  /* ── Logo bar items ───────────────────────────────────────────────── */
-  .logo-item { color: rgba(255,255,255,0.55) !important; }
-  .logo-item:hover { color: rgba(255,255,255,0.9) !important; }
-  .logos-bar-label { color: #94a3b8 !important; }
-
-  /* ── Logos bar and stats bar backgrounds ─────────────────────────── */
-  .logos-bar { background: var(--ut-surface) !important; }
-  .ut-stat-block { background: var(--ut-surface) !important; }
-  .ut-testimonial { background: var(--ut-surface) !important; }
-  .ut-card { background: var(--ut-surface) !important; }
-  .step-card { background: var(--ut-surface) !important; }
-}
-
 /* ─── Reduced Motion ─────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -201,6 +106,7 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   tab-size: 4;
+  color-scheme: light;
 }
 
 body {
@@ -243,8 +149,9 @@ input, textarea, select { font: inherit; }
   top: 0; left: 0; right: 0;
   z-index: var(--z-nav);
   height: var(--ut-nav-h);
-  background: var(--ut-navy);
-  border-bottom: 2px solid var(--ut-gold);
+  background: var(--ut-bg);
+  border-bottom: 1px solid var(--ut-border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   display: flex;
   align-items: center;
   padding: 0 clamp(1rem, 4vw, 2.5rem);
@@ -270,14 +177,13 @@ input, textarea, select { font: inherit; }
 
 .ut-nav-brand-name {
   font-family: var(--ut-font-head);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  color: #fff;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  color: var(--ut-navy);
+  letter-spacing: 0.01em;
 }
 
-.ut-nav-brand-name span { color: var(--ut-gold); }
+.ut-nav-brand-name span { color: var(--ut-ocw-red); }
 
 .ut-nav-links {
   display: flex;
@@ -292,11 +198,9 @@ input, textarea, select { font: inherit; }
   height: var(--ut-nav-h);
   padding: 0 1rem;
   font-family: var(--ut-font-head);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.8);
+  color: var(--ut-text);
   transition: color var(--ut-duration-sm) var(--ut-ease),
               background var(--ut-duration-sm) var(--ut-ease);
   position: relative;
@@ -307,7 +211,7 @@ input, textarea, select { font: inherit; }
   position: absolute;
   bottom: 0; left: 1rem; right: 1rem;
   height: 2px;
-  background: var(--ut-gold);
+  background: var(--ut-ocw-red);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform var(--ut-duration-sm) var(--ut-ease);
@@ -315,8 +219,8 @@ input, textarea, select { font: inherit; }
 
 .ut-nav-links a:hover,
 .ut-nav-links a[aria-current="page"] {
-  color: var(--ut-gold);
-  background: rgba(255,255,255,0.04);
+  color: var(--ut-ocw-red);
+  background: transparent;
 }
 
 .ut-nav-links a:hover::after,
@@ -332,10 +236,10 @@ input, textarea, select { font: inherit; }
   margin-left: 1rem;
   padding: 0.5rem 1.25rem !important;
   height: auto !important;
-  background: var(--ut-teal) !important;
+  background: var(--ut-ocw-red) !important;
   color: #fff !important;
   border-radius: var(--ut-radius-sm) !important;
-  font-size: 0.85rem !important;
+  font-size: 0.875rem !important;
   transition: background var(--ut-duration-sm) var(--ut-ease),
               transform var(--ut-duration-sm) var(--ut-ease) !important;
 }
@@ -343,8 +247,16 @@ input, textarea, select { font: inherit; }
 .ut-nav-cta::after { display: none !important; }
 
 .ut-nav-cta:hover {
-  background: var(--ut-teal-dark) !important;
+  background: var(--ut-ocw-red-dark) !important;
   transform: translateY(-1px);
+}
+
+.ut-nav-login {
+  color: var(--ut-text-muted) !important;
+}
+
+.ut-nav-login:hover {
+  color: var(--ut-ocw-red) !important;
 }
 
 /* Mobile nav toggle */
@@ -352,7 +264,7 @@ input, textarea, select { font: inherit; }
   display: none;
   margin-left: auto;
   padding: 0.5rem;
-  color: #fff;
+  color: var(--ut-navy);
   border-radius: var(--ut-radius-sm);
 }
 
@@ -366,8 +278,9 @@ input, textarea, select { font: inherit; }
   .ut-nav-links {
     position: fixed;
     top: var(--ut-nav-h); left: 0; right: 0;
-    background: var(--ut-navy-deep);
-    border-bottom: 2px solid var(--ut-gold);
+    background: var(--ut-bg);
+    border-bottom: 1px solid var(--ut-border);
+    box-shadow: var(--ut-shadow-md);
     flex-direction: column;
     align-items: stretch;
     gap: 0;
@@ -419,9 +332,9 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--ut-font-head);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ut-teal);
+  color: var(--ut-ocw-red);
   display: block;
   margin-bottom: 0.75rem;
 }
@@ -443,8 +356,8 @@ h1, h2, h3, h4, h5, h6 {
 code {
   font-family: var(--ut-font-mono);
   font-size: 0.88em;
-  background: rgba(255,255,255,0.08);
-  color: #93c5fd;
+  background: var(--ut-surface-2);
+  color: var(--ut-navy);
   padding: 0.15rem 0.4rem;
   border-radius: 0.25rem;
 }
@@ -477,14 +390,14 @@ code {
 .btn:active { transform: translateY(1px); }
 
 .btn-primary {
-  background: var(--ut-teal);
+  background: var(--ut-ocw-red);
   color: #fff;
-  box-shadow: 0 4px 14px rgba(26,138,125,0.35);
+  box-shadow: 0 2px 8px rgba(163,31,52,0.25);
 }
 .btn-primary:hover {
-  background: var(--ut-teal-dark);
+  background: var(--ut-ocw-red-dark);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(26,138,125,0.45);
+  box-shadow: 0 4px 14px rgba(163,31,52,0.35);
 }
 
 .btn-gold {
@@ -500,12 +413,12 @@ code {
 
 .btn-outline {
   background: transparent;
-  color: #fff;
-  border: 2px solid rgba(255,255,255,0.4);
+  color: var(--ut-navy);
+  border: 2px solid var(--ut-border-med);
 }
 .btn-outline:hover {
-  border-color: var(--ut-gold);
-  color: var(--ut-gold);
+  border-color: var(--ut-ocw-red);
+  color: var(--ut-ocw-red);
   transform: translateY(-2px);
 }
 
@@ -580,12 +493,13 @@ code {
   font-family: var(--ut-font-head);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
-  background: var(--ut-navy);
-  color: var(--ut-gold);
+  background: rgba(163,31,52,0.08);
+  color: var(--ut-ocw-red);
+  border: 1px solid rgba(163,31,52,0.15);
 }
 
 /* ─── Dividers ───────────────────────────────────────────────────── */
@@ -611,7 +525,7 @@ code {
 
 .ut-feature-icon-teal { background: rgba(26,138,125,0.12); color: var(--ut-teal); }
 .ut-feature-icon-gold { background: rgba(201,162,39,0.12); color: var(--ut-gold); }
-.ut-feature-icon-navy   { background: rgba(255,255,255,0.06); color: var(--ut-text-muted); }
+.ut-feature-icon-navy   { background: rgba(11,31,58,0.06); color: var(--ut-navy); }
 .ut-feature-icon-purple { background: var(--ut-purple-dim); color: var(--ut-purple-light); border: 1px solid rgba(196,181,253,0.25); }
 
 /* ─── Stats Row ──────────────────────────────────────────────────── */
@@ -634,13 +548,9 @@ code {
   font-family: var(--ut-font-head);
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
-  color: var(--ut-text);
+  color: var(--ut-navy);
   line-height: 1;
   display: block;
-}
-
-@media (prefers-color-scheme: dark) {
-  .ut-stat-value { color: #e2e8f0; }
 }
 
 .ut-stat-label {
@@ -698,9 +608,6 @@ code {
   display: block;
 }
 
-@media (prefers-color-scheme: dark) {
-}
-
 .ut-author-role {
   font-size: 0.85rem;
   color: var(--ut-text-muted);
@@ -724,15 +631,15 @@ code {
 }
 
 .ut-pricing-card.featured {
-  background: var(--ut-navy);
-  border-color: var(--ut-gold);
-  box-shadow: var(--ut-shadow-xl);
+  background: var(--ut-bg);
+  border: 2px solid var(--ut-ocw-red);
+  box-shadow: var(--ut-shadow-lg);
   transform: scale(1.03);
 }
 
 .ut-pricing-card.featured h3,
 .ut-pricing-card.featured p,
-.ut-pricing-card.featured li { color: rgba(255,255,255,0.9); }
+.ut-pricing-card.featured li { color: var(--ut-text); }
 
 .ut-pricing-badge {
   position: absolute;
@@ -759,7 +666,7 @@ code {
   line-height: 1;
 }
 
-.ut-pricing-card.featured .ut-price { color: var(--ut-gold); }
+.ut-pricing-card.featured .ut-price { color: var(--ut-ocw-red); }
 
 .ut-price-period {
   font-size: 1rem;
@@ -811,11 +718,7 @@ code {
   transition: color var(--ut-duration-sm) var(--ut-ease);
 }
 
-@media (prefers-color-scheme: dark) {
-  .ut-faq-trigger { color: #e2e8f0; }
-}
-
-.ut-faq-trigger:hover { color: var(--ut-teal); }
+.ut-faq-trigger:hover { color: var(--ut-ocw-red); }
 
 .ut-faq-trigger:focus-visible {
   outline: 2px solid var(--ut-gold);
@@ -858,10 +761,10 @@ code {
 
 /* ─── Footer ─────────────────────────────────────────────────────── */
 .ut-footer {
-  background: var(--ut-navy-deep);
-  border-top: 3px solid var(--ut-gold);
+  background: var(--ut-surface-2);
+  border-top: 1px solid var(--ut-border);
   padding: var(--ut-space-2xl) 0 var(--ut-space-xl);
-  color: rgba(255,255,255,0.6);
+  color: var(--ut-text-muted);
 }
 
 .ut-footer-grid {
@@ -889,9 +792,9 @@ code {
   font-family: var(--ut-font-head);
   font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ut-gold);
+  color: var(--ut-navy);
   margin-bottom: var(--ut-space-md);
 }
 
@@ -899,11 +802,11 @@ code {
 
 .ut-footer-col a {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.6);
+  color: var(--ut-text-muted);
   transition: color var(--ut-duration-sm) var(--ut-ease);
 }
 
-.ut-footer-col a:hover { color: #fff; }
+.ut-footer-col a:hover { color: var(--ut-ocw-red); }
 
 .ut-footer-col a:focus-visible {
   outline: 2px solid var(--ut-gold);
@@ -915,7 +818,7 @@ code {
 .ut-footer-bottom {
   margin-top: var(--ut-space-xl);
   padding-top: var(--ut-space-md);
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid var(--ut-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -925,11 +828,11 @@ code {
 }
 
 .ut-footer-bottom a {
-  color: rgba(255,255,255,0.5);
+  color: var(--ut-text-muted);
   transition: color var(--ut-duration-sm) var(--ut-ease);
 }
 
-.ut-footer-bottom a:hover { color: var(--ut-gold); }
+.ut-footer-bottom a:hover { color: var(--ut-ocw-red); }
 
 /* ─── XP Progress Bar ────────────────────────────────────────────── */
 .ut-xp-bar {
@@ -1067,19 +970,58 @@ code {
 }
 
 /* ─── CTA Banner (shared) ────────────────────────────────────────── */
+.cta-banner {
+  background: var(--ut-surface-2);
+  border: 1px solid var(--ut-border);
+  border-radius: var(--ut-radius-xl);
+  padding: var(--ut-space-2xl);
+  text-align: center;
+  position: relative;
+}
+
 .cta-banner h2 {
   font-size: var(--ut-text-3xl);
-  color: #fff;
+  color: var(--ut-navy);
   margin-bottom: var(--ut-space-md);
   position: relative;
 }
 
 .cta-banner p {
-  color: rgba(255,255,255,0.7);
+  color: var(--ut-text-muted);
   font-size: var(--ut-text-lg);
   max-width: 55ch;
   margin: 0 auto var(--ut-space-xl);
   position: relative;
+}
+
+/* ─── Page hero (subpages) ───────────────────────────────────────── */
+.page-hero {
+  background: var(--ut-bg);
+  border-bottom: 1px solid var(--ut-border);
+  padding: calc(var(--ut-nav-h) + var(--ut-space-2xl)) 0 var(--ut-space-2xl);
+  position: relative;
+}
+
+.page-hero h1 {
+  font-size: var(--ut-text-3xl);
+  color: var(--ut-navy);
+  line-height: 1.1;
+  margin-bottom: var(--ut-space-md);
+}
+
+.page-hero h1 .accent { color: var(--ut-ocw-red); }
+
+.page-hero-lead {
+  font-size: var(--ut-text-lg);
+  color: var(--ut-text-muted);
+  line-height: 1.7;
+  max-width: 52ch;
+  margin-bottom: var(--ut-space-xl);
+}
+
+/* ─── Alt section band (light gray, OCW-style) ───────────────────── */
+.ut-section-alt {
+  background: var(--ut-surface-2);
 }
 
 /* ─── Focus-visible global fallback ─────────────────────────────── */
