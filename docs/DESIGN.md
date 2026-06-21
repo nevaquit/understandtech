@@ -5,7 +5,7 @@
 - **What this is:** AI-augmented certification training LMS (Moodle 4.5 child theme + custom plugins).
 - **Who it's for:** Professionals preparing for vendor certifications (SEC+, Network+, A+, etc.) in long study sessions.
 - **Space/industry:** EdTech / B2B SaaS LMS — peers include Coursera for Business, Pluralsight, CompTIA CertMaster-style flows.
-- **Project type:** Dark-first learning interface (dashboard, course, lesson, quiz) — not marketing.
+- **Project type:** Light-first learning interface aligned with marketing OCW shell (dashboard, course, lesson, quiz) — white canvas, navy headings, OCW red CTAs.
 
 ## Research Summary (2025–2026)
 
@@ -29,31 +29,22 @@
 | Surface | Mixed `#0f2447` / `#0F2035` | Inconsistent elevation |
 | Semantic | Ad hoc rgba | No shared success/warning/error tokens |
 
-### After (v1.1 — conversion-focused)
+### After (v1.2 — light-first, marketing-aligned)
 
-| Token | Hex / value | Role | Contrast on `#0F2035` |
-|-------|-------------|------|------------------------|
-| `--ut-navy-deep` | `#071529` | Page canvas | — |
-| `--ut-navy` | `#0B1F3A` | Brand / headings on light | — |
-| `--ut-navy-mid` | `#0C1E35` | Inset inputs (darker = “type here”) | — |
-| `--ut-surface` | `#0F2035` | Cards, blocks | — |
-| `--ut-surface-elevated` | `#152B45` | Modals, dropdowns, AI tutor panel | — |
-| `--ut-surface-hover` | `#1A3554` | Hover panels | — |
-| `--ut-gold` | `#C9A227` | Brand gold | 7.4:1 (large text/UI) |
-| `--ut-gold-hover` | `#D4B23A` | CTA hover | — |
-| `--ut-teal` | `#1A8A7D` | Progress, readiness, links base | 4.8:1 |
-| `--ut-teal-light` | `#22B5A5` | Links, active nav secondary | 5.9:1 |
-| `--ut-action` | `#C9A227` | **Primary CTA** (enroll, submit) | 7.4:1 |
-| `--ut-action-on` | `#0B1F3A` | Text on gold buttons | 7.4:1 |
-| `--ut-action-secondary` | `#1A8A7D` | Continue / secondary submit | — |
-| `--ut-success` | `#2DD4A0` | Exam readiness, completion | 5.2:1 |
-| `--ut-warning` | `#F5B731` | Deadlines, caution (≠ gold CTA) | 6.1:1 |
-| `--ut-error` | `#F07178` | Errors, failed attempts | 4.6:1 |
-| `--ut-info` | `#5CB8FF` | Informational alerts | 5.4:1 |
-| `--ut-text-primary` | `rgba(255,255,255,0.94)` | Body | ~12:1 |
-| `--ut-text-secondary` | `rgba(255,255,255,0.72)` | Labels | ~5.5:1 |
-| `--ut-text-muted` | `rgba(255,255,255,0.55)` | Metadata | ~4.5:1 (AA) |
-| `--ut-focus-ring` | `#C9A227` | Keyboard focus (3px offset) | 3:1+ vs adjacent |
+| Token | Hex / value | Role | Notes |
+|-------|-------------|------|-------|
+| `--ut-bg` | `#ffffff` | Page canvas | Matches marketing |
+| `--ut-surface-2` | `#f5f5f5` | Alt panels, table headers | — |
+| `--ut-text` | `#1a1a1a` | Body copy | WCAG AAA on white |
+| `--ut-text-muted` | `#525252` | Metadata | — |
+| `--ut-border` | `#e0e0e0` | Cards, drawers, inputs | Neutral gray |
+| `--ut-navy` | `#0B1F3A` | Headings | Brand anchor |
+| `--ut-ocw-red` / `--ut-link` | `#A31F34` | Primary CTA, links | MIT OCW accent |
+| `--ut-ocw-red-dark` | `#750014` | Link/CTA hover | — |
+| `--ut-teal-on-light` | `#0d5c52` | Progress, secondary accents | Accessible on white |
+| `--ut-gold-on-light` | `#7a5f10` | Sparring gold accents | Warnings, badges |
+| `--ut-action` | `#A31F34` | **Primary CTA** | OCW red fill, white text |
+| `--ut-action-secondary` | `#1A8A7D` | Continue / progress | Teal |
 
 ## Aesthetic Direction
 
@@ -67,15 +58,14 @@
 1. **Primary (`--ut-action` / `.btn-primary`):** Gold fill, navy text — Enroll, Start activity, Submit quiz.
 2. **Secondary (`--ut-action-secondary` / `.btn-secondary`):** Teal fill — Continue module, regenerate plan.
 3. **Tertiary (`.btn-outline-secondary`):** Gold border, transparent — Cancel, low-commit actions.
-4. **Links (`--ut-link`):** Teal-light default, gold on hover — never styled as buttons.
+4. **Links (`--ut-link`):** OCW red default, darker red on hover — never styled as buttons.
 
 ## Typography
 
 | Role | Font | Rationale |
 |------|------|-----------|
-| Display / nav / buttons | Rajdhani | Technical, uppercase-friendly; certification badge aesthetic |
-| Body / lessons | Source Serif 4 | Long-form reading comfort |
-| Code / flags | Share Tech Mono | Lab flags, CLI snippets |
+| All UI / body | system-ui stack | Matches marketing; crisp, low cognitive load |
+| Code / flags | ui-monospace stack | Lab flags, CLI snippets |
 | Scale | 1rem body, modular headings via `--ut-fluid-*` | Responsive without breakpoint soup |
 
 ## Spacing
@@ -95,14 +85,13 @@
 - **Approach:** Minimal-functional — 150ms hovers; `prefers-reduced-motion` zeroes animations.
 - **Easing:** ease for micro; no bounce in professional LMS chrome.
 
-## Surface Elevation (dark-first)
+## Surface Elevation (light-first)
 
 ```
-Canvas (#071529)
-  └─ Surface-1 cards (#0F2035)
-       └─ Surface-2 elevated (#152B45)
-            └─ Surface-3 hover (#1A3554)
-Inset inputs: #0C1E35 (below card level)
+Canvas (#ffffff)
+  └─ Surface alt (#f5f5f5) — table headers, inset panels
+       └─ Cards (#ffffff + #e0e0e0 border)
+Footer / hero accents: navy-deep (#071528) used sparingly
 ```
 
 ## Implementation Map
@@ -122,5 +111,6 @@ Inset inputs: #0C1E35 (below card level)
 |------|----------|-----------|
 | 2026-06-19 | Gold primary CTA, teal secondary | Research: contrast + role separation for enrollment vs progress |
 | 2026-06-19 | Semantic token layer `--ut-action`, `--ut-success`, etc. | WCAG-audited pairs; admin brand colours derive full palette |
-| 2026-06-19 | Dark-first AI tutor sidebar | Matches LMS shell; removes white panel cognitive break |
+| 2026-06-22 | Light-first LMS shell aligned with marketing OCW palette | White canvas, system-ui fonts, OCW red CTAs/links, navy headings |
+| 2026-06-19 | Dark-first AI tutor sidebar | Superseded by light shell; tutor plugin CSS may need separate pass |
 | 2026-06-19 | Warning amber distinct from gold | Prevents deadline alerts looking like CTAs |

@@ -40,11 +40,10 @@
     font-family: $ut-font-heading;
     font-weight: 600;
     font-size: 0.875rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     background: transparent;
-    color: $ut-white;
-    border: 2px solid rgba($ut-white, 0.4);
+    color: $ut-navy;
+    border: 2px solid $ut-border-strong;
     padding: 0.75rem 1.75rem;
     border-radius: $ut-radius-sm;
     transition: border-color $ut-transition-fast, color $ut-transition-fast, background $ut-transition-fast;
@@ -55,9 +54,9 @@
     cursor: pointer;
 
     &:hover {
-        border-color: $ut-gold;
-        color: $ut-gold;
-        background: rgba($ut-gold, 0.06);
+        border-color: $ut-ocw-red;
+        color: $ut-ocw-red;
+        background: rgba($ut-ocw-red, 0.04);
         text-decoration: none;
     }
 }
@@ -76,15 +75,14 @@
     }
 }
 
-// Boost .btn-primary — gold enrollment / submit CTA (highest contrast on navy).
+// Boost .btn-primary — OCW red CTA (marketing-aligned).
 .btn-primary {
     background-color: $ut-action;
     border-color: $ut-action;
     color: $ut-action-on;
     font-family: $ut-font-heading;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     font-size: 0.8125rem;
 
     &:hover,
@@ -93,7 +91,7 @@
         background-color: $ut-action-hover;
         border-color: $ut-action-hover;
         color: $ut-action-on;
-        box-shadow: 0 4px 16px rgba($ut-gold, 0.3);
+        box-shadow: 0 4px 16px rgba($ut-ocw-red, 0.25);
     }
 }
 
@@ -118,32 +116,32 @@
 // Moodle / Bootstrap badge utilities used by blocks (exam readiness, study plan).
 .badge.bg-teal,
 .bg-teal.badge {
-    background-color: rgba($ut-teal, 0.22) !important;
-    color: $ut-teal-light !important;
-    border: 1px solid rgba($ut-teal, 0.4);
+    background-color: rgba($ut-teal, 0.12) !important;
+    color: $ut-teal-on-light !important;
+    border: 1px solid rgba($ut-teal, 0.35);
 }
 
 .badge.bg-navy,
 .bg-navy.badge {
-    background-color: rgba($ut-navy-mid, 0.85) !important;
-    color: $ut-text-secondary !important;
+    background-color: rgba($ut-navy, 0.08) !important;
+    color: $ut-navy !important;
     border: 1px solid $ut-border-default;
 }
 
 .badge.bg-primary {
-    background-color: rgba($ut-teal, 0.2) !important;
-    color: $ut-teal-light !important;
-    border: 1px solid rgba($ut-teal, 0.35);
+    background-color: rgba($ut-ocw-red, 0.1) !important;
+    color: $ut-ocw-red !important;
+    border: 1px solid rgba($ut-ocw-red, 0.25);
 }
 
 .badge.bg-secondary {
-    background-color: rgba($ut-gold, 0.15) !important;
-    color: $ut-gold-light !important;
-    border: 1px solid rgba($ut-gold, 0.35);
+    background-color: rgba($ut-teal, 0.12) !important;
+    color: $ut-teal-on-light !important;
+    border: 1px solid rgba($ut-teal, 0.35);
 }
 
 .badge.bg-light.text-dark {
-    background-color: rgba($ut-surface-hover, 0.9) !important;
+    background-color: $ut-surface-2 !important;
     color: $ut-text-secondary !important;
     border: 1px solid $ut-border-subtle;
 }
@@ -163,7 +161,7 @@
 // ── Cards ─────────────────────────────────────────────────────────────────────
 .ut-card {
     background: $ut-surface;
-    border: 1px solid rgba($ut-gold, 0.12);
+    border: 1px solid $ut-border-default;
     border-radius: $ut-radius-lg;
     padding: $ut-space-xl;
     transition: transform $ut-transition-normal, box-shadow $ut-transition-normal, border-color $ut-transition-normal;
@@ -171,7 +169,7 @@
     &:hover {
         transform: translateY(-4px);
         box-shadow: $ut-shadow-lg;
-        border-color: rgba($ut-gold, 0.3);
+        border-color: $ut-border-strong;
     }
 }
 
@@ -206,7 +204,7 @@
         font-family: $ut-font-heading;
         font-weight: 700;
         font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
-        color: $ut-white;
+        color: $ut-navy;
         margin-bottom: $ut-space-sm;
     }
 
@@ -225,7 +223,7 @@
         font-size: 0.6875rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: $ut-teal-light;
+        color: $ut-teal-on-light;
         border: 1px solid rgba($ut-teal, 0.4);
         padding: 0.25rem 0.625rem;
         border-radius: $ut-radius-pill;
@@ -322,7 +320,7 @@
 // ── Progress Bars ─────────────────────────────────────────────────────────────
 .ut-progress {
     height: 0.5rem;
-    background: rgba($ut-white, 0.1);
+    background: $ut-surface-2;
     border-radius: $ut-radius-pill;
     overflow: hidden;
 
@@ -348,7 +346,7 @@
 
     .ut-xp-bar {
         height: 0.375rem;
-        background: rgba($ut-white, 0.1);
+        background: $ut-surface-2;
         border-radius: $ut-radius-pill;
         overflow: hidden;
 
@@ -369,14 +367,14 @@
         gap: $ut-space-md;
         padding: 0.75rem $ut-space-md;
         border-radius: $ut-radius-md;
-        background: rgba($ut-white, 0.03);
-        border: 1px solid rgba($ut-gold, 0.08);
+        background: $ut-surface-2;
+        border: 1px solid $ut-border-default;
         margin-bottom: $ut-space-sm;
         transition: background $ut-transition-fast, border-color $ut-transition-fast;
 
         &:hover {
-            background: rgba($ut-gold, 0.06);
-            border-color: rgba($ut-gold, 0.2);
+            background: $ut-surface-hover;
+            border-color: $ut-border-strong;
         }
 
         &.ut-rank-1 { border-left: 3px solid #FFD700; }
@@ -401,8 +399,8 @@
         width: 2.25rem;
         height: 2.25rem;
         border-radius: 50%;
-        background: $ut-navy-mid;
-        color: $ut-white;
+        background: $ut-surface-2;
+        color: $ut-navy;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -410,20 +408,20 @@
         font-weight: 700;
         font-size: 0.8125rem;
         flex-shrink: 0;
-        border: 2px solid rgba($ut-gold, 0.2);
+        border: 2px solid $ut-border-default;
     }
 
     .ut-learner-name {
         font-family: $ut-font-heading;
         font-weight: 600;
-        color: $ut-white;
+        color: $ut-text-primary;
         flex: 1;
     }
 
     .ut-xp-score {
         font-family: $ut-font-mono;
         font-size: 0.875rem;
-        color: $ut-gold;
+        color: $ut-gold-on-light;
         white-space: nowrap;
     }
 }
@@ -477,7 +475,7 @@
 
     &.ut-badge-teal {
         background: rgba($ut-teal, 0.15);
-        color: $ut-teal-light;
+        color: $ut-teal-on-light;
         border: 1px solid rgba($ut-teal, 0.3);
     }
 
@@ -521,7 +519,7 @@
     .toast-title {
         font-family: $ut-font-heading;
         font-weight: 700;
-        color: $ut-white;
+        color: $ut-navy;
         margin-bottom: 0.25rem;
     }
 
@@ -533,27 +531,27 @@
 
 // ── Code Blocks ──────────────────────────────────────────────────────────────
 .ut-code-block {
-    background: $ut-navy-deep;
-    border: 1px solid rgba($ut-gold, 0.15);
+    background: $ut-surface-2;
+    border: 1px solid $ut-border-default;
     border-radius: $ut-radius-md;
     padding: $ut-space-lg;
     font-family: $ut-font-mono;
     font-size: 0.8125rem;
     line-height: 1.6;
-    color: rgba($ut-white, 0.85);
+    color: $ut-text-primary;
     overflow-x: auto;
 
-    .ut-code-comment { color: rgba($ut-white, 0.4); }
-    .ut-code-keyword { color: $ut-teal-light; }
-    .ut-code-string  { color: $ut-gold; }
-    .ut-code-value   { color: #79c0ff; }
+    .ut-code-comment { color: $ut-text-muted; }
+    .ut-code-keyword { color: $ut-teal-on-light; }
+    .ut-code-string  { color: $ut-ocw-red; }
+    .ut-code-value   { color: $ut-navy-mid; }
 }
 
 pre code,
 code.hljs {
     font-family: $ut-font-mono;
-    background: $ut-navy-deep;
-    color: rgba($ut-white, 0.85);
+    background: $ut-surface-2;
+    color: $ut-text-primary;
     border-radius: $ut-radius-sm;
     padding: 0.2em 0.4em;
 }

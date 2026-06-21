@@ -1,5 +1,5 @@
-// =============================================================================
-// UnderstandTech Theme � Main SCSS Preset (Inlined for Moodle scssphp compatibility)
+﻿// =============================================================================
+// UnderstandTech Theme — Main SCSS Preset (Inlined for Moodle scssphp compatibility)
 // All partials are inlined here because Moodle's scssphp compiler does not
 // resolve relative @import paths to subdirectories.
 //
@@ -32,67 +32,78 @@
 // -----------------------------------------------------------------------------
 
 // =============================================================================
-// UnderstandTech Design Tokens — conversion-focused LMS palette
+// UnderstandTech Design Tokens â€” conversion-focused LMS palette
 // Single SCSS source of truth; admin brand colours injected via lib.php pre_scss()
 // Semantic roles: docs/DESIGN.md
 // =============================================================================
 
-// ── Brand anchors (recognition) ───────────────────────────────────────────────
-$ut-navy-deep:   #071529 !default;
+// â”€â”€ Brand anchors (recognition) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â”€â”€ Brand anchors (recognition â€” use sparingly on white) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+$ut-navy-deep:   #071528 !default;
 $ut-navy:        #0B1F3A !default;
-$ut-navy-mid:    #0C1E35 !default;
-$ut-surface:     #0F2035 !default;
-$ut-surface-elevated: #152B45 !default;
-$ut-surface-hover:    #1A3554 !default;
+$ut-navy-mid:    #1a3358 !default;
 $ut-gold:        #C9A227 !default;
 $ut-gold-light:  #E8C547 !default;
 $ut-gold-hover:  #D4B23A !default;
+$ut-gold-on-light: #7a5f10 !default;
 $ut-teal:        #1A8A7D !default;
 $ut-teal-light:  #22B5A5 !default;
 $ut-teal-dark:   #157A6E !default;
+$ut-teal-on-light: #0d5c52 !default;
 $ut-white:       #FFFFFF !default;
+$ut-ocw-red:     #A31F34 !default;
+$ut-ocw-red-dark: #750014 !default;
 
-// ── Semantic colours (WCAG AA on dark surfaces) ───────────────────────────────
-$ut-success:     #2DD4A0 !default;
-$ut-success-bg:  rgba(45, 212, 160, 0.12) !default;
-$ut-warning:     #F5B731 !default;
-$ut-warning-bg:  rgba(245, 183, 49, 0.12) !default;
-$ut-error:       #F07178 !default;
-$ut-error-bg:    rgba(240, 113, 120, 0.12) !default;
-$ut-info:        #5CB8FF !default;
-$ut-info-bg:     rgba(92, 184, 255, 0.12) !default;
+// â”€â”€ Semantic surfaces (light-first, OCW readability) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+$ut-bg:          #ffffff !default;
+$ut-surface:     #ffffff !default;
+$ut-surface-2:   #f5f5f5 !default;
+$ut-surface-elevated: #ffffff !default;
+$ut-surface-hover:    #f5f5f5 !default;
 
-// ── Text hierarchy ────────────────────────────────────────────────────────────
-$ut-text-primary:   rgba(255, 255, 255, 0.94) !default;
-$ut-text-secondary: rgba(255, 255, 255, 0.72) !default;
-$ut-text-muted:     rgba(255, 255, 255, 0.55) !default;
-$ut-text-disabled:  rgba(255, 255, 255, 0.38) !default;
+// â”€â”€ Semantic colours (WCAG AA on light surfaces) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+$ut-success:     #0d5c52 !default;
+$ut-success-bg:  rgba(13, 92, 82, 0.10) !default;
+$ut-warning:     #7a5f10 !default;
+$ut-warning-bg:  rgba(201, 162, 39, 0.12) !default;
+$ut-error:       #A31F34 !default;
+$ut-error-bg:    rgba(163, 31, 52, 0.08) !default;
+$ut-info:        #1a3358 !default;
+$ut-info-bg:     rgba(11, 31, 58, 0.06) !default;
 
-// ── Borders (gold-tinted, low opacity) ────────────────────────────────────────
-$ut-border-subtle:  rgba(201, 162, 39, 0.12) !default;
-$ut-border-default: rgba(201, 162, 39, 0.18) !default;
-$ut-border-strong:  rgba(201, 162, 39, 0.32) !default;
-$ut-border-focus:   rgba(201, 162, 39, 0.55) !default;
+// â”€â”€ Text hierarchy â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+$ut-text-primary:   #1a1a1a !default;
+$ut-text-secondary: #525252 !default;
+$ut-text-muted:     #525252 !default;
+$ut-text-disabled:  #9ca3af !default;
 
-// ── Action / CTA hierarchy ────────────────────────────────────────────────────
-$ut-action:         $ut-gold !default;
-$ut-action-hover:   $ut-gold-hover !default;
-$ut-action-on:      $ut-navy !default;
+// â”€â”€ Borders (neutral gray, low cognitive load) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+$ut-border-subtle:  #e0e0e0 !default;
+$ut-border-default: #e0e0e0 !default;
+$ut-border-strong:  #dadce0 !default;
+$ut-border-focus:   rgba(11, 31, 58, 0.45) !default;
+
+// â”€â”€ Action / CTA hierarchy â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+$ut-action:         $ut-ocw-red !default;
+$ut-action-hover:   $ut-ocw-red-dark !default;
+$ut-action-on:      $ut-white !default;
 $ut-action-secondary: $ut-teal !default;
-$ut-action-secondary-hover: $ut-teal-light !default;
-$ut-focus-ring:     $ut-gold !default;
+$ut-action-secondary-hover: $ut-teal-dark !default;
+$ut-focus-ring:     $ut-navy !default;
+$ut-link:           $ut-ocw-red !default;
+$ut-link-hover:     $ut-ocw-red-dark !default;
 
 // Legacy aliases (post.scss, older partials)
 $ut-brand-navy:  $ut-navy !default;
 $ut-brand-gold:  $ut-gold !default;
 $ut-brand-teal:  $ut-teal !default;
 
-// ── Typography ────────────────────────────────────────────────────────────────
-$ut-font-heading:  'Rajdhani', 'Segoe UI', sans-serif !default;
-$ut-font-body:     'Source Serif 4', Georgia, serif !default;
-$ut-font-mono:     'Share Tech Mono', 'Courier New', monospace !default;
+// â”€â”€ Typography (system UI â€” matches marketing) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+$ut-font-heading:  system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
+$ut-font-body:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
+$ut-font-mono:     ui-monospace, 'Cascadia Code', 'Segoe UI Mono', Consolas, monospace !default;
 
-// ── Spacing scale (8px base) ──────────────────────────────────────────────────
+// â”€â”€ Spacing scale (8px base) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 $ut-space-xs:    0.25rem !default;
 $ut-space-sm:    0.5rem  !default;
 $ut-space-md:    1rem    !default;
@@ -101,65 +112,68 @@ $ut-space-xl:    2.5rem  !default;
 $ut-space-2xl:   4rem    !default;
 $ut-space-3xl:   6rem    !default;
 
-// ── Border radius ─────────────────────────────────────────────────────────────
+// â”€â”€ Border radius â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 $ut-radius-sm:   0.375rem !default;
 $ut-radius-md:   0.75rem  !default;
 $ut-radius-lg:   1.25rem  !default;
 $ut-radius-pill: 999px    !default;
 
-// ── Shadows (surface colour shifts, not heavy drop shadows) ───────────────────
-$ut-shadow-sm:  0 2px 8px  rgba($ut-navy-deep, 0.35) !default;
-$ut-shadow-md:  0 4px 20px rgba($ut-navy-deep, 0.45) !default;
-$ut-shadow-lg:  0 8px 40px rgba($ut-navy-deep, 0.55) !default;
-$ut-shadow-gold: 0 0 0 3px rgba($ut-gold, 0.45) !default;
-$ut-shadow-focus: 0 0 0 3px rgba($ut-gold, 0.35) !default;
+// â”€â”€ Shadows (subtle on white) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+$ut-shadow-sm:  0 1px 4px rgba(11, 31, 58, 0.08) !default;
+$ut-shadow-md:  0 4px 16px rgba(11, 31, 58, 0.10) !default;
+$ut-shadow-lg:  0 8px 32px rgba(11, 31, 58, 0.14) !default;
+$ut-shadow-gold: 0 0 0 3px rgba(201, 162, 39, 0.35) !default;
+$ut-shadow-focus: 0 0 0 3px rgba(11, 31, 58, 0.25) !default;
 
-// ── Transitions ───────────────────────────────────────────────────────────────
+// â”€â”€ Transitions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 $ut-transition-fast:   0.15s ease !default;
 $ut-transition-normal: 0.25s ease !default;
 $ut-transition-slow:   0.4s  ease !default;
 
-// ── Z-index ───────────────────────────────────────────────────────────────────
+// â”€â”€ Z-index â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 $ut-z-nav:     1000 !default;
 $ut-z-modal:   1050 !default;
 $ut-z-toast:   1100 !default;
 
-// ── Boost / Bootstrap overrides ─────────────────────────────────────────────────
-// Primary = gold CTA (highest contrast on navy canvas for enrollment/submit).
-// Secondary = teal (progress, continue learning — does not compete with CTAs).
-$primary:               $ut-gold !default;
+// â”€â”€ Boost / Bootstrap overrides â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Primary = OCW red CTA (marketing-aligned). Secondary = teal (progress).
+$primary:               $ut-ocw-red !default;
 $secondary:             $ut-teal !default;
 $success:               $ut-success !default;
 $warning:               $ut-warning !default;
 $danger:                $ut-error !default;
 $info:                  $ut-info !default;
-$body-bg:               $ut-navy-deep !default;
+$body-bg:               $ut-bg !default;
 $body-color:            $ut-text-primary !default;
 $headings-font-family:  $ut-font-heading !default;
 $headings-font-weight:  700 !default;
-$headings-color:        $ut-white !default;
+$headings-color:        $ut-navy !default;
 $font-family-base:      $ut-font-body !default;
 $font-size-base:        1rem !default;
 $line-height-base:      1.65 !default;
 $card-border-radius:    $ut-radius-md !default;
 $card-bg:               $ut-surface !default;
 $card-border-color:     $ut-border-default !default;
-$link-color:            $ut-teal-light !default;
-$link-hover-color:      $ut-gold !default;
+$link-color:            $ut-link !default;
+$link-hover-color:      $ut-link-hover !default;
+$navbar-light-color:    $ut-text-secondary !default;
+$navbar-light-hover-color: $ut-ocw-red !default;
+$navbar-light-active-color: $ut-navy !default;
+$navbar-light-bg:       $ut-bg !default;
 $navbar-dark-color:     $ut-text-secondary !default;
-$navbar-dark-hover-color: $ut-gold !default;
-$navbar-dark-active-color: $ut-gold !default;
-$navbar-dark-bg:        $ut-navy-deep !default;
-$input-bg:              $ut-navy-mid !default;
+$navbar-dark-hover-color: $ut-ocw-red !default;
+$navbar-dark-active-color: $ut-navy !default;
+$navbar-dark-bg:        $ut-bg !default;
+$input-bg:              $ut-bg !default;
 $input-color:           $ut-text-primary !default;
 $input-border-color:    $ut-border-strong !default;
-$input-focus-border-color: $ut-gold !default;
-$input-focus-box-shadow: $ut-shadow-gold !default;
+$input-focus-border-color: $ut-navy !default;
+$input-focus-box-shadow: $ut-shadow-focus !default;
 $input-placeholder-color: $ut-text-muted !default;
 $btn-border-radius:     $ut-radius-sm !default;
 $btn-font-family:       $ut-font-heading !default;
 $btn-font-weight:       600 !default;
-$btn-letter-spacing:    0.08em !default;
+$btn-letter-spacing:    0.04em !default;
 $table-color:           $ut-text-primary !default;
 $table-bg:              transparent !default;
 $table-border-color:    $ut-border-default !default;
@@ -168,25 +182,26 @@ $modal-content-color:   $ut-text-primary !default;
 $dropdown-bg:           $ut-surface-elevated !default;
 $dropdown-color:        $ut-text-primary !default;
 $dropdown-link-color:   $ut-text-primary !default;
-$dropdown-link-hover-bg: rgba($ut-gold, 0.1) !default;
-$dropdown-link-hover-color: $ut-gold !default;
+$dropdown-link-hover-bg: $ut-surface-hover !default;
+$dropdown-link-hover-color: $ut-ocw-red !default;
 $pagination-bg:         $ut-surface !default;
 $pagination-color:      $ut-text-primary !default;
 $pagination-border-color: $ut-border-default !default;
-$pagination-hover-bg:   rgba($ut-gold, 0.1) !default;
-$pagination-active-bg:  $ut-gold !default;
-$pagination-active-color: $ut-navy !default;
+$pagination-hover-bg:   $ut-surface-hover !default;
+$pagination-active-bg:  $ut-ocw-red !default;
+$pagination-active-color: $ut-white !default;
 $alert-bg-level:        -10 !default;
 $alert-border-level:    -9 !default;
 $alert-color-level:     6 !default;
 $breadcrumb-bg:         transparent !default;
 $breadcrumb-divider-color: $ut-text-muted !default;
-$breadcrumb-active-color: $ut-gold !default;
-$progress-bg:           rgba($ut-navy-mid, 0.65) !default;
+$breadcrumb-active-color: $ut-navy !default;
+$progress-bg:           $ut-surface-2 !default;
 $progress-bar-bg:       $ut-teal !default;
-$tooltip-bg:            $ut-surface-elevated !default;
-$tooltip-color:         $ut-text-primary !default;
+$tooltip-bg:            $ut-navy !default;
+$tooltip-color:         $ut-white !default;
 $badge-font-weight:     600 !default;
+
 
 
 // =============================================================================
@@ -194,7 +209,7 @@ $badge-font-weight:     600 !default;
 // Fixes all six design deficiencies identified in the architectural audit report
 // =============================================================================
 
-// ── 1. Skip-to-content link ───────────────────────────────────────────────────
+// â”€â”€ 1. Skip-to-content link â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Shared by theme templates (.ut-skip-link) and Moodle core (.sr-only-focusable).
 @mixin ut-skip-link-styles {
     position: absolute;
@@ -230,7 +245,7 @@ a.sr-only-focusable[href="#maincontent"] {
     }
 }
 
-// ── 2. Focus-visible rings (WCAG 2.1 AA) ─────────────────────────────────────
+// â”€â”€ 2. Focus-visible rings (WCAG 2.1 AA) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Remove browser default outline, replace with gold ring on keyboard focus only
 *:focus {
     outline: none;
@@ -253,7 +268,7 @@ a:focus-visible {
     box-shadow: none !important;
 }
 
-// ── 3. Reduced-motion guard ───────────────────────────────────────────────────
+// â”€â”€ 3. Reduced-motion guard â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -272,7 +287,7 @@ a:focus-visible {
     }
 }
 
-// ── 4. Print styles ───────────────────────────────────────────────────────────
+// â”€â”€ 4. Print styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 @media print {
     // Hide navigation, sidebars, and interactive chrome
     #nav-drawer,
@@ -331,7 +346,7 @@ a:focus-visible {
     }
 }
 
-// ── 5. Dark mode system preference ───────────────────────────────────────────
+// â”€â”€ 5. Dark mode system preference â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Moodle renders on a navy background by default; this block adjusts
 // surface tokens when the OS is in dark mode to prevent navy-on-navy text
 @media (prefers-color-scheme: dark) {
@@ -353,14 +368,14 @@ a:focus-visible {
     }
 }
 
-// ── 6. Icon-only button accessibility ────────────────────────────────────────
+// â”€â”€ 6. Icon-only button accessibility â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Ensure all icon-only buttons have a visible label for screen readers
 // (aria-label is enforced in templates; this provides the visual tooltip)
 [aria-label]:not([aria-label=""]) {
     position: relative;
 }
 
-// Hamburger / mobile menu — use SVG icon, not emoji
+// Hamburger / mobile menu â€” use SVG icon, not emoji
 .ut-mobile-menu-btn {
     // Icon is rendered via background SVG in _navigation.scss
     // This rule ensures the button text node is visually hidden
@@ -382,31 +397,27 @@ a:focus-visible {
 }
 
 
-// =============================================================================
-// UnderstandTech Navigation
-// Sticky top nav with gold active indicators and mobile drawer
-// =============================================================================
-
-// ── Navbar Shell ─────────────────────────────────────────────────────────────
+// â”€â”€ Navbar Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .navbar.ut-navbar {
-    background: rgba($ut-navy-deep, 0.95);
+    background: rgba($ut-bg, 0.98);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba($ut-gold, 0.15);
+    border-bottom: 1px solid $ut-border-default;
     padding: 0 $ut-space-lg;
     height: 4rem;
     position: sticky;
     top: 0;
     z-index: $ut-z-nav;
+    box-shadow: 0 1px 3px rgba(11, 31, 58, 0.04);
     transition: background $ut-transition-normal, box-shadow $ut-transition-normal;
 
     &.scrolled {
-        background: rgba($ut-navy-deep, 0.98);
-        box-shadow: $ut-shadow-md;
+        background: rgba($ut-bg, 0.99);
+        box-shadow: $ut-shadow-sm;
     }
 }
 
-// ── Logo ─────────────────────────────────────────────────────────────────────
+// â”€â”€ Logo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-navbar-brand {
     display: flex;
     align-items: center;
@@ -415,13 +426,12 @@ a:focus-visible {
     font-family: $ut-font-heading;
     font-weight: 700;
     font-size: 1.125rem;
-    letter-spacing: 0.06em;
-    color: $ut-white;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: $ut-navy;
 
     &:hover,
     &:focus-visible {
-        color: $ut-gold;
+        color: $ut-ocw-red;
         text-decoration: none;
     }
 
@@ -432,11 +442,11 @@ a:focus-visible {
     }
 
     .ut-logo-text {
-        span { color: $ut-gold; }
+        span { color: $ut-ocw-red; }
     }
 }
 
-// ── Primary Nav Links ─────────────────────────────────────────────────────────
+// â”€â”€ Primary Nav Links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-primary-nav {
     display: flex;
     align-items: center;
@@ -453,9 +463,8 @@ a:focus-visible {
         font-family: $ut-font-heading;
         font-weight: 600;
         font-size: 0.8125rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: rgba($ut-white, 0.8);
+        letter-spacing: 0.04em;
+        color: $ut-text-secondary;
         padding: 0.5rem 0.875rem;
         border-radius: $ut-radius-sm;
         transition: color $ut-transition-fast, background $ut-transition-fast;
@@ -463,13 +472,13 @@ a:focus-visible {
         white-space: nowrap;
 
         &:hover {
-            color: $ut-gold;
-            background: rgba($ut-gold, 0.08);
+            color: $ut-ocw-red;
+            background: $ut-surface-hover;
         }
 
         &.active,
         &[aria-current="page"] {
-            color: $ut-gold;
+            color: $ut-navy;
 
             &::after {
                 content: '';
@@ -478,14 +487,14 @@ a:focus-visible {
                 left: 0.875rem;
                 right: 0.875rem;
                 height: 2px;
-                background: $ut-gold;
+                background: $ut-ocw-red;
                 border-radius: $ut-radius-pill;
             }
         }
     }
 }
 
-// ── CTA Button in Nav ─────────────────────────────────────────────────────────
+// â”€â”€ CTA Button in Nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-user-avatar {
     width: 2rem;
     height: 2rem;
@@ -497,17 +506,16 @@ a:focus-visible {
     font-size: 0.875rem;
     font-weight: 700;
     color: $ut-white;
-    border: 2px solid rgba($ut-gold, 0.4);
+    border: 2px solid $ut-border-default;
 }
 
 .ut-nav-cta {
     font-family: $ut-font-heading;
     font-weight: 700;
     font-size: 0.8125rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: $ut-gold;
-    color: $ut-navy;
+    letter-spacing: 0.04em;
+    background: $ut-ocw-red;
+    color: $ut-white;
     border: none;
     padding: 0.5rem 1.25rem;
     border-radius: $ut-radius-sm;
@@ -516,30 +524,32 @@ a:focus-visible {
     white-space: nowrap;
 
     &:hover {
-        background: $ut-gold-light;
-        color: $ut-navy;
+        background: $ut-ocw-red-dark;
+        color: $ut-white;
         transform: translateY(-1px);
         text-decoration: none;
     }
 
     &:focus-visible {
-        outline: 3px solid $ut-white;
+        outline: 3px solid $ut-navy;
         outline-offset: 2px;
     }
 }
 
-// ── Mobile Hamburger ─────────────────────────────────────────────────────────
+// â”€â”€ Mobile Hamburger â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-mobile-menu-btn {
     display: none;
     background: transparent;
-    border: 1px solid rgba($ut-gold, 0.4);
+    border: 1px solid $ut-border-strong;
     border-radius: $ut-radius-sm;
     padding: 0.375rem 0.5rem;
     cursor: pointer;
+    color: $ut-navy;
     transition: border-color $ut-transition-fast;
 
     &:hover {
-        border-color: $ut-gold;
+        border-color: $ut-ocw-red;
+        color: $ut-ocw-red;
     }
 
     @media (max-width: 991.98px) {
@@ -549,7 +559,7 @@ a:focus-visible {
     }
 }
 
-// ── Mobile Drawer ─────────────────────────────────────────────────────────────
+// â”€â”€ Mobile Drawer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 @media (max-width: 991.98px) {
     .ut-primary-nav {
         display: none;
@@ -557,13 +567,14 @@ a:focus-visible {
         top: 4rem;
         left: 0;
         right: 0;
-        background: rgba($ut-navy-deep, 0.98);
-        border-bottom: 1px solid rgba($ut-gold, 0.15);
+        background: rgba($ut-bg, 0.98);
+        border-bottom: 1px solid $ut-border-default;
         flex-direction: column;
         align-items: stretch;
         gap: 0;
         padding: $ut-space-sm 0;
         z-index: $ut-z-nav - 1;
+        box-shadow: $ut-shadow-md;
 
         &.open {
             display: flex;
@@ -578,8 +589,9 @@ a:focus-visible {
             }
 
             &.active {
-                border-left: 3px solid $ut-gold;
+                border-left: 3px solid $ut-ocw-red;
                 padding-left: calc(#{$ut-space-lg} - 3px);
+                color: $ut-navy;
             }
         }
     }
@@ -591,70 +603,69 @@ a:focus-visible {
     }
 }
 
-// ── Moodle Boost Nav Overrides ────────────────────────────────────────────────
-// Ensure Boost's own navbar inherits our brand colours
+// â”€â”€ Moodle Boost Nav Overrides â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 #nav-drawer {
-    background: $ut-navy-deep;
-    border-right: 1px solid rgba($ut-gold, 0.12);
+    background: $ut-bg;
+    border-right: 1px solid $ut-border-default;
 
     .list-group-item {
         background: transparent;
-        color: rgba($ut-white, 0.8);
-        border-color: rgba($ut-gold, 0.08);
+        color: $ut-text-secondary;
+        border-color: $ut-border-subtle;
         font-family: $ut-font-heading;
         font-weight: 600;
-        letter-spacing: 0.04em;
 
         &:hover,
         &:focus {
-            background: rgba($ut-gold, 0.08);
-            color: $ut-gold;
+            background: $ut-surface-hover;
+            color: $ut-ocw-red;
         }
 
         &.active {
-            background: rgba($ut-gold, 0.12);
-            color: $ut-gold;
-            border-left: 3px solid $ut-gold;
+            background: rgba($ut-ocw-red, 0.06);
+            color: $ut-navy;
+            border-left: 3px solid $ut-ocw-red;
         }
     }
 }
 
+.navbar-light .navbar-nav .nav-link,
 .navbar-dark .navbar-nav .nav-link {
-    color: rgba($ut-white, 0.8);
+    color: $ut-text-secondary;
 
     &:hover,
     &:focus {
-        color: $ut-gold;
+        color: $ut-ocw-red;
     }
 }
 
+.navbar-light .navbar-toggler,
 .navbar-dark .navbar-toggler {
-    border-color: rgba($ut-gold, 0.4);
-    color: $ut-gold;
+    border-color: $ut-border-strong;
+    color: $ut-navy;
 }
 
-// ── Breadcrumbs ───────────────────────────────────────────────────────────────
+// â”€â”€ Breadcrumbs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .breadcrumb {
     background: transparent;
     padding: $ut-space-sm 0;
     font-family: $ut-font-heading;
     font-size: 0.8125rem;
-    letter-spacing: 0.04em;
 
     .breadcrumb-item {
         color: $ut-text-muted;
 
         a {
-            color: $ut-teal-light;
+            color: $ut-text-muted;
             text-decoration: none;
 
             &:hover {
-                color: $ut-gold;
+                color: $ut-ocw-red;
             }
         }
 
         &.active {
-            color: $ut-gold;
+            color: $ut-navy;
         }
 
         + .breadcrumb-item::before {
@@ -664,16 +675,11 @@ a:focus-visible {
 }
 
 
-// =============================================================================
-// UnderstandTech Layout
-// Page-level layout: hero, sections, dashboard, login, footer
-// =============================================================================
-
-// ── Global Page Shell ─────────────────────────────────────────────────────────
+// â”€â”€ Global Page Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 body {
     font-family: $ut-font-body;
-    background-color: $ut-navy;
-    color: $ut-white;
+    background-color: $ut-bg;
+    color: $ut-text-primary;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -681,16 +687,16 @@ body {
 
 #page-wrapper,
 #page {
-    background: $ut-navy;
+    background: $ut-bg;
 }
 
-// ── Typography ────────────────────────────────────────────────────────────────
+// â”€â”€ Typography â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: $ut-font-heading;
     font-weight: 700;
     line-height: 1.15;
-    color: $ut-white;
+    color: $ut-navy;
 }
 
 .ut-eyebrow {
@@ -708,7 +714,7 @@ h1, h2, h3, h4, h5, h6,
 .ut-accent-teal { color: $ut-teal-light; }
 .ut-text-muted { color: $ut-text-muted; }
 
-// ── Container ─────────────────────────────────────────────────────────────────
+// â”€â”€ Container â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-container {
     width: 100%;
     max-width: 75rem;
@@ -718,7 +724,7 @@ h1, h2, h3, h4, h5, h6,
     padding-right: clamp(1rem, 4vw, 2rem);
 }
 
-// ── Sections ─────────────────────────────────────────────────────────────────
+// â”€â”€ Sections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-section {
     padding: clamp(3rem, 8vw, 6rem) 0;
 }
@@ -729,10 +735,15 @@ h1, h2, h3, h4, h5, h6,
 
 .ut-section-dark {
     background: $ut-navy-deep;
+    color: $ut-white;
+
+    h1, h2, h3, h4, h5, h6 {
+        color: $ut-white;
+    }
 }
 
 .ut-section-surface {
-    background: $ut-surface;
+    background: $ut-surface-2;
 }
 
 .ut-section-header {
@@ -754,7 +765,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Hero ─────────────────────────────────────────────────────────────────────
+// â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-hero {
     position: relative;
     min-height: calc(100vh - 4rem);
@@ -844,14 +855,14 @@ h1, h2, h3, h4, h5, h6,
         color: $ut-text-muted;
 
         &::before {
-            content: '✓';
+            content: 'âœ“';
             color: $ut-teal-light;
             font-weight: 700;
         }
     }
 }
 
-// ── Dashboard Widget ─────────────────────────────────────────────────────────
+// â”€â”€ Dashboard Widget â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-dashboard-widget {
     background: rgba($ut-surface, 0.9);
     border: 1px solid rgba($ut-gold, 0.2);
@@ -929,7 +940,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Dashboard Grid ────────────────────────────────────────────────────────────
+// â”€â”€ Dashboard Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-dashboard-cards {
     container-type: inline-size;
     container-name: dashboard;
@@ -955,11 +966,9 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Login Page ────────────────────────────────────────────────────────────────
+// â”€â”€ Login Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 #page-login-index {
-    background:
-        radial-gradient(ellipse 80% 60% at 70% 50%, rgba($ut-teal, 0.08) 0%, transparent 60%),
-        linear-gradient(160deg, $ut-navy-deep 0%, $ut-navy 100%);
+    background: $ut-bg;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -983,11 +992,11 @@ h1, h2, h3, h4, h5, h6,
         width: 100%;
         max-width: 28rem;
         background: $ut-surface;
-        border: 1px solid rgba($ut-gold, 0.2);
-        border-top: 4px solid $ut-gold;
+        border: 1px solid $ut-border-default;
+        border-top: 4px solid $ut-ocw-red;
         border-radius: $ut-radius-lg;
         padding: $ut-space-2xl;
-        box-shadow: $ut-shadow-lg;
+        box-shadow: $ut-shadow-md;
     }
 
     .ut-login-logo {
@@ -1005,7 +1014,7 @@ h1, h2, h3, h4, h5, h6,
         font-weight: 700;
         font-size: 1.5rem;
         text-align: center;
-        color: $ut-white;
+        color: $ut-navy;
         margin-bottom: $ut-space-xs;
     }
 
@@ -1017,9 +1026,9 @@ h1, h2, h3, h4, h5, h6,
     }
 
     .form-control {
-        background: rgba($ut-navy-mid, 0.8);
-        border-color: rgba($ut-gold, 0.25);
-        color: $ut-white;
+        background: $ut-bg;
+        border-color: $ut-border-strong;
+        color: $ut-text-primary;
         border-radius: $ut-radius-sm;
 
         &::placeholder {
@@ -1027,28 +1036,27 @@ h1, h2, h3, h4, h5, h6,
         }
 
         &:focus {
-            background: $ut-navy-mid;
-            border-color: $ut-gold;
-            box-shadow: $ut-shadow-gold;
-            color: $ut-white;
+            background: $ut-bg;
+            border-color: $ut-navy;
+            box-shadow: $ut-shadow-focus;
+            color: $ut-text-primary;
         }
     }
 
     .btn-primary {
-        background: $ut-gold;
-        border-color: $ut-gold;
-        color: $ut-navy;
+        background: $ut-ocw-red;
+        border-color: $ut-ocw-red;
+        color: $ut-white;
         font-family: $ut-font-heading;
         font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        letter-spacing: 0.04em;
         width: 100%;
         padding: 0.75rem;
 
         &:hover {
-            background: $ut-gold-light;
-            border-color: $ut-gold-light;
-            color: $ut-navy;
+            background: $ut-ocw-red-dark;
+            border-color: $ut-ocw-red-dark;
+            color: $ut-white;
         }
     }
 
@@ -1057,19 +1065,19 @@ h1, h2, h3, h4, h5, h6,
         margin-top: $ut-space-lg;
 
         a {
-            color: $ut-teal-light;
+            color: $ut-link;
             font-size: 0.875rem;
             text-decoration: none;
 
             &:hover {
-                color: $ut-gold;
+                color: $ut-link-hover;
                 text-decoration: underline;
             }
         }
     }
 }
 
-// ── Footer ────────────────────────────────────────────────────────────────────
+// â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 #page-footer,
 .ut-footer {
     background: $ut-navy-deep;
@@ -1169,7 +1177,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Moodle Skool Layout ───────────────────────────────────────────────────────
+// â”€â”€ Moodle Skool Layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-skool-enabled .ut-skool-layout {
     .ut-lesson-grid {
         display: grid;
@@ -1186,7 +1194,7 @@ h1, h2, h3, h4, h5, h6,
     .ut-lesson-content {
         background: $ut-surface;
         border-radius: $ut-radius-md;
-        border: 1px solid rgba($ut-gold, 0.1);
+        border: 1px solid $ut-border-default;
         padding: $ut-space-xl;
     }
 
@@ -1197,8 +1205,8 @@ h1, h2, h3, h4, h5, h6,
     }
 
     .ut-lesson-nav {
-        background: $ut-surface;
-        border: 1px solid rgba($ut-gold, 0.1);
+        background: $ut-surface-2;
+        border: 1px solid $ut-border-default;
         border-radius: $ut-radius-md;
         padding: $ut-space-md;
     }
@@ -1210,7 +1218,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Community Feed ────────────────────────────────────────────────────────────
+// â”€â”€ Community Feed â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-community-feed {
     .ut-feed-item {
         border-left: 3px solid $ut-gold;
@@ -1225,7 +1233,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Exam Readiness Block ──────────────────────────────────────────────────────
+// â”€â”€ Exam Readiness Block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .block-examreadiness {
     container-type: inline-size;
     container-name: readiness;
@@ -1258,12 +1266,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 
-// =============================================================================
-// UnderstandTech Components
-// Reusable UI components: cards, buttons, badges, progress, XP, leaderboard
-// =============================================================================
-
-// ── Buttons ───────────────────────────────────────────────────────────────────
+// â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .btn-ut-primary {
     font-family: $ut-font-heading;
     font-weight: 700;
@@ -1300,11 +1303,10 @@ h1, h2, h3, h4, h5, h6,
     font-family: $ut-font-heading;
     font-weight: 600;
     font-size: 0.875rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     background: transparent;
-    color: $ut-white;
-    border: 2px solid rgba($ut-white, 0.4);
+    color: $ut-navy;
+    border: 2px solid $ut-border-strong;
     padding: 0.75rem 1.75rem;
     border-radius: $ut-radius-sm;
     transition: border-color $ut-transition-fast, color $ut-transition-fast, background $ut-transition-fast;
@@ -1315,9 +1317,9 @@ h1, h2, h3, h4, h5, h6,
     cursor: pointer;
 
     &:hover {
-        border-color: $ut-gold;
-        color: $ut-gold;
-        background: rgba($ut-gold, 0.06);
+        border-color: $ut-ocw-red;
+        color: $ut-ocw-red;
+        background: rgba($ut-ocw-red, 0.04);
         text-decoration: none;
     }
 }
@@ -1336,15 +1338,14 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// Boost .btn-primary — gold enrollment / submit CTA (highest contrast on navy).
+// Boost .btn-primary â€” OCW red CTA (marketing-aligned).
 .btn-primary {
     background-color: $ut-action;
     border-color: $ut-action;
     color: $ut-action-on;
     font-family: $ut-font-heading;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     font-size: 0.8125rem;
 
     &:hover,
@@ -1353,11 +1354,11 @@ h1, h2, h3, h4, h5, h6,
         background-color: $ut-action-hover;
         border-color: $ut-action-hover;
         color: $ut-action-on;
-        box-shadow: 0 4px 16px rgba($ut-gold, 0.3);
+        box-shadow: 0 4px 16px rgba($ut-ocw-red, 0.25);
     }
 }
 
-// Secondary — teal for continue/progress actions (does not compete with gold CTAs).
+// Secondary â€” teal for continue/progress actions (does not compete with gold CTAs).
 .btn-secondary {
     background-color: $ut-action-secondary;
     border-color: $ut-action-secondary;
@@ -1378,37 +1379,37 @@ h1, h2, h3, h4, h5, h6,
 // Moodle / Bootstrap badge utilities used by blocks (exam readiness, study plan).
 .badge.bg-teal,
 .bg-teal.badge {
-    background-color: rgba($ut-teal, 0.22) !important;
-    color: $ut-teal-light !important;
-    border: 1px solid rgba($ut-teal, 0.4);
+    background-color: rgba($ut-teal, 0.12) !important;
+    color: $ut-teal-on-light !important;
+    border: 1px solid rgba($ut-teal, 0.35);
 }
 
 .badge.bg-navy,
 .bg-navy.badge {
-    background-color: rgba($ut-navy-mid, 0.85) !important;
-    color: $ut-text-secondary !important;
+    background-color: rgba($ut-navy, 0.08) !important;
+    color: $ut-navy !important;
     border: 1px solid $ut-border-default;
 }
 
 .badge.bg-primary {
-    background-color: rgba($ut-teal, 0.2) !important;
-    color: $ut-teal-light !important;
-    border: 1px solid rgba($ut-teal, 0.35);
+    background-color: rgba($ut-ocw-red, 0.1) !important;
+    color: $ut-ocw-red !important;
+    border: 1px solid rgba($ut-ocw-red, 0.25);
 }
 
 .badge.bg-secondary {
-    background-color: rgba($ut-gold, 0.15) !important;
-    color: $ut-gold-light !important;
-    border: 1px solid rgba($ut-gold, 0.35);
+    background-color: rgba($ut-teal, 0.12) !important;
+    color: $ut-teal-on-light !important;
+    border: 1px solid rgba($ut-teal, 0.35);
 }
 
 .badge.bg-light.text-dark {
-    background-color: rgba($ut-surface-hover, 0.9) !important;
+    background-color: $ut-surface-2 !important;
     color: $ut-text-secondary !important;
     border: 1px solid $ut-border-subtle;
 }
 
-// Study plan block — readiness/progress emphasis.
+// Study plan block â€” readiness/progress emphasis.
 .block-studyplan {
     .block-studyplan-activity {
         border-bottom-color: $ut-border-subtle !important;
@@ -1420,10 +1421,10 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Cards ─────────────────────────────────────────────────────────────────────
+// â”€â”€ Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-card {
     background: $ut-surface;
-    border: 1px solid rgba($ut-gold, 0.12);
+    border: 1px solid $ut-border-default;
     border-radius: $ut-radius-lg;
     padding: $ut-space-xl;
     transition: transform $ut-transition-normal, box-shadow $ut-transition-normal, border-color $ut-transition-normal;
@@ -1431,7 +1432,7 @@ h1, h2, h3, h4, h5, h6,
     &:hover {
         transform: translateY(-4px);
         box-shadow: $ut-shadow-lg;
-        border-color: rgba($ut-gold, 0.3);
+        border-color: $ut-border-strong;
     }
 }
 
@@ -1466,7 +1467,7 @@ h1, h2, h3, h4, h5, h6,
         font-family: $ut-font-heading;
         font-weight: 700;
         font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
-        color: $ut-white;
+        color: $ut-navy;
         margin-bottom: $ut-space-sm;
     }
 
@@ -1485,7 +1486,7 @@ h1, h2, h3, h4, h5, h6,
         font-size: 0.6875rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: $ut-teal-light;
+        color: $ut-teal-on-light;
         border: 1px solid rgba($ut-teal, 0.4);
         padding: 0.25rem 0.625rem;
         border-radius: $ut-radius-pill;
@@ -1493,7 +1494,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Certificate Card ──────────────────────────────────────────────────────────
+// â”€â”€ Certificate Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-cert-card {
     background: $ut-white;
     border: 2px solid $ut-gold;
@@ -1579,10 +1580,10 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Progress Bars ─────────────────────────────────────────────────────────────
+// â”€â”€ Progress Bars â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-progress {
     height: 0.5rem;
-    background: rgba($ut-white, 0.1);
+    background: $ut-surface-2;
     border-radius: $ut-radius-pill;
     overflow: hidden;
 
@@ -1594,7 +1595,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── XP Bar ────────────────────────────────────────────────────────────────────
+// â”€â”€ XP Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-xp-bar-container {
     .ut-xp-bar-label {
         display: flex;
@@ -1608,7 +1609,7 @@ h1, h2, h3, h4, h5, h6,
 
     .ut-xp-bar {
         height: 0.375rem;
-        background: rgba($ut-white, 0.1);
+        background: $ut-surface-2;
         border-radius: $ut-radius-pill;
         overflow: hidden;
 
@@ -1621,7 +1622,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Leaderboard ───────────────────────────────────────────────────────────────
+// â”€â”€ Leaderboard â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-leaderboard {
     .ut-leaderboard-row {
         display: flex;
@@ -1629,14 +1630,14 @@ h1, h2, h3, h4, h5, h6,
         gap: $ut-space-md;
         padding: 0.75rem $ut-space-md;
         border-radius: $ut-radius-md;
-        background: rgba($ut-white, 0.03);
-        border: 1px solid rgba($ut-gold, 0.08);
+        background: $ut-surface-2;
+        border: 1px solid $ut-border-default;
         margin-bottom: $ut-space-sm;
         transition: background $ut-transition-fast, border-color $ut-transition-fast;
 
         &:hover {
-            background: rgba($ut-gold, 0.06);
-            border-color: rgba($ut-gold, 0.2);
+            background: $ut-surface-hover;
+            border-color: $ut-border-strong;
         }
 
         &.ut-rank-1 { border-left: 3px solid #FFD700; }
@@ -1661,8 +1662,8 @@ h1, h2, h3, h4, h5, h6,
         width: 2.25rem;
         height: 2.25rem;
         border-radius: 50%;
-        background: $ut-navy-mid;
-        color: $ut-white;
+        background: $ut-surface-2;
+        color: $ut-navy;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1670,25 +1671,25 @@ h1, h2, h3, h4, h5, h6,
         font-weight: 700;
         font-size: 0.8125rem;
         flex-shrink: 0;
-        border: 2px solid rgba($ut-gold, 0.2);
+        border: 2px solid $ut-border-default;
     }
 
     .ut-learner-name {
         font-family: $ut-font-heading;
         font-weight: 600;
-        color: $ut-white;
+        color: $ut-text-primary;
         flex: 1;
     }
 
     .ut-xp-score {
         font-family: $ut-font-mono;
         font-size: 0.875rem;
-        color: $ut-gold;
+        color: $ut-gold-on-light;
         white-space: nowrap;
     }
 }
 
-// ── Stat Blocks ───────────────────────────────────────────────────────────────
+// â”€â”€ Stat Blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-stats-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
@@ -1716,7 +1717,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Badges ────────────────────────────────────────────────────────────────────
+// â”€â”€ Badges â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-badge {
     display: inline-flex;
     align-items: center;
@@ -1737,7 +1738,7 @@ h1, h2, h3, h4, h5, h6,
 
     &.ut-badge-teal {
         background: rgba($ut-teal, 0.15);
-        color: $ut-teal-light;
+        color: $ut-teal-on-light;
         border: 1px solid rgba($ut-teal, 0.3);
     }
 
@@ -1748,7 +1749,7 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Divider ───────────────────────────────────────────────────────────────────
+// â”€â”€ Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-divider {
     height: 3px;
     background: linear-gradient(90deg, $ut-gold, $ut-teal);
@@ -1757,7 +1758,7 @@ h1, h2, h3, h4, h5, h6,
     margin: $ut-space-xl 0;
 }
 
-// ── Toast / Notification ─────────────────────────────────────────────────────
+// â”€â”€ Toast / Notification â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-notification-toast {
     background: $ut-surface;
     border: 1px solid rgba($ut-gold, 0.2);
@@ -1781,7 +1782,7 @@ h1, h2, h3, h4, h5, h6,
     .toast-title {
         font-family: $ut-font-heading;
         font-weight: 700;
-        color: $ut-white;
+        color: $ut-navy;
         margin-bottom: 0.25rem;
     }
 
@@ -1791,63 +1792,30 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// ── Code Blocks ──────────────────────────────────────────────────────────────
+// â”€â”€ Code Blocks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 .ut-code-block {
-    background: $ut-navy-deep;
-    border: 1px solid rgba($ut-gold, 0.15);
+    background: $ut-surface-2;
+    border: 1px solid $ut-border-default;
     border-radius: $ut-radius-md;
     padding: $ut-space-lg;
     font-family: $ut-font-mono;
     font-size: 0.8125rem;
     line-height: 1.6;
-    color: rgba($ut-white, 0.85);
+    color: $ut-text-primary;
     overflow-x: auto;
 
-    .ut-code-comment { color: rgba($ut-white, 0.4); }
-    .ut-code-keyword { color: $ut-teal-light; }
-    .ut-code-string  { color: $ut-gold; }
-    .ut-code-value   { color: #79c0ff; }
+    .ut-code-comment { color: $ut-text-muted; }
+    .ut-code-keyword { color: $ut-teal-on-light; }
+    .ut-code-string  { color: $ut-ocw-red; }
+    .ut-code-value   { color: $ut-navy-mid; }
 }
 
 pre code,
 code.hljs {
     font-family: $ut-font-mono;
-    background: $ut-navy-deep;
-    color: rgba($ut-white, 0.85);
+    background: $ut-surface-2;
+    color: $ut-text-primary;
     border-radius: $ut-radius-sm;
     padding: 0.2em 0.4em;
 }
 
-
-
-// -- Exam Readiness Block ------------------------------------------------------
-.block-examreadiness {
-    container-type: inline-size;
-    container-name: readiness;
-
-    .block-examreadiness-score .display-6 {
-        font-family: $ut-font-heading;
-        color: $ut-gold;
-        font-size: var(--ut-fluid-14);
-    }
-
-    .block-examreadiness-radar {
-        width: 100%;
-        max-height: var(--ut-fluid-15);
-    }
-
-    .block-examreadiness-misconceptions li {
-        padding: $ut-space-sm 0;
-        border-bottom: 1px solid $ut-border-subtle;
-
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-}
-
-@container readiness (min-width: 20rem) {
-    .block-examreadiness-radar {
-        max-height: var(--ut-fluid-16);
-    }
-}

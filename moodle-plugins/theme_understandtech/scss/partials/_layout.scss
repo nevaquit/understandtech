@@ -6,8 +6,8 @@
 // ── Global Page Shell ─────────────────────────────────────────────────────────
 body {
     font-family: $ut-font-body;
-    background-color: $ut-navy;
-    color: $ut-white;
+    background-color: $ut-bg;
+    color: $ut-text-primary;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -15,7 +15,7 @@ body {
 
 #page-wrapper,
 #page {
-    background: $ut-navy;
+    background: $ut-bg;
 }
 
 // ── Typography ────────────────────────────────────────────────────────────────
@@ -24,7 +24,7 @@ h1, h2, h3, h4, h5, h6,
     font-family: $ut-font-heading;
     font-weight: 700;
     line-height: 1.15;
-    color: $ut-white;
+    color: $ut-navy;
 }
 
 .ut-eyebrow {
@@ -63,10 +63,15 @@ h1, h2, h3, h4, h5, h6,
 
 .ut-section-dark {
     background: $ut-navy-deep;
+    color: $ut-white;
+
+    h1, h2, h3, h4, h5, h6 {
+        color: $ut-white;
+    }
 }
 
 .ut-section-surface {
-    background: $ut-surface;
+    background: $ut-surface-2;
 }
 
 .ut-section-header {
@@ -291,9 +296,7 @@ h1, h2, h3, h4, h5, h6,
 
 // ── Login Page ────────────────────────────────────────────────────────────────
 #page-login-index {
-    background:
-        radial-gradient(ellipse 80% 60% at 70% 50%, rgba($ut-teal, 0.08) 0%, transparent 60%),
-        linear-gradient(160deg, $ut-navy-deep 0%, $ut-navy 100%);
+    background: $ut-bg;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -317,11 +320,11 @@ h1, h2, h3, h4, h5, h6,
         width: 100%;
         max-width: 28rem;
         background: $ut-surface;
-        border: 1px solid rgba($ut-gold, 0.2);
-        border-top: 4px solid $ut-gold;
+        border: 1px solid $ut-border-default;
+        border-top: 4px solid $ut-ocw-red;
         border-radius: $ut-radius-lg;
         padding: $ut-space-2xl;
-        box-shadow: $ut-shadow-lg;
+        box-shadow: $ut-shadow-md;
     }
 
     .ut-login-logo {
@@ -339,7 +342,7 @@ h1, h2, h3, h4, h5, h6,
         font-weight: 700;
         font-size: 1.5rem;
         text-align: center;
-        color: $ut-white;
+        color: $ut-navy;
         margin-bottom: $ut-space-xs;
     }
 
@@ -351,9 +354,9 @@ h1, h2, h3, h4, h5, h6,
     }
 
     .form-control {
-        background: rgba($ut-navy-mid, 0.8);
-        border-color: rgba($ut-gold, 0.25);
-        color: $ut-white;
+        background: $ut-bg;
+        border-color: $ut-border-strong;
+        color: $ut-text-primary;
         border-radius: $ut-radius-sm;
 
         &::placeholder {
@@ -361,28 +364,27 @@ h1, h2, h3, h4, h5, h6,
         }
 
         &:focus {
-            background: $ut-navy-mid;
-            border-color: $ut-gold;
-            box-shadow: $ut-shadow-gold;
-            color: $ut-white;
+            background: $ut-bg;
+            border-color: $ut-navy;
+            box-shadow: $ut-shadow-focus;
+            color: $ut-text-primary;
         }
     }
 
     .btn-primary {
-        background: $ut-gold;
-        border-color: $ut-gold;
-        color: $ut-navy;
+        background: $ut-ocw-red;
+        border-color: $ut-ocw-red;
+        color: $ut-white;
         font-family: $ut-font-heading;
         font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        letter-spacing: 0.04em;
         width: 100%;
         padding: 0.75rem;
 
         &:hover {
-            background: $ut-gold-light;
-            border-color: $ut-gold-light;
-            color: $ut-navy;
+            background: $ut-ocw-red-dark;
+            border-color: $ut-ocw-red-dark;
+            color: $ut-white;
         }
     }
 
@@ -391,12 +393,12 @@ h1, h2, h3, h4, h5, h6,
         margin-top: $ut-space-lg;
 
         a {
-            color: $ut-teal-light;
+            color: $ut-link;
             font-size: 0.875rem;
             text-decoration: none;
 
             &:hover {
-                color: $ut-gold;
+                color: $ut-link-hover;
                 text-decoration: underline;
             }
         }
@@ -520,7 +522,7 @@ h1, h2, h3, h4, h5, h6,
     .ut-lesson-content {
         background: $ut-surface;
         border-radius: $ut-radius-md;
-        border: 1px solid rgba($ut-gold, 0.1);
+        border: 1px solid $ut-border-default;
         padding: $ut-space-xl;
     }
 
@@ -531,8 +533,8 @@ h1, h2, h3, h4, h5, h6,
     }
 
     .ut-lesson-nav {
-        background: $ut-surface;
-        border: 1px solid rgba($ut-gold, 0.1);
+        background: $ut-surface-2;
+        border: 1px solid $ut-border-default;
         border-radius: $ut-radius-md;
         padding: $ut-space-md;
     }

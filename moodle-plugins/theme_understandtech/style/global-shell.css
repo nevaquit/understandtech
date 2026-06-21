@@ -3,61 +3,67 @@
 
 :root {
     /* Brand anchors */
-    --ut-navy-deep: #071529;
+    --ut-navy-deep: #071528;
     --ut-navy: #0B1F3A;
-    --ut-navy-mid: #0C1E35;
-    --ut-surface: #0F2035;
-    --ut-surface-elevated: #152B45;
-    --ut-surface-hover: #1A3554;
+    --ut-navy-mid: #1a3358;
+    --ut-bg: #ffffff;
+    --ut-surface: #ffffff;
+    --ut-surface-2: #f5f5f5;
+    --ut-surface-elevated: #ffffff;
+    --ut-surface-hover: #f5f5f5;
     --ut-gold: #C9A227;
     --ut-gold-light: #E8C547;
     --ut-gold-hover: #D4B23A;
+    --ut-gold-on-light: #7a5f10;
     --ut-teal: #1A8A7D;
     --ut-teal-light: #22B5A5;
     --ut-teal-dark: #157A6E;
+    --ut-teal-on-light: #0d5c52;
+    --ut-ocw-red: #A31F34;
+    --ut-ocw-red-dark: #750014;
     /* Semantic */
-    --ut-success: #2DD4A0;
-    --ut-warning: #F5B731;
-    --ut-error: #F07178;
-    --ut-info: #5CB8FF;
-    --ut-success-bg: rgba(45, 212, 160, 0.12);
-    --ut-warning-bg: rgba(245, 183, 49, 0.12);
-    --ut-error-bg: rgba(240, 113, 120, 0.12);
-    --ut-info-bg: rgba(92, 184, 255, 0.12);
+    --ut-success: #0d5c52;
+    --ut-warning: #7a5f10;
+    --ut-error: #A31F34;
+    --ut-info: #1a3358;
+    --ut-success-bg: rgba(13, 92, 82, 0.10);
+    --ut-warning-bg: rgba(201, 162, 39, 0.12);
+    --ut-error-bg: rgba(163, 31, 52, 0.08);
+    --ut-info-bg: rgba(11, 31, 58, 0.06);
     /* Text hierarchy */
-    --ut-text: rgba(255, 255, 255, 0.94);
-    --ut-text-primary: rgba(255, 255, 255, 0.94);
-    --ut-text-secondary: rgba(255, 255, 255, 0.72);
-    --ut-text-muted: rgba(255, 255, 255, 0.55);
-    --ut-text-subtle: rgba(255, 255, 255, 0.55);
-    --ut-text-disabled: rgba(255, 255, 255, 0.38);
+    --ut-text: #1a1a1a;
+    --ut-text-primary: #1a1a1a;
+    --ut-text-secondary: #525252;
+    --ut-text-muted: #525252;
+    --ut-text-subtle: #525252;
+    --ut-text-disabled: #9ca3af;
     /* Borders */
-    --ut-border: rgba(201, 162, 39, 0.18);
-    --ut-border-subtle: rgba(201, 162, 39, 0.12);
-    --ut-border-default: rgba(201, 162, 39, 0.18);
-    --ut-border-strong: rgba(201, 162, 39, 0.32);
-    --ut-border-focus: rgba(201, 162, 39, 0.55);
+    --ut-border: #e0e0e0;
+    --ut-border-subtle: #e0e0e0;
+    --ut-border-default: #e0e0e0;
+    --ut-border-strong: #dadce0;
+    --ut-border-focus: rgba(11, 31, 58, 0.45);
     /* CTA / action hierarchy */
-    --ut-action: #C9A227;
-    --ut-action-hover: #D4B23A;
-    --ut-action-on: #0B1F3A;
+    --ut-action: #A31F34;
+    --ut-action-hover: #750014;
+    --ut-action-on: #ffffff;
     --ut-action-secondary: #1A8A7D;
-    --ut-action-secondary-hover: #22B5A5;
-    --ut-focus-ring: #C9A227;
+    --ut-action-secondary-hover: #157A6E;
+    --ut-focus-ring: #0B1F3A;
     --ut-progress: #1A8A7D;
-    --ut-link: #22B5A5;
-    --ut-link-hover: #C9A227;
+    --ut-link: #A31F34;
+    --ut-link-hover: #750014;
     /* Lesson content */
-    --ut-lesson-outer: #0B1F3A;
-    --ut-lesson-surface: #0F2035;
-    --ut-lesson-prose: rgba(255, 255, 255, 0.92);
-    --ut-lesson-muted: rgba(255, 255, 255, 0.72);
-    --ut-lesson-card: rgba(11, 31, 58, 0.92);
-    --ut-lesson-border: rgba(201, 162, 39, 0.22);
+    --ut-lesson-outer: #ffffff;
+    --ut-lesson-surface: #ffffff;
+    --ut-lesson-prose: #1a1a1a;
+    --ut-lesson-muted: #525252;
+    --ut-lesson-card: #ffffff;
+    --ut-lesson-border: #e0e0e0;
     /* Typography & layout */
-    --ut-font-heading: "Rajdhani", "Segoe UI", system-ui, sans-serif;
-    --ut-font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
-    --ut-font-mono: "Share Tech Mono", Consolas, "Courier New", monospace;
+    --ut-font-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --ut-font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --ut-font-mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", Consolas, monospace;
     --ut-radius-sm: 0.375rem;
     --ut-radius-md: 0.75rem;
     --ut-radius-lg: 1.25rem;
@@ -113,7 +119,7 @@ body.understandtech-app--learn {
     font-size: 1rem;
     line-height: 1.65;
     color: var(--ut-text);
-    background-color: var(--ut-navy);
+    background-color: var(--ut-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -174,18 +180,18 @@ body.ut-theme .dimmed {
 }
 
 body.ut-theme a:not(.btn):not(.dropdown-item):not(.nav-link) {
-    color: var(--ut-teal-light);
+    color: var(--ut-link);
 }
 
 body.ut-theme a:not(.btn):not(.dropdown-item):not(.nav-link):hover {
-    color: var(--ut-gold);
+    color: var(--ut-link-hover);
 }
 
 /* ── Page shell (Boost drawers) ───────────────────────────────────────────── */
 body.ut-theme #page-wrapper,
 body.ut-theme #page,
 body.ut-theme #page.drawers {
-    background: var(--ut-navy);
+    background: var(--ut-bg);
     color: var(--ut-text);
 }
 
@@ -261,7 +267,7 @@ body.ut-theme #region-main {
 
 body.ut-theme .page-header-headings h1,
 body.ut-theme .page-header-headings .h2 {
-    color: #fff;
+    color: var(--ut-navy);
     font-weight: 700;
     letter-spacing: 0.02em;
 }
@@ -272,44 +278,42 @@ body.ut-theme nav.navbar.fixed-top,
 body.ut-theme .navbar.bg-white,
 body.ut-theme .navbar-light,
 body.ut-theme .navbar.ut-navbar {
-    background: rgba(7, 20, 38, 0.98) !important;
+    background: rgba(255, 255, 255, 0.98) !important;
     border-bottom: 1px solid var(--ut-border) !important;
-    box-shadow: 0 4px 24px rgba(7, 20, 38, 0.35);
+    box-shadow: 0 1px 3px rgba(11, 31, 58, 0.04);
     min-height: 4rem;
 }
 
 body.ut-theme .navbar .navbar-brand,
 body.ut-theme .navbar .navbar-brand .site-name,
 body.ut-theme .navbar .navbar-brand .logo {
-    color: #fff !important;
+    color: var(--ut-navy) !important;
     font-family: var(--ut-font-heading);
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 
 body.ut-theme .navbar .nav-link,
 body.ut-theme .primary-navigation .nav-link,
 body.ut-theme .navbar .dropdown-toggle {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: var(--ut-text-secondary) !important;
     font-family: var(--ut-font-heading);
     font-weight: 600;
     font-size: 0.8125rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 body.ut-theme .navbar .nav-link:hover,
 body.ut-theme .navbar .nav-link:focus,
 body.ut-theme .primary-navigation .nav-link:hover,
 body.ut-theme .primary-navigation .nav-link:focus {
-    color: var(--ut-gold) !important;
+    color: var(--ut-link) !important;
 }
 
 body.ut-theme .navbar .nav-link.active,
 body.ut-theme .primary-navigation .nav-link.active {
-    color: #fff !important;
-    background: rgba(201, 162, 39, 0.35) !important;
+    color: var(--ut-navy) !important;
+    background: rgba(163, 31, 52, 0.06) !important;
 }
 
 body.ut-theme .navbar .divider,
@@ -322,21 +326,21 @@ body.ut-theme .navbar .border-end {
 body.ut-theme .drawer,
 body.ut-theme .drawer.drawer-left,
 body.ut-theme .drawer.drawer-right {
-    background: var(--ut-navy-deep) !important;
+    background: var(--ut-bg) !important;
     border-color: var(--ut-border) !important;
     color: var(--ut-text);
 }
 
 body.ut-theme .drawer .drawerheader,
 body.ut-theme .drawer .drawercontent {
-    background: var(--ut-navy-deep) !important;
+    background: var(--ut-bg) !important;
     color: var(--ut-text);
     border-color: var(--ut-border) !important;
 }
 
 body.ut-theme .drawer .btn-close,
 body.ut-theme .drawer .drawertoggle {
-    color: var(--ut-gold);
+    color: var(--ut-navy);
     opacity: 0.85;
 }
 
@@ -348,12 +352,12 @@ body.ut-theme .courseindex-section {
 
 body.ut-theme .courseindex-section-title,
 body.ut-theme .courseindex .icon {
-    color: var(--ut-gold);
+    color: var(--ut-teal-on-light);
 }
 
 body.ut-theme .courseindex-item a,
 body.ut-theme .courseindex-item .courseindex-link {
-    color: rgba(255, 255, 255, 0.82);
+    color: var(--ut-text-secondary);
     font-family: var(--ut-font-heading);
     font-size: 0.875rem;
     display: flex;
@@ -379,15 +383,15 @@ body.ut-theme .courseindex-item a.active,
 body.ut-theme .courseindex-item.pageitem a,
 body.ut-theme .courseindex-item.pageitem .courseindex-link,
 body.ut-theme .courseindex-item.current a {
-    color: var(--ut-gold) !important;
+    color: var(--ut-navy) !important;
     background: transparent !important;
     border-radius: var(--ut-radius-sm);
 }
 
 body.ut-theme .courseindex-item.active a:hover,
 body.ut-theme .courseindex-item.pageitem a:hover {
-    color: var(--ut-gold-light) !important;
-    background: rgba(201, 162, 39, 0.08) !important;
+    color: var(--ut-link) !important;
+    background: var(--ut-surface-hover) !important;
 }
 
 /* Course index drawer — hide skeleton only after real sections render.
@@ -422,7 +426,7 @@ body.ut-theme #theme_boost-drawers-courseindex .courseindex-section-title {
     font-size: 0.6875rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--ut-gold);
+    color: var(--ut-text-muted);
     margin-top: 0.75rem;
 }
 
@@ -432,8 +436,8 @@ body.ut-theme #theme_boost-drawers-courseindex .courseindex-item {
 }
 
 body.ut-theme #theme_boost-drawers-courseindex .courseindex-item a:hover {
-    color: var(--ut-gold);
-    background: rgba(201, 162, 39, 0.08);
+    color: var(--ut-link);
+    background: var(--ut-surface-hover);
 }
 
 /* ── Student-facing error states (DB/filter failures) ─────────────────────── */
@@ -486,15 +490,15 @@ body.ut-theme .breadcrumb .breadcrumb-item a {
 }
 
 body.ut-theme .breadcrumb .breadcrumb-item a:hover {
-    color: var(--ut-gold);
+    color: var(--ut-link);
 }
 
 body.ut-theme .breadcrumb .breadcrumb-item.active {
-    color: var(--ut-gold);
+    color: var(--ut-navy);
 }
 
 body.ut-theme .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
-    color: rgba(201, 162, 39, 0.45);
+    color: var(--ut-text-muted);
 }
 
 /* ── Cards, blocks, regions ─────────────────────────────────────────────────── */
@@ -510,14 +514,14 @@ body.ut-theme .block .card-body {
 
 body.ut-theme .card-header,
 body.ut-theme .card-footer {
-    background: rgba(11, 31, 58, 0.55);
+    background: var(--ut-surface-2);
     border-color: var(--ut-border);
     color: var(--ut-text);
 }
 
 body.ut-theme .card-title,
 body.ut-theme .block .card-title {
-    color: #fff;
+    color: var(--ut-navy);
     font-weight: 700;
 }
 
@@ -540,9 +544,9 @@ body.ut-theme input[type="email"],
 body.ut-theme input[type="search"],
 body.ut-theme textarea,
 body.ut-theme select {
-    background: var(--ut-navy-mid);
+    background: var(--ut-bg);
     border: 1px solid var(--ut-border-strong);
-    color: #fff;
+    color: var(--ut-text);
     border-radius: var(--ut-radius-sm);
     font-family: var(--ut-font-body);
 }
@@ -553,10 +557,10 @@ body.ut-theme .form-control::placeholder {
 
 body.ut-theme .form-control:focus,
 body.ut-theme .form-select:focus {
-    background: var(--ut-navy-mid);
-    border-color: var(--ut-gold);
-    color: #fff;
-    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.25);
+    background: var(--ut-bg);
+    border-color: var(--ut-navy);
+    color: var(--ut-text);
+    box-shadow: 0 0 0 3px rgba(11, 31, 58, 0.15);
 }
 
 body.ut-theme label,
@@ -636,11 +640,11 @@ body.ut-theme table.generaltable {
     --bs-table-bg: var(--ut-surface);
     --bs-table-color: var(--ut-text);
     --bs-table-border-color: var(--ut-border);
-    --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+    --bs-table-striped-bg: rgba(11, 31, 58, 0.03);
     --bs-table-striped-color: var(--ut-text);
     --bs-table-active-bg: rgba(26, 138, 125, 0.12);
     --bs-table-active-color: var(--ut-text);
-    --bs-table-hover-bg: rgba(201, 162, 39, 0.06);
+    --bs-table-hover-bg: rgba(163, 31, 52, 0.04);
     --bs-table-hover-color: var(--ut-text);
     background-color: var(--ut-surface) !important;
     color: var(--ut-text) !important;
@@ -668,7 +672,7 @@ body.ut-theme .generaltable tbody tr {
 body.ut-theme .table-striped > tbody > tr:nth-of-type(odd) > *,
 body.ut-theme .table-striped tbody tr:nth-of-type(odd) > *,
 body.ut-theme .generaltable tbody tr:nth-of-type(odd) > * {
-    background-color: rgba(255, 255, 255, 0.04) !important;
+    background-color: rgba(11, 31, 58, 0.03) !important;
     color: var(--ut-text) !important;
 }
 
@@ -682,13 +686,13 @@ body.ut-theme .generaltable tbody tr:nth-of-type(even) > * {
 
 body.ut-theme .table thead th,
 body.ut-theme .generaltable thead th {
-    color: var(--ut-gold) !important;
+    color: var(--ut-navy) !important;
     border-color: var(--ut-border) !important;
     font-family: var(--ut-font-heading);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     font-size: 0.75rem;
-    background-color: rgba(11, 31, 58, 0.55) !important;
+    background-color: var(--ut-surface-2) !important;
 }
 
 body.ut-theme .generaltable th.cell[scope="row"],
@@ -705,7 +709,7 @@ body.ut-theme table.quizattemptsummary th.cell[scope="row"] {
 body.ut-theme .dropdown-menu {
     background: var(--ut-surface-elevated);
     border: 1px solid var(--ut-border);
-    box-shadow: 0 12px 40px rgba(7, 20, 38, 0.55);
+    box-shadow: 0 4px 16px rgba(11, 31, 58, 0.12);
 }
 
 body.ut-theme .dropdown-item {
@@ -716,8 +720,8 @@ body.ut-theme .dropdown-item {
 body.ut-theme .dropdown-item:hover,
 body.ut-theme .dropdown-item:focus,
 body.ut-theme .dropdown-item.active {
-    background: rgba(201, 162, 39, 0.12);
-    color: var(--ut-gold);
+    background: var(--ut-surface-hover);
+    color: var(--ut-link);
 }
 
 body.ut-theme .modal-content {
@@ -728,7 +732,7 @@ body.ut-theme .modal-content {
 
 body.ut-theme .modal-header,
 body.ut-theme .modal-footer {
-    background: rgba(11, 31, 58, 0.55);
+    background: var(--ut-surface-2);
     border-color: var(--ut-border);
 }
 
@@ -864,9 +868,9 @@ body.ut-theme .more-nav .nav-link.active,
 body.ut-theme .moremenu .nav-link.active,
 body.ut-theme .moremenu .show > .nav-link,
 body.ut-theme .moremenu .active > .nav-link {
-    color: #fff !important;
-    background: rgba(201, 162, 39, 0.35) !important;
-    border-bottom: 2px solid var(--ut-gold) !important;
+    color: var(--ut-navy) !important;
+    background: rgba(163, 31, 52, 0.06) !important;
+    border-bottom: 2px solid var(--ut-link) !important;
 }
 
 body.ut-theme .secondary-navigation .nav-link:hover,
@@ -877,8 +881,8 @@ body.ut-theme .moremenu .nav-link:hover,
 body.ut-theme .moremenu .nav-link:focus,
 body.ut-theme .moremenu .nav-link.active:hover,
 body.ut-theme .moremenu .nav-link.active:focus {
-    color: var(--ut-gold) !important;
-    background: rgba(201, 162, 39, 0.08) !important;
+    color: var(--ut-link) !important;
+    background: var(--ut-surface-hover) !important;
 }
 
 body.ut-theme .moremenu .dropdown-menu {
@@ -895,16 +899,16 @@ body.ut-theme .moremenu .dropdown-item:hover,
 body.ut-theme .moremenu .dropdown-item:focus,
 body.ut-theme .moremenu .dropdown-item.active,
 body.ut-theme .moremenu .dropdown-item[aria-current="true"] {
-    background: rgba(201, 162, 39, 0.12) !important;
-    color: var(--ut-gold) !important;
+    background: var(--ut-surface-hover) !important;
+    color: var(--ut-link) !important;
 }
 
 /* ── Course view & activities ───────────────────────────────────────────────── */
 body.ut-theme.path-course-view .course-section-header h3,
 body.ut-theme .course-section-header h3 {
-    color: var(--ut-gold);
+    color: var(--ut-navy);
     font-size: 1.125rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
 }
 
 body.ut-theme .activity-item,
@@ -913,13 +917,13 @@ body.ut-theme .activity {
 }
 
 body.ut-theme .activity-item {
-    background: rgba(15, 36, 71, 0.55);
+    background: var(--ut-surface-2);
     border: 1px solid var(--ut-border);
     transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 body.ut-theme .activity-item:hover {
-    background: rgba(15, 36, 71, 0.8);
+    background: var(--ut-surface-hover);
     border-color: var(--ut-border-strong);
 }
 
@@ -961,7 +965,7 @@ body.ut-theme .ut-frontpage-tracks {
 }
 
 body.ut-theme .ut-cert-track-card {
-    background: var(--ut-navy);
+    background: var(--ut-bg);
     border: 1px solid var(--ut-border);
     border-radius: var(--ut-radius-lg);
     padding: 1.5rem;
@@ -1151,7 +1155,7 @@ body.ut-theme .ut-member-nav-card {
     gap: 0.5rem;
     padding: 1.25rem;
     min-height: 100%;
-    background: var(--ut-navy);
+    background: var(--ut-bg);
     border: 1px solid var(--ut-border);
     border-radius: var(--ut-radius-lg);
     text-decoration: none !important;
@@ -1298,7 +1302,7 @@ body.ut-theme .alert-danger a {
 body.ut-theme.path-mod-quiz .que,
 body.ut-theme.path-question .que,
 body.ut-theme .que {
-    background: rgba(15, 36, 71, 0.65);
+    background: #f5f5f5;
     border: 1px solid var(--ut-border);
     border-radius: var(--ut-radius-md);
     color: var(--ut-text);
@@ -1314,14 +1318,14 @@ body.ut-theme .que .content {
 body.ut-theme .que .formulation,
 body.ut-theme .que .outcome,
 body.ut-theme .que .comment {
-    background: rgba(15, 36, 71, 0.85) !important;
+    background: #ffffff !important;
     border: 1px solid var(--ut-border) !important;
     color: var(--ut-text) !important;
     border-radius: var(--ut-radius-sm);
 }
 
 body.ut-theme .que .info {
-    background: rgba(11, 31, 58, 0.75) !important;
+    background: var(--ut-surface-2) !important;
     border: 1px solid var(--ut-border) !important;
     color: var(--ut-text) !important;
     border-radius: var(--ut-radius-sm);
@@ -1331,7 +1335,7 @@ body.ut-theme .que .info h3,
 body.ut-theme .que .info .questionno,
 body.ut-theme .que .info .grade,
 body.ut-theme .que .info .state {
-    color: var(--ut-gold) !important;
+    color: var(--ut-navy) !important;
 }
 
 /* Question flag — core YUI init may not run; style pre-transform label and a.aabtn toggle. */
@@ -1635,10 +1639,10 @@ body.ut-theme.path-mod-quiz-attempt table.quizreviewsummary,
 body.ut-theme.path-mod-quiz-summary table.quizreviewsummary,
 body.ut-theme.path-mod-quiz-review table.quizreviewsummary {
     --bs-table-bg: var(--ut-surface);
-    --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+    --bs-table-striped-bg: rgba(11, 31, 58, 0.03);
     --bs-table-striped-color: var(--ut-text);
     --bs-table-active-bg: rgba(26, 138, 125, 0.12);
-    --bs-table-hover-bg: rgba(201, 162, 39, 0.06);
+    --bs-table-hover-bg: rgba(163, 31, 52, 0.04);
     --bs-table-color: var(--ut-text);
     --bs-table-border-color: var(--ut-border);
     background: var(--ut-surface) !important;
@@ -1710,7 +1714,7 @@ body.ut-theme.path-mod-quiz .list-unstyled.row .card-body a:hover {
 
 body.ut-theme.path-mod-quiz table.quizreviewsummary tbody tr:nth-of-type(odd) > *,
 body.ut-theme.path-mod-quiz table.generaltable.generalbox tbody tr:nth-of-type(odd) > * {
-    background-color: rgba(255, 255, 255, 0.04) !important;
+    background-color: rgba(11, 31, 58, 0.03) !important;
 }
 
 body.ut-theme.path-mod-quiz table.quizreviewsummary tbody tr:nth-of-type(even) > *,
@@ -1761,7 +1765,7 @@ body.ut-theme.path-mod-forum .discussion-list .discussion .discussion-name {
 
 body.ut-theme.path-mod-forum .forumpost .content,
 body.ut-theme.path-mod-forum .posting.fullpost {
-    background: rgba(15, 36, 71, 0.55);
+    background: var(--ut-surface-2);
     border: 1px solid var(--ut-border);
     border-radius: var(--ut-radius-sm);
     color: var(--ut-text);
@@ -1806,7 +1810,7 @@ body.ut-theme .page-item.active .page-link {
 /* ── Fix legacy light-theme leaks in post.scss widgets ──────────────────────── */
 body.ut-theme .ut-leaderboard .ut-leaderboard-row,
 body.ut-theme .ut-member-card {
-    background: rgba(15, 36, 71, 0.65) !important;
+    background: var(--ut-surface-2) !important;
     border: 1px solid var(--ut-border) !important;
     color: var(--ut-text);
 }
@@ -1904,7 +1908,7 @@ body.ut-theme .block-region .drawertoggle,
 body.ut-theme .drawer-toggles .btn {
     background: transparent !important;
     border-color: var(--ut-border) !important;
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: var(--ut-navy) !important;
 }
 
 body.ut-theme .drawer-toggler .btn:hover,
@@ -1915,9 +1919,9 @@ body.ut-theme .block-region .drawertoggle:hover,
 body.ut-theme .block-region .drawertoggle:focus,
 body.ut-theme .drawer-toggles .btn:hover,
 body.ut-theme .drawer-toggles .btn:focus {
-    background: rgba(201, 162, 39, 0.12) !important;
-    border-color: var(--ut-gold) !important;
-    color: var(--ut-gold) !important;
+    background: var(--ut-surface-hover) !important;
+    border-color: var(--ut-link) !important;
+    color: var(--ut-link) !important;
 }
 
 body.ut-theme .footer-popover.ut-theme-footer {
@@ -1949,7 +1953,7 @@ body.ut-theme #region-main .h1 {
     font-weight: 700;
     line-height: 1.2;
     margin: 0 0 1rem;
-    color: #fff;
+    color: var(--ut-navy);
 }
 
 body.ut-theme #region-main h2,
@@ -1958,7 +1962,7 @@ body.ut-theme #region-main .h2 {
     font-weight: 700;
     line-height: 1.25;
     margin: 1.5rem 0 0.75rem;
-    color: #fff;
+    color: var(--ut-navy);
 }
 
 body.ut-theme #region-main h3,
@@ -1967,7 +1971,7 @@ body.ut-theme #region-main .h3 {
     font-weight: 700;
     line-height: 1.3;
     margin: 1.25rem 0 0.5rem;
-    color: var(--ut-gold);
+    color: var(--ut-navy);
 }
 
 body.ut-theme #region-main h4,
@@ -1976,7 +1980,7 @@ body.ut-theme #region-main .h4 {
     font-weight: 600;
     line-height: 1.35;
     margin: 1rem 0 0.5rem;
-    color: var(--ut-teal-light);
+    color: var(--ut-teal-on-light);
 }
 
 body.ut-theme #region-main p {
@@ -2017,7 +2021,7 @@ body.ut-theme #region-main li {
 }
 
 body.ut-theme #region-main li::marker {
-    color: var(--ut-gold);
+    color: var(--ut-teal-on-light);
 }
 
 /* ── Tables (borders, padding, contrast — dual-width equivalent) ─────────── */
@@ -2031,7 +2035,7 @@ body.ut-theme .generaltable th {
 
 body.ut-theme .table tbody tr:hover,
 body.ut-theme .generaltable tbody tr:hover {
-    background: rgba(201, 162, 39, 0.05);
+    background: rgba(163, 31, 52, 0.03);
 }
 
 body.ut-theme .table caption,
@@ -2342,7 +2346,7 @@ body.ut-theme .course-summaryitem .coursename {
     font-family: var(--ut-font-heading);
     font-weight: 700;
     font-size: 1rem;
-    color: #fff;
+    color: var(--ut-navy);
 }
 
 body.ut-theme .dashboard-card .text-muted,
@@ -2354,7 +2358,7 @@ body.ut-theme .course-summaryitem .text-muted {
 body.ut-theme.path-mod-forum .discussion-list .discussion {
     padding: 1rem;
     margin-bottom: 0.75rem;
-    background: rgba(15, 36, 71, 0.55);
+    background: var(--ut-surface-2);
     border: 1px solid var(--ut-border);
     border-radius: var(--ut-radius-md);
 }
