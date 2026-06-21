@@ -9,6 +9,9 @@ on:
     branches: [main]
     paths:
       - 'marketing/**'
+      - 'scripts/deploy-marketing-vm.sh'
+      - 'infrastructure/runner/gha-runner-sudoers'
+      - '.github/workflows/deploy-marketing.yml'
   workflow_dispatch: {}
 
 concurrency:
@@ -48,13 +51,13 @@ jobs:
           echo "ERROR: monorepo stuck at $(git rev-parse HEAD), expected ${EXPECTED_SHA}" >&2
           exit 1
 
+      - name: Sync gha-runner sudoers
+        run: sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/sync-sudoers-vm.sh"
+
       - name: Deploy marketing site
         run: |
           set -euo pipefail
-          sudo ${RSYNC_BIN} -av --delete \
-            --exclude='.git' --exclude='.github' \
-            ${PLUGINS_REPO_DIR}/marketing/ /var/www/marketing/
-          sudo /usr/bin/chown -R gha-runner:gha-runner /var/www/marketing/
+          sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/deploy-marketing-vm.sh"
           echo "Marketing site deployed from commit ${{ github.sha }}"
 
       - name: Verify deployment
@@ -93,9 +96,10 @@ jobs:
             --data '{
               "files": [
                 "https://understandtech.app/",
+                "https://understandtech.app/index.html",
                 "https://understandtech.app/css/design-system.css",
                 "https://understandtech.app/css/design-system.css?v=20260608",
-                "https://understandtech.app/css/pages.css",
+                "https://understandtech.app/css/design-system.css?v=20260621",
                 "https://understandtech.app/js/main.js",
                 "https://understandtech.app/js/components.js",
                 "https://understandtech.app/pages/gamification.html",

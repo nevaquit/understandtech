@@ -18,6 +18,12 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/script
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/recover-origin-db.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/moodle-sync-version-hash.sh
 
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/deploy-marketing-vm.sh
+
+# Marketing site sync to /var/www/marketing (deploy-marketing workflow)
+gha-runner ALL=(root) NOPASSWD: /usr/bin/rsync -av --delete --exclude=.git --exclude=.github /opt/understandtech-plugins/marketing/ /var/www/marketing/
+gha-runner ALL=(root) NOPASSWD: /usr/bin/chown -R gha-runner\:gha-runner /var/www/marketing/
+
 # Plugin sync into www-data-owned Moodle dirroot (deploy workflow)
 gha-runner ALL=(root) NOPASSWD: /usr/bin/mkdir -p /var/www/moodle/local/*
 gha-runner ALL=(root) NOPASSWD: /usr/bin/mkdir -p /var/www/moodle/mod/*
