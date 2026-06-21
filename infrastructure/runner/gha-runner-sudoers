@@ -51,6 +51,7 @@ gha-runner ALL=(root) NOPASSWD: /usr/bin/systemctl reload nginx
 gha-runner ALL=(root) NOPASSWD: /usr/bin/systemctl restart php8.3-fpm
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/restart-php-fpm-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/post-deploy-stabilize-vm.sh
+gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/core-patches/apply-patches.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/sync-theme-understandtech-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/scripts/theme-upgrade-purge-vm.sh
 gha-runner ALL=(root) NOPASSWD: /usr/bin/bash /opt/understandtech-plugins/core-patches/apply-patches.sh

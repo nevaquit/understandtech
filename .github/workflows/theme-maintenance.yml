@@ -33,16 +33,18 @@ jobs:
 
       - name: Theme upgrade and purge caches
         run: sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/theme-upgrade-purge-vm.sh"
-      - name: Verify theme version
+      - name: Verify deployed CSS tokens
         run: |
           set -euo pipefail
-          sudo -u www-data php -r '
-          define("CLI_SCRIPT", true);
-          require "/var/www/moodle/config.php";
-          $theme = theme_config::load("understandtech");
-          echo "theme=understandtech version=" . $theme->version . " release=" . ($theme->release ?? "?") . PHP_EOL;
-          echo "site_theme=" . get_config("core", "theme") . PHP_EOL;
-          '
+          grep -qF '--ut-action' /var/www/moodle/theme/understandtech/style/global-shell.css
+          grep -qF 'var(--ut-action)' /var/www/moodle/theme/understandtech/style/global-shell.css
+          echo "global_shell_conversion_tokens_ok=1"
+          if grep -q 'formatoptions->filter = false' /var/www/moodle/mod/page/view.php; then
+            echo "mod_page_filter_patch_ok=1"
+          else
+            echo "mod_page_filter_patch_missing=1" >&2
+            exit 1
+          fi
       - name: Disable maintenance mode
         if: success()
         run: sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable
@@ -65,16 +67,18 @@ jobs:
 
       - name: Theme upgrade and purge caches
         run: sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/scripts/theme-upgrade-purge-vm.sh"
-      - name: Verify theme version
+      - name: Verify deployed CSS tokens
         run: |
           set -euo pipefail
-          sudo -u www-data php -r '
-          define("CLI_SCRIPT", true);
-          require "/var/www/moodle/config.php";
-          $theme = theme_config::load("understandtech");
-          echo "theme=understandtech version=" . $theme->version . " release=" . ($theme->release ?? "?") . PHP_EOL;
-          echo "site_theme=" . get_config("core", "theme") . PHP_EOL;
-          '
+          grep -qF '--ut-action' /var/www/moodle/theme/understandtech/style/global-shell.css
+          grep -qF 'var(--ut-action)' /var/www/moodle/theme/understandtech/style/global-shell.css
+          echo "global_shell_conversion_tokens_ok=1"
+          if grep -q 'formatoptions->filter = false' /var/www/moodle/mod/page/view.php; then
+            echo "mod_page_filter_patch_ok=1"
+          else
+            echo "mod_page_filter_patch_missing=1" >&2
+            exit 1
+          fi
       - name: Disable maintenance mode
         if: success()
         run: sudo /usr/bin/php /var/www/moodle/admin/cli/maintenance.php --disable

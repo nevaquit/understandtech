@@ -353,8 +353,8 @@ jobs:
       - name: Apply core patches
         run: |
           set -euo pipefail
-          if [ -x "${PLUGINS_REPO_DIR}/core-patches/apply-patches.sh" ]; then
-            bash "${PLUGINS_REPO_DIR}/core-patches/apply-patches.sh"
+          if [ -f "${PLUGINS_REPO_DIR}/core-patches/apply-patches.sh" ]; then
+            sudo /usr/bin/bash "${PLUGINS_REPO_DIR}/core-patches/apply-patches.sh"
           else
             echo "No core-patches/apply-patches.sh — skipping"
           fi

@@ -6,8 +6,8 @@ REPO="${PLUGINS_REPO_DIR:-/opt/understandtech-plugins}"
 MOODLE_DIR="${MOODLE_DIR:-/var/www/moodle}"
 
 echo "=== apply core patches ==="
-if [ -x "${REPO}/core-patches/apply-patches.sh" ]; then
-  bash "${REPO}/core-patches/apply-patches.sh"
+if [ -f "${REPO}/core-patches/apply-patches.sh" ]; then
+  sudo /usr/bin/bash "${REPO}/core-patches/apply-patches.sh"
 else
   echo "skip: no core-patches/apply-patches.sh"
 fi

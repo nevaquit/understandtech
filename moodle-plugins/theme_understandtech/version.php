@@ -9,10 +9,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'theme_understandtech';
-$plugin->version   = 2026062000;
+$plugin->version   = 2026062001;
 $plugin->requires  = 2024100700;
 $plugin->maturity  = MATURITY_BETA;
-$plugin->release   = '1.1.1';
+$plugin->release   = '1.1.2';
 $plugin->dependencies = [
     'theme_boost' => 2024100700,
 ];
