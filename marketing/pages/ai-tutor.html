@@ -24,7 +24,7 @@
         href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap"></noscript>
 
-  <link rel="stylesheet" href="../css/design-system.css?v=20260621">
+  <link rel="stylesheet" href="../css/design-system.css?v=20260622">
   <style>
     /* ── Page Hero ─────────────────────────────────────────────────── */
     .page-hero-inner {
@@ -109,7 +109,7 @@
 
     .chat-msg-ai code {
       background: rgba(11,31,58,0.06);
-      color: var(--ut-teal);
+      color: var(--ut-teal-on-light);
       padding: 0.1rem 0.35rem;
       border-radius: 3px;
       font-size: 0.82rem;
@@ -202,14 +202,14 @@
       width: 2.5rem; height: 2.5rem;
       border-radius: var(--ut-radius-sm);
       background: var(--ut-teal-dim);
-      color: var(--ut-teal);
+      color: var(--ut-teal-on-light);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
     .capability-icon-gold {
       background: var(--ut-gold-dim);
-      color: var(--ut-gold);
+      color: var(--ut-gold-on-light);
     }
 
     .capability-item h4 {
@@ -244,7 +244,7 @@
       text-transform: uppercase;
     }
 
-    .context-tag-course  { background: rgba(26,138,125,0.1); color: var(--ut-teal); border: 1px solid rgba(26,138,125,0.2); }
+    .context-tag-course  { background: rgba(26,138,125,0.1); color: var(--ut-teal-on-light); border: 1px solid rgba(26,138,125,0.2); }
     .context-tag-history { background: rgba(11,31,58,0.06); color: var(--ut-text); border: 1px solid var(--ut-border); }
     .context-tag-mastery { background: rgba(201,162,39,0.1); color: #92400e; border: 1px solid rgba(201,162,39,0.2); }
   </style>
@@ -265,7 +265,7 @@
               Stop searching Stack Overflow. Stop rewatching the same video. Ask your AI tutor anything about technology and get a clear, contextual, personalized answer — right now.
             </p>
             <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-              <a href="../pages/pricing.html" class="btn btn-gold btn-lg">Try It Free</a>
+              <a href="../pages/pricing.html" class="btn btn-primary btn-lg">Try It Free</a>
               <a href="#how-tutor-works" class="btn btn-outline">See the Details</a>
             </div>
           </div>
@@ -372,7 +372,7 @@
             </div>
           </div>
           <div class="feature-detail-visual" aria-hidden="true">
-            <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ut-teal);margin-bottom:1rem;">Context Window</div>
+            <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ut-teal-on-light);margin-bottom:1rem;">Context Window</div>
             <div class="context-visual">
               <div class="context-tag context-tag-course">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
@@ -387,7 +387,7 @@
                 Recent: Struggled with CIDR notation (2 days ago)
               </div>
               <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(26,138,125,0.06);border-radius:var(--ut-radius-sm);border:1px solid rgba(26,138,125,0.15);">
-                <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-teal);margin-bottom:0.4rem;">Tutor Strategy</div>
+                <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-teal-on-light);margin-bottom:0.4rem;">Tutor Strategy</div>
                 <div style="font-size:0.85rem;color:var(--ut-text-muted);line-height:1.5;">Use spatial analogies (land/zones). Reinforce CIDR with concrete examples. Avoid jargon — build from fundamentals.</div>
               </div>
             </div>
@@ -427,7 +427,7 @@
           </div>
           <div class="feature-detail-visual" aria-hidden="true">
             <div style="font-family:var(--ut-font-mono);font-size:0.78rem;color:var(--ut-text-muted);line-height:1.8;">
-              <div style="color:var(--ut-teal);margin-bottom:0.5rem;">// Cloudflare Worker — SSE Stream</div>
+              <div style="color:var(--ut-teal-on-light);margin-bottom:0.5rem;">// Cloudflare Worker — SSE Stream</div>
               <div><span style="color:#93c5fd">const</span> stream = <span style="color:#86efac">new</span> ReadableStream({</div>
               <div style="padding-left:1.25rem;">start(controller) {</div>
               <div style="padding-left:2.5rem;"><span style="color:#93c5fd">for await</span> (<span style="color:#93c5fd">const</span> chunk <span style="color:#93c5fd">of</span> llmStream) {</div>
@@ -437,7 +437,7 @@
               <div style="padding-left:2.5rem;">}</div>
               <div style="padding-left:1.25rem;">}</div>
               <div>});</div>
-              <div style="margin-top:0.75rem;color:var(--ut-teal);">// Response headers</div>
+              <div style="margin-top:0.75rem;color:var(--ut-teal-on-light);">// Response headers</div>
               <div><span style="color:#86efac">'Content-Type'</span>: <span style="color:#fbbf24">'text/event-stream'</span></div>
               <div><span style="color:#86efac">'Cache-Control'</span>: <span style="color:#fbbf24">'no-cache'</span></div>
             </div>
@@ -454,7 +454,7 @@
           <span class="ut-eyebrow ut-eyebrow-gold">Start Learning</span>
           <h2>Ask your first question — free</h2>
           <p>No setup. No credit card. Just type your question and experience what learning with an expert tutor actually feels like.</p>
-          <a href="/learn/login/index.php?wantsurl=%2Flearn%2Fmy%2F" class="btn btn-gold btn-lg">Start Free Trial</a>
+          <a href="/learn/login/index.php?wantsurl=%2Flearn%2Fmy%2F" class="btn btn-primary btn-lg">Start Free Trial</a>
         </div>
       </div>
     </section>

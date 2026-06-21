@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════════
-   UnderstandTech Design System — v3.0 (Marketing)
-   MIT OCW-inspired: white-forward, high readability, minimal chrome.
-   Brand accents (navy, gold, teal) used sparingly on light surfaces.
+   UnderstandTech Design System — v3.1 (Marketing)
+   MIT OCW-inspired light shell + WCAG AAA readability targets.
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ─── Custom Properties (Design Tokens) ─────────────────────────── */
@@ -20,6 +19,10 @@
   --ut-purple-light: #C4B5FD;
   --ut-purple-dim:  rgba(139,92,246,0.12);
 
+  /* Accessible text on white (WCAG AAA for body-sized copy) */
+  --ut-teal-on-light:  #0d5c52;
+  --ut-gold-on-light:  #7a5f10;
+
   /* MIT OCW-inspired accent (primary links & CTAs) */
   --ut-ocw-red:     #A31F34;
   --ut-ocw-red-dark: #750014;
@@ -30,15 +33,19 @@
   --ut-bg:          #ffffff;
   --ut-surface:     #ffffff;
   --ut-surface-2:   #f5f5f5;
-  --ut-text:        #212121;
-  --ut-text-muted:  #666666;
+  --ut-text:        #1a1a1a;
+  --ut-text-muted:  #525252;
   --ut-border:      #e0e0e0;
   --ut-border-med:  #dadce0;
 
-  /* Typography — clean sans (OCW-like) */
-  --ut-font-head:   'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
-  --ut-font-body:   'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
-  --ut-font-mono:   ui-monospace, 'Cascadia Code', 'Segoe UI Mono', monospace;
+  /* Readability rhythm (≈45–75 characters per line, relaxed leading) */
+  --ut-read-max:    68ch;
+  --ut-read-line:   1.75;
+
+  /* Typography — system UI stack (crisp, familiar, low cognitive load) */
+  --ut-font-head:   system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --ut-font-body:   system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --ut-font-mono:   ui-monospace, 'Cascadia Code', 'Segoe UI Mono', Consolas, monospace;
 
   /* Fluid Spacing (mirrors theme_understandtech clamp values) */
   --ut-space-xs:    clamp(0.25rem, 0.2rem + 0.25vw, 0.375rem);
@@ -48,14 +55,14 @@
   --ut-space-xl:    clamp(2rem,    1.5rem  + 2.5vw,  4rem);
   --ut-space-2xl:   clamp(3rem,    2rem    + 4vw,    6rem);
 
-  /* Fluid Type */
-  --ut-text-sm:     clamp(0.8rem,  0.75rem + 0.25vw, 0.9rem);
-  --ut-text-base:   clamp(1rem,    0.95rem + 0.25vw, 1.1rem);
-  --ut-text-lg:     clamp(1.1rem,  1rem    + 0.5vw,  1.35rem);
-  --ut-text-xl:     clamp(1.25rem, 1.1rem  + 0.75vw, 1.75rem);
-  --ut-text-2xl:    clamp(1.5rem,  1.25rem + 1.25vw, 2.25rem);
-  --ut-text-3xl:    clamp(2rem,    1.5rem  + 2.5vw,  3.5rem);
-  --ut-text-hero:   clamp(2.5rem,  1.75rem + 4vw,    5rem);
+  /* Fluid Type — minimums tuned for comfortable reading (≥17px body) */
+  --ut-text-sm:     clamp(0.875rem, 0.85rem + 0.15vw, 0.9375rem);
+  --ut-text-base:   clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  --ut-text-lg:     clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  --ut-text-xl:     clamp(1.3125rem, 1.15rem + 0.6vw, 1.625rem);
+  --ut-text-2xl:    clamp(1.5rem,  1.25rem + 1vw,    2.125rem);
+  --ut-text-3xl:    clamp(1.875rem, 1.5rem + 1.5vw,  2.75rem);
+  --ut-text-hero:   clamp(2.25rem, 1.75rem + 2.5vw,  3.75rem);
 
   /* Radii */
   --ut-radius-sm:   0.375rem;
@@ -112,12 +119,31 @@ html {
 body {
   font-family: var(--ut-font-body);
   font-size: var(--ut-text-base);
-  line-height: 1.7;
+  font-weight: 400;
+  line-height: var(--ut-read-line);
   color: var(--ut-text);
   background: var(--ut-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+p {
+  max-width: var(--ut-read-max);
+  margin-bottom: 0.875em;
+  text-wrap: pretty;
+}
+
+main a:not([class]) {
+  color: var(--ut-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+main a:not([class]):hover {
+  color: var(--ut-link-hover);
 }
 
 img, video, svg { display: block; max-width: 100%; }
@@ -227,9 +253,9 @@ input, textarea, select { font: inherit; }
 .ut-nav-links a[aria-current="page"]::after { transform: scaleX(1); }
 
 .ut-nav-links a:focus-visible {
-  outline: 2px solid var(--ut-gold);
+  outline: 2px solid var(--ut-ocw-red);
   outline-offset: -4px;
-  color: var(--ut-gold);
+  color: var(--ut-ocw-red);
 }
 
 .ut-nav-cta {
@@ -324,22 +350,22 @@ input, textarea, select { font: inherit; }
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--ut-font-head);
   font-weight: 700;
-  line-height: 1.2;
-  color: var(--ut-text);
+  line-height: 1.25;
+  color: var(--ut-navy);
 }
 
 .ut-eyebrow {
   font-family: var(--ut-font-head);
-  font-size: 0.8rem;
+  font-size: var(--ut-text-sm);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ut-ocw-red);
   display: block;
   margin-bottom: 0.75rem;
 }
 
-.ut-eyebrow-gold { color: var(--ut-gold); }
+.ut-eyebrow-gold { color: var(--ut-gold-on-light); }
 
 .ut-heading-xl { font-size: var(--ut-text-hero); }
 .ut-heading-lg { font-size: var(--ut-text-3xl); }
@@ -349,8 +375,8 @@ h1, h2, h3, h4, h5, h6 {
 .ut-lead {
   font-size: var(--ut-text-lg);
   color: var(--ut-text-muted);
-  line-height: 1.65;
-  max-width: 60ch;
+  line-height: var(--ut-read-line);
+  max-width: var(--ut-read-max);
 }
 
 code {
@@ -370,10 +396,10 @@ code {
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
   font-family: var(--ut-font-head);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: var(--ut-text-base);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
   border-radius: var(--ut-radius-sm);
   transition: background var(--ut-duration-sm) var(--ut-ease),
               transform var(--ut-duration-sm) var(--ut-ease),
@@ -383,7 +409,7 @@ code {
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--ut-gold);
+  outline: 2px solid var(--ut-ocw-red);
   outline-offset: 3px;
 }
 
@@ -401,14 +427,14 @@ code {
 }
 
 .btn-gold {
-  background: var(--ut-gold);
-  color: var(--ut-navy);
-  box-shadow: 0 4px 14px rgba(201,162,39,0.35);
+  background: #7a6110;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(122,97,16,0.25);
 }
 .btn-gold:hover {
-  background: var(--ut-gold-light);
+  background: #6b5412;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(201,162,39,0.45);
+  box-shadow: 0 4px 14px rgba(122,97,16,0.35);
 }
 
 .btn-outline {
@@ -468,8 +494,8 @@ code {
   white-space: nowrap;
 }
 
-.badge-teal    { background: rgba(26,138,125,0.12); color: var(--ut-teal); }
-.badge-gold    { background: rgba(201,162,39,0.15); color: var(--ut-gold); }
+.badge-teal    { background: rgba(26,138,125,0.12); color: var(--ut-teal-on-light); }
+.badge-gold    { background: rgba(201,162,39,0.15); color: var(--ut-gold-on-light); }
 .badge-purple  { background: var(--ut-purple-dim); color: var(--ut-purple-light); border: 1px solid rgba(196,181,253,0.35); }
 .badge-navy    { background: var(--ut-navy); color: #fff; }
 .badge-new     { background: var(--ut-teal); color: #fff; }
@@ -523,8 +549,8 @@ code {
   flex-shrink: 0;
 }
 
-.ut-feature-icon-teal { background: rgba(26,138,125,0.12); color: var(--ut-teal); }
-.ut-feature-icon-gold { background: rgba(201,162,39,0.12); color: var(--ut-gold); }
+.ut-feature-icon-teal { background: rgba(26,138,125,0.12); color: var(--ut-teal-on-light); }
+.ut-feature-icon-gold { background: rgba(201,162,39,0.12); color: var(--ut-gold-on-light); }
 .ut-feature-icon-navy   { background: rgba(11,31,58,0.06); color: var(--ut-navy); }
 .ut-feature-icon-purple { background: var(--ut-purple-dim); color: var(--ut-purple-light); border: 1px solid rgba(196,181,253,0.25); }
 
@@ -555,13 +581,14 @@ code {
 
 .ut-stat-label {
   font-family: var(--ut-font-head);
-  font-size: 0.8rem;
+  font-size: var(--ut-text-sm);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ut-text-muted);
   margin-top: 0.4rem;
   display: block;
+  line-height: 1.4;
 }
 
 /* ─── Testimonials ───────────────────────────────────────────────── */
@@ -691,12 +718,12 @@ code {
 
 .ut-check {
   width: 1.1rem; height: 1.1rem;
-  color: var(--ut-teal);
+  color: var(--ut-teal-on-light);
   flex-shrink: 0;
   margin-top: 0.2rem;
 }
 
-.ut-pricing-card.featured .ut-check { color: var(--ut-gold); }
+.ut-pricing-card.featured .ut-check { color: var(--ut-gold-on-light); }
 
 /* ─── FAQ Accordion ──────────────────────────────────────────────── */
 .ut-faq-item {
@@ -721,7 +748,7 @@ code {
 .ut-faq-trigger:hover { color: var(--ut-ocw-red); }
 
 .ut-faq-trigger:focus-visible {
-  outline: 2px solid var(--ut-gold);
+  outline: 2px solid var(--ut-ocw-red);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -730,7 +757,7 @@ code {
   width: 1.5rem; height: 1.5rem;
   border-radius: 50%;
   background: var(--ut-teal-dim);
-  color: var(--ut-teal);
+  color: var(--ut-teal-on-light);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   transition: transform var(--ut-duration-sm) var(--ut-ease),
@@ -809,10 +836,10 @@ code {
 .ut-footer-col a:hover { color: var(--ut-ocw-red); }
 
 .ut-footer-col a:focus-visible {
-  outline: 2px solid var(--ut-gold);
+  outline: 2px solid var(--ut-ocw-red);
   outline-offset: 2px;
   border-radius: 2px;
-  color: var(--ut-gold);
+  color: var(--ut-ocw-red);
 }
 
 .ut-footer-bottom {
@@ -862,8 +889,8 @@ code {
 
 /* ─── Utility Classes ────────────────────────────────────────────── */
 .text-center { text-align: center; }
-.text-gold   { color: var(--ut-gold); }
-.text-teal   { color: var(--ut-teal); }
+.text-gold   { color: var(--ut-gold-on-light); }
+.text-teal   { color: var(--ut-teal-on-light); }
 .text-muted  { color: var(--ut-text-muted); }
 .text-white  { color: #fff; }
 
@@ -1005,7 +1032,7 @@ code {
 .page-hero h1 {
   font-size: var(--ut-text-3xl);
   color: var(--ut-navy);
-  line-height: 1.1;
+  line-height: 1.2;
   margin-bottom: var(--ut-space-md);
 }
 
@@ -1014,8 +1041,8 @@ code {
 .page-hero-lead {
   font-size: var(--ut-text-lg);
   color: var(--ut-text-muted);
-  line-height: 1.7;
-  max-width: 52ch;
+  line-height: var(--ut-read-line);
+  max-width: var(--ut-read-max);
   margin-bottom: var(--ut-space-xl);
 }
 
@@ -1026,7 +1053,7 @@ code {
 
 /* ─── Focus-visible global fallback ─────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--ut-gold);
+  outline: 2px solid var(--ut-ocw-red);
   outline-offset: 3px;
 }
 

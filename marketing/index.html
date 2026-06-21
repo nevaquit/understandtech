@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Share+Tech+Mono&display=swap">
   </noscript>
 
-  <link rel="stylesheet" href="css/design-system.css?v=20260621">
+  <link rel="stylesheet" href="css/design-system.css?v=20260622">
   <style>
     /* ── Hero ─────────────────────────────────────────────────────── */
     .hero {
@@ -99,19 +99,19 @@
     .hero h1 {
       font-size: var(--ut-text-hero);
       color: var(--ut-navy);
-      line-height: 1.08;
-      letter-spacing: -0.02em;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
       margin-bottom: var(--ut-space-lg);
     }
 
     .hero h1 .accent { color: var(--ut-ocw-red); }
-    .hero h1 .accent-teal { color: var(--ut-teal); }
+    .hero h1 .accent-teal { color: var(--ut-teal-on-light); }
 
     .hero-lead {
       font-size: var(--ut-text-lg);
       color: var(--ut-text-muted);
-      line-height: 1.7;
-      max-width: 52ch;
+      line-height: var(--ut-read-line);
+      max-width: var(--ut-read-max);
       margin-bottom: var(--ut-space-xl);
     }
 
@@ -140,7 +140,7 @@
       color: var(--ut-text-muted);
     }
 
-    .hero-trust-item svg { color: var(--ut-teal); }
+    .hero-trust-item svg { color: var(--ut-teal-on-light); }
 
     /* Hero Visual — Dashboard Mockup */
     .hero-visual {
@@ -173,7 +173,7 @@
 
     .hero-card-badge {
       background: var(--ut-teal-dim);
-      color: var(--ut-teal);
+      color: var(--ut-teal-on-light);
       font-family: var(--ut-font-head);
       font-size: 0.7rem;
       font-weight: 700;
@@ -250,7 +250,7 @@
       background: var(--ut-gold-dim);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: var(--ut-gold);
+      color: var(--ut-gold-on-light);
       flex-shrink: 0;
     }
 
@@ -258,12 +258,12 @@
       display: block;
       font-family: var(--ut-font-head);
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: var(--ut-text-sm);
       color: var(--ut-text);
     }
 
     .hero-notif-text span {
-      font-size: 0.78rem;
+      font-size: var(--ut-text-sm);
       color: var(--ut-text-muted);
     }
 
@@ -405,7 +405,7 @@
             </p>
 
             <div class="hero-actions">
-              <a href="pages/pricing.html" class="btn btn-gold btn-lg">
+              <a href="pages/pricing.html" class="btn btn-primary btn-lg">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 Start Free Trial
               </a>
@@ -484,7 +484,7 @@
                 </div>
                 <div style="text-align:right;">
                   <div style="font-family:var(--ut-font-head);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ut-text-muted);margin-bottom:0.25rem;">Streak</div>
-                  <div style="font-family:var(--ut-font-head);font-size:1.5rem;font-weight:700;color:var(--ut-teal);">14 days</div>
+                  <div style="font-family:var(--ut-font-head);font-size:1.5rem;font-weight:700;color:var(--ut-teal-on-light);">14 days</div>
                 </div>
               </div>
             </div>
@@ -685,7 +685,7 @@
           <h2 id="cta-heading">Ready to understand technology — deeply?</h2>
           <p>Join 12,000+ professionals who chose to stop memorizing and start mastering. Your first 14 days are completely free.</p>
           <div class="cta-actions">
-            <a href="/learn/login/index.php?wantsurl=%2Flearn%2Fmy%2F" class="btn btn-gold btn-lg">Start Free Trial — No Card Needed</a>
+            <a href="/learn/login/index.php?wantsurl=%2Flearn%2Fmy%2F" class="btn btn-primary btn-lg">Start Free Trial — No Card Needed</a>
             <a href="pages/about.html" class="btn btn-outline btn-lg">Learn About Our Mission</a>
           </div>
         </div>
