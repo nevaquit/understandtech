@@ -1003,7 +1003,15 @@ h1, h2, h3, h4, h5, h6,
         padding: 0;
     }
 
-    .login-container {
+    .login-wrapper > .login-container {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: none;
+    }
+
+    .ut-login-panel {
         width: 100%;
         max-width: 28rem;
         background: $ut-surface;

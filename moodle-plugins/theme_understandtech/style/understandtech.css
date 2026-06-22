@@ -12,7 +12,14 @@
 .modal-body{background:#ffffff;color:#1a1a1a}
 .modal-footer{background:#f5f5f5;border-top-color:#e0e0e0}
 .modal-title{color:#0B1F3A}
-/* Login: Boost wraps loginform in .card — keep shell transparent; style .login-container only. */
+/* Login: Moodle wraps loginform in .login-wrapper > .login-container; panel is .ut-login-panel only. */
+#page-login-index .login-wrapper > .login-container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: none !important;
+}
 #page-login-index #region-main,
 #page-login-index #region-main.card,
 #page-login-index .card {
@@ -37,13 +44,16 @@ body.pagelayout-login #page,
     min-height: 100vh;
 }
 
-#page-login-index .login-container {
+#page-login-index .ut-login-panel {
     background: #ffffff !important;
     border: 1px solid #e0e0e0 !important;
     border-top: 4px solid #A31F34 !important;
     border-radius: 1.25rem;
     box-shadow: 0 4px 16px rgba(11, 31, 58, 0.10) !important;
     color: #1a1a1a !important;
+    width: 100%;
+    max-width: 28rem;
+    padding: 2.5rem;
 }
 
 #page-login-index .ut-login-heading {

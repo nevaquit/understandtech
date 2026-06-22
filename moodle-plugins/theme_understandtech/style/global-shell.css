@@ -2441,13 +2441,24 @@ body.ut-theme.pagelayout-login,
     padding: 0 !important;
 }
 
-#page-login-index .login-container {
+#page-login-index .login-wrapper > .login-container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: none !important;
+}
+
+#page-login-index .ut-login-panel {
     background: var(--ut-surface) !important;
     border: 1px solid var(--ut-border) !important;
     border-top: 4px solid var(--ut-ocw-red) !important;
     border-radius: var(--ut-radius-lg);
     box-shadow: 0 4px 16px rgba(11, 31, 58, 0.10) !important;
     color: var(--ut-text) !important;
+    width: 100%;
+    max-width: 28rem;
+    padding: 2.5rem;
 }
 
 #page-login-index .ut-login-heading {
