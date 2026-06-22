@@ -12,9 +12,20 @@
 .modal-body{background:#ffffff;color:#1a1a1a}
 .modal-footer{background:#f5f5f5;border-top-color:#e0e0e0}
 .modal-title{color:#0B1F3A}
-#page-login-index .card{background:#ffffff;border:1px solid #e0e0e0;color:#1a1a1a}
-#page-login-index .card-body{background:#ffffff;color:#1a1a1a}
-#page-login-index .card p,#page-login-index .card h4,#page-login-index .card h3,#page-login-index .card h2{color:#0B1F3A}
+/* Login: Boost wraps loginform in .card — keep shell transparent; style .login-container only. */
+#page-login-index #region-main,
+#page-login-index #region-main.card,
+#page-login-index .card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+#page-login-index .card-body {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
 
 /* ── Login page — marketing OCW light (overrides stale preset dump on line 1) ── */
 body.pagelayout-login,

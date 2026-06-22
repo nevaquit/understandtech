@@ -988,6 +988,21 @@ h1, h2, h3, h4, h5, h6,
         padding: $ut-space-xl $ut-space-md;
     }
 
+    #region-main,
+    #region-main.card,
+    .card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .card-body {
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+
     .login-container {
         width: 100%;
         max-width: 28rem;

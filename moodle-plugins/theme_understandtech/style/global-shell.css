@@ -2426,6 +2426,21 @@ body.ut-theme.pagelayout-login,
     background: transparent !important;
 }
 
+#page-login-index #region-main,
+#page-login-index #region-main.card,
+#page-login-index .card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+#page-login-index .card-body {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
 #page-login-index .login-container {
     background: var(--ut-surface) !important;
     border: 1px solid var(--ut-border) !important;
