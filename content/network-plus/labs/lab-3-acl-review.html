@@ -1,22 +1,30 @@
-<div class="ut-lab-content">
+<div class="ut-lab-content" data-ut-lab="acl-review">
 <h3>Scenario: Firewall ACL rule review</h3>
-<p>Harbor Finance Group is auditing edge firewall rules before a PCI assessment. Review the excerpt
-below and identify the rule that violates least-privilege for outbound web traffic.</p>
+<p>Harbor Finance Group is auditing edge firewall rules before a PCI assessment.</p>
 
-<h4>ACL excerpt (EDGE-OUT)</h4>
-<pre>
-10 permit tcp any any eq 443
-20 permit tcp any any eq 80
-30 permit ip any any
-40 deny ip any any log
-</pre>
+<h4>ACL excerpt (EDGE-OUT) — click to mark violations</h4>
+<section class="ut-lab-interactive" aria-label="Interactive ACL audit">
+<div class="ut-lab-acl-list" data-widget="acl">
+<div class="ut-lab-acl-row" data-acl-rule="10"><span>10</span> permit tcp any any eq 443</div>
+<div class="ut-lab-acl-row" data-acl-rule="20"><span>20</span> permit tcp any any eq 80</div>
+<div class="ut-lab-acl-row" data-acl-rule="30"><span>30</span> permit ip any any</div>
+<div class="ut-lab-acl-row" data-acl-rule="40"><span>40</span> deny ip any any log</div>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+
+<h4>Interactive: Flag hasher</h4>
+<div data-widget="hash">
+<label>Rule identifier phrase: <input type="text" class="ut-lab-input" data-input="rule-phrase" placeholder="Type phrase from task 3"></label>
+<button type="button" class="ut-lab-btn ut-lab-btn--primary" data-action="hash-rule-id">Compute flag</button>
+<p>Candidate: <code class="ut-lab-output" data-hash-out>—</code></p>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+</section>
 
 <h4>Your tasks</h4>
 <ol>
-<li>Identify which rule is overly permissive before the final deny.</li>
-<li>Recommend the corrective action (specific rule number to change).</li>
-<li>Submit the lab flag <code>UT{ACL-RULE-30}</code> referencing the problematic rule.</li>
+<li>Click the overly permissive rule in the ACL list.</li>
+<li>Recommend the corrective action for that rule number.</li>
+<li>Hash the string <code>RULE-30-PERMIT-IP</code> using the hasher and submit the flag.</li>
 </ol>
-
-<p><em>Do not share flags in course forums. The AI tutor will not validate flag values for you.</em></p>
 </div>

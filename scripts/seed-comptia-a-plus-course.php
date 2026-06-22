@@ -24,6 +24,7 @@ require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->libdir . '/questionlib.php');
 require_once($CFG->libdir . '/filterlib.php');
 require_once(__DIR__ . '/lib/moodle-cert-practice-exam.php');
+require_once(__DIR__ . '/lib/ctfflag_seed.php');
 
 $admin = get_admin();
 \core\session\manager::set_user($admin);
@@ -819,116 +820,6 @@ function aplus_sync_practice_exam(
 }
 
 /**
- * Load lab intro HTML from repo content when present.
- *
- * @param string $repopath
- * @param string $slug
- * @param string $fallback
- * @return string
- */
-function aplus_load_lab_intro(string $repopath, string $slug, string $fallback): string {
-    $path = $repopath . '/content/a-plus/labs/' . $slug . '.html';
-    if (is_readable($path)) {
-        $html = file_get_contents($path);
-        if ($html !== false && trim($html) !== '') {
-            return $html;
-        }
-    }
-    return $fallback;
-}
-
-/**
- * Find ctfflag course module by activity name.
- *
- * @param int $courseid
- * @param string $name
- * @return stdClass|null
- */
-function aplus_find_ctfflag(int $courseid, string $name): ?stdClass {
-    global $DB;
-
-    return $DB->get_record_sql(
-        "SELECT cf.*
-           FROM {ctfflag} cf
-           JOIN {course_modules} cm ON cm.instance = cf.id
-           JOIN {modules} m ON m.id = cm.module AND m.name = 'ctfflag'
-          WHERE cm.course = :courseid AND cf.name = :name",
-        ['courseid' => $courseid, 'name' => $name]
-    ) ?: null;
-}
-
-/**
- * Create or update a mod_ctfflag lab activity.
- *
- * @param stdClass $course
- * @param int $sectionnum
- * @param string $name
- * @param string $intro
- * @param string $regex
- * @param int $xpaward
- * @return void
- */
-function aplus_upsert_ctfflag(
-    stdClass $course,
-    int $sectionnum,
-    string $name,
-    string $intro,
-    string $regex,
-    int $xpaward = 100
-): void {
-    global $DB, $CFG;
-
-    if (!array_key_exists('ctfflag', core_component::get_plugin_list('mod'))) {
-        echo "ctfflag_skip plugin_missing name={$name}\n";
-        return;
-    }
-
-    require_once($CFG->dirroot . '/mod/ctfflag/lib.php');
-
-    $existing = aplus_find_ctfflag((int) $course->id, $name);
-    if ($existing) {
-        $changed = false;
-        if ((string) $existing->intro !== $intro) {
-            $existing->intro = $intro;
-            $existing->introformat = FORMAT_HTML;
-            $changed = true;
-        }
-        if ((string) $existing->expected_flag_regex !== $regex) {
-            $existing->expected_flag_regex = $regex;
-            $changed = true;
-        }
-        if ((int) $existing->xp_award !== $xpaward) {
-            $existing->xp_award = $xpaward;
-            $changed = true;
-        }
-        if ($changed) {
-            $existing->instance = $existing->id;
-            ctfflag_update_instance($existing);
-            echo "ctfflag_updated id={$existing->id} name={$name}\n";
-        } else {
-            echo "ctfflag_unchanged id={$existing->id} name={$name}\n";
-        }
-        return;
-    }
-
-    $module = new stdClass();
-    $module->course = $course->id;
-    $module->name = $name;
-    $module->intro = $intro;
-    $module->introformat = FORMAT_HTML;
-    $module->expected_flag_regex = $regex;
-    $module->xp_award = $xpaward;
-    $module->module = $DB->get_field('modules', 'id', ['name' => 'ctfflag']);
-    $module->modulename = 'ctfflag';
-    $module->section = $sectionnum;
-    $module->visible = 1;
-    $module->cmidnumber = '';
-
-    $cm = add_moduleinfo($module, $course);
-    echo "ctfflag_created id={$cm->instance} name={$name} section={$sectionnum}\n";
-}
-
-/**
  * @param array<string,int[]> $questionmap
  * @return int
  */
@@ -1294,11 +1185,11 @@ for ($examnum = 2; $examnum <= 3; $examnum++) {
 
 echo "labs_block_start\n";
 try {
-    aplus_upsert_ctfflag(
+    ut_upsert_ctfflag(
         $course,
         11,
         'Lab 1: RAM and storage upgrade planning',
-        aplus_load_lab_intro($repopath, 'lab-1-ram-storage-upgrade', '<p>RAM and storage upgrade planning lab.</p>'),
+        ut_load_lab_intro($repopath, 'a-plus', 'lab-1-ram-storage-upgrade', '<p>RAM and storage upgrade planning lab.</p>'),
         'UT\\{4E8B2A1F\\}',
         100
     );
@@ -1307,11 +1198,11 @@ try {
 }
 
 try {
-    aplus_upsert_ctfflag(
+    ut_upsert_ctfflag(
         $course,
         11,
         'Lab 2: Windows boot troubleshooting',
-        aplus_load_lab_intro($repopath, 'lab-2-windows-boot-troubleshooting', '<p>Windows boot troubleshooting lab.</p>'),
+        ut_load_lab_intro($repopath, 'a-plus', 'lab-2-windows-boot-troubleshooting', '<p>Windows boot troubleshooting lab.</p>'),
         'UT\\{9C3D7E02\\}',
         100
     );
@@ -1320,11 +1211,11 @@ try {
 }
 
 try {
-    aplus_upsert_ctfflag(
+    ut_upsert_ctfflag(
         $course,
         11,
         'Lab 3: Network connectivity diagnosis',
-        aplus_load_lab_intro($repopath, 'lab-3-network-connectivity', '<p>Network connectivity diagnosis lab.</p>'),
+        ut_load_lab_intro($repopath, 'a-plus', 'lab-3-network-connectivity', '<p>Network connectivity diagnosis lab.</p>'),
         'UT\\{2A6F1B9D\\}',
         100
     );

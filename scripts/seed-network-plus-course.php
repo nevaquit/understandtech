@@ -24,6 +24,7 @@ require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->dirroot . '/lib/questionlib.php');
 require_once($CFG->libdir . '/filterlib.php');
 require_once(__DIR__ . '/lib/moodle-cert-practice-exam.php');
+require_once(__DIR__ . '/lib/ctfflag_seed.php');
 
 $admin = get_admin();
 \core\session\manager::set_user($admin);
@@ -592,120 +593,6 @@ function network_plus_sync_practice_exam(
         }
     );
     network_plus_apply_practice_exam_settings($course, $quizname, $timelimitsecs);
-}
-
-/**
- * Load lab intro HTML from repo content when present.
- *
- * @param string $repopath
- * @param string $slug
- * @param string $fallback
- * @return string
- */
-function network_plus_load_lab_intro(string $repopath, string $slug, string $fallback): string {
-    $path = $repopath . '/content/network-plus/labs/' . $slug . '.html';
-    if (is_readable($path)) {
-        $html = file_get_contents($path);
-        if ($html !== false && trim($html) !== '') {
-            return $html;
-        }
-    }
-    return $fallback;
-}
-
-/**
- * Find ctfflag course module by activity name.
- *
- * @param int $courseid
- * @param string $name
- * @return stdClass|null
- */
-function network_plus_find_ctfflag(int $courseid, string $name): ?stdClass {
-    global $DB;
-
-    return $DB->get_record_sql(
-        "SELECT cf.*
-           FROM {ctfflag} cf
-           JOIN {course_modules} cm ON cm.instance = cf.id
-           JOIN {modules} m ON m.id = cm.module AND m.name = 'ctfflag'
-          WHERE cm.course = :courseid AND cf.name = :name",
-        ['courseid' => $courseid, 'name' => $name]
-    ) ?: null;
-}
-
-/**
- * Create or update a mod_ctfflag lab activity.
- *
- * @param stdClass $course
- * @param int $sectionnum
- * @param string $name
- * @param string $intro
- * @param string $regex
- * @param int $xpaward
- * @return void
- */
-function network_plus_upsert_ctfflag(
-    stdClass $course,
-    int $sectionnum,
-    string $name,
-    string $intro,
-    string $regex,
-    int $xpaward = 100
-): void {
-    global $DB, $CFG;
-
-    if (!array_key_exists('ctfflag', core_component::get_plugin_list('mod'))) {
-        echo "ctfflag_skip plugin_missing name={$name}\n";
-        return;
-    }
-
-    require_once($CFG->dirroot . '/mod/ctfflag/lib.php');
-
-    $existing = network_plus_find_ctfflag((int) $course->id, $name);
-    if ($existing) {
-        $changed = false;
-        if ((string) $existing->intro !== $intro) {
-            $existing->intro = $intro;
-            $existing->introformat = FORMAT_HTML;
-            $changed = true;
-        }
-        if ((string) $existing->expected_flag_regex !== $regex) {
-            $existing->expected_flag_regex = $regex;
-            $changed = true;
-        }
-        if ((int) $existing->xp_award !== $xpaward) {
-            $existing->xp_award = $xpaward;
-            $changed = true;
-        }
-        if ($changed) {
-            $existing->instance = $existing->id;
-            ctfflag_update_instance($existing);
-            echo "ctfflag_updated id={$existing->id} name={$name}\n";
-        } else {
-            echo "ctfflag_unchanged id={$existing->id} name={$name}\n";
-        }
-        return;
-    }
-
-    $module = new stdClass();
-    $module->course = $course->id;
-    $module->name = $name;
-    $module->intro = $intro;
-    $module->introformat = FORMAT_HTML;
-    $module->expected_flag_regex = $regex;
-    $module->xp_award = $xpaward;
-    $module->module = $DB->get_field('modules', 'id', ['name' => 'ctfflag']);
-    $module->modulename = 'ctfflag';
-    $module->section = $sectionnum;
-    $module->visible = 1;
-    $module->cmidnumber = '';
-
-    try {
-        $cm = add_moduleinfo($module, $course);
-        echo "ctfflag_created id={$cm->instance} name={$name} section={$sectionnum}\n";
-    } catch (Throwable $e) {
-        echo "ctfflag_create_failed name={$name} error=" . $e->getMessage() . "\n";
-    }
 }
 
 /**
@@ -1314,11 +1201,11 @@ for ($examnum = 2; $examnum <= 3; $examnum++) {
 
 echo "labs_block_start\n";
 try {
-    network_plus_upsert_ctfflag(
+    ut_upsert_ctfflag(
         $course,
         7,
         'Lab 1: IPv4 subnet planning',
-        network_plus_load_lab_intro($repopath, 'lab-1-ipv4-subnetting', '<p>IPv4 subnet planning lab.</p>'),
+        ut_load_lab_intro($repopath, 'network-plus', 'lab-1-ipv4-subnetting', '<p>IPv4 subnet planning lab.</p>'),
         'UT\\{7F3A9B2C\\}',
         100
     );
@@ -1327,12 +1214,12 @@ try {
 }
 
 try {
-    network_plus_upsert_ctfflag(
+    ut_upsert_ctfflag(
         $course,
         7,
         'Lab 2: VLAN troubleshooting',
-        network_plus_load_lab_intro($repopath, 'lab-2-vlan-troubleshooting', '<p>VLAN troubleshooting lab.</p>'),
-        'UT\\{UT-VLAN-120-FIX\\}',
+        ut_load_lab_intro($repopath, 'network-plus', 'lab-2-vlan-troubleshooting', '<p>VLAN troubleshooting lab.</p>'),
+        'UT\\{d99639b4\\}',
         100
     );
 } catch (Throwable $e) {
@@ -1340,12 +1227,12 @@ try {
 }
 
 try {
-    network_plus_upsert_ctfflag(
+    ut_upsert_ctfflag(
         $course,
         7,
         'Lab 3: ACL rule review',
-        network_plus_load_lab_intro($repopath, 'lab-3-acl-review', '<p>ACL rule review lab.</p>'),
-        'UT\\{ACL-RULE-30\\}',
+        ut_load_lab_intro($repopath, 'network-plus', 'lab-3-acl-review', '<p>ACL rule review lab.</p>'),
+        'UT\\{3e6544d9\\}',
         100
     );
 } catch (Throwable $e) {

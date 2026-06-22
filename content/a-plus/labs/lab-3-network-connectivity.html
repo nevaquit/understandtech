@@ -1,23 +1,48 @@
-<div class="ut-lab-content">
+<div class="ut-lab-content" data-ut-lab="network-connectivity">
 <h3>Scenario: Network connectivity diagnosis</h3>
-<p>You are a Tier-1 technician at Help Desk North. A user reports "Wi-Fi connected, no internet"
-on a Windows laptop after moving to a new desk. Wired dock works; wireless fails on guest and corporate SSIDs.</p>
+<p>Wi-Fi connected, no internet — APIPA address assigned after desk move.</p>
 
 <h4>Environment</h4>
 <ul>
 <li><strong>SSID:</strong> CORP-5G (WPA2-Enterprise)</li>
 <li><strong>IP assigned:</strong> 169.254.44.12 (APIPA)</li>
 <li><strong>Other users:</strong> Same VLAN working normally</li>
-<li><strong>Recent change:</strong> User disabled airplane mode manually</li>
 </ul>
+
+<section class="ut-lab-interactive" aria-label="Interactive connectivity lab">
+<h4>Interactive: Layer guess</h4>
+<p class="ut-lab-widget-hint">What layer best explains an APIPA address?</p>
+<div class="ut-lab-btn-group" data-widget="layer">
+<button type="button" class="ut-lab-btn" data-layer-guess="physical">Physical</button>
+<button type="button" class="ut-lab-btn" data-layer-guess="dhcp">DHCP</button>
+<button type="button" class="ut-lab-btn" data-layer-guess="auth">802.1X auth</button>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+
+<h4>Interactive: Command simulator</h4>
+<div data-widget="cmd">
+<select class="ut-lab-input" data-input="cmd">
+<option value="ipconfig">ipconfig /all</option>
+<option value="ipconfig-release">ipconfig /release</option>
+<option value="ipconfig-renew">ipconfig /renew</option>
+</select>
+<button type="button" class="ut-lab-btn" data-action="run-cmd">Run command</button>
+<pre class="ut-lab-cmd-out" data-cmd-out>Output appears here…</pre>
+</div>
+
+<h4>Interactive: Flag hasher</h4>
+<div data-widget="hash">
+<label>Fix phrase: <input type="text" class="ut-lab-input" data-input="fix-phrase" placeholder="Type phrase from task 3"></label>
+<button type="button" class="ut-lab-btn ut-lab-btn--primary" data-action="hash-phrase">Compute flag</button>
+<p>Candidate: <code class="ut-lab-output" data-hash-out>—</code></p>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+</section>
 
 <h4>Your tasks</h4>
 <ol>
-<li>Interpret the APIPA address and name the most likely layer (physical, DHCP, or authentication).</li>
-<li>List two CLI or GUI commands to confirm your hypothesis on Windows.</li>
-<li>Submit the lab flag: first eight hex characters of the SHA-256 hash of the string
-<code>APIPA-DHCP-RELEASE</code>, wrapped as <code>UT{xxxxxxxx}</code>.</li>
+<li>Identify the failed layer using the guess tool.</li>
+<li>Run commands in the simulator to confirm your hypothesis.</li>
+<li>Hash <code>APIPA-DHCP-RELEASE</code> (first 8 hex) and submit as <code>UT{...}</code>.</li>
 </ol>
-
-<p><em>Precomputed flag for validation: UT{2A6F1B9D}. Do not share flags in course forums.</em></p>
 </div>

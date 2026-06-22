@@ -1,4 +1,4 @@
-<div class="ut-lab-content">
+<div class="ut-lab-content" data-ut-lab="ipv4-subnet">
 <h3>Scenario: IPv4 subnet planning</h3>
 <p>You are a network engineer at Metro Health ISP. A new clinic VLAN must support at least 50 hosts
 with room for growth. You are given the aggregate block <code>10.44.0.0/22</code>.</p>
@@ -7,17 +7,31 @@ with room for growth. You are given the aggregate block <code>10.44.0.0/22</code
 <ul>
 <li><strong>VLAN:</strong> CLINIC-WS (workstations only)</li>
 <li><strong>Hosts needed:</strong> 50 usable addresses minimum</li>
-<li><strong>Reserved:</strong> First usable = gateway; last usable = network management</li>
 <li><strong>Chosen subnet:</strong> <code>10.44.1.0/26</code></li>
 </ul>
 
+<section class="ut-lab-interactive" aria-label="Interactive subnet calculator">
+<h4>Interactive: Subnet calculator</h4>
+<div data-widget="subnet">
+<label>Prefix length: /<input type="number" min="1" max="30" value="26" data-input="prefix" class="ut-lab-input ut-lab-input--narrow"></label>
+<button type="button" class="ut-lab-btn" data-action="calc-subnet">Calculate usable hosts</button>
+<p>Usable hosts: <strong data-hosts-out>—</strong></p>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+
+<h4>Interactive: Flag hasher</h4>
+<div data-widget="hash">
+<label>Broadcast address: <input type="text" class="ut-lab-input" data-input="broadcast" placeholder="e.g. 10.44.1.63"></label>
+<button type="button" class="ut-lab-btn ut-lab-btn--primary" data-action="hash-broadcast">Compute flag from broadcast</button>
+<p>Candidate: <code class="ut-lab-output" data-hash-out>—</code></p>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+</section>
+
 <h4>Your tasks</h4>
 <ol>
-<li>Confirm whether <code>/26</code> meets the host requirement (show usable host math).</li>
-<li>Identify the broadcast address for <code>10.44.1.0/26</code>.</li>
-<li>Submit the lab flag: first eight hex characters of the SHA-256 hash of the broadcast address
-string <code>10.44.1.63</code>, wrapped as <code>UT{xxxxxxxx}</code>.</li>
+<li>Verify <code>/26</code> meets the 50-host requirement using the calculator.</li>
+<li>Enter the broadcast address for <code>10.44.1.0/26</code> and compute the flag.</li>
+<li>Submit the candidate flag in the panel →</li>
 </ol>
-
-<p><em>Precomputed flag for validation: UT{7F3A9B2C}. Do not share flags in course forums.</em></p>
 </div>

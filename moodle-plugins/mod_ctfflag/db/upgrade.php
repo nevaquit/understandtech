@@ -50,5 +50,9 @@ function xmldb_ctfflag_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2026060800, 'ctfflag');
     }
 
+    if ($oldversion < 2026062202) {
+        upgrade_mod_savepoint(true, 2026062202, 'ctfflag');
+    }
+
     return true;
 }

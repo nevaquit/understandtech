@@ -78,6 +78,10 @@ function theme_understandtech_page_init(moodle_page $page): void {
         $page->add_body_class('ut-lesson-page');
     }
 
+    if ($page->cm && $page->cm->modname === 'ctfflag') {
+        $page->add_body_class('ut-lab-page');
+    }
+
     if ($page->pagelayout === 'frontpage') {
         $page->add_body_class('ut-frontpage');
     }

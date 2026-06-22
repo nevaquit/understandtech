@@ -24,6 +24,7 @@ require_once($CFG->dirroot . '/question/format/gift/format.php');
 require_once($CFG->dirroot . '/lib/questionlib.php');
 require_once($CFG->libdir . '/filterlib.php');
 require_once(__DIR__ . '/lib/moodle-cert-practice-exam.php');
+require_once(__DIR__ . '/lib/ctfflag_seed.php');
 
 $admin = get_admin();
 \core\session\manager::set_user($admin);
@@ -857,123 +858,6 @@ function security_plus_sync_practice_exam(
 }
 
 /**
- * Load lab intro HTML from repo content when present.
- *
- * @param string $repopath
- * @param string $slug Lab file slug e.g. lab-1-siem-triage
- * @param string $fallback Fallback HTML
- * @return string
- */
-function security_plus_load_lab_intro(string $repopath, string $slug, string $fallback): string {
-    $path = $repopath . '/content/security-plus/labs/' . $slug . '.html';
-    if (is_readable($path)) {
-        $html = file_get_contents($path);
-        if ($html !== false && trim($html) !== '') {
-            return $html;
-        }
-    }
-    return $fallback;
-}
-
-/**
- * Find ctfflag course module by activity name.
- *
- * @param int $courseid
- * @param string $name
- * @return stdClass|null ctfflag instance row
- */
-function security_plus_find_ctfflag(int $courseid, string $name): ?stdClass {
-    global $DB;
-
-    $record = $DB->get_record_sql(
-        "SELECT cf.*
-           FROM {ctfflag} cf
-           JOIN {course_modules} cm ON cm.instance = cf.id
-           JOIN {modules} m ON m.id = cm.module AND m.name = 'ctfflag'
-          WHERE cm.course = :courseid AND cf.name = :name",
-        ['courseid' => $courseid, 'name' => $name]
-    );
-    return $record ?: null;
-}
-
-/**
- * Create or update a mod_ctfflag lab activity.
- *
- * @param stdClass $course
- * @param int $sectionnum
- * @param string $name
- * @param string $intro HTML intro (must not contain flag value)
- * @param string $regex Expected flag regex
- * @param int $xpaward XP points on success
- * @return void
- */
-function security_plus_upsert_ctfflag(
-    stdClass $course,
-    int $sectionnum,
-    string $name,
-    string $intro,
-    string $regex,
-    int $xpaward = 100
-): void {
-    global $DB, $CFG;
-
-    if (!array_key_exists('ctfflag', core_component::get_plugin_list('mod'))) {
-        echo "ctfflag_skip plugin_missing name={$name}\n";
-        return;
-    }
-
-    require_once($CFG->dirroot . '/mod/ctfflag/lib.php');
-
-    $existing = security_plus_find_ctfflag((int) $course->id, $name);
-    if ($existing) {
-        $changed = false;
-        if ((string) $existing->intro !== $intro) {
-            $existing->intro = $intro;
-            $existing->introformat = FORMAT_HTML;
-            $changed = true;
-        }
-        if ((string) $existing->expected_flag_regex !== $regex) {
-            $existing->expected_flag_regex = $regex;
-            $changed = true;
-        }
-        if ((int) $existing->xp_award !== $xpaward) {
-            $existing->xp_award = $xpaward;
-            $changed = true;
-        }
-        if ($changed) {
-            $existing->instance = $existing->id;
-            ctfflag_update_instance($existing);
-            echo "ctfflag_updated id={$existing->id} name={$name}\n";
-        } else {
-            echo "ctfflag_unchanged id={$existing->id} name={$name}\n";
-        }
-        return;
-    }
-
-    $module = new stdClass();
-    $module->course = $course->id;
-    $module->name = $name;
-    $module->intro = $intro;
-    $module->introformat = FORMAT_HTML;
-    $module->expected_flag_regex = $regex;
-    $module->xp_award = $xpaward;
-    $module->completion_required = 1;
-    $module->module = $DB->get_field('modules', 'id', ['name' => 'ctfflag']);
-    $module->modulename = 'ctfflag';
-    $module->section = $sectionnum;
-    $module->visible = 1;
-    $module->cmidnumber = '';
-    $module->completion = COMPLETION_TRACKING_AUTOMATIC;
-
-    try {
-        $cm = add_moduleinfo($module, $course);
-        echo "ctfflag_created id={$cm->instance} name={$name} section={$sectionnum}\n";
-    } catch (Throwable $e) {
-        echo "ctfflag_create_failed name={$name} error=" . $e->getMessage() . "\n";
-    }
-}
-
-/**
  * @param array<string,int|int[]> $questionmap
  * @return int Mappings created
  */
@@ -1266,13 +1150,14 @@ for ($examnum = 2; $examnum <= 3; $examnum++) {
 }
 
 echo "labs_block_start\n";
-$lab1intro = security_plus_load_lab_intro(
+$lab1intro = ut_load_lab_intro(
     $repopath,
+    'security-plus',
     'lab-1-siem-triage',
     '<p>SIEM alert triage lab — see course materials for the scenario.</p>'
 );
 try {
-    security_plus_upsert_ctfflag(
+    ut_upsert_ctfflag(
         $course,
         7,
         'Lab 1: SIEM alert triage',
@@ -1284,13 +1169,14 @@ try {
     echo 'ctfflag_lab1_failed error=' . $e->getMessage() . "\n";
 }
 
-$lab2intro = security_plus_load_lab_intro(
+$lab2intro = ut_load_lab_intro(
     $repopath,
+    'security-plus',
     'lab-2-phishing-analysis',
     '<p>Phishing analysis lab.</p>'
 );
 try {
-    security_plus_upsert_ctfflag(
+    ut_upsert_ctfflag(
         $course,
         7,
         'Lab 2: Phishing email analysis',
@@ -1302,13 +1188,14 @@ try {
     echo 'ctfflag_lab2_failed error=' . $e->getMessage() . "\n";
 }
 
-$lab3intro = security_plus_load_lab_intro(
+$lab3intro = ut_load_lab_intro(
     $repopath,
+    'security-plus',
     'lab-3-firewall-rule-review',
     '<p>Firewall rule review lab.</p>'
 );
 try {
-    security_plus_upsert_ctfflag(
+    ut_upsert_ctfflag(
         $course,
         7,
         'Lab 3: Firewall rule review',

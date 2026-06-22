@@ -1,29 +1,33 @@
-<div class="ut-lab-content">
+<div class="ut-lab-content" data-ut-lab="phishing-analysis">
 <h3>Scenario: Phishing email analysis</h3>
-<p>You are an email security analyst investigating a reported phish. The user forwarded headers
-and body text from a suspicious message targeting the finance team.</p>
+<p>You are an email security analyst investigating a reported phish. Click suspicious header lines
+in the raw excerpt below to flag them.</p>
 
 <h4>Message metadata</h4>
 <ul>
 <li><strong>Reported by:</strong> apatel@contoso.example</li>
 <li><strong>Subject:</strong> URGENT: Wire transfer authorization required today</li>
 <li><strong>Display From:</strong> CFO &lt;cfo@contoso.example&gt;</li>
-<li><strong>Return-Path:</strong> bounce@mailer-48291.badsender.net</li>
-<li><strong>Authentication-Results:</strong> spf=fail; dkim=none; dmarc=fail</li>
-<li><strong>Reply-To:</strong> payments-review@secure-wire-portal.biz</li>
-<li><strong>X-Campaign-Tag (sandbox):</strong> UT-PHISH-2026-Q2-7F3A</li>
 </ul>
+
+<section class="ut-lab-interactive" aria-label="Interactive header analysis">
+<h4>Interactive: Header inspector</h4>
+<p class="ut-lab-widget-hint">Click each header line that indicates spoofing or malicious intent.</p>
+<pre class="ut-lab-headers ut-lab-clickable-headers" data-widget="headers"><span data-header-line="return-path" data-value="">Return-Path: bounce@mailer-48291.badsender.net</span>
+<span data-header-line="auth-results" data-value="">Authentication-Results: spf=fail; dkim=none; dmarc=fail</span>
+<span data-header-line="reply-to" data-value="">Reply-To: payments-review@secure-wire-portal.biz</span>
+<span data-header-line="campaign-tag" data-value="UT-PHISH-2026-Q2-7F3A">X-Campaign-Tag: UT-PHISH-2026-Q2-7F3A</span></pre>
+<p>Derived flag format: <code class="ut-lab-output" data-campaign-out>—</code></p>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</section>
 
 <h4>Body excerpt</h4>
 <p><em>Please approve the attached wire by 3 PM. Use the portal link if the attachment is blocked.</em></p>
 
 <h4>Your tasks</h4>
 <ol>
-<li>Identify the strongest indicator that this message is spoofed or malicious.</li>
+<li>Flag all suspicious headers using the inspector above.</li>
 <li>Classify the attack type using MITRE ATT&amp;CK initial access patterns (conceptual).</li>
-<li>Submit the lab flag as <code>UT{</code> + the campaign tag value after the colon in X-Campaign-Tag + <code>}</code>
-(example format: <code>UT{TAGVALUE}</code>).</li>
+<li>Submit the derived flag shown after identifying all suspicious headers.</li>
 </ol>
-
-<p><em>Do not share flags in course forums. The AI tutor will not validate flag values for you.</em></p>
 </div>

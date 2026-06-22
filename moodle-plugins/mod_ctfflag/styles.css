@@ -1,35 +1,285 @@
+/* mod_ctfflag — lab flag panel (theme lab-content.css handles page shell) */
+
 .ut-ctfflag-view .ut-ctfflag-intro {
-    margin-bottom: 1.25rem;
+    margin-bottom: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
 }
 
-.ut-ctfflag-form {
-    max-width: 36rem;
-    padding: clamp(1rem, 0.75rem + 1vw, 1.5rem);
-    border: 1px solid var(--ut-border-default, rgba(201, 162, 39, 0.18));
+.ut-lab-flag-panel {
+    border: 1px solid var(--ut-border, #e0e0e0);
     border-radius: 0.5rem;
-    background: var(--ut-surface, #0F2035);
+    background: var(--ut-surface, #ffffff);
+    padding: clamp(1rem, 0.75rem + 1vw, 1.5rem);
 }
 
-.ut-ctfflag-form .form-control {
-    font-family: var(--ut-font-mono, "Share Tech Mono", ui-monospace, monospace);
-    background: var(--ut-navy-mid, #0C1E35);
-    color: var(--ut-text-primary, rgba(255, 255, 255, 0.94));
-    border-color: var(--ut-border-strong, rgba(201, 162, 39, 0.32));
+.ut-lab-panel-title {
+    font-family: var(--ut-font-heading, system-ui, sans-serif);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ut-navy, #0B1F3A);
+    margin: 0 0 0.75rem;
 }
 
-.ut-ctfflag-form .btn-primary {
-    background-color: var(--ut-action, #C9A227);
-    border-color: var(--ut-action, #C9A227);
-    color: var(--ut-action-on, #0B1F3A);
+.ut-lab-feedback {
+    font-size: 0.9375rem;
+    margin-bottom: 0.75rem;
+    min-height: 1.25rem;
 }
 
-.ut-ctfflag-form .btn-primary:hover {
-    background-color: var(--ut-action-hover, #D4B23A);
-    border-color: var(--ut-action-hover, #D4B23A);
-    color: var(--ut-action-on, #0B1F3A);
+.ut-lab-feedback--pending {
+    color: var(--ut-text-muted, #525252);
+}
+
+.ut-lab-feedback--success {
+    color: var(--ut-success, #0d5c52);
+    font-weight: 600;
+}
+
+.ut-lab-feedback--error {
+    color: var(--ut-action, #A31F34);
+}
+
+.ut-ctfflag-form .form-control,
+.ut-ctfflag-form #id_flagvalue {
+    font-family: var(--ut-font-mono, ui-monospace, monospace);
+    font-size: 1rem;
+    background: var(--ut-surface-2, #f5f5f5);
+    color: var(--ut-text, #1a1a1a);
+    border-color: var(--ut-border, #e0e0e0);
+    border-radius: 0.375rem;
+}
+
+.ut-ctfflag-form .form-control:focus {
+    border-color: var(--ut-action, #A31F34);
+    box-shadow: 0 0 0 3px rgba(163, 31, 52, 0.15);
+}
+
+.ut-ctfflag-form .btn-primary,
+.ut-ctfflag-form #id_submitbutton {
+    background-color: var(--ut-action, #A31F34);
+    border-color: var(--ut-action, #A31F34);
+    color: var(--ut-action-on, #ffffff);
+    font-weight: 600;
+    min-width: 10rem;
+}
+
+.ut-ctfflag-form .btn-primary:hover,
+.ut-ctfflag-form #id_submitbutton:hover {
+    background-color: var(--ut-action-hover, #750014);
+    border-color: var(--ut-action-hover, #750014);
+    color: var(--ut-action-on, #ffffff);
+}
+
+.ut-ctfflag-form .btn-primary:disabled,
+.ut-ctfflag-form #id_submitbutton:disabled {
+    opacity: 0.65;
 }
 
 .ut-ctfflag-complete {
-    color: var(--ut-success, #2DD4A0);
+    color: var(--ut-success, #0d5c52);
     font-weight: 600;
 }
+
+.ut-lab-workspace--complete .ut-lab-flag-panel {
+    border-color: rgba(13, 92, 82, 0.35);
+    background: rgba(13, 92, 82, 0.06);
+}
+
+@media (max-width: 767.98px) {
+    .ut-lab-flag-panel {
+        position: sticky;
+        bottom: 0;
+        z-index: 5;
+        box-shadow: 0 -4px 24px rgba(11, 31, 58, 0.08);
+    }
+}
+
+/* ── Interactive lab widgets ─────────────────────────────────────────────── */
+.ut-lab-interactive {
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+    border: 1px dashed var(--ut-border, #e0e0e0);
+    border-radius: 0.5rem;
+    background: var(--ut-surface-2, #f5f5f5);
+}
+
+.ut-lab-interactive h4 {
+    margin-top: 1rem;
+}
+
+.ut-lab-interactive h4:first-child {
+    margin-top: 0;
+}
+
+.ut-lab-widget-hint {
+    font-size: 0.9375rem;
+    color: var(--ut-text-muted, #525252);
+    margin: 0 0 0.75rem;
+}
+
+.ut-lab-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.ut-lab-btn {
+    font-family: var(--ut-font-body, system-ui, sans-serif);
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--ut-border, #e0e0e0);
+    border-radius: 0.375rem;
+    background: var(--ut-surface, #ffffff);
+    color: var(--ut-text, #1a1a1a);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.ut-lab-btn:hover {
+    border-color: var(--ut-navy, #0B1F3A);
+}
+
+.ut-lab-btn.is-selected {
+    border-color: var(--ut-navy, #0B1F3A);
+    background: rgba(11, 31, 58, 0.06);
+}
+
+.ut-lab-btn.is-correct {
+    border-color: var(--ut-success, #0d5c52);
+    background: rgba(13, 92, 82, 0.1);
+}
+
+.ut-lab-btn.is-wrong {
+    border-color: var(--ut-action, #A31F34);
+    background: rgba(163, 31, 52, 0.08);
+}
+
+.ut-lab-btn--primary {
+    background: var(--ut-action, #A31F34);
+    border-color: var(--ut-action, #A31F34);
+    color: var(--ut-action-on, #ffffff);
+}
+
+.ut-lab-btn--primary:hover {
+    background: var(--ut-action-hover, #750014);
+    border-color: var(--ut-action-hover, #750014);
+    color: #fff;
+}
+
+.ut-lab-input {
+    font-family: var(--ut-font-mono, ui-monospace, monospace);
+    font-size: 0.9375rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--ut-border, #e0e0e0);
+    border-radius: 0.375rem;
+    margin: 0 0.35rem;
+    min-width: 12rem;
+}
+
+.ut-lab-input--narrow {
+    min-width: 4rem;
+    width: 4rem;
+}
+
+.ut-lab-output {
+    font-family: var(--ut-font-mono, ui-monospace, monospace);
+    font-weight: 600;
+    color: var(--ut-navy, #0B1F3A);
+}
+
+.ut-lab-widget-feedback {
+    font-size: 0.875rem;
+    margin: 0.5rem 0 0;
+    min-height: 1.25rem;
+}
+
+.ut-lab-widget-feedback--ok {
+    color: var(--ut-success, #0d5c52);
+    font-weight: 600;
+}
+
+.ut-lab-widget-feedback--err {
+    color: var(--ut-action, #A31F34);
+}
+
+.ut-lab-clickable-headers span {
+    display: block;
+    padding: 0.35rem 0.5rem;
+    margin: 0.15rem 0;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.ut-lab-clickable-headers span:hover {
+    background: rgba(11, 31, 58, 0.06);
+}
+
+.ut-lab-clickable-headers span.is-flagged {
+    background: rgba(163, 31, 52, 0.12);
+    outline: 2px solid var(--ut-action, #A31F34);
+}
+
+.ut-lab-violation {
+    display: none;
+    color: var(--ut-action, #A31F34);
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.ut-lab-violation.is-visible {
+    display: block;
+}
+
+.ut-lab-acl-row {
+    font-family: var(--ut-font-mono, ui-monospace, monospace);
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    margin: 0.25rem 0;
+    border: 1px solid var(--ut-border, #e0e0e0);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    background: var(--ut-surface, #fff);
+}
+
+.ut-lab-acl-row.is-marked {
+    border-color: var(--ut-action, #A31F34);
+    background: rgba(163, 31, 52, 0.08);
+}
+
+.ut-lab-sortable {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.75rem;
+}
+
+.ut-lab-sort-item {
+    padding: 0.65rem 1rem;
+    margin: 0.35rem 0;
+    border: 1px solid var(--ut-border, #e0e0e0);
+    border-radius: 0.375rem;
+    background: var(--ut-surface, #fff);
+    cursor: grab;
+}
+
+.ut-lab-sort-item.is-dragging {
+    opacity: 0.6;
+}
+
+.ut-lab-cmd-out {
+    font-family: var(--ut-font-mono, ui-monospace, monospace);
+    font-size: 0.8125rem;
+    background: #1a1a1a;
+    color: #e8e8e8;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    margin-top: 0.75rem;
+    min-height: 4rem;
+    white-space: pre-wrap;
+}
+

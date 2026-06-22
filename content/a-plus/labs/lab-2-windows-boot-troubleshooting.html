@@ -1,23 +1,38 @@
-<div class="ut-lab-content">
+<div class="ut-lab-content" data-ut-lab="boot-troubleshoot">
 <h3>Scenario: Windows boot troubleshooting</h3>
-<p>You are an OS support specialist at Desktop Services Group. A workstation fails to boot after
-a feature update. The user sees a spinning logo, then a black screen with a blinking cursor.</p>
+<p>A workstation fails to boot after a feature update — spinning logo, then black screen with cursor.</p>
 
 <h4>Symptoms and history</h4>
 <ul>
 <li><strong>OS:</strong> Windows 11 Pro</li>
 <li><strong>Last change:</strong> Automatic update installed overnight</li>
-<li><strong>Boot media:</strong> Recovery USB available</li>
-<li><strong>BitLocker:</strong> Enabled (recovery key on file)</li>
+<li><strong>Recovery USB:</strong> Available</li>
 </ul>
+
+<section class="ut-lab-interactive" aria-label="Interactive recovery sorter">
+<h4>Interactive: Recovery step sorter</h4>
+<p class="ut-lab-widget-hint">Drag steps into least-invasive-first order, then check.</p>
+<ol class="ut-lab-sortable" data-sortable="boot-steps" data-widget="sort">
+<li class="ut-lab-sort-item" data-step="system-restore">System Restore to pre-update point</li>
+<li class="ut-lab-sort-item" data-step="safe-mode">Boot into Safe Mode with networking</li>
+<li class="ut-lab-sort-item" data-step="startup-repair">Run Startup Repair from recovery USB</li>
+</ol>
+<button type="button" class="ut-lab-btn" data-action="check-order">Check order</button>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+
+<h4>Interactive: Flag hasher</h4>
+<div data-widget="hash">
+<label>Recovery phrase: <input type="text" class="ut-lab-input" data-input="recovery-phrase" placeholder="Type phrase from task 3"></label>
+<button type="button" class="ut-lab-btn ut-lab-btn--primary" data-action="hash-phrase">Compute flag</button>
+<p>Candidate: <code class="ut-lab-output" data-hash-out>—</code></p>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+</section>
 
 <h4>Your tasks</h4>
 <ol>
-<li>Order three boot-recovery steps using the CompTIA troubleshooting methodology (least invasive first).</li>
-<li>State when you would use Startup Repair vs. Safe Mode vs. System Restore.</li>
-<li>Submit the lab flag: first eight hex characters of the SHA-256 hash of the string
-<code>StartupRepair-SafeMode</code>, wrapped as <code>UT{xxxxxxxx}</code>.</li>
+<li>Order recovery steps correctly using the sorter.</li>
+<li>State when Startup Repair vs Safe Mode vs System Restore applies.</li>
+<li>Hash <code>StartupRepair-SafeMode</code> (first 8 hex) and submit as <code>UT{...}</code>.</li>
 </ol>
-
-<p><em>Precomputed flag for validation: UT{9C3D7E02}. Do not share flags in course forums.</em></p>
 </div>

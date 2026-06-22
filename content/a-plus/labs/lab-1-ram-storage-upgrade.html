@@ -1,23 +1,36 @@
-<div class="ut-lab-content">
+<div class="ut-lab-content" data-ut-lab="ram-storage">
 <h3>Scenario: RAM and storage upgrade planning</h3>
-<p>You are a bench technician at Precision PC Repair Depot. A customer laptop reports frequent
-blue screens and slow boot times. The device supports SO-DIMM RAM upgrades and has one M.2 slot.</p>
+<p>You are a bench technician planning upgrades for a customer laptop used for VM-based certification study.</p>
 
 <h4>Device profile</h4>
 <ul>
 <li><strong>Model:</strong> UltraBook Pro 14 (synthetic)</li>
 <li><strong>Current RAM:</strong> 8 GB DDR4 SO-DIMM (single channel)</li>
 <li><strong>Storage:</strong> 256 GB SATA M.2 SSD</li>
-<li><strong>User goal:</strong> Run virtual machines for certification study</li>
 </ul>
+
+<section class="ut-lab-interactive" aria-label="Interactive upgrade planner">
+<h4>Interactive: Upgrade priority</h4>
+<p class="ut-lab-widget-hint">Which upgrade helps VM workloads most for this profile?</p>
+<div class="ut-lab-btn-group" data-widget="upgrade">
+<button type="button" class="ut-lab-btn" data-upgrade-choice="ram">16 GB SO-DIMM RAM</button>
+<button type="button" class="ut-lab-btn" data-upgrade-choice="storage">NVMe SSD replacement</button>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+
+<h4>Interactive: Flag hasher</h4>
+<div data-widget="hash">
+<label>Configuration phrase: <input type="text" class="ut-lab-input" data-input="config-phrase" placeholder="Type phrase from task 3"></label>
+<button type="button" class="ut-lab-btn ut-lab-btn--primary" data-action="hash-phrase">Compute flag</button>
+<p>Candidate: <code class="ut-lab-output" data-hash-out>—</code></p>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+</section>
 
 <h4>Your tasks</h4>
 <ol>
-<li>Recommend whether upgrading to 16 GB SO-DIMM or replacing storage yields the bigger gain for VM workloads.</li>
-<li>Identify the correct form factor for a storage upgrade (SATA M.2 vs. NVMe M.2 — check keying).</li>
-<li>Submit the lab flag: first eight hex characters of the SHA-256 hash of the string
-<code>SO-DIMM-16GB-NVMe</code>, wrapped as <code>UT{xxxxxxxx}</code>.</li>
+<li>Choose the highest-impact upgrade using the planner above.</li>
+<li>Identify the correct storage form factor (SO-DIMM vs NVMe M.2).</li>
+<li>Hash the string <code>SO-DIMM-16GB-NVMe</code> (first 8 hex) and submit as <code>UT{...}</code>.</li>
 </ol>
-
-<p><em>Precomputed flag for validation: UT{4E8B2A1F}. Do not share flags in course forums.</em></p>
 </div>

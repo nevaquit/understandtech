@@ -5,8 +5,6 @@ require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/mod/ctfflag/lib.php');
 require_once($CFG->dirroot . '/mod/ctfflag/classes/form/submit_form.php');
 
-use mod_ctfflag\local\flag_validator;
-
 global $DB, $USER, $PAGE, $OUTPUT;
 
 $id = required_param('id', PARAM_INT);
@@ -25,11 +23,7 @@ $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_activity_record($instance);
 $PAGE->add_body_class('ut-ctfflag-view');
 
-$success = $DB->record_exists('ctfflag_submissions', [
-    'ctfflagid' => $instance->id,
-    'userid' => $USER->id,
-    'success' => 1,
-]);
+$success = ctfflag_user_has_success((int) $instance->id, (int) $USER->id);
 
 $formurl = new moodle_url('/mod/ctfflag/view.php', ['id' => $cm->id]);
 $mform = new mod_ctfflag_submit_form($formurl, ['readonly' => $success]);
@@ -42,47 +36,79 @@ if ($data = $mform->get_data()) {
     require_capability('mod/ctfflag:submit', $context);
     require_sesskey();
 
-    if ($success) {
-        redirect($PAGE->url, get_string('alreadycompleted', 'mod_ctfflag'), null, \core\output\notification::NOTIFY_INFO);
+    $result = ctfflag_process_flag_submission($cm, $instance, (int) $USER->id, $data->flagvalue);
+
+    if ($result['status'] === 'ratelimited') {
+        redirect($PAGE->url, $result['message'], null, \core\output\notification::NOTIFY_ERROR);
     }
 
-    $matched = flag_validator::matches($data->flagvalue, $instance->expected_flag_regex);
-
-    $submission = (object) [
-        'ctfflagid' => $instance->id,
-        'userid' => $USER->id,
-        'success' => $matched ? 1 : 0,
-        'timecreated' => time(),
-    ];
-    $DB->insert_record('ctfflag_submissions', $submission);
-
-    if ($matched) {
-        ctfflag_notify_flag_success($cm, $instance, (int) $USER->id);
-        ctfflag_update_completion($cm, $instance, $USER->id, true);
-        ctfflag_update_grades($instance, $USER->id, 1.0);
-        redirect($PAGE->url, get_string('flagsuccess', 'mod_ctfflag'), null, \core\output\notification::NOTIFY_SUCCESS);
+    if ($result['success']) {
+        $type = $result['status'] === 'alreadycompleted'
+            ? \core\output\notification::NOTIFY_INFO
+            : \core\output\notification::NOTIFY_SUCCESS;
+        redirect($PAGE->url, $result['message'], null, $type);
     }
 
-    redirect($PAGE->url, get_string('flagincorrect', 'mod_ctfflag'), null, \core\output\notification::NOTIFY_ERROR);
+    redirect($PAGE->url, $result['message'], null, \core\output\notification::NOTIFY_ERROR);
 }
 
 echo $OUTPUT->header();
 
-echo $OUTPUT->heading(format_string($instance->name));
+echo html_writer::start_div('ut-lab-shell');
+echo html_writer::start_div('ut-lab-header');
+echo html_writer::tag('h1', format_string($instance->name), ['class' => 'ut-lab-title']);
+echo html_writer::tag(
+    'p',
+    get_string('labworkspacehint', 'mod_ctfflag'),
+    ['class' => 'ut-lab-subtitle']
+);
+echo html_writer::end_div();
 
+echo html_writer::start_div('ut-lab-grid');
+
+echo html_writer::start_div('ut-lab-instructions', ['aria-label' => get_string('labinstructions', 'mod_ctfflag')]);
 if (trim($instance->intro)) {
-    echo $OUTPUT->box(format_module_intro('ctfflag', $instance, $cm->id), 'generalbox mod_introbox ut-ctfflag-intro');
+    echo $OUTPUT->box(format_module_intro('ctfflag', $instance, $cm->id), 'generalbox ut-ctfflag-intro');
 }
+echo html_writer::end_div();
+
+echo html_writer::start_div('ut-lab-workspace' . ($success ? ' ut-lab-workspace--complete' : ''));
+echo html_writer::start_div('ut-lab-flag-panel card ut-ctfflag-form');
 
 if ($success) {
     echo $OUTPUT->notification(get_string('flagsuccess', 'mod_ctfflag'), 'success');
     echo html_writer::tag('p', get_string('alreadycompleted', 'mod_ctfflag'), ['class' => 'ut-ctfflag-complete']);
 } else if (has_capability('mod/ctfflag:submit', $context)) {
-    echo html_writer::start_div('ut-ctfflag-form card');
+    echo html_writer::tag('h2', get_string('submitflag', 'mod_ctfflag'), ['class' => 'ut-lab-panel-title']);
+    echo html_writer::tag(
+        'div',
+        '',
+        [
+            'id' => 'ut-lab-feedback',
+            'class' => 'ut-lab-feedback',
+            'role' => 'status',
+            'aria-live' => 'polite',
+        ]
+    );
     $mform->display();
-    echo html_writer::end_div();
 } else {
     echo $OUTPUT->notification(get_string('submitnotallowed', 'mod_ctfflag'), 'info');
+}
+
+echo html_writer::end_div();
+echo html_writer::end_div();
+echo html_writer::end_div();
+echo html_writer::end_div();
+
+$PAGE->requires->js_call_amd('mod_ctfflag/lab_interactives', 'init');
+
+if (!$success && has_capability('mod/ctfflag:submit', $context)) {
+    $PAGE->requires->js_call_amd('mod_ctfflag/lab_workspace', 'init', [
+        'cmid' => $cm->id,
+        'completed' => false,
+        'formatInvalid' => get_string('flagformatinvalid', 'mod_ctfflag'),
+        'submitting' => get_string('flagsubmitting', 'mod_ctfflag'),
+    ]);
 }
 
 echo $OUTPUT->footer();

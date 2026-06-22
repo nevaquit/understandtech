@@ -23,6 +23,15 @@ class flag_validator {
             return false;
         }
 
+        if (strlen($submitted) > 256) {
+            return false;
+        }
+
+        if (strlen($pattern) > 128) {
+            debugging('CTF flag regex exceeds maximum length', DEBUG_DEVELOPER);
+            return false;
+        }
+
         $regex = self::wrap_pattern($pattern);
         $result = @preg_match($regex, $submitted);
         if ($result === false) {

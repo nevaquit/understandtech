@@ -186,3 +186,120 @@ function ctfflag_notify_flag_success(stdClass $cm, stdClass $instance, int $user
     $event->trigger();
     ctfflag_award_xp($instance, $userid, (int) $cm->course);
 }
+
+/** Maximum failed submissions per user per lab per hour. */
+define('CTFFLAG_MAX_FAILURES_PER_HOUR', 30);
+
+/**
+ * Whether the learner already captured this lab flag.
+ *
+ * @param int $ctfflagid Activity instance id
+ * @param int $userid User id
+ * @return bool
+ */
+function ctfflag_user_has_success(int $ctfflagid, int $userid): bool {
+    global $DB;
+
+    return $DB->record_exists('ctfflag_submissions', [
+        'ctfflagid' => $ctfflagid,
+        'userid' => $userid,
+        'success' => 1,
+    ]);
+}
+
+/**
+ * Count recent failed attempts for rate limiting.
+ *
+ * @param int $ctfflagid Activity instance id
+ * @param int $userid User id
+ * @param int $withinseconds Window in seconds
+ * @return int
+ */
+function ctfflag_count_recent_failures(int $ctfflagid, int $userid, int $withinseconds = HOURSECS): int {
+    global $DB;
+
+    $since = time() - $withinseconds;
+    return (int) $DB->count_records_select(
+        'ctfflag_submissions',
+        'ctfflagid = :ctfflagid AND userid = :userid AND success = 0 AND timecreated > :since',
+        [
+            'ctfflagid' => $ctfflagid,
+            'userid' => $userid,
+            'since' => $since,
+        ]
+    );
+}
+
+/**
+ * Process a flag submission (shared by view.php and AJAX webservice).
+ *
+ * @param stdClass $cm Course module
+ * @param stdClass $instance Activity instance
+ * @param int $userid Learner id
+ * @param string $flagvalue Raw flag value
+ * @return array{status: string, success: bool, message: string}
+ */
+function ctfflag_process_flag_submission(
+    stdClass $cm,
+    stdClass $instance,
+    int $userid,
+    string $flagvalue
+): array {
+    global $DB;
+
+    if (ctfflag_user_has_success((int) $instance->id, $userid)) {
+        return [
+            'status' => 'alreadycompleted',
+            'success' => true,
+            'message' => get_string('alreadycompleted', 'mod_ctfflag'),
+        ];
+    }
+
+    if (ctfflag_count_recent_failures((int) $instance->id, $userid) >= CTFFLAG_MAX_FAILURES_PER_HOUR) {
+        return [
+            'status' => 'ratelimited',
+            'success' => false,
+            'message' => get_string('flagratelimited', 'mod_ctfflag'),
+        ];
+    }
+
+    $matched = \mod_ctfflag\local\flag_validator::matches($flagvalue, $instance->expected_flag_regex);
+
+    $transaction = $DB->start_delegated_transaction();
+
+    if (ctfflag_user_has_success((int) $instance->id, $userid)) {
+        $transaction->allow_commit();
+        return [
+            'status' => 'alreadycompleted',
+            'success' => true,
+            'message' => get_string('alreadycompleted', 'mod_ctfflag'),
+        ];
+    }
+
+    $submission = (object) [
+        'ctfflagid' => $instance->id,
+        'userid' => $userid,
+        'success' => $matched ? 1 : 0,
+        'timecreated' => time(),
+    ];
+    $DB->insert_record('ctfflag_submissions', $submission);
+
+    if ($matched) {
+        ctfflag_notify_flag_success($cm, $instance, $userid);
+        ctfflag_update_completion($cm, $instance, $userid, true);
+        ctfflag_update_grades($instance, $userid, 1.0);
+        $transaction->allow_commit();
+        return [
+            'status' => 'success',
+            'success' => true,
+            'message' => get_string('flagsuccess', 'mod_ctfflag'),
+        ];
+    }
+
+    $transaction->allow_commit();
+    return [
+        'status' => 'incorrect',
+        'success' => false,
+        'message' => get_string('flagincorrect', 'mod_ctfflag'),
+    ];
+}

@@ -31,7 +31,14 @@ final class flag_validator_test extends \advanced_testcase {
     /**
      * @return void
      */
-    public function test_rejects_empty_submission(): void {
-        $this->assertFalse(flag_validator::matches('   ', 'UT\\{.*\\}'));
+    public function test_rejects_overlong_submission(): void {
+        $this->assertFalse(flag_validator::matches(str_repeat('A', 300), 'UT\\{.*\\}'));
+    }
+
+    /**
+     * @return void
+     */
+    public function test_rejects_overlong_pattern(): void {
+        $this->assertFalse(flag_validator::matches('UT{test}', str_repeat('A', 200)));
     }
 }

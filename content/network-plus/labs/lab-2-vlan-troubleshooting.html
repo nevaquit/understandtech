@@ -1,22 +1,36 @@
-<div class="ut-lab-content">
+<div class="ut-lab-content" data-ut-lab="vlan-troubleshoot">
 <h3>Scenario: VLAN troubleshooting</h3>
-<p>Pacific Retail Co-op reports that POS terminals on VLAN 120 cannot reach the payment gateway,
-while corporate PCs on VLAN 10 work normally. You have switch output from the access layer.</p>
+<p>Pacific Retail Co-op reports that POS terminals on VLAN 120 cannot reach the payment gateway.</p>
 
 <h4>Evidence</h4>
 <ul>
 <li><strong>Symptom:</strong> VLAN 120 hosts get DHCP but default gateway unreachable</li>
 <li><strong>Trunk:</strong> Gi1/0/48 allowed VLANs show <code>10,120</code> on Store-A-SW2</li>
 <li><strong>Uplink:</strong> Distribution switch missing VLAN 120 SVI</li>
-<li><strong>Fix ticket:</strong> Create SVI 120 with gateway <code>192.168.120.1/24</code></li>
 </ul>
+
+<section class="ut-lab-interactive" aria-label="Interactive VLAN diagnosis">
+<h4>Interactive: Layer diagnosis</h4>
+<p class="ut-lab-widget-hint">Where is the fault — Layer 2 or Layer 3?</p>
+<div class="ut-lab-btn-group" data-widget="layer">
+<button type="button" class="ut-lab-btn" data-layer-choice="l2">Layer 2 (trunking)</button>
+<button type="button" class="ut-lab-btn" data-layer-choice="l3">Layer 3 (routing/SVI)</button>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+
+<h4>Interactive: Flag hasher</h4>
+<div data-widget="hash">
+<label>Diagnosis phrase (from your analysis): <input type="text" class="ut-lab-input" data-input="diagnosis-phrase" placeholder="Type the keyword phrase from task 3"></label>
+<button type="button" class="ut-lab-btn ut-lab-btn--primary" data-action="hash-diagnosis">Compute flag</button>
+<p>Candidate: <code class="ut-lab-output" data-hash-out>—</code></p>
+<p class="ut-lab-widget-feedback" data-ut-feedback></p>
+</div>
+</section>
 
 <h4>Your tasks</h4>
 <ol>
-<li>State whether the issue is Layer 2 trunking or Layer 3 routing.</li>
-<li>Identify the missing component on the distribution switch.</li>
-<li>Submit the lab flag <code>UT{UT-VLAN-120-FIX}</code> after verifying inter-VLAN routing design.</li>
+<li>Identify the failed layer using the diagnosis tool.</li>
+<li>State the missing distribution-switch component.</li>
+<li>Enter the diagnosis phrase <code>VLAN120-SVI-MISSING</code> in the hasher and submit the flag.</li>
 </ol>
-
-<p><em>Do not share flags in course forums. The AI tutor will not validate flag values for you.</em></p>
 </div>

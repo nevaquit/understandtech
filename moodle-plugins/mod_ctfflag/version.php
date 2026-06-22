@@ -4,7 +4,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_ctfflag';
-$plugin->version   = 2026061300;
+$plugin->version   = 2026062202;
 $plugin->requires  = 2024100700;
-$plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = '0.1.0-dev';
+$plugin->maturity  = MATURITY_BETA;
+$plugin->release   = '1.1.0';

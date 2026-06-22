@@ -1,20 +1,28 @@
-<div class="ut-lab-content">
+<div class="ut-lab-content" data-ut-lab="firewall-review">
 <h3>Scenario: Firewall rule review</h3>
-<p>You are reviewing a proposed rule change on the edge firewall before change-window deployment.
-A developer requested broad access for a new API integration.</p>
+<p>You are reviewing a proposed rule change on the edge firewall before change-window deployment.</p>
 
 <h4>Change ticket CHG-8842</h4>
-<table>
+<table class="ut-lab-table">
 <thead><tr><th>Field</th><th>Value</th></tr></thead>
 <tbody>
 <tr><td>Requested rule name</td><td>API-INTEGRATION-TEMP</td></tr>
-<tr><td>Source</td><td>ANY</td></tr>
+<tr><td>Source</td><td data-field="source">ANY</td></tr>
 <tr><td>Destination</td><td>10.20.30.40 (prod API server)</td></tr>
 <tr><td>Service</td><td>TCP/8443</td></tr>
 <tr><td>Action</td><td>ALLOW</td></tr>
-<tr><td>Rule set ID (CMDB)</td><td>RS-EDGE-9912</td></tr>
+<tr><td>Rule set ID (CMDB)</td><td data-field="cmdb-id">RS-EDGE-9912</td></tr>
 </tbody>
 </table>
+
+<section class="ut-lab-interactive" aria-label="Interactive policy audit">
+<h4>Interactive: Policy auditor</h4>
+<p class="ut-lab-widget-hint">Run the auditor to highlight baseline violations and reveal the flag format.</p>
+<button type="button" class="ut-lab-btn ut-lab-btn--primary" data-action="audit-rule">Audit proposed rule</button>
+<p class="ut-lab-violation" data-violation="source-any">⚠ Source ANY violates explicit-source policy.</p>
+<p>Flag format: <code class="ut-lab-output" data-cmdb-out>—</code></p>
+<p class="ut-lab-widget-feedback" data-ut-feedback data-widget="audit"></p>
+</section>
 
 <h4>Policy baseline excerpt</h4>
 <ul>
@@ -25,10 +33,8 @@ A developer requested broad access for a new API integration.</p>
 
 <h4>Your tasks</h4>
 <ol>
-<li>Identify the policy violations in the proposed rule.</li>
-<li>Recommend a least-privilege alternative (describe in your notes; not graded here).</li>
-<li>Submit the lab flag using the rule set ID from CMDB in the format <code>UT{RS-EDGE-9912}</code>.</li>
+<li>Run the policy auditor and note violations.</li>
+<li>Recommend a least-privilege alternative in your notes.</li>
+<li>Submit the CMDB rule set ID wrapped as <code>UT{...}</code>.</li>
 </ol>
-
-<p><em>Do not share flags in course forums. The AI tutor will not validate flag values for you.</em></p>
 </div>

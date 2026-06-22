@@ -6,7 +6,7 @@ defined('MOODLE_INTERNAL') || die();
 $THEME->name = 'understandtech';
 $THEME->parents = ['boost'];
 
-$THEME->sheets = ['understandtech', 'global-shell', 'lesson-content'];
+$THEME->sheets = ['understandtech', 'global-shell', 'lesson-content', 'lab-content'];
 // Plain CSS sheets above complement compiled SCSS; understandtech.css retained for deploy
 // stability — consolidate into SCSS/global-shell in a future release.
 $THEME->editor_sheets = ['editor'];

@@ -1,0 +1,228 @@
+/* mod_ctfflag labs — immersive split workspace (mirrors lesson shell) */
+
+.path-mod-ctfflag,
+#page-mod-ctfflag-view,
+.ut-lab-page {
+    --ut-lab-outer: var(--ut-bg, #ffffff);
+    --ut-lab-surface: var(--ut-surface, #ffffff);
+    --ut-lab-border: var(--ut-border, #e0e0e0);
+    --ut-lab-prose: var(--ut-text, #1a1a1a);
+    --ut-lab-muted: var(--ut-text-muted, #525252);
+}
+
+.path-mod-ctfflag #page-header,
+#page-mod-ctfflag-view #page-header,
+.ut-lab-page #page-header {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 0;
+    padding-top: 0.75rem;
+    padding-bottom: 0.25rem;
+}
+
+.path-mod-ctfflag #page-header .page-header-headings,
+#page-mod-ctfflag-view #page-header .page-header-headings,
+.ut-lab-page #page-header .page-header-headings {
+    display: none;
+}
+
+.path-mod-ctfflag #page-header .breadcrumb .breadcrumb-item,
+.ut-lab-page #page-header .breadcrumb .breadcrumb-item {
+    color: var(--ut-lab-muted);
+    font-size: 0.75rem;
+}
+
+.path-mod-ctfflag #page-header .breadcrumb .breadcrumb-item a:hover,
+.ut-lab-page #page-header .breadcrumb .breadcrumb-item a:hover {
+    color: var(--ut-link, #A31F34);
+}
+
+.path-mod-ctfflag #region-main,
+#page-mod-ctfflag-view #region-main,
+.ut-lab-page #region-main {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 3rem);
+}
+
+.path-mod-ctfflag .activity-header,
+.ut-lab-page .activity-header {
+    display: none;
+}
+
+.path-mod-ctfflag #region-main > .card,
+.ut-lab-page #region-main > .card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.path-mod-ctfflag #region-main > .card > .card-body,
+.ut-lab-page #region-main > .card > .card-body {
+    padding: 0;
+}
+
+/* ── Lab shell layout ───────────────────────────────────────────────────── */
+.ut-lab-shell {
+    max-width: min(72rem, 100%);
+    margin: 0 auto;
+}
+
+.ut-lab-header {
+    margin-bottom: 1.5rem;
+}
+
+.ut-lab-title {
+    font-family: var(--ut-font-heading, system-ui, sans-serif);
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+    font-weight: 700;
+    color: var(--ut-navy, #0B1F3A);
+    margin: 0 0 0.35rem;
+    line-height: 1.2;
+}
+
+.ut-lab-subtitle {
+    margin: 0;
+    color: var(--ut-lab-muted);
+    font-size: 0.9375rem;
+    max-width: 42rem;
+}
+
+.ut-lab-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+    gap: clamp(1rem, 2vw, 2rem);
+    align-items: start;
+}
+
+.ut-lab-instructions {
+    min-width: 0;
+}
+
+.ut-lab-instructions .generalbox.ut-ctfflag-intro,
+.ut-lab-instructions .mod_introbox {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.ut-lab-workspace {
+    min-width: 0;
+}
+
+/* ── Scenario prose (.ut-lab-content in intro HTML) ─────────────────────── */
+.ut-lab-content,
+.ut-ctfflag-intro .ut-lab-content,
+.ut-lab-instructions .ut-lab-content {
+    background: var(--ut-lab-surface);
+    border: 1px solid var(--ut-lab-border);
+    border-radius: 0.5rem;
+    padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+    color: var(--ut-lab-prose);
+    font-family: var(--ut-font-body, system-ui, sans-serif);
+    font-size: 1rem;
+    line-height: 1.75;
+    max-width: 68ch;
+}
+
+.ut-lab-content h3 {
+    font-family: var(--ut-font-heading, system-ui, sans-serif);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--ut-navy, #0B1F3A);
+    margin: 0 0 0.75rem;
+}
+
+.ut-lab-content h4 {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ut-navy, #0B1F3A);
+    margin: 1.25rem 0 0.5rem;
+}
+
+.ut-lab-content ul,
+.ut-lab-content ol {
+    margin: 0 0 1rem;
+    padding-left: 1.35rem;
+}
+
+.ut-lab-content li {
+    margin-bottom: 0.35rem;
+}
+
+.ut-lab-content code {
+    font-family: var(--ut-font-mono, ui-monospace, monospace);
+    font-size: 0.9em;
+    background: var(--ut-surface-2, #f5f5f5);
+    padding: 0.1em 0.35em;
+    border-radius: 0.25rem;
+}
+
+.ut-lab-content pre,
+.ut-lab-content .ut-lab-headers {
+    font-family: var(--ut-font-mono, ui-monospace, monospace);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    background: var(--ut-surface-2, #f5f5f5);
+    border: 1px solid var(--ut-lab-border);
+    border-radius: 0.375rem;
+    padding: 1rem;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    margin: 1rem 0;
+}
+
+.ut-lab-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9375rem;
+}
+
+.ut-lab-content th,
+.ut-lab-content td {
+    border: 1px solid var(--ut-lab-border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+}
+
+.ut-lab-content th {
+    background: var(--ut-surface-2, #f5f5f5);
+    font-weight: 600;
+}
+
+.ut-lab-footer {
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--ut-lab-muted);
+}
+
+/* ── Drawers: match lesson light surfaces ───────────────────────────────── */
+body.ut-lab-page .drawer.drawer-left,
+body.ut-lab-page .drawer.drawer-right {
+    background: var(--ut-lab-surface) !important;
+    border-color: var(--ut-lab-border) !important;
+}
+
+@media (max-width: 991.98px) {
+    .ut-lab-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ut-lab-workspace {
+        order: 2;
+    }
+}
+
+@media (min-width: 992px) {
+    .ut-lab-workspace {
+        position: sticky;
+        top: 5rem;
+    }
+}
