@@ -68,6 +68,7 @@ function theme_understandtech_page_init(moodle_page $page): void {
     );
 
     $page->add_body_class('ut-theme');
+    $page->add_body_class('understandtech-app--learn');
 
     $theme = theme_config::load('understandtech');
     if (!empty($theme->settings->enable_skool_layout)) {

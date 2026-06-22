@@ -16,6 +16,94 @@
 #page-login-index .card-body{background:#ffffff;color:#1a1a1a}
 #page-login-index .card p,#page-login-index .card h4,#page-login-index .card h3,#page-login-index .card h2{color:#0B1F3A}
 
+/* ── Login page — marketing OCW light (overrides stale preset dump on line 1) ── */
+body.pagelayout-login,
+body.pagelayout-login #page-wrapper,
+body.pagelayout-login #page,
+#page-login-index {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    min-height: 100vh;
+}
+
+#page-login-index .login-container {
+    background: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+    border-top: 4px solid #A31F34 !important;
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 16px rgba(11, 31, 58, 0.10) !important;
+    color: #1a1a1a !important;
+}
+
+#page-login-index .ut-login-heading {
+    color: #0B1F3A !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+#page-login-index .ut-login-subheading {
+    color: #525252 !important;
+}
+
+#page-login-index .form-label,
+#page-login-index label {
+    color: #1a1a1a !important;
+    font-weight: 600;
+}
+
+#page-login-index .form-control {
+    background: #ffffff !important;
+    border-color: #dadce0 !important;
+    color: #1a1a1a !important;
+}
+
+#page-login-index .form-control::placeholder {
+    color: #525252 !important;
+}
+
+#page-login-index .form-control:focus {
+    background: #ffffff !important;
+    border-color: #0B1F3A !important;
+    box-shadow: 0 0 0 3px rgba(11, 31, 58, 0.15) !important;
+    color: #1a1a1a !important;
+}
+
+#page-login-index .btn-primary {
+    background: #A31F34 !important;
+    border-color: #A31F34 !important;
+    color: #ffffff !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: none;
+}
+
+#page-login-index .btn-primary:hover,
+#page-login-index .btn-primary:focus {
+    background: #750014 !important;
+    border-color: #750014 !important;
+    color: #ffffff !important;
+}
+
+#page-login-index .ut-login-links a {
+    color: #A31F34 !important;
+}
+
+#page-login-index .ut-login-links a:hover {
+    color: #750014 !important;
+}
+
+#page-login-index .alert-danger {
+    background: rgba(163, 31, 52, 0.08) !important;
+    border-color: rgba(163, 31, 52, 0.25) !important;
+    color: #1a1a1a !important;
+}
+
+#page-login-index .btn-outline-secondary {
+    border-color: #dadce0 !important;
+    color: #1a1a1a !important;
+    background: #ffffff !important;
+}
+
 /* ── Incourse pages: unified navy shell, readable headers ── */
 .ut-incourse #page-header,
 .path-course-view #page-header,
@@ -152,20 +240,20 @@ body.path-mod-quiz-summary #page.drawers .main-inner,
 
 .path-mod-quiz .btn-primary,
 .path-mod-quiz input[type="submit"].btn {
-    background: #C9A227;
-    border-color: #C9A227;
-    color: #0B1F3A;
-    font-family: "Rajdhani", sans-serif;
+    background: #A31F34;
+    border-color: #A31F34;
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
 }
 
 .path-mod-quiz .btn-primary:hover,
 .path-mod-quiz input[type="submit"].btn:hover {
-    background: #d4b452;
-    border-color: #d4b452;
-    color: #0B1F3A;
+    background: #750014;
+    border-color: #750014;
+    color: #ffffff;
 }
 
 /* mod/page lesson — collapse Boost drawers viewport stretch (see global-shell.css). */

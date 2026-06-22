@@ -7,21 +7,21 @@
         justify-content: space-between;
         padding: 0.75rem 1rem;
         border-radius: 0.5rem;
-        background: rgba($ut-brand-navy, 0.55);
+        background: $ut-surface-2;
         margin-bottom: 0.5rem;
-        border: 1px solid rgba($ut-brand-gold, 0.12);
+        border: 1px solid $ut-border-default;
     }
 
     .ut-rank {
         font-family: $headings-font-family;
         font-weight: 700;
-        color: $ut-brand-gold;
+        color: $ut-gold-on-light;
         min-width: 2rem;
     }
 
     .ut-xp-bar {
         height: 0.5rem;
-        background: rgba($ut-brand-navy, 0.1);
+        background: $ut-surface-2;
         border-radius: 999px;
         overflow: hidden;
 
@@ -36,14 +36,14 @@
     text-align: center;
     padding: 1.25rem;
     border-radius: $card-border-radius;
-    background: rgba($ut-brand-navy, 0.55);
-    border: 1px solid rgba($ut-brand-gold, 0.12);
+    background: $ut-surface;
+    border: 1px solid $ut-border-default;
 
     .ut-avatar {
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
-        background: $ut-brand-navy;
+        background: $ut-navy-mid;
         color: #fff;
         display: inline-flex;
         align-items: center;
@@ -460,191 +460,8 @@ body.ut-theme.uses-drawers {
     }
 }
 
-body.ut-theme {
-    // Boost drawers — kill the white content card shell.
-    #page.drawers .main-inner,
-    #page.drawers .drawer-main-content {
-        background: transparent !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
-
-    // Primary navbar (Boost defaults to bg-white).
-    .navbar,
-    nav.navbar.fixed-top,
-    .navbar.bg-white,
-    .navbar-light {
-        background: rgba($ut-navy-deep, 0.98) !important;
-        border-bottom: 1px solid rgba($ut-gold, 0.15) !important;
-        box-shadow: none !important;
-    }
-
-    .navbar .nav-link,
-    .primary-navigation .nav-link {
-        color: rgba($ut-white, 0.85) !important;
-    }
-
-    // Secondary navigation — Course / Participants / Grades bar.
-    .secondary-navigation,
-    .tertiary-navigation,
-    .secondary-navigation .navigation,
-    .secondary-navigation .moremenu,
-    .secondary-navigation .moremenu.navigation {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-
-    .secondary-navigation .nav-tabs,
-    .secondary-navigation .navigation .nav-tabs,
-    .secondary-navigation .moremenu .nav-tabs,
-    .moremenu .nav-tabs {
-        background: transparent !important;
-        border-bottom: 1px solid rgba($ut-gold, 0.18) !important;
-    }
-
-    .moremenu .nav-link,
-    .secondary-navigation .nav-link {
-        color: rgba($ut-white, 0.72) !important;
-        background: transparent !important;
-        font-family: $ut-font-heading;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-size: 0.75rem;
-    }
-
-    .moremenu .nav-link:hover,
-    .moremenu .nav-link:focus,
-    .moremenu .nav-link.active,
-    .moremenu .nav-link.active:hover,
-    .moremenu .nav-link.active:focus,
-    .secondary-navigation .nav-link:hover,
-    .secondary-navigation .nav-link.active {
-        background: rgba($ut-gold, 0.35) !important;
-        color: $ut-white !important;
-    }
-
-    .moremenu .dropdown-menu {
-        background: $ut-navy-mid !important;
-        border: 1px solid rgba($ut-gold, 0.18) !important;
-    }
-
-    .moremenu .dropdown-item {
-        color: rgba($ut-white, 0.85) !important;
-
-        &:hover,
-        &:focus,
-        &.active,
-        &[aria-current="true"] {
-            background: rgba($ut-gold, 0.12) !important;
-            color: $ut-gold !important;
-        }
-    }
-
-    .drawer.drawer-left,
-    .drawer.drawer-right {
-        background: $ut-navy-deep !important;
-        border-color: rgba($ut-gold, 0.15) !important;
-    }
-
-    .drawer .drawerheader,
-    .drawer .drawercontent {
-        background: $ut-navy-deep !important;
-        border-color: rgba($ut-gold, 0.12) !important;
-        color: $ut-white;
-    }
-
-    #page-header,
-    #page-header .header-maxwidth,
-    #region-main,
-    #region-main-box,
-    #page-content {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-
-    .activity-header,
-    .page-context-header {
-        background: transparent !important;
-        color: $ut-white;
-    }
-
-    // Boost utility / list-group white leaks (dashboard blocks, user menu, messaging).
-    .bg-white,
-    .bg-light,
-    .bg-body,
-    .list-group-item,
-    .list-group-item-action,
-    a.list-group-item-action {
-        background-color: $ut-surface !important;
-        color: $ut-white !important;
-        border-color: rgba($ut-gold, 0.18) !important;
-    }
-
-    .list-group-item:hover,
-    .list-group-item:focus,
-    .list-group-item-action:hover,
-    .list-group-item-action:focus,
-    a.list-group-item-action:hover,
-    a.list-group-item-action:focus {
-        background-color: rgba($ut-gold, 0.08) !important;
-        color: $ut-gold !important;
-    }
-
-    .list-group-item.active,
-    .list-group-item-action.active,
-    a.list-group-item-action.active {
-        background-color: rgba($ut-gold, 0.12) !important;
-        color: $ut-gold !important;
-    }
-
-    .footer-popover.bg-white,
-    .footer-popover.ut-theme-footer {
-        background: $ut-navy-deep !important;
-        border-top: 1px solid rgba($ut-gold, 0.18);
-        color: rgba($ut-white, 0.72);
-    }
-
-    .drawer-toggler .btn,
-    [data-region="drawer-toggle"] .btn,
-    .drawer-toggles .btn {
-        background: transparent !important;
-        border-color: rgba($ut-gold, 0.18) !important;
-        color: rgba($ut-white, 0.85) !important;
-
-        &:hover,
-        &:focus {
-            background: rgba($ut-gold, 0.12) !important;
-            border-color: $ut-gold !important;
-            color: $ut-gold !important;
-        }
-    }
-
-    .btn-outline-secondary {
-        border-color: rgba($ut-gold, 0.32) !important;
-        color: rgba($ut-white, 0.94) !important;
-
-        &:hover,
-        &:focus,
-        &:active {
-            border-color: $ut-gold !important;
-            color: $ut-gold !important;
-            background: rgba($ut-gold, 0.1) !important;
-        }
-    }
-
-    .custom-control.custom-switch .custom-control-label::before {
-        background-color: $ut-navy-mid;
-        border-color: rgba($ut-gold, 0.32);
-    }
-
-    .custom-control.custom-switch .custom-control-input:checked ~ .custom-control-label::before {
-        background-color: $ut-teal;
-        border-color: $ut-teal;
-    }
-}
+// Site-wide shell (navbar, drawers, quiz, forms) lives in style/global-shell.css.
+// Do not reintroduce dark-navy overrides here — they fight the marketing light palette.
 
 // ── Custom marketing footer social links ──────────────────────────────────────
 .ut-footer-social {
@@ -660,110 +477,4 @@ body.ut-theme {
     }
 }
 
-body.ut-theme {
-    .message-app {
-        background: $ut-surface !important;
-        color: $ut-white !important;
-    }
-
-    .message-app .header-container,
-    .message-app .footer-container,
-    .message-app .body-container {
-        background: $ut-surface;
-        color: $ut-white;
-        border-color: rgba($ut-gold, 0.18);
-    }
-}
-
-// =============================================================================
-// Quiz & question UI — mirrors style/global-shell.css (Boost alert-info leak fix)
-// =============================================================================
-
-body.ut-theme {
-    .que .formulation,
-    .que .outcome,
-    .que .comment {
-        background: rgba($ut-surface, 0.85) !important;
-        border: 1px solid rgba($ut-gold, 0.18) !important;
-        color: rgba($ut-white, 0.94) !important;
-    }
-
-    .que .info {
-        background: rgba($ut-navy, 0.75) !important;
-        border: 1px solid rgba($ut-gold, 0.18) !important;
-        color: rgba($ut-white, 0.94) !important;
-    }
-
-    .que .info .questionflag {
-        margin-top: 0.75rem;
-        pointer-events: auto;
-    }
-
-    .que .info .questionflag label,
-    .que .info .questionflag a.aabtn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding: 0.25rem 0.5rem;
-        border: 1px solid rgba($ut-gold, 0.18);
-        border-radius: 0.375rem;
-        background: rgba($ut-teal, 0.14);
-        color: $ut-teal-light !important;
-        font-weight: 600;
-        text-decoration: none !important;
-        cursor: pointer;
-    }
-
-    .que .info .questionflag a.aabtn[aria-pressed="true"],
-    .que .info .questionflag input[type="checkbox"]:checked + label {
-        background: rgba($ut-gold, 0.2);
-        border-color: $ut-gold;
-        color: $ut-gold-light !important;
-    }
-
-    .que .answer label,
-    .que .qtext,
-    .que .qtext p {
-        color: rgba($ut-white, 0.94) !important;
-    }
-
-    .ut-confidence-prompt,
-    .ut-confidence-label,
-    .ut-confidence-feedback {
-        color: rgba($ut-white, 0.94) !important;
-    }
-
-    .ut-confidence-options {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-    .ut-confidence-option {
-        display: inline-flex !important;
-        flex: 1 1 8.75rem;
-        flex-wrap: nowrap !important;
-        align-items: center !important;
-        gap: 0.5rem !important;
-    }
-
-    .path-mod-quiz .qnbutton,
-    #mod_quiz_navblock .qnbutton {
-        background-color: rgba(255, 255, 255, 0.92) !important;
-        color: $ut-navy !important;
-        border-color: rgba($ut-gold, 0.25) !important;
-    }
-
-    .path-mod-quiz .qnbutton.thispage {
-        border-color: $ut-gold !important;
-    }
-
-    &:not(.path-mod-page):not(.ut-lesson-page) {
-        .generalbox,
-        .box.generalbox {
-            background: $ut-surface;
-            border: 1px solid rgba($ut-gold, 0.18);
-            color: rgba($ut-white, 0.94);
-        }
-    }
-}
+// Quiz, messaging, and incourse shell — style/global-shell.css (light OCW palette).

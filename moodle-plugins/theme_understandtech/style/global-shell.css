@@ -984,7 +984,7 @@ body.ut-theme .ut-cert-track-card h3 {
     font-family: var(--ut-font-heading);
     font-size: 1.25rem;
     margin: 0;
-    color: var(--ut-white);
+    color: var(--ut-navy);
 }
 
 body.ut-theme .ut-cert-track-exam {
@@ -1056,7 +1056,7 @@ body.ut-theme .ut-frontpage-steps li {
     gap: 1rem;
     align-items: start;
     padding: 1.25rem 1.5rem;
-    background: rgba(11, 31, 58, 0.55);
+    background: var(--ut-surface);
     border: 1px solid var(--ut-border);
     border-radius: var(--ut-radius-lg);
 }
@@ -1104,7 +1104,7 @@ body.ut-theme .ut-audience-card {
 body.ut-theme .ut-audience-card h3 {
     font-size: 1.125rem;
     margin: 0 0 0.5rem;
-    color: var(--ut-gold-light);
+    color: var(--ut-teal-on-light);
 }
 
 body.ut-theme .ut-audience-card p {
@@ -1204,7 +1204,7 @@ body.ut-theme .ut-member-nav-title {
     font-family: var(--ut-font-heading);
     font-weight: 700;
     font-size: 1.0625rem;
-    color: var(--ut-white);
+    color: var(--ut-navy);
 }
 
 body.ut-theme .ut-member-nav-desc {
@@ -2402,4 +2402,148 @@ body.ut-theme .generalbox:empty {
     padding: 0 !important;
     margin: 0 !important;
     border: none !important;
+}
+
+/* ── Login page — marketing OCW light (wins over stale understandtech.css dump) ── */
+body.pagelayout-login,
+body.pagelayout-login #page-wrapper,
+body.pagelayout-login #page,
+body.ut-theme.pagelayout-login,
+#page-login-index {
+    background: var(--ut-bg) !important;
+    color: var(--ut-text) !important;
+}
+
+#page-login-index {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-login-index #page,
+#page-login-index #region-main-box {
+    background: transparent !important;
+}
+
+#page-login-index .login-container {
+    background: var(--ut-surface) !important;
+    border: 1px solid var(--ut-border) !important;
+    border-top: 4px solid var(--ut-ocw-red) !important;
+    border-radius: var(--ut-radius-lg);
+    box-shadow: 0 4px 16px rgba(11, 31, 58, 0.10) !important;
+    color: var(--ut-text) !important;
+}
+
+#page-login-index .ut-login-heading {
+    color: var(--ut-navy) !important;
+    font-family: var(--ut-font-heading);
+}
+
+#page-login-index .ut-login-subheading {
+    color: var(--ut-text-muted) !important;
+}
+
+#page-login-index .form-label,
+#page-login-index label {
+    color: var(--ut-text) !important;
+}
+
+#page-login-index .form-control {
+    background: var(--ut-bg) !important;
+    border-color: var(--ut-border-strong) !important;
+    color: var(--ut-text) !important;
+}
+
+#page-login-index .form-control:focus {
+    border-color: var(--ut-navy) !important;
+    box-shadow: 0 0 0 3px rgba(11, 31, 58, 0.15) !important;
+}
+
+#page-login-index .btn-primary {
+    background: var(--ut-ocw-red) !important;
+    border-color: var(--ut-ocw-red) !important;
+    color: #ffffff !important;
+    text-transform: none;
+}
+
+#page-login-index .btn-primary:hover,
+#page-login-index .btn-primary:focus {
+    background: var(--ut-ocw-red-dark) !important;
+    border-color: var(--ut-ocw-red-dark) !important;
+    color: #ffffff !important;
+}
+
+#page-login-index .ut-login-links a {
+    color: var(--ut-link) !important;
+}
+
+#page-login-index .ut-login-links a:hover {
+    color: var(--ut-link-hover) !important;
+}
+
+/* ── Stale preset dump in understandtech.css — force marketing light shell ── */
+body.ut-theme .navbar.ut-navbar {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-bottom: 1px solid var(--ut-border) !important;
+    box-shadow: 0 1px 3px rgba(11, 31, 58, 0.04) !important;
+}
+
+body.ut-theme .navbar.ut-navbar .ut-navbar-brand,
+body.ut-theme .navbar.ut-navbar .ut-primary-nav .nav-link {
+    color: var(--ut-text-secondary) !important;
+}
+
+body.ut-theme .navbar.ut-navbar .ut-primary-nav .nav-link:hover,
+body.ut-theme .navbar.ut-navbar .ut-primary-nav .nav-link.active {
+    color: var(--ut-link) !important;
+    background: rgba(163, 31, 52, 0.06) !important;
+}
+
+body.ut-theme .ut-feature-card,
+body.ut-theme .ut-card {
+    background: var(--ut-surface) !important;
+    border: 1px solid var(--ut-border) !important;
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme .ut-feature-card .ut-card-title {
+    color: var(--ut-navy) !important;
+}
+
+body.ut-theme .ut-feature-card .ut-card-body {
+    color: var(--ut-text-muted) !important;
+}
+
+body.ut-theme .ut-hero {
+    background: var(--ut-bg) !important;
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme .ut-hero-content h1,
+body.ut-theme .ut-hero-content p {
+    color: var(--ut-navy) !important;
+}
+
+body.ut-theme .ut-hero-content p {
+    color: var(--ut-text-muted) !important;
+}
+
+body.ut-theme .ut-section-dark,
+body.ut-theme .ut-section-surface {
+    background: var(--ut-bg) !important;
+    color: var(--ut-text) !important;
+}
+
+body.ut-theme .ut-section-header p {
+    color: var(--ut-text-muted) !important;
+}
+
+body.ut-theme .breadcrumb .breadcrumb-item,
+body.ut-theme .breadcrumb .breadcrumb-item a {
+    color: var(--ut-text-muted) !important;
+}
+
+body.ut-theme .breadcrumb .breadcrumb-item.active {
+    color: var(--ut-navy) !important;
 }
